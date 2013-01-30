@@ -43,16 +43,12 @@ Most of the visualization facets get rendered seperatly, on seperate planes/DIVs
 Tor Node Types
 --------------
 All the different nodes in the Tor network are - despite their different functions - in the end just that: nodes. Clients (which is Tor-speak for 'users') and bridges, relays and exit nodes, guards and directory servers all operate from the same code base, just with different configuration flags set. A single node can be in _most_ categories at the same time and in _every_ category over time.  It's quite common that a relay can be guard node, middle node, exit node, and directory mirror at the same time.  And that same node can be used as client at any time.  Also, the node may have been configured as bridge before or after being configured as relay.  
-
 * client  
-Tor doesn't log anything a clients, but only at bridges and directory mirrors. Bridges are obvious, but directory mirrors maybe not
-so much. The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.  
-The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from
-clients run by the Tor project itself.  
+Tor doesn't log anything a clients, but only at bridges and directory mirrors. Bridges are obvious, but directory mirrors maybe not so much. The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.  
+The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.  
 See https://metrics.torproject.org/formats.html for details: "Second, we describe the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."  
 * bridge  
-Bridges are simply relays with a I-want-to-be-a-bridge bit set in their configuration.  However, whether
-a node is a bridge or a relay determines to some extend what data we have about that node. For example, we don't have country information about bridges, but we have that for relays.
+Bridges are simply relays with a I-want-to-be-a-bridge bit set in their configuration.  However, whether a node is a bridge or a relay determines to some extend what data we have about that node. For example, we don't have country information about bridges, but we have that for relays.
 * guard node     
 * middle node  
 * exit node  
@@ -60,59 +56,66 @@ a node is a bridge or a relay determines to some extend what data we have about 
 
 
 
-Data Schema
------------
-The database scheme has only one datatype for all possible node types. The information available about the different types of nodes does indeed vary to some degree. You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no penalty to pay for scarcely populated objects. OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
-That one table has the additional advantage of providing maximum extensibility and malleability. MongoDB will never complain if some documents inserted to it suddenly contain a new field. It couldn't be easier to add new data types, data sources or facets to the database. The client side code can instantly access these new fields (at least as soon as it becomes aware of them).  
+Data Scheme Outline
+-------------------
+The database scheme has only two datatypes for all node types: 'relay' for all nodes except clients, and'client'.  
 
+**Relays**  
+The information available about the different types of relay nodes does vary to some degree. You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no penalty to pay for scarcely populated objects. OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
+That one big table for all relay types has the additional advantage of providing maximum extensibility and malleability. MongoDB will never complain if some documents inserted to it suddenly contain a new field. It couldn't be easier to add new data types, data sources or facets to the database. The client side code can instantly access these new fields (at least as soon as it becomes aware of them).  
 
-	BMGEDC		B_ridge G_uard M_iddle E_xit D_irectoryMirror C_lient
-	bgmedc		ID		document ID																	homegrown?
-	bgmed		nid		node id						string											fingerprint?
-	bgmedc		date	datetime					JavaScript Date object
-	bgmedc		time	datetime interval			string			1h | 6h | 1d | 1w | 1m			months?							
-	bgmedc		type	type of node				string	array	bridge # guard # middle # exit # directory # client
-	bgmed		f		flags 						string	array	fast # stable # named # running # valid
-	bgmed		bwa		bandwidth advertized 		number											normalize?
-	bgmed		bwc		bandwidth consumed 			number											normalize?
+	BMGED															Bridge Guard Middle Exit Directory
+	in			code	description					type	struct	valuespace
+	+----------+-------+---------------------------+--------+-------+---------
+	bgmed		_ID		document ID					string			fingerprint+date
+	bgmed		nid		node id						string			fingerprint
+	bgmed		date	datetime					JS.Date			JavaScript Date object
+	bgmed		type	type of node				string	array	bridge # Guard # middle # Exit # directory
+	bgmed		flag	flags 						string	array	Authority # BadExit # BadDirectory # Fast # Named # Stable # Running # Unnamed # Valid # V2Dir # V3Dir
+	bgmed		bwa		bandwidth advertized 		number											
+	bgmed		bwc		bandwidth consumed 			number											
 	bgmed		tv		Tor software version		number			010 | 011 | 012 | 020 | 021 | 022 | 023 | 024
 	bgmed		os		operating system			string
-	bgmed		osn		operating system normalized	string			linux | darwin | freebsd | windows | other
-	 gmed		as		autonomous system			string											normalize?
+	bgmed		cwf		consensus_weight_fraction	number					
+	bgmed		pe		exit_probability			number					
+	bgmed		pg		guard_probability			number			
+	bgmed		pm		middle_probability			number			
+	 gmed		as		autonomous system			string	
 	 gmed		exp		permitted exit ports		number	array
+	 gmed		cc		country code				string
 	b			gob		given out by				string			email | https | other 
 	b			ez		EZcloud						boolean
 	b			pt		pluggable transport			string	array	obfs2 # obfs3 #	etc
-	 gmedc		cc		country code				string
-		 c		ncb		# of clients at bridges		number		
-		 c		ncr		# of clients at relays		number		
-		 c		fdl		time to download files		number								
-		 c		fail	timeouts and failures... 	number			... of downloading files
-		 c		uni		unidirectional connections	number
-		 c		bi		bidirectional connections	number
-		 c		cen		possible censorship events	number
-		 c		drq		number of bytes spent...	number 			... on answering directory requests
-	bgmed		cwf		consensus_weight_fraction	number			(1)		
-	bgmed		pe		exit_probability			number			(2)		
-	bgmed		pg		guard_probability			number			(3)
-	bgmed		pm		middle_probability			number			(4)
-	
-				
-(1) "consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.  
-(2) "guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
-(3) "middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
-(4) "exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
-They need subdocuments eg:
-				10p		10% probality				number			percentage of relays that have a 10% probablity 
-				20p		...											of being used as exit node
-				30p     and so forth
 
-**timedate intervals** 
-we want to zoom in and out the timeline, so we need it at different scales  
-do these scales have to be preproduced? mapreduce?  
-like 1 pixel / 1 hour | 6 hours | 1 day | 1 week | 1 month (with 28-31 days)  
-we have about 5 years of data so far, which leads the following numbers of pixels  
+**Clients**  
+Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. This is not surprusing given the nature of the Tor project. Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
 
+				code	description					type	struct	valuespace
+				+-------+---------------------------+-------+-------+---------
+				_ID		document ID									'client'+date
+				date	datetime					JS.Date			JavaScript Date object
+				ncb		# of clients at bridges		number		
+				ncr		# of clients at relays		number		
+				fdl		time to download files		number								
+				fail	timeouts and failures (*) 	number			
+				uni		unidirectional connections	number
+				bi		bidirectional connections	number
+				cen		possible censorship events	number
+				drq		# of bytes spent (**)		number
+				cbc		clients by country			object	array	{cc:number}
+						(*) of downloading files
+						(**) on answering dir requests
+						
+**Issues**
+_timedate_  
+Check what possibilities JavaScript does provide to handle timedate. Specifically: what would be the most efficient way to handle hourly intervals?
+_timedate intervals / periods_   
+Periods are so far removed from the database schemas but when aggregation starts this will have to be tackled. All relay data is collected in 1 hour intervals. As soon as the visualization starts to support zooming in and out specific time spans  preaggregated indices for different lenghts of periods will be needed. 
+	bgmed		period	datetime interval			string			1h | 6h | 1d | 1w | 1m			months?	
+we want to zoom in and out the timeline, so we need it at different scales   
+do these scales have to be preproduced? mapreduce?   
+like 1 pixel / 1 hour | 6 hours | 1 day | 1 week | 1 month (with 28-31 days)   
+we have about 5 years of data so far, which leads the following numbers of pixels   
 	5					5		years since 2008
 	5 x 12				60		months
 		   x 4			240 	weeks
@@ -121,6 +124,7 @@ we have about 5 years of data so far, which leads the following numbers of pixel
 	       						// we can show about half of the available data on a per day basis
 	            x 4		2200	6 hours, quarter day
 	            x24		43200	hourly
+						
 
 
 Data Reprocessing
@@ -140,6 +144,12 @@ Aggregations
 * for nodes: determine datetime intervals
 * for relays: extract country codes from ip-adresses
 * 
+
+**Issues**  
+Aggregates should use normalized versions of operating system data:
+	bgmed		osn		operating system normalized	string			linux | darwin | freebsd | windows | other  
+Maybe aggregates should use normalized versions of autonomous system data:			
+	 gmed		asn		autonomous system normalizd	string	
 
 Some material about MongoDB and OLAP
 [MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)  
@@ -176,8 +186,8 @@ Visualization Mechanics Wishlist
 * notify the client of new fields so he can add them to the generic interface 
 * RESTfulness: having the URL represent the complete state of a visualization e.g. including zoom factor, 
   active facets, selected clipping etc
-  
-  
+
+
 Data Import
 -----------
 An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.  
@@ -189,7 +199,7 @@ Next Steps
 ----------
 * The schema still needs a little conceptual refinement.
 * When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) JSON [schema](visionion/blob/master/schema.json).
-* check how ip-adress to countycode conversion is done in MongoDB
+* Check how ip-adress to countycode conversion is done in MongoDB or if it should be done prior to import
 * A subset of the schema should be defined to help starting the work on the data import tool.
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
 * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
