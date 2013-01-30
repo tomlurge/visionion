@@ -10,7 +10,7 @@ Visualizing all the parts of this network in a meaningful way is propably not po
 Tor Metrics Data
 ----------------
 The currently available data is accessible in JSON from the [website](https://metrics.torproject.org/graphs/). There's also an overview of [metrics descriptor formats](https://metrics.torproject.org/index.html)
-and the raw [data](https://metrics.torproject.org/data.html). It's currently saved to PostgreSQL database (see the [schem](https://gitweb.torproject.org/metrics-web.git/blob/HEAD:/db/tordir.sql)).
+and the raw [data](https://metrics.torproject.org/data.html). It's currently saved to a PostgreSQL database (see the [schema](https://gitweb.torproject.org/metrics-web.git/blob/HEAD:/db/tordir.sql)).
 
 
 Usage Scenario
@@ -183,13 +183,13 @@ Data Import
 -----------
 An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.
 Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors.  I think it even has an export function that may or may not support JSON.  See #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171
-[import.py](import/import.py} is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
+[import.py](import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
 
 
 Next Steps
 ----------
 * The schema still needs a little conceptual refinement.
-* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) JSON schema.
+* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) [JSON schema](schema.json).
 * A subset of the schema should be defined to help starting the work on the data import tool.
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
 * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
