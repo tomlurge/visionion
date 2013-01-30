@@ -161,13 +161,15 @@ Visualization Interface Wishlist
 * ability to change scale on vertical axis
 * ensure that any field not accessible through predefined vis options is accessible through gerneric interface
 * combine criteria eg stable and fast relays runnix linux with OS version xy in country z
-* combine/add/stack graphs to show complete datasets (like cake diagrams)
+* combine/add/stack graphs to show complete datasets (eg cake diagrams)
 * SVG export
 * [future] consumed bandwidth between relays
+
 this list is unsorted
 
 
 Topojson	https://github.com/mbostock/topojson/
+
 Fisheye 	http://bost.ocks.org/mike/fisheye/
 
 
