@@ -35,9 +35,9 @@ In a nutshell:
 * Supported web browsers are Chrome and Firefox. Others might work as well.
 Most of the visualization facets get rendered seperatly, on seperate planes/DIVs. The application prepares the joins and our eyes carry them out. The DB is well off.
 
-**Visualization framework** D3.js is [_the_](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web today. It keeps a strong link between the data and it's visual representation, expresses it a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.
-**Database** Since the data scheme is quite flat and in flux a NoSQL database seems appropriate. MongoDB was [chosen](http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis "Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison") because of it's JavaScript support which promises nice integration with client side logic. Since the complexity of the underlying data is rather limited MongoDBs query capabilities, although less expressive than SQL, should be sufficient. With a visualization tool the most interesting joins are anyway those that are carried out in the eyes of the user. The ability to store JavaScript-code in the MongoDB might help in the development of some nice analyzer toolkit. Support for geo-data doesn't hurt either (no other NoSQL database has that so easily available AFAIK).
-**Web application framework** Angular.js was chosen because of ... well, that's another [discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks"). But it's cool. And very modular. And the DOM is far away. And it plays nicely [together](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS")with D3.js. And [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).
+**Visualization framework** D3.js is [_the_](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web today. It keeps a strong link between the data and it's visual representation, expresses it a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.  
+**Database** Since the data scheme is quite flat and in flux a NoSQL database seems appropriate. MongoDB was [chosen](http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis "Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison") because of it's JavaScript support which promises nice integration with client side logic. Since the complexity of the underlying data is rather limited MongoDBs query capabilities, although less expressive than SQL, should be sufficient. With a visualization tool the most interesting joins are anyway those that are carried out in the eyes of the user. The ability to store JavaScript-code in the MongoDB might help in the development of some nice analyzer toolkit. Support for geo-data doesn't hurt either (no other NoSQL database has that so easily available AFAIK).  
+**Web application framework** Angular.js was chosen because of ... well, that's another [discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks"). But it's cool. And very modular. And the DOM is far away. And it plays nicely [together](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS")with D3.js. And [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).  
 
 
 Data Schema
@@ -65,11 +65,11 @@ Aggregations
 
 
 Some material about MongoDB and OLAP
-* [MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)
-* [Another useful thread on stackoverflow](http://stackoverflow.com/questions/3478916/what-should-i-choose-mongodb-cassandra-redis-couchdb), see especially the second answer
-* [MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)
-* [DataBrewery Cubes](http://databrewery.org/cubes/doc/)
-* [MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)
+[MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)  
+[Another useful thread on stackoverflow](http://stackoverflow.com/questions/3478916/what-should-i-choose-mongodb-cassandra-redis-couchdb), see especially the second answer  
+[MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)  
+[DataBrewery Cubes](http://databrewery.org/cubes/doc/)  
+[MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)  
 
 
 Tor Node Types
@@ -93,7 +93,7 @@ Schema Overview
 ---------------
 
 	RBGEDC		R_elay B_ridge G_uard E_xit D_irectoryMirror C_lient
-	rbgedc		ID																					homegrown?
+	rbgedc		ID		document ID																	homegrown?
 	rbgedc		date	datetime					number											homegrown?
 	rbgedc		time	datetime interval			string			1h | 6h | 1d | 1w | 1m			months?							
 	rbgedc		type	type of node				string			relay | bridge | guard | exit | directory | client
@@ -130,10 +130,10 @@ Schema Overview
 				20p		...											of being used as exit node
 				30p     and so forth
 				
-"consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.
-"guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
-"middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
-"exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
+"consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.  
+"guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
+"middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
+"exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.  
 
 
 **timedate intervals** 
@@ -163,14 +163,12 @@ Visualization Interface Wishlist
 * combine criteria eg stable and fast relays runnix linux with OS version xy in country z
 * combine/add/stack graphs to show complete datasets (eg cake diagrams)
 * SVG export
-* [future] consumed bandwidth between relays
-
+* [future] consumed bandwidth between relays  
 this list is unsorted
 
-
-Topojson	https://github.com/mbostock/topojson/
-
-Fisheye 	http://bost.ocks.org/mike/fisheye/
+Some useful links:  
+[Topojson](https://github.com/mbostock/topojson/)  
+[Fisheye](http://bost.ocks.org/mike/fisheye/)  
 
 
 
@@ -186,3 +184,14 @@ Data Import
 An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.
 Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors.  I think it even has an export function that may or may not support JSON.  See #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171
 [import.py](import/import.py} is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
+
+
+Next Steps
+----------
+* The schema still needs a little conceptual refinement.
+* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) JSON schema.
+* A subset of the schema should be defined to help starting the work on the data import tool.
+* Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
+* When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
+* Then the real work on the visualizations can begin.
+* tbc
