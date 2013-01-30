@@ -92,7 +92,7 @@ Relays, bridges, and clients (which is Tor-speak for 'users') all run the same T
 Schema Overview
 ---------------
 
-	RBGEDC													R_elay B_ridge G_uard E_xit D_irectoryMirror C_lient
+	RBGEDC		R_elay B_ridge G_uard E_xit D_irectoryMirror C_lient
 	rbgedc		ID																					homegrown?
 	rbgedc		date	datetime					number											homegrown?
 	rbgedc		time	datetime interval			string			1h | 6h | 1d | 1w | 1m			months?							
@@ -118,14 +118,14 @@ Schema Overview
 		 c		cen		possible censorship events	number
 		 c		drq		number of bytes spent...	number 			... on answering directory requests
 
-				per relay:	 
+	the following 4 fields are per relay data - orthogonal to all the above.	 
 	rbged		cwf		consensus_weight_fraction	number			average probability of a client picking 
 																	a specific relay for their path			
 	rbged		pe		exit_probability			number			probability of a client picking 
 																	a specific relay for their exit position		
 	rbged		pg		guard_probability			number			
 	rbged		pm		middle_probability			number
-				:these 4 are per relay data - orthogonal to all the above. they need subdocuments eg:
+	they need subdocuments eg:
 				10p		10% probality				number			percentage of relays that have a 10% probablity 
 				20p		...											of being used as exit node
 				30p     and so forth
