@@ -141,6 +141,7 @@ we want to zoom in and out the timeline, so we need it at different scales
 do these scales have to be preproduced? mapreduce?
 like 1 pixel / 1 hour | 6 hours | 1 day | 1 week | 1 month (with 28-31 days)
 we have about 5 years of data so far, which leads the following numbers of pixels
+
 	5					5		years since 2008
 	5 x 12				60		months
 		   x 4			240 	weeks
@@ -164,6 +165,7 @@ Visualization Interface Wishlist
 * combine/add/stack graphs to show complete datasets (eg cake diagrams)
 * SVG export
 * [future] consumed bandwidth between relays  
+
 this list is unsorted
 
 Some useful links:  
@@ -181,15 +183,15 @@ Visualization Mechanics Wishlist
   
 Data Import
 -----------
-An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.
-Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors.  I think it even has an export function that may or may not support JSON.  See #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171
-[import.py](import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
+An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.  
+Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors.  I think it even has an export function that may or may not support JSON.  See Tor ticket #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171.  
+[import.py](visionion/import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
 
 
 Next Steps
 ----------
 * The schema still needs a little conceptual refinement.
-* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) [JSON schema](schema.json).
+* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) JSON [schema](visionion/schema.json).
 * A subset of the schema should be defined to help starting the work on the data import tool.
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
 * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
