@@ -17,10 +17,10 @@ Usage Scenario
 --------------
 Some examples: How many relays were there running in the past 3 months in .de? How much bandwidth was provided by relays running Tor version 0.2.3.x. Basically, take all network graphs and merge them into one single graph with plenty of options. Users should be able to navigate into any factor (bridge vs. relay, country, flags, Tor software version, operating system, EC2 cloud bridge or not) and learn the total relay number or advertised bandwidth or bandwidth history for their selection.
 
-**1** the most prominent usecase is the timeline with a graph representing volumina of bandwidth or number of hosts or number of clients etc. on the vertical axis
-**1a** it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg consumed bandwidth and number of clients
-**2** now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays
-**3** now imagine a third plane showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes
+**1** the most prominent usecase is the timeline with a graph representing volumina of bandwidth or number of hosts or number of clients etc. on the vertical axis  
+**1a** it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg consumed bandwidth and number of clients  
+**2** now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays  
+**3** now imagine a third plane showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes  
 **4** now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.
 
 1 represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 1a is available as a prototype of [interactive graphs](http://tigerpa.ws/tor_metrics/). 2 attempts to combine different visualization techniques like timeline and cake diagram. Different visualizations get rendered on different layers. Control shifts from the visualization framework to web application. 3 introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective. 4 points the user in directions that might be worth to explore. It will need some analytics in the background.
@@ -56,9 +56,9 @@ Bridges are simply relays with a I-want-to-be-a-bridge bit set in their configur
 
 
 
-Data Scheme Outline
+Data Schema Outline
 -------------------
-The database scheme has only two datatypes for all node types: 'relay' for all nodes except clients, and'client'.  
+The database schema has only two datatypes for all node types: 'relay' for all nodes except clients, and'client'. Documents of type "relay" will be added to the collection named "relays", documents of type "client" likewise to the collection named "clients". These two collections contain all raw data as it is imported into the database. Further collections - equaling views in SQL-land - will be constructed through map/reduce style aggregation. They are described further down.
 
 **Relays**  
 The information available about the different types of relay nodes does vary to some degree. You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no penalty to pay for scarcely populated objects. OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
@@ -88,34 +88,35 @@ That one big table for all relay types has the additional advantage of providing
 	b			pt		pluggable transport			string	array	obfs2 # obfs3 #	etc
 
 **Clients**  
-Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. This is not surprusing given the nature of the Tor project. Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
+Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. This is not surprising given the nature of the Tor project. Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
 
 				code	description					type	struct	valuespace
 				+-------+---------------------------+-------+-------+---------
 				_ID		document ID									'client'+date
 				date	datetime					JS.Date			JavaScript Date object
-				ncb		# of clients at bridges		number		
-				ncr		# of clients at relays		number		
-				fdl		time to download files		number								
-				fail	timeouts and failures (*) 	number			
+				cb		clients at bridges			number		
+				cr		clients at relays			number			
 				uni		unidirectional connections	number
 				bi		bidirectional connections	number
-				cen		possible censorship events	number
-				drq		# of bytes spent (**)		number
+				cen		possible censorship events	number	
+				fdl		time to download files		number								
+				fail	dl timeouts and failures	number	
+				drq		answering dir request		number
 				cbc		clients by country			object	array	{cc:number}
-						(*) of downloading files
-						(**) on answering dir requests
 						
-**Issues**
-_timedate_  
-Check what possibilities JavaScript does provide to handle timedate. Specifically: what would be the most efficient way to handle hourly intervals?
+**Issues**   
+_timedate_    
+Check what possibilities JavaScript does provide to handle timedate. Specifically: what would be the most efficient way to handle hourly intervals?   
 _timedate intervals / periods_   
-Periods are so far removed from the database schemas but when aggregation starts this will have to be tackled. All relay data is collected in 1 hour intervals. As soon as the visualization starts to support zooming in and out specific time spans  preaggregated indices for different lenghts of periods will be needed. 
+Periods so far are not part of the database schemas but when aggregation starts they will have to be added somehow. All relay data is collected in 1 hour intervals. As soon as the visualization starts to support zooming in and out specific time spans  preaggregated indices for different lenghts of periods will be needed. 
+
 	bgmed		period	datetime interval			string			1h | 6h | 1d | 1w | 1m			months?	
+
 we want to zoom in and out the timeline, so we need it at different scales   
 do these scales have to be preproduced? mapreduce?   
 like 1 pixel / 1 hour | 6 hours | 1 day | 1 week | 1 month (with 28-31 days)   
 we have about 5 years of data so far, which leads the following numbers of pixels   
+
 	5					5		years since 2008
 	5 x 12				60		months
 		   x 4			240 	weeks
@@ -129,7 +130,7 @@ we have about 5 years of data so far, which leads the following numbers of pixel
 
 Data Reprocessing
 -----------------
-Having all data sitting very generically in one big table has the disadvantage of being slow. To make up for that indices and aggregations are needed. Indices reestablish the differenciation that the one big table flattend. E.g. each node type needs it's own index. Aggregation has to precompute timespans, reduce value spaces, consolidate geographical information etc. Indices and aggregation are optimizations for preconfigured usecases and visualization options, adding targeted performance to generic flexibility.
+Having all data sitting very generically in one big table has the disadvantage of being slow. To make up for that indices and aggregations are needed. Indices reestablish the differenciation that the one big table flattend. E.g. each node type needs it's own index. Aggregation has to precompute timespans, reduce value spaces, consolidate geographical information etc. Indices and aggregation are optimizations for preconfigured usecases and visualization options, adding targeted performance to generic flexibility. Additionally indices on the big "relay" collection have to facilitate generic and unforseen queries as much as possible.
 
 Indices
 * bridges
@@ -143,7 +144,6 @@ Aggregations
 * consolidate censorship circumvention: bridges + directory servers
 * for nodes: determine datetime intervals
 * for relays: extract country codes from ip-adresses
-* 
 
 **Issues**  
 Aggregates should use normalized versions of operating system data:
