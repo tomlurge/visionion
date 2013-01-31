@@ -1,35 +1,19 @@
-﻿/*
-http://en.wikipedia.org/wiki/JSON#Schema
-http://json-schema.org/latest/json-schema-core.html
-
-
-
-
-	BMGED															Bridge Guard Middle Exit Directory
-	in			code	description					type	struct	valuespace
-	+----------+-------+---------------------------+--------+-------+---------
-	bgmed		_ID		document ID					string			fingerprint+date
-	bgmed		nid		node id						string			fingerprint
-	bgmed		date	datetime					JS.Date			JavaScript Date object
-	bgmed		type	type of node				string	array	bridge # Guard # middle # Exit # directory
-	bgmed		flag	flags 						string	array	Authority # BadExit # BadDirectory # Fast # Named # Stable # Running # Unnamed # Valid # V2Dir # V3Dir
-	bgmed		bwa		bandwidth advertized 		number											
-	bgmed		bwc		bandwidth consumed 			number											
-	bgmed		tv		Tor software version		number			010 | 011 | 012 | 020 | 021 | 022 | 023 | 024
-	bgmed		os		operating system			string
-	bgmed		cwf		consensus_weight_fraction	number					
-	bgmed		pe		exit_probability			number					
-	bgmed		pg		guard_probability			number			
-	bgmed		pm		middle_probability			number			
-	 gmed		as		autonomous system			string	
-	 gmed		exp		permitted exit ports		number	array
-	 gmed		cc		country code				string
-	b			gob		given out by				string			email | https | other 
-	b			ez		EZcloud						boolean
-	b			pt		pluggable transport			string	array	obfs2 # obfs3 #	etc
+﻿/*	
+	documentation:
+	http://en.wikipedia.org/wiki/JSON#Schema
+	http://tools.ietf.org/html/draft-zyp-json-schema-03
+	https://github.com/garycourt/JSV
 	
-	
-	
+	3.5.  JSON Schema primitive types
+	JSON Schema defines seven primitive types for JSON values:
+	    array		A JSON array. 
+	    boolean		A JSON boolean. 
+	    integer		A JSON number without a fraction or exponent part. 
+	    number		Any JSON number. Number includes integer. 
+	    null		The JSON null value. 
+	    object		A JSON object. 
+	    string		A JSON string. 
+ 
 */
 
 
@@ -38,52 +22,220 @@ http://json-schema.org/latest/json-schema-core.html
     "properties": {
         "_ID": {
             "type": "string",
-            "description": "Identifier, composed of fingerprint + date",
+            "title": "Identifier",
+            "description": "Composed of date and fingerprint
+            				in the form 'YYYYMMDDHH + "-" + fingerprint'.",
+            "required": true
+        },
+        "date": {
+            "type": "integer",
+            "title": "Date of dataset",
+            "description": "JavaScript Date object in milliseconds since the epoch.",
+            "format" : utc-millisec
             "required": true
         },
         "nid": {
             "type": "string",
-            "description": "node ID, just the fingerprint",
-        },
-        "date": {
-            "type": "JS.Date",
-            "description": "Date of dataset",
+            "title": "Node ID",
+            "description": "Just the fingerprint.",
             "required": true
+        },
+        "nick": {
+            "type": "string",
+            "title": "Nickname",
+            "description": "Nickname of relay"
+        },
+        "span": {
+            "type": "integer",
+            "title": "Timespan",
+            "description": "Duration of validity of this dataset, in hours.",
+            "default": 1
         },
         "type": {
             "type": "array",
-            "items": {
-                "type": "string",
-           		"description": "Type of relay. Possible values are: Bridge, Guard, Middle, Exit, Dir"
-            }
-        },
-        "flags": {
-            "type": "array",
-            "items": {
-                "type": "string",
-           		"description": "Possible values are: Authority, BadExit, BadDirectory, Fast, Named, Stable, Running, Unnamed, Valid, V2Dir, V3Dir"
-            }
-        },
-        
-        
-        
-        
-        
-        
-        
-        "tags": {
-            "type": "array",
+            "title": "Type of relay",
+           	"description": "Possible values are: 
+           					Bridge, Guard, Middle, Exit, Dir."
             "items": {
                 "type": "string"
             }
         },
-        "stock": {
+        "flag": {
+            "type": "array",
+            "title": "Flags",
+           	"description": "Possible values are: 
+           					Authority, BadExit, BadDirectory, Fast, Named, Stable, Running, 
+    						Unnamed, Valid, V2Dir, V3Dir."
+            "items": {
+                "type": "string"
+            }
+        },
+        "bwa": {
+            "type": "integer",
+            "title": "Bandwidth advertized"
+        },
+        "bwc": {
+            "type": "integer",
+            "title": "Bandwidth consumed"
+        },
+        "tv": {
+            "type": "integer",
+            "title": "Tor software version",
+            "description": "Possible values are:
+            				010,  011,  012,  020,  021,  022,  023,  024"
+        },
+        "os": {
+            "type": "string",
+            "title": "Operating system version."
+        },
+        "osn": {
+            "type": "string",
+            "title": "Operating system version, normalized",
+            "description": "Possible values are:
+            				linux,  darwin,  freebsd,  windows,  other"
+        },
+		"cwf": {
+            "type": "number",
+            "title": "Consensus weight fraction."
+        },
+		"pg": {
+            "type": "number",
+            "title": "Guard probability",
+            "description": "Probability of a relay to be Guard node."
+        },
+		"pm": {
+            "type": "number",
+            "title": "Middle probablity",
+            "description": "Probability of a relay to be Middle node."
+        },
+		"pe": {
+            "type": "number",
+            "title": "Exit probability",
+            "description": "Probability of a relay to be Exit node."
+        },
+        "as": {
+            "type": "string",
+            "title": "Autonomous system",
+            "description": "Autonomous system the node belongs to."
+        },
+        "pex": {
+            "type": "array",
+            "title": "Permitted exit ports",
+            "description": "Port numbers of permitted exit ports."
+            "items": {
+                "type": "integer",
+                }
+        },
+        "cc": {
+            "type": "string",
+            "title": "Country code",
+            "description": "Country the node is located in.
+            				Country codes as two-letter (ISO 3166-1 alpha-2, 
+            				http://www.iso.org/iso/home/standards/country_codes.htm#2012_iso3166-2)"
+        },
+        "bag": {
+            "type": "string",
+            "title": "Bridge authority",
+            "description": "Bridge adress given out by ...
+            				One of the following values:
+            				email,  https,  other"
+        },
+        "bez": {
+            "type": "boolean",
+            "title": "EZcloud Bridge",
+            "description": "Bridge is located in EZcloud"
+        },
+        "bpt": {
+            "type": "array",
+            "title": "Pluggable Transports",
+            "description": "Bridge supports the following pluggable transports",
+            "items": {
+                "type": "string",
+            	"description": "Among the possible values are
+								obfs2, obfs3"
+                }
+        }
+    }
+}
+
+
+
+{
+    "name": "Client",
+    "properties": {
+        "_ID": {
+            "type": "string",
+            "title": "Identifier",
+            "description": "Composed of date and the string '-client'
+            				in the form 'YYYYMMDDHH + "-client"'.",
+            "required": true
+        },
+        "date": {
+            "type": "integer",
+            "title": "Date of dataset",
+            "description": "JavaScript Date object in milliseconds since the epoch.",
+            "format" : utc-millisec
+            "required": true
+        },
+        "span": {
+            "type": "integer",
+            "title": "Timespan",
+            "description": "Duration of validity of this dataset, in hours.",
+            "default": 12
+        },
+        "cb": {
+            "type": "integer",
+            "title": "Clients via bridges",
+            "description": "Number of clients connecting via bridges"
+        },
+        "cr": {
+            "type": "integer",
+            "title": "Clients via relays",
+            "description": "Number of clients connecting via relays"
+        },
+        "uni": {
+            "type": "integer",
+            "title": "Unidirectional",
+            "description": "Number of unidirectional connections"
+        },
+        "bi": {
+            "type": "integer",
+            "title": "Bidirectional",
+            "description": "Number of bidirectional connections"
+        },
+        "cen": {
+            "type": "integer",
+            "title": "Censorships",
+            "description": "Number of possible censorship events"
+        },
+        "dlf": {
+            "type": "integer",
+            "title": "Average Download",
+            "description": "Average time to download files"
+        },
+        "fail": {
+            "type": "integer",
+            "title": "Timeouts and Failures",
+            "description": "Number of timeouts and failures during file downloads"
+        },
+        "drq": {
+            "type": "integer",
+            "title": "Directory requests",
+            "description": "Average time taken for answering directory request"
+        },
+        "cbc": {
             "type": "object",
+            "title": "Clients by country",
+            "description": "Number of clients connecting to Tor by country the client is located in.
+            				Country codes as two-letter (ISO 3166-1 alpha-2, 
+            				http://www.iso.org/iso/home/standards/country_codes.htm#2012_iso3166-2)"
             "properties": {
-                "warehouse": {
-                    "type": "number"
+                "cc": {
+            		"title": "Country code",
+                    "type": "string"
                 },
-                "retail": {
+                "count": {
+            		"title": "Count",
                     "type": "number"
                 }
             }

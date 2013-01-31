@@ -65,48 +65,55 @@ The information available about the different types of relay nodes does vary to 
 That one big table for all relay types has the additional advantage of providing maximum extensibility and malleability. MongoDB will never complain if some documents inserted to it suddenly contain a new field. It couldn't be easier to add new data types, data sources or facets to the database. The client side code can instantly access these new fields (at least as soon as it becomes aware of them).  
 
 	BMGED															Bridge Guard Middle Exit Directory
-	in			code	description					type	struct	valuespace
+	in			code	description					type	subtype	valuespace
 	+----------+-------+---------------------------+--------+-------+---------
-	bgmed		_ID		document ID					string			fingerprint+date
+	bgmed		_ID		document ID					string			date+fingerprint eg 'YYYYMMDDHH-fingerprint'
 	bgmed		nid		node id						string			fingerprint
-	bgmed		date	datetime					JS.Date			JavaScript Date object
-	bgmed		type	type of node				string	array	bridge # Guard # middle # Exit # directory
-	bgmed		flag	flags 						string	array	Authority # BadExit # BadDirectory # Fast # Named # Stable # Running # Unnamed # Valid # V2Dir # V3Dir
-	bgmed		bwa		bandwidth advertized 		number											
-	bgmed		bwc		bandwidth consumed 			number											
-	bgmed		tv		Tor software version		number			010 | 011 | 012 | 020 | 021 | 022 | 023 | 024
+	bgmed		nick	nickname					string			
+	bgmed		date	datetime					integer			JS Date in milliseconds since the epoch)
+	bgmed		span	duration					integer			valid for how many hours, defaults to 1
+	bgmed		type	type of node				array	string	Bridge,  Guard,  Middle,  Exit,  Dir
+	bgmed		flag	flags 						array	string	Authority,  BadExit,  BadDirectory,  Fast,  Named,  Stable,  Running,  Unnamed,  Valid,  V2Dir,  V3Dir
+	bgmed		bwa		bandwidth advertized 		integer											
+	bgmed		bwc		bandwidth consumed 			integer											
+	bgmed		tv		Tor software version		integer			010,  011,  012,  020,  021,  022,  023,  024
 	bgmed		os		operating system			string
+	bgmed		osn		operating system normalized	string			linux,  darwin,  freebsd,  windows,  other 
 	bgmed		cwf		consensus_weight_fraction	number					
-	bgmed		pe		exit_probability			number					
 	bgmed		pg		guard_probability			number			
-	bgmed		pm		middle_probability			number			
+	bgmed		pm		middle_probability			number						
+	bgmed		pe		exit_probability			number		
 	 gmed		as		autonomous system			string	
-	 gmed		exp		permitted exit ports		number	array
+	 gmed		pex		permitted exit ports		array	integer
 	 gmed		cc		country code				string
-	b			gob		given out by				string			email | https | other 
-	b			ez		EZcloud						boolean
-	b			pt		pluggable transport			string	array	obfs2 # obfs3 #	etc
+	b			bag		bridge adress given out by	string			email,  https,  other 
+	b			bez		bridge is in EZcloud		boolean
+	b			bpt		bridge pluggable transport	array	string	obfs2 # obfs3 #	etc
 
 **Clients**  
 Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. This is not surprising given the nature of the Tor project. Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
 
-				code	description					type	struct	valuespace
+				code	description					type	subtype	valuespace
 				+-------+---------------------------+-------+-------+---------
-				_ID		document ID									'client'+date
+				_ID		document ID									date+'client' eg 'YYYYMMDDHH-client'
 				date	datetime					JS.Date			JavaScript Date object
-				cb		clients at bridges			number		
-				cr		clients at relays			number			
-				uni		unidirectional connections	number
-				bi		bidirectional connections	number
-				cen		possible censorship events	number	
-				fdl		time to download files		number								
-				fail	dl timeouts and failures	number	
-				drq		answering dir request		number
-				cbc		clients by country			object	array	{cc:number}
+				span	duration					integer			valid for how many hours, defaults to 12
+				cb		clients at bridges			integer		
+				cr		clients at relays			integer			
+				uni		unidirectional connections	integer
+				bi		bidirectional connections	integer
+				cen		possible censorship events	integer	
+				dlf		time to download files		integer								
+				fail	dl timeouts and failures	integer	
+				drq		answering dir request		integer
+				cbc		clients by country			array	object	{cc:number}
 						
 **Issues**   
 _timedate_    
 Check what possibilities JavaScript does provide to handle timedate. Specifically: what would be the most efficient way to handle hourly intervals?   
+[Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript) rulez okay!
+[Date.js](http://www.datejs.com/), [Moment.js](http://momentjs.com/)
+
 _timedate intervals / periods_   
 Periods so far are not part of the database schemas but when aggregation starts they will have to be added somehow. All relay data is collected in 1 hour intervals. As soon as the visualization starts to support zooming in and out specific time spans  preaggregated indices for different lenghts of periods will be needed. 
 
