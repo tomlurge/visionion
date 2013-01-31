@@ -108,6 +108,10 @@ Clients OTOH have their own datatype because client data is - unlikey all relay 
 				drq		answering dir request		integer
 				cbc		clients by country			array	object	{cc:number}
 						
+**JSON scheme**  
+The above has been transformed into a [proper](http://en.wikipedia.org/wiki/JSON#Schema) JSON [scheme](visionion/blob/master/scheme.json). If the outline above and the scheme get out of sync, the scheme is authorative. The purpose of the scheme is twofold: combined with a [validator](https://github.com/garycourt/JSV) it provides a little control over what data get's inserted into the database. More importantly the validator can spot data that's not handled by the scheme and trigger the addition of a generic query interface to the visualization GUI.
+
+
 **Issues**   
 _timedate_    
 Check what possibilities JavaScript does provide to handle timedate. Specifically: what would be the most efficient way to handle hourly intervals?   
@@ -133,7 +137,6 @@ we have about 5 years of data so far, which leads the following numbers of pixel
 	            x 4		2200	6 hours, quarter day
 	            x24		43200	hourly
 						
-
 
 Data Reprocessing
 -----------------
@@ -197,7 +200,7 @@ Visualization Mechanics Wishlist
 
 Data Import
 -----------
-An importer tool takes metrics descriptors as input and produces JSON/BSON to be imported into MongoDB.  
+An importer tool takes metrics descriptors as input and produces JSON or BSON to be imported into MongoDB.  
 Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors.  I think it even has an export function that may or may not support JSON.  See Tor ticket #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171.  
 [import.py](visionion/blob/master/import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
 
@@ -205,7 +208,6 @@ Such a tool should use Stem, which is a Python library that parses all relevant 
 Next Steps
 ----------
 * The schema still needs a little conceptual refinement.
-* When it feels considerably stable it will be transformed into a [proper](http://en.wikipedia.org/wiki/JSON#Schema) JSON [schema](visionion/blob/master/schema.json).
 * Check how ip-adress to countycode conversion is done in MongoDB or if it should be done prior to import
 * A subset of the schema should be defined to help starting the work on the data import tool.
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
