@@ -1,1 +1,92 @@
-﻿
+﻿/*
+http://en.wikipedia.org/wiki/JSON#Schema
+http://json-schema.org/latest/json-schema-core.html
+
+
+
+
+	BMGED															Bridge Guard Middle Exit Directory
+	in			code	description					type	struct	valuespace
+	+----------+-------+---------------------------+--------+-------+---------
+	bgmed		_ID		document ID					string			fingerprint+date
+	bgmed		nid		node id						string			fingerprint
+	bgmed		date	datetime					JS.Date			JavaScript Date object
+	bgmed		type	type of node				string	array	bridge # Guard # middle # Exit # directory
+	bgmed		flag	flags 						string	array	Authority # BadExit # BadDirectory # Fast # Named # Stable # Running # Unnamed # Valid # V2Dir # V3Dir
+	bgmed		bwa		bandwidth advertized 		number											
+	bgmed		bwc		bandwidth consumed 			number											
+	bgmed		tv		Tor software version		number			010 | 011 | 012 | 020 | 021 | 022 | 023 | 024
+	bgmed		os		operating system			string
+	bgmed		cwf		consensus_weight_fraction	number					
+	bgmed		pe		exit_probability			number					
+	bgmed		pg		guard_probability			number			
+	bgmed		pm		middle_probability			number			
+	 gmed		as		autonomous system			string	
+	 gmed		exp		permitted exit ports		number	array
+	 gmed		cc		country code				string
+	b			gob		given out by				string			email | https | other 
+	b			ez		EZcloud						boolean
+	b			pt		pluggable transport			string	array	obfs2 # obfs3 #	etc
+	
+	
+	
+*/
+
+
+{
+    "name": "Relay",
+    "properties": {
+        "_ID": {
+            "type": "string",
+            "description": "Identifier, composed of fingerprint + date",
+            "required": true
+        },
+        "nid": {
+            "type": "string",
+            "description": "node ID, just the fingerprint",
+        },
+        "date": {
+            "type": "JS.Date",
+            "description": "Date of dataset",
+            "required": true
+        },
+        "type": {
+            "type": "array",
+            "items": {
+                "type": "string",
+           		"description": "Type of relay. Possible values are: Bridge, Guard, Middle, Exit, Dir"
+            }
+        },
+        "flags": {
+            "type": "array",
+            "items": {
+                "type": "string",
+           		"description": "Possible values are: Authority, BadExit, BadDirectory, Fast, Named, Stable, Running, Unnamed, Valid, V2Dir, V3Dir"
+            }
+        },
+        
+        
+        
+        
+        
+        
+        
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "stock": {
+            "type": "object",
+            "properties": {
+                "warehouse": {
+                    "type": "number"
+                },
+                "retail": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

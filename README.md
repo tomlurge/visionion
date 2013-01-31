@@ -151,7 +151,7 @@ Aggregates should use normalized versions of operating system data:
 Maybe aggregates should use normalized versions of autonomous system data:			
 	 gmed		asn		autonomous system normalizd	string	
 
-Some material about MongoDB and OLAP
+Some material about MongoDB and OLAP  
 [MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)  
 [Another useful thread on stackoverflow](http://stackoverflow.com/questions/3478916/what-should-i-choose-mongodb-cassandra-redis-couchdb), see especially the second answer  
 [MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)  
@@ -198,7 +198,7 @@ Such a tool should use Stem, which is a Python library that parses all relevant 
 Next Steps
 ----------
 * The schema still needs a little conceptual refinement.
-* When it feels considerably stable it will be transformed into a [proper](http://json-schema.org/latest/json-schema-core.html) JSON [schema](visionion/blob/master/schema.json).
+* When it feels considerably stable it will be transformed into a [proper](http://en.wikipedia.org/wiki/JSON#Schema) JSON [schema](visionion/blob/master/schema.json).
 * Check how ip-adress to countycode conversion is done in MongoDB or if it should be done prior to import
 * A subset of the schema should be defined to help starting the work on the data import tool.
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
