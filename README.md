@@ -21,9 +21,10 @@ Some examples: How many relays were there running in the past 3 months in .de? H
 **1a** it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg consumed bandwidth and number of clients  
 **2** now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays  
 **3** now imagine a third plane showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes  
-**4** now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.
+**4** now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.  
+**5** show the biggest nodes for a given metric and their share of the total   
 
-1 represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 1a is available as a prototype of [interactive graphs](http://tigerpa.ws/tor_metrics/). 2 attempts to combine different visualization techniques like timeline and cake diagram. Different visualizations get rendered on different layers. Control shifts from the visualization framework to web application. 3 introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective. 4 points the user in directions that might be worth to explore. It will need some analytics in the background.
+**1** represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 1a is available as a prototype of [interactive graphs](http://tigerpa.ws/tor_metrics/). **2** attempts to combine different visualization techniques like timeline and cake diagram. Different visualizations get rendered on different layers. Control shifts from the visualization framework to web application. **3** introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective. **4** points the user in directions that might be worth to explore. It will need some analytics in the background. **5** checks (de-) centralizations in the infrastructure
 
 
 Technical Overview
@@ -70,13 +71,14 @@ That one big table for all relay types has the additional advantage of providing
 	bgmed		_ID		document ID					string			date+fingerprint eg 'YYYYMMDDHH-fingerprint'
 	bgmed		nid		node id						string			fingerprint
 	bgmed		nick	nickname					string			
-	bgmed		date	datetime					integer			JS Date in milliseconds since the epoch)
+	bgmed		date	datetime					integer			Start of the time span that this dataset describes
+																	format "YYYY-MM-DD HH" as defined in ISO-8601
 	bgmed		span	duration					integer			valid for how many hours, defaults to 1
 	bgmed		type	type of node				array	string	Bridge,  Guard,  Middle,  Exit,  Dir
 	bgmed		flag	flags 						array	string	Authority,  BadExit,  BadDirectory,  Fast,  Named,  Stable,  Running,  Unnamed,  Valid,  V2Dir,  V3Dir
 	bgmed		bwa		bandwidth advertized 		integer											
 	bgmed		bwc		bandwidth consumed 			integer											
-	bgmed		tv		Tor software version		integer			010,  011,  012,  020,  021,  022,  023,  024
+	bgmed		tsv		Tor software version		integer			010,  011,  012,  020,  021,  022,  023,  024
 	bgmed		os		operating system			string
 	bgmed		osn		operating system normalized	string			linux,  darwin,  freebsd,  windows,  other 
 	bgmed		cwf		consensus_weight_fraction	number					
@@ -96,17 +98,21 @@ Clients OTOH have their own datatype because client data is - unlikey all relay 
 				code	description					type	subtype	valuespace
 				+-------+---------------------------+-------+-------+---------
 				_ID		document ID									date+'client' eg 'YYYYMMDDHH-client'
-				date	datetime					JS.Date			JavaScript Date object
-				span	duration					integer			valid for how many hours, defaults to 12
+				date	datetime					integer			Start of the time span that this dataset describes
+																	format "YYYY-MM-DD HH" as defined in ISO-8601
+				span	duration					integer			valid for how many hours, defaults to 24
 				cb		clients at bridges			integer		
+				cbcc	clients@bridges by country	array	object	{cc:number}
 				cr		clients at relays			integer			
+				crcc	clients@relays by country	array	object	{cc:number}
 				uni		unidirectional connections	integer
 				bi		bidirectional connections	integer
 				cen		possible censorship events	integer	
 				dlf		time to download files		integer								
 				fail	dl timeouts and failures	integer	
 				drq		answering dir request		integer
-				cbc		clients by country			array	object	{cc:number}
+				ptu		pluggable transport used	array	object	{string:number}
+				ipvu	ip-version used					array	object	{string:number}
 						
 **JSON scheme**  
 The above has been transformed into a [proper](http://en.wikipedia.org/wiki/JSON#Schema) JSON [scheme](visionion/blob/master/scheme.json). If the outline above and the scheme get out of sync, the scheme is authorative. The purpose of the scheme is twofold: combined with a [validator](https://github.com/garycourt/JSV) it provides a little control over what data get's inserted into the database. More importantly the validator can spot data that's not handled by the scheme and trigger the addition of a generic query interface to the visualization GUI.
