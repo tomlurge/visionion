@@ -25,13 +25,13 @@
             "title": "Identifier",
             "description": "Composed of date and fingerprint
                             in the form 'YYYYMMDDHH + "-" + fingerprint'.",
-            "required": true
+            "required": "true"
         },
         "nid": {
             "type": "string",
             "title": "Node ID",
             "description": "Just the fingerprint.",
-            "required": true
+            "required": "true"
         },
         "nick": {
             "type": "string",
@@ -43,19 +43,19 @@
             "title": "Date of dataset",
             "description": "Start of the time span that this dataset describes",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
-            "required": true
+            "required": "true"
         },
         "span": {
             "type": "integer",
             "title": "Timespan",
             "description": "Duration of validity of this dataset, in hours.",
-            "default": 1
+            "default": "1"
         },
         "type": {
             "type": "array",
             "title": "Type of relay",
             "description": "Possible values are: 
-                            Bridge, Guard, Middle, Exit, Dir."
+                            Bridge, Guard, Middle, Exit, Dir.",
             "items": {
                 "type": "string"
             }
@@ -65,7 +65,7 @@
             "title": "Flags",
             "description": "Possible values are: 
                             Authority, BadExit, BadDirectory, Fast, Named, Stable, Running, 
-                            Unnamed, Valid, V2Dir, V3Dir."
+                            Unnamed, Valid, V2Dir, V3Dir.",
             "items": {
                 "type": "string"
             }
@@ -168,20 +168,20 @@
             "title": "Identifier",
             "description": "Composed of date and the string '-client'
                             in the form 'YYYYMMDDHH + "-client"'.",
-            "required": true
+            "required": "true"
         },
         "date": {
             "type": "string",
             "title": "Date of dataset",
             "description": "Start of the time span that this dataset describes",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
-            "required": true
+            "required": "true"
         },
         "span": {
             "type": "integer",
             "title": "Timespan",
             "description": "Duration of validity of this dataset, in hours.",
-            "default": 12
+            "default": "24"
         },
         "cb": {
             "type": "integer",
@@ -201,7 +201,7 @@
                 },
                 "count": {
                     "title": "Count",
-                    "type": "number"
+                    "type": "integer"
                 }
             }
         },
@@ -223,7 +223,7 @@
                 },
                 "count": {
                     "title": "Count",
-                    "type": "number"
+                    "type": "integer"
                 }
             }
         },
@@ -269,7 +269,7 @@
                 },
                 "count": {
                     "title": "Count",
-                    "type": "number"
+                    "type": "integer"
                 }
             }
         },
@@ -279,12 +279,12 @@
             "properties": {
                 "ipv": {
                     "title": "IP version",
-                    "type": "number",
+                    "type": "integer",
                     "description": "possible values are '4' and '6'"
                 },
                 "count": {
                     "title": "Count",
-                    "type": "number"
+                    "type": "integer"
                 }
             }
         }
