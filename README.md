@@ -1,4 +1,4 @@
-﻿visionion
+visionion
 =========
 
 visionion aims to provide a webbased visualization tool for Tor metrics data.  
