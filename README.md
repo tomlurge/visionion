@@ -112,7 +112,8 @@ Clients OTOH have their own datatype because client data is - unlikey all relay 
 				fail	dl timeouts and failures	integer	
 				drq		answering dir request		integer
 				ptu		pluggable transport used	array	object	{string:number}
-				ipvu	ip-version used					array	object	{string:number}
+				ipvu	ip-version used				array	object	{string:number}
+				frac	grounding of estimates		integer
 						
 **JSON schema**  
 The above has been transformed into a [proper](http://en.wikipedia.org/wiki/JSON#Schema) JSON [schema](schema.json). If the outline above and the schema get out of sync, the schema is authorative. The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it provides a little control over what data get's inserted into the database. More importantly the validator can spot data that's not handled by the schema and trigger the addition of a generic query interface to the visualization GUI.

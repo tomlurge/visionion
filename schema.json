@@ -264,8 +264,7 @@
                 "pt": {
                     "title": "Pluggable transport",
                     "type": "string",
-                    "description": "Among the possible values are
-                                    obfs2, obfs3, other"
+                    "description": "Expected values are 'obfs2', 'obfs3', '<OR>', '<??>'"
                 },
                 "count": {
                     "title": "Count",
@@ -280,13 +279,18 @@
                 "ipv": {
                     "title": "IP version",
                     "type": "integer",
-                    "description": "possible values are '4' and '6'"
+                    "description": "Expected values are '4', '6'"
                 },
                 "count": {
                     "title": "Count",
                     "type": "integer"
                 }
             }
+        },
+        "frac": {
+            "type": "integer",
+            "title": "Grounding of estimates",
+            "description": "The fraction of relays and bridges that contributed to the assessment of cbcc, crcc, ptu and ipvu"
         }
     }
 }
