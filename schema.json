@@ -1,9 +1,9 @@
 ﻿/*  
     documentation:
     http://en.wikipedia.org/wiki/JSON#Schema
-    http://tools.ietf.org/html/draft-zyp-json-schema-03
     https://github.com/garycourt/JSV
     
+    http://datatracker.ietf.org/doc/draft-zyp-json-schema/
     3.5.  JSON Schema primitive types
     JSON Schema defines seven primitive types for JSON values:
         array       A JSON array. 
@@ -22,15 +22,17 @@
     "properties": {
         "_ID": {
             "type": "string",
-            "title": "Identifier",
-            "description": "Composed of date and fingerprint
-                            in the form 'YYYYMMDDHH + "-" + fingerprint'.",
+            "title": "Document Identifier",
+            "description": "Composed of fingerprint, span and date:
+                            'fingerprint' + '-' + 'span' + '-' + 'date',
+                            e.g. 'fingerprint-1-YYYYMMDDHH'
+                            (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
         "nid": {
             "type": "string",
             "title": "Node ID",
-            "description": "Just the fingerprint.",
+            "description": "Just the Tor fingerprint.",
             "required": "true"
         },
         "nick": {
@@ -41,33 +43,35 @@
         "date": {
             "type": "string",
             "title": "Date of dataset",
-            "description": "Start of the time span that this dataset describes",
+            "description": "Start of the time span that this document describes",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
         },
         "span": {
             "type": "integer",
-            "title": "Timespan",
-            "description": "Duration of validity of this dataset, in hours.",
+            "title": "Period of validity",
+            "description": "Length of the interval this document describes, in hours. 
+                            Expected values are ONE of the following:
+                            '1', '6', '24', '168'",
             "default": "1"
         },
         "type": {
             "type": "array",
             "title": "Type of relay",
-            "description": "Possible values are: 
-                            Bridge, Guard, Middle, Exit, Dir.",
             "items": {
-                "type": "string"
+                "type": "string",
+                "description": "Expected values are SOME of the following: 
+                        'Bridge', 'Guard', 'Middle', 'Exit', 'Dir'."
             }
         },
         "flag": {
             "type": "array",
-            "title": "Flags",
-            "description": "Possible values are: 
-                            Authority, BadExit, BadDirectory, Fast, Named, Stable, Running, 
-                            Unnamed, Valid, V2Dir, V3Dir.",
+            "title": "Flags as defined by the Tor protocol",
             "items": {
-                "type": "string"
+                "type": "string",
+                "description": "Expected values are SOME of the following: 
+                        'Authority', 'BadExit', 'BadDirectory', 'Fast', 'Named', 'Stable', 'Running', 
+                        'Unnamed', 'Valid', 'V2Dir', 'V3Dir'"
             }
         },
         "bwa": {
@@ -81,18 +85,18 @@
         "tsv": {
             "type": "integer",
             "title": "Tor software version",
-            "description": "Possible values are:
-                            010,  011,  012,  020,  021,  022,  023,  024"
+            "description": "Expected values are ONE of the following:
+                            '010', '011', '012', '020', '021', '022', '023', '024'"
         },
         "os": {
             "type": "string",
-            "title": "Operating system version."
+            "title": "Operating system version, as announced by the relay."
         },
         "osn": {
             "type": "string",
             "title": "Operating system version, normalized",
-            "description": "Possible values are:
-                            linux,  darwin,  freebsd,  windows,  other"
+            "description": "Expected values are ONE of the following:
+                            'linux', 'darwin', 'freebsd', 'windows', 'other'"
         },
         "cwf": {
             "type": "number",
@@ -121,24 +125,22 @@
         "pex": {
             "type": "array",
             "title": "Permitted exit ports",
-            "description": "Port numbers of permitted exit ports."
+            "description": "Port numbers of permitted exit ports.",
             "items": {
-                "type": "integer",
-                }
+                "type": "integer"
+            }
         },
         "cc": {
             "type": "string",
             "title": "Country code",
-            "description": "Country the node is located in.
-                            Country codes as two-letter (ISO 3166-1 alpha-2, 
-                            http://www.iso.org/iso/home/standards/country_codes.htm#2012_iso3166-2)"
+            "description": "Country the node is located in. Two-letter country code (ISO 3166-1 alpha-2)"
         },
-        "bag": {
+        "ba": {
             "type": "string",
             "title": "Bridge authority",
-            "description": "Bridge adress given out by ...
-                            One of the following values:
-                            email,  https,  other"
+            "description": "Source of bridge adress.
+                            Expected values are ONE of the following:
+                            'email', 'https', 'other'"
         },
         "bez": {
             "type": "boolean",
@@ -148,12 +150,12 @@
         "bpt": {
             "type": "array",
             "title": "Pluggable Transports",
-            "description": "Bridge supports the following pluggable transports",
+            "description": "Pluggable transports supported by the bridge",
             "items": {
                 "type": "string",
-                "description": "Among the possible values are
-                                obfs2, obfs3"
-                }
+                "description": "Expected values are SOME of the following:
+                                'obfs2', 'obfs3', '<OR>', '<??>'"
+            }
         }
     }
 }
@@ -166,21 +168,25 @@
         "_ID": {
             "type": "string",
             "title": "Identifier",
-            "description": "Composed of date and the string '-client'
-                            in the form 'YYYYMMDDHH + "-client"'.",
+            "description": "Composed of the string 'client', plus span and date:
+                            'client' + '-' + 'span' + '-' + 'date',
+                            e.g. 'client-24-YYYYMMDDHH'
+                            (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
         "date": {
             "type": "string",
             "title": "Date of dataset",
-            "description": "Start of the time span that this dataset describes",
+            "description": "Start of the time span that this document describes",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
         },
         "span": {
             "type": "integer",
             "title": "Timespan",
-            "description": "Duration of validity of this dataset, in hours.",
+            "description": "Duration of validity of this document, in hours. 
+                            Expected values are ONE of the following:
+                            '24', '168'",
             "default": "24"
         },
         "cb": {
@@ -189,19 +195,21 @@
             "description": "Number of clients connecting via bridges"
         },
         "cbcc": {
-            "type": "object",
-            "title": "Clients via bridges by country",
-            "description": "Number of clients connecting to Tor via bridges by country the client is located in.
-                            Country codes as two-letter (ISO 3166-1 alpha-2, 
-                            http://www.iso.org/iso/home/standards/country_codes.htm#2012_iso3166-2)"
-            "properties": {
-                "cc": {
-                    "title": "Country code",
-                    "type": "string"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "type": "array",
+            "title": "Clients via bridges per country",
+            "description": "Number of clients connecting to Tor via bridges per country the client is located in.
+                            Two-letter Country code (ISO 3166-1 alpha-2)",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cc": {
+                        "title": "Country code",
+                        "type": "string"
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -211,19 +219,21 @@
             "description": "Number of clients connecting via relays"
         },
         "crcc": {
-            "type": "object",
-            "title": "Clients via relays by country",
-            "description": "Number of clients connecting to Tor via relays by country the client is located in.
-                            Country codes as two-letter (ISO 3166-1 alpha-2, 
-                            http://www.iso.org/iso/home/standards/country_codes.htm#2012_iso3166-2)"
-            "properties": {
-                "cc": {
-                    "title": "Country code",
-                    "type": "string"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "type": "array",
+            "title": "Clients via relays per country",
+            "description": "Number of clients connecting to Tor via relays per country the client is located in.
+                            Two-letter Country code (ISO 3166-1 alpha-2)",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "cc": {
+                        "title": "Country code",
+                        "type": "string"
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -257,40 +267,50 @@
             "title": "Directory requests",
             "description": "Average time taken for answering directory request"
         },
-        "ptu": {
-            "type": "object",
-            "title": "Pluggable transport used",
-            "properties": {
-                "pt": {
-                    "title": "Pluggable transport",
-                    "type": "string",
-                    "description": "Expected values are 'obfs2', 'obfs3', '<OR>', '<??>'"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+        "bptu": {
+            "type": "array",
+            "title": "Bridge pluggable transport used",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "pt": {
+                        "title": "Pluggable transport",
+                        "type": "string",
+                        "description": "Expected values are ONE of the following: 
+                                        'obfs2', 'obfs3', '<OR>', '<??>' 
+                                        (same as 'relay.bpt' above")
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
         "ipvu": {
-            "type": "object",
+            "type": "array",
             "title": "IP version used",
-            "properties": {
-                "ipv": {
-                    "title": "IP version",
-                    "type": "integer",
-                    "description": "Expected values are '4', '6'"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "items": {
+                "type": "object",
+                "properties": {
+                    "ipv": {
+                        "title": "IP version",
+                        "type": "integer",
+                        "description": "Expected values are ONE of the following: 
+                                        '4', '6'"
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
         "frac": {
             "type": "integer",
             "title": "Grounding of estimates",
-            "description": "The fraction of relays and bridges that contributed to the assessment of cbcc, crcc, ptu and ipvu"
+            "description": "The fraction of relays and bridges that contributed 
+                            to the assessment of cbcc, crcc, ptu and ipvu"
         }
     }
 }
