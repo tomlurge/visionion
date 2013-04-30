@@ -144,7 +144,7 @@ The client side code can instantly access these new fields (at least as soon as 
 	bgmed		bwa		bandwidth advertized 		integer
 	bgmed		bwc		bandwidth consumed 			integer
 	bgmed		tsv		Tor software version		integer			one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		os		operating system			string
+	bgmed		osv		operating system version	string
 	bgmed		osn		operating system normalized	string			one of: linux,  darwin,  freebsd,  windows,  other 
 	bgmed		cwf		consensus_weight_fraction	number
 	bgmed		pg		guard_probability			number
@@ -187,7 +187,7 @@ Instead client data is derived from relay data through various means and is alre
 				uni		unidirectional connections	integer
 				bi		bidirectional connections	integer
 				cen		possible censorship events	integer
-				dlf		time to download files		integer
+				adlf	av. time to download files	integer
 				fail	dl timeouts and failures	integer
 				drq		answering dir request		integer
 				bptu	bridge pluggbl.transp.used	array	object	{bpt:integer}

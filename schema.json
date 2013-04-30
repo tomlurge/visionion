@@ -23,10 +23,10 @@
         "_ID": {
             "type": "string",
             "title": "Document Identifier",
-            "description": "Composed of fingerprint, span and date:
-                            'fingerprint' + '-' + 'span' + '-' + 'date',
-                            e.g. 'fingerprint-1-YYYYMMDDHH'
-                            (date not like ISO-8601 but without dashes and whitespace).",
+            "description": "Composed of fingerprint, span and date.",
+            "format": "'fingerprint' + '-' + 'span' + '-' + 'date',
+                        e.g. 'fingerprint-1-YYYYMMDDHH'
+                        (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
         "nid": {
@@ -43,16 +43,16 @@
         "date": {
             "type": "string",
             "title": "Date of dataset",
-            "description": "Start of the time span that this document describes",
+            "description": "Start of the time span that this document describes.",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
         },
         "span": {
             "type": "integer",
             "title": "Period of validity",
-            "description": "Length of the interval this document describes, in hours. 
-                            Expected values are ONE of the following:
-                            '1', '6', '24', '168'",
+            "description": "Length of the interval this document describes, in hours.",
+            "format": "Expected values are ONE of the following:
+                       '1', '6', '24', '168'",
             "default": "1"
         },
         "type": {
@@ -60,8 +60,8 @@
             "title": "Type of relay",
             "items": {
                 "type": "string",
-                "description": "Expected values are SOME of the following: 
-                        'Bridge', 'Guard', 'Middle', 'Exit', 'Dir'."
+                "format": "Expected values are SOME of the following: 
+                           'Bridge', 'Guard', 'Middle', 'Exit', 'Dir'."
             }
         },
         "flag": {
@@ -69,9 +69,9 @@
             "title": "Flags as defined by the Tor protocol",
             "items": {
                 "type": "string",
-                "description": "Expected values are SOME of the following: 
-                        'Authority', 'BadExit', 'BadDirectory', 'Fast', 'Named', 'Stable', 'Running', 
-                        'Unnamed', 'Valid', 'V2Dir', 'V3Dir'"
+                "format": "Expected values are SOME of the following: 
+                           'Authority', 'BadExit', 'BadDirectory', 'Fast', 'Named', 'Stable', 'Running', 
+                           'Unnamed', 'Valid', 'V2Dir', 'V3Dir'"
             }
         },
         "bwa": {
@@ -85,18 +85,18 @@
         "tsv": {
             "type": "integer",
             "title": "Tor software version",
-            "description": "Expected values are ONE of the following:
-                            '010', '011', '012', '020', '021', '022', '023', '024'"
+            "format": "Expected values are ONE of the following:
+                       '010', '011', '012', '020', '021', '022', '023', '024'"
         },
-        "os": {
+        "osv": {
             "type": "string",
             "title": "Operating system version, as announced by the relay."
         },
         "osn": {
             "type": "string",
             "title": "Operating system version, normalized",
-            "description": "Expected values are ONE of the following:
-                            'linux', 'darwin', 'freebsd', 'windows', 'other'"
+            "format": "Expected values are ONE of the following:
+                       'linux', 'darwin', 'freebsd', 'windows', 'other'"
         },
         "cwf": {
             "type": "number",
@@ -133,28 +133,29 @@
         "cc": {
             "type": "string",
             "title": "Country code",
-            "description": "Country the node is located in. Two-letter country code (ISO 3166-1 alpha-2)"
+            "description": "Country the node is located in.",
+            "format": "Two-letter country code (ISO 3166-1 alpha-2)"
         },
         "ba": {
             "type": "string",
             "title": "Bridge authority",
-            "description": "Source of bridge adress.
-                            Expected values are ONE of the following:
-                            'email', 'https', 'other'"
+            "description": "Source of bridge adress.",
+            "format": "Expected values are ONE of the following: 
+                       'email', 'https', 'other'"
         },
         "bez": {
             "type": "boolean",
             "title": "EZcloud Bridge",
-            "description": "Bridge is located in EZcloud"
+            "description": "Bridge is located in EZcloud."
         },
         "bpt": {
             "type": "array",
             "title": "Pluggable Transports",
-            "description": "Pluggable transports supported by the bridge",
+            "description": "Pluggable transports supported by the bridge.",
             "items": {
                 "type": "string",
-                "description": "Expected values are SOME of the following:
-                                'obfs2', 'obfs3', '<OR>', '<??>'"
+                "format": "Expected values are SOME of the following:
+                           'obfs2', 'obfs3', '<OR>', '<??>'"
             }
         }
     }
@@ -168,25 +169,25 @@
         "_ID": {
             "type": "string",
             "title": "Identifier",
-            "description": "Composed of the string 'client', plus span and date:
-                            'client' + '-' + 'span' + '-' + 'date',
-                            e.g. 'client-24-YYYYMMDDHH'
-                            (date not like ISO-8601 but without dashes and whitespace).",
+            "description": "Composed of the string 'client', plus span and date.",
+            "format": "'client' + '-' + 'span' + '-' + 'date',
+                        e.g. 'client-24-YYYYMMDDHH'
+                        (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
         "date": {
             "type": "string",
             "title": "Date of dataset",
-            "description": "Start of the time span that this document describes",
+            "description": "Start of the time span that this document describes.",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
         },
         "span": {
             "type": "integer",
             "title": "Timespan",
-            "description": "Duration of validity of this document, in hours. 
-                            Expected values are ONE of the following:
-                            '24', '168'",
+            "description": "Duration of validity of this document, in hours.",
+            "format": "Expected values are ONE of the following:
+                       '24', '168'",
             "default": "24"
         },
         "cb": {
@@ -197,14 +198,14 @@
         "cbcc": {
             "type": "array",
             "title": "Clients via bridges per country",
-            "description": "Number of clients connecting to Tor via bridges per country the client is located in.
-                            Two-letter Country code (ISO 3166-1 alpha-2)",
+            "description": "Number of clients connecting to Tor via bridges per country the client is located in.",
             "items": {
                 "type": "object",
                 "properties": {
                     "cc": {
                         "title": "Country code",
-                        "type": "string"
+                        "type": "string",
+                        "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
                     },
                     "count": {
                         "title": "Count",
@@ -221,14 +222,14 @@
         "crcc": {
             "type": "array",
             "title": "Clients via relays per country",
-            "description": "Number of clients connecting to Tor via relays per country the client is located in.
-                            Two-letter Country code (ISO 3166-1 alpha-2)",
+            "description": "Number of clients connecting to Tor via relays per country the client is located in.",
             "items": {
                 "type": "object",
                 "properties": {
                     "cc": {
                         "title": "Country code",
-                        "type": "string"
+                        "type": "string",
+                        "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
                     },
                     "count": {
                         "title": "Count",
@@ -252,7 +253,7 @@
             "title": "Censorships",
             "description": "Number of possible censorship events"
         },
-        "dlf": {
+        "adlf": {
             "type": "integer",
             "title": "Average Download",
             "description": "Average time to download files"
@@ -276,9 +277,8 @@
                     "pt": {
                         "title": "Pluggable transport",
                         "type": "string",
-                        "description": "Expected values are ONE of the following: 
-                                        'obfs2', 'obfs3', '<OR>', '<??>' 
-                                        (same as 'relay.bpt' above")
+                        "format": "Expected values are ONE of the following (same as 'relay.bpt' above): 
+                                   'obfs2', 'obfs3', '<OR>', '<??>'" 
                     },
                     "count": {
                         "title": "Count",
@@ -296,8 +296,8 @@
                     "ipv": {
                         "title": "IP version",
                         "type": "integer",
-                        "description": "Expected values are ONE of the following: 
-                                        '4', '6'"
+                        "format": "Expected values are ONE of the following: 
+                                   '4', '6'"
                     },
                     "count": {
                         "title": "Count",
