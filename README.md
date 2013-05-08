@@ -130,32 +130,34 @@ It couldn't be easier to add new data types, change data sources or modify value
 The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
 
 	
-	in			code	description					type	subtype	valuespace
-	+----------+-------+---------------------------+--------+-------+---------
-	bgmed		_ID		document ID					string			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmed		nid		node id						string			Tor fingerprint
-	bgmed		nick	nickname					string			nickname of relay
-	bgmed		date	datetime					string			Start of the time span that this document describes
-																	format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		span	period of validity			integer			length of the interval this dataset describes, in hours:
-																	one of: 1(default), 6, 24, 168
-	bgmed		type	type of node				array	string	some of: Bridge,  Guard,  Middle,  Exit,  Dir
-	bgmed		flag	flags 						array	string	some of: Authority,  BadExit,  BadDirectory,  Fast,  Named,  Stable,  Running,  Unnamed,  Valid,  V2Dir,  V3Dir
-	bgmed		bwa		bandwidth advertized 		integer
-	bgmed		bwc		bandwidth consumed 			integer
-	bgmed		tsv		Tor software version		integer			one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		osv		operating system version	string
-	bgmed		osn		operating system normalized	string			one of: linux,  darwin,  freebsd,  windows,  other 
-	bgmed		cwf		consensus_weight_fraction	number
-	bgmed		pg		guard_probability			number
-	bgmed		pm		middle_probability			number
-	bgmed		pe		exit_probability			number
-	 gmed		as		autonomous system			string
-	 gmed		pex		permitted exit ports		array	integer
-	 gmed		cc		country code				string			two-letter (ISO 3166-1 alpha-2)
-	b			ba		bridge authority			string			one of: email,  https,  other 
-	b			bez		bridge is in EZcloud		boolean
-	b			bpt		bridge pluggable transport	array	string	some of: obfs2, obfs3, <OR>, <??>
+	in			code	description					type	subtype	aggregation	valuespace
+	+----------+-------+---------------------------+--------+------+-----------+----------
+	bgmed		_ID		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmed		nid		node id						string			-			Tor fingerprint
+	bgmed		nick	nickname					string			mode		nickname of relay
+	bgmed		date	datetime					string			-			start of the time span that this document describes
+																				format "YYYY-MM-DD HH" as defined in ISO-8601
+	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default), 6, 24, 168
+	bgmed		type	type of node				array	string	mode [**]	some of: Bridge,  Guard,  Middle,  Exit,  Dir
+	 gmed		flag	flags 						array	string	mode [**]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
+	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
+	 																					 V2Dir,  V3Dir
+	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
+	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
+	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
+	bgmed		osv		operating system version	string			mode
+	bgmed		osn		operating system normalized	string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	 gmed		cwf		consensus_weight_fraction	number			mean
+	 gmed		pg		guard_probability			number			mean
+	 gmed		pm		middle_probability			number			mean
+	 gmed		pe		exit_probability			number			mean
+	 gmed		as		autonomous system			string			mode		'AS' + integer
+	 gmed		pex		permitted exit ports		array	string	mode		not yet specified
+	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
+	b			ba		bridge pool     			string			mode		one of: email,  https,  other 
+	b			bez		bridge is in EC2 cloud		boolean			mode
+	b			bpt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
 	
 	LEGEND --------------------------------------------------------------------
 	in			indicates, for which type of node the field is relevant, 
@@ -167,35 +169,31 @@ The client side code can instantly access these new fields (at least as soon as 
 	valuespace	expected values
 				for lists of possible values "some of" where multiple values are possible 
 				or "one of" where possible values are mutually exclusive
+	[*]			if the relay is online available for at least 20% of the timespan in question
+	[**]		if the relay provides the functionality in question for at least half of the timespan in question
 						
 **Clients**  
 Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. 
 This is not surprising given the nature of the Tor project. 
 Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
 
-				code	description					type	subtype	valuespace
-				+-------+---------------------------+-------+-------+---------
-				_ID		document ID					string			'client'+span+date eg 'client-24-YYYYMMDDHH'
-				date	datetime					string			Start of the time span that this document describes
-																	format "YYYY-MM-DD HH" as defined in ISO-8601
-				span	duration					integer			Length of the time span that this dataset describes, in hours:
-																	one of: 24 (default), 168
-				cb		clients at bridges			integer
-				cbcc	clients@bridges per country	array	object	{cc:integer}	// an array of {countrycode : int } objects
-				cr		clients at relays			integer
-				crcc	clients@relays per country	array	object	{cc:integer}
-				uni		unidirectional connections	integer
-				bi		bidirectional connections	integer
-				cen		possible censorship events	integer
-				adlf	av. time to download files	integer
-				fail	dl timeouts and failures	integer
-				drq		answering dir request		integer
-				bptu	bridge pluggbl.transp.used	array	object	{bpt:integer}
-				ipvu	ip-version used				array	object	{4/6:integer}
-				frac	grounding of estimates		integer
+				code	description					type	subtype	aggregation	valuespace
+				+-------+---------------------------+-------+------+------------+---------
+				_ID		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
+				date	datetime					string						Start of the time span that this document describes
+																				format "YYYY-MM-DD HH" as defined in ISO-8601
+				span	duration					integer						Length of the time span that this dataset describes, in hours:
+																				one of: 24 (default), 168
+				cb		clients at bridges			integer			mean
+				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
+				cr		clients at relays			integer			mean
+				crcc	clients@relays per country	array	object	mean		{cc:integer}
+				bptu	bridge pluggbl.transp.used	array	object				{bpt:integer}
+				ipvu	ip-version used				array	object	mode		{4/6:integer}
 	
 	LEGEND --------------------------------------------------------------------
 	see above
+	
 
 **JSON schema**  
 The above has been transformed into a JSON [schema](schema.json).   

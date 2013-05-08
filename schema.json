@@ -83,7 +83,7 @@
             "title": "Bandwidth consumed"
         },
         "tsv": {
-            "type": "integer",
+            "type": "string",
             "title": "Tor software version",
             "format": "Expected values are ONE of the following:
                        '010', '011', '012', '020', '021', '022', '023', '024'"
@@ -127,7 +127,8 @@
             "title": "Permitted exit ports",
             "description": "Port numbers of permitted exit ports.",
             "items": {
-                "type": "integer"
+                "type": "string",
+                "format": "Not yet specified"
             }
         },
         "cc": {
@@ -138,15 +139,15 @@
         },
         "ba": {
             "type": "string",
-            "title": "Bridge authority",
+            "title": "Bridge pool",
             "description": "Source of bridge adress.",
             "format": "Expected values are ONE of the following: 
                        'email', 'https', 'other'"
         },
         "bez": {
             "type": "boolean",
-            "title": "EZcloud Bridge",
-            "description": "Bridge is located in EZcloud."
+            "title": "EC2 cloud Bridge",
+            "description": "Bridge is located in Amazon EC2 cloud."
         },
         "bpt": {
             "type": "array",
@@ -155,7 +156,7 @@
             "items": {
                 "type": "string",
                 "format": "Expected values are SOME of the following:
-                           'obfs2', 'obfs3', '<OR>', '<??>'"
+                           'obfs2', 'obfs3'"
             }
         }
     }
@@ -238,36 +239,6 @@
                 }
             }
         },
-        "uni": {
-            "type": "integer",
-            "title": "Unidirectional",
-            "description": "Number of unidirectional connections"
-        },
-        "bi": {
-            "type": "integer",
-            "title": "Bidirectional",
-            "description": "Number of bidirectional connections"
-        },
-        "cen": {
-            "type": "integer",
-            "title": "Censorships",
-            "description": "Number of possible censorship events"
-        },
-        "adlf": {
-            "type": "integer",
-            "title": "Average Download",
-            "description": "Average time to download files"
-        },
-        "fail": {
-            "type": "integer",
-            "title": "Timeouts and Failures",
-            "description": "Number of timeouts and failures during file downloads"
-        },
-        "drq": {
-            "type": "integer",
-            "title": "Directory requests",
-            "description": "Average time taken for answering directory request"
-        },
         "bptu": {
             "type": "array",
             "title": "Bridge pluggable transport used",
@@ -305,12 +276,6 @@
                     }
                 }
             }
-        },
-        "frac": {
-            "type": "integer",
-            "title": "Grounding of estimates",
-            "description": "The fraction of relays and bridges that contributed 
-                            to the assessment of cbcc, crcc, ptu and ipvu"
         }
     }
 }
