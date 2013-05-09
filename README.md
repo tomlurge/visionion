@@ -145,6 +145,7 @@ The client side code can instantly access these new fields (at least as soon as 
 	 																					 V2Dir,  V3Dir
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
+	bgmed		bwp		bandwidth actually provided integer			mean		B/s
 	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
 	bgmed		osv		operating system version	string			mode

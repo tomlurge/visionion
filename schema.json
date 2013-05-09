@@ -84,6 +84,12 @@
             "title": "Bandwidth consumed",
             "format": "B/s"
         },
+        "bwp": {
+            "type": "integer",
+            "title": "Bandwidth provided",
+            "description": "Product of 'Bandwidth advertized' and 'Uptime'."
+            "format": "B/s"
+        },
         "upt": {
             "type": "integer",
             "title": "Uptime",
