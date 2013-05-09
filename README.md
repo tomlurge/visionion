@@ -155,7 +155,7 @@ The client side code can instantly access these new fields (at least as soon as 
 	 gmed		pm		middle_probability			number			mean
 	 gmed		pe		exit_probability			number			mean
 	 gmed		as		autonomous system			string			mode		'AS' + integer
-	 gmed		pex		permitted exit ports		array	string	mode		not yet specified
+	 gmed		pex		permitted exit ports		array	string	mode		some of: 80, 443, 6667
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 	b			ba		bridge pool     			string			mode		one of: email,  https,  other 
 	b			bez		bridge is in EC2 cloud		boolean			mode

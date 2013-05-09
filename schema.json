@@ -141,7 +141,8 @@
             "description": "Port numbers of permitted exit ports.",
             "items": {
                 "type": "string",
-                "format": "Not yet specified"
+                "format": "Expected values are SOME of the following:
+                           '80', '443', '6667'"
             }
         },
         "cc": {
