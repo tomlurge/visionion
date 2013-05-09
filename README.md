@@ -148,14 +148,13 @@ The client side code can instantly access these new fields (at least as soon as 
 	bgmed		bwp		bandwidth actually provided integer			mean		B/s
 	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		osv		operating system version	string			mode
-	bgmed		osn		operating system normalized	string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	bgmed		os		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
 	 gmed		cwf		consensus_weight_fraction	number			mean
 	 gmed		pg		guard_probability			number			mean
 	 gmed		pm		middle_probability			number			mean
 	 gmed		pe		exit_probability			number			mean
-	 gmed		as		autonomous system			string			mode		'AS' + integer
-	 gmed		pex		permitted exit ports		array	string	mode		some of: 80, 443, 6667
+	 gmed		as		autonomous system			integer			mode		
+	 gmed		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 	b			ba		bridge pool     			string			mode		one of: email,  https,  other 
 	b			bez		bridge is in EC2 cloud		boolean			mode
@@ -187,11 +186,11 @@ Instead client data is derived from relay data through various means and is alre
 				span	duration					integer						Length of the time span that this dataset describes, in hours:
 																				one of: 24 (default), 168
 				cb		clients at bridges			integer			mean
-				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
+				cbcc	clients@bridges per country	object	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
-				crcc	clients@relays per country	array	object	mean		{cc:integer}
-				bptu	bridge pluggbl.transp.used	array	object				{bpt:integer}
-				ipvu	ip-version used				array	object	mode		{4/6:integer}
+				crcc	clients@relays per country	object	object	mean		{cc:integer}
+				bptu	bridge pluggbl.transp.used	object	object				{bpt:integer}
+				ipvu	ip-version used				object	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
 	see above
