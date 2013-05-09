@@ -145,6 +145,7 @@ The client side code can instantly access these new fields (at least as soon as 
 	 																					 V2Dir,  V3Dir
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
+	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
 	bgmed		osv		operating system version	string			mode
 	bgmed		osn		operating system normalized	string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
@@ -233,7 +234,8 @@ If we skip months as too coarse anyway (but actually because they are so unwield
 
 We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
-
+_aggregation_
+Wikipedia has quick introductions to the meaning of [mean](http://de.wikipedia.org/wiki/Arithmetisches_Mittel), [median](http://de.wikipedia.org/wiki/Median) and [mode](http://de.wikipedia.org/wiki/Modus_%28Statistik%29) (the links point to the german edition).
 
 Data Reprocessing
 -----------------

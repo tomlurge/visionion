@@ -76,11 +76,18 @@
         },
         "bwa": {
             "type": "integer",
-            "title": "Bandwidth advertized"
+            "title": "Bandwidth advertized",
+            "format": "B/s"
         },
         "bwc": {
             "type": "integer",
-            "title": "Bandwidth consumed"
+            "title": "Bandwidth consumed",
+            "format": "B/s"
+        },
+        "upt": {
+            "type": "integer",
+            "title": "Uptime",
+            "description": "Percentage of the given span the relay was actually available."
         },
         "tsv": {
             "type": "string",
