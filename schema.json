@@ -87,7 +87,7 @@
         "bwp": {
             "type": "integer",
             "title": "Bandwidth provided",
-            "description": "Product of 'Bandwidth advertized' and 'Uptime'."
+            "description": "Product of 'Bandwidth advertized' and 'Uptime'.",
             "format": "B/s"
         },
         "upt": {
