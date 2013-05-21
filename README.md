@@ -125,14 +125,14 @@ The information available about the different types of relay nodes does vary to 
 You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no performance penalty to pay for scarcely populated objects. 
 OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
 That one big table for all relay types has the additional advantage of providing maximum extensibility and malleability. 
-MongoDB will never complain if some documents inserted to it suddenly contain a new field or arre missing another one. 
+MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
 It couldn't be easier to add new data types, change data sources or modify value spaces. 
 The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
 
 	
 	in			code	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_ID		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
 	bgmed		nid		node id						string			-			Tor fingerprint
 	bgmed		nick	nickname					string			mode		nickname of relay
 	bgmed		date	datetime					string			-			start of the time span that this document describes
@@ -148,17 +148,17 @@ The client side code can instantly access these new fields (at least as soon as 
 	bgmed		bwp		bandwidth actually provided integer			mean		B/s
 	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		os		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
-	 gmed		cwf		consensus_weight_fraction	number			mean
-	 gmed		pg		guard_probability			number			mean
-	 gmed		pm		middle_probability			number			mean
-	 gmed		pe		exit_probability			number			mean
+	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	 gmed		pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
+	 gmed		pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
+	 gmed		pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
+	 gmed		pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
 	 gmed		as		autonomous system			integer			mode		
 	 gmed		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
-	b			ba		bridge pool     			string			mode		one of: email,  https,  other 
-	b			bez		bridge is in EC2 cloud		boolean			mode
-	b			bpt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
+	b			brp		bridge pool     			string			mode		one of: email,  https,  other 
+	b			bre		bridge is in EC2 cloud		boolean			mode
+	b			brt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
 	
 	LEGEND --------------------------------------------------------------------
 	in			indicates, for which type of node the field is relevant, 
@@ -180,17 +180,17 @@ Instead client data is derived from relay data through various means and is alre
 
 				code	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
-				_ID		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
+				_id		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 				span	duration					integer						Length of the time span that this dataset describes, in hours:
 																				one of: 24 (default), 168
 				cb		clients at bridges			integer			mean
-				cbcc	clients@bridges per country	object	object	mean		{cc:integer}	// an array of {countrycode : int } objects
+				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
-				crcc	clients@relays per country	object	object	mean		{cc:integer}
-				bptu	bridge pluggbl.transp.used	object	object				{bpt:integer}
-				ipvu	ip-version used				object	object	mode		{v4/v6:integer}
+				crcc	clients@relays per country	array	object	mean		{cc:integer}
+				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/<??>/<OR>:integer}
+				cip		ip-version used				array	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
 	see above

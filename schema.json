@@ -20,7 +20,7 @@
 {
     "name": "Relay",
     "properties": {
-        "_ID": {
+        "_id": {
             "type": "string",
             "title": "Document Identifier",
             "description": "Composed of fingerprint, span and date.",
@@ -101,30 +101,31 @@
             "format": "Expected values are ONE of the following:
                        '010', '011', '012', '020', '021', '022', '023', '024'"
         },
-        "os": {
+        "osv": {
             "type": "string",
             "title": "Operating system version",
             "format": "Expected values are ONE of the following:
                        'linux', 'darwin', 'freebsd', 'windows', 'other'"
         },
-        "cwf": {
+        "pbr": {
             "type": "number",
-            "title": "Consensus weight fraction."
+            "title": "Consensus weight fraction.",
+            "description": "Probability of a client picking a relay for their path."
         },
-        "pg": {
+        "pbg": {
             "type": "number",
             "title": "Guard probability",
-            "description": "Probability of a relay to be Guard node."
+            "description": "Probability of a client picking a relay to be Guard node."
         },
-        "pm": {
+        "pbm": {
             "type": "number",
             "title": "Middle probablity",
-            "description": "Probability of a relay to be Middle node."
+            "description": "Probability of a client picking a relay to be Middle node."
         },
-        "pe": {
+        "pbe": {
             "type": "number",
             "title": "Exit probability",
-            "description": "Probability of a relay to be Exit node."
+            "description": "Probability of a client picking a relay to be Exit node."
         },
         "as": {
             "type": "integer",
@@ -147,21 +148,21 @@
             "description": "Country the node is located in.",
             "format": "Two-letter country code (ISO 3166-1 alpha-2)"
         },
-        "ba": {
+        "brp": {
             "type": "string",
             "title": "Bridge pool",
             "description": "Source of bridge adress.",
             "format": "Expected values are ONE of the following: 
                        'email', 'https', 'other'"
         },
-        "bez": {
+        "bre": {
             "type": "boolean",
-            "title": "EC2 cloud Bridge",
+            "title": "Bridge EC2 cloud",
             "description": "Bridge is located in Amazon EC2 cloud."
         },
-        "bpt": {
+        "brt": {
             "type": "array",
-            "title": "Pluggable Transports",
+            "title": "Bridge Pluggable Transport",
             "description": "Pluggable transports supported by the bridge.",
             "items": {
                 "type": "string",
@@ -177,7 +178,7 @@
 {
     "name": "Client",
     "properties": {
-        "_ID": {
+        "_id": {
             "type": "string",
             "title": "Identifier",
             "description": "Composed of the string 'client', plus span and date.",
@@ -207,18 +208,21 @@
             "description": "Number of clients connecting via bridges"
         },
         "cbcc": {
-            "type": "object",
+            "type": "array",
             "title": "Clients via bridges per country",
             "description": "Number of clients connecting to Tor via bridges per country the client is located in.",
-            "properties": {
-                "cc": {
-                    "title": "Country code",
-                    "type": "string",
-                    "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "items": {
+                "type": "object",
+                "properties": {
+                     "country": {
+                        "title": "Country code",
+                        "type": "string",
+                        "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
+                    },
+                     "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
@@ -228,50 +232,59 @@
             "description": "Number of clients connecting via relays"
         },
         "crcc": {
-            "type": "object",
+            "type": "array",
             "title": "Clients via relays per country",
             "description": "Number of clients connecting to Tor via relays per country the client is located in.",
-            "properties": {
-                 "cc": {
-                    "title": "Country code",
-                    "type": "string",
-                    "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
-                },
-                 "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "items": {
+                "type": "object",
+                "properties": {
+                     "country": {
+                        "title": "Country code",
+                        "type": "string",
+                        "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
+                    },
+                     "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
-        "bptu": {
-            "type": "object",
+        "cpt": {
+            "type": "array",
             "title": "Bridge pluggable transport used",
-            "properties": {
-                "pt": {
-                    "title": "Pluggable transport",
-                    "type": "string",
-                    "format": "Expected values are ONE of the following: 
-                               'obfs2', 'obfs3', '<OR>', '<??>'" 
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "items": {
+                "type": "object",
+                "properties": {
+                    "pt": {
+                        "title": "Pluggable transport",
+                        "type": "string",
+                        "format": "Expected values are ONE of the following: 
+                                   'obfs2', 'obfs3', '<OR>', '<??>'" 
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         },
-        "ipvu": {
-            "type": "object",
+        "cip": {
+            "type": "array",
             "title": "IP version used",
-            "properties": {
-                "ipv": {
-                    "title": "IP version",
-                    "type": "integer",
-                    "format": "Expected values are ONE of the following: 
-                               'v4', 'v6'"
-                },
-                "count": {
-                    "title": "Count",
-                    "type": "integer"
+            "items": {
+                "type": "object",
+                "properties": {
+                    "ipv": {
+                        "title": "IP version",
+                        "type": "string",
+                        "format": "Expected values are ONE of the following: 
+                                   'v4', 'v6'" 
+                    },
+                    "count": {
+                        "title": "Count",
+                        "type": "integer"
+                    }
                 }
             }
         }
