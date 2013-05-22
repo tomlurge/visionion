@@ -12,10 +12,14 @@ Visionion aims to integrate and visualize all available data in a generic and ea
 These generic views can then be combined and tailored to elucidate structural patterns and hidden aspects in the data.
 
 
+
+
 Tor Metrics Data
 ----------------
 The project website provides the [currently available data in JSON](https://metrics.torproject.org/graphs/) as well as an [overview of metrics descriptor formats](https://metrics.torproject.org/index.html) and the [raw data](https://metrics.torproject.org/data.html). 
 It's currently saved to a PostgreSQL database ([SQL schema](https://gitweb.torproject.org/metrics-web.git/blob/HEAD:/db/tordir.sql)).
+
+
 
 
 Usage Scenario
@@ -62,6 +66,8 @@ It will need some analytics in the background.
 checks (de-) centralizations in the infrastructure   
 
 
+
+
 Technical Overview
 ------------------
 In a nutshell:
@@ -72,9 +78,12 @@ In a nutshell:
 Most of the visualization facets get rendered seperatly, on seperate planes/DIVs.   
 The application prepares the joins and our eyes carry them out (the DB is well off ;) .   
 
+
 **Visualization framework** 
 [D3.js](http://d3js.org/) is a [leading](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web. 
 It keeps a strong link between the data and it's visual representation, expresses it in a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.   
+
+
 **Database** 
 Since the data schema is quite flat and in a certain flux a NoSQL database seems appropriate. 
 [MongoDB](http://www.mongodb.org/) was [chosen](http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis "Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison") because of it's JavaScript support which promises nice integration with client side logic. 
@@ -82,9 +91,13 @@ Since the complexity of the underlying data is rather limited MongoDBs query cap
 With a visualization tool the most interesting joins are anyway those that are carried out in the eyes of the user.   
 The ability to store JavaScript-code in the MongoDB might help in the development of an analyzer toolkit. 
 Support for geo-data could be beneficial either (no other NoSQL database has that so easily available AFAIK).  
+
+
 **Web application framework** 
 [Angular.js](http://angularjs.org/) was chosen because of it's declarative style and it's attractive approach to routing and HTML extensions ([discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks")). 
 It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).  
+
+
 
 
 Tor Node Types
@@ -113,12 +126,14 @@ For example, we don't have country information about bridges, but we have that f
 
 
 
+
 Data Schema Outline
 -------------------
-The database schema has only 2 datatypes for all node types: 'relay' for all nodes except clients, and'client'. 
+The initial database import schema has only 2 datatypes for all node types: 'relay' for all nodes except clients, and'client'. 
 Documents of type "relay" will be added to the collection named "relays", documents of type "client" likewise to the collection named "clients". 
 These two collections contain all raw data as it is imported into the database. 
 Further collections - equaling views in SQL-land - will be constructed through map/reduce style aggregation. They are described further below.
+
 
 **Relays**  
 The information available about the different types of relay nodes does vary to some degree. 
@@ -172,11 +187,21 @@ The client side code can instantly access these new fields (at least as soon as 
 				or "one of" where possible values are mutually exclusive
 	[*]			if the relay is online available for at least 20% of the timespan in question
 	[**]		if the relay provides the functionality in question for at least half of the timespan in question
-						
+	
+_flags_
+On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
+They will remain in the scheme and will be imported in the Databae but will not be aggregated.  
+Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for teh following types of nodes: 
+				Fast	Stable	BadExit	Authority
+	Guard		x		x
+	Middle		x		x
+	Exit		x		x		x
+	Directory 							x
+
+
 **Clients**  
-Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves. 
-This is not surprising given the nature of the Tor project. 
-Instead client data is derived from relay data through various means and is already aggregated when it is fed into the MongoDB. 
+Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
+Instead client data is derived from relay data through various means and is already aggregated when it is imported into the MongoDB. 
 
 				code	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
@@ -201,16 +226,370 @@ The above has been transformed into a JSON [schema](schema.json).
 If the outline above and the schema get out of sync, the *schema is authorative*.   
 For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/JSON#Schema) and the [Draft Specification](http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1).
 
-The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks since can be useful to detect if somethings goes wrong.
+The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks this can be useful to detect if somethings goes wrong.
 More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
 
 
-**Issues**   
-_datetime_    
-Handling of date and time can get difficult with JavaScript because not every environment handles every possible datetime format equally well. 
-Besides the ubiquitious UTC-epoch format which is rather inaccessable to humans we settle on "YYYY-MM-DD HH" as defined in ISO-8601 which is supported across all browsers and serves our needs just well.   
-We use the [Moment.JS](http://momentjs.com) library which "was designed to work both in the browser and in Node.JS". 
-For further discussion of the topic see [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
+
+
+Data Reprocessing
+-----------------
+Aggregation of imported data is essential to this project, for several reasons:
+* the relay data is ordered by relay by date but most of the time we will not want to look at individual relays but at at all relays together or at least at a group of relays sharing certain attributes.   
+* having all relay data sitting very generically in one big table has the disadvantage of being slow.    
+Dividing that big table of imported data into specialized collections according to the visual needs of the interface is a prerequisite for a responsive and interactive visualization.    
+* what's even more important is that the data as it is gathered and imported into the DB reflects the technical structure of the network but not necessarily the logical structure that we'd like to examine and understand.   
+For example data from clients and from relays is collected in different ways and imported in different collections but the relation between the number of clients connecting to the network and the bandwidth available to them is one of the crucial characteristics of the network. 
+Also the data can be of very different nature: percentages don't easily compare to absolute values and also not all absolute values in one category add up to a meaningful sum because value spaces overlap.   
+Therefor it's important to carefully select, construct and arrange meaningful and actually comparable configurations.   
+
+Step 1 - topical aggregation:     
+The aggregated collections will be those that actually provide the data to the visualization frontend. They are mappings from the imported data to the concepts that drive the interface. I call these aggregations step 1 collections or topical collections.    
+Step 2 - formal aggregation:   
+A second step of aggregation will consolidate these topical collections in precomputed timespans, regions, groups of node types etc to improve retrieval performance. They are reductions of the still very detailed data derived from the imports in step 1. I call these aggregations step 2 collections or formal collections.    
+Step 3 - indexing:    
+All these aggregated collections will then have to be enhanced by indices to gain further speed advantages.   
+Additionally indices on the big "relay" collection of imported data have to facilitate generic and unforseen queries as much as possible.    
+
+
+**Understanding the data**
+The imported data is quite diverse and heterogeneous. The table below tries to capture its different dimensions.    
+"Mode" refers to the essential quality of the thing being counted. 
+This may be the numbers of hardware instances, software characteristics, measures of quality of service, number of users. 
+We import data in two collections: relays and clients. The fields in these collections overlap only in one case: country. Countries are a powerful metaphor and because of this overlap they become a prominent player in the visualization, but they are still just a medium, not a subject of discourse. We are not interested in countries per se, we just use them to make connections.     
+"Measure" documents if the numbers denote absolute values, percentages, averages etc. 
+Obviously one would compare apples with oranges by comparing an absolute value like the number of available Bridges with an relative value like uptime. 
+"Unit" is not much different from Measure, mainly reflecting if the field is single value or multi valued.
+"Upper limit" denotes the upper limit of the value space. For percentages it's 100. For each relay type it's the total number of relays - the important implication being that each relay can simultaneously belong to multiple types: the types alltogether don't add up to the number of relays, the're up to 4 times more. Only Bridges are distinct.
+
+"scat" is short for scattering (or spreading) and indicates how evenly distributed the value space is. This needs further thinking.
+	
+
+	TYPE	FIELD	MODE	MEASURE			UNIT				UPPER LIMIT
+	-----------------------------------------------------------------------
+	RELAY								
+			bgmed	hard	sum				count				relay
+			osv		soft	sum...s			count/item			relay
+			tsv		soft	sum...s			count/item			relay
+			upt		quality	avg				percentage			100
+			bwp		ip		scat + sum		count				
+			bwc		ip		scat + sum		count				bwp
+			// bwa							
+									
+	GMED								
+			gmed	hard	sum				count				relay minus Bridge
+			g		hard	sum				count				< gmed
+			m		hard	sum				count				< gmed
+			e		hard	sum				count				< gmed
+			d		hard	sum				count				< gmed
+			pbr		quality	avg				percentage			100 (but should be much less)
+			pbg		quality	avg				percentage			100 (but should be much less)
+			pbm		quality	avg				percentage			100 (but should be much less)
+			pbe		quality	avg				percentage			100 (but should be much less)
+			flag	soft	sum...s			count/item			< gmed
+			as		net		scat + sum...s	count/item			< gmed (but really much less)
+			// pex	soft	sum,sum,sum		count/item			< gmed
+									
+	BRIDGE														relay minus GMED
+			b		hard	sum	count		relay	
+			brp		net		sum,sum,sum		count/item			bridge
+			bre		hard	sum				count				< bridge
+			brt		soft	sum,sum			count/item			bridge
+								
+	CLIENT							
+			cb		user	sum				client
+			cr		user	sum				client
+			cpt		soft	sum,sum,sum,sum	count/item		
+			cip		soft	sum,sum			count/item
+						
+	COUTRY					
+	clients					
+			cbcc	user	sum				client/country
+			crcc	user	sum				client/country
+	relays					
+			osv		soft	sum...s			count/item/country	relay
+			tsv		soft					count/item/country	relay
+			upt		quality	avg				percentage/country	100
+			bwp		ip		scat + sum		count/country		
+			bwc		ip		scat + sum		count/country		bwp
+			g		hard	sum				count/country		< gmed
+			m		hard	sum				count/country		< gmed
+			e		hard	sum				count/country		< gmed
+			d		hard	sum				count/country		< gmed
+			pbr		quality	avg				percentage/country	100 (but should be much less)
+			pbg		quality	avg				percentage/country	100 (but should be much less)
+			pbm		quality	avg				percentage/country	100 (but should be much less)
+			pbe		quality	avg				percentage/country	100 (but should be much less)
+			flag	soft	sum...s			count/item/country	< gmed
+			as		net		scat + sum...s	count/item/country	< gmed (but really much less)
+			// pex				
+			// bwa		
+
+Overview data on clients and relays:   
+We have some very general data on all relays: total count, software version, operating system version, total bandwidth provided and consumed. 
+Correspondingly we have quite general data on clients: how many clients in total were connected to the tor network via bridges or directly via guard nodes. 
+These two fit well together.
+We also know which IP-version and which obfuscation techniques clients use. 
+But that's about it with clients and relays. 
+
+Clients:   
+Client data is on purpose quite sparse and we can't make much more than compare numbers of clients with the much more detailed data about the relays that make up the tor network. 
+We will eg not be able to follow clients through the network.
+
+Countries:   
+The most detailed view we can get on clients is their distribution by country. This is interesting since we know also from each relay in which country it is related. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
+
+Relays:   
+Additionally to the data on all relays we have quite specific data on different types of relays, namely guards, middle nodes, exits and directory servers. 
+This data is detailed but not easy to handle. 
+Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.   
+We know for each relay with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add some meaning to these numbers. 
+We also know for most relays through which AS they are connected but this is a very large number of different AS which we first need to aggregate to find the most used ones and how high the concentration is. 
+We then have some flags and exit port information which again are not particularily easy to visualize (and interpret).
+
+Bridges:    
+Last not least we have some data about bridges, but not as much as about guards, midddles, exist and directories. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors job easier. 
+What's fortunate about bridges is that they are mutually exclusive to the other 4 types of relays. So at least these numbers add up.
+Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
+
+
+**Import aggregation**
+There's one field in the initial relay collection that has to be aggregated inside MongoDB and that's bwp (bandwidth actually provided).
+	
+	TODO
+
+
+
+**Import checks**
+We are making assumptions about the imported data that wouldn't hurt to be checked. 
+The following query checks if Bridges and all other types of relays are really disjunct sets:
+
+	TODO
+
+
+
+**Topical aggregation**
+* consolidate relays: bridges + guard nodes + middle nodes + exit nodes + directory servers
+* consolidate anonymity: guard nodes + middle nodes + exit nodes
+* consolidate censorship circumvention: bridges + directory servers
+
+	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
+	a1-country	ident
+						_id						cc + '-1-' + date
+						cc						for each country
+						span	1
+																				
+												FALSCH														
+												MUSS														
+						das						ALLES														
+						wird					AUF														
+						hart					24														
+												STUNDEN														
+												BASIS														
+												UMGERECHNET														
+												WERDEN														
+												WEIL DIE CLIENT DATA														
+												NUR 24 GENAU IST
+												
+												
+						date					by each date
+				clients
+						cbcc					from client		copy+paste
+						crcc					from client		copy+paste
+				relays
+						osv		array	object	from relay		for this country 	
+																for this date 		
+																for each osv		take note of osv
+																					sum up occurrences
+						tsv		array	object	like osv
+						upt		integer			from relay		for this country 	
+																for this date 		average of all uptimes
+						bwp		integer			from relay		for this country 	
+																for this date 		sum up values
+						bwc		integer			like bwp	
+						gmed	integer			from relay		for this country 	
+																for this date 		sum up all nodes except bridges
+						g		integer			from relay		for this country 	
+																for this date 		sum up all guards
+						m		integer			like g
+						e		integer			like g
+						d		integer			like g
+						pbr		percentage		from relay		for this country 	
+																for this date 		average of all pbr's
+						pbg		percentage		like pbr
+						pbm		percentage		like pbr
+						pbe		percentage		like pbr
+						as		array	object	from relay		for this country 	
+																for this date		
+																for each node		take note of AS
+																					sum up occurrences
+				flags	
+						gme-fast	int			from relay		for this country 	
+																for this date		sum of all nodes with flag fast
+						gme-stable	int			like gem-fast
+						g-fast		int			like...
+						g-stable	int			like...
+						m-fast		int			like...
+						m-stable	int			like...
+						e-fast		int			like...
+						e-stable	int			like...
+						e-badexit	int			like...
+		
+Relay data by country like tsv, osv, upt, bwp and bwc could even be split up to the type level but I have no idea how to visualize that properly. 
+Implementation would not be difficult (just a different combination of the steps already implemented above) but would still use quite some time and resources. Seems superfluous right now.   
+Maybe just for gmed (guard-middle-exit-dir) and bridges?    
+Maybe it' the other way round and the a1-relay collection is superfluous? It certainly can be constructed from gmed and bridges.
+The utility of flags is also a little unclear.
+
+
+	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
+	a1-relay	ident
+						_id						'relay'-1-' + date
+						span					1
+						date					by each date
+				nodes
+						bgmed	integer			from relay		for this date		sum up all nodes
+						osv		array	object	from relay		for this date 		
+																for each node		take note of osv
+																					sum up occurrences
+						tsv		array	object	from relay		for this date 		
+																for each node		take note of tsv
+																					sum up occurrences
+						upt		integer			from relay		for this date 		average of all uptimes
+						bwp		integer			from relay		for this date 		sum up values
+						bwc		integer			from relay		for this date 		sum up values	
+								
+						
+	
+	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
+	a1-gmed		ident
+						_id						'gmed-1-' + date
+						span					1
+						date					by each date
+				nodes
+						gmed	integer			from relay		for this date		sum up all 
+																			 		guard, middle, exit, dir
+						osv		array	object	from relay		for this date 		
+																for gmed nodes		take note of osv
+																					sum up occurrences
+						tsv		array	object	from relay		for this date 		
+																for gmed nodes		take note of tsv
+																					sum up occurrences
+						upt		integer			from relay		for this date		
+																for gmed nodes 		average of all uptimes
+						bwp		integer			from relay		for this date		
+																for gmed nodes 		sum up values
+						bwc		integer			from relay		for this date		
+																for gmed nodes 		sum up values	
+						g		integer			from relay		for this date		sum up all guard nodes
+						m		integer			from relay		for this date		sum up all middle nodes
+						e		integer			from relay		for this date		sum up all exit nodes
+						d		integer			from relay		for this date		sum up all dir nodes
+						pbr		percentage		from relay		for this date		average of all pbr
+						pbg		percentage		from relay		for this date		average of all pbg
+						pbm		percentage		from relay		for this date		average of all pbm
+						pbe		percentage		from relay		for this date		average of all pbe
+						as		array	object	from relay		for this date		
+																for each node		take note of AS
+																					sum up occurrences
+				flags	
+						gme-fast	int			from relay		for this date
+																for each node
+																with flag fast		sum
+						gme-stable	int			from relay		for this date
+																for each node
+																with flag stable	sum
+						g-fast		int			from relay		for this date
+																for each guard
+																with flag fast		sum
+						g-stable	int			like g-fast
+						m-fast		int			like...
+						m-stable	int			like...
+						e-fast		int			like...
+						e-stable	int			like...
+						e-badexit	int			like...
+		
+	
+		
+	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
+	a1-bridge	ident
+						_id						'bridge-1-' + date
+						span					1
+						date					by each date
+				bridges
+						bridge	integer			from relay		for this date		sum up all bridges
+						osv		array	object	from relay		for this date 		
+																for bridge nodes	take note of osv
+																					sum up occurrences
+						tsv		array	object	from relay		for this date 		
+																for bridge nodes	take note of tsv
+																					sum up occurrences
+						upt		integer			from relay		for this date		
+																for bridge nodes	average of all uptimes
+						bwp		integer			from relay		for this date		
+																for bridge nodes	sum up values
+						bwc		integer			from relay		for this date		
+																for bridge nodes 	sum up values
+						brp		integer			from relay		for this date
+																for each bridge	
+																for each pool		sum
+						bre		integer			from relay		for this date
+																for each bridge		
+																with bre true		sum
+						brt		integer			from relay		for this date
+																for each bridge	
+																for each transport	sum
+	
+	
+	
+	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
+	a1-censor	ident																bridges+directories+cpt
+						_id						'censor-1-' + date
+						span					1
+						date					by each date
+				
+				TODO		
+
+
+
+
+	 
+The client collection doesn't need any further aggregation since it is - as described above - already aggregated when it is imported into the Database. For indices see below.
+
+
+_scattering / spreading / evenness of distribution_
+So far we're only gathering all AS and how many nodes are connected to them. 
+With a little more statistical knowledge and effort (hint hint) we could derive some facts about e.g. evenness of distribution.    
+Maybe also bandwidth data could benefit from such measures.   
+Who else?
+
+	TODO
+	
+	
+_supporting indices over relay_
+Indices over the imported relay collection can probably speed up aggregation considerably. 
+I didn't test this but it really seems reasonable and since the aggregation task is quite massive the overhead in time and space to generate these indices seems justified.
+
+	FOR			OVER 	INCLUDING FIELDS
+	a1-country	relay	country+date+type
+	a1-relays	relay	date -> use date+type
+	a1-gmed		relay	date+type
+
+
+_aggregation mdularization_
+With so much aggregation taking place it should be tried to prevent aggregation steps more than once for different views but build them on each other like a pyramid.   
+Especially the country collection has a lot of overlap with other views.    
+Maybe it would be good to seperate GMED and Bridges in the import collections
+
+	TODO
+
+	
+	
+**Formal aggregation**
+
+This means aggregations over time and space. 
+Time quite obviously translates to the ability watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
+Space translates to the ability to group countries to meaningful regions, either continents or geopolitical regions like "arab spring countries".
 
 _timedate intervals / periods_   
 The default timespan is 1 hour for relays and 24 hours for clients. At a scale of 1 pixel per default timespan we can't see the whole data on a regular display.
@@ -234,36 +613,28 @@ If we skip months as too coarse anyway (but actually because they are so unwield
 
 We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
-_aggregation_
-Wikipedia has quick introductions to the meaning of [mean](http://de.wikipedia.org/wiki/Arithmetisches_Mittel), [median](http://de.wikipedia.org/wiki/Median) and [mode](http://de.wikipedia.org/wiki/Modus_%28Statistik%29) (the links point to the german edition).
+_continents and political regions_
 
-Data Reprocessing
------------------
-Having all data sitting very generically in one big table has the disadvantage of being slow. 
-To make up for that indices and aggregations are needed. Indices reestablish the differenciation that the one big table flattend. 
-E.g. each node type needs it's own index. 
-Aggregation has to precompute timespans, reduce value spaces, consolidate geographical information etc. 
-Indices and aggregation are optimizations for preconfigured usecases and visualization options, adding targeted performance to generic flexibility. 
-Additionally indices on the big "relay" collection have to facilitate generic and unforseen queries as much as possible.
+	TODO
+	
 
-Indices
+
+**Indices**
+
 * bridges
 * guard nodes
 * middle nodes
 * exit nodes
 
-Aggregations
-* consolidate relays: bridges + guard nodes + middle nodes + exit nodes + directory servers
-* consolidate anonymity: guard nodes + middle nodes + exit nodes
-* consolidate censorship circumvention: bridges + directory servers
-* for nodes: determine datetime intervals
-* for relays: extract country codes from ip-adresses
 
-**Issues**  
-Aggregates should use normalized versions of operating system data:
-	bgmed		osn		operating system normalized	string			linux | darwin | freebsd | windows | other  
+**Issues**
 Maybe aggregates should use normalized versions of autonomous system data:			
 	 gmed		asn		autonomous system normalizd	string	
+Would be good to check the DB for how many AS we currently have and if a small number of them is significantly important (I need to learn some statistics terms...).
+
+
+**Background Information**
+Wikipedia has quick introductions to the meaning of [mean](http://de.wikipedia.org/wiki/Arithmetisches_Mittel), [median](http://de.wikipedia.org/wiki/Median) and [mode](http://de.wikipedia.org/wiki/Modus_%28Statistik%29) (the links point to the german edition).
 
 Some material about MongoDB and OLAP  
 [MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)  
@@ -271,6 +642,8 @@ Some material about MongoDB and OLAP
 [MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)  
 [DataBrewery Cubes](http://databrewery.org/cubes/doc/)  
 [MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)  
+
+
 
 
 Visualization Interface Wishlist
@@ -295,11 +668,32 @@ Some useful links:
 
 
 
+
 Visualization Mechanics Wishlist
 --------------------------------
 * notify the client of new fields so he can add them to the generic interface 
 * RESTfulness: having the URL represent the complete state of a visualization e.g. including zoom factor, 
   active facets, selected clipping etc
+
+
+
+
+JavaScript Issues
+-----------------
+
+_framework_
+still not sure which framework to use. something lightweight should suffice. 
+angular.js maybe to involved. 
+knockout.js like angular.js takes a declarative approach.
+can.js doesn't have that declarative touch but apart from that looks very promising.
+  
+_datetime_    
+Handling of date and time can get difficult with JavaScript because not every environment handles every possible datetime format equally well. 
+Besides the ubiquitious UTC-epoch format which is rather inaccessable to humans we settle on "YYYY-MM-DD HH" as defined in ISO-8601 which is supported across all browsers and serves our needs just well.   
+If D3.js doesn't provide all we need we may use the [Moment.JS](http://momentjs.com) library which "was designed to work both in the browser and in Node.JS". 
+For further discussion of the topic see [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
+
+
 
 
 Data Import
@@ -311,11 +705,15 @@ See Tor ticket #6171 for more details: https://trac.torproject.org/projects/tor/
 [import.py](visionion/blob/master/import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
 
 
+
+
 Next Steps
 ----------
-* The schema still needs a little conceptual refinement.
-* Check how ip-adress to countycode conversion is done in MongoDB or if it should be done prior to import
-* A subset of the schema should be defined to help starting the work on the data import tool.
+* sketches of a visualization
+* more documentation of pre-import aggregation (extract from karsten's mails)
+* aggregation of visualization primitives and timespans
+* figure out how to control MongoDB via external scripts   
+  particularily aggregation, indexing and status/control-queries
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
 * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
 * Then the real work on the visualizations can begin.
