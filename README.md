@@ -7,7 +7,7 @@ The [Tor](https://www.torproject.org/index.html) project is primarily a system t
 It adds to this some means for censorship prevention as adversaries try to block access to Tor alltogether. 
 The Tor infrastructure is comprised of several types of network nodes, and a lot thereof. 
 
-Visualizing all the parts of this network in a meaningful way is propably not possible but of course insight can be drawn from combining different aspects and sources in one view. 
+Visualizing all the parts of this network in a meaningful way is propably not possible but of course insights can be drawn from combining different aspects and sources in one view. 
 Visionion aims to integrate and visualize all available data in a generic and easily extensible fashion. 
 These generic views can then be combined and tailored to elucidate structural patterns and hidden aspects in the data.
 
@@ -100,23 +100,49 @@ It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using th
 
 
 
-Tor Node Types
---------------
-All the different nodes in the Tor network are - despite their different functions - in the end just that: nodes. 
-Clients (which is Tor-speak for 'users') and bridges, relays and exit nodes, guards and directory servers all operate from the same code base, just with different configuration flags set. 
-A single node can be in _most_ categories at the same time and in _every_ category over time.   
+Tor network terminology
+-----------------------
+The Tor network is comprised of a lot of different nodes. 
+All these nodes operate - despite their different functions - from the same software, just with different configuration flags set. 
+A single node can be in _most_ categories at the same time and in _every_ category over time.  
+ 
+_Nodes_ are all the actors that form the network. 
+Nodes encompass clients, bridges and relays.    
+_Clients_ are the end users, connecting to the Tor network to anonymously use the internet.   
+_Bridges_ are the nodes that clients connect to to circumvent attempts to block access to Tor.   
+_Relays_ are the nodes that form the actual Tor network which provides anonymity. 
+Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.
+_Guard_ nodes function as entry points to an anonymized route through the Tor network. 
+They are reached by the client either directly or, if a censor blocks them, through a bridge.
+_Middle_ nodes function as intermediary steps on that route.
+_Exit_ nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.
+_Directory_ nodes provide some auxiliary services to the Tor network.
 
-It's quite common that a relay can be guard node, middle node, exit node, and directory mirror at the same time and that same node can be used as client at any time. 
-Also, the node may have been configured as bridge before or after being configured as relay.  
+	nodes				everything in the tor network
+		clients			the users
+		bridges			special entry points for clients that need to circumvent blocking 
+		relays			the actual anonymization network
+			guard		entry points into the network (accessed by client directky or by bridge)
+			middle		intermediary nodes on anonymizing route
+			exit		now anonymized, continue route to actual destination on the internet
+			directory	some auxiliary services 
 
+
+It's quite common that a relay is guard node, middle node, exit node, and directory mirror at the same time and that same node can be used as client at any time. 
+Also, the node may have been configured as bridge before or after being configured as a relay.   
+But there are two exceptions to the general rule:   
+1) a node can't be a client and a relay or bridge at the same time.   
+2) a node can't be a bridge and a relay at the same time.
+
+**a more detailed description of the different actors**
 * client  
-Tor doesn't log anything a clients, but only at bridges and directory mirrors. 
+Tor doesn't log anything at clients, but only at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
 The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
 The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.   
 See https://metrics.torproject.org/formats.html for details: "Second, we describe the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."   
 * bridge  
-Bridges are simply relays with a I-want-to-be-a-bridge bit set in their configuration. 
+Bridges are simply nodes with a I-want-to-be-a-bridge bit set in their configuration. 
 However, whether a node is a bridge or a relay determines to some extend what data we have about that node. 
 For example, we don't have country information about bridges, but we have that for relays.
 * guard node     
@@ -124,22 +150,23 @@ For example, we don't have country information about bridges, but we have that f
 * exit node  
 * directory mirror  
 
-
+	TODO
+	
 
 
 Data Schema Outline
 -------------------
-The initial database import schema has only 2 datatypes for all node types: 'relay' for all nodes except clients, and'client'. 
-Documents of type "relay" will be added to the collection named "relays", documents of type "client" likewise to the collection named "clients". 
+The initial database import schema has only 2 collections for all node types: 'relay' and'client'. 
+Documents of type "bridge", "guard", "middle", "exit" and "directory" will be added to the collection named "relay", documents of type "client" will be added to the collection named "client". 
 These two collections contain all raw data as it is imported into the database. 
 Further collections - equaling views in SQL-land - will be constructed through map/reduce style aggregation. They are described further below.
 
 
-**Relays**  
-The information available about the different types of relay nodes does vary to some degree. 
+**Relays and bridges**  
+The information available about the different types of relay and bridge nodes varies to some degree. 
 You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no performance penalty to pay for scarcely populated objects. 
 OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
-That one big table for all relay types has the additional advantage of providing maximum extensibility and malleability. 
+That one big table for all relay and bridge types has the additional advantage of providing maximum extensibility and malleability. 
 MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
 It couldn't be easier to add new data types, change data sources or modify value spaces. 
 The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
@@ -191,7 +218,7 @@ The client side code can instantly access these new fields (at least as soon as 
 _flags_
 On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
 They will remain in the scheme and will be imported in the Databae but will not be aggregated.  
-Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for teh following types of nodes: 
+Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for the following types of relays: 
 				Fast	Stable	BadExit	Authority
 	Guard		x		x
 	Middle		x		x
@@ -201,7 +228,7 @@ Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated fo
 
 **Clients**  
 Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
-Instead client data is derived from relay data through various means and is already aggregated when it is imported into the MongoDB. 
+Instead client data is derived from relay data through special means and is already aggregated when it is imported into the MongoDB. 
 
 				code	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
@@ -235,8 +262,8 @@ More importantly the validator can spot data that's not handled by the schema an
 Data Reprocessing
 -----------------
 Aggregation of imported data is essential to this project, for several reasons:
-* the relay data is ordered by relay by date but most of the time we will not want to look at individual relays but at at all relays together or at least at a group of relays sharing certain attributes.   
-* having all relay data sitting very generically in one big table has the disadvantage of being slow.    
+* the relay/bridge data is ordered by relay/bridge by date but most of the time we will not want to look at individual relays/bridges but at all relays/bridges together or at least at a group of relays/bridges sharing certain attributes.   
+* having all relay/bridge data sitting very generically in one big table has the disadvantage of being slow.    
 Dividing that big table of imported data into specialized collections according to the visual needs of the interface is a prerequisite for a responsive and interactive visualization.    
 * what's even more important is that the data as it is gathered and imported into the DB reflects the technical structure of the network but not necessarily the logical structure that we'd like to examine and understand.   
 For example data from clients and from relays is collected in different ways and imported in different collections but the relation between the number of clients connecting to the network and the bandwidth available to them is one of the crucial characteristics of the network. 
@@ -267,7 +294,7 @@ Obviously one would compare apples with oranges by comparing an absolute value l
 
 	TYPE	FIELD	MODE	MEASURE			UNIT				UPPER LIMIT
 	-----------------------------------------------------------------------
-	RELAY								
+	NODE								
 			bgmed	hard	sum				count				relay
 			osv		soft	sum...s			count/item			relay
 			tsv		soft	sum...s			count/item			relay
@@ -276,7 +303,7 @@ Obviously one would compare apples with oranges by comparing an absolute value l
 			bwc		ip		scat + sum		count				bwp
 			// bwa							
 									
-	GMED								
+	RELAY								
 			gmed	hard	sum				count				relay minus Bridge
 			g		hard	sum				count				< gmed
 			m		hard	sum				count				< gmed
@@ -326,7 +353,7 @@ Obviously one would compare apples with oranges by comparing an absolute value l
 			// bwa		
 
 Overview data on clients and relays:   
-We have some very general data on all relays: total count, software version, operating system version, total bandwidth provided and consumed. 
+We have some very general data on all relays and bridges: total count, software version, operating system version, total bandwidth provided and consumed. 
 Correspondingly we have quite general data on clients: how many clients in total were connected to the tor network via bridges or directly via guard nodes. 
 These two fit well together.
 We also know which IP-version and which obfuscation techniques clients use. 
@@ -340,7 +367,7 @@ Countries:
 The most detailed view we can get on clients is their distribution by country. This is interesting since we know also from each relay in which country it is related. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
 
 Relays:   
-Additionally to the data on all relays we have quite specific data on different types of relays, namely guards, middle nodes, exits and directory servers. 
+Additionally to the data on relays and bridges we have quite specific data on different types of relays (but not bridges), namely guards, middle nodes, exits and directory servers. 
 This data is detailed but not easy to handle. 
 Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.   
 We know for each relay with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add some meaning to these numbers. 
@@ -348,8 +375,8 @@ We also know for most relays through which AS they are connected but this is a v
 We then have some flags and exit port information which again are not particularily easy to visualize (and interpret).
 
 Bridges:    
-Last not least we have some data about bridges, but not as much as about guards, midddles, exist and directories. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors job easier. 
-What's fortunate about bridges is that they are mutually exclusive to the other 4 types of relays. So at least these numbers add up.
+Last not least we have some data about bridges, but not as much as about relays. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors job easier. 
+What's fortunate about bridges is that they are mutually exclusive to relays. So at least these numbers add up.
 Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
 
 
@@ -443,7 +470,7 @@ The utility of flags is also a little unclear.
 
 
 	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-relay	ident
+	a1-bgmed	ident
 						_id						'relay'-1-' + date
 						span					1
 						date					by each date
@@ -713,6 +740,8 @@ Next Steps
 * more documentation of pre-import aggregation (extract from karsten's mails)
 * aggregation of visualization primitives and timespans
 * figure out how to control MongoDB via external scripts   
+		http://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
+		e.g. prompt:> mongo localhost:27017/tor ~/visionion/aggregation.js
   particularily aggregation, indexing and status/control-queries
 * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
 * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
