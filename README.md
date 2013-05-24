@@ -109,6 +109,8 @@ A single node can be in _most_ categories at the same time and in _every_ catego
 _Nodes_ are all the actors that form the network. 
 Nodes encompass clients, bridges and relays.    
 _Clients_ are the end users, connecting to the Tor network to anonymously use the internet.   
+_Servers_ are everything except clients. 
+Servers encompass relays and bridges.
 _Bridges_ are the nodes that clients connect to to circumvent attempts to block access to Tor.   
 _Relays_ are the nodes that form the actual Tor network which provides anonymity. 
 Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.
@@ -118,14 +120,15 @@ _Middle_ nodes function as intermediary steps on that route.
 _Exit_ nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.
 _Directory_ nodes provide some auxiliary services to the Tor network.
 
-	nodes				everything in the tor network
-		clients			the users
-		bridges			special entry points for clients that need to circumvent blocking 
-		relays			the actual anonymization network
-			guard		entry points into the network (accessed by client directky or by bridge)
-			middle		intermediary nodes on anonymizing route
-			exit		now anonymized, continue route to actual destination on the internet
-			directory	some auxiliary services 
+	node					everything in the tor network
+		client				the users
+		server				everything serving the user
+			bridge			special entry points for clients that need to circumvent blocking 
+			relay			the actual anonymization network
+				guard		entry points into the network (accessed by client directky or by bridge)
+				middle		intermediary nodes on anonymizing route
+				exit		now anonymized, continue route to actual destination on the internet
+				directory	some auxiliary services 
 
 
 It's quite common that a relay is guard node, middle node, exit node, and directory mirror at the same time and that same node can be used as client at any time. 
@@ -134,7 +137,7 @@ But there are two exceptions to the general rule:
 1) a node can't be a client and a relay or bridge at the same time.   
 2) a node can't be a bridge and a relay at the same time.
 
-**a more detailed description of the different actors**
+**a more detailed description of the different nodes**
 * client  
 Tor doesn't log anything at clients, but only at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
@@ -156,21 +159,12 @@ For example, we don't have country information about bridges, but we have that f
 
 Data Schema Outline
 -------------------
-The initial database import schema has only 2 collections for all node types: 'relay' and'client'. 
-Documents of type "bridge", "guard", "middle", "exit" and "directory" will be added to the collection named "relay", documents of type "client" will be added to the collection named "client". 
-These two collections contain all raw data as it is imported into the database. 
-Further collections - equaling views in SQL-land - will be constructed through map/reduce style aggregation. They are described further below.
+The initial database import schema has only 3 collections for all node types: 'relay', 'bridge' and'client'. 
+Documents of type "guard", "middle", "exit" and "directory" will be added to the collection named "relay", documents of type "bridge" will be added to the collection named "bridge", documents of type "client" will be added to the collection named "client". 
+These 3 collections contain all raw data as it is imported into the database. 
 
 
-**Relays and bridges**  
-The information available about the different types of relay and bridge nodes varies to some degree. 
-You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no performance penalty to pay for scarcely populated objects. 
-OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
-That one big table for all relay and bridge types has the additional advantage of providing maximum extensibility and malleability. 
-MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
-It couldn't be easier to add new data types, change data sources or modify value spaces. 
-The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
-
+**relay**  
 	
 	in			code	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
@@ -181,14 +175,13 @@ The client side code can instantly access these new fields (at least as soon as 
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
 																				one of: 1(default), 6, 24, 168
-	bgmed		type	type of node				array	string	mode [**]	some of: Bridge,  Guard,  Middle,  Exit,  Dir
+	bgmed		type	type of node				string						Relay
+	bgmed		role	role/function of node		array	string	mode [**]	some of: Guard,  Middle,  Exit,  Dir
 	 gmed		flag	flags 						array	string	mode [**]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
-	bgmed		bwp		bandwidth actually provided integer			mean		B/s
-	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
 	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
 	 gmed		pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
@@ -198,9 +191,6 @@ The client side code can instantly access these new fields (at least as soon as 
 	 gmed		as		autonomous system			integer			mode		
 	 gmed		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
-	b			brp		bridge pool     			string			mode		one of: email,  https,  other 
-	b			bre		bridge is in EC2 cloud		boolean			mode
-	b			brt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
 	
 	LEGEND --------------------------------------------------------------------
 	in			indicates, for which type of node the field is relevant, 
@@ -217,7 +207,7 @@ The client side code can instantly access these new fields (at least as soon as 
 	
 _flags_
 On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
-They will remain in the scheme and will be imported in the Databae but will not be aggregated.  
+They will remain in the scheme and will be imported into the Database but will not be aggregated.  
 Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for the following types of relays: 
 				Fast	Stable	BadExit	Authority
 	Guard		x		x
@@ -226,9 +216,33 @@ Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated fo
 	Directory 							x
 
 
-**Clients**  
-Clients OTOH have their own datatype because client data is - unlikey all relay data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
-Instead client data is derived from relay data through special means and is already aggregated when it is imported into the MongoDB. 
+**bridge**  
+	
+	in			code	description					type	subtype	aggregation	valuespace
+	+----------+-------+---------------------------+--------+------+-----------+----------
+	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmed		nid		node id						string			-			Tor fingerprint
+	bgmed		nick	nickname					string			mode		nickname of relay
+	bgmed		date	datetime					string			-			start of the time span that this document describes
+																				format "YYYY-MM-DD HH" as defined in ISO-8601
+	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default), 6, 24, 168
+	bgmed		type	type of node				string						Bridge
+	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
+	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
+	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
+	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	b			brp		bridge pool     			string			mode		one of: email,  https,  other 
+	b			bre		bridge is in EC2 cloud		boolean			mode
+	b			brt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
+	
+	LEGEND --------------------------------------------------------------------
+	see 'relay' above
+
+
+**client**  
+Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
+Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
 
 				code	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
@@ -245,11 +259,15 @@ Instead client data is derived from relay data through special means and is alre
 				cip		ip-version used				array	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
-	see above
+	see 'relay' above
 	
 
 **JSON schema**  
 The above has been transformed into a JSON [schema](schema.json).   
+
+		TODO	implemet the changes made above into the JSON schema
+		
+
 If the outline above and the schema get out of sync, the *schema is authorative*.   
 For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/JSON#Schema) and the [Draft Specification](http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1).
 
@@ -261,6 +279,18 @@ More importantly the validator can spot data that's not handled by the schema an
 
 Data Reprocessing
 -----------------
+
+<!-- 
+The information available about the different types of relay and bridge nodes varies to some degree. 
+You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no performance penalty to pay for scarcely populated objects. 
+OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
+That one big table for all relay and bridge types has the additional advantage of providing maximum extensibility and malleability. 
+MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
+It couldn't be easier to add new data types, change data sources or modify value spaces. 
+The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
+ -->
+
+
 Aggregation of imported data is essential to this project, for several reasons:
 * the relay/bridge data is ordered by relay/bridge by date but most of the time we will not want to look at individual relays/bridges but at all relays/bridges together or at least at a group of relays/bridges sharing certain attributes.   
 * having all relay/bridge data sitting very generically in one big table has the disadvantage of being slow.    
@@ -379,12 +409,14 @@ Last not least we have some data about bridges, but not as much as about relays.
 What's fortunate about bridges is that they are mutually exclusive to relays. So at least these numbers add up.
 Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
 
+<!-- 
 
 **Import aggregation**
 There's one field in the initial relay collection that has to be aggregated inside MongoDB and that's bwp (bandwidth actually provided).
 	
 	TODO
 
+ -->
 
 
 **Import checks**
@@ -593,7 +625,7 @@ Who else?
 	TODO
 	
 	
-_supporting indices over relay_
+_supporting indices over relay and bridge_
 Indices over the imported relay collection can probably speed up aggregation considerably. 
 I didn't test this but it really seems reasonable and since the aggregation task is quite massive the overhead in time and space to generate these indices seems justified.
 
@@ -617,6 +649,20 @@ Maybe it would be good to seperate GMED and Bridges in the import collections
 This means aggregations over time and space. 
 Time quite obviously translates to the ability watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
 Space translates to the ability to group countries to meaningful regions, either continents or geopolitical regions like "arab spring countries".
+
+
+_uptimes_
+A node may not be online in every part of an aggregated timespan. 
+We don't count servers that haven't been available for at least 30% of a timespan. 
+That way we are counting the bandwidth a little conservativ, while we are too optimistic regarding the number of available servers.
+
+We could document the details by recording a nodes uptime and calculating the bandwidth actually provided by multiplying the uptime (in percent) with the bandwidth advertized, thus adding 2 new fields to the collection.
+But it probably is sufficient to calculate the bwa "bandwidth advertized" field accordingly and be done with it.
+Because of that the following two lines were deleted from the scheme. 
+
+	bgmed		bwp		bandwidth actually provided integer			mean		B/s
+	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
+	
 
 _timedate intervals / periods_   
 The default timespan is 1 hour for relays and 24 hours for clients. At a scale of 1 pixel per default timespan we can't see the whole data on a regular display.
