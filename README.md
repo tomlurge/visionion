@@ -43,7 +43,7 @@ it should also be possible to layer timeline graphs for the same time period but
 **2** 
 now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays   
 **3** 
-now imagine a third plane showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes   
+now imagine a third plane on the floor showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes   
 **4** 
 now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.   
 **5** 
@@ -52,18 +52,18 @@ show the biggest nodes for a given metric and their share of the total
 **1** 
 represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 
 **1a** 
-is available as a prototype of [interactive graphs](http://tigerpa.ws/tor_metrics/).   
+is available as a prototype at [interactive graphs](http://tigerpa.ws/tor_metrics/).   
 **2** 
 attempts to combine different visualization techniques like timeline and cake diagram. 
 Different visualizations get rendered on different layers. 
-Control shifts from the visualization framework to web application.   
+Control shifts from the visualization framework to the web application.   
 **3** 
 introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective.   
 **4** 
 points the user in directions that might be worth to explore. 
 It will need some analytics in the background.   
 **5** 
-checks (de-) centralizations in the infrastructure   
+checks (de-) centralizations in the infrastructure.   
 
 
 
@@ -71,12 +71,13 @@ checks (de-) centralizations in the infrastructure
 Technical Overview
 ------------------
 In a nutshell:
-* Tor metrics data get's imported into a [MongoDB](http://www.mongodb.org/) database.   
-* Client side application framework is [Angular.js](http://angularjs.org/).   
-* Visualization Framework is [D3.js](http://d3js.org/).   
-* Supported web browsers are Chrome and Firefox. Others might work as well.
-Most of the visualization facets get rendered seperatly, on seperate planes/DIVs.   
-The application prepares the joins and our eyes carry them out (the DB is well off ;) .   
+* Tor metrics data get's imported into a [MongoDB](http://www.mongodb.org/) database.  
+* Aggregation and indexing transforms the imported data into a big fact table suitable to drive the visualization. 
+* Visualization Framework is [D3.js](http://d3js.org/), additionally [Crossfilter](http://square.github.io/crossfilter/).   
+* Client side application framework is not yet decided. Either [Angular.js](http://angularjs.org/), Knockout.js or Can.js.   
+* Targeted web browsers are Chrome and Firefox. Others might work as well.
+Most of the visualization facets get rendered seperatly, on seperate planes (technically DIVs).   
+The application prepares the joins and our eyes carry them out.   
 
 
 **Visualization framework** 
@@ -94,7 +95,7 @@ Support for geo-data could be beneficial either (no other NoSQL database has tha
 
 
 **Web application framework** 
-[Angular.js](http://angularjs.org/) was chosen because of it's declarative style and it's attractive approach to routing and HTML extensions ([discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks")). 
+[Angular.js](http://angularjs.org/) is the likely candidate because of it's declarative style and it's attractive approach to routing and HTML extensions ([discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks")). 
 It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).  
 
 
@@ -110,15 +111,15 @@ _Nodes_ are all the actors that form the network.
 Nodes encompass clients, bridges and relays.    
 _Clients_ are the end users, connecting to the Tor network to anonymously use the internet.   
 _Servers_ are everything except clients. 
-Servers encompass relays and bridges.
+Servers encompass relays and bridges.   
 _Bridges_ are the nodes that clients connect to to circumvent attempts to block access to Tor.   
 _Relays_ are the nodes that form the actual Tor network which provides anonymity. 
-Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.
+Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.   
 _Guard_ nodes function as entry points to an anonymized route through the Tor network. 
-They are reached by the client either directly or, if a censor blocks them, through a bridge.
-_Middle_ nodes function as intermediary steps on that route.
-_Exit_ nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.
-_Directory_ nodes provide some auxiliary services to the Tor network.
+They are reached by the client either directly or, if a censor blocks them, through a bridge.   
+_Middle_ nodes function as intermediary steps on that route.   
+_Exit_ nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.   
+_Directory_ nodes provide some auxiliary services to the Tor network.   
 
 	node					everything in the tor network
 		client				the users
@@ -134,12 +135,12 @@ _Directory_ nodes provide some auxiliary services to the Tor network.
 It's quite common that a relay is guard node, middle node, exit node, and directory mirror at the same time and that same node can be used as client at any time. 
 Also, the node may have been configured as bridge before or after being configured as a relay.   
 But there are two exceptions to the general rule:   
-1) a node can't be a client and a relay or bridge at the same time.   
+1) a node can't be a client and a server at the same time.   
 2) a node can't be a bridge and a relay at the same time.
 
 **a more detailed description of the different nodes**
 * client  
-Tor doesn't log anything at clients, but only at bridges and directory mirrors. 
+Tor doesn't log any data at individual clients themselves, but it logs abstract data about clients at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
 The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
 The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.   
@@ -154,7 +155,144 @@ For example, we don't have country information about bridges, but we have that f
 * directory mirror  
 
 	TODO
+
+**even more**
+* for some rather detailed explenations see the [Tor directory protocol, version 3](https://gitweb.torproject.org/torspec.git/blob/HEAD:/dir-spec.txt)
 	
+	
+<!--
+
+MAIL Jan 17 12:11
+...
+ The "time to download files over Tor" and "timeouts and
+failures of downloading files over Tor" parts are what we learn from
+clients we run ourselves. 
+...
+There's not just one document per relay/bridge.  These are the
+documents you have per relay/bridge:
+
+- Network status entry: There's a network status entry for every relay
+or bridge with some summary information.  It's a confirmation by either
+the directory authorities (for relays) or the bridge authority (for
+bridges) that the given relay/bridge information is valid.  But this
+summary doesn't contain, e.g., OS information or number of bytes spent
+on answering directory requests.
+
+- Server descriptor: Every relay or bridge publishes a descriptor
+containing its contact information and capabilities to the directory
+authorities or bridge authority every 12--18 hours.  This server
+descriptor is then referenced by digest from one or typically multiple
+network status entries.
+
+- Extra-info descriptor: Statistical information about a relay or bridge
+is not contained in the server descriptor, but in an extra-info
+descriptor.  These are referenced from server descriptors by digest,
+with a 1:1 relationship.
+
+And while we're at descriptor types, there's a separate descriptor type
+for "time to download files over Tor" and "timeouts and failures of
+downloading files over Tor".  These data come from Torperf output files.
+
+...
+You can assign a consensus weight fraction to
+each relay, for any given date and hour.  Then you can say that all
+clients used that relay for about x% of their paths, or that a
+particular client used that relay for a particular path with a
+probability of x%.
+
+There are currently four such weights/probabilities defined for relays
+(this does not apply to bridges).  Quoting from Onionoo's protocol
+specification:
+
+"consensus_weight_fraction": Fraction of this relay's consensus weight
+compared to the sum of all consensus weights in the network. This
+fraction is a very rough approximation of the probability of this relay
+to be selected by clients.
+
+"guard_probability": Probability of this relay to be selected for the
+guard position. This probability is calculated based on consensus
+weights, relay flags, and bandwidth weights in the consensus. Path
+selection depends on more factors, so that this probability can only be
+an approximation.
+
+"middle_probability": Probability of this relay to be selected for the
+middle position. This probability is calculated based on consensus
+weights, relay flags, and bandwidth weights in the consensus. Path
+selection depends on more factors, so that this probability can only be
+an approximation.
+
+"exit_probability": Probability of this relay to be selected for the
+exit position. This probability is calculated based on consensus
+weights, relay flags, and bandwidth weights in the consensus. Path
+selection depends on more factors, so that this probability can only be
+an approximation.
+...
+For visualization, autonomous systems are very similar to countries.
+Think of an autonomous system as a group of IP address blocks belonging
+to the same organization.  You want to avoid that all relays in a path,
+or at least entry and exit, are located in the same autonomous system
+and thereby controlled by the same organization.  And you want to avoid
+that a single AS/organization sees a too high percentage of Tor traffic.
+For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees
+almost 20% of Tor's exit traffic.  That's about as interesting as the
+fact that over 30% of Tor's traffic exits from U.S. relays.
+...
+| what information about clients do you gather at the guards and bridges ?
+See https://metrics.torproject.org/formats.html for details: "Second, we
+describe the numerous aggregate statistics that relays publish about
+their usage (PDF), including byte histories, directory request
+statistics, connecting client statistics, bridge user statistics,
+cell-queue statistics, exit-port statistics, and bidirectional
+connection use."
+
+
+MAIL JAN 18
+...
+Ah, directory mirrors are just relays with an open directory ports.  So,
+the set of directory mirrors is a subset of the set of relays, and
+there'd be flags and all that for directory mirrors, too.
+
+
+MAIL May 16
+
+Bandwidth figures are for all types of service.  In theory, we have data
+about consumed directory bandwidth for newer relays or bridges, but not
+for traffic as bridge, guard, middle, or exit node.  There are privacy
+implications of gathering too detailed data, so we can't get more
+detailed data.  I'd say let's only work with total bandwidth per relay
+or bridge, that is, the data that you already have.
+
+MAIL May 18
+
+I'm already taking the BadExit flag into account in the importer: a
+relay that has the Exit flag _and_ the BadExit flag isn't put into the
+Exit category.  The BadExit flag doesn't have any impact on the other types.
+
+
+MAIL May 21
+
+	      Guard   Middle  Exit    Directory
+Authority     [ ]     [ ]     [ ]     [X]
+Being an authority is mostly relevant for directories, if at all.
+Hmmm, that doesn't sound very important :/
+You're right, it's not.
+...
+However, you left out two important flags:
+Exit & !BadExit [X]   [ ]     [ ]     [ ]
+Guard         [ ]     [ ]     [X]     [ ]
+Knowing if an exit may also be used in the guard position can be interesting.
+
+Uh? Exits and Guard in my scheme are types of relays, not flags. 
+Maybe you should check the readme.md again to see if I missed more flags.
+
+So, if your schema allow comparisons between two types, we're all set.
+For example, it's interesting to compare Exit-type relays with
+Guard-type relays.  If that is possible, there's no need to look at the
+Exit & !BadExit or Guard flags anymore.
+
+
+-->
+
 
 
 Data Schema Outline
@@ -166,14 +304,14 @@ These 3 collections contain all raw data as it is imported into the database.
 
 **relays**  
 	
-	in			code	description					type	subtype	aggregation	valuespace
+	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
 	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		nick	nickname					string			mode		nickname of relay
 	bgmed		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		role	roles/functions of relay	array	string	mode [**]	some of: Guard,  Middle,  Exit,  Dir
-	 gmed		flag	flags 						array	string	mode [**]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
+	bgmed		role	roles/functions of relay	array	string	mode [*]	some of: Guard,  Middle,  Exit,  Dir
+	 gmed		flag	flags 						array	string	mode [*]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
@@ -187,34 +325,11 @@ These 3 collections contain all raw data as it is imported into the database.
 	   e		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		as		autonomous system			integer			mode		
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
-	
-	LEGEND --------------------------------------------------------------------
-	in			indicates, for which type of node the field is relevant, 
-				'bgmed' standing for Bridge Guard Middle Exit Directory
-	code		name of the field
-	description	short description of the field's semantics
-	type		as defined in 3.5 of http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1 
-	subtype		if type is array, type of array content
-	valuespace	expected values
-				for lists of possible values "some of" where multiple values are possible 
-				or "one of" where possible values are mutually exclusive
-	[*]			if the relay is online available for at least 20% of the timespan in question
-	[**]		if the relay provides the functionality in question for at least half of the timespan in question
-	
-_flags_
-On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
-They will remain in the scheme and will be imported into the Database but will not be aggregated.  
-Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for the following types of relays: 
-				Fast	Stable	BadExit	Authority
-	Guard		x		x
-	Middle		x		x
-	Exit		x		x		x
-	Directory 							x
 
 
 **bridges**  
 	
-	in			code	description					type	subtype	aggregation	valuespace
+	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
 	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		nick	nickname					string			mode		nickname of relay
@@ -226,17 +341,12 @@ Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated fo
 	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
 	b			brp		bridge pool     			string			mode		one of: email,  https,  other 
 	b			bre		bridge is in EC2 cloud		boolean			mode
-	b			brt		bridge pluggable transport	array	string	mode [**]	some of: obfs2, obfs3
-	
-	LEGEND --------------------------------------------------------------------
-	see 'relay' above
+	b			brt		bridge pluggable transport	array	string	mode [*]	some of: obfs2, obfs3
 
 
 **clients**  
-Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
-Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
 
-				code	description					type	subtype	aggregation	valuespace
+				field	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
@@ -248,13 +358,24 @@ Instead client data is derived from relay data through special means and is alre
 				cip		ip-version used				array	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
-	see 'relay' above
-	
+	in			indicates, for which type of node the field is relevant, 
+				'bgmed' standing for Bridge Guard Middle Exit Directory
+	field		name of the field in the database
+	description	short description of the field's semantics
+	type		as defined in 3.5 of http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1 
+	subtype		if type is array, type of array content
+	valuespace	expected values
+				for lists of possible values "some of" where multiple values are possible 
+				or "one of" where possible values are mutually exclusive
+	[*]			if the relay provides the functionality in question for at least half of the timespan in question
+
+Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
+Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
+
 
 **JSON schema**  
 The above has been transformed into a JSON [schema](schema.json).   
 		
-
 If the outline above and the schema get out of sync, the *schema is authorative*.   
 For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/JSON#Schema) and the [Draft Specification](http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1).
 
@@ -268,19 +389,22 @@ Data Reprocessing
 -----------------
 
 <!-- 
-The information available about the different types of relay and bridge nodes varies to some degree. 
-You wouldn't put them all together in one table if you used an RDBMS but that's okay with a document centric store like MongoDB since there is no performance penalty to pay for scarcely populated objects. 
-OTOH MongoDB as a typical NoSQL store provides no joins which means that for retrieval purposes it can be very beneficial to have all data in one big table.  
-That one big table for all relay and bridge types has the additional advantage of providing maximum extensibility and malleability. 
+The information available about the different types of nodes varies to some degree. 
+You wouldn't put them all together in one table if you used an RDBMS but a document centric store like MongoDB works differently. 
+There is no performance penalty to pay for scarcely populated tables: this facilitates big diverse tables. 
+OTOH MongoDB as a typical NoSQL store provides no joins: this mandates big diverse tables for complex retrieval tasks.  
+That one big table for all relay, bridge  and client data provides maximum extensibility and malleability. 
+Changes in the Tor network structure or in available data will not compromise teh database over time. 
 MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
-It couldn't be easier to add new data types, change data sources or modify value spaces. 
+Adding new data types or modifying value spaces is always possible without need for further adjustments. 
 The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
  -->
 
 
 Aggregation of imported data is essential to this project, for several reasons:
-* the relay/bridge data is ordered by relay/bridge by date but most of the time we will not want to look at individual relays/bridges but at all relays/bridges together or at least at a group of relays/bridges sharing certain attributes.   
-* having all relay/bridge data sitting very generically in one big table has the disadvantage of being slow.    
+* the server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers together during a given timespan or at least at a group of servers sharing certain attributes.   
+
+
 Dividing that big table of imported data into specialized collections according to the visual needs of the interface is a prerequisite for a responsive and interactive visualization.    
 * what's even more important is that the data as it is gathered and imported into the DB reflects the technical structure of the network but not necessarily the logical structure that we'd like to examine and understand.   
 For example data from clients and from relays is collected in different ways and imported in different collections but the relation between the number of clients connecting to the network and the bandwidth available to them is one of the crucial characteristics of the network. 
@@ -396,15 +520,18 @@ Last not least we have some data about bridges, but not as much as about relays.
 What's fortunate about bridges is that they are mutually exclusive to relays. So at least these numbers add up.
 Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
 
-<!-- 
 
-**Import aggregation**
-There's one field in the initial relay collection that has to be aggregated inside MongoDB and that's bwp (bandwidth actually provided).
+_flags_
+On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
+They will remain in the schema and will be imported into the Database but will not be aggregated.  
+Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for the following types of relays: 
+				Fast	Stable	BadExit	Authority
+	Guard		x		x
+	Middle		x		x
+	Exit		x		x		x
+	Directory 							x
 	
-	TODO
-
- -->
-
+	
 
 **Import checks**
 We are making assumptions about the imported data that wouldn't hurt to be checked. 
@@ -645,7 +772,7 @@ That way we are counting the bandwidth a little conservativ, while we are too op
 
 We could document the details by recording a nodes uptime and calculating the bandwidth actually provided by multiplying the uptime (in percent) with the bandwidth advertized, thus adding 2 new fields to the collection.
 But it probably is sufficient to calculate the bwa "bandwidth advertized" field accordingly and be done with it.
-Because of that the following two lines were deleted from the scheme. 
+Because of that the following two lines were deleted from the schema. 
 
 	bgmed		bwp		bandwidth actually provided integer			mean		B/s
 	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
@@ -673,7 +800,7 @@ If we skip months as too coarse anyway (but actually because they are so unwield
 
 We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
-From an earlier version of the import scheme:
+From an earlier version of the import schema:
 	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
 																				one of: 1(default), 6, 24, 168
 
@@ -709,6 +836,72 @@ Some material about MongoDB and OLAP
 [MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)  
 
 
+<!--
+
+MAIL May 1
+
+
+Speaking of aggregation, should there be a threshold of non-null entries
+below which we don't aggregate an entry?  For example, if a relay was
+only running for 1 out of 6 hours, should we rather exclude it?  If so,
+what fraction of non-null entries would we require?
+...
+I think Onionoo includes a data point if it has data for at least 20% of
+the considered interval, and considers the data point as null otherwise.
+So, for a 6 hour interval, having data for 1 hour wouldn't suffice, but
+2 hours or more would be okay.
+...
+Mode in math sense, so most frequent element, breaking ties somehow.
+So, if a relay upgrades in a 6-hour period, we'll have to pick either
+version number for the 6-hour data point.  Using the mode and breaking
+ties by picking the larger version number, we'll have these results:
+023 023 023 023 023 024 -> 023
+023 023 023 023 024 024 -> 023
+023 023 023 024 024 024 -> 024
+023 023 null null 024 024 -> 024
+And if we use the 20% threshold for non-null values:
+023 024 null null null null -> 024
+023 null null null null null -> null
+
+
+MAIL May 25
+
+Also, we should distinguish more clearly between measures and dimensions
+(see m/d column below).  I envision a single fact table that's a
+combination of the current nodes and clients table.
+
+in   code   m/d  description     type
++---+------+----+---------------+--------------------------------------
+rbc  _id    d    document ID     dict of:
+                                - datetime, ISODate
+                                - span, integer, in hours
+                                - type: "relay", "bridge", or "client"
+                                - fingerprint, string, only rb span=1
+                                - nickname, string, only rb span=1
+r    rtype  d    type of relay   some of "Guard", ...
+r    rflag  d    relay flags     some of "Fast", "Stable", ...
+rb   tsv    d    software ver.   string
+rb   osv    d    operating sys.  string
+r    as     d    auton. sys.     integer
+r    pex    d    perm. exit p.   array of integers
+r c  cc     d    country code    string
+b   brp    d    bridge pool     string
+b   bre    d    EC2 cloud       boolean
+bc  brt    d    pluggable trans string
+ c  cdc    d    direct conn.    boolean: connect via relay or bridge?
+ c  cip    d    ip version      integer: connect via IP version 4 or 6
+rbc  nodes  m    # of nodes      float
+rb   bwa    m    bw advertised   float
+rb   bwc    m    bw consumed     float
+r    pbr    m    cons. weight    float
+r    pbg    m    guard prob.     float
+r    pbm    m    middle prob.    float
+r    pbe    m    exit prob.      float
+
+
+-->
+
+
 
 
 Visualization Interface Wishlist
@@ -727,10 +920,153 @@ Visualization Interface Wishlist
 
 this list is unsorted
 
+
 Some useful links:  
 [Topojson](https://github.com/mbostock/topojson/)  
 [Fisheye](http://bost.ocks.org/mike/fisheye/)  
 
+
+<!-- 
+Re: metrics visualization
+
+Your question was what factors would be relevant for users.  I'm trying
+to make a short list here:
+
+- bridge vs. relay: bridges are simply relays with a
+I-want-to-be-a-bridge bit set in their configuration.  However, whether
+a node is a bridge or a relay determines to some extend what data we
+have about that node.  For example, we don't have country information
+about bridges, but we have that for relays.
+
+- country code
+
+- flags: does the relay permit exiting to the Internet, is it a
+potential guard node, is it fast, is it stable, etc.
+
+- Tor software version
+- operating system
+
+- EC2 cloud bridge or not: our EC2 bridge image uses a naming scheme
+that allows us to determine whether a bridge is run in Amazon's cloud or
+not.
+
+- Autonomous system: in which AS is a relay running (this information is
+not available for bridges).  We currently don't extract this
+information, but it's only a database lookup away.
+
+- advertised bandwidth: maybe we only want to look at relays with a
+given minimum advertised bandwidth.
+
+- permitted exit ports: maybe we only want to look at relays permitting
+exiting to port 80 and 443, or at relays permitting everything except
+those ports, or any other port combination.
+
+- for bridges, were they given out via BridgeDB's https or email pool or
+not given out at all?
+
+- for bridges, did they permit a given pluggable transport, like obfs2?
+
+These are just a few ideas.  Some of these might turn out to be really
+boring, and there might be exciting ones that I didn't list here.  We'll
+probably learn more about good factors once there's something to play
+with.  It would be cool if a new visualization would allow for removing
+or adding factors easily, as well as adding or removing aggregates
+(relay numbers, bandwidth numbers, etc.).
+
+
+Re: [tor-assistants] metrics visualization
+
+Right now, if you ask
+for relays running version 0.2.4, it looks up those numbers in the
+static JSON file that metrics exports.  You cannot ask for the number of
+relays running version 0.2.4 on Linux, and you cannot ask for bandwidth
+provided by relays running version 0.2.4.  If we wanted to add those
+numbers, I'd have to add a new JSON file containing that particular
+subset of relays; that doesn't scale.  What we should instead do is
+define a data interface that's driven by the graphing engine that we can
+then write a back-end counter-part for.  I have weak memories of data
+warehouses and OLAP from my Information Science studies, but I don't
+know how to design and implement such a thing using open-source
+components.  I'd love to have help with this by knowing what data is
+required for a good graphing framework.
+...
+Maybe there should be an "All" selection for every factor.  With
+the current data it would only be possible to select one factor value
+that is not "All" and select "All" for all other factors.  Once it's
+possible to look at "0.2.4 relays on Linux", one could select something
+else than "All" for more than one factor.  Or did you mean something else?
+
+
+Re: [tor-assistants] metrics visualization
+
+Yes, but pretty much anything above - except location and datetime - is 
+measured in quantities of nodes: how many nodes run linux, how many nodes 
+are stable, how many nodes permit exit pot 80 etc etc. All dimensions 
+except location and datetime break down to quantities.
+
+You could also ask how many bytes per day are transported by relays
+running Linus.  Or, what's the probability of having a Windows relay as
+your entry guard.
+
+
+Re: visionion - aggregation
+
+| Note that you wouldn't have to aggregate by single relay or bridge, but
+| you could aggregate all relays or bridges with the same combination of
+| dimensions.  For example, you only care about facts like "on May 23,
+| 2013, there were 25 relays running with type Guard and Middle, with the
+| Fast and Stable flag, with version 0.2.3.x, on OS X, in AS 1234, not
+| permitting any ports, in Germany".
+
+When I wrote that example, I wanted to express the maximum level of
+detail that you'd have to keep to answer any question that anybody could
+ever want to ask.  I wanted to say that you don't need to remember which
+particular relay fingerprints are behind that number.  But you're right
+that nobody would actually want to know the answer to such a detailed
+question.
+
+Starting from the other end, I suggest you start with questions touching
+only a single dimension: "how many relays were there in Germany?" or
+"how many relays were there on OS X?"  And when people want to know
+more, like: "how many relays on OS X were there in Germany?", it would
+be good if the system can be extended to answer such questions.  But
+actually extending it could be step two.
+
+
+MAY 23 9:17pm
+
+Assume we only have node numbers as measure and relay types (only Guard
+and Exit) and software versions (only 0.2.1, 0.2.2, and 0.2.3) as
+dimensions.  Now, for a given hour, we could group relays, so that:
+
+Guard/0.2.1 + Guard/0.2.2 + Guard/0.2.3 + Exit/0.2.1 + Exit/0.2.2 +
+Exit/0.2.3 = all nodes
+
+With clients, we don't have data for combinations of dimensions, but
+only by a single dimension.  So, for a given day, we have:
+
+de + us + fr + it + uk + gr + ... = all nodes connecting via bridges
+IPv4 + IPv6 = all nodes connecting via bridges
+obfs2 + obfs3 + websocket = all nodes connecting via bridges
+
+But there's no such thing as de/IPv4/obfs2, and we can't derive that
+number from our data.
+
+
+MAY 25 7:17pm
+
+There's a large emphasis on node numbers, but really, bwa, bwc, and pbr 
+are more important measures than the number of nodes.
+
+Here's my idea: how about you keep osv_r, tsv_r, fast_r, stable_r, and
+as_r and store arrays of [#nodes, bwa, bwc, pbr] for each of them?  For
+osv_r, tsv_r, and as_r that would mean storing an array of arrays, and
+for fast_r and stable_r it would be just that array.
+
+
+
+
+-->
 
 
 
