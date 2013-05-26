@@ -18,21 +18,12 @@
 
 
 {
-    "name": "Relay",
+    "name": "relays",
     "properties": {
-        "_id": {
-            "type": "string",
-            "title": "Document Identifier",
-            "description": "Composed of fingerprint, span and date.",
-            "format": "'fingerprint' + '-' + 'span' + '-' + 'date',
-                        e.g. 'fingerprint-1-YYYYMMDDHH'
-                        (date not like ISO-8601 but without dashes and whitespace).",
-            "required": "true"
-        },
-        "nid": {
+        "node": {
             "type": "string",
             "title": "Node ID",
-            "description": "Just the Tor fingerprint.",
+            "description": "Tor fingerprint of relay.",
             "required": "true"
         },
         "nick": {
@@ -47,15 +38,7 @@
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
         },
-        "span": {
-            "type": "integer",
-            "title": "Period of validity",
-            "description": "Length of the interval this document describes, in hours.",
-            "format": "Expected values are ONE of the following:
-                       '1', '6', '24', '168'",
-            "default": "1"
-        },
-        "type": {
+        "role": {
             "type": "array",
             "title": "Type of relay",
             "items": {
@@ -83,17 +66,6 @@
             "type": "integer",
             "title": "Bandwidth consumed",
             "format": "B/s"
-        },
-        "bwp": {
-            "type": "integer",
-            "title": "Bandwidth provided",
-            "description": "Product of 'Bandwidth advertized' and 'Uptime'.",
-            "format": "B/s"
-        },
-        "upt": {
-            "type": "integer",
-            "title": "Uptime",
-            "description": "Percentage of the given span the relay was actually available."
         },
         "tsv": {
             "type": "string",
@@ -127,11 +99,6 @@
             "title": "Exit probability",
             "description": "Probability of a client picking a relay to be Exit node."
         },
-        "as": {
-            "type": "integer",
-            "title": "Autonomous system",
-            "description": "Number of the autonomous system the node belongs to."
-        },
         "pex": {
             "type": "array",
             "title": "Permitted exit ports",
@@ -142,11 +109,63 @@
                            '80', '443', '6667'"
             }
         },
+        "as": {
+            "type": "integer",
+            "title": "Autonomous system",
+            "description": "Number of the autonomous system the node belongs to."
+        },
         "cc": {
             "type": "string",
             "title": "Country code",
             "description": "Country the node is located in.",
             "format": "Two-letter country code (ISO 3166-1 alpha-2)"
+        }
+    }
+}
+
+
+{
+    "name": "bridges",
+    "properties": {
+        "node": {
+            "type": "string",
+            "title": "Node ID",
+            "description": "Tor fingerprint of relay.",
+            "required": "true"
+        },
+        "nick": {
+            "type": "string",
+            "title": "Nickname",
+            "description": "Nickname of relay"
+        },
+        "date": {
+            "type": "string",
+            "title": "Date of dataset",
+            "description": "Start of the time span that this document describes.",
+            "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
+            "required": "true"
+        },
+        "bwa": {
+            "type": "integer",
+            "title": "Bandwidth advertized",
+            "format": "B/s"
+        },
+        "bwc": {
+            "type": "integer",
+            "title": "Bandwidth consumed",
+            "format": "B/s"
+        },
+        "tsv": {
+            "type": "string",
+            "title": "Tor software version",
+            "format": "Expected values are ONE of the following:
+                       '010', '011', '012', '020', '021', '022', '023', '024'"
+        },
+        "osv": {
+            "type": "string",
+            "title": "Operating system version",
+            "format": "Expected values are ONE of the following:
+                       'linux', 'darwin', 'freebsd', 'windows', 'other'"
         },
         "brp": {
             "type": "string",
@@ -174,33 +193,15 @@
 }
 
 
-
 {
-    "name": "Client",
+    "name": "clients",
     "properties": {
-        "_id": {
-            "type": "string",
-            "title": "Identifier",
-            "description": "Composed of the string 'client', plus span and date.",
-            "format": "'client' + '-' + 'span' + '-' + 'date',
-                        e.g. 'client-24-YYYYMMDDHH'
-                        (date not like ISO-8601 but without dashes and whitespace).",
-            "required": "true"
-        },
         "date": {
             "type": "string",
             "title": "Date of dataset",
             "description": "Start of the time span that this document describes.",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
-        },
-        "span": {
-            "type": "integer",
-            "title": "Timespan",
-            "description": "Duration of validity of this document, in hours.",
-            "format": "Expected values are ONE of the following:
-                       '24', '168'",
-            "default": "24"
         },
         "cb": {
             "type": "integer",

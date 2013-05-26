@@ -164,19 +164,15 @@ Documents of type "guard", "middle", "exit" and "directory" will be added to the
 These 3 collections contain all raw data as it is imported into the database. 
 
 
-**relay**  
+**relays**  
 	
 	in			code	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmed		nid		node id						string			-			Tor fingerprint
+	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		nick	nickname					string			mode		nickname of relay
 	bgmed		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default), 6, 24, 168
-	bgmed		type	type of node				string						Relay
-	bgmed		role	role/function of node		array	string	mode [**]	some of: Guard,  Middle,  Exit,  Dir
+	bgmed		role	roles/functions of relay	array	string	mode [**]	some of: Guard,  Middle,  Exit,  Dir
 	 gmed		flag	flags 						array	string	mode [**]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
@@ -188,8 +184,8 @@ These 3 collections contain all raw data as it is imported into the database.
 	 gmed		pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
 	 gmed		pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
 	 gmed		pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
+	   e		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		as		autonomous system			integer			mode		
-	 gmed		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
 	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 	
 	LEGEND --------------------------------------------------------------------
@@ -216,18 +212,14 @@ Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated fo
 	Directory 							x
 
 
-**bridge**  
+**bridges**  
 	
 	in			code	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmed		nid		node id						string			-			Tor fingerprint
+	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		nick	nickname					string			mode		nickname of relay
 	bgmed		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default), 6, 24, 168
-	bgmed		type	type of node				string						Bridge
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
@@ -240,17 +232,14 @@ Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated fo
 	see 'relay' above
 
 
-**client**  
+**clients**  
 Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
 Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
 
 				code	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
-				_id		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-				span	duration					integer						Length of the time span that this dataset describes, in hours:
-																				one of: 24 (default), 168
 				cb		clients at bridges			integer			mean
 				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
@@ -264,8 +253,6 @@ Instead client data is derived from relay data through special means and is alre
 
 **JSON schema**  
 The above has been transformed into a JSON [schema](schema.json).   
-
-		TODO	implemet the changes made above into the JSON schema
 		
 
 If the outline above and the schema get out of sync, the *schema is authorative*.   
@@ -685,6 +672,11 @@ Sensible spans coudl be
 If we skip months as too coarse anyway (but actually because they are so unwieldy irregular) we could get by with 4 possible integer values: 1, 6, 24, 168
 
 We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
+
+From an earlier version of the import scheme:
+	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default), 6, 24, 168
+
 
 _continents and political regions_
 
