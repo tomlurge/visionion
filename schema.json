@@ -20,16 +20,29 @@
 {
     "name": "relays",
     "properties": {
+        "_id": {
+            "type": "string",
+            "title": "Document Identifier",
+            "description": "Composed of fingerprint, span and date.",
+            "format": "'fingerprint' + '-' + 'span' + '-' + 'date',
+                        e.g. 'fingerprint-1-YYYYMMDDHH'
+                        (date not like ISO-8601 but without dashes and whitespace).",
+            "required": "true"
+        },
         "node": {
             "type": "string",
             "title": "Node ID",
             "description": "Tor fingerprint of relay.",
             "required": "true"
         },
-        "nick": {
-            "type": "string",
-            "title": "Nickname",
-            "description": "Nickname of relay"
+        "span": {
+            "type": "integer",
+            "title": "Period of validity",
+            "description": "Length of the interval this document describes, in hours.",
+            "format": "Expected values are ONE of the following:
+                       '1', '6', '24', '168'",
+            "default": "1",
+            "required": "true"
         },
         "date": {
             "type": "string",
@@ -37,6 +50,11 @@
             "description": "Start of the time span that this document describes.",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
+        },
+        "nick": {
+            "type": "string",
+            "title": "Nickname",
+            "description": "Nickname of relay"
         },
         "role": {
             "type": "array",
@@ -127,16 +145,29 @@
 {
     "name": "bridges",
     "properties": {
+        "_id": {
+            "type": "string",
+            "title": "Document Identifier",
+            "description": "Composed of fingerprint, span and date.",
+            "format": "'fingerprint' + '-' + 'span' + '-' + 'date',
+                        e.g. 'fingerprint-1-YYYYMMDDHH'
+                        (date not like ISO-8601 but without dashes and whitespace).",
+            "required": "true"
+        },
         "node": {
             "type": "string",
             "title": "Node ID",
             "description": "Tor fingerprint of relay.",
             "required": "true"
         },
-        "nick": {
-            "type": "string",
-            "title": "Nickname",
-            "description": "Nickname of relay"
+        "span": {
+            "type": "integer",
+            "title": "Period of validity",
+            "description": "Length of the interval this document describes, in hours.",
+            "format": "Expected values are ONE of the following:
+                       '1', '6', '24', '168'",
+            "default": "1",
+            "required": "true"
         },
         "date": {
             "type": "string",
@@ -144,6 +175,11 @@
             "description": "Start of the time span that this document describes.",
             "format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
             "required": "true"
+        },
+        "nick": {
+            "type": "string",
+            "title": "Nickname",
+            "description": "Nickname of relay"
         },
         "bwa": {
             "type": "integer",
@@ -196,6 +232,24 @@
 {
     "name": "clients",
     "properties": {
+        "_id": {
+            "type": "string",
+            "title": "Identifier",
+            "description": "Composed of the string 'client', plus span and date.",
+            "format": "'client' + '-' + 'span' + '-' + 'date',
+                        e.g. 'client-24-YYYYMMDDHH'
+                        (date not like ISO-8601 but without dashes and whitespace).",
+            "required": "true"
+        },
+        "span": {
+            "type": "integer",
+            "title": "Timespan",
+            "description": "Duration of validity of this document, in hours.",
+            "format": "Expected values are ONE of the following:
+                       '24', '168'",
+            "default": "24",
+            "required": "true"
+        },
         "date": {
             "type": "string",
             "title": "Date of dataset",

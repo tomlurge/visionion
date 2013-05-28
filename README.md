@@ -306,10 +306,13 @@ These 3 collections contain all raw data as it is imported into the database.
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
+	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
 	bgmed		node	node id						string			-			Tor fingerprint
-	bgmed		nick	nickname					string			mode		nickname of relay
+	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default), 6, 24, 168
 	bgmed		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
+	bgmed		nick	nickname					string			mode		nickname of relay
 	bgmed		role	roles/functions of relay	array	string	mode [*]	some of: Guard,  Middle,  Exit,  Dir
 	 gmed		flag	flags 						array	string	mode [*]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
@@ -331,10 +334,13 @@ These 3 collections contain all raw data as it is imported into the database.
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
+	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
 	bgmed		node	node id						string			-			Tor fingerprint
-	bgmed		nick	nickname					string			mode		nickname of relay
+	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default), 6, 24, 168
 	bgmed		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
+	bgmed		nick	nickname					string			mode		nickname of bridge
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
 	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
@@ -348,6 +354,9 @@ These 3 collections contain all raw data as it is imported into the database.
 
 				field	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
+				_id		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
+				span	duration					integer						Length of the time span that this dataset describes, in hours:
+																				one of: 24 (default), 168
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 				cb		clients at bridges			integer			mean
