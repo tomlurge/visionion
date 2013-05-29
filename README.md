@@ -138,161 +138,93 @@ But there are two exceptions to the general rule:
 1) a node can't be a client and a server at the same time.   
 2) a node can't be a bridge and a relay at the same time.
 
-**a more detailed description of the different nodes**
-* client  
+**a more detailed description of the different nodes and measures**
 
+*clients*  
 Tor doesn't log any data at individual clients themselves, but it logs abstract data about clients at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
 The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
 The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.   
 See https://metrics.torproject.org/formats.html for details: "Second, we describe the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."   
-* bridge  
+
+*servers* 
+These are the documents you have per relay/bridge:   
+- Network status entry: There's a network status entry for every relay or bridge with some summary information. 
+It's a confirmation by either the directory authorities (for relays) or the bridge authority (for bridges) that the given relay/bridge information is valid.  
+But this summary doesn't contain, e.g., OS information or number of bytes spent on answering directory requests.
+- Server descriptor: Every relay or bridge publishes a descriptor containing its contact information and capabilities to the directory authorities or bridge authority every 12--18 hours. 
+This server descriptor is then referenced by digest from one or typically multiple network status entries.   
+- Extra-info descriptor: Statistical information about a relay or bridge is not contained in the server descriptor, but in an extra-info descriptor. 
+These are referenced from server descriptors by digest, with a 1:1 relationship.   
+See https://metrics.torproject.org/formats.html for details about "the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."  
+
+*bridges*  
 Bridges are simply nodes with a I-want-to-be-a-bridge bit set in their configuration. 
 However, whether a node is a bridge or a relay determines to some extend what data we have about that node. 
 For example, we don't have country information about bridges, but we have that for relays.
-* guard node     
+
+*relays*
+* guard node   
 * middle node  
 * exit node  
 * directory mirror  
+  Directory mirrors are just relays with an open directory ports.  So, the set of directory mirrors is a subset of the set of relays, and there'd be flags and all that for directory mirrors, too.
+* combinations of guard, middle, exit and directory
+  Knowing if an exit may also be used in the guard position can be interesting. 
+  In general comparisons between any two types of relays should be possible,
+  
+*flags*
+* BadExit
+  The BadExit flag is already taken into account in the importer: a relay that has the Exit flag _and_ the BadExit flag isn't put into the Exit category. 
+  The BadExit flag doesn't have any impact on the other types.
+* Authority
+  Being an authority is mostly relevant for directories, if at all. It's not a very important flag.
+* Fast
 
 	TODO
+
+* Stable
+
+	TODO
+
+  
+*other diemnsions*  
+
+* bandwidth
+  Bandwidth is measured for relays and bridges in two values: bandwidth advertized and bandwidth consumed.   
+
+* probabilities   
+  You can assign a consensus weight fraction to each relay, for any given date and hour. 
+  Then you can say that all clients used that relay for about x% of their paths, or that a particular client used that relay for a particular path with a probability of x%.   
+  There are currently four such weights/probabilities defined for relays (this does not apply to bridges).    Quoting from Onionoo's protocol specification:    
+  "consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.   
+  "guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
+  "middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
+  "exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
+
+* autonomous systems
+  For visualization, autonomous systems are very similar to countries. Think of an autonomous system as a group of IP address blocks belonging to the same organization. 
+  You want to avoid that all relays in a path, or at least entry and exit, are located in the same autonomous system and thereby controlled by the same organization. 
+  And you want to avoid that a single AS/organization sees a too high percentage of Tor traffic. For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees almost 20% of Tor's exit traffic. 
+  That's about as interesting as the fact that over 30% of Tor's traffic exits from U.S. relays.
+
+
 
 **even more**
 * for some rather detailed explenations see the [Tor directory protocol, version 3](https://gitweb.torproject.org/torspec.git/blob/HEAD:/dir-spec.txt)
 	
-	
-<!--
 
-MAIL Jan 17 12:11
-...
- The "time to download files over Tor" and "timeouts and
-failures of downloading files over Tor" parts are what we learn from
-clients we run ourselves. 
-...
-There's not just one document per relay/bridge.  These are the
-documents you have per relay/bridge:
+**postponed**
 
-- Network status entry: There's a network status entry for every relay
-or bridge with some summary information.  It's a confirmation by either
-the directory authorities (for relays) or the bridge authority (for
-bridges) that the given relay/bridge information is valid.  But this
-summary doesn't contain, e.g., OS information or number of bytes spent
-on answering directory requests.
+* performance measures
+  The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" are learned from clients we run ourselves, coming from Torperf output files. 
+  The gathering of this data is currently worked on and work on it's visualization is postponed.
 
-- Server descriptor: Every relay or bridge publishes a descriptor
-containing its contact information and capabilities to the directory
-authorities or bridge authority every 12--18 hours.  This server
-descriptor is then referenced by digest from one or typically multiple
-network status entries.
-
-- Extra-info descriptor: Statistical information about a relay or bridge
-is not contained in the server descriptor, but in an extra-info
-descriptor.  These are referenced from server descriptors by digest,
-with a 1:1 relationship.
-
-And while we're at descriptor types, there's a separate descriptor type
-for "time to download files over Tor" and "timeouts and failures of
-downloading files over Tor".  These data come from Torperf output files.
-
-...
-You can assign a consensus weight fraction to
-each relay, for any given date and hour.  Then you can say that all
-clients used that relay for about x% of their paths, or that a
-particular client used that relay for a particular path with a
-probability of x%.
-
-There are currently four such weights/probabilities defined for relays
-(this does not apply to bridges).  Quoting from Onionoo's protocol
-specification:
-
-"consensus_weight_fraction": Fraction of this relay's consensus weight
-compared to the sum of all consensus weights in the network. This
-fraction is a very rough approximation of the probability of this relay
-to be selected by clients.
-
-"guard_probability": Probability of this relay to be selected for the
-guard position. This probability is calculated based on consensus
-weights, relay flags, and bandwidth weights in the consensus. Path
-selection depends on more factors, so that this probability can only be
-an approximation.
-
-"middle_probability": Probability of this relay to be selected for the
-middle position. This probability is calculated based on consensus
-weights, relay flags, and bandwidth weights in the consensus. Path
-selection depends on more factors, so that this probability can only be
-an approximation.
-
-"exit_probability": Probability of this relay to be selected for the
-exit position. This probability is calculated based on consensus
-weights, relay flags, and bandwidth weights in the consensus. Path
-selection depends on more factors, so that this probability can only be
-an approximation.
-...
-For visualization, autonomous systems are very similar to countries.
-Think of an autonomous system as a group of IP address blocks belonging
-to the same organization.  You want to avoid that all relays in a path,
-or at least entry and exit, are located in the same autonomous system
-and thereby controlled by the same organization.  And you want to avoid
-that a single AS/organization sees a too high percentage of Tor traffic.
-For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees
-almost 20% of Tor's exit traffic.  That's about as interesting as the
-fact that over 30% of Tor's traffic exits from U.S. relays.
-...
-| what information about clients do you gather at the guards and bridges ?
-See https://metrics.torproject.org/formats.html for details: "Second, we
-describe the numerous aggregate statistics that relays publish about
-their usage (PDF), including byte histories, directory request
-statistics, connecting client statistics, bridge user statistics,
-cell-queue statistics, exit-port statistics, and bidirectional
-connection use."
-
-
-MAIL JAN 18
-...
-Ah, directory mirrors are just relays with an open directory ports.  So,
-the set of directory mirrors is a subset of the set of relays, and
-there'd be flags and all that for directory mirrors, too.
-
-
-MAIL May 16
-
-Bandwidth figures are for all types of service.  In theory, we have data
-about consumed directory bandwidth for newer relays or bridges, but not
-for traffic as bridge, guard, middle, or exit node.  There are privacy
-implications of gathering too detailed data, so we can't get more
-detailed data.  I'd say let's only work with total bandwidth per relay
-or bridge, that is, the data that you already have.
-
-MAIL May 18
-
-I'm already taking the BadExit flag into account in the importer: a
-relay that has the Exit flag _and_ the BadExit flag isn't put into the
-Exit category.  The BadExit flag doesn't have any impact on the other types.
-
-
-MAIL May 21
-
-	      Guard   Middle  Exit    Directory
-Authority     [ ]     [ ]     [ ]     [X]
-Being an authority is mostly relevant for directories, if at all.
-Hmmm, that doesn't sound very important :/
-You're right, it's not.
-...
-However, you left out two important flags:
-Exit & !BadExit [X]   [ ]     [ ]     [ ]
-Guard         [ ]     [ ]     [X]     [ ]
-Knowing if an exit may also be used in the guard position can be interesting.
-
-Uh? Exits and Guard in my scheme are types of relays, not flags. 
-Maybe you should check the readme.md again to see if I missed more flags.
-
-So, if your schema allow comparisons between two types, we're all set.
-For example, it's interesting to compare Exit-type relays with
-Guard-type relays.  If that is possible, there's no need to look at the
-Exit & !BadExit or Guard flags anymore.
-
-
--->
+* measuring bandwidths for types of relays
+  Relays with the Guard flag are not exclusively used in the guard position, but could also be used in the middle position and possibly also as directory server. 
+  And if relays also have the Exit flag, they'll be used less in the previously mentioned positions, but therefore also in the exit position.    
+  We could derive advertised or consumed guard bandwidth for types of relays from relay bandwidth similar to how we derive guard probability from consensus weight using the Guard/Exit/BadExit flag and Wgd/Wgg bandwidth weights.   
+  I'm uncertain whether this would produce good metrics or not.  We'd mix path selection probabilities with actual usage data, and I'm not sure whether we can do that. This is a fine question for an analysis task and a later extension of Visionion, but currently we don't feel confident enough now to implement this in the current database importer. Results might be misleading.
 
 
 
@@ -395,8 +327,8 @@ More importantly the validator can spot data that's not handled by the schema an
 
 
 
-Data Reprocessing
------------------
+Data aggregation
+----------------
 
 <!-- 
 The information available about the different types of nodes varies to some degree. 
@@ -410,9 +342,21 @@ Adding new data types or modifying value spaces is always possible without need 
 The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
  -->
 
+In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
+MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets we retrieve from the network are not as uniform and regular as we'd like them to be.
+MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
+- no joins 
+ (but we can work around that by visually layering querie results on top of each other)
+- only 64 indices per collection (equals table in SQL-speak)
+ (slightly easing this problem: composite indices)
+- only one field in an index can be an array
+ (no workaround: we have to avoid arrays if they aren't really necessary)
+
+
 
 Aggregation of imported data is essential to this project, for several reasons:
-* the server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers together during a given timespan or at least at a group of servers sharing certain attributes.   
+. the server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers together during a given timespan or at least at a group of servers sharing certain attributes.  
+. 
 
 
 Dividing that big table of imported data into specialized collections according to the visual needs of the interface is a prerequisite for a responsive and interactive visualization.    
@@ -532,14 +476,14 @@ Apart from that we don't know much more than a few technicalities that don't hav
 
 
 _flags_
-On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction. 
+On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction and improve performance on teh backend. 
 They will remain in the schema and will be imported into the Database but will not be aggregated.  
-Only the flags "Fast", "Stable", "BadExit" and "Authority" will be aggregated for the following types of relays: 
-				Fast	Stable	BadExit	Authority
+Only the flags "Fast", "Stable" and "Authority" will be aggregated for the following types of relays: 
+				Fast	Stable	Authority
 	Guard		x		x
 	Middle		x		x
-	Exit		x		x		x
-	Directory 							x
+	Exit		x		x
+	Directory 					x
 	
 	
 
@@ -1073,7 +1017,15 @@ as_r and store arrays of [#nodes, bwa, bwc, pbr] for each of them?  For
 osv_r, tsv_r, and as_r that would mean storing an array of arrays, and
 for fast_r and stable_r it would be just that array.
 
+MAY 27 10:15am
 
+But still, visualizing the average pbr (consensus weight fraction) or
+all relays doesn't make much sense to me.  The pbr values of all relays
+add up to 100%, so that the average is always 1 / #relays.
+
+What makes more sense is visualizing the total pbr of all relays with a
+certain characteristic.  For example, what's the total pbr of all relays
+in Germany?  That makes much more sense to me.
 
 
 -->
