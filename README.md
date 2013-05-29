@@ -140,6 +140,7 @@ But there are two exceptions to the general rule:
 
 **a more detailed description of the different nodes**
 * client  
+
 Tor doesn't log any data at individual clients themselves, but it logs abstract data about clients at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
 The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
