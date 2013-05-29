@@ -325,95 +325,79 @@ The purpose of the schema is twofold: combined with a [validator](https://github
 More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
 
 
+**Import checks**
+We are making assumptions about the imported data that wouldn't hurt to be checked. 
+The following query checks if Bridges and all other types of relays are really disjunct sets:
+
+	TODO
 
 
-Data aggregation
-----------------
-
-<!-- 
-The information available about the different types of nodes varies to some degree. 
-You wouldn't put them all together in one table if you used an RDBMS but a document centric store like MongoDB works differently. 
-There is no performance penalty to pay for scarcely populated tables: this facilitates big diverse tables. 
-OTOH MongoDB as a typical NoSQL store provides no joins: this mandates big diverse tables for complex retrieval tasks.  
-That one big table for all relay, bridge  and client data provides maximum extensibility and malleability. 
-Changes in the Tor network structure or in available data will not compromise teh database over time. 
-MongoDB will never complain if some documents inserted to it suddenly contain a new field or are missing another one. 
-Adding new data types or modifying value spaces is always possible without need for further adjustments. 
-The client side code can instantly access these new fields (at least as soon as it knows how to ask for them).   
- -->
-
-In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
-MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets we retrieve from the network are not as uniform and regular as we'd like them to be.
-MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
-- no joins 
- (but we can work around that by visually layering querie results on top of each other)
-- only 64 indices per collection (equals table in SQL-speak)
- (slightly easing this problem: composite indices)
-- only one field in an index can be an array
- (no workaround: we have to avoid arrays if they aren't really necessary)
-
-
-
-Aggregation of imported data is essential to this project, for several reasons:
-. the server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers together during a given timespan or at least at a group of servers sharing certain attributes.  
-. 
+Import data gestalt
+-------------------
+The imported data represents the following dimensions:
+	
+ node types
+	3 node types: relays, bridges, clients
+	4 relay types: guard, middle, exit, directory (not mutually exclusive)
+ flags
+	2 flags for relays only: stable, fast - both boolean (the others are too unimportant to aggregate) 
+	1 flag for exits: permitted exit ports (3 values, not mutually exclusive)
+	3 flags for bridges only: pool (one of 3), ec2 (boolean), transport (2 values, n.m.e.)
+ bandwidths	
+	2 bandwidths for all servers: advertized and consumed
+ probabilities
+	4 probabilties: for relay in general and for guard, middle, exit
+ software
+	8 software versions for tor
+	5 software versions for os
+ areas
+	about 200 countries
+	and many more autonomous systems
+ clients
+	2 types: @relays, @bridges
+	2 types per country: @relays, @bridges
+	2 flags: transport used (4 values) and ip-version used (2 values)
 
 
-Dividing that big table of imported data into specialized collections according to the visual needs of the interface is a prerequisite for a responsive and interactive visualization.    
-* what's even more important is that the data as it is gathered and imported into the DB reflects the technical structure of the network but not necessarily the logical structure that we'd like to examine and understand.   
-For example data from clients and from relays is collected in different ways and imported in different collections but the relation between the number of clients connecting to the network and the bandwidth available to them is one of the crucial characteristics of the network. 
-Also the data can be of very different nature: percentages don't easily compare to absolute values and also not all absolute values in one category add up to a meaningful sum because value spaces overlap.   
-Therefor it's important to carefully select, construct and arrange meaningful and actually comparable configurations.   
+The fields in the 3 import collections overlap only in one case: date. That's the only clamp between all datasets. 
+The table below tries to capture the multiple dimensions and qualities of the imported data.
 
-Step 1 - topical aggregation:     
-The aggregated collections will be those that actually provide the data to the visualization frontend. They are mappings from the imported data to the concepts that drive the interface. I call these aggregations step 1 collections or topical collections.    
-Step 2 - formal aggregation:   
-A second step of aggregation will consolidate these topical collections in precomputed timespans, regions, groups of node types etc to improve retrieval performance. They are reductions of the still very detailed data derived from the imports in step 1. I call these aggregations step 2 collections or formal collections.    
-Step 3 - indexing:    
-All these aggregated collections will then have to be enhanced by indices to gain further speed advantages.   
-Additionally indices on the big "relay" collection of imported data have to facilitate generic and unforseen queries as much as possible.    
-
-
-**Understanding the data**
-The imported data is quite diverse and heterogeneous. The table below tries to capture its different dimensions.    
 "Mode" refers to the essential quality of the thing being counted. 
-This may be the numbers of hardware instances, software characteristics, measures of quality of service, number of users. 
-We import data in two collections: relays and clients. The fields in these collections overlap only in one case: country. Countries are a powerful metaphor and because of this overlap they become a prominent player in the visualization, but they are still just a medium, not a subject of discourse. We are not interested in countries per se, we just use them to make connections.     
+This may be the numbers of hardware instances, software characteristics, measures of quality of service, number of users.   
 "Measure" documents if the numbers denote absolute values, percentages, averages etc. 
-Obviously one would compare apples with oranges by comparing an absolute value like the number of available Bridges with an relative value like uptime. 
+Percentages don't easily compare to absolute values and also not all absolute values in one category add up to a meaningful sum because value spaces overlap. 
+Therefor it's important to carefully select, construct and arrange meaningful and actually comparable configurations.   
 "Unit" is not much different from Measure, mainly reflecting if the field is single value or multi valued.
-"Upper limit" denotes the upper limit of the value space. For percentages it's 100. For each relay type it's the total number of relays - the important implication being that each relay can simultaneously belong to multiple types: the types alltogether don't add up to the number of relays, the're up to 4 times more. Only Bridges are distinct.
-
-"scat" is short for scattering (or spreading) and indicates how evenly distributed the value space is. This needs further thinking.
+"Upper limit" denotes the upper limit of the value space. For percentages it's 100. 
+For each relay type it's the total number of relays - the important implication being that each relay can simultaneously belong to multiple types: the types alltogether don't add up to the number of relays, the're up to 4 times more. Bridges are distinct from relays.
 	
 
 	TYPE	FIELD	MODE	MEASURE			UNIT				UPPER LIMIT
 	-----------------------------------------------------------------------
-	NODE								
-			bgmed	hard	sum				count				relay
-			osv		soft	sum...s			count/item			relay
-			tsv		soft	sum...s			count/item			relay
+	SERVER								
+			server	hard	sum				count				server
+			osv		soft	sum...s			count/item			server
+			tsv		soft	sum...s			count/item			server
 			upt		quality	avg				percentage			100
-			bwp		ip		scat + sum		count				
-			bwc		ip		scat + sum		count				bwp
-			// bwa							
+			bwa		ip		sum				count				-
+			bwc		ip		sum				count				bwa
 									
 	RELAY								
-			gmed	hard	sum				count				relay minus Bridge
-			g		hard	sum				count				< gmed
-			m		hard	sum				count				< gmed
-			e		hard	sum				count				< gmed
-			d		hard	sum				count				< gmed
+			relay	hard	sum				count				Server minus Bridge
+			g		hard	sum				count				< relay
+			m		hard	sum				count				< relay
+			e		hard	sum				count				< relay
+			d		hard	sum				count				< relay
 			pbr		quality	avg				percentage			100 (but should be much less)
 			pbg		quality	avg				percentage			100 (but should be much less)
 			pbm		quality	avg				percentage			100 (but should be much less)
 			pbe		quality	avg				percentage			100 (but should be much less)
-			flag	soft	sum...s			count/item			< gmed
-			as		net		scat + sum...s	count/item			< gmed (but really much less)
-			// pex	soft	sum,sum,sum		count/item			< gmed
+			flag	soft	sum...s			count/item			< relay
+			as		net		sum...s			count/item			< relay (but really much less)
+			pex		soft	sum,sum,sum		count/item			< relay
 									
-	BRIDGE														relay minus GMED
-			b		hard	sum	count		relay	
+	BRIDGE														Server minus Relay
+			bridge	hard	sum	count		relay	
 			brp		net		sum,sum,sum		count/item			bridge
 			bre		hard	sum				count				< bridge
 			brt		soft	sum,sum			count/item			bridge
@@ -432,20 +416,19 @@ Obviously one would compare apples with oranges by comparing an absolute value l
 			osv		soft	sum...s			count/item/country	relay
 			tsv		soft					count/item/country	relay
 			upt		quality	avg				percentage/country	100
-			bwp		ip		scat + sum		count/country		
-			bwc		ip		scat + sum		count/country		bwp
-			g		hard	sum				count/country		< gmed
-			m		hard	sum				count/country		< gmed
-			e		hard	sum				count/country		< gmed
-			d		hard	sum				count/country		< gmed
+			bwa		ip		sum				count/country		
+			bwc		ip		sum				count/country		bwa
+			g		hard	sum				count/country		< relay
+			m		hard	sum				count/country		< relay
+			e		hard	sum				count/country		< relay
+			d		hard	sum				count/country		< relay
 			pbr		quality	avg				percentage/country	100 (but should be much less)
 			pbg		quality	avg				percentage/country	100 (but should be much less)
 			pbm		quality	avg				percentage/country	100 (but should be much less)
 			pbe		quality	avg				percentage/country	100 (but should be much less)
 			flag	soft	sum...s			count/item/country	< gmed
 			as		net		scat + sum...s	count/item/country	< gmed (but really much less)
-			// pex				
-			// bwa		
+			
 
 Overview data on clients and relays:   
 We have some very general data on all relays and bridges: total count, software version, operating system version, total bandwidth provided and consumed. 
@@ -455,268 +438,212 @@ We also know which IP-version and which obfuscation techniques clients use.
 But that's about it with clients and relays. 
 
 Clients:   
-Client data is on purpose quite sparse and we can't make much more than compare numbers of clients with the much more detailed data about the relays that make up the tor network. 
+Client data is on purpose quite sparse and we can't do much more than compare numbers of clients with the more detailed data about the relays and bridges. 
 We will eg not be able to follow clients through the network.
 
 Countries:   
-The most detailed view we can get on clients is their distribution by country. This is interesting since we know also from each relay in which country it is related. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
+The most detailed view we can get on clients is their distribution by country. This is interesting since we also know from each relay the country in which it is located. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
 
 Relays:   
 Additionally to the data on relays and bridges we have quite specific data on different types of relays (but not bridges), namely guards, middle nodes, exits and directory servers. 
 This data is detailed but not easy to handle. 
 Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.   
-We know for each relay with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add some meaning to these numbers. 
+For each relay we know with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add more meaning to these numbers. 
 We also know for most relays through which AS they are connected but this is a very large number of different AS which we first need to aggregate to find the most used ones and how high the concentration is. 
 We then have some flags and exit port information which again are not particularily easy to visualize (and interpret).
 
 Bridges:    
-Last not least we have some data about bridges, but not as much as about relays. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors job easier. 
-What's fortunate about bridges is that they are mutually exclusive to relays. So at least these numbers add up.
+Last not least we have some data about bridges, but not as much as about relays. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors' job easier. 
+Since bridges are distinct from relays their numbers add up to the total number of servers.
 Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
 
 
 _flags_
-On closer inspection it became clear that most of the flags actually serve so little purpose that we will not use them in the visualization thereby trying to avoid visual clutter and distraction and improve performance on teh backend. 
-They will remain in the schema and will be imported into the Database but will not be aggregated.  
-Only the flags "Fast", "Stable" and "Authority" will be aggregated for the following types of relays: 
+Most of the flags collected in the "relays" import collection actually serve so little purpose that we will not use them in the visualization, to avoid visual clutter and distraction and improve performance on the backend. 
+They will be imported into the database but will not be aggregated. 
+Only the flags "Fast", "Stable" and "Authority" will be aggregated for the following types of relays:   
 				Fast	Stable	Authority
 	Guard		x		x
 	Middle		x		x
 	Exit		x		x
 	Directory 					x
-	
-	
-
-**Import checks**
-We are making assumptions about the imported data that wouldn't hurt to be checked. 
-The following query checks if Bridges and all other types of relays are really disjunct sets:
-
-	TODO
 
 
+Data aggregation
+----------------
 
-**Topical aggregation**
-* consolidate relays: bridges + guard nodes + middle nodes + exit nodes + directory servers
-* consolidate anonymity: guard nodes + middle nodes + exit nodes
-* consolidate censorship circumvention: bridges + directory servers
-
-	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-country	ident
-						_id						cc + '-1-' + date
-						cc						for each country
-						span	1
-																				
-												FALSCH														
-												MUSS														
-						das						ALLES														
-						wird					AUF														
-						hart					24														
-												STUNDEN														
-												BASIS														
-												UMGERECHNET														
-												WERDEN														
-												WEIL DIE CLIENT DATA														
-												NUR 24 GENAU IST
-												
-												
-						date					by each date
-				clients
-						cbcc					from client		copy+paste
-						crcc					from client		copy+paste
-				relays
-						osv		array	object	from relay		for this country 	
-																for this date 		
-																for each osv		take note of osv
-																					sum up occurrences
-						tsv		array	object	like osv
-						upt		integer			from relay		for this country 	
-																for this date 		average of all uptimes
-						bwp		integer			from relay		for this country 	
-																for this date 		sum up values
-						bwc		integer			like bwp	
-						gmed	integer			from relay		for this country 	
-																for this date 		sum up all nodes except bridges
-						g		integer			from relay		for this country 	
-																for this date 		sum up all guards
-						m		integer			like g
-						e		integer			like g
-						d		integer			like g
-						pbr		percentage		from relay		for this country 	
-																for this date 		average of all pbr's
-						pbg		percentage		like pbr
-						pbm		percentage		like pbr
-						pbe		percentage		like pbr
-						as		array	object	from relay		for this country 	
-																for this date		
-																for each node		take note of AS
-																					sum up occurrences
-				flags	
-						gme-fast	int			from relay		for this country 	
-																for this date		sum of all nodes with flag fast
-						gme-stable	int			like gem-fast
-						g-fast		int			like...
-						g-stable	int			like...
-						m-fast		int			like...
-						m-stable	int			like...
-						e-fast		int			like...
-						e-stable	int			like...
-						e-badexit	int			like...
-		
-Relay data by country like tsv, osv, upt, bwp and bwc could even be split up to the type level but I have no idea how to visualize that properly. 
-Implementation would not be difficult (just a different combination of the steps already implemented above) but would still use quite some time and resources. Seems superfluous right now.   
-Maybe just for gmed (guard-middle-exit-dir) and bridges?    
-Maybe it' the other way round and the a1-relay collection is superfluous? It certainly can be constructed from gmed and bridges.
-The utility of flags is also a little unclear.
+**MongoDB**
+In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
+MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets we retrieve from the network are not as uniform and regular as we'd like them to be. As MongoDB is a schemaless database we do not have to worry about future structural changes. When e.g. more performance data becomes available we can seamlessly add it without having to touch any of the existing documents.
+MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
+- no joins 
+ (but we can work around that by visually layering querie results on top of each other)
+- only 64 indices per collection (equals table in SQL-speak)
+ (slightly easing this problem: composite indices)
+- only one field in an index can be an array
+ (no workaround: we have to avoid arrays if they aren't really necessary)
 
 
-	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-bgmed	ident
-						_id						'relay'-1-' + date
-						span					1
-						date					by each date
-				nodes
-						bgmed	integer			from relay		for this date		sum up all nodes
-						osv		array	object	from relay		for this date 		
-																for each node		take note of osv
-																					sum up occurrences
-						tsv		array	object	from relay		for this date 		
-																for each node		take note of tsv
-																					sum up occurrences
-						upt		integer			from relay		for this date 		average of all uptimes
-						bwp		integer			from relay		for this date 		sum up values
-						bwc		integer			from relay		for this date 		sum up values	
-								
-						
-	
-	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-gmed		ident
-						_id						'gmed-1-' + date
-						span					1
-						date					by each date
-				nodes
-						gmed	integer			from relay		for this date		sum up all 
-																			 		guard, middle, exit, dir
-						osv		array	object	from relay		for this date 		
-																for gmed nodes		take note of osv
-																					sum up occurrences
-						tsv		array	object	from relay		for this date 		
-																for gmed nodes		take note of tsv
-																					sum up occurrences
-						upt		integer			from relay		for this date		
-																for gmed nodes 		average of all uptimes
-						bwp		integer			from relay		for this date		
-																for gmed nodes 		sum up values
-						bwc		integer			from relay		for this date		
-																for gmed nodes 		sum up values	
-						g		integer			from relay		for this date		sum up all guard nodes
-						m		integer			from relay		for this date		sum up all middle nodes
-						e		integer			from relay		for this date		sum up all exit nodes
-						d		integer			from relay		for this date		sum up all dir nodes
-						pbr		percentage		from relay		for this date		average of all pbr
-						pbg		percentage		from relay		for this date		average of all pbg
-						pbm		percentage		from relay		for this date		average of all pbm
-						pbe		percentage		from relay		for this date		average of all pbe
-						as		array	object	from relay		for this date		
-																for each node		take note of AS
-																					sum up occurrences
-				flags	
-						gme-fast	int			from relay		for this date
-																for each node
-																with flag fast		sum
-						gme-stable	int			from relay		for this date
-																for each node
-																with flag stable	sum
-						g-fast		int			from relay		for this date
-																for each guard
-																with flag fast		sum
-						g-stable	int			like g-fast
-						m-fast		int			like...
-						m-stable	int			like...
-						e-fast		int			like...
-						e-stable	int			like...
-						e-badexit	int			like...
-		
-	
-		
-	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-bridge	ident
-						_id						'bridge-1-' + date
-						span					1
-						date					by each date
-				bridges
-						bridge	integer			from relay		for this date		sum up all bridges
-						osv		array	object	from relay		for this date 		
-																for bridge nodes	take note of osv
-																					sum up occurrences
-						tsv		array	object	from relay		for this date 		
-																for bridge nodes	take note of tsv
-																					sum up occurrences
-						upt		integer			from relay		for this date		
-																for bridge nodes	average of all uptimes
-						bwp		integer			from relay		for this date		
-																for bridge nodes	sum up values
-						bwc		integer			from relay		for this date		
-																for bridge nodes 	sum up values
-						brp		integer			from relay		for this date
-																for each bridge	
-																for each pool		sum
-						bre		integer			from relay		for this date
-																for each bridge		
-																with bre true		sum
-						brt		integer			from relay		for this date
-																for each bridge	
-																for each transport	sum
-	
-	
-	
-	AGG.NAME	CAT		FIELD	TYPE	SUBTYPE	AGGREGATION		STEPS
-	a1-censor	ident																bridges+directories+cpt
-						_id						'censor-1-' + date
-						span					1
-						date					by each date
-				
-				TODO		
+**Preparing the import tables**
+A few indices over the 3 import tables "relays", "bridges" and "clients" will speed up the aggregation: 
+. an index over "date" for "bridges" and "clients
+. an index over "date + flag" for "relays"
+. an index over "cc + date" for "relays"
+. an index over "date + as + role + node" for "relays" (?)
 
 
+**Aggregation**
+Aggregation of the imported data is necessary for several reasons:
+. the imported server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers or at a subset of servers sharing certain attributes during a given timespan.  
+. the imported data reflects only a certain view on the underlying network, highly influenced by how the data is collected. A visualization needs to provide other and more diverse perspectives and the imported data has to be aggregated in different shapes and combinations to support the visualization accordingly. A well prepared database is a prerequisite for a responsive and interactive visualization.
+
+Step 1 - aggregation of imported data
+In a first step imported data will be added to the facts collection.    
+Step 2 - consolidation and simplification
+Then the facts table will be aggregated into longer timespans and other simplifications (e.g. regions) to improve retrieval performance.
+Step 3 - indexing
+The aggregated collections will be indexed to gain further speed advantages. 
+Additionally indices over the 3 import collections are needed to facilitate generic and unforseen queries and lookups on specific nodes.   
 
 
-	 
-The client collection doesn't need any further aggregation since it is - as described above - already aggregated when it is imported into the Database. For indices see below.
+**step 1 : import data aggregation**
+A rather minimal fact table would include:
+	(4 relays x 2 flags + 3 nodes) x 2 bandwidths = 22 bandwidths
+But we need the intermediate steps too because we also want to know these numbers for groups of nodes like all stable relays or all servers. That already leads to more than 30 bandwidth values - a rough first estimate and a very reasonable and encouraging result. But this sketch neglects a lot of information that we want to make visible, and the devil lies in the detail (-ed data sets). So let's work on a real, exhaustive fact table.
+
+It should encompass everything we know from a certain timespan, about all node types and in any dimension. We'll see how far we can get on the way.
+
+	1	clients						count
+	2		@bridges				count
+	3		@relays					count
+	4		ip v4					count
+	5		ip v6					count
+	6		transport				count
+
+For clients this is all we know, save the clients per country which we'll tackle later. Clients @bridges and @relays are mutually exclusive but the other fields are not, so it's natural to just list them one ater another. The value is always the number of clients complying to the field type.
+
+	7	servers						result object
+	8		bridges					result object
+	9			email				result object
+	10			https				result object
+	11			other				result object
+	12			ec2					result object
+	13			obfs2				result object
+	14			obfs3				result object
+	15		relays					result object
+	16				no flags		result object
+	17				fast			result object
+	18				stable			result object
+	19				fast + stable	result object
+	20			guard				result object
+	21				no flags		result object
+	22				fast			result object
+	23				stable			result object
+	24				fast + stable	result object
+	25			middle				result object
+	26				no flags		result object
+	27				fast			result object
+	28				stable			result object
+	29				fast + stable	result object
+	30			exit				result object
+	31				no flags		result object
+	32				fast			result object
+	33				stable			result object
+	34				fast + stable	result object
+	35			directory			result object
+	36				authority		result object
+	37				no authority	result object
+
+That's 31 columns about servers, including the most common flags. Still looks manageable
+And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidth for all server nodes, probabilities and some others where applicable.
+The result object en detail:
+First every object contains a field counting the number of nodes that comply to the field type.
+Second for each of these node types 2 bandwidth values can be calculated: advertized and consumed bw.
+Third some node types have addidtional fields in their results object: 
+- the relays field also carrys a probabilties field
+- exit fields also carrys the permitted exit ports. There are 3 possible values and every combination thereof: 6 fields. We'll add these 6 fields of permitted exit ports as an array to the result object.
+
+This elegant way of using the columns for more than one result type is possible because bandwidths, node counts, probabilties and the exit ports are independent from each other. There's no way how we could construct a different perspective where bandwidths and node counts don't correlate in the same way.
+
+But we've already reached the end of low hanging fruit. 
 
 
-_scattering / spreading / evenness of distribution_
-So far we're only gathering all AS and how many nodes are connected to them. 
-With a little more statistical knowledge and effort (hint hint) we could derive some facts about e.g. evenness of distribution.    
-Maybe also bandwidth data could benefit from such measures.   
-Who else?
+_Mutually non exclusive relay types_
+Up to now it looks like we have everything covered. Or is there a combination of type, flag and probabilty that we couldn't find in this table in one easy step?
+The astute reader will have noticed that there indeed is indeed a problem: guards, middles, exits and directories aren't mutually exclusive. To capture any combination thereof we would need not only 4 but 15 rows, so add 9 to 37 = 46. 
+Plus we wouldn't want to loose track of the flags and add another - hold your breath - 66 rows. 
+	combinations of relay types and flags
+	type	g	d	gd
+			m		gmd
+			gm		md
+			gme		ged
+			ge		gmed
+			e		med
+			me		ed
+	flags	4	2	6
+	total	28	2	36
+					66
+Alltogether [112](http://en.wikipedia.org/wiki/112_%28emergency_telephone_number%29) columns. What a fitting number... Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
 
-	TODO
-	
-	
-_supporting indices over relay and bridge_
-Indices over the imported relay collection can probably speed up aggregation considerably. 
-I didn't test this but it really seems reasonable and since the aggregation task is quite massive the overhead in time and space to generate these indices seems justified.
+_OS or Tor software versions_
+Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or even 37 x 8 = 296 and I can't see any scenario in which this effort would be justified. And that still leaves out the 40 combinations of OS and Tor software versions.
+Probably Tor software version and OS versions are only of limited significance. I tend to add them to the result objects of the main 31 server columns sketched out above and be done with it. 
+13 more field:value pairs added to each result object, 5 for OS and 8 for TS: would that seem useful?
+Maybe even cut that down and only add them to bridges and the 4 relays types, without honoring the flags?
 
-	FOR			OVER 	INCLUDING FIELDS
-	a1-country	relay	country+date+type
-	a1-relays	relay	date -> use date+type
-	a1-gmed		relay	date+type
+At least theoretically interesting iare the 40 possible combinations of operating system and tor software compared with any of the other dimensions, e.g. the 8 basic node types (without flags) = 320 permutations. Not nice, but doable in a seperate collection. Would that be useful?
+
+_Areas_
+But this was all peanuts compared to country and AS information. These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. So with countries and AS we have to change perspective: we can't start from the nodes anymore, we have to start from the properties.
+
+Again there are differences: while the value space for autonomous systems tends to be endless, there are less than 200 countries - which is a lot, but limited. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
+
+	38	country 					array : object
+			cbcc					count
+			crcc					count
+			relay					count
+			guard					count
+			middle					count
+			exit					count
+			directory				count
+			bwa						count
+			bwc						count
+			pbr						percentage
+			pbg						percentage
+			pbm						percentage
+			pbe						percentage
+			fast					count
+			stable					count
+			osv						array osv:count
+			tsv						array tsv:count
+			pex						array v:count
+			as						array v:count
+
+This approach has one problem: the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this could be solved by plainly listing them: that's 16 more rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 AS with the most bandwidth, or probability, and an 11th value for the rest.
+
+Additionally countries could be grouped into continents, political regions (like "middle east", "EU"), by bandwidth consumption etc.
 
 
-_aggregation mdularization_
-With so much aggregation taking place it should be tried to prevent aggregation steps more than once for different views but build them on each other like a pyramid.   
-Especially the country collection has a lot of overlap with other views.    
-Maybe it would be good to seperate GMED and Bridges in the import collections
+Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-	TODO
+	39	AS 							array:object		
+			relay					count
+			bandwidth advertized	count
+			bandwidth consumed		count
+			fast					count
+			stable					count
+			probability				count
+			guard					count		
+				probability			count
+			middle					count
+				probability			count
+			exit					count
+				probability			count
+			directory				count
+			country					array country:count
 
-	
-	
-**Formal aggregation**
+This is still sketchy. More input and ideas on handling AS would be very welcome. 
 
-This means aggregations over time and space. 
-Time quite obviously translates to the ability watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
-Space translates to the ability to group countries to meaningful regions, either continents or geopolitical regions like "arab spring countries".
 
 
 _uptimes_
@@ -724,12 +651,29 @@ A node may not be online in every part of an aggregated timespan.
 We don't count servers that haven't been available for at least 30% of a timespan. 
 That way we are counting the bandwidth a little conservativ, while we are too optimistic regarding the number of available servers.
 
-We could document the details by recording a nodes uptime and calculating the bandwidth actually provided by multiplying the uptime (in percent) with the bandwidth advertized, thus adding 2 new fields to the collection.
-But it probably is sufficient to calculate the bwa "bandwidth advertized" field accordingly and be done with it.
-Because of that the following two lines were deleted from the schema. 
+_aggregation mdularization_
+With so much aggregation taking place it should be tried to prevent aggregation steps more than once for different views but build them on each other like a pyramid.   
+Especially the country collection has a lot of overlap with other views.    
 
-	bgmed		bwp		bandwidth actually provided integer			mean		B/s
-	bgmed		upt		uptime						integer			mean		percentage of the given span the relay was actually available
+	TODO
+
+
+_scattering / spreading / evenness of distribution_
+So far we only examined aggregated groups of node types. To understand distribution over the individual nodes we have to collect some 10 or 100 or whatever biggest nodes in each category. 
+These numbers can be added to the server result objects explained above. 
+They can be added alongside applicable fields in the country objects, namely: relay (guard, middle, exit, dir), bandwidths, probabilities, flags. 
+Likewise for AS.
+And we should establish some measure to indicate how even the distribution is (without ahvin to look at individual nodes).
+But this is just a reminder and a list of notes. We agreed to postpone this domain.
+
+	TODO
+
+
+**step 2 : consolidation and simplification**
+
+aggregations over time and space. 
+Time quite obviously translates to the ability to watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
+Space translates to the ability to group countries to meaningful regions, either continents or geopolitical regions like "arab spring".
 	
 
 _timedate intervals / periods_   
@@ -752,31 +696,23 @@ Sensible spans coudl be
 	1m		1 month, about 4 weeks, about 30.5 days
 If we skip months as too coarse anyway (but actually because they are so unwieldy irregular) we could get by with 4 possible integer values: 1, 6, 24, 168
 
-We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
-From an earlier version of the import schema:
-	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default), 6, 24, 168
+We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
 
 _continents and political regions_
 
 	TODO
-	
 
 
-**Indices**
 
-* bridges
-* guard nodes
-* middle nodes
-* exit nodes
+**step 3 : indexing**
+
+* import collections
+	relay: node+timespan to look up specific nodes
 
 
 **Issues**
-Maybe aggregates should use normalized versions of autonomous system data:			
-	 gmed		asn		autonomous system normalizd	string	
-Would be good to check the DB for how many AS we currently have and if a small number of them is significantly important (I need to learn some statistics terms...).
 
 
 **Background Information**
@@ -857,6 +793,42 @@ r    pbe    m    exit prob.      float
 
 
 
+Usecases
+--------
+How well would the schema developed so far from the inherent characteristics of the data and the limitations of the database fit the usecases we already gathered?
+
+_1_   
+Visualizing the total pbr of all relays with a certain characteristic. 
+For example, what's the total pbr of all relays in Germany?    
+_._ covered by the aggregations outlined above! (by the countries subcollection)
+
+_2_   
+Right now, if you ask for relays running version 0.2.4, it looks up those numbers in the static JSON file that metrics exports.  You cannot ask for the number of relays running version 0.2.4 on Linux, and you cannot ask for bandwidth provided by relays running version 0.2.4.   
+_._ I described the aggregation required to fulfill this usecase above and dismissed it as too expensive. 
+But it may be tackled again.    
+
+_3_   
+One could ask how many bytes per day are transported by relays running Linus. 
+Or, what's the probability of having a Windows relay as your entry guard.   
+_._ more software version tasks. 
+My question is still: is this really important on such a detailed level?   
+
+_4_   
+Note that you wouldn't have to aggregate by single relay or bridge, but you could aggregate all relays or bridges with the same combination of dimensions.  For example, you only care about facts like "on May 23, 2013, there were 25 relays running with type Guard and Middle, with the Fast and Stable flag, with version 0.2.3.x, on OS X, in AS 1234, not permitting any ports, in Germany".    
+When I wrote that example, I wanted to express the maximum level of detail that you'd have to keep to answer any question that anybody could ever want to ask.  I wanted to say that you don't need to remember which particular relay fingerprints are behind that number.  But you're right that nobody would actually want to know the answer to such a detailed question.    
+Starting from the other end, I suggest you start with questions touching only a single dimension: "how many relays were there in Germany?" or "how many relays were there on OS X?"  And when people want to know more, like: "how many relays on OS X were there in Germany?", it would be good if the system can be extended to answer such questions.  But actually extending it could be step two.    
+_._ The schema above could be extended, with not too much effort, to cover such queries. In this case I would probably add 5 os columns relay to the country sub-collection.   
+
+_5_   
+There's a large emphasis on node numbers, but really, bwa, bwc, and pbr are more important measures than the number of nodes. Here's my idea: how about you keep osv_r, tsv_r, fast_r, stable_r, and as_r and store arrays of [#nodes, bwa, bwc, pbr] for each of them?  For osv_r, tsv_r, and as_r that would mean storing an array of arrays, and for fast_r and stable_r it would be just that array.    
+_._ I hope I took this into account with the new aggregation concept.   
+
+_7_    
+But still, visualizing the average pbr (consensus weight fraction) or all relays doesn't make much sense to me.  The pbr values of all relays add up to 100%, so that the average is always 1 / #relays. What makes more sense is visualizing the total pbr of all relays with a certain characteristic.  For example, what's the total pbr of all relays in Germany? That makes much more sense to me.    
+_._ covered    
+
+
+
 
 Visualization Interface Wishlist
 --------------------------------
@@ -874,162 +846,9 @@ Visualization Interface Wishlist
 
 this list is unsorted
 
-
 Some useful links:  
 [Topojson](https://github.com/mbostock/topojson/)  
 [Fisheye](http://bost.ocks.org/mike/fisheye/)  
-
-
-<!-- 
-Re: metrics visualization
-
-Your question was what factors would be relevant for users.  I'm trying
-to make a short list here:
-
-- bridge vs. relay: bridges are simply relays with a
-I-want-to-be-a-bridge bit set in their configuration.  However, whether
-a node is a bridge or a relay determines to some extend what data we
-have about that node.  For example, we don't have country information
-about bridges, but we have that for relays.
-
-- country code
-
-- flags: does the relay permit exiting to the Internet, is it a
-potential guard node, is it fast, is it stable, etc.
-
-- Tor software version
-- operating system
-
-- EC2 cloud bridge or not: our EC2 bridge image uses a naming scheme
-that allows us to determine whether a bridge is run in Amazon's cloud or
-not.
-
-- Autonomous system: in which AS is a relay running (this information is
-not available for bridges).  We currently don't extract this
-information, but it's only a database lookup away.
-
-- advertised bandwidth: maybe we only want to look at relays with a
-given minimum advertised bandwidth.
-
-- permitted exit ports: maybe we only want to look at relays permitting
-exiting to port 80 and 443, or at relays permitting everything except
-those ports, or any other port combination.
-
-- for bridges, were they given out via BridgeDB's https or email pool or
-not given out at all?
-
-- for bridges, did they permit a given pluggable transport, like obfs2?
-
-These are just a few ideas.  Some of these might turn out to be really
-boring, and there might be exciting ones that I didn't list here.  We'll
-probably learn more about good factors once there's something to play
-with.  It would be cool if a new visualization would allow for removing
-or adding factors easily, as well as adding or removing aggregates
-(relay numbers, bandwidth numbers, etc.).
-
-
-Re: [tor-assistants] metrics visualization
-
-Right now, if you ask
-for relays running version 0.2.4, it looks up those numbers in the
-static JSON file that metrics exports.  You cannot ask for the number of
-relays running version 0.2.4 on Linux, and you cannot ask for bandwidth
-provided by relays running version 0.2.4.  If we wanted to add those
-numbers, I'd have to add a new JSON file containing that particular
-subset of relays; that doesn't scale.  What we should instead do is
-define a data interface that's driven by the graphing engine that we can
-then write a back-end counter-part for.  I have weak memories of data
-warehouses and OLAP from my Information Science studies, but I don't
-know how to design and implement such a thing using open-source
-components.  I'd love to have help with this by knowing what data is
-required for a good graphing framework.
-...
-Maybe there should be an "All" selection for every factor.  With
-the current data it would only be possible to select one factor value
-that is not "All" and select "All" for all other factors.  Once it's
-possible to look at "0.2.4 relays on Linux", one could select something
-else than "All" for more than one factor.  Or did you mean something else?
-
-
-Re: [tor-assistants] metrics visualization
-
-Yes, but pretty much anything above - except location and datetime - is 
-measured in quantities of nodes: how many nodes run linux, how many nodes 
-are stable, how many nodes permit exit pot 80 etc etc. All dimensions 
-except location and datetime break down to quantities.
-
-You could also ask how many bytes per day are transported by relays
-running Linus.  Or, what's the probability of having a Windows relay as
-your entry guard.
-
-
-Re: visionion - aggregation
-
-| Note that you wouldn't have to aggregate by single relay or bridge, but
-| you could aggregate all relays or bridges with the same combination of
-| dimensions.  For example, you only care about facts like "on May 23,
-| 2013, there were 25 relays running with type Guard and Middle, with the
-| Fast and Stable flag, with version 0.2.3.x, on OS X, in AS 1234, not
-| permitting any ports, in Germany".
-
-When I wrote that example, I wanted to express the maximum level of
-detail that you'd have to keep to answer any question that anybody could
-ever want to ask.  I wanted to say that you don't need to remember which
-particular relay fingerprints are behind that number.  But you're right
-that nobody would actually want to know the answer to such a detailed
-question.
-
-Starting from the other end, I suggest you start with questions touching
-only a single dimension: "how many relays were there in Germany?" or
-"how many relays were there on OS X?"  And when people want to know
-more, like: "how many relays on OS X were there in Germany?", it would
-be good if the system can be extended to answer such questions.  But
-actually extending it could be step two.
-
-
-MAY 23 9:17pm
-
-Assume we only have node numbers as measure and relay types (only Guard
-and Exit) and software versions (only 0.2.1, 0.2.2, and 0.2.3) as
-dimensions.  Now, for a given hour, we could group relays, so that:
-
-Guard/0.2.1 + Guard/0.2.2 + Guard/0.2.3 + Exit/0.2.1 + Exit/0.2.2 +
-Exit/0.2.3 = all nodes
-
-With clients, we don't have data for combinations of dimensions, but
-only by a single dimension.  So, for a given day, we have:
-
-de + us + fr + it + uk + gr + ... = all nodes connecting via bridges
-IPv4 + IPv6 = all nodes connecting via bridges
-obfs2 + obfs3 + websocket = all nodes connecting via bridges
-
-But there's no such thing as de/IPv4/obfs2, and we can't derive that
-number from our data.
-
-
-MAY 25 7:17pm
-
-There's a large emphasis on node numbers, but really, bwa, bwc, and pbr 
-are more important measures than the number of nodes.
-
-Here's my idea: how about you keep osv_r, tsv_r, fast_r, stable_r, and
-as_r and store arrays of [#nodes, bwa, bwc, pbr] for each of them?  For
-osv_r, tsv_r, and as_r that would mean storing an array of arrays, and
-for fast_r and stable_r it would be just that array.
-
-MAY 27 10:15am
-
-But still, visualizing the average pbr (consensus weight fraction) or
-all relays doesn't make much sense to me.  The pbr values of all relays
-add up to 100%, so that the average is always 1 / #relays.
-
-What makes more sense is visualizing the total pbr of all relays with a
-certain characteristic.  For example, what's the total pbr of all relays
-in Germany?  That makes much more sense to me.
-
-
--->
-
 
 
 Visualization Mechanics Wishlist
@@ -1037,8 +856,6 @@ Visualization Mechanics Wishlist
 * notify the client of new fields so he can add them to the generic interface 
 * RESTfulness: having the URL represent the complete state of a visualization e.g. including zoom factor, 
   active facets, selected clipping etc
-
-
 
 
 JavaScript Issues
