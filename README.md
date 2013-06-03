@@ -239,28 +239,28 @@ These 3 collections contain all raw data as it is imported into the database.
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmed		node	node id						string			-			Tor fingerprint
-	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+	bgmedr		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmedr		node	node id						string			-			Tor fingerprint
+	bgmedr		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
 																				one of: 1(default), 6, 24, 168
-	bgmed		date	datetime					string			-			start of the time span that this document describes
+	bgmedr		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		nick	nickname					string			mode		nickname of relay
-	bgmed		role	roles/functions of relay	array	string	mode [*]	some of: Guard,  Middle,  Exit,  Dir
-	 gmed		flag	flags 						array	string	mode [*]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
+	bgmedr		nick	nickname					string			mode		nickname of relay
+	 gmedr		role	roles/functions of relay	array	string	mode [*]	some of: Guard,  Middle,  Exit,  Dir
+	 gmedr		flag	flags 						array	string	mode [*]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
-	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
-	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
-	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
-	 gmed		pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
-	 gmed		pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
-	 gmed		pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
-	 gmed		pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
+	b    r		bwa		bandwidth advertized 		integer			mean		B/s
+	b    r		bwc		bandwidth consumed 			integer			mean		B/s
+	bgmedr		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
+	bgmedr		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	     r		pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
+	 g			pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
+	  m			pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
+	   e		pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
 	   e		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
-	 gmed		as		autonomous system			integer			mode		
-	 gmed		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
+	 gmedr		as		autonomous system			integer			mode		
+	 gmedr		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 
 
 **bridges**  
@@ -509,59 +509,63 @@ Additionally indices over the 3 import collections are needed to facilitate gene
 **step 1 : import data aggregation**
 A rather minimal fact table would include:
 	(4 relays x 2 flags + 3 nodes) x 2 bandwidths = 22 bandwidths
-But we need the intermediate steps too because we also want to know these numbers for groups of nodes like all stable relays or all servers. That already leads to more than 30 bandwidth values - a rough first estimate and a very reasonable and encouraging result. But this sketch neglects a lot of information that we want to make visible, and the devil lies in the detail (-ed data sets). So let's work on a real, exhaustive fact table.
+But we need the intermediate steps too because we also want to know these numbers for groups of nodes like all stable relays or all servers. That already leads to more than 30 bandwidth values - a rough first estimate and a very reasonable and encouraging result. But this sketch neglects a lot of information that we want to make visible, and the devil lies in the detail (-ed data sets). 
 
-It should encompass everything we know from a certain timespan, about all node types and in any dimension. We'll see how far we can get on the way.
+An exhaustive fact table should encompass everything we know from a certain timespan, about all node types and in any dimension. We'll see how far we can get on the way.
 
 	1	clients						count
 	2		@bridges				count
 	3		@relays					count
 	4		ip v4					count
 	5		ip v6					count
-	6		transport				count
+	6		transport				result object
+For clients this is all we know, save the clients per country which we'll tackle later. 
+Clients @bridges and @relays are mutually exclusive but the other fields are not, so it's natural to just list them one after another. 
+For transports we currently have 3 possible values: obfs2, obfs3, both. 
+Since more transports may be developed in the future it seems saver to not just add 3 more columns but a result object that has fields for every possible combination of transports offered by a bridge. 
+The value is always the number of clients complying to the field type.
 
-For clients this is all we know, save the clients per country which we'll tackle later. Clients @bridges and @relays are mutually exclusive but the other fields are not, so it's natural to just list them one ater another. The value is always the number of clients complying to the field type.
+									legend			c	osv	tsv	bwa	bwc	prb	pex	
+	7	servers						object			x	x	x	x	x
+	8		bridges					object			x	x	x	x	x			can bridge bwa/bwc/osv/tsv also be calculated for the subcategories?
+	9			email				object			x							
+	10			https				object			x						
+	11			other				object			x	
+	12			ec2					object			x	
+	13			obfs2				object			x	
+	14			obfs3				object			x	
+	15			obfs2+3				object			x	
+	16		relays					object			x	x	x	x	x	x		can relay osv/tsv/pbr also be calculated for the subcategories?
+	17				no flags		object			x					
+	18				fast			object			x	
+	19				stable			object			x	
+	20				fast + stable	object			x	
+	21			guard				object			x	x	x			x		can guard osv/tsv/pbg also be calculated for the subcategories?
+	22				no flags		object			x				
+	23				fast			object			x				
+	24				stable			object			x				
+	25				fast + stable	object			x				
+	26			middle				object			x	x	x			x		can middle osv/tsv/prm also be calculated for the subcategories?
+	27				no flags		object			x				
+	28				fast			object			x				
+	29				stable			object			x				
+	30				fast + stable	object			x				
+	31			exit				object			x	x	x			x	x	can exit osv/tsv/pre also be calculated for the subcategories?
+	32				no flags		object			x				
+	33				fast			object			x				
+	34				stable			object			x				
+	35				fast + stable	object			x				
+	36			directory			object			x	x	x
+	37				authority		object			x	
 
-	7	servers						result object
-	8		bridges					result object
-	9			email				result object
-	10			https				result object
-	11			other				result object
-	12			ec2					result object
-	13			obfs2				result object
-	14			obfs3				result object
-	15		relays					result object
-	16				no flags		result object
-	17				fast			result object
-	18				stable			result object
-	19				fast + stable	result object
-	20			guard				result object
-	21				no flags		result object
-	22				fast			result object
-	23				stable			result object
-	24				fast + stable	result object
-	25			middle				result object
-	26				no flags		result object
-	27				fast			result object
-	28				stable			result object
-	29				fast + stable	result object
-	30			exit				result object
-	31				no flags		result object
-	32				fast			result object
-	33				stable			result object
-	34				fast + stable	result object
-	35			directory			result object
-	36				authority		result object
-	37				no authority	result object
-
-That's 31 columns about servers, including the most common flags. Still looks manageable
-And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidth for all server nodes, probabilities and some others where applicable.
+That's 31 columns about servers, including the most common flags. Still looks manageable.
+And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidths for all server nodes, probabilities and some others where applicable.
 The result object en detail:
 First every object contains a field counting the number of nodes that comply to the field type.
-Second for each of these node types 2 bandwidth values can be calculated: advertized and consumed bw.
+Second for each of these node types 2 bandwidth values can be calculated: advertized and consumed bandwidth.
 Third some node types have addidtional fields in their results object: 
 - the relays field also carrys a probabilties field
-- exit fields also carrys the permitted exit ports. There are 3 possible values and every combination thereof: 6 fields. We'll add these 6 fields of permitted exit ports as an array to the result object.
+- exit fields also carrys the permitted exit ports. There are 3 possible values and every combination thereof which makes 6 fields. We'll add these 6 fields of permitted exit ports as rows to the result object.
 
 This elegant way of using the columns for more than one result type is possible because bandwidths, node counts, probabilties and the exit ports are independent from each other. There's no way how we could construct a different perspective where bandwidths and node counts don't correlate in the same way.
 
@@ -586,7 +590,7 @@ Plus we wouldn't want to loose track of the flags and add another - hold your br
 Alltogether [112](http://en.wikipedia.org/wiki/112_%28emergency_telephone_number%29) columns. What a fitting number... Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
 
 _OS or Tor software versions_
-Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or even 37 x 8 = 296 and I can't see any scenario in which this effort would be justified. And that still leaves out the 40 combinations of OS and Tor software versions.
+Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or 37 x 8 = 296 respectively and I can't see any scenario in which this effort would be justified. And that still leaves out the 40 combinations of OS and Tor software versions.
 Probably Tor software version and OS versions are only of limited significance. I tend to add them to the result objects of the main 31 server columns sketched out above and be done with it. 
 13 more field:value pairs added to each result object, 5 for OS and 8 for TS: would that seem useful?
 Maybe even cut that down and only add them to bridges and the 4 relays types, without honoring the flags?
@@ -594,55 +598,74 @@ Maybe even cut that down and only add them to bridges and the 4 relays types, wi
 At least theoretically interesting iare the 40 possible combinations of operating system and tor software compared with any of the other dimensions, e.g. the 8 basic node types (without flags) = 320 permutations. Not nice, but doable in a seperate collection. Would that be useful?
 
 _Areas_
-But this was all peanuts compared to country and AS information. These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. So with countries and AS we have to change perspective: we can't start from the nodes anymore, we have to start from the properties.
+But this was all peanuts compared to country and AS information. These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. So with countries and AS we have to change perspective: we can't start from the perspective of servrers and clients anymore, we have to start from the properties.
 
-Again there are differences: while the value space for autonomous systems tends to be endless, there are less than 200 countries - which is a lot, but limited. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
+Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
 	38	country 					array : object
-			cbcc					count
-			crcc					count
-			relay					count
-			guard					count
-			middle					count
-			exit					count
-			directory				count
-			bwa						count
-			bwc						count
-			pbr						percentage
-			pbg						percentage
-			pbm						percentage
-			pbe						percentage
-			fast					count
-			stable					count
-			osv						array osv:count
-			tsv						array tsv:count
-			pex						array v:count
+			cbcc					count										how many clients in this country connecting through bridges
+			crcc					count										how many clients in this country connecting through relays
+			relay					count										how many relays in this country
+			guard					count										how many guards in this country
+			middle					count										how many middles in this country
+			exit					count										how many exits in this country
+			directory				count										how many directories in this country
+			bwa						count										total bwa of all relays in this country
+			bwc						count										total bwc of all relays in this country
+			pbr						percent										total probability of all relays in this country
+			pbg						percent										total probability of all guards in this country
+			pbm						percent										total probability of all middles in this country
+			pbe						percent										total probability of all exits in this country
+			fast					count										how many fast relays in this country
+			stable					count										how many stable relays in this country
+			os_linux				count
+			os_freebsd				count
+			os_darwin				count
+			os_windows				count
+			os_other				count
+			tsv_010					count
+			tsv_011					count
+			tsv_012					count
+			tsv_020					count
+			tsv_021					count
+			tsv_022					count
+			tsv_023					count
+			tsv_024					count
+			pex_80					count
+			pex_443					count
+			pex_6667				count
 			as						array v:count
 
-This approach has one problem: the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this could be solved by plainly listing them: that's 16 more rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 AS with the most bandwidth, or probability, and an 11th value for the rest.
+This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
 
 Additionally countries could be grouped into continents, political regions (like "middle east", "EU"), by bandwidth consumption etc.
 
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-	39	AS 							array:object		
-			relay					count
-			bandwidth advertized	count
-			bandwidth consumed		count
-			fast					count
-			stable					count
-			probability				count
-			guard					count		
-				probability			count
-			middle					count
-				probability			count
-			exit					count
-				probability			count
-			directory				count
-			country					array country:count
+	39	AS 							array:object								one result object per AS
+			relay					count										how many relays in this AS
+			bandwidth advertized	count										total bwa of all relays in this AS
+			bandwidth consumed		count										total bwc of all relays in this AS
+			fast					count										how many fast relays in this AS
+			stable					count										how many stable relays in this AS
+			probability				count										total pbr of all relays in this AS 
+			guard					count										how many guards in this AS
+				probability			count										total pbg of all guards in this AS 
+			middle					count										how many middles in this AS
+				probability			count										total pbm of all middles in this AS 
+			exit					count										how many exits in this AS
+				probability			count										total pbe of all exits in this AS 
+			directory				count										how many directories in this AS
+			cc_count				array country:value							how many relays in that country in this AS
+			cc_bwa					array country:value							how many bwa in that country in this AS
+			cc_bwc					array country:value							how many bwc in that country in this AS
+			cc_pbr					array country:value							total probability of all relays in that country and this AS
+			cc_pbg					array country:value							total probability of all guards in that country and this AS
+			cc_pbm					array country:value							total probability of all middles in that country and this AS
+			cc_pbe					array country:value							total probability of all exits in that country and this AS
 
-This is still sketchy. More input and ideas on handling AS would be very welcome. 
+This is still sketchy. More input and ideas on handling AS would be welcome. 
 
 
 
@@ -651,7 +674,7 @@ A node may not be online in every part of an aggregated timespan.
 We don't count servers that haven't been available for at least 30% of a timespan. 
 That way we are counting the bandwidth a little conservativ, while we are too optimistic regarding the number of available servers.
 
-_aggregation mdularization_
+_aggregation modularization_
 With so much aggregation taking place it should be tried to prevent aggregation steps more than once for different views but build them on each other like a pyramid.   
 Especially the country collection has a lot of overlap with other views.    
 
@@ -663,7 +686,7 @@ So far we only examined aggregated groups of node types. To understand distribut
 These numbers can be added to the server result objects explained above. 
 They can be added alongside applicable fields in the country objects, namely: relay (guard, middle, exit, dir), bandwidths, probabilities, flags. 
 Likewise for AS.
-And we should establish some measure to indicate how even the distribution is (without ahvin to look at individual nodes).
+And we should establish some measure to indicate how even the distribution is (without having to look at individual nodes).
 But this is just a reminder and a list of notes. We agreed to postpone this domain.
 
 	TODO
