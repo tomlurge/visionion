@@ -36,17 +36,17 @@ How to achieve all this?
 Basically, take all network graphs and merge them into one single graph with plenty of options. 
 Users should be able to navigate into any factor (bridge vs. relay, country, flags, Tor software version, operating system, EC2 cloud bridge or not) and learn the total relay number or advertised bandwidth or bandwidth history for their selection. 
 
-**1** 
+**1**   
 the most prominent usecase is the timeline with a graph representing volumina of bandwidth or number of hosts or number of clients etc. on the vertical axis   
-**1a** 
+**1a**   
 it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg consumed bandwidth and number of clients   
-**2** 
+**2**   
 now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays   
-**3** 
+**3**   
 now imagine a third plane on the floor showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes   
-**4** 
+**4**   
 now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.   
-**5** 
+**5**   
 show the biggest nodes for a given metric and their share of the total  
 
 **1** 
@@ -80,12 +80,12 @@ Most of the visualization facets get rendered seperatly, on seperate planes (tec
 The application prepares the joins and our eyes carry them out.   
 
 
-**Visualization framework** 
+**Visualization framework**   
 [D3.js](http://d3js.org/) is a [leading](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web. 
 It keeps a strong link between the data and it's visual representation, expresses it in a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.   
 
 
-**Database** 
+**Database**   
 Since the data schema is quite flat and in a certain flux a NoSQL database seems appropriate. 
 [MongoDB](http://www.mongodb.org/) was [chosen](http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis "Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison") because of it's JavaScript support which promises nice integration with client side logic. 
 Since the complexity of the underlying data is rather limited MongoDBs query capabilities, although less expressive than SQL, should be sufficient. 
@@ -94,7 +94,7 @@ The ability to store JavaScript-code in the MongoDB might help in the developmen
 Support for geo-data could be beneficial either (no other NoSQL database has that so easily available AFAIK).  
 
 
-**Web application framework** 
+**Web application framework**   
 [Angular.js](http://angularjs.org/) is the likely candidate because of it's declarative style and it's attractive approach to routing and HTML extensions ([discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks")). 
 It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).  
 
@@ -107,19 +107,19 @@ The Tor network is comprised of a lot of different nodes.
 All these nodes operate - despite their different functions - from the same software, just with different configuration flags set. 
 A single node can be in _most_ categories at the same time and in _every_ category over time.  
  
-_Nodes_ are all the actors that form the network. 
+**Nodes** are all the actors that form the network. 
 Nodes encompass clients, bridges and relays.    
-_Clients_ are the end users, connecting to the Tor network to anonymously use the internet.   
-_Servers_ are everything except clients. 
+**Clients** are the end users, connecting to the Tor network to anonymously use the internet.   
+**Servers** are everything except clients. 
 Servers encompass relays and bridges.   
-_Bridges_ are the nodes that clients connect to to circumvent attempts to block access to Tor.   
-_Relays_ are the nodes that form the actual Tor network which provides anonymity. 
+**Bridges** are the nodes that clients connect to to circumvent attempts to block access to Tor.   
+**Relays** are the nodes that form the actual Tor network which provides anonymity. 
 Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.   
-_Guard_ nodes function as entry points to an anonymized route through the Tor network. 
+**Guard** nodes function as entry points to an anonymized route through the Tor network. 
 They are reached by the client either directly or, if a censor blocks them, through a bridge.   
-_Middle_ nodes function as intermediary steps on that route.   
-_Exit_ nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.   
-_Directory_ nodes provide some auxiliary services to the Tor network.   
+**Middle** nodes function as intermediary steps on that route.   
+**Exit** nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.   
+**Directory** nodes provide some auxiliary services to the Tor network.   
 
 	node					everything in the tor network
 		client				the users
@@ -138,16 +138,16 @@ But there are two exceptions to the general rule:
 1) a node can't be a client and a server at the same time.   
 2) a node can't be a bridge and a relay at the same time.
 
-**a more detailed description of the different nodes and measures**
+**A more detailed description of the different nodes and measures**
 
-*clients*  
+*clients*   
 Tor doesn't log any data at individual clients themselves, but it logs abstract data about clients at bridges and directory mirrors. 
 Bridges are obvious, but directory mirrors maybe not so much. 
 The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
 The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.   
 See https://metrics.torproject.org/formats.html for details: "Second, we describe the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."   
 
-*servers* 
+*servers*    
 These are the documents you have per relay/bridge:   
 - Network status entry: There's a network status entry for every relay or bridge with some summary information. 
 It's a confirmation by either the directory authorities (for relays) or the bridge authority (for bridges) that the given relay/bridge information is valid.  
@@ -188,21 +188,25 @@ For example, we don't have country information about bridges, but we have that f
 	TODO
 
   
-*other diemnsions*  
+*other dimensions*  
 
-* bandwidth
+* bandwidth   
   Bandwidth is measured for relays and bridges in two values: bandwidth advertized and bandwidth consumed.   
 
 * probabilities   
   You can assign a consensus weight fraction to each relay, for any given date and hour. 
   Then you can say that all clients used that relay for about x% of their paths, or that a particular client used that relay for a particular path with a probability of x%.   
-  There are currently four such weights/probabilities defined for relays (this does not apply to bridges).    Quoting from Onionoo's protocol specification:    
+  There are currently four such weights/probabilities defined for relays (this does not apply to bridges). 
+   
+  Quoting from Onionoo's protocol specification:    
   "consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.   
   "guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
   "middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
   "exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
-
-* autonomous systems
+  
+  Probabilities for selecting a node in the guard/middle/exit position are calculated based on the node's consensus weight, whether it has the Guard and/or Exit flag, and the bandwidth weights in the consensus. 
+  
+* autonomous systems    
   For visualization, autonomous systems are very similar to countries. Think of an autonomous system as a group of IP address blocks belonging to the same organization. 
   You want to avoid that all relays in a path, or at least entry and exit, are located in the same autonomous system and thereby controlled by the same organization. 
   And you want to avoid that a single AS/organization sees a too high percentage of Tor traffic. For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees almost 20% of Tor's exit traffic. 
@@ -216,11 +220,11 @@ For example, we don't have country information about bridges, but we have that f
 
 **postponed**
 
-* performance measures
+* performance measures   
   The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" are learned from clients we run ourselves, coming from Torperf output files. 
   The gathering of this data is currently worked on and work on it's visualization is postponed.
 
-* measuring bandwidths for types of relays
+* measuring bandwidths for types of relays    
   Relays with the Guard flag are not exclusively used in the guard position, but could also be used in the middle position and possibly also as directory server. 
   And if relays also have the Exit flag, they'll be used less in the previously mentioned positions, but therefore also in the exit position.    
   We could derive advertised or consumed guard bandwidth for types of relays from relay bandwidth similar to how we derive guard probability from consensus weight using the Guard/Exit/BadExit flag and Wgd/Wgg bandwidth weights.   
@@ -325,7 +329,7 @@ The purpose of the schema is twofold: combined with a [validator](https://github
 More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
 
 
-**Import checks**
+**Import checks**    
 We are making assumptions about the imported data that wouldn't hurt to be checked. 
 The following query checks if Bridges and all other types of relays are really disjunct sets:
 
