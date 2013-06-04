@@ -212,6 +212,13 @@ For example, we don't have country information about bridges, but we have that f
   And you want to avoid that a single AS/organization sees a too high percentage of Tor traffic. For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees almost 20% of Tor's exit traffic. 
   That's about as interesting as the fact that over 30% of Tor's traffic exits from U.S. relays.
 
+* pluggable transports   
+  <OR> steht hier für Onion Routing, sprich das normale Tor-Protocol. 
+  Eine Bridge, die Pluggable Transports anbietet kann auch normale Tor-Verbindungen zulassen, die unter <OR> zusammengefasst würden. 
+  Das ist auch gleichzeitig der Default-Wert wenn eine Bridge keine Statistiken zu Pluggable Transports übermittelt, daher der große Anteil. 
+  Außerdem gibt es noch <??> für den Fall, dass weder ein bekannter Pluggable Transport noch <OR> benutzt wurden. 
+  Das wird aber wahrscheinlich nur sehr selten passieren.
+
 
 
 **even more**
@@ -309,7 +316,8 @@ These 3 collections contain all raw data as it is imported into the database.
 				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
 				crcc	clients@relays per country	array	object	mean		{cc:integer}
-				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/<??>/<OR>:integer}
+				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/<??>/<OR>:integer} // <OR>: "onion routing", standard tor protocol, 
+																												   <??>: unknown
 				cip		ip-version used				array	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
@@ -529,53 +537,64 @@ But we need the intermediate steps too because we also want to know these number
 
 An exhaustive fact table should encompass everything we know from a certain timespan, about all node types and in any dimension. We'll see how far we can get on the way.
 
-	1	clients						count
+	1	clients
+			total					count
 	2		@bridges				count
 	3		@relays					count
 	4		ip v4					count
 	5		ip v6					count
 	6		transport				result object
+	
 For clients this is all we know, save the clients per country which we'll tackle later. 
-Clients @bridges and @relays are mutually exclusive but the other fields are not, so it's natural to just list them one after another. 
-For transports we currently have 3 possible values: obfs2, obfs3, both. 
-Since more transports may be developed in the future it seems saver to not just add 3 more columns but a result object that has fields for every possible combination of transports offered by a bridge. 
-The value is always the number of clients complying to the field type.
+Clients @bridges and @relays are mutually exclusive, the other fields aren't. We'll just list them one after another. 
+For transports we currently have 8 possible values: obfs2, obfs3, OR, obfs2+3, obfs2+OR, obfs3+OR, obfs2+3+OR, other. 
+More transports may be developed in the future. 
+It seems sensible to add  a result object that has fields for every possible combination of transports offered by a bridge. 
+The value is always the number of clients complying to the field type. 
 
 									legend			c	osv	tsv	bwa	bwc	prb	pex	
-	7	servers						object			x	x	x	x	x
-	8		bridges					object			x	x	x	x	x			
-	9			email				object			x	x	x	x	x			
-	10			https				object			x	x	x	x	x		
-	11			other				object			x	x	x	x	x
-	12			ec2					object			x	x	x	x	x
-	13			obfs2				object			x	x	x	x	x
-	14			obfs3				object			x	x	x	x	x
-	15			obfs2+3				object			x	x	x	x	x
-	16		relays					object			x	x	x	x	x	x		
-	17				no flags		object			x	x	x	x	x	x					
-	18				fast			object			x	x	x	x	x	x
-	19				stable			object			x	x	x	x	x	x
-	20				fast + stable	object			x	x	x	x	x	x
-	21			guard				object			x	x	x	x	x	x		
-	22				no flags		object			x	x	x	x	x	x
-	23				fast			object			x	x	x	x	x	x
-	24				stable			object			x	x	x	x	x	x
-	25				fast + stable	object			x	x	x	x	x	x
-	26			middle				object			x	x	x	x	x	x		
-	27				no flags		object			x	x	x	x	x	x
-	28				fast			object			x	x	x	x	x	x
-	29				stable			object			x	x	x	x	x	x
-	30				fast + stable	object			x	x	x	x	x	x
-	31			exit				object			x	x	x	x	x	x	x	
-	32				no flags		object			x	x	x	x	x	x
-	33				fast			object			x	x	x	x	x	x
-	34				stable			object			x	x	x	x	x	x
-	35				fast + stable	object			x	x	x	x	x	x
-	36			directory			object			x	x	x	x	x
-	37				authority		object			x	x	x	x	x
+	7	servers
+			total					object			x	x	x	x	x
+	8		bridges
+				total				object			x	x	x	x	x			
+	9			brpEmail			object			x	x	x	x	x			
+	10			brpHttps			object			x	x	x	x	x		
+	11			brpOther			object			x	x	x	x	x
+	12			breTrue				object			x	x	x	x	x
+	13			brtObfs2			object			x	x	x	x	x
+	14			brtObfs3			object			x	x	x	x	x
+	15			brtObfs2+3			object			x	x	x	x	x
+	16		relays		
+				roleAll
+					total			object			x	x	x	x	x	x		
+	17				flagNone		object			x	x	x	x	x	x					
+	18				flagFast		object			x	x	x	x	x	x
+	19				flagStable		object			x	x	x	x	x	x
+	20				flagFastStable	object			x	x	x	x	x	x
+	21			roleGuard		
+					total			object			x	x	x	x	x	x		
+	22				flagNone		object			x	x	x	x	x	x
+	23				flagFast		object			x	x	x	x	x	x
+	24				flagStable		object			x	x	x	x	x	x
+	25				flagFastStable	object			x	x	x	x	x	x
+	26			roleMiddle		
+					total			object			x	x	x	x	x	x		
+	27				flagNone		object			x	x	x	x	x	x
+	28				flagFast		object			x	x	x	x	x	x
+	29				flagStable		object			x	x	x	x	x	x
+	30				flagFastStable	object			x	x	x	x	x	x
+	31			roleExit		
+					total			object			x	x	x	x	x	x	x	
+	32				flagNone		object			x	x	x	x	x	x	x
+	33				flagFast		object			x	x	x	x	x	x	x
+	34				flagStable		object			x	x	x	x	x	x	x
+	35				flagFastStable	object			x	x	x	x	x	x	x
+	36			roleDir
+					total			object			x	x	x	x	x
+	37				authorityTrue	object			x	x	x	x	x
 
 That's 31 columns about servers, including the most common flags. Still looks manageable.
-And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidths for all server nodes, probabilities and some others where applicable.
+And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count, bandwidths and softwaer versions for all server nodes, probabilities and exitports where applicable.
 The result object en detail:
 First every object contains a field counting the number of nodes that comply to the field type.
 Second for each of these node types 2 bandwidth values can be calculated: advertized and consumed bandwidth.
@@ -618,7 +637,7 @@ But this was all peanuts compared to country and AS information. These are enorm
 
 Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
-	38	country 					array : object
+	38	countries 					array : object
 			cbcc					count										how many clients in this country connecting through bridges
 			crcc					count										how many clients in this country connecting through relays
 			relay					count										how many relays in this country
@@ -659,7 +678,7 @@ Additionally countries could be grouped into continents, political regions (like
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-	39	AS 							array:object								one result object per AS
+	39	as				 			array:object								one result object per AS
 			relay					count										how many relays in this AS
 			bandwidth advertized	count										total bwa of all relays in this AS
 			bandwidth consumed		count										total bwc of all relays in this AS
