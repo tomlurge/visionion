@@ -540,7 +540,7 @@ The value is always the number of clients complying to the field type.
 
 									legend			c	osv	tsv	bwa	bwc	prb	pex	
 	7	servers						object			x	x	x	x	x
-	8		bridges					object			x	x	x	x	x			can bridge bwa/bwc/osv/tsv also be calculated for the subcategories?
+	8		bridges					object			x	x	x	x	x			
 	9			email				object			x	x	x	x	x			
 	10			https				object			x	x	x	x	x		
 	11			other				object			x	x	x	x	x
@@ -548,22 +548,22 @@ The value is always the number of clients complying to the field type.
 	13			obfs2				object			x	x	x	x	x
 	14			obfs3				object			x	x	x	x	x
 	15			obfs2+3				object			x	x	x	x	x
-	16		relays					object			x	x	x	x	x	x		can relay osv/tsv/pbr also be calculated for the subcategories?
+	16		relays					object			x	x	x	x	x	x		
 	17				no flags		object			x	x	x	x	x	x					
 	18				fast			object			x	x	x	x	x	x
 	19				stable			object			x	x	x	x	x	x
 	20				fast + stable	object			x	x	x	x	x	x
-	21			guard				object			x	x	x			x		can guard osv/tsv/pbg also be calculated for the subcategories?
+	21			guard				object			x	x	x			x		
 	22				no flags		object			x	x	x			x
 	23				fast			object			x	x	x			x
 	24				stable			object			x	x	x			x
 	25				fast + stable	object			x	x	x			x
-	26			middle				object			x	x	x			x		can middle osv/tsv/prm also be calculated for the subcategories?
+	26			middle				object			x	x	x			x		
 	27				no flags		object			x	x	x			x
 	28				fast			object			x	x	x			x
 	29				stable			object			x	x	x			x
 	30				fast + stable	object			x	x	x			x
-	31			exit				object			x	x	x			x	x	can exit osv/tsv/pre also be calculated for the subcategories?
+	31			exit				object			x	x	x			x	x	
 	32				no flags		object			x	x	x			x
 	33				fast			object			x	x	x			x
 	34				stable			object			x	x	x			x
