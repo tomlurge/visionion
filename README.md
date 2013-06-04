@@ -225,10 +225,16 @@ For example, we don't have country information about bridges, but we have that f
   The gathering of this data is currently worked on and work on it's visualization is postponed.
 
 * measuring bandwidths for types of relays    
-  Relays with the Guard flag are not exclusively used in the guard position, but could also be used in the middle position and possibly also as directory server. 
+
+  Bandwidth figures (advertized and consumed) include all types of services offered by a node. Currently they can not be refined to the level of indidividual services like bandwidth consumed by guard nodes, middle nodes etc.   
+  In theory, we have data about consumed directory bandwidth for newer relays or bridges, but not for traffic as bridge, guard, middle, or  exit node. 
+  We only have that data for the directory role, and only for a subset of relays, and deriving this data is difficult. 
+  There are privacy implications of gathering too detailed data, so we can't get more detailed data.    
+  We can also not simply derive these values from the data we already have since relays can offer more than one service. 
+  E.g. relays with the Guard flag are not exclusively used in the guard position, but could also be used in the middle position and possibly also as directory server. 
   And if relays also have the Exit flag, they'll be used less in the previously mentioned positions, but therefore also in the exit position.    
   We could derive advertised or consumed guard bandwidth for types of relays from relay bandwidth similar to how we derive guard probability from consensus weight using the Guard/Exit/BadExit flag and Wgd/Wgg bandwidth weights.   
-  I'm uncertain whether this would produce good metrics or not.  We'd mix path selection probabilities with actual usage data, and I'm not sure whether we can do that. This is a fine question for an analysis task and a later extension of Visionion, but currently we don't feel confident enough now to implement this in the current database importer. Results might be misleading.
+  I'm uncertain whether this would produce good metrics or not. We'd mix path selection probabilities with actual usage data, and I'm not sure whether we can do that. This is a fine question for an analysis task and a later extension of Visionion, but currently we don't feel confident enough now to implement this in the current database importer. Results might be misleading.
 
 
 
@@ -338,6 +344,9 @@ The following query checks if Bridges and all other types of relays are really d
 
 Import data gestalt
 -------------------
+
+	TODO 	this section is of questionable quality
+
 The imported data represents the following dimensions:
 	
  node types
@@ -532,35 +541,35 @@ The value is always the number of clients complying to the field type.
 									legend			c	osv	tsv	bwa	bwc	prb	pex	
 	7	servers						object			x	x	x	x	x
 	8		bridges					object			x	x	x	x	x			can bridge bwa/bwc/osv/tsv also be calculated for the subcategories?
-	9			email				object			x							
-	10			https				object			x						
-	11			other				object			x	
-	12			ec2					object			x	
-	13			obfs2				object			x	
-	14			obfs3				object			x	
-	15			obfs2+3				object			x	
+	9			email				object			x	x	x	x	x			
+	10			https				object			x	x	x	x	x		
+	11			other				object			x	x	x	x	x
+	12			ec2					object			x	x	x	x	x
+	13			obfs2				object			x	x	x	x	x
+	14			obfs3				object			x	x	x	x	x
+	15			obfs2+3				object			x	x	x	x	x
 	16		relays					object			x	x	x	x	x	x		can relay osv/tsv/pbr also be calculated for the subcategories?
-	17				no flags		object			x					
-	18				fast			object			x	
-	19				stable			object			x	
-	20				fast + stable	object			x	
+	17				no flags		object			x	x	x	x	x	x					
+	18				fast			object			x	x	x	x	x	x
+	19				stable			object			x	x	x	x	x	x
+	20				fast + stable	object			x	x	x	x	x	x
 	21			guard				object			x	x	x			x		can guard osv/tsv/pbg also be calculated for the subcategories?
-	22				no flags		object			x				
-	23				fast			object			x				
-	24				stable			object			x				
-	25				fast + stable	object			x				
+	22				no flags		object			x	x	x			x
+	23				fast			object			x	x	x			x
+	24				stable			object			x	x	x			x
+	25				fast + stable	object			x	x	x			x
 	26			middle				object			x	x	x			x		can middle osv/tsv/prm also be calculated for the subcategories?
-	27				no flags		object			x				
-	28				fast			object			x				
-	29				stable			object			x				
-	30				fast + stable	object			x				
+	27				no flags		object			x	x	x			x
+	28				fast			object			x	x	x			x
+	29				stable			object			x	x	x			x
+	30				fast + stable	object			x	x	x			x
 	31			exit				object			x	x	x			x	x	can exit osv/tsv/pre also be calculated for the subcategories?
-	32				no flags		object			x				
-	33				fast			object			x				
-	34				stable			object			x				
-	35				fast + stable	object			x				
+	32				no flags		object			x	x	x			x
+	33				fast			object			x	x	x			x
+	34				stable			object			x	x	x			x
+	35				fast + stable	object			x	x	x			x
 	36			directory			object			x	x	x
-	37				authority		object			x	
+	37				authority		object			x	x	x
 
 That's 31 columns about servers, including the most common flags. Still looks manageable.
 And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidths for all server nodes, probabilities and some others where applicable.
