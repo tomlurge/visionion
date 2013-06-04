@@ -496,65 +496,69 @@ Only the flags "Fast", "Stable" and "Authority" will be aggregated for the follo
 Data aggregation
 ----------------
 
-**MongoDB**
+**MongoDB**    
 In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
 MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets we retrieve from the network are not as uniform and regular as we'd like them to be. As MongoDB is a schemaless database we do not have to worry about future structural changes. When e.g. more performance data becomes available we can seamlessly add it without having to touch any of the existing documents.
 MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
-- no joins 
- (but we can work around that by visually layering querie results on top of each other)
-- only 64 indices per collection (equals table in SQL-speak)
- (slightly easing this problem: composite indices)
-- only one field in an index can be an array
- (no workaround: we have to avoid arrays if they aren't really necessary)
+- no joins    
+ (but we can work around that by visually layering querie results on top of each other)    
+- only 64 indices per collection (equals table in SQL-speak)    
+ (slightly easing this problem: composite indices)    
+- only one field in an index can be an array    
+ (no workaround: we have to avoid arrays if they aren't really necessary)   
 
 
-**Preparing the import tables**
-A few indices over the 3 import tables "relays", "bridges" and "clients" will speed up the aggregation: 
-. an index over "date" for "bridges" and "clients
-. an index over "date + flag" for "relays"
-. an index over "cc + date" for "relays"
-. an index over "date + as + role + node" for "relays" (?)
+**Preparing the import tables**    
+A few indices over the 3 import tables "relays", "bridges" and "clients" will speed up the aggregation:     
+. an index over "date" for "bridges" and "clients    
+. an index over "date + flag" for "relays"    
+. an index over "cc + date" for "relays"    
+. an index over "date + as + role + node" for "relays" (?)    
 
 
-**Aggregation**
-Aggregation of the imported data is necessary for several reasons:
-. the imported server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers or at a subset of servers sharing certain attributes during a given timespan.  
-. the imported data reflects only a certain view on the underlying network, highly influenced by how the data is collected. A visualization needs to provide other and more diverse perspectives and the imported data has to be aggregated in different shapes and combinations to support the visualization accordingly. A well prepared database is a prerequisite for a responsive and interactive visualization.
+**Aggregation**    
+Aggregation of the imported data is necessary for several reasons:    
+. the imported server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers or at a subset of servers sharing certain attributes during a given timespan.     
+. the imported data reflects only a certain view on the underlying network, highly influenced by how the data is collected. A visualization needs to provide other and more diverse perspectives and the imported data has to be aggregated in different shapes and combinations to support the visualization accordingly. A well prepared database is a prerequisite for a responsive and interactive visualization.    
 
-Step 1 - aggregation of imported data
-In a first step imported data will be added to the facts collection.    
-Step 2 - consolidation and simplification
-Then the facts table will be aggregated into longer timespans and other simplifications (e.g. regions) to improve retrieval performance.
-Step 3 - indexing
-The aggregated collections will be indexed to gain further speed advantages. 
-Additionally indices over the 3 import collections are needed to facilitate generic and unforseen queries and lookups on specific nodes.   
+Step 1 - aggregation of imported data     
+In a first step imported data will be added to the facts collection.       
+Step 2 - consolidation and simplification    
+Then the facts table will be aggregated into longer timespans and other simplifications (e.g. regions) to improve retrieval performance.   
+Step 3 - indexing    
+The aggregated collections will be indexed to gain further speed advantages.    
+Additionally indices over the 3 import collections are needed to facilitate generic and unforseen queries and lookups on specific nodes.     
 
 
-**step 1 : import data aggregation**
-A rather minimal fact table would include:
+**step 1 : import data aggregation**   
+
+tl;dr: a schematic example of a row of the resulting facts collection can be found [here](factsRow.md)   
+
+A rather minimal fact table would include:   
 	(4 relays x 2 flags + 3 nodes) x 2 bandwidths = 22 bandwidths
-But we need the intermediate steps too because we also want to know these numbers for groups of nodes like all stable relays or all servers. That already leads to more than 30 bandwidth values - a rough first estimate and a very reasonable and encouraging result. But this sketch neglects a lot of information that we want to make visible, and the devil lies in the detail (-ed data sets). 
+But we need the intermediate steps too because we also want to know these numbers for groups of nodes like all stable relays or all servers. That already leads to more than 30 bandwidth values - a rough first estimate and a very reasonable and encouraging result. But this sketch neglects a lot of information that we want to make visible, and the devil lies in the detail (-ed data sets).    
 
-An exhaustive fact table should encompass everything we know from a certain timespan, about all node types and in any dimension. We'll see how far we can get on the way.
+An exhaustive fact table should encompass everything we know from a certain timespan, about all node types and in any dimension. 
+We'll see how far we can get on the way.
 
 	1	clients
-			total					count
-	2		@bridges				count
-	3		@relays					count
-	4		ip v4					count
-	5		ip v6					count
-	6		transport				result object
+			total					int
+	2		atBridges				int
+	3		atRelays				int
+	4		cip4					int
+	5		cip6					int
+	6		cpt						object										obfs2, obfs3, or, obfs23, obfs2or, obfs3or, obfs23or, other
 	
 For clients this is all we know, save the clients per country which we'll tackle later. 
 Clients @bridges and @relays are mutually exclusive, the other fields aren't. We'll just list them one after another. 
 For transports we currently have 8 possible values: obfs2, obfs3, OR, obfs2+3, obfs2+OR, obfs3+OR, obfs2+3+OR, other. 
-More transports may be developed in the future. 
+More transports may be developed in the future.    
 It seems sensible to add  a result object that has fields for every possible combination of transports offered by a bridge. 
 The value is always the number of clients complying to the field type. 
 
 									legend			c	osv	tsv	bwa	bwc	prb	pex	
 	7	servers
-			total					object			x	x	x	x	x
+			total					object			x	x	x	x	x	
 	8		bridges
 				total				object			x	x	x	x	x			
 	9			brpEmail			object			x	x	x	x	x			
@@ -563,7 +567,7 @@ The value is always the number of clients complying to the field type.
 	12			breTrue				object			x	x	x	x	x
 	13			brtObfs2			object			x	x	x	x	x
 	14			brtObfs3			object			x	x	x	x	x
-	15			brtObfs2+3			object			x	x	x	x	x
+	15			brtObfs23			object			x	x	x	x	x
 	16		relays		
 				roleAll
 					total			object			x	x	x	x	x	x		
@@ -594,20 +598,24 @@ The value is always the number of clients complying to the field type.
 	37				authorityTrue	object			x	x	x	x	x
 
 That's 31 columns about servers, including the most common flags. Still looks manageable.
-And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count, bandwidths and softwaer versions for all server nodes, probabilities and exitports where applicable.
+And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count, bandwidths and software versions for all server nodes, probabilities and exitports where applicable.
 The result object en detail:
 First every object contains a field counting the number of nodes that comply to the field type.
 Second for each of these node types 2 bandwidth values can be calculated: advertized and consumed bandwidth.
-Third some node types have addidtional fields in their results object: 
-- the relays field also carrys a probabilties field
-- exit fields also carrys the permitted exit ports. There are 3 possible values and every combination thereof which makes 6 fields. We'll add these 6 fields of permitted exit ports as rows to the result object.
+Third all objects contain sub-objects for Tor software version and operating system.
+Finally some node types have addidtional fields in their results object:    
+- the relays also carry a probabilty field   
+- exits also carrys the permitted exit ports. 
+  There are 3 possible values and every combination thereof which makes 7 fields.   
+  We'll add these as a sub-object to the result object.    
 
-This elegant way of using the columns for more than one result type is possible because bandwidths, node counts, probabilties and the exit ports are independent from each other. There's no way how we could construct a different perspective where bandwidths and node counts don't correlate in the same way.
+This elegant way of using the columns for more than one result type is possible because bandwidths, node counts, probabilties and the exit ports are independent from each other. 
+There's no way how we could construct a different perspective where bandwidths and node counts don't correlate in the same way.
 
-But we've already reached the end of low hanging fruit. 
+But now we've reached the end of low hanging fruit. 
 
 
-_Mutually non exclusive relay types_
+_Mutually non exclusive relay types_    
 Up to now it looks like we have everything covered. Or is there a combination of type, flag and probabilty that we couldn't find in this table in one easy step?
 The astute reader will have noticed that there indeed is indeed a problem: guards, middles, exits and directories aren't mutually exclusive. To capture any combination thereof we would need not only 4 but 15 rows, so add 9 to 37 = 46. 
 Plus we wouldn't want to loose track of the flags and add another - hold your breath - 66 rows. 
@@ -624,7 +632,7 @@ Plus we wouldn't want to loose track of the flags and add another - hold your br
 					66
 Alltogether [112](http://en.wikipedia.org/wiki/112_%28emergency_telephone_number%29) columns. What a fitting number... Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
 
-_OS or Tor software versions_
+_OS or Tor software versions_    
 Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or 37 x 8 = 296 respectively and I can't see any scenario in which this effort would be justified. And that still leaves out the 40 combinations of OS and Tor software versions.
 Probably Tor software version and OS versions are only of limited significance. I tend to add them to the result objects of the main 31 server columns sketched out above and be done with it. 
 13 more field:value pairs added to each result object, 5 for OS and 8 for TS: would that seem useful?
@@ -632,44 +640,55 @@ Maybe even cut that down and only add them to bridges and the 4 relays types, wi
 
 At least theoretically interesting iare the 40 possible combinations of operating system and tor software compared with any of the other dimensions, e.g. the 8 basic node types (without flags) = 320 permutations. Not nice, but doable in a seperate collection. Would that be useful?
 
-_Areas_
-But this was all peanuts compared to country and AS information. These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. So with countries and AS we have to change perspective: we can't start from the perspective of servrers and clients anymore, we have to start from the properties.
+_Areas_    
+But so far this was all peanuts compared to country and AS information. 
+These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. 
+Therefor we have to change perspective: we can't start from the perspective of servers and clients anymore, we have to start from the properties country and AS.
 
 Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
-	38	countries 					array : object
-			cbcc					count										how many clients in this country connecting through bridges
-			crcc					count										how many clients in this country connecting through relays
-			relay					count										how many relays in this country
-			guard					count										how many guards in this country
-			middle					count										how many middles in this country
-			exit					count										how many exits in this country
-			directory				count										how many directories in this country
-			bwa						count										total bwa of all relays in this country
-			bwc						count										total bwc of all relays in this country
-			pbr						percent										total probability of all relays in this country
-			pbg						percent										total probability of all guards in this country
-			pbm						percent										total probability of all middles in this country
-			pbe						percent										total probability of all exits in this country
-			fast					count										how many fast relays in this country
-			stable					count										how many stable relays in this country
-			os_linux				count
-			os_freebsd				count
-			os_darwin				count
-			os_windows				count
-			os_other				count
-			tsv_010					count
-			tsv_011					count
-			tsv_012					count
-			tsv_020					count
-			tsv_021					count
-			tsv_022					count
-			tsv_023					count
-			tsv_024					count
-			pex_80					count
-			pex_443					count
-			pex_6667				count
-			as						array v:count
+	38	countries 					array of objects
+			country					cc											country
+			cbcc					int											how many clients in this country connecting through bridges
+			crcc					int											how many clients in this country connecting through relays
+			relay					int											how many relays in this country
+			guard					int											how many guards in this country
+			middle					int											how many middles in this country
+			exit					int											how many exits in this country
+			directory				int											how many directories in this country
+			bwa						int											total bwa of all relays in this country
+			bwc						int											total bwc of all relays in this country
+			pbr						float										total probability of all relays in this country
+			pbg						float										total probability of all guards in this country
+			pbm						float										total probability of all middles in this country
+			pbe						float										total probability of all exits in this country
+			fast					int											how many fast relays in this country
+			stable					int											how many stable relays in this country
+			osv						object
+				linux				int	
+				freebsd				int	
+				darwin				int	
+				windows				int	
+				other				int	
+			tsv						object
+				010					int	
+				011					int	
+				012					int	
+				020					int	
+				021					int	
+				022					int	
+				023					int	
+				024					int	
+			pex						object
+				4					int											4 as in 443
+				6					int											6 as in 6667
+				8					int											8 as in 80
+				46					int
+				48					int
+				68					int
+				468					int
+			autosys					array of objects 
+				as					int	
 
 This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
 
@@ -678,45 +697,44 @@ Additionally countries could be grouped into continents, political regions (like
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-	39	as				 			array:object								one result object per AS
-			relay					count										how many relays in this AS
-			bandwidth advertized	count										total bwa of all relays in this AS
-			bandwidth consumed		count										total bwc of all relays in this AS
-			fast					count										how many fast relays in this AS
-			stable					count										how many stable relays in this AS
-			probability				count										total pbr of all relays in this AS 
-			guard					count										how many guards in this AS
-				probability			count										total pbg of all guards in this AS 
-			middle					count										how many middles in this AS
-				probability			count										total pbm of all middles in this AS 
-			exit					count										how many exits in this AS
-				probability			count										total pbe of all exits in this AS 
-			directory				count										how many directories in this AS
-			cc_count				array country:value							how many relays in that country in this AS
-			cc_bwa					array country:value							how many bwa in that country in this AS
-			cc_bwc					array country:value							how many bwc in that country in this AS
-			cc_pbr					array country:value							total probability of all relays in that country and this AS
-			cc_pbg					array country:value							total probability of all guards in that country and this AS
-			cc_pbm					array country:value							total probability of all middles in that country and this AS
-			cc_pbe					array country:value							total probability of all exits in that country and this AS
-
+	39	autosys		 				array of objects							one result object per AS
+			as						int											number of as
+			name					string										name of as	
+			home					string										home country of as, jurisdiction
+			relay					int											how many relays in this AS
+			bwa						int											total bwa of all relays in this AS
+			bwc						int											total bwc of all relays in this AS
+			fast					int											how many fast relays in this AS
+			stable					int											how many stable relays in this AS
+			guard					int											how many guards in this AS
+			middle					int											how many middles in this AS
+			exit					int											how many exits in this AS
+			dir						int											how many directories in this AS
+			pbr						int											total pbr of all relays in this AS 
+			pbg						int											total pbg of all guards in this AS 
+			pbm						int											total pbm of all middles in this AS 
+			pbe						int											total pbe of all exits in this AS 
+			countries				array of objects
+				country				cc											country code
+				relays				int											how many relays in that country in this AS
+				bwa					int											how much bwa in that country in this AS
+				bwc					int											how much bwc in that country in this AS
+				pbr					float										total probability of all relays in that country and this AS
+				pbg					float										total probability of all guards in that country and this AS
+				pbm					float										total probability of all middles in that country and this AS
+				pbe					float										total probability of all exits in that country and this AS
+				
 This is still sketchy. More input and ideas on handling AS would be welcome. 
 
 
 
-_uptimes_
+_uptimes_    
 A node may not be online in every part of an aggregated timespan. 
 We don't count servers that haven't been available for at least 30% of a timespan. 
 That way we are counting the bandwidth a little conservativ, while we are too optimistic regarding the number of available servers.
 
-_aggregation modularization_
-With so much aggregation taking place it should be tried to prevent aggregation steps more than once for different views but build them on each other like a pyramid.   
-Especially the country collection has a lot of overlap with other views.    
 
-	TODO
-
-
-_scattering / spreading / evenness of distribution_
+_scattering / spreading / evenness of distribution_    
 So far we only examined aggregated groups of node types. To understand distribution over the individual nodes we have to collect some 10 or 100 or whatever biggest nodes in each category. 
 These numbers can be added to the server result objects explained above. 
 They can be added alongside applicable fields in the country objects, namely: relay (guard, middle, exit, dir), bandwidths, probabilities, flags. 
@@ -727,15 +745,15 @@ But this is just a reminder and a list of notes. We agreed to postpone this doma
 	TODO
 
 
-**step 2 : consolidation and simplification**
+**step 2 : consolidation and simplification**    
 
 aggregations over time and space. 
 Time quite obviously translates to the ability to watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
 Space translates to the ability to group countries to meaningful regions, either continents or geopolitical regions like "arab spring".
 	
 
-_timedate intervals / periods_   
-The default timespan is 1 hour for relays and 24 hours for clients. At a scale of 1 pixel per default timespan we can't see the whole data on a regular display.
+_timedate intervals / periods_    
+The default timespan is 1 hour for relays and 24 hours for  clients. At a scale of 1 pixel per default timespan we can't see the whole data on a regular display.
 So far we collected about 5 years of data so far, which leads the following numbers of pixels   
 	5					5		years since 2008
 	5 x 12				60		months
@@ -758,30 +776,30 @@ If we skip months as too coarse anyway (but actually because they are so unwield
 We probably need to pre-aggregate these timespans in MongoDB (which provides map/reduce functionality and an "aggregation framework". Maybe the [Cube](https://github.com/square/cube) project (based on D3.js) can be used. 
 
 
-_continents and political regions_
+_continents and political regions_    
 
 	TODO
 
 
 
-**step 3 : indexing**
+**step 3 : indexing**    
 
-* import collections
-	relay: node+timespan to look up specific nodes
-
-
-**Issues**
+* import collections   
+	relay: node+timespan to look up specific nodes   
 
 
-**Background Information**
+**Issues**    
+
+
+**Background Information**     
 Wikipedia has quick introductions to the meaning of [mean](http://de.wikipedia.org/wiki/Arithmetisches_Mittel), [median](http://de.wikipedia.org/wiki/Median) and [mode](http://de.wikipedia.org/wiki/Modus_%28Statistik%29) (the links point to the german edition).
 
-Some material about MongoDB and OLAP  
-[MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)  
-[Another useful thread on stackoverflow](http://stackoverflow.com/questions/3478916/what-should-i-choose-mongodb-cassandra-redis-couchdb), see especially the second answer  
-[MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)  
-[DataBrewery Cubes](http://databrewery.org/cubes/doc/)  
-[MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)  
+Some material about MongoDB and OLAP    
+[MongoDB - Materialized View/OLAP Style Aggregation and Performance (stackoverflow)](http://stackoverflow.com/questions/11810911/mongodb-materialized-view-olap-style-aggregation-and-performance)    
+[Another useful thread on stackoverflow](http://stackoverflow.com/questions/3478916/what-should-i-choose-mongodb-cassandra-redis-couchdb), see especially the second answer    
+[MongoDB OLAP with pre-aggregated cubes](http://osdir.com/ml/mongodb-user/2011-01/msg01542.html)     
+[DataBrewery Cubes](http://databrewery.org/cubes/doc/)      
+[MongoDB OLAP](https://groups.google.com/forum/?fromgroups=#!searchin/mongodb-user/MongoDB$20OLAP/mongodb-user/Aaxn813-oO4/PMrYH7Mr_2YJ)     
 
 
 <!--
