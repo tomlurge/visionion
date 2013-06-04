@@ -571,8 +571,8 @@ The value is always the number of clients complying to the field type.
 	33				fast			object			x	x	x	x	x	x
 	34				stable			object			x	x	x	x	x	x
 	35				fast + stable	object			x	x	x	x	x	x
-	36			directory			object			x	x	x
-	37				authority		object			x	x	x
+	36			directory			object			x	x	x	x	x
+	37				authority		object			x	x	x	x	x
 
 That's 31 columns about servers, including the most common flags. Still looks manageable.
 And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count and bandwidths for all server nodes, probabilities and some others where applicable.
