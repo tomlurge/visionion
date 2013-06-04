@@ -235,6 +235,9 @@ For example, we don't have country information about bridges, but we have that f
   And if relays also have the Exit flag, they'll be used less in the previously mentioned positions, but therefore also in the exit position.    
   We could derive advertised or consumed guard bandwidth for types of relays from relay bandwidth similar to how we derive guard probability from consensus weight using the Guard/Exit/BadExit flag and Wgd/Wgg bandwidth weights.   
   I'm uncertain whether this would produce good metrics or not. We'd mix path selection probabilities with actual usage data, and I'm not sure whether we can do that. This is a fine question for an analysis task and a later extension of Visionion, but currently we don't feel confident enough now to implement this in the current database importer. Results might be misleading.
+  
+  An additional note: We can count relays that are *suitable* for guard position, and we can sum up advertised and observed bandwidth of those relays.   
+  We cannot sum up advertised and observed bandwidth of relays that have actually been used as guards.  In fact, we cannot even count those relays, because a relay may have been used 20% in guard position, 30% in middle position, 40% in exit position, and 10% as directory.  We don't know those fractions.
 
 
 
@@ -553,21 +556,21 @@ The value is always the number of clients complying to the field type.
 	18				fast			object			x	x	x	x	x	x
 	19				stable			object			x	x	x	x	x	x
 	20				fast + stable	object			x	x	x	x	x	x
-	21			guard				object			x	x	x			x		
-	22				no flags		object			x	x	x			x
-	23				fast			object			x	x	x			x
-	24				stable			object			x	x	x			x
-	25				fast + stable	object			x	x	x			x
-	26			middle				object			x	x	x			x		
-	27				no flags		object			x	x	x			x
-	28				fast			object			x	x	x			x
-	29				stable			object			x	x	x			x
-	30				fast + stable	object			x	x	x			x
-	31			exit				object			x	x	x			x	x	
-	32				no flags		object			x	x	x			x
-	33				fast			object			x	x	x			x
-	34				stable			object			x	x	x			x
-	35				fast + stable	object			x	x	x			x
+	21			guard				object			x	x	x	x	x	x		
+	22				no flags		object			x	x	x	x	x	x
+	23				fast			object			x	x	x	x	x	x
+	24				stable			object			x	x	x	x	x	x
+	25				fast + stable	object			x	x	x	x	x	x
+	26			middle				object			x	x	x	x	x	x		
+	27				no flags		object			x	x	x	x	x	x
+	28				fast			object			x	x	x	x	x	x
+	29				stable			object			x	x	x	x	x	x
+	30				fast + stable	object			x	x	x	x	x	x
+	31			exit				object			x	x	x	x	x	x	x	
+	32				no flags		object			x	x	x	x	x	x
+	33				fast			object			x	x	x	x	x	x
+	34				stable			object			x	x	x	x	x	x
+	35				fast + stable	object			x	x	x	x	x	x
 	36			directory			object			x	x	x
 	37				authority		object			x	x	x
 
