@@ -547,57 +547,59 @@ We'll see how far we can get on the way.
 	3		atRelays				int
 	4		cip4					int
 	5		cip6					int
-	6		cpt						object										obfs2, obfs3, or, obfs23, obfs2or, obfs3or, obfs23or, other
-	
+	6		cptObfs2				int
+	7		cptObfs3				int
+	8		cptOR					int
+	9		cptOther				int
 For clients this is all we know, save the clients per country which we'll tackle later. 
 Clients @bridges and @relays are mutually exclusive, the other fields aren't. We'll just list them one after another. 
-For transports we currently have 8 possible values: obfs2, obfs3, OR, obfs2+3, obfs2+OR, obfs3+OR, obfs2+3+OR, other. 
+For transports we currently have 4 possible values: obfs2, obfs3, OR, other. 
 More transports may be developed in the future.    
 It seems sensible to add  a result object that has fields for every possible combination of transports offered by a bridge. 
 The value is always the number of clients complying to the field type. 
 
 									legend			c	osv	tsv	bwa	bwc	prb	pex	
-	7	servers
+	10	servers
 			total					object			x	x	x	x	x	
-	8		bridges
+	11		bridges
 				total				object			x	x	x	x	x			
-	9			brpEmail			object			x	x	x	x	x			
-	10			brpHttps			object			x	x	x	x	x		
-	11			brpOther			object			x	x	x	x	x
-	12			breTrue				object			x	x	x	x	x
-	13			brtObfs2			object			x	x	x	x	x
-	14			brtObfs3			object			x	x	x	x	x
-	15			brtObfs23			object			x	x	x	x	x
-	16		relays		
+	12			brpEmail			object			x	x	x	x	x			
+	13			brpHttps			object			x	x	x	x	x		
+	14			brpOther			object			x	x	x	x	x
+	15			breTrue				object			x	x	x	x	x
+	16			brtObfs2			object			x	x	x	x	x
+	17			brtObfs3			object			x	x	x	x	x
+	18			brtObfs23			object			x	x	x	x	x
+	19		relays		
 				roleAll
 					total			object			x	x	x	x	x	x		
-	17				flagNone		object			x	x	x	x	x	x					
-	18				flagFast		object			x	x	x	x	x	x
-	19				flagStable		object			x	x	x	x	x	x
-	20				flagFastStable	object			x	x	x	x	x	x
-	21			roleGuard		
+	20				flagNone		object			x	x	x	x	x	x					
+	21				flagFast		object			x	x	x	x	x	x
+	22				flagStable		object			x	x	x	x	x	x
+	23				flagFastStable	object			x	x	x	x	x	x
+	24			roleGuard		
 					total			object			x	x	x	x	x	x		
-	22				flagNone		object			x	x	x	x	x	x
-	23				flagFast		object			x	x	x	x	x	x
-	24				flagStable		object			x	x	x	x	x	x
-	25				flagFastStable	object			x	x	x	x	x	x
-	26			roleMiddle		
+	25				flagNone		object			x	x	x	x	x	x
+	26				flagFast		object			x	x	x	x	x	x
+	27				flagStable		object			x	x	x	x	x	x
+	28				flagFastStable	object			x	x	x	x	x	x
+	29			roleMiddle		
 					total			object			x	x	x	x	x	x		
-	27				flagNone		object			x	x	x	x	x	x
-	28				flagFast		object			x	x	x	x	x	x
-	29				flagStable		object			x	x	x	x	x	x
-	30				flagFastStable	object			x	x	x	x	x	x
-	31			roleExit		
+	30				flagNone		object			x	x	x	x	x	x
+	31				flagFast		object			x	x	x	x	x	x
+	32				flagStable		object			x	x	x	x	x	x
+	33				flagFastStable	object			x	x	x	x	x	x
+	34			roleExit		
 					total			object			x	x	x	x	x	x	x	
-	32				flagNone		object			x	x	x	x	x	x	x
-	33				flagFast		object			x	x	x	x	x	x	x
-	34				flagStable		object			x	x	x	x	x	x	x
-	35				flagFastStable	object			x	x	x	x	x	x	x
-	36			roleDir
+	35				flagNone		object			x	x	x	x	x	x	x
+	36				flagFast		object			x	x	x	x	x	x	x
+	37				flagStable		object			x	x	x	x	x	x	x
+	38				flagFastStable	object			x	x	x	x	x	x	x
+	39			roleDir
 					total			object			x	x	x	x	x
-	37				authorityTrue	object			x	x	x	x	x
+	40				authorityTrue	object			x	x	x	x	x
 
-That's 31 columns about servers, including the most common flags. Still looks manageable.
+That's 34 columns about servers, including the most common flags. Still looks manageable.
 And we cover a lot of ground here since the value is not only a number like with clients but it's an object with several field:value pairs: count, bandwidths and software versions for all server nodes, probabilities and exitports where applicable.
 The result object en detail:
 First every object contains a field counting the number of nodes that comply to the field type.
@@ -617,7 +619,7 @@ But now we've reached the end of low hanging fruit.
 
 _Mutually non exclusive relay types_    
 Up to now it looks like we have everything covered. Or is there a combination of type, flag and probabilty that we couldn't find in this table in one easy step?
-The astute reader will have noticed that there indeed is indeed a problem: guards, middles, exits and directories aren't mutually exclusive. To capture any combination thereof we would need not only 4 but 15 rows, so add 9 to 37 = 46. 
+The astute reader will have noticed that there indeed is indeed a problem: guards, middles, exits and directories aren't mutually exclusive. To capture any combination thereof we would need not only 4 but 15 rows, so add 9 to 40 = 49. 
 Plus we wouldn't want to loose track of the flags and add another - hold your breath - 66 rows. 
 	combinations of relay types and flags
 	type	g	d	gd
@@ -630,7 +632,7 @@ Plus we wouldn't want to loose track of the flags and add another - hold your br
 	flags	4	2	6
 	total	28	2	36
 					66
-Alltogether [112](http://en.wikipedia.org/wiki/112_%28emergency_telephone_number%29) columns. What a fitting number... Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
+Alltogether 115 columns. Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
 
 _OS or Tor software versions_    
 Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or 37 x 8 = 296 respectively and I can't see any scenario in which this effort would be justified. And that still leaves out the 40 combinations of OS and Tor software versions.
@@ -647,7 +649,7 @@ Therefor we have to change perspective: we can't start from the perspective of s
 
 Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
-	38	countries 					array of objects
+	41	countries 					array of objects
 			country					cc											country
 			cbcc					int											how many clients in this country connecting through bridges
 			crcc					int											how many clients in this country connecting through relays
@@ -697,7 +699,7 @@ Additionally countries could be grouped into continents, political regions (like
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-	39	autosys		 				array of objects							one result object per AS
+	42	autosys		 				array of objects							one result object per AS
 			as						int											number of as
 			name					string										name of as	
 			home					string										home country of as, jurisdiction

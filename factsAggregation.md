@@ -2,35 +2,36 @@
 (SQL-speak for: row in the facts table)
 
 	{ 	
-		_id: string,
+		_id: string,					date+span
 		date: string,
 		clients: {
-			total: int,
-			atBridges: int,
-			atRelays: int;
-			cip4: int,
-			cip6: int,
-			cptObfs2: int,
-			cptObfs3: int,
-			cptOR: int,
-			cptOther: int
+			total: int,					sum cr+cb
+			atBridges: int,				copy cr
+			atRelays: int;				copy cb
+			cip4: int,					copy cip.[version:v4].count
+			cip6: int,					copy cip.[version:v6].count
+			cptObfs2: int,				copy
+			cptObfs3: int,				copy
+			cptOR: int,					copy
+			cptOther: int				copy
+			}
 		},
 		servers: {
 			total: {
-				count: int,
-				bwa: int,
-				bwc: int,
+				count: int,				+1 for each relay or bridge
+				bwa: int,				sum over all relays and bridges
+				bwc: int,				dito
 				osv: {
-					linux: int,
-					darwin: int,
-					freebsd: int,
+					linux: int,			sum over all relays/bridges with os linux
+					darwin: int,											darwin
+					freebsd: int,											etc
 					windows: int,
 					other: int
 				},
 				tsv: {
-					010: int,
-					011: int, 
-					012: int, 
+					010: int,			sum over all relays/bridges with tsv 010
+					011: int, 												 011
+					012: int, 												 etc
 					020: int, 
 					021: int, 
 					022: int, 
@@ -40,16 +41,16 @@
 			},
 			bridges: {
 				total: {
-					count: int,
-					bwa: int,
-					bwc: int,
+					count: int,			+1 for each bridge
+					bwa: int,			sum over all bridges
+					bwc: int,			dito
 					osv: ... ,			osv like above
 					tsv: ... ,			tsv like above
 				},
 				brpEmail: {
-					count: int,
-					bwa: int,
-					bwc: int,
+					count: int,			+1 for each bridge with brpEmail
+					bwa: int,			sum over all bridges with brpEmail
+					bwc: int,			dito
 					osv: ... ,			osv like above
 					tsv: ... ,			tsv like above
 				},
