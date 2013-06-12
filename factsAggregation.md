@@ -85,7 +85,7 @@
 						bwc: int,
 						osv: ... ,		osv like above
 						tsv: ... ,		tsv like above
-						pbr: float,
+						pbe: float,
 						pex: {
 							4: int,
 							6: int,
