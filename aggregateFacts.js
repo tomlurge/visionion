@@ -1,4 +1,43 @@
-﻿// a little helper to check if an array contains a value
+﻿/* 		aggregation steps
+	0.	aggregation starts either triggered by the import of new data 
+		or periodically, first checking the import collection for newly imported documents
+		from the newly imported documents it extracts the dates and for each distinct date starts the following aggregation procedure:
+	1.	more than one mapReduce for one import collection
+		some mapReduce steps are to complex to put them together in one map/reduce
+	A.	they can be run sequentelly and all be reduced to one result { out: { reduce : "tempFacts" }
+		http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
+		http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
+	2.	probably we can then also aggregate from different import tables
+		should still be possible with  { out: { reduce : "tempFacts" }
+	B.	amounting to the following mapReduce steps:
+		* clients				from clients import collection
+		* servers
+			** 					from bridges import collection
+			**					from relays import collection
+		* bridges				from bridges import collection
+		* relays				from relays import collection
+		* countries
+			** 					from clients import collection
+			**					from relays import collection
+		* autonomous systems	
+			** 					from clients import collection
+			**					from relays import collection
+	3.	servers, countries and autonomous sytems need to be aggregated from 2 import collections
+		and the resulting aggregates merged into one, like: { out: { merge : "servers/countriea/autosys" } }
+	4.	to get rid of the "value" object we need one further step
+		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
+		this is not part of the mapReduce operation
+	5.	the resulting fact document has to be added to the facts collection
+		overwriting older documents for the same date if need be (e.g. if new data arrived for already existing imports)
+		using the update() method
+		The update() method can either replace the existing document with the new document or update specific fields in the existing document.
+		If the <update> argument contains fields not currently in the document, the update() method adds the new fields to the document.
+		If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
+	
+*/
+
+
+// a little helper to check if an array contains a value
 // http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
 contains(a, obj) {
     for (var i = 0; i < a.length; i++) {
@@ -13,16 +52,16 @@ contains(a, obj) {
 // the mother ship
 // aggregate facts for one date
 
-aggregateFacts(date) {									
+aggregateFacts(aDate) {									
 
-	var myDate = date ;
+	var date = aDate ;
 	var fact ;
 
-	var mapFacts = function() {
-		var key = myDate;
-		var value = {
-			// CLIENTS
-			
+
+	// 	EMIT
+	// 	clients
+	var mapClients = function() {
+		var clients = {
 			clients.total : this.cr + this.cb ,
 			clients.atBridges : this.cb ,
 			clients.atRelays : this.cr ,
@@ -31,9 +70,59 @@ aggregateFacts(date) {
 			clients.cptObfs2 : this.cpt.obfs2 ,
 			clients.cptObfs3 : this.cpt.obfs3 ,
 			clients.cptOr : this.cpt.or ,
-			clients.cptUnknown : this.cpt.unknown ,
-			
-			// SERVERS
+			clients.cptUnknown : this.cpt.unknown
+		}
+		emit ( date , clients );
+	};
+	
+	//	servers 											   in 3 steps, because it has to be gathererd from 2 collections
+	var mapServersRelay = function() {
+		var serversRelay = {
+			count : 1 ,
+			bwa : this.bwa ,
+			bwc : this.bwc ,
+			osv.linux : (osv == "linux") ? 1 : 0 ,
+			osv.darwin : (osv == "darwin") ? 1 : 0 ,
+			osv.freebsd : (osv == "freebsd") ? 1 : 0 ,
+			osv.windows : (osv == "windows") ? 1 : 0 ,
+			osv.other : (osv == "other") ? 1 : 0 ,
+			tsv.010 : (tsv == "010") ? 1 : 0 ,
+			tsv.011 : (tsv == "011") ? 1 : 0 ,
+			tsv.012 : (tsv == "012") ? 1 : 0 ,
+			tsv.020 : (tsv == "020") ? 1 : 0 ,
+			tsv.021 : (tsv == "021") ? 1 : 0 ,
+			tsv.022 : (tsv == "022") ? 1 : 0 ,
+			tsv.023 : (tsv == "023") ? 1 : 0 ,
+			tsv.024 : (tsv == "024") ? 1 : 0
+		}
+		emit ( date , serversRelay );
+	};
+	
+	var mapServersBridge = function() {
+		var serversBridge = {
+			count : 1 ,
+			bwa : this.bwa ,
+			bwc : this.bwc ,
+			osv.linux : (osv == "linux") ? 1 : 0 ,
+			osv.darwin : (osv == "darwin") ? 1 : 0 ,
+			osv.freebsd : (osv == "freebsd") ? 1 : 0 ,
+			osv.windows : (osv == "windows") ? 1 : 0 ,
+			osv.other : (osv == "other") ? 1 : 0 ,
+			tsv.010 : (tsv == "010") ? 1 : 0 ,
+			tsv.011 : (tsv == "011") ? 1 : 0 ,
+			tsv.012 : (tsv == "012") ? 1 : 0 ,
+			tsv.020 : (tsv == "020") ? 1 : 0 ,
+			tsv.021 : (tsv == "021") ? 1 : 0 ,
+			tsv.022 : (tsv == "022") ? 1 : 0 ,
+			tsv.023 : (tsv == "023") ? 1 : 0 ,
+			tsv.024 : (tsv == "024") ? 1 : 0
+		}
+		emit ( date , serversBridge );
+	};
+	
+	// hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm 		das rechts des doppelpunkts muss nochmal überdacht werden!
+	var mapServers = function() {
+		var servers = {
 			servers.total.count : 1 ,
 			servers.total.bwa : this.bwa ,
 			servers.total.bwc : this.bwc ,
@@ -49,10 +138,14 @@ aggregateFacts(date) {
 			servers.total.tsv.021 : (tsv == "021") ? 1 : 0 ,
 			servers.total.tsv.022 : (tsv == "022") ? 1 : 0 ,
 			servers.total.tsv.023 : (tsv == "023") ? 1 : 0 ,
-			servers.total.tsv.024 : (tsv == "024") ? 1 : 0 ,
-			
-			
-			// BRIDGES
+			servers.total.tsv.024 : (tsv == "024") ? 1 : 0
+		}
+		emit ( date , servers );
+	};
+	
+	//	bridges	
+	var mapBridges = function() {
+		var bridges = {
 			servers.bridges.total.count : (type == "bridge") ? 1 : 0 ,
 			servers.bridges.total.bwa : (type == "bridge") ? this.bwa : 0 ,
 			servers.bridges.total.bwc : (type == "bridge") ? this.bwc : 0 ,
@@ -187,10 +280,14 @@ aggregateFacts(date) {
 			servers.bridges.brtObfs23.tsv.021 : (brt == [obfs23, obfs3] && tsv == "021") ? 1 : 0 ,
 			servers.bridges.brtObfs23.tsv.022 : (brt == [obfs23, obfs3] && tsv == "022") ? 1 : 0 ,
 			servers.bridges.brtObfs23.tsv.023 : (brt == [obfs23, obfs3] && tsv == "023") ? 1 : 0 ,
-			servers.bridges.brtObfs23.tsv.024 : (brt == [obfs23, obfs3] && tsv == "024") ? 1 : 0 ,
-			
-			
-			// RELAYS
+			servers.bridges.brtObfs23.tsv.024 : (brt == [obfs23, obfs3] && tsv == "024") ? 1 : 0
+		}
+		emit ( date , bridges );
+	};
+	
+	//	relays
+	var mapRelays = function() {
+		var relays = {
 			servers.relays.roleAll.total.count : (type == "relay") ? 1 : 0 ,
 			servers.relays.roleAll.total.bwa : (type == "relay") ? this.bwa : 0 ,
 			servers.relays.roleAll.total.bwc : (type == "relay") ? this.bwc : 0 ,
@@ -622,48 +719,251 @@ aggregateFacts(date) {
 			servers.relays.roleDir.authorityTrue.tsv.021 : (role == "dir" && flag == "Authority" && tsv == "021") ? 1 : 0 ,
 			servers.relays.roleDir.authorityTrue.tsv.022 : (role == "dir" && flag == "Authority" && tsv == "022") ? 1 : 0 ,
 			servers.relays.roleDir.authorityTrue.tsv.023 : (role == "dir" && flag == "Authority" && tsv == "023") ? 1 : 0 ,
-			servers.relays.roleDir.authorityTrue.tsv.024 : (role == "dir" && flag == "Authority" && tsv == "024") ? 1 : 0 ,		
-			
-			// COUNTRIES
-			
-			
-			
-			// AUTOSYS
-			
-			
-			
-			
-		};
-		emit ( key , value );
+			servers.relays.roleDir.authorityTrue.tsv.024 : (role == "dir" && flag == "Authority" && tsv == "024") ? 1 : 0
+		}
+		emit ( date , relays );
 	};
 	
+	//	countries 											   in 3 steps, because it has to be gathererd from 2 collections
+	var mapCountriesClient = function() {
+		var countriesClient = {
+		
+		}
+		emit ( date , countriesClient );
+	};
+	
+	var mapCountriesRelay = function() {
+		var countriesRelay = {
+		
+		}
+		emit ( date , countriesRelay );
+	};
+	
+	var mapCountries = function() {
+		var countries = {
+		
+		}
+		emit ( date , countries );
+	};
+	
+	//	autonomous systems 									   in 3 steps, because it has to be gathererd from 2 collections
+	var mapAutosysClient = function() {
+		var autosysClient = {
+		
+		}
+		emit ( date , autosysClient );
+	};
+	
+	var mapAutosysRelay = function() {
+		var autosysRelay = {
+		
+		}
+		emit ( date , autosysRelay );
+	};
+	
+	
+	var mapAutosys = function() {
+		var autosys = {
+		
+		}
+		emit ( date , autosys );
+	};
+	
+	
+	// REDUCE
 	
 	var reduceFacts = function ( key, value ) {
 		fact = {										
 			
 		};
 		
-		// gerödel
+		// doing stuff
 		
 		return fact;
 	};
 	
-	var finalizeFacts = function ( key, fact ) {
-														// e.g. some averages
-	}
 	
-	var resultFacts = db.import.mapReduce (				// statt import eventuell relays, bridges, clients
-		mapFacts,
+	// FINALIZE
+	
+	var finalizeFacts = function ( key, fact ) {
+														// doing stuff e.g. some averages
+	};
+	
+	
+	// EXECUTION
+	
+	// clients
+	var resultClients = db.clientsImport.mapReduce (			
+		mapClients,
 		reduceFacts,
 		{ 
-			out: { merge : "facts" } ,					// oder "reduce" statt "merge"?
-														/ irgendwie überschreibt merge eher
-														// während reduce eher kombiniert
-														// http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how/8746805#8746805
+			out: { 
+				reduce : "factsTemp", 						// the temporary fact collection, with _id:value structure
+				nonAtomic : true						// prevents locking of the db during post-processing
+			} ,			
 			query : { "date" : myDate } ,				// limit aggregation to myDate
-			// sort										    Optional. Sorts the input documents. This option is useful for optimization. For example, specify the sort key to be the same as the emit key so that there are fewer reduce operations.
+			// sort										   sorts the input documents for fewer reduce operations
 			jsMode: true ,								// check if feasable! is faster, but needs more memory
-			finalize : factsFinalize
+			finalize : finalizeFacts
+		}
+	);
+	
+	// servers 											   in 3 steps, because it has to be gathererd from 2 collections 
+	var resultServersRelay = db.relaysImport.mapReduce (			
+		mapServersRelay,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "serversTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultServersBridge = db.bridgesImport.mapReduce (			
+		mapServersBridge,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "serversTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultServers = db.serversTemp.mapReduce (			
+		mapServers,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "factsTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	// bridges
+	var resultBridges = db.bridgesImport.mapReduce (			
+		mapBridges,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "factsTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	// relays
+	var resultRelays = db.relaysImport.mapReduce (			
+		mapBridges,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "factsTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	// countries 											   in 3 steps, because it has to be gathererd from 2 collections 
+	var resultCountriesClient = db.clientsImport.mapReduce (			
+		mapCountriesClient,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "countriesTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultCountriesRelay = db.relaysImport.mapReduce (			
+		mapCountriesRelay,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "countriesTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultCountries = db.countriesTemp.mapReduce (			
+		mapCountries,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "factsTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	// autonomous systems 									   in 3 steps, because it has to be gathererd from 2 collections 
+	var resultAutosysClient = db.clientsImport.mapReduce (			
+		mapAutosysClient,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "autosysTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultAutosysRelay = db.relaysImport.mapReduce (			
+		mapAutosysRelay,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "autosysTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var resultAutosys = db.autosysTemp.mapReduce (			
+		mapAutosys,
+		reduceFacts,
+		{ 
+			out: { 
+				reduce : "factsTemp",
+				nonAtomic : true
+			} ,			
+			query : { "date" : myDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
 		}
 	);
 	
@@ -671,218 +971,3 @@ aggregateFacts(date) {
 
 
 
-
-**probleme**
-* ich muss documente in der facts collection partiell updaten können
-	1) weil manchmal daten sich ändern oder nachgeliefert werden
-	2) weil sie so umfangreich sind, dass es tendenziell zu komplex und ineffizient wäre, sie in einem rutsch zu erstellen. 
-	3) weil die import-daten für clients, relays und bridges in verschiedenen collections stehen
-	
-	(3) kann mit reduce erschlagen werden
-	http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
-	http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
-	
-	(1) + (2): wahrscheinlich muss dazu erst ein neues document erzeugt und dann ein update von diesem in die facts collection
-	The update() method can either replace the existing document with the new document or update specific fields in the existing document.
-	If the <update> argument contains fields not currently in the document, the update() method adds the new fields to the document.
-	If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
-	
-* grössen
-	ein einzelnes emit result document darf maximal 8 mb gross sein
-
-* diese verschissene mongodb mapreduce gibt ergebnisse nicht als flaches document, sondern als
-	_id:value paar zurück. 
-	das erzwingt einen zusätzlichen schritt der umformung:
-	http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
-
-* wenn verschiedne collections mit unterschiedlichen feldern in eine ziel_collection aggregiert werden sollen, müssen entweder alle map-funktionen alle felder mit jeweils sinnvollen angaben enthalten (also 0 oder null o.ä. wenn die ausgangs-collection die felder nicht enthält), doer die reduce funktion muss den fall, dass ein feld in der map nicht auftaucht, sinnvoll abfangen (also 1* fragen, ob die map das feld übergibt und 2* wenn ja, dann es überehmen oder 3* wenn nein dann es anlegen (mit leerem inhalt, oder 0, oder null - je nachdem)
-	
-/* http://docs.mongodb.org/manual/tutorial/map-reduce-examples/ */
-
-
-// define a map function
-var myMap = function() {
-	emit (	
-		this.date,								// this always refers to the instance document 
-												// the map function is currently processing
-		{	
-			guards: this.guards,				// gibt ein document zurück: "{guards: int}"
-			some: this.else,
-			and: 1
-		}
-	);
-};
-
-// oder auch emit als teil einer schleife
-var myMap2 = function() {
-	for (var idx = 0; idx < this.items.length; idx++) {
-    	var key = this.items[idx].sku;
-		var value = {
-			count: 1,
-	 		qty: this.items[idx].qty
-	 	};
-		emit (key, value);
-	}
-};
-
-
-
-the type of the return object must be identical to the type of the value emitted by the map function to ensure that the following operations is true:
-http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#requirements-for-the-reduce-function
-
-// define a corresponding reduce function
-var myReduce = function ( key, valuesArray ) {	// key ist das erste element aus emit
-												// valuesArray ein array der zweiten elemente über alle keys
-  var sum = 0;
-  values.forEach(function(guard) {
-    sum += guards.count;						// guards.count gibt es garnicht, nur so als beispiel
-  });
-  return {guards: sum};
-};
-
-
-var myResult = db.importCollection.mapReduce ( 
-	myMap, 
-	myReduce, 
-	{out: "facts"} 
-);
-
-
-/*
-import collection index 
-	nach zeit
-	
-mapreduce tage+stunden-weise anstossen
-		zum einen ist das resourcenschonender
-		zum anderen können dann updates leichter eingearbeitet werden
-	query
-		zeitabfrage
-		tag und stunde,
-		wenn keine stunde verfügbar (clients collection), dann nur tag
-		
-out : { 
-		merge : collectionName ,			// 'reduce' statt 'merge' könnte zur folge haben, dass alte und   
-											// neue werte aufaddiert weredn, statt dass die alten durch  
-											// die neuen ersetzt werden
-		nonAtomic : true					// prevents locking of the db during post-processing
-}
-
-
-wo immer die import daten einen array enthalten, muss ich diesen in der mapFunction durchlaufen, um emit mit den passenden key:values zu befüllen (http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calculate-order-and-total-quantity-with-average-quantity-per-item)
-
-mit finalize kann man schön durchschnitte u.ä. errechnen
-http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calculate-order-and-total-quantity-with-average-quantity-per-item
-
-Subsequent Incremental Map-Reduce
-http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
-
-*/
-
-
-
-// http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how/8746805#8746805
-// merging 2 collections
-// intercepting non-existant fields in reduce step 
-var mapUsers, mapComments, reduce;
-db.users_comments.remove();
-
-// setup sample data - wouldn't actually use this in production
-db.users.remove();
-db.comments.remove();
-db.users.save({firstName:"Rich",lastName:"S",gender:"M",country:"CA",age:"18"});
-db.users.save({firstName:"Rob",lastName:"M",gender:"M",country:"US",age:"25"});
-db.users.save({firstName:"Sarah",lastName:"T",gender:"F",country:"US",age:"13"});
-var users = db.users.find();
-db.comments.save({userId: users[0]._id, "comment": "Hey, what's up?", created: new ISODate()});
-db.comments.save({userId: users[1]._id, "comment": "Not much", created: new ISODate()});
-db.comments.save({userId: users[0]._id, "comment": "Cool", created: new ISODate()});
-// end sample data setup
-
-mapUsers = function() {
-    var values = {
-        country: this.country,
-        gender: this.gender,
-        age: this.age
-    };
-    emit(this._id, values);
-};
-mapComments = function() {
-    var values = {
-        commentId: this._id,
-        comment: this.comment,
-        created: this.created
-    };
-    emit(this.userId, values);
-};
-reduce = function(k, values) {
-    var result = {}, 
-    commentFields = {
-        "commentId": '', 
-        "comment": '',
-        "created": ''
-    };
-    values.forEach(function(value) {
-        var field;
-        if ("comment" in value) {
-            if (!("comments" in result)) {
-                result.comments = [];
-            }
-            result.comments.push(value);
-        } else if ("comments" in value) {
-            if (!("comments" in result)) {
-                result.comments = [];
-            }
-            result.comments.push.apply(result.comments, value.comments);
-        }
-        for (field in value) {
-            if (value.hasOwnProperty(field) && !(field in commentFields)) {
-                result[field] = value[field];
-            }
-        }
-    });
-    return result;
-};
-db.users.mapReduce(mapUsers, reduce, {"out": {"reduce": "users_comments"}});
-db.comments.mapReduce(mapComments, reduce, {"out": {"reduce": "users_comments"}});
-db.users_comments.find().pretty(); // see the resulting collection
-
-
-
-
-
-// http://stackoverflow.com/questions/9696940/merging-two-collections-in-mongodb/9723549#9723549
-// merging 2 collections
-// adding empty fields in map step
-var mapDetails = function(){
-    var output = {studentid: this.studentid, classes_1: [], classes_2: [], year: this.year, overall: 0, subscore: 0}
-    if (this.year == 1) {
-        output.classes_1 = this.classes;
-    }
-    if (this.year == 2) {
-        output.classes_2 = this.classes;
-    }
-    emit(this.studentid, output);
-};
-
-var mapGpas = function() {
-    emit(this.studentid, {studentid: this.studentid, classes_1: [], classes_2: [], year: 0, overall: this.overall, subscore: this.subscore});		// interessant, dass er year hier einführt, obwohl er es nur in der anderen map benötigt und im reduce step garnicht mehr benutzt
-};
-
-var r = function(key, values) {
-    var outs = { studentid: "0", classes_1: [], classes_2: [], overall: 0, subscore: 0};
-
-    values.forEach(function(v){
-        outs.studentid = v.studentid;
-        v.classes_1.forEach(function(class){if(outs.classes_1.indexOf(class)==-1){outs.classes_1.push(class)}})
-        v.classes_2.forEach(function(class){if(outs.classes_2.indexOf(class)==-1){outs.classes_2.push(class)}})
-
-        if (v.year == 0) {
-            outs.overall = v.overall;
-            outs.subscore = v.subscore;
-        }
-    });
-    return outs;
-};
-
-res = db.details.mapReduce(mapDetails, r, {out: {reduce: 'joined'}})
-res = db.gpas.mapReduce(mapGpas, r, {out: {reduce: 'joined'}})
