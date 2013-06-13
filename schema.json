@@ -18,7 +18,7 @@
 
 
 {
-    "name": "relays",
+    "name": "importRelays",
     "properties": {
         "_id": {
             "type": "string",
@@ -143,7 +143,7 @@
 
 
 {
-    "name": "bridges",
+    "name": "importBridges",
     "properties": {
         "_id": {
             "type": "string",
@@ -230,7 +230,7 @@
 
 
 {
-    "name": "clients",
+    "name": "importClients",
     "properties": {
         "_id": {
             "type": "string",
@@ -315,7 +315,7 @@
                         "title": "Pluggable transport",
                         "type": "string",
                         "format": "Expected values are ONE of the following: 
-                                   'obfs2', 'obfs3', '<OR>', '<??>'" 
+                                   'obfs2', 'obfs3', 'or', 'unknown'" 
                     },
                     "count": {
                         "title": "Count",

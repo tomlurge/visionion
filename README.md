@@ -251,11 +251,11 @@ For example, we don't have country information about bridges, but we have that f
 Data Schema Outline
 -------------------
 The initial database import schema has only 3 collections for all node types: 'relay', 'bridge' and'client'. 
-Documents of type "guard", "middle", "exit" and "directory" will be added to the collection named "relay", documents of type "bridge" will be added to the collection named "bridge", documents of type "client" will be added to the collection named "client". 
+Documents of type "guard", "middle", "exit" and "directory" will be added to the collection named "importRelays", documents of type "bridge" will be added to the collection named "importBridges", documents of type "client" will be added to the collection named "importClients". 
 These 3 collections contain all raw data as it is imported into the database. 
 
 
-**relays**  
+**importRelays**  
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
@@ -283,7 +283,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	 gmedr		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 
 
-**bridges**  
+**importBridges**  
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
@@ -303,7 +303,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	b			brt		bridge pluggable transport	array	string	mode [*]	some of: obfs2, obfs3
 
 
-**clients**  
+**importClients**  
 
 				field	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
@@ -316,8 +316,7 @@ These 3 collections contain all raw data as it is imported into the database.
 				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
 				crcc	clients@relays per country	array	object	mean		{cc:integer}
-				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/<??>/<OR>:integer} // <OR>: "onion routing", standard tor protocol, 
-																												   <??>: unknown
+				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/unknown/or:integer} // or: "onion routing", standard tor protocol
 				cip		ip-version used				array	object	mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
@@ -541,6 +540,7 @@ But we need the intermediate steps too because we also want to know these number
 An exhaustive fact table should encompass everything we know from a certain timespan, about all node types and in any dimension. 
 We'll see how far we can get on the way.
 
+	0	_id, date, span
 	1	clients
 			total					int
 	2		atBridges				int
@@ -549,7 +549,7 @@ We'll see how far we can get on the way.
 	5		cip6					int
 	6		cptObfs2				int
 	7		cptObfs3				int
-	8		cptOR					int
+	8		cptOr					int
 	9		cptOther				int
 For clients this is all we know, save the clients per country which we'll tackle later. 
 Clients @bridges and @relays are mutually exclusive, the other fields aren't. We'll just list them one after another. 
