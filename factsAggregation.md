@@ -2,8 +2,9 @@
 (SQL-speak for: row in the facts table)
 
 	{ 	
-		_id: string,					date+span
+		_id: string,					
 		date: string,
+		span: integer,
 		clients: {
 			total: int,					sum cr+cb
 			atBridges: int,				copy cr
@@ -12,8 +13,8 @@
 			cip6: int,					copy cip.[version:v6].count
 			cptObfs2: int,				copy
 			cptObfs3: int,				copy
-			cptOR: int,					copy
-			cptOther: int				copy
+			cpt<OR>: int,					copy
+			cpt<??>: int				copy
 			}
 		},
 		servers: {
@@ -96,7 +97,7 @@
 							468: int
 					},
 					...					flagNone, flagFast, flagStable, flagFastStable like above
-				...						roleDir like above
+				...						roleDir (total + authorityTrue) like above
 		},
 		countries: [
 			{

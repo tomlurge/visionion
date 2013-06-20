@@ -37,36 +37,36 @@
 */
 
 
+/*	javascript problems
+	adress the field name and it's value seperately
+	adress a field in an object in an array
+		something like superfield.field[i].subfield
+*/
 
-
-//	a little helper to check if an array contains a value
-//	http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
-contains(this.a, obj) {
-    for (var i = 0; i < a.length; i++) {
-        if (a[i] === obj) {
-            return true;
-        }
-    }
-    return false;
-}
 
 
 //	the mother ship
 //	aggregate facts for one date
 
-aggregateFacts(aDate) {									
+aggregateFacts(aDate) {		
+	
+	
+	//	PRELIMINARIES					
 
 	var date = aDate ;
 	var fact ;
-	
-	
-	//	PREPARATION
-	
 	var cleanup = function() {
 		db.tempFacts.remove();
-		db.tempServers.remove();
-		db.tempCountries.remove();
-		db.tempAutosys.remove();
+	}
+	//	a little helper to check if an array contains a value
+	//	http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
+	contains(this.a, obj) {
+		for (var i = 0; i < a.length; i++) {
+			if (a[i] === obj) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -74,15 +74,16 @@ aggregateFacts(aDate) {
 	// 	clients
 	var mapClients = function() {
 		var clients = {
-			clients.total : this.cr + this.cb ,
+			clients.total : this.cr ,
+			clients.total : this.cb ,
 			clients.atBridges : this.cb ,
 			clients.atRelays : this.cr ,
 			clients.cip4 : this.cip,v4 ,
 			clients.cip6 : this.cip.v6 ,
 			clients.cptObfs2 : this.cpt.obfs2 ,
 			clients.cptObfs3 : this.cpt.obfs3 ,
-			clients.cptOr : this.cpt.or ,
-			clients.cptUnknown : this.cpt.unknown
+			clients.cpt<OR> : this.cpt.<OR> ,
+			clients.cpt<??> : this.cpt.<??>
 		}
 		emit ( date , clients );
 	};
@@ -135,9 +136,9 @@ aggregateFacts(aDate) {
 	//	bridges	
 	var mapBridges = function() {
 		var bridges = {
-			servers.bridges.total.count : (type == "bridge") ? 1 : 0 ,
-			servers.bridges.total.bwa : (type == "bridge") ? this.bwa : 0 ,
-			servers.bridges.total.bwc : (type == "bridge") ? this.bwc : 0 ,
+			servers.bridges.total.count : (this.type == "bridge") ? 1 : 0 ,
+			servers.bridges.total.bwa : (this.type == "bridge") ? this.bwa : 0 ,
+			servers.bridges.total.bwc : (this.type == "bridge") ? this.bwc : 0 ,
 			servers.bridges.total.osv.linux : (this.type == "bridge" && this.osv == "linux") ? 1 : 0 ,
 			servers.bridges.total.osv.darwin : (this.type == "bridge" && this.osv == "darwin") ? 1 : 0 ,
 			servers.bridges.total.osv.freebsd : (this.type == "bridge" && this.osv == "freebsd") ? 1 : 0 ,
@@ -717,8 +718,47 @@ aggregateFacts(aDate) {
 	var mapCountriesClient = function() {
 		var countriesClient = {
 		
-		}
+			// uiuiuiuiiiiii
+			for (var i = 0; i < this.cbcc.length; i++) {
+				var key = this.cbcc[i].country;
+				var value = {
+					country: this.cbcc[i].country,
+					cbcc: this.cbcc[i].count
+				};
+				emit(key, value);
+			}
+			// das geht so noch nicht
+			
+		};
+			
+			//	collect all countries from crcc and cbcc and construct objects like 
+			//	{ "country" : "cc", "cbcc" : "", "crcc" : "" }
+			//	some countries may only occur in one of crcc or cbcc
+			
+			//	add all cbcc numbers
+			
+			//	add all crcc numbers
+			
 		emit ( date , countriesClient );
+		
+		/*
+		http://docs.mongodb.org/manual/tutorial/map-reduce-examples
+    	var key = this.items[i].sku;
+		var value = {
+			count: 1,
+	 		qty: this.items[i].qty
+	 	};
+		emit (key, value);
+		*/
+		
+		/*
+		http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
+		The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
+		function() {
+    		this.items.forEach(function(item){ emit(item.sku, 1); });
+		}
+		*/
+		
 	};
 	
 	var mapCountriesRelay = function() {
@@ -746,7 +786,43 @@ aggregateFacts(aDate) {
 	
 	// REDUCE
 	
-	var reduceFacts = function ( key, value ) {
+	var reduceClients = function ( key, values ) {
+		fact = {										
+			
+		};
+		
+		// doing stuff
+		
+		return fact;
+	};
+	
+	var reduceServers = function ( key, values ) {
+		fact = {										
+			
+		};
+		
+		// doing stuff
+		/* 
+		someting like: for all fields
+			if field == bwa || bwc || pbr || pbg || pbm || pbe || pex
+				 add value
+			else add 1
+		*/
+		
+		return fact;
+	};
+	
+	var reduceCountries = function ( key, values ) {
+		fact = {										
+			
+		};
+		
+		// doing stuff
+		
+		return fact;
+	};
+	
+	var reduceAutosys = function ( key, values ) {
 		fact = {										
 			
 		};
@@ -757,6 +833,7 @@ aggregateFacts(aDate) {
 	};
 	
 	
+	
 	// FINALIZE
 	
 	var finalizeFacts = function ( key, fact ) {
@@ -764,18 +841,19 @@ aggregateFacts(aDate) {
 	};
 	
 	
+	
 	// EXECUTION
 	
 	// clients
-	var resultClients = db.importClients.mapReduce (			
+	var aggregateClients = db.importClients.mapReduce (			
 		mapClients,
-		reduceFacts,
+		reduceClients,
 		{ 
 			out: { 
 				reduce : "tempFacts", 					// the temporary fact collection, with _id:value structure
 				nonAtomic : true						// prevents locking of the db during post-processing
 			} ,			
-			query : { "date" : myDate } ,				// limit aggregation to myDate
+			query : { "date" : date } ,					// limit aggregation to date
 			// sort										   sorts the input documents for fewer reduce operations
 			jsMode: true ,								// check if feasable! is faster, but needs more memory
 			finalize : finalizeFacts
@@ -783,117 +861,117 @@ aggregateFacts(aDate) {
 	);
 	
 	// servers 											   in 2 steps, because it has to be gathererd from 2 collections 
-	var resultServersRelay = db.importRelays.mapReduce (			
+	var aggregateServersRelay = db.importRelays.mapReduce (			
 		mapServersRelay,
-		reduceFacts,
+		reduceServers,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
-	var resultServersBridge = db.importBridges.mapReduce (			
+	var aggregateServersBridge = db.importBridges.mapReduce (			
 		mapServersBridge,
-		reduceFacts,
+		reduceServers,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
 	// bridges
-	var resultBridges = db.importBridges.mapReduce (			
+	var aggregateBridges = db.importBridges.mapReduce (			
 		mapBridges,
-		reduceFacts,
+		reduceServers,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
 	// relays
-	var resultRelays = db.importRelays.mapReduce (			
+	var aggregateRelays = db.importRelays.mapReduce (			
 		mapBridges,
-		reduceFacts,
+		reduceServers,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
 	// countries 											   in 2 steps, because it has to be gathererd from 2 collections 
-	var resultCountriesClient = db.importClients.mapReduce (			
+	var aggregateCountriesClient = db.importClients.mapReduce (			
 		mapCountriesClient,
-		reduceFacts,
+		reduceCountries,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
-	var resultCountriesRelay = db.importRelays.mapReduce (			
+	var aggregateCountriesRelay = db.importRelays.mapReduce (			
 		mapCountriesRelay,
-		reduceFacts,
+		reduceCountries,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
 	// autonomous systems 									   in 2 steps, because it has to be gathererd from 2 collections 
-	var resultAutosysClient = db.importClients.mapReduce (			
+	var aggregateAutosysClient = db.importClients.mapReduce (			
 		mapAutosysClient,
-		reduceFacts,
+		reduceAutosys,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}
 	);
 	
-	var resultAutosysRelay = db.importRelays.mapReduce (			
+	var aggregateAutosysRelay = db.importRelays.mapReduce (			
 		mapAutosysRelay,
-		reduceFacts,
+		reduceAutosys,
 		{ 
 			out: { 
 				reduce : "tempFacts",
 				nonAtomic : true
 			} ,			
-			query : { "date" : myDate } ,
+			query : { "date" : date } ,
 			jsMode: true ,
 			finalize : finalizeFacts
 		}

@@ -17,6 +17,7 @@
 */
 
 
+
 {
     "name": "importRelays",
     "properties": {
@@ -27,6 +28,13 @@
             "format": "'fingerprint' + '-' + 'span' + '-' + 'date',
                         e.g. 'fingerprint-1-YYYYMMDDHH'
                         (date not like ISO-8601 but without dashes and whitespace).",
+            "required": "true"
+        },
+        "addd": {
+            "type": "string",
+            "title": "added",
+            "description": "Date the dataset was last modified.",
+            "format" : "ISO 8601 extended format 'YYYY-MM-DDTHH:mm:ss.sssZ'",
             "required": "true"
         },
         "node": {
@@ -154,6 +162,13 @@
                         (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
+        "addd": {
+            "type": "string",
+            "title": "added",
+            "description": "Date the dataset was last modified.",
+            "format" : "ISO 8601 extended format 'YYYY-MM-DDTHH:mm:ss.sssZ'",
+            "required": "true"
+        },
         "node": {
             "type": "string",
             "title": "Node ID",
@@ -241,6 +256,13 @@
                         (date not like ISO-8601 but without dashes and whitespace).",
             "required": "true"
         },
+        "addd": {
+            "type": "string",
+            "title": "added",
+            "description": "Date the dataset was last modified.",
+            "format" : "ISO 8601 extended format 'YYYY-MM-DDTHH:mm:ss.sssZ'",
+            "required": "true"
+        },
         "span": {
             "type": "integer",
             "title": "Timespan",
@@ -270,13 +292,13 @@
                 "type": "object",
                 "properties": {
                      "country": {
-                        "title": "Country code",
                         "type": "string",
+                        "title": "Country code",
                         "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
                     },
                      "count": {
-                        "title": "Count",
-                        "type": "integer"
+                        "type": "integer",
+                        "title": "Count"
                     }
                 }
             }
@@ -294,17 +316,61 @@
                 "type": "object",
                 "properties": {
                      "country": {
-                        "title": "Country code",
                         "type": "string",
+                        "title": "Country code",
                         "format": "Two-letter Country code (ISO 3166-1 alpha-2)"
                     },
                      "count": {
-                        "title": "Count",
-                        "type": "integer"
+                        "type": "integer",
+                        "title": "Count"
                     }
                 }
             }
         },
+        "cpt": {
+            "type": "object",
+            "title": "Bridge pluggable transport used",
+            "properties": {
+                "obfs2": {
+                    "type": "integer",
+                    "title": "Pluggable transport obfs2"
+                },
+                "obfs3": {
+                    "type": "integer",
+                    "title": "Pluggable transport obfs3"
+                },
+                "<OR>": {
+                    "type": "integer",
+                    "title": "Pluggable transport <OR>"
+                },
+                "<??>": {
+                    "type": "integer",
+                    "title": "Pluggable transport <??>"
+                }
+            }
+        },
+        "cip": {
+            "type": "object",
+            "title": "IP version used",
+            "properties": {
+                "v4": {
+                    "type": "integer",
+                    "title": "IP version 4"
+                },
+                "v6": {
+                    "type": "integer",
+                    "title": "IP version 6"
+                }
+            }
+        }    
+        
+    }
+}
+
+
+
+
+/*
         "cpt": {
             "type": "array",
             "title": "Bridge pluggable transport used",
@@ -312,14 +378,14 @@
                 "type": "object",
                 "properties": {
                     "pt": {
-                        "title": "Pluggable transport",
                         "type": "string",
+                        "title": "Pluggable transport",
                         "format": "Expected values are ONE of the following: 
-                                   'obfs2', 'obfs3', 'or', 'unknown'" 
+                                   'obfs2', 'obfs3', '<OR>', '<??>'" 
                     },
                     "count": {
-                        "title": "Count",
-                        "type": "integer"
+                        "type": "integer",
+                        "title": "Count"
                     }
                 }
             }
@@ -331,17 +397,17 @@
                 "type": "object",
                 "properties": {
                     "ipv": {
-                        "title": "IP version",
                         "type": "string",
+                        "title": "IP version",
                         "format": "Expected values are ONE of the following: 
                                    'v4', 'v6'" 
                     },
                     "count": {
-                        "title": "Count",
-                        "type": "integer"
+                        "type": "integer",
+                        "title": "Count"
                     }
                 }
             }
         }
-    }
-}
+        
+*/  

@@ -260,6 +260,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
 	bgmedr		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmedr		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 	bgmedr		node	node id						string			-			Tor fingerprint
 	bgmedr		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
 																				one of: 1(default), 6, 24, 168
@@ -288,6 +289,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
 	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmed		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
 																				one of: 1(default), 6, 24, 168
@@ -308,6 +310,7 @@ These 3 collections contain all raw data as it is imported into the database.
 				field	description					type	subtype	aggregation	valuespace
 				+-------+---------------------------+-------+------+------------+---------
 				_id		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
+				addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 				span	duration					integer						Length of the time span that this dataset describes, in hours:
 																				one of: 24 (default), 168
 				date	datetime					string						Start of the time span that this document describes
@@ -316,8 +319,8 @@ These 3 collections contain all raw data as it is imported into the database.
 				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
 				crcc	clients@relays per country	array	object	mean		{cc:integer}
-				cpt		bridge pluggbl.transp.used	array	object				{obfs2/obfs3/unknown/or:integer} // or: "onion routing", standard tor protocol
-				cip		ip-version used				array	object	mode		{v4/v6:integer}
+				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/<OR>/<??>:integer}
+				cip		ip-version used				object			mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
 	in			indicates, for which type of node the field is relevant, 
