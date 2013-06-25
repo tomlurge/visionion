@@ -54,6 +54,46 @@ http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
 		*/
 		
 
+/* 	countries
+
+			// uiuiuiuiiiiii
+			for (var i = 0; i < this.cbcc.length; i++) {
+				var key = this.cbcc[i].country;
+				var value = {
+					country: this.cbcc[i].country,
+					cbcc: this.cbcc[i].count
+				};
+				emit(key, value);
+			}
+			// das geht so noch nicht
+			
+		};
+			/*	NOPE - too complicated, since we also need to check which countries surface in "importRelays"
+			//	collect all countries from crcc and cbcc and construct objects like 
+			//	{ "country" : "cc", "cbcc" : "", "crcc" : "" }
+			//	some countries may only occur in one of crcc or cbcc 		*/	
+
+		/*
+		http://docs.mongodb.org/manual/tutorial/map-reduce-examples
+    	var key = this.items[i].sku;
+		var value = {
+			count: 1,
+	 		qty: this.items[i].qty
+	 	};
+		emit (key, value);
+		*/
+		
+		/*
+		http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
+		The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
+		function() {
+    		this.items.forEach(function(item){ emit(item.sku, 1); });
+		}
+		*/
+
+
+*/
+
 
 
 //	MAPPING an OBJECT or ARRAY
@@ -264,7 +304,7 @@ var reduceFunction = function(key, values) {
         		}
         	}
         )
-        if (v.year == 0) {								//	nämlich hier
+        if (v.year == 0) {								//	year:0 switch
             outs.overall = v.overall;
             outs.subscore = v.subscore;
         }

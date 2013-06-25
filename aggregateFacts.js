@@ -23,7 +23,7 @@
 			** 					from clients import collection
 			**					from relays import collection
 	3.	servers, countries and autonomous sytems need to be aggregated from 2 import collections
-		and the resulting aggregates merged into one, like: { out: { merge : "servers/countriea/autosys" } }
+		and the resulting aggregates merged into one, like: { out: { merge : "servers/countries/autosys" } }
 	4.	to get rid of the "value" object we need one further step
 		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
 		this is not part of the mapReduce operation
@@ -73,13 +73,16 @@ aggregateFacts(aDate) {
 	//	PRELIMINARIES					
 
 	var date = aDate ;
-	var fact ;
+	
 	var cleanup = function() {
+		db.tempCountries.remove();
+		db.tempAutosys.remove();
 		db.tempFacts.remove();
 	}
+	
 	//	a little helper to check if an array contains a value
 	//	http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
-	contains(this.a, obj) {
+	var contains = function(this.a, obj) {
 		for (var i = 0; i < a.length; i++) {
 			if (a[i] === obj) {
 				return true;
@@ -89,7 +92,13 @@ aggregateFacts(aDate) {
 	}
 	
 	
+	
+
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	// 	EMIT
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
 	// 	clients
 	var mapClients = function() {
 		var clients = {
@@ -105,8 +114,12 @@ aggregateFacts(aDate) {
 		}
 		emit ( date , clients );
 	};
+
 	
-	//	servers 											   in 3 steps, because it has to be gathererd from 2 collections
+	//	servers 											  	in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.					
+															//	the emit fuctions only differ in their KEYs 
+															//	to prevent overwriting intermediate data from different sources, the 2 intermediate emits
+															//	can't use just 'date' as the key. apart from that it's all the same 
 	var mapServersRelay = function() {
 		var serversRelay = {
 			count : 1 ,
@@ -126,7 +139,7 @@ aggregateFacts(aDate) {
 			tsv.023 : (this.tsv == "023") ? 1 : 0 ,
 			tsv.024 : (this.tsv == "024") ? 1 : 0
 		}
-		emit ( date , serversRelay );
+		emit ( {date, "relays"} , serversRelay );			//	combined key '{date, "relays"}'
 	};
 	
 	var mapServersBridge = function() {
@@ -148,12 +161,31 @@ aggregateFacts(aDate) {
 			tsv.023 : (this.tsv == "023") ? 1 : 0 ,
 			tsv.024 : (this.tsv == "024") ? 1 : 0
 		}
-		emit ( date , serversBridge );
+		emit ( {date, "bridges"} , serversBridge );			//	combined key '{date, "bridges"}'
 	};
 	
 	var mapServers = function() {
-																//	TODO
+		var servers = {
+			count : 1 ,
+			bwa : this.bwa ,
+			bwc : this.bwc ,
+			osv.linux : (this.osv == "linux") ? 1 : 0 ,
+			osv.darwin : (this.osv == "darwin") ? 1 : 0 ,
+			osv.freebsd : (this.osv == "freebsd") ? 1 : 0 ,
+			osv.windows : (this.osv == "windows") ? 1 : 0 ,
+			osv.other : (this.osv == "other") ? 1 : 0 ,
+			tsv.010 : (this.tsv == "010") ? 1 : 0 ,
+			tsv.011 : (this.tsv == "011") ? 1 : 0 ,
+			tsv.012 : (this.tsv == "012") ? 1 : 0 ,
+			tsv.020 : (this.tsv == "020") ? 1 : 0 ,
+			tsv.021 : (this.tsv == "021") ? 1 : 0 ,
+			tsv.022 : (this.tsv == "022") ? 1 : 0 ,
+			tsv.023 : (this.tsv == "023") ? 1 : 0 ,
+			tsv.024 : (this.tsv == "024") ? 1 : 0
+		}
+		emit ( date , servers );							//	ordinary key 'date'
 	};
+
 	
 	//	bridges	
 	var mapBridges = function() {
@@ -297,98 +329,99 @@ aggregateFacts(aDate) {
 		emit ( date , bridges );
 	};
 	
-	//	relays			
+
+	//	relays												this is HUGE
 	var mapRelays = function() {
 		var relays = {
-			servers.relays.roleAll.total.count : (this.type == "relay") ? 1 : 0 ,
-			servers.relays.roleAll.total.bwa : (this.type == "relay") ? this.bwa : 0 ,
-			servers.relays.roleAll.total.bwc : (this.type == "relay") ? this.bwc : 0 ,
-			servers.relays.roleAll.total.osv.linux : (this.type == "relay" && this.osv == "linux") ? 1 : 0 ,
-			servers.relays.roleAll.total.osv.darwin : (this.type == "relay" && this.osv == "darwin") ? 1 : 0 ,
-			servers.relays.roleAll.total.osv.freebsd : (this.type == "relay" && this.osv == "freebsd") ? 1 : 0 ,
-			servers.relays.roleAll.total.osv.windows : (this.type == "relay" && this.osv == "windows") ? 1 : 0 ,
-			servers.relays.roleAll.total.osv.other : (this.type == "relay" && this.osv == "other") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.010 : (this.type == "relay" && this.tsv == "010") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.011 : (this.type == "relay" && this.tsv == "011") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.012 : (this.type == "relay" && this.tsv == "012") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.020 : (this.type == "relay" && this.tsv == "020") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.021 : (this.type == "relay" && this.tsv == "021") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.022 : (this.type == "relay" && this.tsv == "022") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.023 : (this.type == "relay" && this.tsv == "023") ? 1 : 0 ,
-			servers.relays.roleAll.total.tsv.024 : (this.type == "relay" && this.tsv == "024") ? 1 : 0 ,
-			servers.relays.roleAll.total.pbr : (this.type == "relay") ? this.pbr : 0.0 ,
+			servers.relays.roleAll.total.count : 1 ,
+			servers.relays.roleAll.total.bwa : this.bwa ,
+			servers.relays.roleAll.total.bwc : this.bwc ,
+			servers.relays.roleAll.total.osv.linux : (this.osv == "linux") ? 1 : 0 ,
+			servers.relays.roleAll.total.osv.darwin : (this.osv == "darwin") ? 1 : 0 ,
+			servers.relays.roleAll.total.osv.freebsd : (this.osv == "freebsd") ? 1 : 0 ,
+			servers.relays.roleAll.total.osv.windows : (this.osv == "windows") ? 1 : 0 ,
+			servers.relays.roleAll.total.osv.other : (this.osv == "other") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.010 : (this.tsv == "010") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.011 : (this.tsv == "011") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.012 : (this.tsv == "012") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.020 : (this.tsv == "020") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.021 : (this.tsv == "021") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.022 : (this.tsv == "022") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.023 : (this.tsv == "023") ? 1 : 0 ,
+			servers.relays.roleAll.total.tsv.024 : (this.tsv == "024") ? 1 : 0 ,
+			servers.relays.roleAll.total.pbr : this.pbr ,
 			
-			servers.relays.roleAll.flagNone.count : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable)) ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.bwa : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwa : 0 ,
-			servers.relays.roleAll.flagNone.bwc : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwc : 0 ,
-			servers.relays.roleAll.flagNone.osv.linux : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.osv.darwin : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.osv.freebsd : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.osv.windows : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.osv.other : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.010 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.011 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.012 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.020 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.021 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.022 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.023 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.tsv.024 : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
-			servers.relays.roleAll.flagNone.pbr : (this.type == "relay" && !contains(this.flag, fast) && !contains(this.flag,stable)) ? this.pbr : 0.0 ,
+			servers.relays.roleAll.flagNone.count : (!contains(this.flag, fast) && !contains(this.flag,stable)) ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.bwa : (!contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwa : 0 ,
+			servers.relays.roleAll.flagNone.bwc : (!contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwc : 0 ,
+			servers.relays.roleAll.flagNone.osv.linux : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.osv.darwin : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.osv.freebsd : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.osv.windows : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.osv.other : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.010 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.011 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.012 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.020 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.021 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.022 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.023 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.tsv.024 : (!contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
+			servers.relays.roleAll.flagNone.pbr : (!contains(this.flag, fast) && !contains(this.flag,stable)) ? this.pbr : 0.0 ,
 			
-			servers.relays.roleAll.flagStable.count : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable)) ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.bwa : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwa : 0 ,
-			servers.relays.roleAll.flagStable.bwc : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwc : 0 ,
-			servers.relays.roleAll.flagStable.osv.linux : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.osv.darwin : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.osv.freebsd : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.osv.windows : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.osv.other : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.010 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.011 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.012 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.020 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.021 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.022 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.023 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.tsv.024 : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
-			servers.relays.roleAll.flagStable.pbr : (this.type == "relay" && !contains(this.flag, fast) && contains(this.flag,stable)) ? this.pbr : 0.0 ,
+			servers.relays.roleAll.flagStable.count : (!contains(this.flag, fast) && contains(this.flag,stable)) ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.bwa : (!contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwa : 0 ,
+			servers.relays.roleAll.flagStable.bwc : (!contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwc : 0 ,
+			servers.relays.roleAll.flagStable.osv.linux : (!contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.osv.darwin : (!contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.osv.freebsd : (!contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.osv.windows : (!contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.osv.other : (!contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.010 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.011 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.012 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.020 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.021 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.022 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.023 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.tsv.024 : (!contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
+			servers.relays.roleAll.flagStable.pbr : (!contains(this.flag, fast) && contains(this.flag,stable)) ? this.pbr : 0.0 ,
 			
-			servers.relays.roleAll.flagFast.count : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable)) ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.bwa : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwa : 0 ,
-			servers.relays.roleAll.flagFast.bwc : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwc : 0 ,
-			servers.relays.roleAll.flagFast.osv.linux : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.osv.darwin : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.osv.freebsd : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.osv.windows : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.osv.other : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.010 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.011 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.012 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.020 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.021 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.022 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.023 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.tsv.024 : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
-			servers.relays.roleAll.flagFast.pbr : (this.type == "relay" && contains(this.flag, fast) && !contains(this.flag,stable)) ? this.pbr : 0.0 ,
+			servers.relays.roleAll.flagFast.count : (contains(this.flag, fast) && !contains(this.flag,stable)) ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.bwa : (contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwa : 0 ,
+			servers.relays.roleAll.flagFast.bwc : (contains(this.flag, fast) && !contains(this.flag,stable)) ? this.bwc : 0 ,
+			servers.relays.roleAll.flagFast.osv.linux : (contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.osv.darwin : (contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.osv.freebsd : (contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.osv.windows : (contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.osv.other : (contains(this.flag, fast) && !contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.010 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.011 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.012 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.020 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.021 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.022 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.023 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.tsv.024 : (contains(this.flag, fast) && !contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
+			servers.relays.roleAll.flagFast.pbr : (contains(this.flag, fast) && !contains(this.flag,stable)) ? this.pbr : 0.0 ,
 	
-			servers.relays.roleAll.flagFastStable.count : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable)) ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.bwa : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwa : 0 ,
-			servers.relays.roleAll.flagFastStable.bwc : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwc : 0 ,
-			servers.relays.roleAll.flagFastStable.osv.linux : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.osv.darwin : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.osv.freebsd : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.osv.windows : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.osv.other : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.010 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.011 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.012 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.020 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.021 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.022 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.023 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.tsv.024 : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
-			servers.relays.roleAll.flagFastStable.pbr : (this.type == "relay" && contains(this.flag, fast) && contains(this.flag,stable)) ? this.pbr : 0.0 ,			
+			servers.relays.roleAll.flagFastStable.count : (contains(this.flag, fast) && contains(this.flag,stable)) ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.bwa : (contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwa : 0 ,
+			servers.relays.roleAll.flagFastStable.bwc : (contains(this.flag, fast) && contains(this.flag,stable)) ? this.bwc : 0 ,
+			servers.relays.roleAll.flagFastStable.osv.linux : (contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "linux") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.osv.darwin : (contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "darwin") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.osv.freebsd : (contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "freebsd") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.osv.windows : (contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "windows") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.osv.other : (contains(this.flag, fast) && contains(this.flag,stable) && this.osv == "other") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.010 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "010") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.011 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "011") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.012 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "012") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.020 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "020") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.021 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "021") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.022 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "022") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.023 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "023") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.tsv.024 : (contains(this.flag, fast) && contains(this.flag,stable) && this.tsv == "024") ? 1 : 0 ,
+			servers.relays.roleAll.flagFastStable.pbr : (contains(this.flag, fast) && contains(this.flag,stable)) ? this.pbr : 0.0 ,			
 			
 			// GUARD
 			servers.relays.roleGuard.total.count : (this.role == "guard") ? 1 : 0 ,
@@ -732,117 +765,226 @@ aggregateFacts(aDate) {
 			servers.relays.roleDir.authorityTrue.tsv.022 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "022") ? 1 : 0 ,
 			servers.relays.roleDir.authorityTrue.tsv.023 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "023") ? 1 : 0 ,
 			servers.relays.roleDir.authorityTrue.tsv.024 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "024") ? 1 : 0
-		}										// this is HUGE
+		}	
 		emit ( date , relays );
 	};
 	
-	//	countries 												 in 3 steps, because it has to be gathererd from 2 collections and then aggregated
-	/*															. aggregate countriesClients into a collection tempCountries with key country
-																. aggregate countriesRelay into the same collection tempCountries with key   country
-																. aggregate all documents from that tempCountries collection into an array of objects in one field into the facts collection with key date
-																*/																				
-	var mapCountriesClient = function() {
-		var countriesClient = {
-		
-			// uiuiuiuiiiiii
-			for (var i = 0; i < this.cbcc.length; i++) {
-				var key = this.cbcc[i].country;
-				var value = {
-					country: this.cbcc[i].country,
-					cbcc: this.cbcc[i].count
-				};
-				emit(key, value);
-			}
-			// das geht so noch nicht
-			
+
+	//	countries											in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
+	/*														. aggregate countriesClients.cbcc into a collection tempCountries with key country
+															. aggregate countriesClients.crcc into the same collection tempCountries with key country
+															. aggregate countriesRelay into the same collection tempCountries with key country
+															. aggregate all documents from that tempCountries collection into an array of objects 
+															  in one field into the facts collection with key date
+															*/																				
+	var mapCountriesClientCR = function() {
+		var country =  {
+			cc: "" ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 0 ,
+			guard: 0 ,
+			middle: 0 ,
+			exit: 0 ,
+			dir: 0 ,
+			bwa: 0 ,
+			bwc: 0 ,
+			pbr: 0.0 ,
+			pbg: 0.0 ,
+			pbm: 0.0 ,
+			pbe: 0.0 ,
+			fast: 0 ,
+			stable: 0 ,
+			osv.linux : 0 ,
+			osv.darwin : 0 ,
+			osv.freebsd : 0 ,
+			osv.windows : 0 ,
+			osv.other : 0 ,
+			tsv.010 : 0 ,
+			tsv.011 : 0 ,
+			tsv.012 : 0 ,
+			tsv.020 : 0 ,
+			tsv.021 : 0 ,
+			tsv.022 : 0 ,
+			tsv.023 : 0 ,
+			tsv.024 : 0 ,
+			pex.4 : 0 ,
+			pex.6 : 0 ,
+			pex.8 : 0 ,
+			pex.46 : 0 ,
+			pex.48 : 0 ,
+			pex.68 : 0 ,
+			pex.468 : 0 ,
+			as: "" 
 		};
-			/*	NOPE - too complicated, since we also need to check which countries surface in "importRelays"
-			//	collect all countries from crcc and cbcc and construct objects like 
-			//	{ "country" : "cc", "cbcc" : "", "crcc" : "" }
-			//	some countries may only occur in one of crcc or cbcc 		*/	
-			
-			//	preconstruct the countries array for all countries on the world
-			//	this is gonna be quite an array, with 251 entries
-				var countriesClient = [];
-				var countryObj =  {
-					country: "" ,
-					cbcc: 0 ,
-					crcc: 0 ,
-					relay: 0 ,
-					guard: 0 ,
-					middle: 0 ,
-					exit: 0 ,
-					dir: 0 ,
-					bwa: 0 ,
-					bwc: 0 ,
-					pbr: 0.0 ,
-					pbg: 0.0 ,
-					pbm: 0.0 ,
-					pbe: 0.0 ,
-					fast: 0 ,
-					stable: 0 ,
-					osv: {} ,
-					tsv: {} ,
-					pex: {} ,
-					autosys: [] 
-				};
-				countryCodes.forEach(
-					function addCountry2Countries() {
-						countryObj.country = this;
-						countriesClient.push(countryObj)
-					}
-				)
-			
-			//	add all cbcc numbers
-			
-			//	add all crcc numbers
-			
-		emit ( date , countriesClient );
-		
-		/*
-		http://docs.mongodb.org/manual/tutorial/map-reduce-examples
-    	var key = this.items[i].sku;
-		var value = {
-			count: 1,
-	 		qty: this.items[i].qty
-	 	};
-		emit (key, value);
-		*/
-		
-		/*
-		http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
-		The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
-		function() {
-    		this.items.forEach(function(item){ emit(item.sku, 1); });
+		for(field in this.crcc) {
+			country.cc = field;
+			country.crcc = this[field];
+			emit ( this.cc , country );						//	emit is part of the loop - see: http://cookbook.mongodb.org/patterns/pivot/
 		}
-		*/
-		
+	};		
+																	
+	var mapCountriesClientCB = function() {
+		var country =  {
+			cc: "" ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 0 ,
+			guard: 0 ,
+			middle: 0 ,
+			exit: 0 ,
+			dir: 0 ,
+			bwa: 0 ,
+			bwc: 0 ,
+			pbr: 0.0 ,
+			pbg: 0.0 ,
+			pbm: 0.0 ,
+			pbe: 0.0 ,
+			fast: 0 ,
+			stable: 0 ,
+			osv.linux : 0 ,
+			osv.darwin : 0 ,
+			osv.freebsd : 0 ,
+			osv.windows : 0 ,
+			osv.other : 0 ,
+			tsv.010 : 0 ,
+			tsv.011 : 0 ,
+			tsv.012 : 0 ,
+			tsv.020 : 0 ,
+			tsv.021 : 0 ,
+			tsv.022 : 0 ,
+			tsv.023 : 0 ,
+			tsv.024 : 0 ,
+			pex.4 : 0 ,
+			pex.6 : 0 ,
+			pex.8 : 0 ,
+			pex.46 : 0 ,
+			pex.48 : 0 ,
+			pex.68 : 0 ,
+			pex.468 : 0 ,
+			as: ""
+		};
+		for(field in this.cbcc) {
+			country.cc = field;
+			country.cbcc = this[field];
+			emit ( this.cc , country );						//	emit is part of the loop - see: http://cookbook.mongodb.org/patterns/pivot/
+		}
 	};
 	
 	var mapCountriesRelay = function() {
-		var countriesRelay = {
-		
+		var country = {
+			cc: this.cc ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 1 ,
+			guard: (this.role == "guard") ? 1 : 0 ,
+			middle: (this.role == "middle") ? 1 : 0 ,
+			exit: (this.role == "exit") ? 1 : 0 ,
+			dir: (this.role == "dir") ? 1 : 0 ,
+			bwa: this.bwa ,
+			bwc: this.bwc ,
+			pbr: this.pbr ,
+			pbg: (this.role == "guard") ? this.pbg : 0 ,
+			pbm: (this.role == "middle") ? this.pbm : 0 ,
+			pbe: (this.role == "exit") ? this.pbe : 0 ,
+			fast: contains(this.flag, fast) ? 1 : 0 ,
+			stable: contains(this.flag, stable) ? 1 : 0 ,
+			osv.linux : (this.osv == "linux") ? 1 : 0 ,
+			osv.darwin : (this.osv == "darwin") ? 1 : 0 ,
+			osv.freebsd : (this.osv == "freebsd") ? 1 : 0 ,
+			osv.windows : (this.osv == "windows") ? 1 : 0 ,
+			osv.other : (this.osv == "other") ? 1 : 0 ,
+			tsv.010 : (this.tsv == "010") ? 1 : 0 ,
+			tsv.011 : (this.tsv == "011") ? 1 : 0 ,
+			tsv.012 : (this.tsv == "012") ? 1 : 0 ,
+			tsv.020 : (this.tsv == "020") ? 1 : 0 ,
+			tsv.021 : (this.tsv == "021") ? 1 : 0 ,
+			tsv.022 : (this.tsv == "022") ? 1 : 0 ,
+			tsv.023 : (this.tsv == "023") ? 1 : 0 ,
+			tsv.024 : (this.tsv == "024") ? 1 : 0 ,
+			pex.4 : (this.role == "exit" && this.pex == [443]) ? 1 : 0 ,
+			pex.6 : (this.role == "exit" && this.pex == [6667]) ? 1 : 0 ,
+			pex.8 : (this.role == "exit" && this.pex == [80]) ? 1 : 0 ,
+			pex.46 : (this.role == "exit" && this.pex == [443, 6667]) ? 1 : 0 ,
+			pex.48 : (this.role == "exit" && this.pex == [80, 443]) ? 1 : 0 ,
+			pex.68 : (this.role == "exit" && this.pex == [80, 6667]) ? 1 : 0 ,
+			pex.468 : (this.role == "exit" && this.pex == [80, 443, 6667]) ? 1 : 0 ,
+			as: this.as										//	walking through the import table, which contains only
+															//	one as per entry
 		}
-		emit ( date , countriesRelay );
+		emit ( this.cc , country );
 	};
-	
-	//	autonomous systems 										in 3 steps, because it has to be gathererd from 2 collections
+
+	var mapCountries = function() {							//	putting it all together
+		var country = {
+			cc: this.cc ,
+			cbcc: this.cbcc ,
+			crcc: this.crcc ,
+			relay: this.relay ,
+			guard: this.guard ,
+			middle: this.middle ,
+			exit: this.exit ,
+			dir: this.dir ,
+			bwa: this.bwa ,
+			bwc: this.bwc ,
+			pbr: this.pbr ,
+			pbg: this.pbg ,
+			pbm: this.pbm ,
+			pbe: this.pbe ,
+			fast: this.fast ,
+			stable: this.stable ,
+			osv.linux : this.osv.linux ,
+			osv.darwin : this.osv.darwin ,
+			osv.freebsd : this.osv.freebsd ,
+			osv.windows : this.osv.windows ,
+			osv.other : this.osv.other ,
+			tsv.010 : this.tsv.010 ,
+			tsv.011 : this.tsv.011 ,
+			tsv.012 : this.tsv.012 ,
+			tsv.020 : this.tsv.020 ,
+			tsv.021 : this.tsv.021 ,
+			tsv.022 : this.tsv.022 ,
+			tsv.023 : this.tsv.023 ,
+			tsv.024 : this.tsv.024 ,
+			pex.4 : this.pex.4 ,
+			pex.6 : this.pex.6 ,
+			pex.8 : this.pex.8 ,
+			pex.46 : this.pex.46 ,
+			pex.48 : this.pex.48 ,
+			pex.68 : this.pex.68 ,
+			pex.468 : this.pex.468 ,
+			autosys: this.autosys							//	already an array of as:#
+		}
+		emit ( date , country );
+	};
+
+
+	//	autonomous systems 										in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.
 	var mapAutosysClient = function() {
 		var autosysClient = {
 		
 		}
 		emit ( date , autosysClient );
 	};
-	
+
 	var mapAutosysRelay = function() {
 		var autosysRelay = {
 		
 		}
 		emit ( date , autosysRelay );
 	};
+	var mapAutosys = function() {
+		var autosys = {
+		
+		}
+		emit ( date , autosys );
+	};
 	
 	
-	// REDUCE
+	
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	REDUCE
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	var reduceClients = function ( key, values ) {
 		var fact = {	
@@ -870,8 +1012,10 @@ aggregateFacts(aDate) {
 		return fact;
 	};
 	
-	var reduceServersRelays = function ( key, values ) {
-		var fact = {
+	//	reduceServersRelays and reduceServersBridges are exact duplicates and could be reduced to one, 
+	//	but for the sake of readability i'm leaving them alone for now
+	var reduceServersRelays = function ( key, values ) {	
+		var temp = {
 			count : 0 ,
 			bwa : 0 ,
 			bwc : 0 ,
@@ -890,28 +1034,28 @@ aggregateFacts(aDate) {
 			tsv.024 : 0
 		};
 		for (var v in values) {
-			fact.count += 1 ;
-			fact.bwa += v.bwa ;
-			fact.bwc += v.bwc ;
-			fact.osv.linux += v.osv.linux ;
-			fact.osv.darwin += v.osv.darwin ;
-			fact.osv.freebsd += v.osv.freebsd ;
-			fact.osv.windows += v.osv.windows ;
-			fact.osv.other += v.osv.other ;
-			fact.tsv.010 += v.tsv.010 ;
-			fact.tsv.011 += v.tsv.011 ;
-			fact.tsv.012 += v.tsv.012 ;
-			fact.tsv.020 += v.tsv.020 ;
-			fact.tsv.021 += v.tsv.021 ;
-			fact.tsv.022 += v.tsv.022 ;
-			fact.tsv.023 += v.tsv.023 ;
-			fact.tsv.024 += v.tsv.024 
+			temp.count += 1 ;
+			temp.bwa += v.bwa ;
+			temp.bwc += v.bwc ;
+			temp.osv.linux += v.osv.linux ;
+			temp.osv.darwin += v.osv.darwin ;
+			temp.osv.freebsd += v.osv.freebsd ;
+			temp.osv.windows += v.osv.windows ;
+			temp.osv.other += v.osv.other ;
+			temp.tsv.010 += v.tsv.010 ;
+			temp.tsv.011 += v.tsv.011 ;
+			temp.tsv.012 += v.tsv.012 ;
+			temp.tsv.020 += v.tsv.020 ;
+			temp.tsv.021 += v.tsv.021 ;
+			temp.tsv.022 += v.tsv.022 ;
+			temp.tsv.023 += v.tsv.023 ;
+			temp.tsv.024 += v.tsv.024 
 		}
-		return fact;
+		return temp;
 	};
 	
 	var reduceServersBridges = function ( key, values ) {
-		var fact = {	
+		var temp = {	
 			count : 0 ,
 			bwa : 0 ,
 			bwc : 0 ,
@@ -930,24 +1074,24 @@ aggregateFacts(aDate) {
 			tsv.024 : 0									
 		};
 		for (var v in values) {
-			fact.count += 1 ;
-			fact.bwa += v.bwa ;
-			fact.bwc += v.bwc ;
-			fact.osv.linux += v.osv.linux ;
-			fact.osv.darwin += v.osv.darwin ;
-			fact.osv.freebsd += v.osv.freebsd ;
-			fact.osv.windows += v.osv.windows ;
-			fact.osv.other += v.osv.other ;
-			fact.tsv.010 += v.tsv.010 ;
-			fact.tsv.011 += v.tsv.011 ;
-			fact.tsv.012 += v.tsv.012 ;
-			fact.tsv.020 += v.tsv.020 ;
-			fact.tsv.021 += v.tsv.021 ;
-			fact.tsv.022 += v.tsv.022 ;
-			fact.tsv.023 += v.tsv.023 ;
-			fact.tsv.024 += v.tsv.024 
+			temp.count += 1 ;	
+			temp.bwa += v.bwa ;
+			temp.bwc += v.bwc ;
+			temp.osv.linux += v.osv.linux ;
+			temp.osv.darwin += v.osv.darwin ;
+			temp.osv.freebsd += v.osv.freebsd ;
+			temp.osv.windows += v.osv.windows ;
+			temp.osv.other += v.osv.other ;
+			temp.tsv.010 += v.tsv.010 ;
+			temp.tsv.011 += v.tsv.011 ;
+			temp.tsv.012 += v.tsv.012 ;
+			temp.tsv.020 += v.tsv.020 ;
+			temp.tsv.021 += v.tsv.021 ;
+			temp.tsv.022 += v.tsv.022 ;
+			temp.tsv.023 += v.tsv.023 ;
+			temp.tsv.024 += v.tsv.024 
 		}
-		return fact;
+		return temp;
 	};
 	
 	//	aggregating serverRelays and serverBridges into the combined servers fact
@@ -971,7 +1115,8 @@ aggregateFacts(aDate) {
 			tsv.024 : 0									
 		};
 		for (var v in values) {
-			fact.count += v.count ;
+			fact.count += v.count ;							//	while reduceServerRelays reduceSnd serverBridges count the raw data 1 by 1, 
+															//	this final steps adds up results
 			fact.bwa += v.bwa ;
 			fact.bwc += v.bwc ;
 			fact.osv.linux += v.osv.linux ;
@@ -2136,18 +2281,263 @@ aggregateFacts(aDate) {
 			fact.servers.relays.roleDir.authorityTrue.tsv.021 += v.servers.relays.roleDir.authorityTrue.tsv.021 ;
 			fact.servers.relays.roleDir.authorityTrue.tsv.022 += v.servers.relays.roleDir.authorityTrue.tsv.022 ;
 			fact.servers.relays.roleDir.authorityTrue.tsv.023 += v.servers.relays.roleDir.authorityTrue.tsv.023 ;
-			fact.servers.relays.roleDir.authorityTrue.tsv.024 += v.servers.relays.roleDir.authorityTrue.tsv.024
+			fact.servers.relays.roleDir.authorityTrue.tsv.024 += v.servers.relays.roleDir.authorityTrue.tsv.024 ;
 		}
 		return fact;
 	};		
 		
-	var reduceCountries = function ( key, values ) {
-		var fact = {										
-			
+	var reduceCountriesClient = function ( key, values ) {	//	same reduce function for CB and CR map functions	
+		var temp = {	
+			cc: "" ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 0 ,
+			guard: 0 ,
+			middle: 0 ,
+			exit: 0 ,
+			dir: 0 ,
+			bwa: 0 ,
+			bwc: 0 ,
+			pbr: 0.0 ,
+			pbg: 0.0 ,
+			pbm: 0.0 ,
+			pbe: 0.0 ,
+			fast: 0 ,
+			stable: 0 ,
+			osv.linux : 0 ,
+			osv.darwin : 0 ,
+			osv.freebsd : 0 ,
+			osv.windows : 0 ,
+			osv.other : 0 ,
+			tsv.010 : 0 ,
+			tsv.011 : 0 ,
+			tsv.012 : 0 ,
+			tsv.020 : 0 ,
+			tsv.021 : 0 ,
+			tsv.022 : 0 ,
+			tsv.023 : 0 ,
+			tsv.024 : 0 ,
+			pex.4 : 0 ,
+			pex.6 : 0 ,
+			pex.8 : 0 ,
+			pex.46 : 0 ,
+			pex.48 : 0 ,
+			pex.68 : 0 ,
+			pex.468 : 0 ,
+			as: "" 				
 		};
+		for (var v in values) {								// 	not much happening here since clients are already aggregated
+			temp.cc = v.cc ;								//	getting the cc
+			temp.cbcc = v.cbcc ;							//	catching the fish from mapCountriesClientCB
+			temp.crcc = v.crcc ;							//	catching the fish from mapCountriesClientCR
+			temp.relay = v.relay ;							//	only 0's from here on
+			temp.guard = v.guard ;
+			temp.middle = v.middle ;
+			temp.exit = v.exit ;
+			temp.dir = v.dir ;
+			temp.bwa = v.bwa ;
+			temp.bwc = v.bwc ;
+			temp.pbr = v.pbr ;
+			temp.pbg = v.pbg ;
+			temp.pbm = v.pbm ;
+			temp.pbe = v.pbe ;
+			temp.fast = v.fast ;
+			temp.stable = v.stable ;
+			temp.osv.linux = v.osv.linux ;
+			temp.osv.darwin = v.osv.darwin ;
+			temp.osv.freebsd = v.osv.freebsd ;
+			temp.osv.windows = v.osv.windows ;
+			temp.osv.other = v.osv.other ;
+			temp.tsv.010 = v.tsv.010 ;
+			temp.tsv.011 = v.tsv.011 ;
+			temp.tsv.012 = v.tsv.012 ;
+			temp.tsv.020 = v.tsv.020 ;
+			temp.tsv.021 = v.tsv.021 ;
+			temp.tsv.022 = v.tsv.022 ;
+			temp.tsv.023 = v.tsv.023 ;
+			temp.tsv.024 = v.tsv.024 ;
+			temp.pex.4 = v.pex.4 ;
+			temp.pex.6 = v.pex.6 ;
+			temp.pex.8 = v.pex.8 ;
+			temp.pex.46 = v.pex.46 ;
+			temp.pex.48 = v.pex.48 ;
+			temp.pex.68 = v.pex.68 ;
+			temp.pex.468 = v.pex.468 ;
+			temp.as = v.as ;
+		}
+		return temp;
+	};
 		
-		// doing stuff
+	var reduceCountriesRelay = function ( key, values ) {
+		var temp = {	
+			cc: "" ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 0 ,
+			guard: 0 ,
+			middle: 0 ,
+			exit: 0 ,
+			dir: 0 ,
+			bwa: 0 ,
+			bwc: 0 ,
+			pbr: 0.0 ,
+			pbg: 0.0 ,
+			pbm: 0.0 ,
+			pbe: 0.0 ,
+			fast: 0 ,
+			stable: 0 ,
+			osv.linux : 0 ,
+			osv.darwin : 0 ,
+			osv.freebsd : 0 ,
+			osv.windows : 0 ,
+			osv.other : 0 ,
+			tsv.010 : 0 ,
+			tsv.011 : 0 ,
+			tsv.012 : 0 ,
+			tsv.020 : 0 ,
+			tsv.021 : 0 ,
+			tsv.022 : 0 ,
+			tsv.023 : 0 ,
+			tsv.024 : 0 ,
+			pex.4 : 0 ,
+			pex.6 : 0 ,
+			pex.8 : 0 ,
+			pex.46 : 0 ,
+			pex.48 : 0 ,
+			pex.68 : 0 ,
+			pex.468 : 0 ,
+			autosys: []															
+		};
+		for (var v in values) {								//	adding up counts (except cc, cbcc, and crcc from clients)
+			temp.cc = v.cc ;
+			temp.cbcc = v.cbcc ;
+			temp.crcc = v.crcc ;
+			temp.relay += v.relay ;
+			temp.guard += v.guard ;
+			temp.middle += v.middle ;
+			temp.exit += v.exit ;
+			temp.dir += v.dir ;
+			temp.bwa += v.bwa ;
+			temp.bwc += v.bwc ;
+			temp.pbr += v.pbr ;
+			temp.pbg += v.pbg ;
+			temp.pbm += v.pbm ;
+			temp.pbe += v.pbe ;
+			temp.fast += v.fast ;
+			temp.stable += v.stable ;
+			temp.osv.linux += v.osv.linux ;
+			temp.osv.darwin += v.osv.darwin ;
+			temp.osv.freebsd += v.osv.freebsd ;
+			temp.osv.windows += v.osv.windows ;
+			temp.osv.other += v.osv.other ;
+			temp.tsv.010 += v.tsv.010 ;
+			temp.tsv.011 += v.tsv.011 ;
+			temp.tsv.012 += v.tsv.012 ;
+			temp.tsv.020 += v.tsv.020 ;
+			temp.tsv.021 += v.tsv.021 ;
+			temp.tsv.022 += v.tsv.022 ;
+			temp.tsv.023 += v.tsv.023 ;
+			temp.tsv.024 += v.tsv.024 ;
+			temp.pex.4 += v.pex.4 ;
+			temp.pex.6 += v.pex.6 ;
+			temp.pex.8 += v.pex.8 ;
+			temp.pex.46 += v.pex.46 ;
+			temp.pex.48 += v.pex.48 ;
+			temp.pex.68 += v.pex.68 ;
+			temp.pex.468 += v.pex.468 ;
+			if (temp.autosys.indexOf(as) == -1) {
+				temp.autosys.push(as);
+			};
+			temp.autosys.as += 1;
+		}
+		return temp;
+	};
 		
+	var reduceCountries = function ( key, values ) {
+		var countries = [] ;
+		var fact = { 
+			countries 
+		};
+		var country = {	
+			cc: "" ,
+			cbcc: 0 ,
+			crcc: 0 ,
+			relay: 0 ,
+			guard: 0 ,
+			middle: 0 ,
+			exit: 0 ,
+			dir: 0 ,
+			bwa: 0 ,
+			bwc: 0 ,
+			pbr: 0.0 ,
+			pbg: 0.0 ,
+			pbm: 0.0 ,
+			pbe: 0.0 ,
+			fast: 0 ,
+			stable: 0 ,
+			osv.linux : 0 ,
+			osv.darwin : 0 ,
+			osv.freebsd : 0 ,
+			osv.windows : 0 ,
+			osv.other : 0 ,
+			tsv.010 : 0 ,
+			tsv.011 : 0 ,
+			tsv.012 : 0 ,
+			tsv.020 : 0 ,
+			tsv.021 : 0 ,
+			tsv.022 : 0 ,
+			tsv.023 : 0 ,
+			tsv.024 : 0 ,
+			pex.4 : 0 ,
+			pex.6 : 0 ,
+			pex.8 : 0 ,
+			pex.46 : 0 ,
+			pex.48 : 0 ,
+			pex.68 : 0 ,
+			pex.468 : 0 ,
+			as: [] 				
+		};
+		for (var v in values) {
+			country.cc = v.cc ;
+			country.cbcc = v.cbcc ;
+			country.crcc = v.crcc ;
+			country.relay = v.relay ;
+			country.guard = v.guard ;
+			country.middle = v.middle ;
+			country.exit = v.exit ;
+			country.dir = v.dir ;
+			country.bwa = v.bwa ;
+			country.bwc = v.bwc ;
+			country.pbr = v.pbr ;
+			country.pbg = v.pbg ;
+			country.pbm = v.pbm ;
+			country.pbe = v.pbe ;
+			country.fast = v.fast ;
+			country.stable = v.stable ;
+			country.osv.linux = v.osv.linux ;
+			country.osv.darwin = v.osv.darwin ;
+			country.osv.freebsd = v.osv.freebsd ;
+			country.osv.windows = v.osv.windows ;
+			country.osv.other = v.osv.other ;
+			country.tsv.010 = v.tsv.010 ;
+			country.tsv.011 = v.tsv.011 ;
+			country.tsv.012 = v.tsv.012 ;
+			country.tsv.020 = v.tsv.020 ;
+			country.tsv.021 = v.tsv.021 ;
+			country.tsv.022 = v.tsv.022 ;
+			country.tsv.023 = v.tsv.023 ;
+			country.tsv.024 = v.tsv.024 ;
+			country.pex.4 = v.pex.4 ;
+			country.pex.6 = v.pex.6 ;
+			country.pex.8 = v.pex.8 ;
+			country.pex.46 = v.pex.46 ;
+			country.pex.48 = v.pex.48 ;
+			country.pex.68 = v.pex.68 ;
+			country.pex.468 = v.pex.468 ;
+			country.as = v.as ;
+			
+			countries.push(country);						//	pushing the 'country' objects into the 'countries' array
+		}
 		return fact;
 	};
 	
@@ -2162,40 +2552,46 @@ aggregateFacts(aDate) {
 	};
 	
 	
-	
-	// FINALIZE
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	FINALIZE
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	var finalizeFacts = function ( key, fact ) {
-														// doing stuff e.g. some averages
+															// doing stuff e.g. some averages
 	};
 	
 	
 	
-	// EXECUTION
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//	EXECUTION
+	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// clients
+	//	clients
 	var aggregateClients = db.importClients.mapReduce (			
 		mapClients,
 		reduceClients,
 		{ 
 			out: { 
-				reduce : "tempFacts", 					// the temporary fact collection, with _id:value structure
-				nonAtomic : true						// prevents locking of the db during post-processing
+				reduce : "tempFacts", 						// the temporary fact collection, with _id:value structure
+				nonAtomic : true							// prevents locking of the db during post-processing
 			} ,			
-			query : { "date" : date } ,					// limit aggregation to date
-			// sort										   sorts the input documents for fewer reduce operations
-			jsMode: true ,								// check if feasable! is faster, but needs more memory
+			query : { "date" : date } ,						// limit aggregation to date
+			// sort											   sorts the input documents for fewer reduce operations
+			jsMode: true ,									// check if feasable! is faster, but needs more memory
 			finalize : finalizeFacts
 		}
 	);
 	
-	// servers 											   in 2 steps, because it has to be gathererd from 2 collections 
+	
+	//	servers 
+	//	in 3 steps, because it has to be gathererd from 2 collections 
+	
 	var aggregateServersRelay = db.importRelays.mapReduce (			
 		mapServersRelay,
 		reduceServers,
 		{ 
 			out: { 
-				reduce : "tempFacts",
+				reduce : "tempServers",						//	reduce to intermediate collection
 				nonAtomic : true
 			} ,			
 			query : { "date" : date } ,
@@ -2209,7 +2605,7 @@ aggregateFacts(aDate) {
 		reduceServers,
 		{ 
 			out: { 
-				reduce : "tempFacts",
+				reduce : "tempServers",						//	reduce to intermediate collection
 				nonAtomic : true
 			} ,			
 			query : { "date" : date } ,
@@ -2218,10 +2614,26 @@ aggregateFacts(aDate) {
 		}
 	);
 	
-	// bridges
+	var aggregateServers = db.tempServers.mapReduce (		//	take the intermediate collection as input
+		mapServers,
+		reduceServers,
+		{ 
+			out: { 
+				reduce : "tempFacts",						//	reduce intermediates to final destination: tempFacts
+				nonAtomic : true
+			} ,			
+			query : { "date" : date } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	
+	//	bridges
+	
 	var aggregateBridges = db.importBridges.mapReduce (			
 		mapBridges,
-		reduceServers,
+		reduceBridges,
 		{ 
 			out: { 
 				reduce : "tempFacts",
@@ -2233,10 +2645,12 @@ aggregateFacts(aDate) {
 		}
 	);
 	
-	// relays
+	
+	//	relays
+	
 	var aggregateRelays = db.importRelays.mapReduce (			
-		mapBridges,
-		reduceServers,
+		mapRelays,
+		reduceRelays,
 		{ 
 			out: { 
 				reduce : "tempFacts",
@@ -2248,13 +2662,30 @@ aggregateFacts(aDate) {
 		}
 	);
 	
-	// countries 											   in 2 steps, because it has to be gathererd from 2 collections 
-	var aggregateCountriesClient = db.importClients.mapReduce (			
-		mapCountriesClient,
-		reduceCountries,
+	
+	//	countries 		
+	//	in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
+	
+	var aggregateCountriesClientCR = db.importClients.mapReduce (			
+		mapCountriesClientCR,
+		reduceCountriesClient,
 		{ 
 			out: { 
-				reduce : "tempFacts",
+				reduce : "tempCountries",
+				nonAtomic : true
+			} ,			
+			query : { "date" : date } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var aggregateCountriesClientCB = db.importClients.mapReduce (			
+		mapCountriesClientCB,
+		reduceCountriesClient,
+		{ 
+			out: { 
+				reduce : "tempCountries",
 				nonAtomic : true
 			} ,			
 			query : { "date" : date } ,
@@ -2265,6 +2696,20 @@ aggregateFacts(aDate) {
 	
 	var aggregateCountriesRelay = db.importRelays.mapReduce (			
 		mapCountriesRelay,
+		reduceCountriesRelay,
+		{ 
+			out: { 
+				reduce : "tempCountries",
+				nonAtomic : true
+			} ,			
+			query : { "date" : date } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var aggregateCountries = db.tempCountries.mapReduce (			
+		mapCountries,
 		reduceCountries,
 		{ 
 			out: { 
@@ -2277,13 +2722,16 @@ aggregateFacts(aDate) {
 		}
 	);
 	
-	// autonomous systems 									   in 2 steps, because it has to be gathererd from 2 collections 
+	
+	//	autonomous systems
+	//	in 3 steps, because it has to be gathererd from 2 collections 
+	
 	var aggregateAutosysClient = db.importClients.mapReduce (			
 		mapAutosysClient,
 		reduceAutosys,
 		{ 
 			out: { 
-				reduce : "tempFacts",
+				reduce : "tempAutosys",
 				nonAtomic : true
 			} ,			
 			query : { "date" : date } ,
@@ -2294,6 +2742,20 @@ aggregateFacts(aDate) {
 	
 	var aggregateAutosysRelay = db.importRelays.mapReduce (			
 		mapAutosysRelay,
+		reduceAutosys,
+		{ 
+			out: { 
+				reduce : "tempAutosys",
+				nonAtomic : true
+			} ,			
+			query : { "date" : date } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+	
+	var aggregateAutosys = db.tempAutosys.mapReduce (			
+		mapAutosys,
 		reduceAutosys,
 		{ 
 			out: { 
