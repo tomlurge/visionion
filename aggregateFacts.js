@@ -116,10 +116,10 @@ aggregateFacts(aDate) {
 	};
 
 	
-	//	servers 											  	in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.					
-															//	the emit fuctions only differ in their KEYs 
-															//	to prevent overwriting intermediate data from different sources, the 2 intermediate emits
-															//	can't use just 'date' as the key. apart from that it's all the same 
+	//	servers												in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.					
+														/*	the emit fuctions only differ in their KEYs 
+															to prevent overwriting intermediate data from different sources, the 2 intermediate emits
+															can't use just 'date' as the key. apart from that it's all the same */
 	var mapServersRelay = function() {
 		var serversRelay = {
 			count : 1 ,
@@ -330,7 +330,7 @@ aggregateFacts(aDate) {
 	};
 	
 
-	//	relays												this is HUGE
+	//	relays
 	var mapRelays = function() {
 		var relays = {
 			servers.relays.roleAll.total.count : 1 ,
@@ -771,7 +771,7 @@ aggregateFacts(aDate) {
 	
 
 	//	countries											in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
-	/*														. aggregate countriesClients.cbcc into a collection tempCountries with key country
+														/*	. aggregate countriesClients.cbcc into a collection tempCountries with key country
 															. aggregate countriesClients.crcc into the same collection tempCountries with key country
 															. aggregate countriesRelay into the same collection tempCountries with key country
 															. aggregate all documents from that tempCountries collection into an array of objects 
@@ -988,8 +988,8 @@ aggregateFacts(aDate) {
 			countries.pbm : (this.role == "middle") ? this.pbm : 0 ,
 			countries.pbe : (this.role == "exit") ? this.pbe : 0
 		}
-		autosys.name = function(this.as) {};									// TODO	lookup name for AS	
-		autosys.home = function(this.as) {};									// TODO	lookup jurisdiction for AS
+		autosys.name = function(this.as) { return ""; };	//	TODO	lookup name for AS	
+		autosys.home = function(this.as) { return ""; };	//	TODO	lookup jurisdiction for AS
 		emit ( date , autosys );
 	};
 	
@@ -1000,6 +1000,7 @@ aggregateFacts(aDate) {
 	//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	var reduceClients = function ( key, values ) {
+		var v;
 		var fact = {	
 			clients.total : 0 ,
 			clients.atBridges : 0 ,
@@ -1011,7 +1012,7 @@ aggregateFacts(aDate) {
 			clients.cpt<OR> : 0 ,
 			clients.cpt<??> : 0
 		};
-		for (var v in values) {
+		values.forEach( function(v) { 
 			fact.clients.total += v.clients.total;
 			fact.clients.atBridges += v.clients.atBridges ;
 			fact.clients.atRelays += v.clients.atRelays ;
@@ -1028,6 +1029,7 @@ aggregateFacts(aDate) {
 	//	reduceServersRelays and reduceServersBridges are exact duplicates and could be reduced to one, 
 	//	but for the sake of readability i'm leaving them alone for now
 	var reduceServersRelays = function ( key, values ) {	
+		var v;
 		var temp = {
 			count : 0 ,
 			bwa : 0 ,
@@ -1046,7 +1048,7 @@ aggregateFacts(aDate) {
 			tsv.023 : 0 ,
 			tsv.024 : 0
 		};
-		for (var v in values) {
+		values.forEach( function(v) {
 			temp.count += 1 ;
 			temp.bwa += v.bwa ;
 			temp.bwc += v.bwc ;
@@ -1068,6 +1070,7 @@ aggregateFacts(aDate) {
 	};
 	
 	var reduceServersBridges = function ( key, values ) {
+		var v;
 		var temp = {	
 			count : 0 ,
 			bwa : 0 ,
@@ -1086,7 +1089,7 @@ aggregateFacts(aDate) {
 			tsv.023 : 0 ,
 			tsv.024 : 0									
 		};
-		for (var v in values) {
+		values.forEach( function(v) {
 			temp.count += 1 ;	
 			temp.bwa += v.bwa ;
 			temp.bwc += v.bwc ;
@@ -1109,6 +1112,7 @@ aggregateFacts(aDate) {
 	
 	//	aggregating serverRelays and serverBridges into the combined servers fact
 	var reduceServers = function ( key, values ) {
+		var v;
 		var fact = {	
 			count : 0 ,
 			bwa : 0 ,
@@ -1127,8 +1131,8 @@ aggregateFacts(aDate) {
 			tsv.023 : 0 ,
 			tsv.024 : 0									
 		};
-		for (var v in values) {
-			fact.count += v.count ;							//	while reduceServerRelays reduceSnd serverBridges count the raw data 1 by 1, 
+		values.forEach( function(v) {
+			fact.count += v.count ;							//	while reduceServerRelays and reduceServerBridges count the raw data 1 by 1, 
 															//	this final steps adds up results
 			fact.bwa += v.bwa ;
 			fact.bwc += v.bwc ;
@@ -1150,6 +1154,7 @@ aggregateFacts(aDate) {
 	};
 	
 	var reduceBridges = function ( key, values ) {
+		var v;
 		var fact = {										
 			servers.bridges.total.count : 0 ;
 			servers.bridges.total.bwa : 0 ;
@@ -1286,8 +1291,8 @@ aggregateFacts(aDate) {
 			servers.bridges.brtObfs23.tsv.022 : 0 ;
 			servers.bridges.brtObfs23.tsv.023 : 0 ;
 			servers.bridges.brtObfs23.tsv.024 : 0
-		}	
-		for (var v in values) {
+		}
+		values.forEach( function(v) {
 			fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 			fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 			fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -1428,6 +1433,7 @@ aggregateFacts(aDate) {
 	};
 	
 	var reduceRelays = function ( key, values ) {
+		var v;
 		var fact = {
 			servers.relays.roleAll.total.count : 0 ;
 			servers.relays.roleAll.total.bwa : 0 ;
@@ -1862,7 +1868,7 @@ aggregateFacts(aDate) {
 			servers.relays.roleDir.authorityTrue.tsv.023 : 0 ;
 			servers.relays.roleDir.authorityTrue.tsv.024 : 0
 		}	
-		for (var v in values) {
+		values.forEach( function(v) {
 			fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;
 			fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
 			fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;
@@ -2300,6 +2306,7 @@ aggregateFacts(aDate) {
 	};		
 		
 	var reduceCountriesClient = function ( key, values ) {	//	same reduce function for CB and CR map functions	
+		var v;
 		var temp = {	
 			cc: "" ,
 			cbcc: 0 ,
@@ -2339,7 +2346,7 @@ aggregateFacts(aDate) {
 			pex.468 : 0 ,
 			as: "" 				
 		};
-		for (var v in values) {								// 	not much happening here since clients are already aggregated
+		values.forEach( function(v) {						// 	not much happening here since clients are already aggregated
 			temp.cc = v.cc ;								//	getting the cc
 			temp.cbcc = v.cbcc ;							//	catching the fish from mapCountriesClientCB
 			temp.crcc = v.crcc ;							//	catching the fish from mapCountriesClientCR
@@ -2382,6 +2389,7 @@ aggregateFacts(aDate) {
 	};
 		
 	var reduceCountriesRelay = function ( key, values ) {
+		var v;
 		var temp = {	
 			cc: "" ,
 			cbcc: 0 ,
@@ -2419,9 +2427,9 @@ aggregateFacts(aDate) {
 			pex.48 : 0 ,
 			pex.68 : 0 ,
 			pex.468 : 0 ,
-			autosys: []															
+			autosys: []										//	TODO	need to declare autosys before?		
 		};
-		for (var v in values) {								//	adding up counts (except cc, cbcc, and crcc from clients)
+		values.forEach( function(v) {						//	adding up counts (except cc, cbcc, and crcc from clients)
 			temp.cc = v.cc ;
 			temp.cbcc = v.cbcc ;
 			temp.crcc = v.crcc ;
@@ -2458,7 +2466,7 @@ aggregateFacts(aDate) {
 			temp.pex.48 += v.pex.48 ;
 			temp.pex.68 += v.pex.68 ;
 			temp.pex.468 += v.pex.468 ;
-			if (temp.autosys.indexOf(as) == -1) {
+			if (temp.autosys.indexOf(as) == -1) {			//	TODO	will this work?	
 				temp.autosys.push(as);
 			};
 			temp.autosys.as += 1;
@@ -2467,10 +2475,9 @@ aggregateFacts(aDate) {
 	};
 		
 	var reduceCountries = function ( key, values ) {
-		var countries = [] ;
-		var fact = { 
-			countries 
-		};
+		var v;
+		var countries = new Array();
+		var fact = { countries };
 		var country = {	
 			cc: "" ,
 			cbcc: 0 ,
@@ -2510,7 +2517,7 @@ aggregateFacts(aDate) {
 			pex.468 : 0 ,
 			as: [] 				
 		};
-		for (var v in values) {
+		values.forEach( function(v) {
 			country.cc = v.cc ;
 			country.cbcc = v.cbcc ;
 			country.crcc = v.crcc ;
@@ -2548,15 +2555,16 @@ aggregateFacts(aDate) {
 			country.pex.68 = v.pex.68 ;
 			country.pex.468 = v.pex.468 ;
 			country.as = v.as ;
-			
-			countries.push(country);						//	pushing the 'country' objects into the 'countries' array
+			//	finally push 'country' object onto 'countries' array
+			countries.push(country);						
 		}
 		return fact;
 	};
 	
 	var reduceAutosys = function ( key, values ) {
-		var fact = autosys;
-		var autosys = [];
+		var v;
+		var autosys =new Array();
+		var fact = { autosys };
 		var asObject = {
 			as : "" ,
 			name : "" ,
@@ -2583,7 +2591,7 @@ aggregateFacts(aDate) {
 			countries.pbm : 0 ,
 			countries.pbe : 0
 		};
-		for (var v in values) {
+		values.forEach( function(v) {
 			if (autosys.objects !contains as-field with value v.as) {		//	PSEUDO CODE
 				#asObject#.as = v.as;
 				#asObject#.name = v.name;
@@ -2620,7 +2628,6 @@ aggregateFacts(aDate) {
 			autosys.#asObject#.countries.#countryObject#.pbe += v.pbe
 				
 		}
-		
 		
 		return fact;
 	};

@@ -54,6 +54,21 @@ function() {
 	this.items.forEach(function(item){ emit(item.sku, 1); });
 }
 
+//	accessing a field in an array
+var chartData = [{"Value1":17.800,"DateAndTime":"\/Date(1338501601000)\/"}]
+chartData[0].DateAndTime;
+
+//	accessing name of field  and value of field
+var myObject = {} ;
+myObject["aaa"] = "AAA" ;
+myObject["bbb"] = "BBB" ;
+var fieldName, fieldValue ;
+for(fieldName in myObject) {
+   fieldValue = myObject[fieldName] ;
+   alert("name : " + fieldName + " : value : " + fieldValue) ;
+}
+
+
 */
 
 
@@ -284,7 +299,7 @@ var reduce = function(key, values) {
 		sum += 1;
 	});
 	return {books: sum};
-};
+};mapRed
 //
 > var count  = db.books.mapReduce(map, reduce, {out: "book_results"});
 > db[count.result].find()
@@ -426,14 +441,16 @@ r = function(key, values) {
 //	http://www.mongovue.com/2010/11/03/yet-another-mongodb-map-reduce-tutorial/#comment-117
 //
 function MapCode() {
-	emit(this.CountryID,
-	{ "data":
-		[
-			{	"city": this.City,
-				"lat":  this.Latitude,
-				"lon":  this.Longitude	}
-		]
-	});
+	emit(
+		this.CountryID,
+		{ "data":
+			[
+				{	"city": this.City,
+					"lat":  this.Latitude,
+					"lon":  this.Longitude	}
+			]
+		}
+	);
 }
 function ReduceCode(key, values) {
 	var reduced = {"data":[]};
