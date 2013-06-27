@@ -149,8 +149,8 @@
 			pbe: float,
 			countries: [
 				{
-					country: cc,
-					relays: int,
+					cc: string,
+					relay: int,
 					bwa: int,
 					bwc: int,
 					pbr: float,

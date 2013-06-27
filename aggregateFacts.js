@@ -959,24 +959,37 @@ aggregateFacts(aDate) {
 	};
 
 
-	//	autonomous systems 										in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.
-	var mapAutosysClient = function() {
-		var autosysClient = {
-		
-		}
-		emit ( date , autosysClient );
-	};
+	//	autonomous systems 					
 
-	var mapAutosysRelay = function() {
-		var autosysRelay = {
-		
-		}
-		emit ( date , autosysRelay );
-	};
 	var mapAutosys = function() {
 		var autosys = {
-		
+			as : this.as ,
+			name : "" ,
+			hone : "",
+			relay : 1 ,
+			bwa : this.bwa ,
+			bwc : this.bwc ,
+			fast : (contains(this.flag, fast)) ? 1 : 0 ,
+			stable : (contains(this.flag, stable)) ? 1 : 0 ,
+			guard : (this.role == "guard") ? 1 : 0 ,
+			middle : (this.role == "middle") ? 1 : 0 ,
+			exit : (this.role == "exit") ? 1 : 0 ,
+			dir : (this.role == "dir") ? 1 : 0 ,
+			pbr: this.pbr ,
+			pbg : (this.role == "guard") ? this.pbg : 0 ,
+			pbm : (this.role == "middle") ? this.pbm : 0 ,
+			pbe : (this.role == "exit") ? this.pbe : 0 ,
+			countries.cc : this.cc ,
+			countries.relay : 1 ,
+			countries.bwa : this.bwa ,
+			countries.bwc : this.bwc ,
+			countries.pbr : this.pbr ,
+			countries.pbg : (this.role == "guard") ? this.pbg : 0 ,
+			countries.pbm : (this.role == "middle") ? this.pbm : 0 ,
+			countries.pbe : (this.role == "exit") ? this.pbe : 0
 		}
+		autosys.name = function(this.as) {};									// TODO	lookup name for AS	
+		autosys.home = function(this.as) {};									// TODO	lookup jurisdiction for AS
 		emit ( date , autosys );
 	};
 	
@@ -2542,11 +2555,72 @@ aggregateFacts(aDate) {
 	};
 	
 	var reduceAutosys = function ( key, values ) {
-		var fact = {										
-			
+		var fact = autosys;
+		var autosys = [];
+		var asObject = {
+			as : "" ,
+			name : "" ,
+			hone : "",
+			relay : 0 ,
+			bwa : 0 ,
+			bwc : 0c ,
+			fast : 0 ,
+			stable : 0 ,
+			guard : 0 ,
+			middle : 0 ,
+			exit : 0 ,
+			dir : 0 ,
+			pbr: 0 ,
+			pbg : 0 ,
+			pbm : 0 ,
+			pbe : 0 ,
+			countries.cc : "" ,
+			countries.relay : 0 ,
+			countries.bwa : 0 ,
+			countries.bwc : 0 ,
+			countries.pbr : 0 ,
+			countries.pbg : 0 ,
+			countries.pbm : 0 ,
+			countries.pbe : 0
 		};
+		for (var v in values) {
+			if (autosys.objects !contains as-field with value v.as) {		//	PSEUDO CODE
+				#asObject#.as = v.as;
+				#asObject#.name = v.name;
+				#asObject#.home = v.home;
+				push #asObject#.as to autosys;
+			}
+			autosys.#asObject#.relay += 1 ,
+			autosys.#asObject#.bwa += v.bwa ,
+			autosys.#asObject#.bwc += v.bwc ,
+			autosys.#asObject#.fast += v.fast ,
+			autosys.#asObject#.stable += v.stable ,
+			autosys.#asObject#.guard += v.guard ,
+			autosys.#asObject#.middle += v.middle ,
+			autosys.#asObject#.exit += v.exit ,
+			autosys.#asObject#.dir += v.dir ,
+			autosys.#asObject#.pbr += v.pbr ,
+			autosys.#asObject#.pbg += v.pbg ,
+			autosys.#asObject#.pbm += v.pbm ,
+			autosys.#asObject#.pbe += v.pbe ,
+			
+			if (autosys.objects.as.countries !contains country-field with value v.countries.country) {		//	PSEUDO CODE
+				#asObject#.as.countries.#countryObject# = v.countries.country;
+				#asObject#.as.countries.#countryObject#name = v.name;
+				#asObject#.as.countries.#countryObject#home = v.home;
+				push #asObject#.as.countries.#countryObject# to autosys;
+			}
+			autosys.#asObject#.countries.#countryObject#.cc : "",			// ui
+			autosys.#asObject#.countries.#countryObject#.relay += v.relay ,
+			autosys.#asObject#.countries.#countryObject#.bwa += v.bwa ,
+			autosys.#asObject#.countries.#countryObject#.bwc += v.bwc ,
+			autosys.#asObject#.countries.#countryObject#.pbr += v.pbr ,
+			autosys.#asObject#.countries.#countryObject#.pbg += v.pbg ,
+			autosys.#asObject#.countries.#countryObject#.pbm += v.pbm ,
+			autosys.#asObject#.countries.#countryObject#.pbe += v.pbe
+				
+		}
 		
-		// doing stuff
 		
 		return fact;
 	};
@@ -2724,35 +2798,6 @@ aggregateFacts(aDate) {
 	
 	
 	//	autonomous systems
-	//	in 3 steps, because it has to be gathererd from 2 collections 
-	
-	var aggregateAutosysClient = db.importClients.mapReduce (			
-		mapAutosysClient,
-		reduceAutosys,
-		{ 
-			out: { 
-				reduce : "tempAutosys",
-				nonAtomic : true
-			} ,			
-			query : { "date" : date } ,
-			jsMode: true ,
-			finalize : finalizeFacts
-		}
-	);
-	
-	var aggregateAutosysRelay = db.importRelays.mapReduce (			
-		mapAutosysRelay,
-		reduceAutosys,
-		{ 
-			out: { 
-				reduce : "tempAutosys",
-				nonAtomic : true
-			} ,			
-			query : { "date" : date } ,
-			jsMode: true ,
-			finalize : finalizeFacts
-		}
-	);
 	
 	var aggregateAutosys = db.tempAutosys.mapReduce (			
 		mapAutosys,

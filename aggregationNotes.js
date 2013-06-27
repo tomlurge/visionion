@@ -1,4 +1,6 @@
-﻿/*	import collection index 
+﻿/*	
+
+import collection index 
 	nach zeit
 	mapreduce tage+stunden-weise anstossen
 		zum einen ist das resourcenschonender
@@ -17,8 +19,9 @@ out : {
 											//	since a given time or for a given timespan
 }
 
-note:	out.merge replaces existing documents woth the same _id
-		out.reduce adds fields if they aren't already present, but doesn't touch fields that are (no updates!)
+note:	out.merge	replaces existing documents woth the same _id
+		out.reduce	adds fields if they aren't already present, 
+					but doesn't touch fields that are (no updates!)
 
 wo immer die import daten einen array enthalten, muss ich diesen in der mapFunction durchlaufen, um emit mit den passenden key:values zu befüllen (http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calculate-order-and-total-quantity-with-average-quantity-per-item)
 
@@ -28,69 +31,28 @@ http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calcula
 Subsequent Incremental Map-Reduce
 http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
 
-*/
-
-/* probleme
-
 *	wenn verschiedene collections mit unterschiedlichen feldern in eine ziel_collection aggregiert 
 	werden sollen, müssen entweder alle map-funktionen alle felder mit jeweils sinnvollen angaben 
 	enthalten (also 0 oder null o.ä. wenn die ausgangs-collection die felder nicht enthält), oder die 
 	reduce funktion muss den fall, dass ein feld in der map nicht auftaucht, sinnvoll abfangen (also 
 	1* fragen, ob die map das feld übergibt und 2* wenn ja, dann es überehmen oder 3* wenn nein dann 
 	es anlegen (mit leerem inhalt, oder 0, oder null - je nachdem)
-	**	oder stimmt das garnicht? tests wiesen eher darauf hin, dass es diese einschränkung garnicht gibt!
-	**	weitere tests legen nahe, dass felder, die in beiden map-funktionen mit dem wert 0 initialisiert wurden
-		und von der ersten map funktion nicht angefasst werden, in der 2. durchaus mit einem wert belegt werden 
-		können, siehe MAPPING 2 COLLECTIONS INTO 1 RESULT - VERSION #2
-*/
+	siehe MAPPING 2 COLLECTIONS INTO 1 RESULT - VERSION #2
 
 
-		// doing stuff
-		/* 
-		someting like: for all fields
-			if field == bwa || bwc || pbr || pbg || pbm || pbe || pex
-				 add value
-			else add 1
-		*/
-		
+//	doing stuff
 
-/* 	countries
+for all fields
+	if field == bwa || bwc || pbr || pbg || pbm || pbe || pex
+		 add value
+	else add 1
 
-			// uiuiuiuiiiiii
-			for (var i = 0; i < this.cbcc.length; i++) {
-				var key = this.cbcc[i].country;
-				var value = {
-					country: this.cbcc[i].country,
-					cbcc: this.cbcc[i].count
-				};
-				emit(key, value);
-			}
-			// das geht so noch nicht
-			
-		};
-			/*	NOPE - too complicated, since we also need to check which countries surface in "importRelays"
-			//	collect all countries from crcc and cbcc and construct objects like 
-			//	{ "country" : "cc", "cbcc" : "", "crcc" : "" }
-			//	some countries may only occur in one of crcc or cbcc 		*/	
-
-		/*
-		http://docs.mongodb.org/manual/tutorial/map-reduce-examples
-    	var key = this.items[i].sku;
-		var value = {
-			count: 1,
-	 		qty: this.items[i].qty
-	 	};
-		emit (key, value);
-		*/
-		
-		/*
-		http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
-		The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
-		function() {
-    		this.items.forEach(function(item){ emit(item.sku, 1); });
-		}
-		*/
-
+//	doing other stuff
+http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
+The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
+function() {
+	this.items.forEach(function(item){ emit(item.sku, 1); });
+}
 
 */
 
@@ -142,37 +104,18 @@ var myResult = db.importCollection.mapReduce (
 
 
 
-
-//	MAPPING AN ARRAY
-//	http://docs.mongodb.org/manual/tutorial/map-reduce-examples/
-//	#calculate-order-and-total-quantity-with-average-quantity-per-item
-//
-var mapFunction2 = function() {
-	for (var i = 0; i < this.items.length; i++) {
-		var key = this.items[i].sku;
-		var value = {
-			count: 1,
-			qty: this.items[i].qty
-		};
-		emit(key, value);
-	}
-};
-
-
-
-
 //	MAPPING 2 COLLECTIONS INTO 1 RESULT - VERSION #1
 //	http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how/8746805#8746805
-//	intercepting non-existant fields in reduce step 
-var mapUsers, mapComments, reduce;
 db.users_comments.remove();
+//	intercept non-existant fields in reduce step 
+var mapUsers, mapComments, reduce;
 //	setup sample data - wouldn't actually use this in production
 db.users.remove();
 db.comments.remove();
 db.users.save({firstName:"Rich",lastName:"S",gender:"M",country:"CA",age:"18"});
 db.users.save({firstName:"Rob",lastName:"M",gender:"M",country:"US",age:"25"});
 db.users.save({firstName:"Sarah",lastName:"T",gender:"F",country:"US",age:"13"});
-var users = db.users.find(); 	//	muss er machen, um im nächsten schritt auf users[i]._id zugreifen zu können
+var users = db.users.find(); 	//	um im nächsten schritt auf users[i]._id zugreifen zu können
 db.comments.save({userId: users[0]._id, "comment": "Hey, what's up?", created: new ISODate()});
 db.comments.save({userId: users[1]._id, "comment": "Not much", created: new ISODate()});
 db.comments.save({userId: users[0]._id, "comment": "Cool", created: new ISODate()});
@@ -202,20 +145,23 @@ var reduce = function(k, values) {
     };
     values.forEach(function(value) {
         var field;
-        if ("comment" in value) {											//	take care of comments
-            if (!("comments" in result)) {
-                result.comments = [];
-            }
+        if ("comment" in value) {								//	take care of comments
+            if (!("comments" in result)) {						//	funny: 'if ("comment" in value)'
+                result.comments = [];							//	checks if ANY of the fields in 
+            }													//	value is named "comment"
             result.comments.push(value);
-        } else if ("comments" in value) {									//	TODO dies ist unklar aber wichtig
-            if (!("comments" in result)) {					
-                result.comments = [];
+        } 
+/*      else if ("comments" in value) {							//	this 'else' makes no sense -
+            if (!("comments" in result)) {						//	removing it seems to make
+                result.comments = [];							//	no difference in the result
             }
             result.comments.push.apply(result.comments, value.comments);
         }
-        for (field in value) {												//	take care of all other fields
-            if (value.hasOwnProperty(field) && !(field in commentFields)) {	//	if field is not comment field
-                result[field] = value[field];								//	add it to result
+*/
+        for (field in value) {									//	take care of all other fields
+            if (value.hasOwnProperty(field) && 					//	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
+            	!(field in commentFields)) {					//	if field is not comment field	
+                	result[field] = value[field];				//	add it to result
             }
         }
     });
@@ -251,21 +197,21 @@ db.users_comments.find().pretty(); // see the resulting collection
 //	http://stackoverflow.com/questions/9696940/merging-two-collections-in-mongodb/9723549#9723549
 //	adding empty fields in map step
 var mapDetails = function() {
-    var output = {										//	konstruiert das value
-    	studentid: this.studentid, 
+    var output = {								//	konstruiert das value
+    	studentid: this.studentid, 				//	füllt einige werte schon aus
     	classes_1: [], 
     	classes_2: [], 
     	year: this.year, 
-    	overall: 0, 
+    	overall: 0, 							//	oder setzt sie auf default 0
     	subscore: 0
     }
-    if (this.year == 1) {								//	rödelt noch ein bisschen auf einzelnen feldern rum
+    if (this.year == 1) {						//	rödelt noch ein bisschen auf einzelnen feldern rum
         output.classes_1 = this.classes;
     }
     if (this.year == 2) {
         output.classes_2 = this.classes;
     }
-    emit(this.studentid, output);						//	gibt es dann aus
+    emit(this.studentid, output);				//	gibt dann key/value aus
 };
 var mapGpas = function() {
     emit(
@@ -274,7 +220,7 @@ var mapGpas = function() {
     		studentid: this.studentid, 
     		classes_1: [], 
     		classes_2: [], 
-    		year: 0, 									//	year:0 benutzt er in reduce als switch
+    		year: 0, 							//	year:0 benutzt er in reduce als switch
     		overall: this.overall, 
     		subscore: this.subscore
     	}

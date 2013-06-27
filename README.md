@@ -298,9 +298,9 @@ These 3 collections contain all raw data as it is imported into the database.
 	bgmed		nick	nickname					string			mode		nickname of bridge
 	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
 	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
-	bgmed		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmed		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
-	b			brp		bridge pool     			string			mode		one of: email,  https,  other 
+	bgmed		tsv		Tor software version		string			mode		one of: 010, 011, 012, 020, 021, 022, 023, 024
+	bgmed		osv		operating system			string			mode		one of: linux, darwin, freebsd, windows, other 
+	b			brp		bridge pool     			string			mode		one of: email, https, other 
 	b			bre		bridge is in EC2 cloud		boolean			mode
 	b			brt		bridge pluggable transport	array	string	mode [*]	some of: obfs2, obfs3
 
@@ -703,7 +703,7 @@ Additionally countries could be grouped into continents, political regions (like
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
 	42	autosys		 				array of objects							one result object per AS
-			as						int											number of as
+			as						string										number of as (format is string because it's a name)
 			name					string										name of as	
 			home					string										home country of as, jurisdiction
 			relay					int											how many relays in this AS
@@ -720,8 +720,8 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 			pbm						int											total pbm of all middles in this AS 
 			pbe						int											total pbe of all exits in this AS 
 			countries				array of objects
-				country				cc											country code
-				relays				int											how many relays in that country in this AS
+				cc					string										two-letter (ISO 3166-1 alpha-2) country code
+				relay				int											how many relays in that country in this AS
 				bwa					int											how much bwa in that country in this AS
 				bwc					int											how much bwc in that country in this AS
 				pbr					float										total probability of all relays in that country and this AS
