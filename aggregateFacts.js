@@ -4,7 +4,7 @@
 		from the newly imported documents it extracts the dates and for each distinct date starts the following aggregation procedure:
 	1.	more than one mapReduce for one import collection
 		some mapReduce steps are to complex to put them together in one map/reduce
-	A.	they can be run sequentelly and all be reduced to one result { out: { reduce : "tempFacts" }
+	A.	they can be run sequentially and all be reduced to one result { out: { reduce : "tempFacts" }
 		http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
 		http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
 	2.	probably we can then also aggregate from different import tables
@@ -19,10 +19,8 @@
 		* countries
 			** 					from clients import collection
 			**					from relays import collection
-		* autonomous systems	
-			** 					from clients import collection
-			**					from relays import collection
-	3.	servers, countries and autonomous sytems need to be aggregated from 2 import collections
+		* autonomous systems	from relays import collection
+	3.	server and countries need to be aggregated from 2 import collections
 		and the resulting aggregates merged into one, like: { out: { merge : "servers/countries/autosys" } }
 	4.	to get rid of the "value" object we need one further step
 		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
@@ -33,17 +31,8 @@
 		The update() method can either replace the existing document with the new document or update specific fields in the existing document.
 		If the <update> argument contains fields not currently in the document, the update() method adds the new fields to the document.
 		If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
-	
 */
 
-/*
-	aggregate countries and autonomous systems
-	all countries and all autonomous systems ever mentioned should be aggregated in 2 collections
-		aggregatedCountries
-		aggregatedAutosys
-	each one probably only holding one array of unique items. from these collections the 'countries' and 'autosys' aggregations could be constructed.
-	another way to deal with the issue would of course be to only aggregate the countries and autosys per timespan that acctually turned up.
-*/
 
 /*
 	aggregate unique items
@@ -53,13 +42,6 @@
 		countries
 		autonomous systems
 		nicknames
-		
-*/
-
-/*	javascript problems
-	adress the field name and it's value seperately
-	adress a field in an object in an array
-		something like superfield.field[i].subfield
 */
 
 
@@ -82,6 +64,9 @@ aggregateFacts(aDate) {
 	
 	//	a little helper to check if an array contains a value
 	//	http://stackoverflow.com/questions/237104/array-containsobj-in-javascript
+	//	TODO	should be changed to 
+	//			arrayName.indexOf("fieldName") > -1
+	//	http://stackoverflow.com/questions/1181575/javascript-determine-whether-an-array-contains-a-value
 	var contains = function(this.a, obj) {
 		for (var i = 0; i < a.length; i++) {
 			if (a[i] === obj) {
@@ -90,7 +75,6 @@ aggregateFacts(aDate) {
 		}
 		return false;
 	}
-	
 	
 	
 
@@ -2631,7 +2615,7 @@ aggregateFacts(aDate) {
 			
 			if (asAquired) {								//	for aquired AS check if country was already aquired
 				for ( var i = 0; i < autosys[asPos].countries.length; i++ ) {	
-					if ( autosys[asPos].countries[i].cc == v.cc) {
+					if ( autosys[asPos].countries[i].cc == v.countries.cc) {
 						ccAquired = true;
 						ccPos = i;
 						break;									
@@ -2639,7 +2623,7 @@ aggregateFacts(aDate) {
 				};
 			};
 			if (!ccAquired) {
-				autosys[asPos].countries[i].cc = v.countries.cc;
+				autosys[asPos].countries[ccPos].cc = v.countries.cc;
 			}
 			autosys[asPos].countries[ccPos].relay += v.relay ,
 			autosys[asPos].countries[ccPos].bwa += v.countries.bwa ,
