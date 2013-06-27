@@ -2564,7 +2564,8 @@ aggregateFacts(aDate) {
 	var reduceAutosys = function ( key, values ) {
 		var v;
 		var autosys =new Array();
-		var fact = { autosys };
+		var countries =new Array();
+		var fact = autosys ;
 		var asObject = {
 			as : "" ,
 			name : "" ,
@@ -2582,51 +2583,71 @@ aggregateFacts(aDate) {
 			pbg : 0 ,
 			pbm : 0 ,
 			pbe : 0 ,
-			countries.cc : "" ,
-			countries.relay : 0 ,
-			countries.bwa : 0 ,
-			countries.bwc : 0 ,
-			countries.pbr : 0 ,
-			countries.pbg : 0 ,
-			countries.pbm : 0 ,
-			countries.pbe : 0
+			countries : []
 		};
-		values.forEach( function(v) {
-			if (autosys.objects !contains as-field with value v.as) {		//	PSEUDO CODE
-				#asObject#.as = v.as;
-				#asObject#.name = v.name;
-				#asObject#.home = v.home;
-				push #asObject#.as to autosys;
+		var ccObject = {
+			cc : "" ,
+			relay : 0 ,
+			bwa : 0 ,
+			bwc : 0 ,
+			pbr : 0 ,
+			pbg : 0 ,
+			pbm : 0 ,
+			pbe : 0
+		};
+		
+		values.forEach( function(v) {						//	TODO	PSEUDO CODE AHEAD
+			var asAquired = false;
+			var asPos = 0 ;									//	autosys.length
+			var ccAquired = false;
+			var ccPos = 0 ;									//	countries.length
+			for ( var i = 0; i < autosys.length; i++ ) {	//	first check if the AS was already acquired
+				if ( autosys[i].as == v.as) {
+					asAquired = true;
+					asPos = i;								//	and if yes, get it's position in the array
+					break;									
+				}
+			};
+			if (!asAquired) {								//	TODO	is this initialization really necessary?
+				autosys[0] = asObject;
+				autosys[0].countries[0] = ccObject;
+				autosys[asPos].as = v.as;
+				autosys[asPos].name = v.name;
+				autosys[asPos].home = v.home;
 			}
-			autosys.#asObject#.relay += 1 ,
-			autosys.#asObject#.bwa += v.bwa ,
-			autosys.#asObject#.bwc += v.bwc ,
-			autosys.#asObject#.fast += v.fast ,
-			autosys.#asObject#.stable += v.stable ,
-			autosys.#asObject#.guard += v.guard ,
-			autosys.#asObject#.middle += v.middle ,
-			autosys.#asObject#.exit += v.exit ,
-			autosys.#asObject#.dir += v.dir ,
-			autosys.#asObject#.pbr += v.pbr ,
-			autosys.#asObject#.pbg += v.pbg ,
-			autosys.#asObject#.pbm += v.pbm ,
-			autosys.#asObject#.pbe += v.pbe ,
+			autosys[asPos].relay += 1 ,
+			autosys[asPos].bwa += v.bwa ,
+			autosys[asPos].bwc += v.bwc ,
+			autosys[asPos].fast += v.fast ,
+			autosys[asPos].stable += v.stable ,
+			autosys[asPos].guard += v.guard ,
+			autosys[asPos].middle += v.middle ,
+			autosys[asPos].exit += v.exit ,
+			autosys[asPos].dir += v.dir ,
+			autosys[asPos].pbr += v.pbr ,
+			autosys[asPos].pbg += v.pbg ,
+			autosys[asPos].pbm += v.pbm ,
+			autosys[asPos].pbe += v.pbe ,
 			
-			if (autosys.objects.as.countries !contains country-field with value v.countries.country) {		//	PSEUDO CODE
-				#asObject#.as.countries.#countryObject# = v.countries.country;
-				#asObject#.as.countries.#countryObject#name = v.name;
-				#asObject#.as.countries.#countryObject#home = v.home;
-				push #asObject#.as.countries.#countryObject# to autosys;
+			if (asAquired) {								//	for aquired AS check if country was already aquired
+				for ( var i = 0; i < autosys[asPos].countries.length; i++ ) {	
+					if ( autosys[asPos].countries[i].cc == v.cc) {
+						ccAquired = true;
+						ccPos = i;
+						break;									
+					}
+				};
+			};
+			if (!ccAquired) {
+				autosys[asPos].countries[i].cc = v.countries.cc;
 			}
-			autosys.#asObject#.countries.#countryObject#.cc : "",			// ui
-			autosys.#asObject#.countries.#countryObject#.relay += v.relay ,
-			autosys.#asObject#.countries.#countryObject#.bwa += v.bwa ,
-			autosys.#asObject#.countries.#countryObject#.bwc += v.bwc ,
-			autosys.#asObject#.countries.#countryObject#.pbr += v.pbr ,
-			autosys.#asObject#.countries.#countryObject#.pbg += v.pbg ,
-			autosys.#asObject#.countries.#countryObject#.pbm += v.pbm ,
-			autosys.#asObject#.countries.#countryObject#.pbe += v.pbe
-				
+			autosys[asPos].countries[ccPos].relay += v.relay ,
+			autosys[asPos].countries[ccPos].bwa += v.countries.bwa ,
+			autosys[asPos].countries[ccPos].bwc += v.countries.bwc ,
+			autosys[asPos].countries[ccPos].pbr += v.countries.pbr ,
+			autosys[asPos].countries[ccPos].pbg += v.countries.pbg ,
+			autosys[asPos].countries[ccPos].pbm += v.countries.pbm ,
+			autosys[asPos].countries[ccPos].pbe += v.countries.pbe
 		}
 		
 		return fact;
