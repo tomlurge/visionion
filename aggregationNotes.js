@@ -265,7 +265,7 @@ var reduceFunction = function(key, values) {
         		}
         	}
         )
-        if (v.year == 0) {								//	year:0 switch
+        if (v.year == 0) {						//	year:0 switch
             outs.overall = v.overall;
             outs.subscore = v.subscore;
         }
@@ -497,9 +497,9 @@ var reduceFunction = function(key, values) {
 		avg_time:0
 	};
 	values.forEach(	function(value) {			//	forEach statt (i=0;i<length;i++) loop
-		reducedObject.total += value.total;		//	nun wird auf reduced_object
-		reducedObject.count += value.count;		//	ein wenig rumgerödelt
-					}
+			reducedObject.total += value.total;	//	nun wird auf reduced_object
+			reducedObject.count += value.count;	//	ein wenig rumgerödelt
+		}
 	);
 	return reducedObject;						//	und fertig ist die laube
 };

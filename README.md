@@ -732,6 +732,15 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 This is still sketchy. More input and ideas on handling AS would be welcome. 
 
 
+_aggregate unique items_
+maybe it would be useful to have a special collection called
+	uniqueItems
+that contains arrays of all values that ever turned up for a given field, e.g.
+	countries
+	autonomous systems
+	nicknames
+wouldn't it?
+
 
 _uptimes_    
 A node may not be online in every part of an aggregated timespan. 

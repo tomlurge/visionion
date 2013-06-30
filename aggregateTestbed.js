@@ -1,6 +1,8 @@
-﻿//	MAPPING 2 COLLECTIONS INTO 1 RESULT
+﻿
+//	MAPPING 2 COLLECTIONS INTO 1 RESULT - VERSION #1
 //	http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how/8746805#8746805
-//	intercepting non-existant fields in reduce step 
+db.users_comments.remove();
+//	intercept non-existant fields in reduce step 
 var mapUsers, mapComments, reduce;
 //	setup sample data - wouldn't actually use this in production
 db.users.remove();
@@ -8,7 +10,7 @@ db.comments.remove();
 db.users.save({firstName:"Rich",lastName:"S",gender:"M",country:"CA",age:"18"});
 db.users.save({firstName:"Rob",lastName:"M",gender:"M",country:"US",age:"25"});
 db.users.save({firstName:"Sarah",lastName:"T",gender:"F",country:"US",age:"13"});
-var users = db.users.find(); //	muss er das machen, um im nächsten schritt auf users[i]._id zugreifen zu können?
+var users = db.users.find(); 	//	um im nächsten schritt auf users[i]._id zugreifen zu können
 db.comments.save({userId: users[0]._id, "comment": "Hey, what's up?", created: new ISODate()});
 db.comments.save({userId: users[1]._id, "comment": "Not much", created: new ISODate()});
 db.comments.save({userId: users[0]._id, "comment": "Cool", created: new ISODate()});
@@ -43,15 +45,10 @@ var reduce = function(k, values) {
                 result.comments = [];
             }
             result.comments.push(value);
-        } else if ("comments" in value) {
-            if (!("comments" in result)) {
-                result.comments = [];
-            }
-            result.comments.push.apply(result.comments, value.comments);
         }
         for (field in value) {
-            if (value.hasOwnProperty(field) && !(field in commentFields)) {
-                result[field] = value[field];
+            if (value.hasOwnProperty(field) && !(field in commentFields)) {	
+                	result[field] = value[field];	
             }
         }
     });
@@ -76,7 +73,8 @@ all fields are preserved,
 regardless of their occurrence in all or only some of the mapped  collections 
 not sure though if and how the reduce function could be simplyfied any further
 */
-db.users_comments.remove();
 db.users.mapReduce(mapUsers, reduce, {"out": {"reduce": "users_comments"}});
 db.comments.mapReduce(mapComments, reduce, {"out": {"reduce": "users_comments"}});
 db.users_comments.find().pretty(); // see the resulting collection
+
+
