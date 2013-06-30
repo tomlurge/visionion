@@ -1012,9 +1012,9 @@ var reduceClients = function ( key, values ) {
 	return fact;
 }
 
-//	reduceServersRelayss and reduceServersBridgess are exact duplicates and could be reduced to one, 
+//	reduceServersRelays and reduceServersBridgess are exact duplicates and could be reduced to one, 
 //	but for the sake of readability i'm leaving them alone for now
-var reduceServersRelayss = function ( key, values ) {	
+var reduceServersRelays = function ( key, values ) {	
 	var v;
 	var temp = {
 		count : 0 ,
