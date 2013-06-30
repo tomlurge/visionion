@@ -57,3 +57,21 @@ var date = "2013-04-03 21";
 
 db.testFact.remove();
 doit();
+
+
+/*	WHAT THE RESULT SHOULD BE
+
+	servers: {
+		count: int,
+		bwa: int,
+		bwc: int,
+		osv: {
+			linux: int,
+			darwin: int,
+			freebsd: int,
+			windows: int,
+			other: int
+		}
+	}
+	
+*/
