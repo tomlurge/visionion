@@ -1213,17 +1213,15 @@ var mapAutosys = function() {
 var reduceClients = function ( key, values ) {
 	var v;
 	var fact = {	
-		clients : {
-			total : 0 ,
-			atBridges : 0 ,
-			atRelays : 0 ,
-			cip4 : 0 ,
-			cip6 : 0 ,
-			cptObfs2 : 0 ,
-			cptObfs3 : 0 ,
-			cptOR : 0 ,
-			cptUnknown : 0
-		}
+		clients.total : 0 ,
+		clients.atBridges : 0 ,
+		clients.atRelays : 0 ,
+		clients.cip4 : 0 ,
+		clients.cip6 : 0 ,
+		clients.cptObfs2 : 0 ,
+		clients.cptObfs3 : 0 ,
+		clients.cpt<OR> : 0 ,
+		clients.cpt<??> : 0
 	};
 	values.forEach( function(v) { 
 		fact.clients.total += v.clients.total;
@@ -1233,8 +1231,8 @@ var reduceClients = function ( key, values ) {
 		fact.clients.cip6 += v.clients.cip6 ;
 		fact.clients.cptObfs2 += v.clients.cptObfs2 ;
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
-		fact.clients.cptOR += v.clients.cptOR ;
-		fact.clients.cptUnknown += v.clients.cptUnknown ;
+		fact.clients.cpt<OR> += v.clients.cpt<OR> ;
+		fact.clients.cpt<??> += v.clients.cpt<??> ;
 	});
 	return fact;
 };
@@ -1247,23 +1245,19 @@ var reduceServersRelays = function ( key, values ) {
 		count : 0 ,
 		bwa : 0 ,
 		bwc : 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		}
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0
 	};
 	values.forEach( function(v) {
 		temp.count += 1 ;
@@ -1292,23 +1286,19 @@ var reduceServersBridgess = function ( key, values ) {
 		count : 0 ,
 		bwa : 0 ,
 		bwc : 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		}								
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0									
 	};
 	values.forEach( function(v) {
 		temp.count += 1 ;	
@@ -1338,23 +1328,19 @@ var reduceServers = function ( key, values ) {
 		count : 0 ,
 		bwa : 0 ,
 		bwc : 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		}							
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0									
 	};
 	values.forEach( function(v) {
 		fact.count += v.count ;							//	while reduceServersRelays and reduceServersBridges count the raw data 1 by 1, 
@@ -1381,186 +1367,141 @@ var reduceServers = function ( key, values ) {
 var reduceBridges = function ( key, values ) {
 	var v;
 	var fact = {										
-		servers : {
-			bridges : {
-				total : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brpEmail : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brpHttps : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brpOther : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				breTrue : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brtObfs2 : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brtObfs3 : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				} ,
-				brtObfs23 : {
-					count : 0 ,
-					bwa : 0 ,
-					bwc : 0 ,
-					osv : {
-						linux : 0 ,
-						darwin : 0 ,
-						freebsd : 0 ,
-						windows : 0 ,
-						other : 0
-					} ,
-					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
-					}
-				}
-			}
-		}
+		servers.bridges.total.count : 0 ;
+		servers.bridges.total.bwa : 0 ;
+		servers.bridges.total.bwc : 0 ;
+		servers.bridges.total.osv.linux : 0 ;
+		servers.bridges.total.osv.darwin : 0 ;
+		servers.bridges.total.osv.freebsd : 0 ;
+		servers.bridges.total.osv.windows : 0 ;
+		servers.bridges.total.osv.other : 0 ;
+		servers.bridges.total.tsv.010 : 0 ;
+		servers.bridges.total.tsv.011 : 0 ;
+		servers.bridges.total.tsv.012 : 0 ;
+		servers.bridges.total.tsv.020 : 0 ;
+		servers.bridges.total.tsv.021 : 0 ;
+		servers.bridges.total.tsv.022 : 0 ;
+		servers.bridges.total.tsv.023 : 0 ;
+		servers.bridges.total.tsv.024 : 0 ;
+		
+		servers.bridges.brpEmail.count : 0 ;
+		servers.bridges.brpEmail.bwa : 0 ;
+		servers.bridges.brpEmail.bwc : 0 ;
+		servers.bridges.brpEmail.osv.linux : 0 ;
+		servers.bridges.brpEmail.osv.darwin : 0 ;
+		servers.bridges.brpEmail.osv.freebsd : 0 ;
+		servers.bridges.brpEmail.osv.windows : 0 ;
+		servers.bridges.brpEmail.osv.other : 0 ;
+		servers.bridges.brpEmail.tsv.010 : 0 ;
+		servers.bridges.brpEmail.tsv.011 : 0 ;
+		servers.bridges.brpEmail.tsv.012 : 0 ;
+		servers.bridges.brpEmail.tsv.020 : 0 ;
+		servers.bridges.brpEmail.tsv.021 : 0 ;
+		servers.bridges.brpEmail.tsv.022 : 0 ;
+		servers.bridges.brpEmail.tsv.023 : 0 ;
+		servers.bridges.brpEmail.tsv.024 : 0 ;
+	
+		servers.bridges.brpHttps.count : 0 ;
+		servers.bridges.brpHttps.bwa : 0 ;
+		servers.bridges.brpHttps.bwc : 0 ;
+		servers.bridges.brpHttps.osv.linux : 0 ;
+		servers.bridges.brpHttps.osv.darwin : 0 ;
+		servers.bridges.brpHttps.osv.freebsd : 0 ;
+		servers.bridges.brpHttps.osv.windows : 0 ;
+		servers.bridges.brpHttps.osv.other : 0 ;
+		servers.bridges.brpHttps.tsv.010 : 0 ;
+		servers.bridges.brpHttps.tsv.011 : 0 ;
+		servers.bridges.brpHttps.tsv.012 : 0 ;
+		servers.bridges.brpHttps.tsv.020 : 0 ;
+		servers.bridges.brpHttps.tsv.021 : 0 ;
+		servers.bridges.brpHttps.tsv.022 : 0 ;
+		servers.bridges.brpHttps.tsv.023 : 0 ;
+		servers.bridges.brpHttps.tsv.024 : 0 ;
+	
+		servers.bridges.brpOther.count : 0 ;
+		servers.bridges.brpOther.bwa : 0 ;
+		servers.bridges.brpOther.bwc : 0 ;
+		servers.bridges.brpOther.osv.linux : 0 ;
+		servers.bridges.brpOther.osv.darwin : 0 ;
+		servers.bridges.brpOther.osv.freebsd : 0 ;
+		servers.bridges.brpOther.osv.windows : 0 ;
+		servers.bridges.brpOther.osv.other : 0 ;
+		servers.bridges.brpOther.tsv.010 : 0 ;
+		servers.bridges.brpOther.tsv.011 : 0 ;
+		servers.bridges.brpOther.tsv.012 : 0 ;
+		servers.bridges.brpOther.tsv.020 : 0 ;
+		servers.bridges.brpOther.tsv.021 : 0 ;
+		servers.bridges.brpOther.tsv.022 : 0 ;
+		servers.bridges.brpOther.tsv.023 : 0 ;
+		servers.bridges.brpOther.tsv.024 : 0 ;
+	
+		servers.bridges.breTrue.count : 0 ;
+		servers.bridges.breTrue.bwa : 0 ;
+		servers.bridges.breTrue.bwc : 0 ;
+		servers.bridges.breTrue.osv.linux : 0 ;
+		servers.bridges.breTrue.osv.darwin : 0 ;
+		servers.bridges.breTrue.osv.freebsd : 0 ;
+		servers.bridges.breTrue.osv.windows : 0 ;
+		servers.bridges.breTrue.osv.other : 0 ;
+		servers.bridges.breTrue.tsv.010 : 0 ;
+		servers.bridges.breTrue.tsv.011 : 0 ;
+		servers.bridges.breTrue.tsv.012 : 0 ;
+		servers.bridges.breTrue.tsv.020 : 0 ;
+		servers.bridges.breTrue.tsv.021 : 0 ;
+		servers.bridges.breTrue.tsv.022 : 0 ;
+		servers.bridges.breTrue.tsv.023 : 0 ;
+		servers.bridges.breTrue.tsv.024 : 0 ;
+	
+		servers.bridges.brtObfs2.count : 0 ;
+		servers.bridges.brtObfs2.bwa : 0 ;
+		servers.bridges.brtObfs2.bwc : 0 ;
+		servers.bridges.brtObfs2.osv.linux : 0 ;
+		servers.bridges.brtObfs2.osv.darwin : 0 ;
+		servers.bridges.brtObfs2.osv.freebsd : 0 ;
+		servers.bridges.brtObfs2.osv.windows : 0 ;
+		servers.bridges.brtObfs2.osv.other : 0 ;
+		servers.bridges.brtObfs2.tsv.010 : 0 ;
+		servers.bridges.brtObfs2.tsv.011 : 0 ;
+		servers.bridges.brtObfs2.tsv.012 : 0 ;
+		servers.bridges.brtObfs2.tsv.020 : 0 ;
+		servers.bridges.brtObfs2.tsv.021 : 0 ;
+		servers.bridges.brtObfs2.tsv.022 : 0 ;
+		servers.bridges.brtObfs2.tsv.023 : 0 ;
+		servers.bridges.brtObfs2.tsv.024 : 0 ;
+		
+		servers.bridges.brtObfs3.count : 0 ;
+		servers.bridges.brtObfs3.bwa : 0 ;
+		servers.bridges.brtObfs3.bwc : 0 ;
+		servers.bridges.brtObfs3.osv.linux : 0 ;
+		servers.bridges.brtObfs3.osv.darwin : 0 ;
+		servers.bridges.brtObfs3.osv.freebsd : 0 ;
+		servers.bridges.brtObfs3.osv.windows : 0 ;
+		servers.bridges.brtObfs3.osv.other : 0 ;
+		servers.bridges.brtObfs3.tsv.010 : 0 ;
+		servers.bridges.brtObfs3.tsv.011 : 0 ;
+		servers.bridges.brtObfs3.tsv.012 : 0 ;
+		servers.bridges.brtObfs3.tsv.020 : 0 ;
+		servers.bridges.brtObfs3.tsv.021 : 0 ;
+		servers.bridges.brtObfs3.tsv.022 : 0 ;
+		servers.bridges.brtObfs3.tsv.023 : 0 ;
+		servers.bridges.brtObfs3.tsv.024 : 0 ;
+		
+		servers.bridges.brtObfs23.count : 0 ;
+		servers.bridges.brtObfs23.bwa : 0 ;
+		servers.bridges.brtObfs23.bwc : 0 ;
+		servers.bridges.brtObfs23.osv.linux : 0 ;
+		servers.bridges.brtObfs23.osv.darwin : 0 ;
+		servers.bridges.brtObfs23.osv.freebsd : 0 ;
+		servers.bridges.brtObfs23.osv.windows : 0 ;
+		servers.bridges.brtObfs23.osv.other : 0 ;
+		servers.bridges.brtObfs23.tsv.010 : 0 ;
+		servers.bridges.brtObfs23.tsv.011 : 0 ;
+		servers.bridges.brtObfs23.tsv.012 : 0 ;
+		servers.bridges.brtObfs23.tsv.020 : 0 ;
+		servers.bridges.brtObfs23.tsv.021 : 0 ;
+		servers.bridges.brtObfs23.tsv.022 : 0 ;
+		servers.bridges.brtObfs23.tsv.023 : 0 ;
+		servers.bridges.brtObfs23.tsv.024 : 0
 	};
 	values.forEach( function(v) {
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
@@ -1705,570 +1646,438 @@ var reduceBridges = function ( key, values ) {
 var reduceRelays = function ( key, values ) {
 	var v;
 	var fact = {
-		servers : {
-			relays : {
-				roleAll : {
-					total : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbr : 0
-					} ,
-					flagNone : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbr : 0
-					} ,
-					flagStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbr : 0
-					} ,
-					flagFast : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbr : 0
-					} ,
-					flagFastStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbr : 0
-					}
-				} ,
+		servers.relays.roleAll.total.count : 0 ;
+		servers.relays.roleAll.total.bwa : 0 ;
+		servers.relays.roleAll.total.bwc : 0 ;
+		servers.relays.roleAll.total.osv.linux : 0 ;
+		servers.relays.roleAll.total.osv.darwin : 0 ;
+		servers.relays.roleAll.total.osv.freebsd : 0 ;
+		servers.relays.roleAll.total.osv.windows : 0 ;
+		servers.relays.roleAll.total.osv.other : 0 ;
+		servers.relays.roleAll.total.tsv.010 : 0 ;
+		servers.relays.roleAll.total.tsv.011 : 0 ;
+		servers.relays.roleAll.total.tsv.012 : 0 ;
+		servers.relays.roleAll.total.tsv.020 : 0 ;
+		servers.relays.roleAll.total.tsv.021 : 0 ;
+		servers.relays.roleAll.total.tsv.022 : 0 ;
+		servers.relays.roleAll.total.tsv.023 : 0 ;
+		servers.relays.roleAll.total.tsv.024 : 0 ;
+		servers.relays.roleAll.total.pbr : 0 ;
+		
+		servers.relays.roleAll.flagNone.count : 0 ;
+		servers.relays.roleAll.flagNone.bwa : 0 ;
+		servers.relays.roleAll.flagNone.bwc : 0 ;
+		servers.relays.roleAll.flagNone.osv.linux : 0 ;
+		servers.relays.roleAll.flagNone.osv.darwin : 0 ;
+		servers.relays.roleAll.flagNone.osv.freebsd : 0 ;
+		servers.relays.roleAll.flagNone.osv.windows : 0 ;
+		servers.relays.roleAll.flagNone.osv.other : 0 ;
+		servers.relays.roleAll.flagNone.tsv.010 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.011 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.012 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.020 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.021 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.022 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.023 : 0 ;
+		servers.relays.roleAll.flagNone.tsv.024 : 0 ;
+		servers.relays.roleAll.flagNone.pbr : 0 ;
+		
+		servers.relays.roleAll.flagStable.count : 0 ;
+		servers.relays.roleAll.flagStable.bwa : 0 ;
+		servers.relays.roleAll.flagStable.bwc : 0 ;
+		servers.relays.roleAll.flagStable.osv.linux : 0 ;
+		servers.relays.roleAll.flagStable.osv.darwin : 0 ;
+		servers.relays.roleAll.flagStable.osv.freebsd : 0 ;
+		servers.relays.roleAll.flagStable.osv.windows : 0 ;
+		servers.relays.roleAll.flagStable.osv.other : 0 ;
+		servers.relays.roleAll.flagStable.tsv.010 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.011 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.012 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.020 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.021 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.022 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.023 : 0 ;
+		servers.relays.roleAll.flagStable.tsv.024 : 0 ;
+		servers.relays.roleAll.flagStable.pbr : 0 ;
+		
+		servers.relays.roleAll.flagFast.count : 0 ;
+		servers.relays.roleAll.flagFast.bwa : 0 ;
+		servers.relays.roleAll.flagFast.bwc : 0 ;
+		servers.relays.roleAll.flagFast.osv.linux : 0 ;
+		servers.relays.roleAll.flagFast.osv.darwin : 0 ;
+		servers.relays.roleAll.flagFast.osv.freebsd : 0 ;
+		servers.relays.roleAll.flagFast.osv.windows : 0 ;
+		servers.relays.roleAll.flagFast.osv.other : 0 ;
+		servers.relays.roleAll.flagFast.tsv.010 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.011 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.012 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.020 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.021 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.022 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.023 : 0 ;
+		servers.relays.roleAll.flagFast.tsv.024 : 0 ;
+		servers.relays.roleAll.flagFast.pbr : 0 ;
+
+		servers.relays.roleAll.flagFastStable.count : 0 ;
+		servers.relays.roleAll.flagFastStable.bwa : 0 ;
+		servers.relays.roleAll.flagFastStable.bwc : 0 ;
+		servers.relays.roleAll.flagFastStable.osv.linux : 0 ;
+		servers.relays.roleAll.flagFastStable.osv.darwin : 0 ;
+		servers.relays.roleAll.flagFastStable.osv.freebsd : 0 ;
+		servers.relays.roleAll.flagFastStable.osv.windows : 0 ;
+		servers.relays.roleAll.flagFastStable.osv.other : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.010 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.011 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.012 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.020 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.021 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.022 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.023 : 0 ;
+		servers.relays.roleAll.flagFastStable.tsv.024 : 0 ;
+		servers.relays.roleAll.flagFastStable.pbr : 0 ;			
+		
+		// GUARD
+		servers.relays.roleGuard.total.count : 0 ;
+		servers.relays.roleGuard.total.bwa : 0 ;
+		servers.relays.roleGuard.total.bwc : 0 ;
+		servers.relays.roleGuard.total.osv.linux : 0 ;
+		servers.relays.roleGuard.total.osv.darwin : 0 ;
+		servers.relays.roleGuard.total.osv.freebsd : 0 ;
+		servers.relays.roleGuard.total.osv.windows : 0 ;
+		servers.relays.roleGuard.total.osv.other : 0 ;
+		servers.relays.roleGuard.total.tsv.010 : 0 ;
+		servers.relays.roleGuard.total.tsv.011 : 0 ;
+		servers.relays.roleGuard.total.tsv.012 : 0 ;
+		servers.relays.roleGuard.total.tsv.020 : 0 ;
+		servers.relays.roleGuard.total.tsv.021 : 0 ;
+		servers.relays.roleGuard.total.tsv.022 : 0 ;
+		servers.relays.roleGuard.total.tsv.023 : 0 ;
+		servers.relays.roleGuard.total.tsv.024 : 0 ;
+		servers.relays.roleGuard.total.pbg : 0 ;		
+		
+		servers.relays.roleGuard.flagNone.count : 0 ;
+		servers.relays.roleGuard.flagNone.bwa : 0 ;
+		servers.relays.roleGuard.flagNone.bwc : 0 ;
+		servers.relays.roleGuard.flagNone.osv.linux : 0 ;
+		servers.relays.roleGuard.flagNone.osv.darwin : 0 ;
+		servers.relays.roleGuard.flagNone.osv.freebsd : 0 ;
+		servers.relays.roleGuard.flagNone.osv.windows : 0 ;
+		servers.relays.roleGuard.flagNone.osv.other : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.010 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.011 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.012 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.020 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.021 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.022 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.023 : 0 ;
+		servers.relays.roleGuard.flagNone.tsv.024 : 0 ;
+		servers.relays.roleGuard.flagNone.pbg : 0 ;
+		
+		servers.relays.roleGuard.flagStable.count : 0 ;
+		servers.relays.roleGuard.flagStable.bwa : 0 ;
+		servers.relays.roleGuard.flagStable.bwc : 0 ;
+		servers.relays.roleGuard.flagStable.osv.linux : 0 ;
+		servers.relays.roleGuard.flagStable.osv.darwin : 0 ;
+		servers.relays.roleGuard.flagStable.osv.freebsd : 0 ;
+		servers.relays.roleGuard.flagStable.osv.windows : 0 ;
+		servers.relays.roleGuard.flagStable.osv.other : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.010 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.011 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.012 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.020 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.021 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.022 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.023 : 0 ;
+		servers.relays.roleGuard.flagStable.tsv.024 : 0 ;
+		servers.relays.roleGuard.flagStable.pbg : 0 ;			
+		
+		servers.relays.roleGuard.flagFast.count : 0 ;
+		servers.relays.roleGuard.flagFast.bwa : 0 ;
+		servers.relays.roleGuard.flagFast.bwc : 0 ;
+		servers.relays.roleGuard.flagFast.osv.linux : 0 ;
+		servers.relays.roleGuard.flagFast.osv.darwin : 0 ;
+		servers.relays.roleGuard.flagFast.osv.freebsd : 0 ;
+		servers.relays.roleGuard.flagFast.osv.windows : 0 ;
+		servers.relays.roleGuard.flagFast.osv.other : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.010 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.011 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.012 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.020 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.021 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.022 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.023 : 0 ;
+		servers.relays.roleGuard.flagFast.tsv.024 : 0 ;
+		servers.relays.roleGuard.flagFast.pbg : 0 ;
+
+		servers.relays.roleGuard.flagFastStable.count : 0 ;
+		servers.relays.roleGuard.flagFastStable.bwa : 0 ;
+		servers.relays.roleGuard.flagFastStable.bwc : 0 ;
+		servers.relays.roleGuard.flagFastStable.osv.linux : 0 ;
+		servers.relays.roleGuard.flagFastStable.osv.darwin : 0 ;
+		servers.relays.roleGuard.flagFastStable.osv.freebsd : 0 ;
+		servers.relays.roleGuard.flagFastStable.osv.windows : 0 ;
+		servers.relays.roleGuard.flagFastStable.osv.other : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.010 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.011 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.012 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.020 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.021 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.022 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.023 : 0 ;
+		servers.relays.roleGuard.flagFastStable.tsv.024 : 0 ;
+		servers.relays.roleGuard.flagFastStable.pbg : 0 ;
+		
+		// MIDDLE
+		servers.relays.roleMiddle.total.count : 0 ;
+		servers.relays.roleMiddle.total.bwa : 0 ;
+		servers.relays.roleMiddle.total.bwc : 0 ;
+		servers.relays.roleMiddle.total.osv.linux : 0 ;
+		servers.relays.roleMiddle.total.osv.darwin : 0 ;
+		servers.relays.roleMiddle.total.osv.freebsd : 0 ;
+		servers.relays.roleMiddle.total.osv.windows : 0 ;
+		servers.relays.roleMiddle.total.osv.other : 0 ;
+		servers.relays.roleMiddle.total.tsv.010 : 0 ;
+		servers.relays.roleMiddle.total.tsv.011 : 0 ;
+		servers.relays.roleMiddle.total.tsv.012 : 0 ;
+		servers.relays.roleMiddle.total.tsv.020 : 0 ;
+		servers.relays.roleMiddle.total.tsv.021 : 0 ;
+		servers.relays.roleMiddle.total.tsv.022 : 0 ;
+		servers.relays.roleMiddle.total.tsv.023 : 0 ;
+		servers.relays.roleMiddle.total.tsv.024 : 0 ;
+		servers.relays.roleMiddle.total.pbm : 0 ;
 				
-				// GUARD
-				roleGuard : {
-					total : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbg : 0
-					} ,
-					flagNone : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbg : 0
-					} ,
-					flagStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbg : 0
-					} ,
-					flagFast : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbg : 0
-					} ,
-					flagFastStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbg : 0
-					}
-				} ,
+		servers.relays.roleMiddle.flagNone.count : 0 ;
+		servers.relays.roleMiddle.flagNone.bwa : 0 ;
+		servers.relays.roleMiddle.flagNone.bwc : 0 ;
+		servers.relays.roleMiddle.flagNone.osv.linux : 0 ;
+		servers.relays.roleMiddle.flagNone.osv.darwin : 0 ;
+		servers.relays.roleMiddle.flagNone.osv.freebsd : 0 ;
+		servers.relays.roleMiddle.flagNone.osv.windows : 0 ;
+		servers.relays.roleMiddle.flagNone.osv.other : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.010 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.011 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.012 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.020 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.021 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.022 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.023 : 0 ;
+		servers.relays.roleMiddle.flagNone.tsv.024 : 0 ;
+		servers.relays.roleMiddle.flagNone.pbm : 0 ;
 		
-				// MIDDLE
-				roleMiddle : {
-					total : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbm : 0
-					} ,
-					flagNone : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbm : 0
-					} ,
-					flagStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbm : 0
-					} ,
-					flagFast : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbm : 0
-					} ,
-					flagFastStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbm : 0
-					}
-				} ,
+		servers.relays.roleMiddle.flagStable.count : 0 ;
+		servers.relays.roleMiddle.flagStable.bwa : 0 ;
+		servers.relays.roleMiddle.flagStable.bwc : 0 ;
+		servers.relays.roleMiddle.flagStable.osv.linux : 0 ;
+		servers.relays.roleMiddle.flagStable.osv.darwin : 0 ;
+		servers.relays.roleMiddle.flagStable.osv.freebsd : 0 ;
+		servers.relays.roleMiddle.flagStable.osv.windows : 0 ;
+		servers.relays.roleMiddle.flagStable.osv.other : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.010 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.011 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.012 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.020 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.021 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.022 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.023 : 0 ;
+		servers.relays.roleMiddle.flagStable.tsv.024 : 0 ;
+		servers.relays.roleMiddle.flagStable.pbm : 0 ;
+					
+		servers.relays.roleMiddle.flagFast.count : 0 ;
+		servers.relays.roleMiddle.flagFast.bwa : 0 ;
+		servers.relays.roleMiddle.flagFast.bwc : 0 ;
+		servers.relays.roleMiddle.flagFast.osv.linux : 0 ;
+		servers.relays.roleMiddle.flagFast.osv.darwin : 0 ;
+		servers.relays.roleMiddle.flagFast.osv.freebsd : 0 ;
+		servers.relays.roleMiddle.flagFast.osv.windows : 0 ;
+		servers.relays.roleMiddle.flagFast.osv.other : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.010 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.011 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.012 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.020 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.021 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.022 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.023 : 0 ;
+		servers.relays.roleMiddle.flagFast.tsv.024 : 0 ;
+		servers.relays.roleMiddle.flagFast.pbm : 0 ;
+
+		servers.relays.roleMiddle.flagFastStable.count : 0 ;
+		servers.relays.roleMiddle.flagFastStable.bwa : 0 ;
+		servers.relays.roleMiddle.flagFastStable.bwc : 0 ;
+		servers.relays.roleMiddle.flagFastStable.osv.linux : 0 ;
+		servers.relays.roleMiddle.flagFastStable.osv.darwin : 0 ;
+		servers.relays.roleMiddle.flagFastStable.osv.freebsd : 0 ;
+		servers.relays.roleMiddle.flagFastStable.osv.windows : 0 ;
+		servers.relays.roleMiddle.flagFastStable.osv.other : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.010 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.011 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.012 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.020 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.021 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.022 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.023 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.tsv.024 : 0 ;
+		servers.relays.roleMiddle.flagFastStable.pbm : 0 ;
 		
-				// EXIT
-				roleExit : {
-					total : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
-						} ,
-						pbe : 0
-					} ,
-					flagNone : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
-						} ,
-						pbe : 0
-					} ,
-					flagStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pbe : 0
-					} ,
-					flagFast : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
-						} ,
-						pbe : 0
-					} ,
-					flagFastStable : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						} ,
-						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
-						} ,
-						pbe : 0
-					}
-				} ,
+		// EXIT
+		servers.relays.roleExit.total.count : 0 ;
+		servers.relays.roleExit.total.bwa : 0 ;
+		servers.relays.roleExit.total.bwc : 0 ;
+		servers.relays.roleExit.total.osv.linux : 0 ;
+		servers.relays.roleExit.total.osv.darwin : 0 ;
+		servers.relays.roleExit.total.osv.freebsd : 0 ;
+		servers.relays.roleExit.total.osv.windows : 0 ;
+		servers.relays.roleExit.total.osv.other : 0 ;
+		servers.relays.roleExit.total.tsv.010 : 0 ;
+		servers.relays.roleExit.total.tsv.011 : 0 ;
+		servers.relays.roleExit.total.tsv.012 : 0 ;
+		servers.relays.roleExit.total.tsv.020 : 0 ;
+		servers.relays.roleExit.total.tsv.021 : 0 ;
+		servers.relays.roleExit.total.tsv.022 : 0 ;
+		servers.relays.roleExit.total.tsv.023 : 0 ;
+		servers.relays.roleExit.total.tsv.024 : 0 ;
+		servers.relays.roleExit.total.pex.4 : 0 ;
+		servers.relays.roleExit.total.pex.6 : 0 ;
+		servers.relays.roleExit.total.pex.8 : 0 ;
+		servers.relays.roleExit.total.pex.46 : 0 ;
+		servers.relays.roleExit.total.pex.48 : 0 ;
+		servers.relays.roleExit.total.pex.68 : 0 ;
+		servers.relays.roleExit.total.pex.468 : 0 ;
+		servers.relays.roleExit.total.pbe : 0 ;
+					
+		servers.relays.roleExit.flagNone.count : 0 ;
+		servers.relays.roleExit.flagNone.bwa : 0 ;
+		servers.relays.roleExit.flagNone.bwc : 0 ;
+		servers.relays.roleExit.flagNone.osv.linux : 0 ;
+		servers.relays.roleExit.flagNone.osv.darwin : 0 ;
+		servers.relays.roleExit.flagNone.osv.freebsd : 0 ;
+		servers.relays.roleExit.flagNone.osv.windows : 0 ;
+		servers.relays.roleExit.flagNone.osv.other : 0 ;
+		servers.relays.roleExit.flagNone.tsv.010 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.011 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.012 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.020 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.021 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.022 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.023 : 0 ;
+		servers.relays.roleExit.flagNone.tsv.024 : 0 ;
+		servers.relays.roleExit.flagNone.pex.4 : 0 ;
+		servers.relays.roleExit.flagNone.pex.6 : 0 ;
+		servers.relays.roleExit.flagNone.pex.8 : 0 ;
+		servers.relays.roleExit.flagNone.pex.46 : 0 ;
+		servers.relays.roleExit.flagNone.pex.48 : 0 ;
+		servers.relays.roleExit.flagNone.pex.68 : 0 ;
+		servers.relays.roleExit.flagNone.pex.468 : 0 ;
+		servers.relays.roleExit.flagNone.pbe : 0 ;
 		
-				// DIR
-				roleDir : {
-					total : {
-						count : 0 ,
-						bwa : 0 ,
-						bwc : 0 ,
-						osv : {
-							linux : 0 ,
-							darwin : 0 ,
-							freebsd : 0 ,
-							windows : 0 ,
-							other : 0
-						} ,
-						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
-						}
-					} ,
-					authorityTrue : {
-						total : {
-							count : 0 ,
-							bwa : 0 ,
-							bwc : 0 ,
-							osv : {
-								linux : 0 ,
-								darwin : 0 ,
-								freebsd : 0 ,
-								windows : 0 ,
-								other : 0
-							} ,
-							tsv : {
-								010 : 0 ,
-								011 : 0 ,
-								012 : 0 ,
-								020 : 0 ,
-								021 : 0 ,
-								022 : 0 ,
-								023 : 0 ,
-								024 : 0
-							}
-						}
-					}
-				}
-			}
-		}
+		servers.relays.roleExit.flagFast.count : 0 ;
+		servers.relays.roleExit.flagFast.bwa : 0 ;
+		servers.relays.roleExit.flagFast.bwc : 0 ;
+		servers.relays.roleExit.flagFast.osv.linux : 0 ;
+		servers.relays.roleExit.flagFast.osv.darwin : 0 ;
+		servers.relays.roleExit.flagFast.osv.freebsd : 0 ;
+		servers.relays.roleExit.flagFast.osv.windows : 0 ;
+		servers.relays.roleExit.flagFast.osv.other : 0 ;
+		servers.relays.roleExit.flagFast.tsv.010 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.011 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.012 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.020 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.021 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.022 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.023 : 0 ;
+		servers.relays.roleExit.flagFast.tsv.024 : 0 ;
+		servers.relays.roleExit.flagFast.pex.4 : 0 ;
+		servers.relays.roleExit.flagFast.pex.6 : 0 ;
+		servers.relays.roleExit.flagFast.pex.8 : 0 ;
+		servers.relays.roleExit.flagFast.pex.46 : 0 ;
+		servers.relays.roleExit.flagFast.pex.48 : 0 ;
+		servers.relays.roleExit.flagFast.pex.68 : 0 ;
+		servers.relays.roleExit.flagFast.pex.468 : 0 ;
+		servers.relays.roleExit.flagFast.pbe : 0 ;
+		
+		servers.relays.roleExit.flagStable.count : 0 ;
+		servers.relays.roleExit.flagStable.bwa : 0 ;
+		servers.relays.roleExit.flagStable.bwc : 0 ;
+		servers.relays.roleExit.flagStable.osv.linux : 0 ;
+		servers.relays.roleExit.flagStable.osv.darwin : 0 ;
+		servers.relays.roleExit.flagStable.osv.freebsd : 0 ;
+		servers.relays.roleExit.flagStable.osv.windows : 0 ;
+		servers.relays.roleExit.flagStable.osv.other : 0 ;
+		servers.relays.roleExit.flagStable.tsv.010 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.011 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.012 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.020 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.021 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.022 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.023 : 0 ;
+		servers.relays.roleExit.flagStable.tsv.024 : 0 ;
+		servers.relays.roleExit.flagStable.pex.4 : 0 ;
+		servers.relays.roleExit.flagStable.pex.6 : 0 ;
+		servers.relays.roleExit.flagStable.pex.8 : 0 ;
+		servers.relays.roleExit.flagStable.pex.46 : 0 ;
+		servers.relays.roleExit.flagStable.pex.48 : 0 ;
+		servers.relays.roleExit.flagStable.pex.68 : 0 ;
+		servers.relays.roleExit.flagStable.pex.468 : 0 ;
+		servers.relays.roleExit.flagStable.pbe : 0 ;
+		
+		servers.relays.roleExit.flagFastStable.count : 0 ;
+		servers.relays.roleExit.flagFastStable.bwa : 0 ;
+		servers.relays.roleExit.flagFastStable.bwc : 0 ;
+		servers.relays.roleExit.flagFastStable.osv.linux : 0 ;
+		servers.relays.roleExit.flagFastStable.osv.darwin : 0 ;
+		servers.relays.roleExit.flagFastStable.osv.freebsd : 0 ;
+		servers.relays.roleExit.flagFastStable.osv.windows : 0 ;
+		servers.relays.roleExit.flagFastStable.osv.other : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.010 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.011 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.012 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.020 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.021 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.022 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.023 : 0 ;
+		servers.relays.roleExit.flagFastStable.tsv.024 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.4 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.6 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.8 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.46 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.48 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.68 : 0 ;
+		servers.relays.roleExit.flagFastStable.pex.468 : 0 ;
+		servers.relays.roleExit.flagFastStable.pbe : 0 ;		
+		
+		// DIR
+		servers.relays.roleDir.total.count : 0 ;
+		servers.relays.roleDir.total.bwa : 0 ;
+		servers.relays.roleDir.total.bwc : 0 ;
+		servers.relays.roleDir.total.osv.linux : 0 ;
+		servers.relays.roleDir.total.osv.darwin : 0 ;
+		servers.relays.roleDir.total.osv.freebsd : 0 ;
+		servers.relays.roleDir.total.osv.windows : 0 ;
+		servers.relays.roleDir.total.osv.other : 0 ;
+		servers.relays.roleDir.total.tsv.010 : 0 ;
+		servers.relays.roleDir.total.tsv.011 : 0 ;
+		servers.relays.roleDir.total.tsv.012 : 0 ;
+		servers.relays.roleDir.total.tsv.020 : 0 ;
+		servers.relays.roleDir.total.tsv.021 : 0 ;
+		servers.relays.roleDir.total.tsv.022 : 0 ;
+		servers.relays.roleDir.total.tsv.023 : 0 ;
+		servers.relays.roleDir.total.tsv.024 : 0 ;		
+		
+		servers.relays.roleDir.authorityTrue.count : 0 ;
+		servers.relays.roleDir.authorityTrue.bwa : 0 ;
+		servers.relays.roleDir.authorityTrue.bwc : 0 ;
+		servers.relays.roleDir.authorityTrue.osv.linux : 0 ;
+		servers.relays.roleDir.authorityTrue.osv.darwin : 0 ;
+		servers.relays.roleDir.authorityTrue.osv.freebsd : 0 ;
+		servers.relays.roleDir.authorityTrue.osv.windows : 0 ;
+		servers.relays.roleDir.authorityTrue.osv.other : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.010 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.011 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.012 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.020 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.021 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.022 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.023 : 0 ;
+		servers.relays.roleDir.authorityTrue.tsv.024 : 0
 	};	
 	values.forEach( function(v) {
 		fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;
@@ -2726,32 +2535,26 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 		pbe: 0.0 ,
 		fast: 0 ,
 		stable: 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		} ,
-		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
-		} ,
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0 ,
+		pex.4 : 0 ,
+		pex.6 : 0 ,
+		pex.8 : 0 ,
+		pex.46 : 0 ,
+		pex.48 : 0 ,
+		pex.68 : 0 ,
+		pex.468 : 0 ,
 		as: "" 				
 	};
 	values.forEach( function(v) {						// 	not much happening here since clients are already aggregated
@@ -2815,32 +2618,26 @@ var reduceCountriesRelays = function ( key, values ) {
 		pbe: 0.0 ,
 		fast: 0 ,
 		stable: 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		} ,
-		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
-		} ,
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0 ,
+		pex.4 : 0 ,
+		pex.6 : 0 ,
+		pex.8 : 0 ,
+		pex.46 : 0 ,
+		pex.48 : 0 ,
+		pex.68 : 0 ,
+		pex.468 : 0 ,
 		autosys: []										//	TODO	need to declare autosys before?		
 	};
 	values.forEach( function(v) {						//	adding up counts (except cc, cbcc, and crcc from clients)
@@ -2909,32 +2706,26 @@ var reduceCountries = function ( key, values ) {
 		pbe: 0.0 ,
 		fast: 0 ,
 		stable: 0 ,
-		osv : {
-			linux : 0 ,
-			darwin : 0 ,
-			freebsd : 0 ,
-			windows : 0 ,
-			other : 0
-		} ,
-		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
-		} ,
-		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
-		} ,
+		osv.linux : 0 ,
+		osv.darwin : 0 ,
+		osv.freebsd : 0 ,
+		osv.windows : 0 ,
+		osv.other : 0 ,
+		tsv.010 : 0 ,
+		tsv.011 : 0 ,
+		tsv.012 : 0 ,
+		tsv.020 : 0 ,
+		tsv.021 : 0 ,
+		tsv.022 : 0 ,
+		tsv.023 : 0 ,
+		tsv.024 : 0 ,
+		pex.4 : 0 ,
+		pex.6 : 0 ,
+		pex.8 : 0 ,
+		pex.46 : 0 ,
+		pex.48 : 0 ,
+		pex.68 : 0 ,
+		pex.468 : 0 ,
 		as: [] 				
 	};
 	values.forEach( function(v) {

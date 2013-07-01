@@ -12,7 +12,7 @@ var mapServers = function() {
             other : (this.osv == "other") ? 1 : 0
         }
 	};
-	emit( this.date , Servers );
+	emit( (this.date + " server")  , Servers );
 };
 
 //	REDUCE
@@ -49,14 +49,14 @@ var run = function() {
 		reduceServers,
 		{ 
 			out: { 
-				reduce : "testFact3"
+				reduce : "testFact4"
 			} ,			
 			query : { "date" : date }
 		}
 	);
 };
 var date = "2013-04-03 21";
-db.testFact3.remove();
+db.testFact4.remove();
 run();
 
 
@@ -87,13 +87,12 @@ run();
              "bwa" : 3636971212,
              "bwc" : 2525709180,
              "osv" : {
-                 "linux" : 2523,
-                 "darwin" : 93,
-                 "freebsd" : 110,
-                 "windows" : 625,
-                 "other" : 0
+                 "linux" : NaN,
+                 "darwin" : NaN,
+                 "freebsd" : NaN,
+                 "windows" : NaN,
+                 "other" : NaN
              }
          }
      }
-
- */
+*/
