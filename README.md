@@ -676,22 +676,22 @@ Again there are differences: while there exist about 37.000 autonomous systems, 
 				windows				int	
 				other				int	
 			tsv						object
-				010					int	
-				011					int	
-				012					int	
-				020					int	
-				021					int	
-				022					int	
-				023					int	
-				024					int	
+				v010				int	
+				v011				int	
+				v012				int	
+				v020				int	
+				v021				int	
+				v022				int	
+				v023				int	
+				v024				int	
 			pex						object
-				4					int											4 as in 443
-				6					int											6 as in 6667
-				8					int											8 as in 80
-				46					int
-				48					int
-				68					int
-				468					int
+				p4					int											4 as in 443
+				p6					int											6 as in 6667
+				p8					int											8 as in 80
+				p46					int
+				p48					int
+				p68					int
+				p468				int
 			autosys					array of objects 
 				as					int	
 

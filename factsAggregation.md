@@ -30,14 +30,14 @@
 				other: int
 			},
 			tsv: {
-				010: int,			sum over all relays/bridges with tsv 010
-				011: int, 												 011
-				012: int, 												 etc
-				020: int, 
-				021: int, 
-				022: int, 
-				023: int, 
-				024: int
+				v010: int,			sum over all relays/bridges with tsv 010
+				v011: int, 												 011
+				v012: int, 												 etc
+				v020: int, 
+				v021: int, 
+				v022: int, 
+				v023: int, 
+				v024: int
 			}
 		},
 		bridges: {
@@ -88,13 +88,13 @@
 					tsv: ... ,		tsv like above
 					pbe: float,
 					pex: {
-						4: int,
-						6: int,
-						8: int,
-						46: int,
-						48: int,
-						68: int,
-						468: int
+						p4: int,
+						p6: int,
+						p8: int,
+						p46: int,
+						p48: int,
+						p68: int,
+						p468: int
 				},
 				...					flagNone, flagFast, flagStable, flagFastStable like above
 			...						roleDir (total + authorityTrue) like above

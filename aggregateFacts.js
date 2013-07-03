@@ -22,7 +22,7 @@
 		* autonomous systems	from relays import collection
 	3.	server and countries need to be aggregated from 2 import collections
 		and the resulting aggregates merged into one, like: { out: { merge : "servers/countries/autosys" } }
-	4.	to get rid of the "value" object we need one further step
+	p4.	to get rid of the "value" object we need one further step
 		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
 		this is not part of the mapReduce operation
 	5.	the resulting fact document has to be added to the facts collection
@@ -33,43 +33,6 @@
 		If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
 */
 
-
-
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	EXECUTION
-//	let the damn thing run
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//	PRELIMINARIES			
-
-var cleanup = function() {
-	db.tempCountries.remove();
-	db.tempAutosys.remove();
-	db.tempFacts.remove();
-};
-
-
-//	CONFIG DATE
-
-var date = "2013-04-03 21" ;
-
-
-//	START MAPREDUCE JOBS
-
-cleanup();
-
-aggregateClients();
-aggregateServersRelays();
-aggregateServersBridges();
-aggregateServers();
-aggregateBridges();
-aggregateRelays();
-aggregateCountriesClientsCR();
-aggregateCountriesClientsCB();
-aggregateCountriesRelays();
-aggregateCountries();
-aggregateAutosys();
 
 
 
@@ -121,14 +84,14 @@ var mapServersRelays = function() {
 			other : (this.osv == "other") ? 1 : 0
 		} ,
 		tsv : {
-			010 : (this.tsv == "010") ? 1 : 0 ,
-			011 : (this.tsv == "011") ? 1 : 0 ,
-			012 : (this.tsv == "012") ? 1 : 0 ,
-			020 : (this.tsv == "020") ? 1 : 0 ,
-			021 : (this.tsv == "021") ? 1 : 0 ,
-			022 : (this.tsv == "022") ? 1 : 0 ,
-			023 : (this.tsv == "023") ? 1 : 0 ,
-			024 : (this.tsv == "024") ? 1 : 0
+			v010 : (this.tsv == "010") ? 1 : 0 ,
+			v011 : (this.tsv == "011") ? 1 : 0 ,
+			v012 : (this.tsv == "012") ? 1 : 0 ,
+			v020 : (this.tsv == "020") ? 1 : 0 ,
+			v021 : (this.tsv == "021") ? 1 : 0 ,
+			v022 : (this.tsv == "022") ? 1 : 0 ,
+			v023 : (this.tsv == "023") ? 1 : 0 ,
+			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
 	emit( (date + " relays") , ServersRelays );   		//	combined key '{date, "relays"}'
@@ -147,14 +110,14 @@ var mapServersBridges = function() {
 			other : (this.osv == "other") ? 1 : 0
 		} ,
 		tsv : {
-			010 : (this.tsv == "010") ? 1 : 0 ,
-			011 : (this.tsv == "011") ? 1 : 0 ,
-			012 : (this.tsv == "012") ? 1 : 0 ,
-			020 : (this.tsv == "020") ? 1 : 0 ,
-			021 : (this.tsv == "021") ? 1 : 0 ,
-			022 : (this.tsv == "022") ? 1 : 0 ,
-			023 : (this.tsv == "023") ? 1 : 0 ,
-			024 : (this.tsv == "024") ? 1 : 0
+			v010 : (this.tsv == "010") ? 1 : 0 ,
+			v011 : (this.tsv == "011") ? 1 : 0 ,
+			v012 : (this.tsv == "012") ? 1 : 0 ,
+			v020 : (this.tsv == "020") ? 1 : 0 ,
+			v021 : (this.tsv == "021") ? 1 : 0 ,
+			v022 : (this.tsv == "022") ? 1 : 0 ,
+			v023 : (this.tsv == "023") ? 1 : 0 ,
+			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
 	emit( (date + " bridges") , ServersBridges );			//	combined key '{date, "bridges"}'
@@ -173,14 +136,14 @@ var mapServers = function() {
 			other : (this.osv == "other") ? 1 : 0
 		} ,
 		tsv : {
-			010 : (this.tsv == "010") ? 1 : 0 ,
-			011 : (this.tsv == "011") ? 1 : 0 ,
-			012 : (this.tsv == "012") ? 1 : 0 ,
-			020 : (this.tsv == "020") ? 1 : 0 ,
-			021 : (this.tsv == "021") ? 1 : 0 ,
-			022 : (this.tsv == "022") ? 1 : 0 ,
-			023 : (this.tsv == "023") ? 1 : 0 ,
-			024 : (this.tsv == "024") ? 1 : 0
+			v010 : (this.tsv == "010") ? 1 : 0 ,
+			v011 : (this.tsv == "011") ? 1 : 0 ,
+			v012 : (this.tsv == "012") ? 1 : 0 ,
+			v020 : (this.tsv == "020") ? 1 : 0 ,
+			v021 : (this.tsv == "021") ? 1 : 0 ,
+			v022 : (this.tsv == "022") ? 1 : 0 ,
+			v023 : (this.tsv == "023") ? 1 : 0 ,
+			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
 	emit( date , servers );							//	ordinary key 'date'
@@ -204,14 +167,14 @@ var mapBridges = function() {
 						other : (this.type == "bridge" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.type == "bridge" && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.type == "bridge" && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.type == "bridge" && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.type == "bridge" && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.type == "bridge" && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.type == "bridge" && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.type == "bridge" && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.type == "bridge" && this.tsv == "024") ? 1 : 0
+						v010 : (this.type == "bridge" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.type == "bridge" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.type == "bridge" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.type == "bridge" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.type == "bridge" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.type == "bridge" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.type == "bridge" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.type == "bridge" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpEmail : {
@@ -226,14 +189,14 @@ var mapBridges = function() {
 						other : (this.brp == "email" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brp == "email" && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brp == "email" && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brp == "email" && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brp == "email" && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brp == "email" && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brp == "email" && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brp == "email" && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brp == "email" && this.tsv == "024") ? 1 : 0
+						v010 : (this.brp == "email" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brp == "email" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brp == "email" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brp == "email" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brp == "email" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brp == "email" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brp == "email" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brp == "email" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpHttps : {
@@ -248,14 +211,14 @@ var mapBridges = function() {
 						other : (this.brp == "https" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brp == "https" && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brp == "https" && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brp == "https" && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brp == "https" && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brp == "https" && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brp == "https" && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brp == "https" && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brp == "https" && this.tsv == "024") ? 1 : 0
+						v010 : (this.brp == "https" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brp == "https" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brp == "https" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brp == "https" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brp == "https" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brp == "https" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brp == "https" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brp == "https" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpOther : {
@@ -270,14 +233,14 @@ var mapBridges = function() {
 						other : (this.brp == "other" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brp == "other" && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brp == "other" && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brp == "other" && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brp == "other" && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brp == "other" && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brp == "other" && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brp == "other" && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brp == "other" && this.tsv == "024") ? 1 : 0
+						v010 : (this.brp == "other" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brp == "other" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brp == "other" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brp == "other" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brp == "other" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brp == "other" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brp == "other" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brp == "other" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				breTrue : {
@@ -292,14 +255,14 @@ var mapBridges = function() {
 						other : (this.bre == "true" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.bre == "true" && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.bre == "true" && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.bre == "true" && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.bre == "true" && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.bre == "true" && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.bre == "true" && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.bre == "true" && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.bre == "true" && this.tsv == "024") ? 1 : 0
+						v010 : (this.bre == "true" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.bre == "true" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.bre == "true" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.bre == "true" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.bre == "true" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.bre == "true" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.bre == "true" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.bre == "true" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs2 : {
@@ -314,14 +277,14 @@ var mapBridges = function() {
 						other : (this.brt == [obfs2] && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brt == [obfs2] && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brt == [obfs2] && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brt == [obfs2] && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brt == [obfs2] && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brt == [obfs2] && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brt == [obfs2] && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brt == [obfs2] && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brt == [obfs2] && this.tsv == "024") ? 1 : 0
+						v010 : (this.brt == [obfs2] && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brt == [obfs2] && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brt == [obfs2] && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brt == [obfs2] && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brt == [obfs2] && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brt == [obfs2] && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brt == [obfs2] && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brt == [obfs2] && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs3 : {
@@ -336,14 +299,14 @@ var mapBridges = function() {
 						other : (this.brt == [obfs3] && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brt == [obfs3] && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brt == [obfs3] && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brt == [obfs3] && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brt == [obfs3] && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brt == [obfs3] && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brt == [obfs3] && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brt == [obfs3] && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brt == [obfs3] && this.tsv == "024") ? 1 : 0
+						v010 : (this.brt == [obfs3] && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brt == [obfs3] && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brt == [obfs3] && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brt == [obfs3] && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brt == [obfs3] && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brt == [obfs3] && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brt == [obfs3] && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brt == [obfs3] && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs23 : {
@@ -358,14 +321,14 @@ var mapBridges = function() {
 						other : (this.brt == [obfs23, obfs3] && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						010 : (this.brt == [obfs23, obfs3] && this.tsv == "010") ? 1 : 0 ,
-						011 : (this.brt == [obfs23, obfs3] && this.tsv == "011") ? 1 : 0 ,
-						012 : (this.brt == [obfs23, obfs3] && this.tsv == "012") ? 1 : 0 ,
-						020 : (this.brt == [obfs23, obfs3] && this.tsv == "020") ? 1 : 0 ,
-						021 : (this.brt == [obfs23, obfs3] && this.tsv == "021") ? 1 : 0 ,
-						022 : (this.brt == [obfs23, obfs3] && this.tsv == "022") ? 1 : 0 ,
-						023 : (this.brt == [obfs23, obfs3] && this.tsv == "023") ? 1 : 0 ,
-						024 : (this.brt == [obfs23, obfs3] && this.tsv == "024") ? 1 : 0
+						v010 : (this.brt == [obfs23, obfs3] && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.brt == [obfs23, obfs3] && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.brt == [obfs23, obfs3] && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.brt == [obfs23, obfs3] && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.brt == [obfs23, obfs3] && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.brt == [obfs23, obfs3] && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.brt == [obfs23, obfs3] && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.brt == [obfs23, obfs3] && this.tsv == "024") ? 1 : 0
 					}
 				}
 			}
@@ -393,14 +356,14 @@ var mapRelays = function() {
 							other : (this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.tsv == "010") ? 1 : 0 ,
-							011 : (this.tsv == "011") ? 1 : 0 ,
-							012 : (this.tsv == "012") ? 1 : 0 ,
-							020 : (this.tsv == "020") ? 1 : 0 ,
-							021 : (this.tsv == "021") ? 1 : 0 ,
-							022 : (this.tsv == "022") ? 1 : 0 ,
-							023 : (this.tsv == "023") ? 1 : 0 ,
-							024 : (this.tsv == "024") ? 1 : 0
+							v010 : (this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.tsv == "024") ? 1 : 0
 						} ,
 						pbr : this.pbr
 					} ,
@@ -416,14 +379,14 @@ var mapRelays = function() {
 							other : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0 
 						} ,
 						tsv : {
-							010 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbr : (!(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbr : 0.0
 					} ,
@@ -439,14 +402,14 @@ var mapRelays = function() {
 							other : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbr : (!(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbr : 0.0
 					} ,
@@ -462,14 +425,14 @@ var mapRelays = function() {
 							other : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbr : ((flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbr : 0.0
 					} ,
@@ -485,14 +448,14 @@ var mapRelays = function() {
 							other : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbr : ((flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbr : 0.0
 					}
@@ -512,14 +475,14 @@ var mapRelays = function() {
 							other : (this.role == "guard" && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "guard" && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "guard" && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "guard" && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "guard" && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "guard" && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "guard" && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "guard" && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "guard" && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "guard" && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "guard" && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "guard" && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "guard" && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "guard" && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "guard" && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "guard" && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "guard" && this.tsv == "024") ? 1 : 0
 						} ,
 						pbg : (this.role == "guard") ? this.pbg : 0.0
 					} ,
@@ -535,14 +498,14 @@ var mapRelays = function() {
 							other : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbg : (this.role == "guard" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbg : 0.0
 					} ,
@@ -558,14 +521,14 @@ var mapRelays = function() {
 							other : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbg : (this.role == "guard" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbg : 0.0
 					} ,
@@ -581,14 +544,14 @@ var mapRelays = function() {
 							other : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbg : (this.role == "guard" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbg : 0.0
 					} ,
@@ -604,14 +567,14 @@ var mapRelays = function() {
 							other : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbg : (this.role == "guard" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbg : 0.0
 					}
@@ -631,14 +594,14 @@ var mapRelays = function() {
 							other : (this.role == "middle" && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "middle" && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "middle" && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "middle" && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "middle" && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "middle" && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "middle" && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "middle" && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "middle" && this.tsv == "024") ? 1 : 0 
+							v010 : (this.role == "middle" && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "middle" && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "middle" && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "middle" && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "middle" && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "middle" && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "middle" && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "middle" && this.tsv == "024") ? 1 : 0 
 						} ,
 						pbm : (this.role == "middle") ? this.pbm : 0.0
 					} ,
@@ -654,14 +617,14 @@ var mapRelays = function() {
 							other : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbm : (this.role == "middle" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbm : 0.0
 					} ,
@@ -677,14 +640,14 @@ var mapRelays = function() {
 							other : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbm : (this.role == "middle" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbm : 0.0
 					} ,
@@ -700,14 +663,14 @@ var mapRelays = function() {
 							other : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbm : (this.role == "middle" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbm : 0.0
 					} ,
@@ -723,14 +686,14 @@ var mapRelays = function() {
 							other : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pbm : (this.role == "middle" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbm : 0.0
 					}
@@ -750,23 +713,23 @@ var mapRelays = function() {
 							other : (this.role == "exit" && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "exit" && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "exit" && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "exit" && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "exit" && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "exit" && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "exit" && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "exit" && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "exit" && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "exit" && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "exit" && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "exit" && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "exit" && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "exit" && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "exit" && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "exit" && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "exit" && this.tsv == "024") ? 1 : 0
 						} ,
 						pex : {
-							4 : (this.role == "exit" && this.pex == [443]) ? 1 : 0 ,
-							6 : (this.role == "exit" && this.pex == [6667]) ? 1 : 0 ,
-							8 : (this.role == "exit" && this.pex == [80]) ? 1 : 0 ,
-							46 : (this.role == "exit" && this.pex == [443, 6667]) ? 1 : 0 ,
-							48 : (this.role == "exit" && this.pex == [80, 443]) ? 1 : 0 ,
-							68 : (this.role == "exit" && this.pex == [80, 6667]) ? 1 : 0 ,
-							468 : (this.role == "exit" && this.pex == [80, 443, 6667]) ? 1 : 0
+							p4 : (this.role == "exit" && this.pex == [443]) ? 1 : 0 ,
+							p6 : (this.role == "exit" && this.pex == [6667]) ? 1 : 0 ,
+							p8 : (this.role == "exit" && this.pex == [80]) ? 1 : 0 ,
+							p46 : (this.role == "exit" && this.pex == [443, 6667]) ? 1 : 0 ,
+							p48 : (this.role == "exit" && this.pex == [80, 443]) ? 1 : 0 ,
+							p68 : (this.role == "exit" && this.pex == [80, 6667]) ? 1 : 0 ,
+							p468 : (this.role == "exit" && this.pex == [80, 443, 6667]) ? 1 : 0
 						} ,
 						pbe : (this.role == "exit") ? this.pbe : 0.0
 					} ,
@@ -782,23 +745,23 @@ var mapRelays = function() {
 							other : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pex : {
-							4 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
-							6 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
-							8 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
-							46 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
-							48 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
-							68 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
-							468 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
+							p4 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
+							p6 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
+							p8 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
+							p46 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
+							p48 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
+							p68 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
+							p468 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
 						} ,
 						pbe : (this.role == "exit" && !(flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbe : 0.0
 					} ,
@@ -814,23 +777,23 @@ var mapRelays = function() {
 							other : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pex : {
-							4 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
-							6 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
-							8 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
-							46 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
-							48 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
-							68 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
-							468 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
+							p4 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
+							p6 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
+							p8 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
+							p46 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
+							p48 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
+							p68 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
+							p468 : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
 						} ,
 						pbe : (this.role == "exit" && (flag.indexOf('fast') > -1) && !(flag.indexOf('stable') > -1)) ? this.pbe : 0.0
 					} ,
@@ -846,23 +809,23 @@ var mapRelays = function() {
 							other : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pex : {
-							4 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
-							6 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
-							8 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
-							46 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
-							48 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
-							68 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
-							468 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
+							p4 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
+							p6 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
+							p8 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
+							p46 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
+							p48 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
+							p68 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
+							p468 : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
 						} ,
 						pbe : (this.role == "exit" && !(flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbe : 0.0
 					} ,
@@ -878,23 +841,23 @@ var mapRelays = function() {
 							other : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.tsv == "024") ? 1 : 0
 						} ,
 						pex : {
-							4 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
-							6 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
-							8 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
-							46 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
-							48 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
-							68 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
-							468 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
+							p4 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443]) ? 1 : 0 ,
+							p6 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [6667]) ? 1 : 0 ,
+							p8 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80]) ? 1 : 0 ,
+							p46 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [443, 6667]) ? 1 : 0 ,
+							p48 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443]) ? 1 : 0 ,
+							p68 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 6667]) ? 1 : 0 ,
+							p468 : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1) && this.pex == [80, 443, 6667]) ? 1 : 0
 						} ,
 						pbe : (this.role == "exit" && (flag.indexOf('fast') > -1) && (flag.indexOf('stable') > -1)) ? this.pbe : 0.0	
 					}
@@ -914,14 +877,14 @@ var mapRelays = function() {
 							other : (this.role == "dir" && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "dir" && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "dir" && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "dir" && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "dir" && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "dir" && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "dir" && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "dir" && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "dir" && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "dir" && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "dir" && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "dir" && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "dir" && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "dir" && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "dir" && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "dir" && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "dir" && this.tsv == "024") ? 1 : 0
 						}		
 					} ,
 					authorityTrue : {
@@ -936,14 +899,14 @@ var mapRelays = function() {
 							other : (this.role == "dir" && this.flag == "Authority" && this.osv == "other") ? 1 : 0
 						} ,
 						tsv : {
-							010 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "010") ? 1 : 0 ,
-							011 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "011") ? 1 : 0 ,
-							012 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "012") ? 1 : 0 ,
-							020 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "020") ? 1 : 0 ,
-							021 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "021") ? 1 : 0 ,
-							022 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "022") ? 1 : 0 ,
-							023 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "023") ? 1 : 0 ,
-							024 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "024") ? 1 : 0
+							v010 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "010") ? 1 : 0 ,
+							v011 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "011") ? 1 : 0 ,
+							v012 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "012") ? 1 : 0 ,
+							v020 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "020") ? 1 : 0 ,
+							v021 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "021") ? 1 : 0 ,
+							v022 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "022") ? 1 : 0 ,
+							v023 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "023") ? 1 : 0 ,
+							v024 : (this.role == "dir" && this.flag == "Authority" && this.tsv == "024") ? 1 : 0
 						}
 					}
 				}
@@ -986,23 +949,23 @@ var mapCountriesClientsCR = function() {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		} ,
 		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
+			p4 : 0 ,
+			p6 : 0 ,
+			p8 : 0 ,
+			p46 : 0 ,
+			p48 : 0 ,
+			p68 : 0 ,
+			p468 : 0
 		} ,
 		as: "" 
 	};
@@ -1039,23 +1002,23 @@ var mapCountriesClientsCB = function() {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		} ,
 		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
+			p4 : 0 ,
+			p6 : 0 ,
+			p8 : 0 ,
+			p46 : 0 ,
+			p48 : 0 ,
+			p68 : 0 ,
+			p468 : 0
 		} ,
 		as: ""
 	};
@@ -1092,23 +1055,23 @@ var mapCountriesRelays = function() {
 			other : (this.osv == "other") ? 1 : 0
 		} ,
 		tsv : {
-			010 : (this.tsv == "010") ? 1 : 0 ,
-			011 : (this.tsv == "011") ? 1 : 0 ,
-			012 : (this.tsv == "012") ? 1 : 0 ,
-			020 : (this.tsv == "020") ? 1 : 0 ,
-			021 : (this.tsv == "021") ? 1 : 0 ,
-			022 : (this.tsv == "022") ? 1 : 0 ,
-			023 : (this.tsv == "023") ? 1 : 0 ,
-			024 : (this.tsv == "024") ? 1 : 0
+			v010 : (this.tsv == "010") ? 1 : 0 ,
+			v011 : (this.tsv == "011") ? 1 : 0 ,
+			v012 : (this.tsv == "012") ? 1 : 0 ,
+			v020 : (this.tsv == "020") ? 1 : 0 ,
+			v021 : (this.tsv == "021") ? 1 : 0 ,
+			v022 : (this.tsv == "022") ? 1 : 0 ,
+			v023 : (this.tsv == "023") ? 1 : 0 ,
+			v024 : (this.tsv == "024") ? 1 : 0
 		} ,
 		pex : {
-			4 : (this.role == "exit" && this.pex == [443]) ? 1 : 0 ,
-			6 : (this.role == "exit" && this.pex == [6667]) ? 1 : 0 ,
-			8 : (this.role == "exit" && this.pex == [80]) ? 1 : 0 ,
-			46 : (this.role == "exit" && this.pex == [443, 6667]) ? 1 : 0 ,
-			48 : (this.role == "exit" && this.pex == [80, 443]) ? 1 : 0 ,
-			68 : (this.role == "exit" && this.pex == [80, 6667]) ? 1 : 0 ,
-			468 : (this.role == "exit" && this.pex == [80, 443, 6667]) ? 1 : 0
+			p4 : (this.role == "exit" && this.pex == [443]) ? 1 : 0 ,
+			p6 : (this.role == "exit" && this.pex == [6667]) ? 1 : 0 ,
+			p8 : (this.role == "exit" && this.pex == [80]) ? 1 : 0 ,
+			p46 : (this.role == "exit" && this.pex == [443, 6667]) ? 1 : 0 ,
+			p48 : (this.role == "exit" && this.pex == [80, 443]) ? 1 : 0 ,
+			p68 : (this.role == "exit" && this.pex == [80, 6667]) ? 1 : 0 ,
+			p468 : (this.role == "exit" && this.pex == [80, 443, 6667]) ? 1 : 0
 		} ,
 		as: this.as										//	walking through the import table, which contains only
 														//	one as per entry
@@ -1142,23 +1105,23 @@ var mapCountries = function() {							//	putting it all together
 			other : this.osv.other
 		} ,
 		tsv : {
-			010 : this.tsv.010 ,
-			011 : this.tsv.011 ,
-			012 : this.tsv.012 ,
-			020 : this.tsv.020 ,
-			021 : this.tsv.021 ,
-			022 : this.tsv.022 ,
-			023 : this.tsv.023 ,
-			024 : this.tsv.024
+			v010 : this.tsv.v010 ,
+			v011 : this.tsv.v011 ,
+			v012 : this.tsv.v012 ,
+			v020 : this.tsv.v020 ,
+			v021 : this.tsv.v021 ,
+			v022 : this.tsv.v022 ,
+			v023 : this.tsv.v023 ,
+			v024 : this.tsv.v024
 		} ,
 		pex : {
-			4 : this.pex.4 ,
-			6 : this.pex.6 ,
-			8 : this.pex.8 ,
-			46 : this.pex.46 ,
-			48 : this.pex.48 ,
-			68 : this.pex.68 ,
-			468 : this.pex.468
+			p4 : this.pex.p4 ,
+			p6 : this.pex.p6 ,
+			p8 : this.pex.p8 ,
+			p46 : this.pex.p46 ,
+			p48 : this.pex.p48 ,
+			p68 : this.pex.p68 ,
+			p468 : this.pex.p468
 		} ,
 		autosys: this.autosys							//	already an array of as:#
 	};
@@ -1211,7 +1174,6 @@ var mapAutosys = function() {
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var reduceClients = function ( key, values ) {
-	var v;
 	var fact = {	
 		clients : {
 			total : 0 ,
@@ -1242,7 +1204,6 @@ var reduceClients = function ( key, values ) {
 //	reduceServersRelays and reduceServersBridgess are exact duplicates and could be reduced to one, 
 //	but for the sake of readability i'm leaving them alone for now
 var reduceServersRelays = function ( key, values ) {	
-	var v;
 	var temp = {
 		count : 0 ,
 		bwa : 0 ,
@@ -1255,14 +1216,14 @@ var reduceServersRelays = function ( key, values ) {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		}
 	};
 	values.forEach( function(v) {
@@ -1274,20 +1235,19 @@ var reduceServersRelays = function ( key, values ) {
 		temp.osv.freebsd += v.osv.freebsd ;
 		temp.osv.windows += v.osv.windows ;
 		temp.osv.other += v.osv.other ;
-		temp.tsv.010 += v.tsv.010 ;
-		temp.tsv.011 += v.tsv.011 ;
-		temp.tsv.012 += v.tsv.012 ;
-		temp.tsv.020 += v.tsv.020 ;
-		temp.tsv.021 += v.tsv.021 ;
-		temp.tsv.022 += v.tsv.022 ;
-		temp.tsv.023 += v.tsv.023 ;
-		temp.tsv.024 += v.tsv.024 ;
+		temp.tsv.v010 += v.tsv.v010 ;
+		temp.tsv.v011 += v.tsv.v011 ;
+		temp.tsv.v012 += v.tsv.v012 ;
+		temp.tsv.v020 += v.tsv.v020 ;
+		temp.tsv.v021 += v.tsv.v021 ;
+		temp.tsv.v022 += v.tsv.v022 ;
+		temp.tsv.v023 += v.tsv.v023 ;
+		temp.tsv.v024 += v.tsv.v024 ;
 	});
 	return temp;
 };
 
 var reduceServersBridgess = function ( key, values ) {
-	var v;
 	var temp = {	
 		count : 0 ,
 		bwa : 0 ,
@@ -1300,14 +1260,14 @@ var reduceServersBridgess = function ( key, values ) {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		}								
 	};
 	values.forEach( function(v) {
@@ -1319,21 +1279,20 @@ var reduceServersBridgess = function ( key, values ) {
 		temp.osv.freebsd += v.osv.freebsd ;
 		temp.osv.windows += v.osv.windows ;
 		temp.osv.other += v.osv.other ;
-		temp.tsv.010 += v.tsv.010 ;
-		temp.tsv.011 += v.tsv.011 ;
-		temp.tsv.012 += v.tsv.012 ;
-		temp.tsv.020 += v.tsv.020 ;
-		temp.tsv.021 += v.tsv.021 ;
-		temp.tsv.022 += v.tsv.022 ;
-		temp.tsv.023 += v.tsv.023 ;
-		temp.tsv.024 += v.tsv.024 ;
+		temp.tsv.v010 += v.tsv.v010 ;
+		temp.tsv.v011 += v.tsv.v011 ;
+		temp.tsv.v012 += v.tsv.v012 ;
+		temp.tsv.v020 += v.tsv.v020 ;
+		temp.tsv.v021 += v.tsv.v021 ;
+		temp.tsv.v022 += v.tsv.v022 ;
+		temp.tsv.v023 += v.tsv.v023 ;
+		temp.tsv.v024 += v.tsv.v024 ;
 	});
 	return temp;
 };
 
 //	aggregating ServersRelays and ServersBridges into the combined servers fact
 var reduceServers = function ( key, values ) {
-	var v;
 	var fact = {	
 		count : 0 ,
 		bwa : 0 ,
@@ -1346,14 +1305,14 @@ var reduceServers = function ( key, values ) {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		}							
 	};
 	values.forEach( function(v) {
@@ -1366,20 +1325,19 @@ var reduceServers = function ( key, values ) {
 		fact.osv.freebsd += v.osv.freebsd ;
 		fact.osv.windows += v.osv.windows ;
 		fact.osv.other += v.osv.other ;
-		fact.tsv.010 += v.tsv.010 ;
-		fact.tsv.011 += v.tsv.011 ;
-		fact.tsv.012 += v.tsv.012 ;
-		fact.tsv.020 += v.tsv.020 ;
-		fact.tsv.021 += v.tsv.021 ;
-		fact.tsv.022 += v.tsv.022 ;
-		fact.tsv.023 += v.tsv.023 ;
-		fact.tsv.024 += v.tsv.024 ;
+		fact.tsv.v010 += v.tsv.v010 ;
+		fact.tsv.v011 += v.tsv.v011 ;
+		fact.tsv.v012 += v.tsv.v012 ;
+		fact.tsv.v020 += v.tsv.v020 ;
+		fact.tsv.v021 += v.tsv.v021 ;
+		fact.tsv.v022 += v.tsv.v022 ;
+		fact.tsv.v023 += v.tsv.v023 ;
+		fact.tsv.v024 += v.tsv.v024 ;
 	});
 	return fact;
 };
 
 var reduceBridges = function ( key, values ) {
-	var v;
 	var fact = {										
 		servers : {
 			bridges : {
@@ -1395,14 +1353,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brpEmail : {
@@ -1417,14 +1375,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brpHttps : {
@@ -1439,14 +1397,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brpOther : {
@@ -1461,14 +1419,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				breTrue : {
@@ -1483,14 +1441,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brtObfs2 : {
@@ -1505,14 +1463,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brtObfs3 : {
@@ -1527,14 +1485,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				} ,
 				brtObfs23 : {
@@ -1549,14 +1507,14 @@ var reduceBridges = function ( key, values ) {
 						other : 0
 					} ,
 					tsv : {
-						010 : 0 ,
-						011 : 0 ,
-						012 : 0 ,
-						020 : 0 ,
-						021 : 0 ,
-						022 : 0 ,
-						023 : 0 ,
-						024 : 0
+						v010 : 0 ,
+						v011 : 0 ,
+						v012 : 0 ,
+						v020 : 0 ,
+						v021 : 0 ,
+						v022 : 0 ,
+						v023 : 0 ,
+						v024 : 0
 					}
 				}
 			}
@@ -1571,14 +1529,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.total.osv.freebsd += v.servers.bridges.total.osv.freebsd ;
 		fact.servers.bridges.total.osv.windows += v.servers.bridges.total.osv.windows ;
 		fact.servers.bridges.total.osv.other += v.servers.bridges.total.osv.other ;
-		fact.servers.bridges.total.tsv.010 += v.servers.bridges.total.tsv.010 ;
-		fact.servers.bridges.total.tsv.011 += v.servers.bridges.total.tsv.011 ;
-		fact.servers.bridges.total.tsv.012 += v.servers.bridges.total.tsv.012 ;
-		fact.servers.bridges.total.tsv.020 += v.servers.bridges.total.tsv.020 ;
-		fact.servers.bridges.total.tsv.021 += v.servers.bridges.total.tsv.021 ;
-		fact.servers.bridges.total.tsv.022 += v.servers.bridges.total.tsv.022 ;
-		fact.servers.bridges.total.tsv.023 += v.servers.bridges.total.tsv.023 ;
-		fact.servers.bridges.total.tsv.024 += v.servers.bridges.total.tsv.024 ; 
+		fact.servers.bridges.total.tsv.v010 += v.servers.bridges.total.tsv.v010 ;
+		fact.servers.bridges.total.tsv.v011 += v.servers.bridges.total.tsv.v011 ;
+		fact.servers.bridges.total.tsv.v012 += v.servers.bridges.total.tsv.v012 ;
+		fact.servers.bridges.total.tsv.v020 += v.servers.bridges.total.tsv.v020 ;
+		fact.servers.bridges.total.tsv.v021 += v.servers.bridges.total.tsv.v021 ;
+		fact.servers.bridges.total.tsv.v022 += v.servers.bridges.total.tsv.v022 ;
+		fact.servers.bridges.total.tsv.v023 += v.servers.bridges.total.tsv.v023 ;
+		fact.servers.bridges.total.tsv.v024 += v.servers.bridges.total.tsv.v024 ; 
 		
 		fact.servers.bridges.brpEmail.count += v.servers.bridges.brpEmail.count ;
 		fact.servers.bridges.brpEmail.bwa += v.servers.bridges.brpEmail.bwa ;
@@ -1588,14 +1546,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brpEmail.osv.freebsd += v.servers.bridges.brpEmail.osv.freebsd ;
 		fact.servers.bridges.brpEmail.osv.windows += v.servers.bridges.brpEmail.osv.windows ;
 		fact.servers.bridges.brpEmail.osv.other += v.servers.bridges.brpEmail.osv.other ;
-		fact.servers.bridges.brpEmail.tsv.010 += v.servers.bridges.brpEmail.tsv.010 ;
-		fact.servers.bridges.brpEmail.tsv.011 += v.servers.bridges.brpEmail.tsv.011 ;
-		fact.servers.bridges.brpEmail.tsv.012 += v.servers.bridges.brpEmail.tsv.012 ;
-		fact.servers.bridges.brpEmail.tsv.020 += v.servers.bridges.brpEmail.tsv.020 ;
-		fact.servers.bridges.brpEmail.tsv.021 += v.servers.bridges.brpEmail.tsv.021 ;
-		fact.servers.bridges.brpEmail.tsv.022 += v.servers.bridges.brpEmail.tsv.022 ;
-		fact.servers.bridges.brpEmail.tsv.023 += v.servers.bridges.brpEmail.tsv.023 ;
-		fact.servers.bridges.brpEmail.tsv.024 += v.servers.bridges.brpEmail.tsv.024 ; 
+		fact.servers.bridges.brpEmail.tsv.v010 += v.servers.bridges.brpEmail.tsv.v010 ;
+		fact.servers.bridges.brpEmail.tsv.v011 += v.servers.bridges.brpEmail.tsv.v011 ;
+		fact.servers.bridges.brpEmail.tsv.v012 += v.servers.bridges.brpEmail.tsv.v012 ;
+		fact.servers.bridges.brpEmail.tsv.v020 += v.servers.bridges.brpEmail.tsv.v020 ;
+		fact.servers.bridges.brpEmail.tsv.v021 += v.servers.bridges.brpEmail.tsv.v021 ;
+		fact.servers.bridges.brpEmail.tsv.v022 += v.servers.bridges.brpEmail.tsv.v022 ;
+		fact.servers.bridges.brpEmail.tsv.v023 += v.servers.bridges.brpEmail.tsv.v023 ;
+		fact.servers.bridges.brpEmail.tsv.v024 += v.servers.bridges.brpEmail.tsv.v024 ; 
 	
 		fact.servers.bridges.brpHttps.count += v.servers.bridges.brpHttps.count ;
 		fact.servers.bridges.brpHttps.bwa += v.servers.bridges.brpHttps.bwa ;
@@ -1605,14 +1563,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brpHttps.osv.freebsd += v.servers.bridges.brpHttps.osv.freebsd ;
 		fact.servers.bridges.brpHttps.osv.windows += v.servers.bridges.brpHttps.osv.windows ;
 		fact.servers.bridges.brpHttps.osv.other += v.servers.bridges.brpHttps.osv.other ;
-		fact.servers.bridges.brpHttps.tsv.010 += v.servers.bridges.brpHttps.tsv.010 ;
-		fact.servers.bridges.brpHttps.tsv.011 += v.servers.bridges.brpHttps.tsv.011 ;
-		fact.servers.bridges.brpHttps.tsv.012 += v.servers.bridges.brpHttps.tsv.012 ;
-		fact.servers.bridges.brpHttps.tsv.020 += v.servers.bridges.brpHttps.tsv.020 ;
-		fact.servers.bridges.brpHttps.tsv.021 += v.servers.bridges.brpHttps.tsv.021 ;
-		fact.servers.bridges.brpHttps.tsv.022 += v.servers.bridges.brpHttps.tsv.022 ;
-		fact.servers.bridges.brpHttps.tsv.023 += v.servers.bridges.brpHttps.tsv.023 ;
-		fact.servers.bridges.brpHttps.tsv.024 += v.servers.bridges.brpHttps.tsv.024 ; 
+		fact.servers.bridges.brpHttps.tsv.v010 += v.servers.bridges.brpHttps.tsv.v010 ;
+		fact.servers.bridges.brpHttps.tsv.v011 += v.servers.bridges.brpHttps.tsv.v011 ;
+		fact.servers.bridges.brpHttps.tsv.v012 += v.servers.bridges.brpHttps.tsv.v012 ;
+		fact.servers.bridges.brpHttps.tsv.v020 += v.servers.bridges.brpHttps.tsv.v020 ;
+		fact.servers.bridges.brpHttps.tsv.v021 += v.servers.bridges.brpHttps.tsv.v021 ;
+		fact.servers.bridges.brpHttps.tsv.v022 += v.servers.bridges.brpHttps.tsv.v022 ;
+		fact.servers.bridges.brpHttps.tsv.v023 += v.servers.bridges.brpHttps.tsv.v023 ;
+		fact.servers.bridges.brpHttps.tsv.v024 += v.servers.bridges.brpHttps.tsv.v024 ; 
 	
 		fact.servers.bridges.brpOther.count += v.servers.bridges.brpOther.count ;
 		fact.servers.bridges.brpOther.bwa += v.servers.bridges.brpOther.bwa ;
@@ -1622,14 +1580,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brpOther.osv.freebsd += v.servers.bridges.brpOther.osv.freebsd ;
 		fact.servers.bridges.brpOther.osv.windows += v.servers.bridges.brpOther.osv.windows ;
 		fact.servers.bridges.brpOther.osv.other += v.servers.bridges.brpOther.osv.other ;
-		fact.servers.bridges.brpOther.tsv.010 += v.servers.bridges.brpOther.tsv.010 ;
-		fact.servers.bridges.brpOther.tsv.011 += v.servers.bridges.brpOther.tsv.011 ;
-		fact.servers.bridges.brpOther.tsv.012 += v.servers.bridges.brpOther.tsv.012 ;
-		fact.servers.bridges.brpOther.tsv.020 += v.servers.bridges.brpOther.tsv.020 ;
-		fact.servers.bridges.brpOther.tsv.021 += v.servers.bridges.brpOther.tsv.021 ;
-		fact.servers.bridges.brpOther.tsv.022 += v.servers.bridges.brpOther.tsv.022 ;
-		fact.servers.bridges.brpOther.tsv.023 += v.servers.bridges.brpOther.tsv.023 ;
-		fact.servers.bridges.brpOther.tsv.024 += v.servers.bridges.brpOther.tsv.024 ; 
+		fact.servers.bridges.brpOther.tsv.v010 += v.servers.bridges.brpOther.tsv.v010 ;
+		fact.servers.bridges.brpOther.tsv.v011 += v.servers.bridges.brpOther.tsv.v011 ;
+		fact.servers.bridges.brpOther.tsv.v012 += v.servers.bridges.brpOther.tsv.v012 ;
+		fact.servers.bridges.brpOther.tsv.v020 += v.servers.bridges.brpOther.tsv.v020 ;
+		fact.servers.bridges.brpOther.tsv.v021 += v.servers.bridges.brpOther.tsv.v021 ;
+		fact.servers.bridges.brpOther.tsv.v022 += v.servers.bridges.brpOther.tsv.v022 ;
+		fact.servers.bridges.brpOther.tsv.v023 += v.servers.bridges.brpOther.tsv.v023 ;
+		fact.servers.bridges.brpOther.tsv.v024 += v.servers.bridges.brpOther.tsv.v024 ; 
 		
 		fact.servers.bridges.breTrue.count += v.servers.bridges.breTrue.count ;
 		fact.servers.bridges.breTrue.bwa += v.servers.bridges.breTrue.bwa ;
@@ -1639,14 +1597,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.breTrue.osv.freebsd += v.servers.bridges.breTrue.osv.freebsd ;
 		fact.servers.bridges.breTrue.osv.windows += v.servers.bridges.breTrue.osv.windows ;
 		fact.servers.bridges.breTrue.osv.other += v.servers.bridges.breTrue.osv.other ;
-		fact.servers.bridges.breTrue.tsv.010 += v.servers.bridges.breTrue.tsv.010 ;
-		fact.servers.bridges.breTrue.tsv.011 += v.servers.bridges.breTrue.tsv.011 ;
-		fact.servers.bridges.breTrue.tsv.012 += v.servers.bridges.breTrue.tsv.012 ;
-		fact.servers.bridges.breTrue.tsv.020 += v.servers.bridges.breTrue.tsv.020 ;
-		fact.servers.bridges.breTrue.tsv.021 += v.servers.bridges.breTrue.tsv.021 ;
-		fact.servers.bridges.breTrue.tsv.022 += v.servers.bridges.breTrue.tsv.022 ;
-		fact.servers.bridges.breTrue.tsv.023 += v.servers.bridges.breTrue.tsv.023 ;
-		fact.servers.bridges.breTrue.tsv.024 += v.servers.bridges.breTrue.tsv.024 ; 
+		fact.servers.bridges.breTrue.tsv.v010 += v.servers.bridges.breTrue.tsv.v010 ;
+		fact.servers.bridges.breTrue.tsv.v011 += v.servers.bridges.breTrue.tsv.v011 ;
+		fact.servers.bridges.breTrue.tsv.v012 += v.servers.bridges.breTrue.tsv.v012 ;
+		fact.servers.bridges.breTrue.tsv.v020 += v.servers.bridges.breTrue.tsv.v020 ;
+		fact.servers.bridges.breTrue.tsv.v021 += v.servers.bridges.breTrue.tsv.v021 ;
+		fact.servers.bridges.breTrue.tsv.v022 += v.servers.bridges.breTrue.tsv.v022 ;
+		fact.servers.bridges.breTrue.tsv.v023 += v.servers.bridges.breTrue.tsv.v023 ;
+		fact.servers.bridges.breTrue.tsv.v024 += v.servers.bridges.breTrue.tsv.v024 ; 
 	
 		fact.servers.bridges.brtObfs2.count += v.servers.bridges.brtObfs2.count ;
 		fact.servers.bridges.brtObfs2.bwa += v.servers.bridges.brtObfs2.bwa ;
@@ -1656,14 +1614,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brtObfs2.osv.freebsd += v.servers.bridges.brtObfs2.osv.freebsd ;
 		fact.servers.bridges.brtObfs2.osv.windows += v.servers.bridges.brtObfs2.osv.windows ;
 		fact.servers.bridges.brtObfs2.osv.other += v.servers.bridges.brtObfs2.osv.other ;
-		fact.servers.bridges.brtObfs2.tsv.010 += v.servers.bridges.brtObfs2.tsv.010 ;
-		fact.servers.bridges.brtObfs2.tsv.011 += v.servers.bridges.brtObfs2.tsv.011 ;
-		fact.servers.bridges.brtObfs2.tsv.012 += v.servers.bridges.brtObfs2.tsv.012 ;
-		fact.servers.bridges.brtObfs2.tsv.020 += v.servers.bridges.brtObfs2.tsv.020 ;
-		fact.servers.bridges.brtObfs2.tsv.021 += v.servers.bridges.brtObfs2.tsv.021 ;
-		fact.servers.bridges.brtObfs2.tsv.022 += v.servers.bridges.brtObfs2.tsv.022 ;
-		fact.servers.bridges.brtObfs2.tsv.023 += v.servers.bridges.brtObfs2.tsv.023 ;
-		fact.servers.bridges.brtObfs2.tsv.024 += v.servers.bridges.brtObfs2.tsv.024 ; 
+		fact.servers.bridges.brtObfs2.tsv.v010 += v.servers.bridges.brtObfs2.tsv.v010 ;
+		fact.servers.bridges.brtObfs2.tsv.v011 += v.servers.bridges.brtObfs2.tsv.v011 ;
+		fact.servers.bridges.brtObfs2.tsv.v012 += v.servers.bridges.brtObfs2.tsv.v012 ;
+		fact.servers.bridges.brtObfs2.tsv.v020 += v.servers.bridges.brtObfs2.tsv.v020 ;
+		fact.servers.bridges.brtObfs2.tsv.v021 += v.servers.bridges.brtObfs2.tsv.v021 ;
+		fact.servers.bridges.brtObfs2.tsv.v022 += v.servers.bridges.brtObfs2.tsv.v022 ;
+		fact.servers.bridges.brtObfs2.tsv.v023 += v.servers.bridges.brtObfs2.tsv.v023 ;
+		fact.servers.bridges.brtObfs2.tsv.v024 += v.servers.bridges.brtObfs2.tsv.v024 ; 
 		
 		fact.servers.bridges.brtObfs3.count += v.servers.bridges.brtObfs3.count ;
 		fact.servers.bridges.brtObfs3.bwa += v.servers.bridges.brtObfs3.bwa ;
@@ -1673,14 +1631,14 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brtObfs3.osv.freebsd += v.servers.bridges.brtObfs3.osv.freebsd ;
 		fact.servers.bridges.brtObfs3.osv.windows += v.servers.bridges.brtObfs3.osv.windows ;
 		fact.servers.bridges.brtObfs3.osv.other += v.servers.bridges.brtObfs3.osv.other ;
-		fact.servers.bridges.brtObfs3.tsv.010 += v.servers.bridges.brtObfs3.tsv.010 ;
-		fact.servers.bridges.brtObfs3.tsv.011 += v.servers.bridges.brtObfs3.tsv.011 ;
-		fact.servers.bridges.brtObfs3.tsv.012 += v.servers.bridges.brtObfs3.tsv.012 ;
-		fact.servers.bridges.brtObfs3.tsv.020 += v.servers.bridges.brtObfs3.tsv.020 ;
-		fact.servers.bridges.brtObfs3.tsv.021 += v.servers.bridges.brtObfs3.tsv.021 ;
-		fact.servers.bridges.brtObfs3.tsv.022 += v.servers.bridges.brtObfs3.tsv.022 ;
-		fact.servers.bridges.brtObfs3.tsv.023 += v.servers.bridges.brtObfs3.tsv.023 ;
-		fact.servers.bridges.brtObfs3.tsv.024 += v.servers.bridges.brtObfs3.tsv.024 ; 
+		fact.servers.bridges.brtObfs3.tsv.v010 += v.servers.bridges.brtObfs3.tsv.v010 ;
+		fact.servers.bridges.brtObfs3.tsv.v011 += v.servers.bridges.brtObfs3.tsv.v011 ;
+		fact.servers.bridges.brtObfs3.tsv.v012 += v.servers.bridges.brtObfs3.tsv.v012 ;
+		fact.servers.bridges.brtObfs3.tsv.v020 += v.servers.bridges.brtObfs3.tsv.v020 ;
+		fact.servers.bridges.brtObfs3.tsv.v021 += v.servers.bridges.brtObfs3.tsv.v021 ;
+		fact.servers.bridges.brtObfs3.tsv.v022 += v.servers.bridges.brtObfs3.tsv.v022 ;
+		fact.servers.bridges.brtObfs3.tsv.v023 += v.servers.bridges.brtObfs3.tsv.v023 ;
+		fact.servers.bridges.brtObfs3.tsv.v024 += v.servers.bridges.brtObfs3.tsv.v024 ; 
 		
 		fact.servers.bridges.brtObfs23.count += v.servers.bridges.brtObfs23.count ;
 		fact.servers.bridges.brtObfs23.bwa += v.servers.bridges.brtObfs23.bwa ;
@@ -1690,20 +1648,19 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brtObfs23.osv.freebsd += v.servers.bridges.brtObfs23.osv.freebsd ;
 		fact.servers.bridges.brtObfs23.osv.windows += v.servers.bridges.brtObfs23.osv.windows ;
 		fact.servers.bridges.brtObfs23.osv.other += v.servers.bridges.brtObfs23.osv.other ;
-		fact.servers.bridges.brtObfs23.tsv.010 += v.servers.bridges.brtObfs23.tsv.010 ;
-		fact.servers.bridges.brtObfs23.tsv.011 += v.servers.bridges.brtObfs23.tsv.011 ;
-		fact.servers.bridges.brtObfs23.tsv.012 += v.servers.bridges.brtObfs23.tsv.012 ;
-		fact.servers.bridges.brtObfs23.tsv.020 += v.servers.bridges.brtObfs23.tsv.020 ;
-		fact.servers.bridges.brtObfs23.tsv.021 += v.servers.bridges.brtObfs23.tsv.021 ;
-		fact.servers.bridges.brtObfs23.tsv.022 += v.servers.bridges.brtObfs23.tsv.022 ;
-		fact.servers.bridges.brtObfs23.tsv.023 += v.servers.bridges.brtObfs23.tsv.023 ;
-		fact.servers.bridges.brtObfs23.tsv.024 += v.servers.bridges.brtObfs23.tsv.024 ; 
+		fact.servers.bridges.brtObfs23.tsv.v010 += v.servers.bridges.brtObfs23.tsv.v010 ;
+		fact.servers.bridges.brtObfs23.tsv.v011 += v.servers.bridges.brtObfs23.tsv.v011 ;
+		fact.servers.bridges.brtObfs23.tsv.v012 += v.servers.bridges.brtObfs23.tsv.v012 ;
+		fact.servers.bridges.brtObfs23.tsv.v020 += v.servers.bridges.brtObfs23.tsv.v020 ;
+		fact.servers.bridges.brtObfs23.tsv.v021 += v.servers.bridges.brtObfs23.tsv.v021 ;
+		fact.servers.bridges.brtObfs23.tsv.v022 += v.servers.bridges.brtObfs23.tsv.v022 ;
+		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
+		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ; 
 	});
 	return fact;
 };
 
 var reduceRelays = function ( key, values ) {
-	var v;
 	var fact = {
 		servers : {
 			relays : {
@@ -1720,14 +1677,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbr : 0
 					} ,
@@ -1743,14 +1700,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbr : 0
 					} ,
@@ -1766,14 +1723,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbr : 0
 					} ,
@@ -1789,14 +1746,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbr : 0
 					} ,
@@ -1812,14 +1769,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbr : 0
 					}
@@ -1839,14 +1796,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbg : 0
 					} ,
@@ -1862,14 +1819,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbg : 0
 					} ,
@@ -1885,14 +1842,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbg : 0
 					} ,
@@ -1908,14 +1865,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbg : 0
 					} ,
@@ -1931,14 +1888,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbg : 0
 					}
@@ -1958,14 +1915,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbm : 0
 					} ,
@@ -1981,14 +1938,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbm : 0
 					} ,
@@ -2004,14 +1961,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbm : 0
 					} ,
@@ -2027,14 +1984,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbm : 0
 					} ,
@@ -2050,14 +2007,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbm : 0
 					}
@@ -2077,23 +2034,23 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
+							p4 : 0 ,
+							p6 : 0 ,
+							p8 : 0 ,
+							p46 : 0 ,
+							p48 : 0 ,
+							p68 : 0 ,
+							p468 : 0
 						} ,
 						pbe : 0
 					} ,
@@ -2109,23 +2066,23 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
+							p4 : 0 ,
+							p6 : 0 ,
+							p8 : 0 ,
+							p46 : 0 ,
+							p48 : 0 ,
+							p68 : 0 ,
+							p468 : 0
 						} ,
 						pbe : 0
 					} ,
@@ -2141,14 +2098,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pbe : 0
 					} ,
@@ -2164,23 +2121,23 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
+							p4 : 0 ,
+							p6 : 0 ,
+							p8 : 0 ,
+							p46 : 0 ,
+							p48 : 0 ,
+							p68 : 0 ,
+							p468 : 0
 						} ,
 						pbe : 0
 					} ,
@@ -2196,23 +2153,23 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						} ,
 						pex : {
-							4 : 0 ,
-							6 : 0 ,
-							8 : 0 ,
-							46 : 0 ,
-							48 : 0 ,
-							68 : 0 ,
-							468 : 0
+							p4 : 0 ,
+							p6 : 0 ,
+							p8 : 0 ,
+							p46 : 0 ,
+							p48 : 0 ,
+							p68 : 0 ,
+							p468 : 0
 						} ,
 						pbe : 0
 					}
@@ -2232,14 +2189,14 @@ var reduceRelays = function ( key, values ) {
 							other : 0
 						} ,
 						tsv : {
-							010 : 0 ,
-							011 : 0 ,
-							012 : 0 ,
-							020 : 0 ,
-							021 : 0 ,
-							022 : 0 ,
-							023 : 0 ,
-							024 : 0
+							v010 : 0 ,
+							v011 : 0 ,
+							v012 : 0 ,
+							v020 : 0 ,
+							v021 : 0 ,
+							v022 : 0 ,
+							v023 : 0 ,
+							v024 : 0
 						}
 					} ,
 					authorityTrue : {
@@ -2255,14 +2212,14 @@ var reduceRelays = function ( key, values ) {
 								other : 0
 							} ,
 							tsv : {
-								010 : 0 ,
-								011 : 0 ,
-								012 : 0 ,
-								020 : 0 ,
-								021 : 0 ,
-								022 : 0 ,
-								023 : 0 ,
-								024 : 0
+								v010 : 0 ,
+								v011 : 0 ,
+								v012 : 0 ,
+								v020 : 0 ,
+								v021 : 0 ,
+								v022 : 0 ,
+								v023 : 0 ,
+								v024 : 0
 							}
 						}
 					}
@@ -2279,14 +2236,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleAll.total.osv.freebsd += v.servers.relays.roleAll.total.osv.freebsd ;
 		fact.servers.relays.roleAll.total.osv.windows += v.servers.relays.roleAll.total.osv.windows ;
 		fact.servers.relays.roleAll.total.osv.other += v.servers.relays.roleAll.total.osv.other ;
-		fact.servers.relays.roleAll.total.tsv.010 += v.servers.relays.roleAll.total.tsv.010 ;
-		fact.servers.relays.roleAll.total.tsv.011 += v.servers.relays.roleAll.total.tsv.011 ;
-		fact.servers.relays.roleAll.total.tsv.012 += v.servers.relays.roleAll.total.tsv.012 ;
-		fact.servers.relays.roleAll.total.tsv.020 += v.servers.relays.roleAll.total.tsv.020 ;
-		fact.servers.relays.roleAll.total.tsv.021 += v.servers.relays.roleAll.total.tsv.021 ;
-		fact.servers.relays.roleAll.total.tsv.022 += v.servers.relays.roleAll.total.tsv.022 ;
-		fact.servers.relays.roleAll.total.tsv.023 += v.servers.relays.roleAll.total.tsv.023 ;
-		fact.servers.relays.roleAll.total.tsv.024 += v.servers.relays.roleAll.total.tsv.024 ;
+		fact.servers.relays.roleAll.total.tsv.v010 += v.servers.relays.roleAll.total.tsv.v010 ;
+		fact.servers.relays.roleAll.total.tsv.v011 += v.servers.relays.roleAll.total.tsv.v011 ;
+		fact.servers.relays.roleAll.total.tsv.v012 += v.servers.relays.roleAll.total.tsv.v012 ;
+		fact.servers.relays.roleAll.total.tsv.v020 += v.servers.relays.roleAll.total.tsv.v020 ;
+		fact.servers.relays.roleAll.total.tsv.v021 += v.servers.relays.roleAll.total.tsv.v021 ;
+		fact.servers.relays.roleAll.total.tsv.v022 += v.servers.relays.roleAll.total.tsv.v022 ;
+		fact.servers.relays.roleAll.total.tsv.v023 += v.servers.relays.roleAll.total.tsv.v023 ;
+		fact.servers.relays.roleAll.total.tsv.v024 += v.servers.relays.roleAll.total.tsv.v024 ;
 		fact.servers.relays.roleAll.total.pbr += v.servers.relays.roleAll.total.pbr ;
 		
 		fact.servers.relays.roleAll.flagNone.count += v.servers.relays.roleAll.flagNone.count ;
@@ -2297,14 +2254,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleAll.flagNone.osv.freebsd += v.servers.relays.roleAll.flagNone.osv.freebsd ;
 		fact.servers.relays.roleAll.flagNone.osv.windows += v.servers.relays.roleAll.flagNone.osv.windows ;
 		fact.servers.relays.roleAll.flagNone.osv.other += v.servers.relays.roleAll.flagNone.osv.other ;
-		fact.servers.relays.roleAll.flagNone.tsv.010 += v.servers.relays.roleAll.flagNone.tsv.010 ;
-		fact.servers.relays.roleAll.flagNone.tsv.011 += v.servers.relays.roleAll.flagNone.tsv.011 ;
-		fact.servers.relays.roleAll.flagNone.tsv.012 += v.servers.relays.roleAll.flagNone.tsv.012 ;
-		fact.servers.relays.roleAll.flagNone.tsv.020 += v.servers.relays.roleAll.flagNone.tsv.020 ;
-		fact.servers.relays.roleAll.flagNone.tsv.021 += v.servers.relays.roleAll.flagNone.tsv.021 ;
-		fact.servers.relays.roleAll.flagNone.tsv.022 += v.servers.relays.roleAll.flagNone.tsv.022 ;
-		fact.servers.relays.roleAll.flagNone.tsv.023 += v.servers.relays.roleAll.flagNone.tsv.023 ;
-		fact.servers.relays.roleAll.flagNone.tsv.024 += v.servers.relays.roleAll.flagNone.tsv.024 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v010 += v.servers.relays.roleAll.flagNone.tsv.v010 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v011 += v.servers.relays.roleAll.flagNone.tsv.v011 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v012 += v.servers.relays.roleAll.flagNone.tsv.v012 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v020 += v.servers.relays.roleAll.flagNone.tsv.v020 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v021 += v.servers.relays.roleAll.flagNone.tsv.v021 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v022 += v.servers.relays.roleAll.flagNone.tsv.v022 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v023 += v.servers.relays.roleAll.flagNone.tsv.v023 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v024 += v.servers.relays.roleAll.flagNone.tsv.v024 ;
 		fact.servers.relays.roleAll.flagNone.pbr += v.servers.relays.roleAll.flagNone.pbr ;
 		
 		fact.servers.relays.roleAll.flagStable.count += v.servers.relays.roleAll.flagStable.count ;
@@ -2315,14 +2272,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleAll.flagStable.osv.freebsd += v.servers.relays.roleAll.flagStable.osv.freebsd ;
 		fact.servers.relays.roleAll.flagStable.osv.windows += v.servers.relays.roleAll.flagStable.osv.windows ;
 		fact.servers.relays.roleAll.flagStable.osv.other += v.servers.relays.roleAll.flagStable.osv.other ;
-		fact.servers.relays.roleAll.flagStable.tsv.010 += v.servers.relays.roleAll.flagStable.tsv.010 ;
-		fact.servers.relays.roleAll.flagStable.tsv.011 += v.servers.relays.roleAll.flagStable.tsv.011 ;
-		fact.servers.relays.roleAll.flagStable.tsv.012 += v.servers.relays.roleAll.flagStable.tsv.012 ;
-		fact.servers.relays.roleAll.flagStable.tsv.020 += v.servers.relays.roleAll.flagStable.tsv.020 ;
-		fact.servers.relays.roleAll.flagStable.tsv.021 += v.servers.relays.roleAll.flagStable.tsv.021 ;
-		fact.servers.relays.roleAll.flagStable.tsv.022 += v.servers.relays.roleAll.flagStable.tsv.022 ;
-		fact.servers.relays.roleAll.flagStable.tsv.023 += v.servers.relays.roleAll.flagStable.tsv.023 ;
-		fact.servers.relays.roleAll.flagStable.tsv.024 += v.servers.relays.roleAll.flagStable.tsv.024 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v010 += v.servers.relays.roleAll.flagStable.tsv.v010 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v011 += v.servers.relays.roleAll.flagStable.tsv.v011 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v012 += v.servers.relays.roleAll.flagStable.tsv.v012 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v020 += v.servers.relays.roleAll.flagStable.tsv.v020 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v021 += v.servers.relays.roleAll.flagStable.tsv.v021 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v022 += v.servers.relays.roleAll.flagStable.tsv.v022 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v023 += v.servers.relays.roleAll.flagStable.tsv.v023 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v024 += v.servers.relays.roleAll.flagStable.tsv.v024 ;
 		fact.servers.relays.roleAll.flagStable.pbr += v.servers.relays.roleAll.flagStable.pbr ;
 		
 		fact.servers.relays.roleAll.flagFast.count += v.servers.relays.roleAll.flagFast.count ;
@@ -2333,14 +2290,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleAll.flagFast.osv.freebsd += v.servers.relays.roleAll.flagFast.osv.freebsd ;
 		fact.servers.relays.roleAll.flagFast.osv.windows += v.servers.relays.roleAll.flagFast.osv.windows ;
 		fact.servers.relays.roleAll.flagFast.osv.other += v.servers.relays.roleAll.flagFast.osv.other ;
-		fact.servers.relays.roleAll.flagFast.tsv.010 += v.servers.relays.roleAll.flagFast.tsv.010 ;
-		fact.servers.relays.roleAll.flagFast.tsv.011 += v.servers.relays.roleAll.flagFast.tsv.011 ;
-		fact.servers.relays.roleAll.flagFast.tsv.012 += v.servers.relays.roleAll.flagFast.tsv.012 ;
-		fact.servers.relays.roleAll.flagFast.tsv.020 += v.servers.relays.roleAll.flagFast.tsv.020 ;
-		fact.servers.relays.roleAll.flagFast.tsv.021 += v.servers.relays.roleAll.flagFast.tsv.021 ;
-		fact.servers.relays.roleAll.flagFast.tsv.022 += v.servers.relays.roleAll.flagFast.tsv.022 ;
-		fact.servers.relays.roleAll.flagFast.tsv.023 += v.servers.relays.roleAll.flagFast.tsv.023 ;
-		fact.servers.relays.roleAll.flagFast.tsv.024 += v.servers.relays.roleAll.flagFast.tsv.024 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v010 += v.servers.relays.roleAll.flagFast.tsv.v010 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v011 += v.servers.relays.roleAll.flagFast.tsv.v011 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v012 += v.servers.relays.roleAll.flagFast.tsv.v012 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v020 += v.servers.relays.roleAll.flagFast.tsv.v020 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v021 += v.servers.relays.roleAll.flagFast.tsv.v021 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v022 += v.servers.relays.roleAll.flagFast.tsv.v022 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v023 += v.servers.relays.roleAll.flagFast.tsv.v023 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v024 += v.servers.relays.roleAll.flagFast.tsv.v024 ;
 		fact.servers.relays.roleAll.flagFast.pbr += v.servers.relays.roleAll.flagFast.pbr ;
 		
 		fact.servers.relays.roleAll.flagFastStable.count += v.servers.relays.roleAll.flagFastStable.count ;
@@ -2351,14 +2308,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleAll.flagFastStable.osv.freebsd += v.servers.relays.roleAll.flagFastStable.osv.freebsd ;
 		fact.servers.relays.roleAll.flagFastStable.osv.windows += v.servers.relays.roleAll.flagFastStable.osv.windows ;
 		fact.servers.relays.roleAll.flagFastStable.osv.other += v.servers.relays.roleAll.flagFastStable.osv.other ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.010 += v.servers.relays.roleAll.flagFastStable.tsv.010 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.011 += v.servers.relays.roleAll.flagFastStable.tsv.011 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.012 += v.servers.relays.roleAll.flagFastStable.tsv.012 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.020 += v.servers.relays.roleAll.flagFastStable.tsv.020 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.021 += v.servers.relays.roleAll.flagFastStable.tsv.021 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.022 += v.servers.relays.roleAll.flagFastStable.tsv.022 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.023 += v.servers.relays.roleAll.flagFastStable.tsv.023 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.024 += v.servers.relays.roleAll.flagFastStable.tsv.024 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v010 += v.servers.relays.roleAll.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v011 += v.servers.relays.roleAll.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v012 += v.servers.relays.roleAll.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v020 += v.servers.relays.roleAll.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v021 += v.servers.relays.roleAll.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v022 += v.servers.relays.roleAll.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v023 += v.servers.relays.roleAll.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v024 += v.servers.relays.roleAll.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleAll.flagFastStable.pbr += v.servers.relays.roleAll.flagFastStable.pbr ;
 		
 		// GUARD
@@ -2370,14 +2327,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleGuard.total.osv.freebsd += v.servers.relays.roleGuard.total.osv.freebsd ;
 		fact.servers.relays.roleGuard.total.osv.windows += v.servers.relays.roleGuard.total.osv.windows ;
 		fact.servers.relays.roleGuard.total.osv.other += v.servers.relays.roleGuard.total.osv.other ;
-		fact.servers.relays.roleGuard.total.tsv.010 += v.servers.relays.roleGuard.total.tsv.010 ;
-		fact.servers.relays.roleGuard.total.tsv.011 += v.servers.relays.roleGuard.total.tsv.011 ;
-		fact.servers.relays.roleGuard.total.tsv.012 += v.servers.relays.roleGuard.total.tsv.012 ;
-		fact.servers.relays.roleGuard.total.tsv.020 += v.servers.relays.roleGuard.total.tsv.020 ;
-		fact.servers.relays.roleGuard.total.tsv.021 += v.servers.relays.roleGuard.total.tsv.021 ;
-		fact.servers.relays.roleGuard.total.tsv.022 += v.servers.relays.roleGuard.total.tsv.022 ;
-		fact.servers.relays.roleGuard.total.tsv.023 += v.servers.relays.roleGuard.total.tsv.023 ;
-		fact.servers.relays.roleGuard.total.tsv.024 += v.servers.relays.roleGuard.total.tsv.024 ;
+		fact.servers.relays.roleGuard.total.tsv.v010 += v.servers.relays.roleGuard.total.tsv.v010 ;
+		fact.servers.relays.roleGuard.total.tsv.v011 += v.servers.relays.roleGuard.total.tsv.v011 ;
+		fact.servers.relays.roleGuard.total.tsv.v012 += v.servers.relays.roleGuard.total.tsv.v012 ;
+		fact.servers.relays.roleGuard.total.tsv.v020 += v.servers.relays.roleGuard.total.tsv.v020 ;
+		fact.servers.relays.roleGuard.total.tsv.v021 += v.servers.relays.roleGuard.total.tsv.v021 ;
+		fact.servers.relays.roleGuard.total.tsv.v022 += v.servers.relays.roleGuard.total.tsv.v022 ;
+		fact.servers.relays.roleGuard.total.tsv.v023 += v.servers.relays.roleGuard.total.tsv.v023 ;
+		fact.servers.relays.roleGuard.total.tsv.v024 += v.servers.relays.roleGuard.total.tsv.v024 ;
 		fact.servers.relays.roleGuard.total.pbg += v.servers.relays.roleGuard.total.pbg ;
 		
 		fact.servers.relays.roleGuard.flagNone.count += v.servers.relays.roleGuard.flagNone.count ;
@@ -2388,14 +2345,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagNone.osv.freebsd += v.servers.relays.roleGuard.flagNone.osv.freebsd ;
 		fact.servers.relays.roleGuard.flagNone.osv.windows += v.servers.relays.roleGuard.flagNone.osv.windows ;
 		fact.servers.relays.roleGuard.flagNone.osv.other += v.servers.relays.roleGuard.flagNone.osv.other ;
-		fact.servers.relays.roleGuard.flagNone.tsv.010 += v.servers.relays.roleGuard.flagNone.tsv.010 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.011 += v.servers.relays.roleGuard.flagNone.tsv.011 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.012 += v.servers.relays.roleGuard.flagNone.tsv.012 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.020 += v.servers.relays.roleGuard.flagNone.tsv.020 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.021 += v.servers.relays.roleGuard.flagNone.tsv.021 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.022 += v.servers.relays.roleGuard.flagNone.tsv.022 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.023 += v.servers.relays.roleGuard.flagNone.tsv.023 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.024 += v.servers.relays.roleGuard.flagNone.tsv.024 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v010 += v.servers.relays.roleGuard.flagNone.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v011 += v.servers.relays.roleGuard.flagNone.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v012 += v.servers.relays.roleGuard.flagNone.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v020 += v.servers.relays.roleGuard.flagNone.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v021 += v.servers.relays.roleGuard.flagNone.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v022 += v.servers.relays.roleGuard.flagNone.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v023 += v.servers.relays.roleGuard.flagNone.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v024 += v.servers.relays.roleGuard.flagNone.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagNone.pbg += v.servers.relays.roleGuard.flagNone.pbg ;
 		
 		fact.servers.relays.roleGuard.flagStable.count += v.servers.relays.roleGuard.flagStable.count ;
@@ -2406,14 +2363,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagStable.osv.freebsd += v.servers.relays.roleGuard.flagStable.osv.freebsd ;
 		fact.servers.relays.roleGuard.flagStable.osv.windows += v.servers.relays.roleGuard.flagStable.osv.windows ;
 		fact.servers.relays.roleGuard.flagStable.osv.other += v.servers.relays.roleGuard.flagStable.osv.other ;
-		fact.servers.relays.roleGuard.flagStable.tsv.010 += v.servers.relays.roleGuard.flagStable.tsv.010 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.011 += v.servers.relays.roleGuard.flagStable.tsv.011 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.012 += v.servers.relays.roleGuard.flagStable.tsv.012 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.020 += v.servers.relays.roleGuard.flagStable.tsv.020 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.021 += v.servers.relays.roleGuard.flagStable.tsv.021 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.022 += v.servers.relays.roleGuard.flagStable.tsv.022 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.023 += v.servers.relays.roleGuard.flagStable.tsv.023 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.024 += v.servers.relays.roleGuard.flagStable.tsv.024 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v010 += v.servers.relays.roleGuard.flagStable.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v011 += v.servers.relays.roleGuard.flagStable.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v012 += v.servers.relays.roleGuard.flagStable.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v020 += v.servers.relays.roleGuard.flagStable.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v021 += v.servers.relays.roleGuard.flagStable.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v022 += v.servers.relays.roleGuard.flagStable.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v023 += v.servers.relays.roleGuard.flagStable.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v024 += v.servers.relays.roleGuard.flagStable.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagStable.pbg += v.servers.relays.roleGuard.flagStable.pbg ;
 		
 		fact.servers.relays.roleGuard.flagFast.count += v.servers.relays.roleGuard.flagFast.count ;
@@ -2424,14 +2381,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagFast.osv.freebsd += v.servers.relays.roleGuard.flagFast.osv.freebsd ;
 		fact.servers.relays.roleGuard.flagFast.osv.windows += v.servers.relays.roleGuard.flagFast.osv.windows ;
 		fact.servers.relays.roleGuard.flagFast.osv.other += v.servers.relays.roleGuard.flagFast.osv.other ;
-		fact.servers.relays.roleGuard.flagFast.tsv.010 += v.servers.relays.roleGuard.flagFast.tsv.010 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.011 += v.servers.relays.roleGuard.flagFast.tsv.011 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.012 += v.servers.relays.roleGuard.flagFast.tsv.012 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.020 += v.servers.relays.roleGuard.flagFast.tsv.020 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.021 += v.servers.relays.roleGuard.flagFast.tsv.021 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.022 += v.servers.relays.roleGuard.flagFast.tsv.022 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.023 += v.servers.relays.roleGuard.flagFast.tsv.023 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.024 += v.servers.relays.roleGuard.flagFast.tsv.024 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v010 += v.servers.relays.roleGuard.flagFast.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v011 += v.servers.relays.roleGuard.flagFast.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v012 += v.servers.relays.roleGuard.flagFast.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v020 += v.servers.relays.roleGuard.flagFast.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v021 += v.servers.relays.roleGuard.flagFast.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v022 += v.servers.relays.roleGuard.flagFast.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v023 += v.servers.relays.roleGuard.flagFast.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v024 += v.servers.relays.roleGuard.flagFast.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagFast.pbg += v.servers.relays.roleGuard.flagFast.pbg ;
 		
 		fact.servers.relays.roleGuard.flagFastStable.count += v.servers.relays.roleGuard.flagFastStable.count ;
@@ -2442,14 +2399,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagFastStable.osv.freebsd += v.servers.relays.roleGuard.flagFastStable.osv.freebsd ;
 		fact.servers.relays.roleGuard.flagFastStable.osv.windows += v.servers.relays.roleGuard.flagFastStable.osv.windows ;
 		fact.servers.relays.roleGuard.flagFastStable.osv.other += v.servers.relays.roleGuard.flagFastStable.osv.other ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.010 += v.servers.relays.roleGuard.flagFastStable.tsv.010 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.011 += v.servers.relays.roleGuard.flagFastStable.tsv.011 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.012 += v.servers.relays.roleGuard.flagFastStable.tsv.012 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.020 += v.servers.relays.roleGuard.flagFastStable.tsv.020 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.021 += v.servers.relays.roleGuard.flagFastStable.tsv.021 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.022 += v.servers.relays.roleGuard.flagFastStable.tsv.022 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.023 += v.servers.relays.roleGuard.flagFastStable.tsv.023 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.024 += v.servers.relays.roleGuard.flagFastStable.tsv.024 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v010 += v.servers.relays.roleGuard.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v011 += v.servers.relays.roleGuard.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v012 += v.servers.relays.roleGuard.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v020 += v.servers.relays.roleGuard.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v021 += v.servers.relays.roleGuard.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v022 += v.servers.relays.roleGuard.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v023 += v.servers.relays.roleGuard.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v024 += v.servers.relays.roleGuard.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagFastStable.pbg += v.servers.relays.roleGuard.flagFastStable.pbg ;
 		
 		// MIDDLE
@@ -2461,14 +2418,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleMiddle.total.osv.freebsd += v.servers.relays.roleMiddle.total.osv.freebsd ;
 		fact.servers.relays.roleMiddle.total.osv.windows += v.servers.relays.roleMiddle.total.osv.windows ;
 		fact.servers.relays.roleMiddle.total.osv.other += v.servers.relays.roleMiddle.total.osv.other ;
-		fact.servers.relays.roleMiddle.total.tsv.010 += v.servers.relays.roleMiddle.total.tsv.010 ;
-		fact.servers.relays.roleMiddle.total.tsv.011 += v.servers.relays.roleMiddle.total.tsv.011 ;
-		fact.servers.relays.roleMiddle.total.tsv.012 += v.servers.relays.roleMiddle.total.tsv.012 ;
-		fact.servers.relays.roleMiddle.total.tsv.020 += v.servers.relays.roleMiddle.total.tsv.020 ;
-		fact.servers.relays.roleMiddle.total.tsv.021 += v.servers.relays.roleMiddle.total.tsv.021 ;
-		fact.servers.relays.roleMiddle.total.tsv.022 += v.servers.relays.roleMiddle.total.tsv.022 ;
-		fact.servers.relays.roleMiddle.total.tsv.023 += v.servers.relays.roleMiddle.total.tsv.023 ;
-		fact.servers.relays.roleMiddle.total.tsv.024 += v.servers.relays.roleMiddle.total.tsv.024 ;
+		fact.servers.relays.roleMiddle.total.tsv.v010 += v.servers.relays.roleMiddle.total.tsv.v010 ;
+		fact.servers.relays.roleMiddle.total.tsv.v011 += v.servers.relays.roleMiddle.total.tsv.v011 ;
+		fact.servers.relays.roleMiddle.total.tsv.v012 += v.servers.relays.roleMiddle.total.tsv.v012 ;
+		fact.servers.relays.roleMiddle.total.tsv.v020 += v.servers.relays.roleMiddle.total.tsv.v020 ;
+		fact.servers.relays.roleMiddle.total.tsv.v021 += v.servers.relays.roleMiddle.total.tsv.v021 ;
+		fact.servers.relays.roleMiddle.total.tsv.v022 += v.servers.relays.roleMiddle.total.tsv.v022 ;
+		fact.servers.relays.roleMiddle.total.tsv.v023 += v.servers.relays.roleMiddle.total.tsv.v023 ;
+		fact.servers.relays.roleMiddle.total.tsv.v024 += v.servers.relays.roleMiddle.total.tsv.v024 ;
 		fact.servers.relays.roleMiddle.total.pbm += v.servers.relays.roleMiddle.total.pbm ;
 		
 		fact.servers.relays.roleMiddle.flagNone.count += v.servers.relays.roleMiddle.flagNone.count ;
@@ -2479,14 +2436,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagNone.osv.freebsd += v.servers.relays.roleMiddle.flagNone.osv.freebsd ;
 		fact.servers.relays.roleMiddle.flagNone.osv.windows += v.servers.relays.roleMiddle.flagNone.osv.windows ;
 		fact.servers.relays.roleMiddle.flagNone.osv.other += v.servers.relays.roleMiddle.flagNone.osv.other ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.010 += v.servers.relays.roleMiddle.flagNone.tsv.010 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.011 += v.servers.relays.roleMiddle.flagNone.tsv.011 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.012 += v.servers.relays.roleMiddle.flagNone.tsv.012 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.020 += v.servers.relays.roleMiddle.flagNone.tsv.020 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.021 += v.servers.relays.roleMiddle.flagNone.tsv.021 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.022 += v.servers.relays.roleMiddle.flagNone.tsv.022 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.023 += v.servers.relays.roleMiddle.flagNone.tsv.023 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.024 += v.servers.relays.roleMiddle.flagNone.tsv.024 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v010 += v.servers.relays.roleMiddle.flagNone.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v011 += v.servers.relays.roleMiddle.flagNone.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v012 += v.servers.relays.roleMiddle.flagNone.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v020 += v.servers.relays.roleMiddle.flagNone.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v021 += v.servers.relays.roleMiddle.flagNone.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v022 += v.servers.relays.roleMiddle.flagNone.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v023 += v.servers.relays.roleMiddle.flagNone.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v024 += v.servers.relays.roleMiddle.flagNone.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagNone.pbm += v.servers.relays.roleMiddle.flagNone.pbm ;
 		
 		fact.servers.relays.roleMiddle.flagStable.count += v.servers.relays.roleMiddle.flagStable.count ;
@@ -2497,14 +2454,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagStable.osv.freebsd += v.servers.relays.roleMiddle.flagStable.osv.freebsd ;
 		fact.servers.relays.roleMiddle.flagStable.osv.windows += v.servers.relays.roleMiddle.flagStable.osv.windows ;
 		fact.servers.relays.roleMiddle.flagStable.osv.other += v.servers.relays.roleMiddle.flagStable.osv.other ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.010 += v.servers.relays.roleMiddle.flagStable.tsv.010 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.011 += v.servers.relays.roleMiddle.flagStable.tsv.011 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.012 += v.servers.relays.roleMiddle.flagStable.tsv.012 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.020 += v.servers.relays.roleMiddle.flagStable.tsv.020 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.021 += v.servers.relays.roleMiddle.flagStable.tsv.021 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.022 += v.servers.relays.roleMiddle.flagStable.tsv.022 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.023 += v.servers.relays.roleMiddle.flagStable.tsv.023 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.024 += v.servers.relays.roleMiddle.flagStable.tsv.024 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v010 += v.servers.relays.roleMiddle.flagStable.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v011 += v.servers.relays.roleMiddle.flagStable.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v012 += v.servers.relays.roleMiddle.flagStable.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v020 += v.servers.relays.roleMiddle.flagStable.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v021 += v.servers.relays.roleMiddle.flagStable.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v022 += v.servers.relays.roleMiddle.flagStable.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v023 += v.servers.relays.roleMiddle.flagStable.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v024 += v.servers.relays.roleMiddle.flagStable.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagStable.pbm += v.servers.relays.roleMiddle.flagStable.pbm ;
 		
 		fact.servers.relays.roleMiddle.flagFast.count += v.servers.relays.roleMiddle.flagFast.count ;
@@ -2515,14 +2472,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagFast.osv.freebsd += v.servers.relays.roleMiddle.flagFast.osv.freebsd ;
 		fact.servers.relays.roleMiddle.flagFast.osv.windows += v.servers.relays.roleMiddle.flagFast.osv.windows ;
 		fact.servers.relays.roleMiddle.flagFast.osv.other += v.servers.relays.roleMiddle.flagFast.osv.other ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.010 += v.servers.relays.roleMiddle.flagFast.tsv.010 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.011 += v.servers.relays.roleMiddle.flagFast.tsv.011 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.012 += v.servers.relays.roleMiddle.flagFast.tsv.012 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.020 += v.servers.relays.roleMiddle.flagFast.tsv.020 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.021 += v.servers.relays.roleMiddle.flagFast.tsv.021 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.022 += v.servers.relays.roleMiddle.flagFast.tsv.022 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.023 += v.servers.relays.roleMiddle.flagFast.tsv.023 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.024 += v.servers.relays.roleMiddle.flagFast.tsv.024 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v010 += v.servers.relays.roleMiddle.flagFast.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v011 += v.servers.relays.roleMiddle.flagFast.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v012 += v.servers.relays.roleMiddle.flagFast.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v020 += v.servers.relays.roleMiddle.flagFast.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v021 += v.servers.relays.roleMiddle.flagFast.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v022 += v.servers.relays.roleMiddle.flagFast.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v023 += v.servers.relays.roleMiddle.flagFast.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v024 += v.servers.relays.roleMiddle.flagFast.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagFast.pbm += v.servers.relays.roleMiddle.flagFast.pbm ;
 		
 		fact.servers.relays.roleMiddle.flagFastStable.count += v.servers.relays.roleMiddle.flagFastStable.count ;
@@ -2533,14 +2490,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagFastStable.osv.freebsd += v.servers.relays.roleMiddle.flagFastStable.osv.freebsd ;
 		fact.servers.relays.roleMiddle.flagFastStable.osv.windows += v.servers.relays.roleMiddle.flagFastStable.osv.windows ;
 		fact.servers.relays.roleMiddle.flagFastStable.osv.other += v.servers.relays.roleMiddle.flagFastStable.osv.other ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.010 += v.servers.relays.roleMiddle.flagFastStable.tsv.010 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.011 += v.servers.relays.roleMiddle.flagFastStable.tsv.011 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.012 += v.servers.relays.roleMiddle.flagFastStable.tsv.012 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.020 += v.servers.relays.roleMiddle.flagFastStable.tsv.020 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.021 += v.servers.relays.roleMiddle.flagFastStable.tsv.021 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.022 += v.servers.relays.roleMiddle.flagFastStable.tsv.022 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.023 += v.servers.relays.roleMiddle.flagFastStable.tsv.023 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.024 += v.servers.relays.roleMiddle.flagFastStable.tsv.024 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v010 += v.servers.relays.roleMiddle.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v011 += v.servers.relays.roleMiddle.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v012 += v.servers.relays.roleMiddle.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v020 += v.servers.relays.roleMiddle.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v021 += v.servers.relays.roleMiddle.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v022 += v.servers.relays.roleMiddle.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v023 += v.servers.relays.roleMiddle.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v024 += v.servers.relays.roleMiddle.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagFastStable.pbm += v.servers.relays.roleMiddle.flagFastStable.pbm ;
 		
 		// EXIT
@@ -2552,21 +2509,21 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleExit.total.osv.freebsd += v.servers.relays.roleExit.total.osv.freebsd ;
 		fact.servers.relays.roleExit.total.osv.windows += v.servers.relays.roleExit.total.osv.windows ;
 		fact.servers.relays.roleExit.total.osv.other += v.servers.relays.roleExit.total.osv.other ;
-		fact.servers.relays.roleExit.total.tsv.010 += v.servers.relays.roleExit.total.tsv.010 ;
-		fact.servers.relays.roleExit.total.tsv.011 += v.servers.relays.roleExit.total.tsv.011 ;
-		fact.servers.relays.roleExit.total.tsv.012 += v.servers.relays.roleExit.total.tsv.012 ;
-		fact.servers.relays.roleExit.total.tsv.020 += v.servers.relays.roleExit.total.tsv.020 ;
-		fact.servers.relays.roleExit.total.tsv.021 += v.servers.relays.roleExit.total.tsv.021 ;
-		fact.servers.relays.roleExit.total.tsv.022 += v.servers.relays.roleExit.total.tsv.022 ;
-		fact.servers.relays.roleExit.total.tsv.023 += v.servers.relays.roleExit.total.tsv.023 ;
-		fact.servers.relays.roleExit.total.tsv.024 += v.servers.relays.roleExit.total.tsv.024 ;
-		fact.servers.relays.roleExit.total.pex.4 += v.servers.relays.roleExit.total.pex.4 ;
-		fact.servers.relays.roleExit.total.pex.6 += v.servers.relays.roleExit.total.pex.6 ;
-		fact.servers.relays.roleExit.total.pex.8 += v.servers.relays.roleExit.total.pex.8 ;
-		fact.servers.relays.roleExit.total.pex.46 += v.servers.relays.roleExit.total.pex.46 ;
-		fact.servers.relays.roleExit.total.pex.48 += v.servers.relays.roleExit.total.pex.48 ;
-		fact.servers.relays.roleExit.total.pex.68 += v.servers.relays.roleExit.total.pex.68 ;
-		fact.servers.relays.roleExit.total.pex.468 += v.servers.relays.roleExit.total.pex.468 ;
+		fact.servers.relays.roleExit.total.tsv.v010 += v.servers.relays.roleExit.total.tsv.v010 ;
+		fact.servers.relays.roleExit.total.tsv.v011 += v.servers.relays.roleExit.total.tsv.v011 ;
+		fact.servers.relays.roleExit.total.tsv.v012 += v.servers.relays.roleExit.total.tsv.v012 ;
+		fact.servers.relays.roleExit.total.tsv.v020 += v.servers.relays.roleExit.total.tsv.v020 ;
+		fact.servers.relays.roleExit.total.tsv.v021 += v.servers.relays.roleExit.total.tsv.v021 ;
+		fact.servers.relays.roleExit.total.tsv.v022 += v.servers.relays.roleExit.total.tsv.v022 ;
+		fact.servers.relays.roleExit.total.tsv.v023 += v.servers.relays.roleExit.total.tsv.v023 ;
+		fact.servers.relays.roleExit.total.tsv.v024 += v.servers.relays.roleExit.total.tsv.v024 ;
+		fact.servers.relays.roleExit.total.pex.p4 += v.servers.relays.roleExit.total.pex.p4 ;
+		fact.servers.relays.roleExit.total.pex.p6 += v.servers.relays.roleExit.total.pex.p6 ;
+		fact.servers.relays.roleExit.total.pex.p8 += v.servers.relays.roleExit.total.pex.p8 ;
+		fact.servers.relays.roleExit.total.pex.p46 += v.servers.relays.roleExit.total.pex.p46 ;
+		fact.servers.relays.roleExit.total.pex.p48 += v.servers.relays.roleExit.total.pex.p48 ;
+		fact.servers.relays.roleExit.total.pex.p68 += v.servers.relays.roleExit.total.pex.p68 ;
+		fact.servers.relays.roleExit.total.pex.p468 += v.servers.relays.roleExit.total.pex.p468 ;
 		fact.servers.relays.roleExit.total.pbe += v.servers.relays.roleExit.total.pbe ;
 					
 		fact.servers.relays.roleExit.flagNone.count += v.servers.relays.roleExit.flagNone.count ;
@@ -2577,21 +2534,21 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleExit.flagNone.osv.freebsd += v.servers.relays.roleExit.flagNone.osv.freebsd ;
 		fact.servers.relays.roleExit.flagNone.osv.windows += v.servers.relays.roleExit.flagNone.osv.windows ;
 		fact.servers.relays.roleExit.flagNone.osv.other += v.servers.relays.roleExit.flagNone.osv.other ;
-		fact.servers.relays.roleExit.flagNone.tsv.010 += v.servers.relays.roleExit.flagNone.tsv.010 ;
-		fact.servers.relays.roleExit.flagNone.tsv.011 += v.servers.relays.roleExit.flagNone.tsv.011 ;
-		fact.servers.relays.roleExit.flagNone.tsv.012 += v.servers.relays.roleExit.flagNone.tsv.012 ;
-		fact.servers.relays.roleExit.flagNone.tsv.020 += v.servers.relays.roleExit.flagNone.tsv.020 ;
-		fact.servers.relays.roleExit.flagNone.tsv.021 += v.servers.relays.roleExit.flagNone.tsv.021 ;
-		fact.servers.relays.roleExit.flagNone.tsv.022 += v.servers.relays.roleExit.flagNone.tsv.022 ;
-		fact.servers.relays.roleExit.flagNone.tsv.023 += v.servers.relays.roleExit.flagNone.tsv.023 ;
-		fact.servers.relays.roleExit.flagNone.tsv.024 += v.servers.relays.roleExit.flagNone.tsv.024 ;
-		fact.servers.relays.roleExit.flagNone.pex.4 += v.servers.relays.roleExit.flagNone.pex.4 ;
-		fact.servers.relays.roleExit.flagNone.pex.6 += v.servers.relays.roleExit.flagNone.pex.6 ;
-		fact.servers.relays.roleExit.flagNone.pex.8 += v.servers.relays.roleExit.flagNone.pex.8 ;
-		fact.servers.relays.roleExit.flagNone.pex.46 += v.servers.relays.roleExit.flagNone.pex.46 ;
-		fact.servers.relays.roleExit.flagNone.pex.48 += v.servers.relays.roleExit.flagNone.pex.48 ;
-		fact.servers.relays.roleExit.flagNone.pex.68 += v.servers.relays.roleExit.flagNone.pex.68 ;
-		fact.servers.relays.roleExit.flagNone.pex.468 += v.servers.relays.roleExit.flagNone.pex.468 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v010 += v.servers.relays.roleExit.flagNone.tsv.v010 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v011 += v.servers.relays.roleExit.flagNone.tsv.v011 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v012 += v.servers.relays.roleExit.flagNone.tsv.v012 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v020 += v.servers.relays.roleExit.flagNone.tsv.v020 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v021 += v.servers.relays.roleExit.flagNone.tsv.v021 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v022 += v.servers.relays.roleExit.flagNone.tsv.v022 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v023 += v.servers.relays.roleExit.flagNone.tsv.v023 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v024 += v.servers.relays.roleExit.flagNone.tsv.v024 ;
+		fact.servers.relays.roleExit.flagNone.pex.p4 += v.servers.relays.roleExit.flagNone.pex.p4 ;
+		fact.servers.relays.roleExit.flagNone.pex.p6 += v.servers.relays.roleExit.flagNone.pex.p6 ;
+		fact.servers.relays.roleExit.flagNone.pex.p8 += v.servers.relays.roleExit.flagNone.pex.p8 ;
+		fact.servers.relays.roleExit.flagNone.pex.p46 += v.servers.relays.roleExit.flagNone.pex.p46 ;
+		fact.servers.relays.roleExit.flagNone.pex.p48 += v.servers.relays.roleExit.flagNone.pex.p48 ;
+		fact.servers.relays.roleExit.flagNone.pex.p68 += v.servers.relays.roleExit.flagNone.pex.p68 ;
+		fact.servers.relays.roleExit.flagNone.pex.p468 += v.servers.relays.roleExit.flagNone.pex.p468 ;
 		fact.servers.relays.roleExit.flagNone.pbe += v.servers.relays.roleExit.flagNone.pbe ;
 		
 		fact.servers.relays.roleExit.flagFast.count += v.servers.relays.roleExit.flagFast.count ;
@@ -2602,21 +2559,21 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleExit.flagFast.osv.freebsd += v.servers.relays.roleExit.flagFast.osv.freebsd ;
 		fact.servers.relays.roleExit.flagFast.osv.windows += v.servers.relays.roleExit.flagFast.osv.windows ;
 		fact.servers.relays.roleExit.flagFast.osv.other += v.servers.relays.roleExit.flagFast.osv.other ;
-		fact.servers.relays.roleExit.flagFast.tsv.010 += v.servers.relays.roleExit.flagFast.tsv.010 ;
-		fact.servers.relays.roleExit.flagFast.tsv.011 += v.servers.relays.roleExit.flagFast.tsv.011 ;
-		fact.servers.relays.roleExit.flagFast.tsv.012 += v.servers.relays.roleExit.flagFast.tsv.012 ;
-		fact.servers.relays.roleExit.flagFast.tsv.020 += v.servers.relays.roleExit.flagFast.tsv.020 ;
-		fact.servers.relays.roleExit.flagFast.tsv.021 += v.servers.relays.roleExit.flagFast.tsv.021 ;
-		fact.servers.relays.roleExit.flagFast.tsv.022 += v.servers.relays.roleExit.flagFast.tsv.022 ;
-		fact.servers.relays.roleExit.flagFast.tsv.023 += v.servers.relays.roleExit.flagFast.tsv.023 ;
-		fact.servers.relays.roleExit.flagFast.tsv.024 += v.servers.relays.roleExit.flagFast.tsv.024 ;
-		fact.servers.relays.roleExit.flagFast.pex.4 += v.servers.relays.roleExit.flagFast.pex.4 ;
-		fact.servers.relays.roleExit.flagFast.pex.6 += v.servers.relays.roleExit.flagFast.pex.6 ;
-		fact.servers.relays.roleExit.flagFast.pex.8 += v.servers.relays.roleExit.flagFast.pex.8 ;
-		fact.servers.relays.roleExit.flagFast.pex.46 += v.servers.relays.roleExit.flagFast.pex.46 ;
-		fact.servers.relays.roleExit.flagFast.pex.48 += v.servers.relays.roleExit.flagFast.pex.48 ;
-		fact.servers.relays.roleExit.flagFast.pex.68 += v.servers.relays.roleExit.flagFast.pex.68 ;
-		fact.servers.relays.roleExit.flagFast.pex.468 += v.servers.relays.roleExit.flagFast.pex.468 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v010 += v.servers.relays.roleExit.flagFast.tsv.v010 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v011 += v.servers.relays.roleExit.flagFast.tsv.v011 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v012 += v.servers.relays.roleExit.flagFast.tsv.v012 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v020 += v.servers.relays.roleExit.flagFast.tsv.v020 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v021 += v.servers.relays.roleExit.flagFast.tsv.v021 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v022 += v.servers.relays.roleExit.flagFast.tsv.v022 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v023 += v.servers.relays.roleExit.flagFast.tsv.v023 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v024 += v.servers.relays.roleExit.flagFast.tsv.v024 ;
+		fact.servers.relays.roleExit.flagFast.pex.p4 += v.servers.relays.roleExit.flagFast.pex.p4 ;
+		fact.servers.relays.roleExit.flagFast.pex.p6 += v.servers.relays.roleExit.flagFast.pex.p6 ;
+		fact.servers.relays.roleExit.flagFast.pex.p8 += v.servers.relays.roleExit.flagFast.pex.p8 ;
+		fact.servers.relays.roleExit.flagFast.pex.p46 += v.servers.relays.roleExit.flagFast.pex.p46 ;
+		fact.servers.relays.roleExit.flagFast.pex.p48 += v.servers.relays.roleExit.flagFast.pex.p48 ;
+		fact.servers.relays.roleExit.flagFast.pex.p68 += v.servers.relays.roleExit.flagFast.pex.p68 ;
+		fact.servers.relays.roleExit.flagFast.pex.p468 += v.servers.relays.roleExit.flagFast.pex.p468 ;
 		fact.servers.relays.roleExit.flagFast.pbe += v.servers.relays.roleExit.flagFast.pbe ;
 		
 		fact.servers.relays.roleExit.flagStable.count += v.servers.relays.roleExit.flagStable.count ;
@@ -2627,21 +2584,21 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleExit.flagStable.osv.freebsd += v.servers.relays.roleExit.flagStable.osv.freebsd ;
 		fact.servers.relays.roleExit.flagStable.osv.windows += v.servers.relays.roleExit.flagStable.osv.windows ;
 		fact.servers.relays.roleExit.flagStable.osv.other += v.servers.relays.roleExit.flagStable.osv.other ;
-		fact.servers.relays.roleExit.flagStable.tsv.010 += v.servers.relays.roleExit.flagStable.tsv.010 ;
-		fact.servers.relays.roleExit.flagStable.tsv.011 += v.servers.relays.roleExit.flagStable.tsv.011 ;
-		fact.servers.relays.roleExit.flagStable.tsv.012 += v.servers.relays.roleExit.flagStable.tsv.012 ;
-		fact.servers.relays.roleExit.flagStable.tsv.020 += v.servers.relays.roleExit.flagStable.tsv.020 ;
-		fact.servers.relays.roleExit.flagStable.tsv.021 += v.servers.relays.roleExit.flagStable.tsv.021 ;
-		fact.servers.relays.roleExit.flagStable.tsv.022 += v.servers.relays.roleExit.flagStable.tsv.022 ;
-		fact.servers.relays.roleExit.flagStable.tsv.023 += v.servers.relays.roleExit.flagStable.tsv.023 ;
-		fact.servers.relays.roleExit.flagStable.tsv.024 += v.servers.relays.roleExit.flagStable.tsv.024 ;
-		fact.servers.relays.roleExit.flagStable.pex.4 += v.servers.relays.roleExit.flagStable.pex.4 ;
-		fact.servers.relays.roleExit.flagStable.pex.6 += v.servers.relays.roleExit.flagStable.pex.6 ;
-		fact.servers.relays.roleExit.flagStable.pex.8 += v.servers.relays.roleExit.flagStable.pex.8 ;
-		fact.servers.relays.roleExit.flagStable.pex.46 += v.servers.relays.roleExit.flagStable.pex.46 ;
-		fact.servers.relays.roleExit.flagStable.pex.48 += v.servers.relays.roleExit.flagStable.pex.48 ;
-		fact.servers.relays.roleExit.flagStable.pex.68 += v.servers.relays.roleExit.flagStable.pex.68 ;
-		fact.servers.relays.roleExit.flagStable.pex.468 += v.servers.relays.roleExit.flagStable.pex.468 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v010 += v.servers.relays.roleExit.flagStable.tsv.v010 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v011 += v.servers.relays.roleExit.flagStable.tsv.v011 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v012 += v.servers.relays.roleExit.flagStable.tsv.v012 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v020 += v.servers.relays.roleExit.flagStable.tsv.v020 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v021 += v.servers.relays.roleExit.flagStable.tsv.v021 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v022 += v.servers.relays.roleExit.flagStable.tsv.v022 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v023 += v.servers.relays.roleExit.flagStable.tsv.v023 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v024 += v.servers.relays.roleExit.flagStable.tsv.v024 ;
+		fact.servers.relays.roleExit.flagStable.pex.p4 += v.servers.relays.roleExit.flagStable.pex.p4 ;
+		fact.servers.relays.roleExit.flagStable.pex.p6 += v.servers.relays.roleExit.flagStable.pex.p6 ;
+		fact.servers.relays.roleExit.flagStable.pex.p8 += v.servers.relays.roleExit.flagStable.pex.p8 ;
+		fact.servers.relays.roleExit.flagStable.pex.p46 += v.servers.relays.roleExit.flagStable.pex.p46 ;
+		fact.servers.relays.roleExit.flagStable.pex.p48 += v.servers.relays.roleExit.flagStable.pex.p48 ;
+		fact.servers.relays.roleExit.flagStable.pex.p68 += v.servers.relays.roleExit.flagStable.pex.p68 ;
+		fact.servers.relays.roleExit.flagStable.pex.p468 += v.servers.relays.roleExit.flagStable.pex.p468 ;
 		fact.servers.relays.roleExit.flagStable.pbe += v.servers.relays.roleExit.flagStable.pbe ;
 		
 		fact.servers.relays.roleExit.flagFastStable.count += v.servers.relays.roleExit.flagFastStable.count ;
@@ -2652,21 +2609,21 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleExit.flagFastStable.osv.freebsd += v.servers.relays.roleExit.flagFastStable.osv.freebsd ;
 		fact.servers.relays.roleExit.flagFastStable.osv.windows += v.servers.relays.roleExit.flagFastStable.osv.windows ;
 		fact.servers.relays.roleExit.flagFastStable.osv.other += v.servers.relays.roleExit.flagFastStable.osv.other ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.010 += v.servers.relays.roleExit.flagFastStable.tsv.010 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.011 += v.servers.relays.roleExit.flagFastStable.tsv.011 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.012 += v.servers.relays.roleExit.flagFastStable.tsv.012 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.020 += v.servers.relays.roleExit.flagFastStable.tsv.020 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.021 += v.servers.relays.roleExit.flagFastStable.tsv.021 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.022 += v.servers.relays.roleExit.flagFastStable.tsv.022 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.023 += v.servers.relays.roleExit.flagFastStable.tsv.023 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.024 += v.servers.relays.roleExit.flagFastStable.tsv.024 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.4 += v.servers.relays.roleExit.flagFastStable.pex.4 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.6 += v.servers.relays.roleExit.flagFastStable.pex.6 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.8 += v.servers.relays.roleExit.flagFastStable.pex.8 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.46 += v.servers.relays.roleExit.flagFastStable.pex.46 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.48 += v.servers.relays.roleExit.flagFastStable.pex.48 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.68 += v.servers.relays.roleExit.flagFastStable.pex.68 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.468 += v.servers.relays.roleExit.flagFastStable.pex.468 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v010 += v.servers.relays.roleExit.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v011 += v.servers.relays.roleExit.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v012 += v.servers.relays.roleExit.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v020 += v.servers.relays.roleExit.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v021 += v.servers.relays.roleExit.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v022 += v.servers.relays.roleExit.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v023 += v.servers.relays.roleExit.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v024 += v.servers.relays.roleExit.flagFastStable.tsv.v024 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p4 += v.servers.relays.roleExit.flagFastStable.pex.p4 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p6 += v.servers.relays.roleExit.flagFastStable.pex.p6 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p8 += v.servers.relays.roleExit.flagFastStable.pex.p8 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p46 += v.servers.relays.roleExit.flagFastStable.pex.p46 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p48 += v.servers.relays.roleExit.flagFastStable.pex.p48 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p68 += v.servers.relays.roleExit.flagFastStable.pex.p68 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p468 += v.servers.relays.roleExit.flagFastStable.pex.p468 ;
 		fact.servers.relays.roleExit.flagFastStable.pbe += v.servers.relays.roleExit.flagFastStable.pbe ;
 		
 		// DIR
@@ -2678,14 +2635,14 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleDir.total.osv.freebsd += v.servers.relays.roleDir.total.osv.freebsd ;
 		fact.servers.relays.roleDir.total.osv.windows += v.servers.relays.roleDir.total.osv.windows ;
 		fact.servers.relays.roleDir.total.osv.other += v.servers.relays.roleDir.total.osv.other ;
-		fact.servers.relays.roleDir.total.tsv.010 += v.servers.relays.roleDir.total.tsv.010 ;
-		fact.servers.relays.roleDir.total.tsv.011 += v.servers.relays.roleDir.total.tsv.011 ;
-		fact.servers.relays.roleDir.total.tsv.012 += v.servers.relays.roleDir.total.tsv.012 ;
-		fact.servers.relays.roleDir.total.tsv.020 += v.servers.relays.roleDir.total.tsv.020 ;
-		fact.servers.relays.roleDir.total.tsv.021 += v.servers.relays.roleDir.total.tsv.021 ;
-		fact.servers.relays.roleDir.total.tsv.022 += v.servers.relays.roleDir.total.tsv.022 ;
-		fact.servers.relays.roleDir.total.tsv.023 += v.servers.relays.roleDir.total.tsv.023 ;
-		fact.servers.relays.roleDir.total.tsv.024 += v.servers.relays.roleDir.total.tsv.024 ;
+		fact.servers.relays.roleDir.total.tsv.v010 += v.servers.relays.roleDir.total.tsv.v010 ;
+		fact.servers.relays.roleDir.total.tsv.v011 += v.servers.relays.roleDir.total.tsv.v011 ;
+		fact.servers.relays.roleDir.total.tsv.v012 += v.servers.relays.roleDir.total.tsv.v012 ;
+		fact.servers.relays.roleDir.total.tsv.v020 += v.servers.relays.roleDir.total.tsv.v020 ;
+		fact.servers.relays.roleDir.total.tsv.v021 += v.servers.relays.roleDir.total.tsv.v021 ;
+		fact.servers.relays.roleDir.total.tsv.v022 += v.servers.relays.roleDir.total.tsv.v022 ;
+		fact.servers.relays.roleDir.total.tsv.v023 += v.servers.relays.roleDir.total.tsv.v023 ;
+		fact.servers.relays.roleDir.total.tsv.v024 += v.servers.relays.roleDir.total.tsv.v024 ;
 
 		fact.servers.relays.roleDir.authorityTrue.count += v.servers.relays.roleDir.authorityTrue.count ;
 		fact.servers.relays.roleDir.authorityTrue.bwa += v.servers.relays.roleDir.authorityTrue.bwa ;
@@ -2695,20 +2652,19 @@ var reduceRelays = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.osv.freebsd += v.servers.relays.roleDir.authorityTrue.osv.freebsd ;
 		fact.servers.relays.roleDir.authorityTrue.osv.windows += v.servers.relays.roleDir.authorityTrue.osv.windows ;
 		fact.servers.relays.roleDir.authorityTrue.osv.other += v.servers.relays.roleDir.authorityTrue.osv.other ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.010 += v.servers.relays.roleDir.authorityTrue.tsv.010 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.011 += v.servers.relays.roleDir.authorityTrue.tsv.011 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.012 += v.servers.relays.roleDir.authorityTrue.tsv.012 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.020 += v.servers.relays.roleDir.authorityTrue.tsv.020 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.021 += v.servers.relays.roleDir.authorityTrue.tsv.021 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.022 += v.servers.relays.roleDir.authorityTrue.tsv.022 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.023 += v.servers.relays.roleDir.authorityTrue.tsv.023 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.024 += v.servers.relays.roleDir.authorityTrue.tsv.024 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v010 += v.servers.relays.roleDir.authorityTrue.tsv.v010 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v011 += v.servers.relays.roleDir.authorityTrue.tsv.v011 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v012 += v.servers.relays.roleDir.authorityTrue.tsv.v012 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v020 += v.servers.relays.roleDir.authorityTrue.tsv.v020 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v021 += v.servers.relays.roleDir.authorityTrue.tsv.v021 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
 	});
 	return fact;
 };
 	
 var reduceCountriesClients = function ( key, values ) {	//	same reduce function for CB and CR map functions	
-	var v;
 	var temp = {	
 		cc: "" ,
 		cbcc: 0 ,
@@ -2734,23 +2690,23 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		} ,
 		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
+			p4 : 0 ,
+			p6 : 0 ,
+			p8 : 0 ,
+			p46 : 0 ,
+			p48 : 0 ,
+			p68 : 0 ,
+			p468 : 0
 		} ,
 		as: "" 				
 	};
@@ -2776,28 +2732,27 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 		temp.osv.freebsd = v.osv.freebsd ;
 		temp.osv.windows = v.osv.windows ;
 		temp.osv.other = v.osv.other ;
-		temp.tsv.010 = v.tsv.010 ;
-		temp.tsv.011 = v.tsv.011 ;
-		temp.tsv.012 = v.tsv.012 ;
-		temp.tsv.020 = v.tsv.020 ;
-		temp.tsv.021 = v.tsv.021 ;
-		temp.tsv.022 = v.tsv.022 ;
-		temp.tsv.023 = v.tsv.023 ;
-		temp.tsv.024 = v.tsv.024 ;
-		temp.pex.4 = v.pex.4 ;
-		temp.pex.6 = v.pex.6 ;
-		temp.pex.8 = v.pex.8 ;
-		temp.pex.46 = v.pex.46 ;
-		temp.pex.48 = v.pex.48 ;
-		temp.pex.68 = v.pex.68 ;
-		temp.pex.468 = v.pex.468 ;
+		temp.tsv.v010 = v.tsv.v010 ;
+		temp.tsv.v011 = v.tsv.v011 ;
+		temp.tsv.v012 = v.tsv.v012 ;
+		temp.tsv.v020 = v.tsv.v020 ;
+		temp.tsv.v021 = v.tsv.v021 ;
+		temp.tsv.v022 = v.tsv.v022 ;
+		temp.tsv.v023 = v.tsv.v023 ;
+		temp.tsv.v024 = v.tsv.v024 ;
+		temp.pex.p4 = v.pex.p4 ;
+		temp.pex.p6 = v.pex.p6 ;
+		temp.pex.p8 = v.pex.p8 ;
+		temp.pex.p46 = v.pex.p46 ;
+		temp.pex.p48 = v.pex.p48 ;
+		temp.pex.p68 = v.pex.p68 ;
+		temp.pex.p468 = v.pex.p468 ;
 		temp.as = v.as ;
 	});
 	return temp;
 };
 	
 var reduceCountriesRelays = function ( key, values ) {
-	var v;
 	var temp = {	
 		cc: "" ,
 		cbcc: 0 ,
@@ -2823,23 +2778,23 @@ var reduceCountriesRelays = function ( key, values ) {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		} ,
 		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
+			p4 : 0 ,
+			p6 : 0 ,
+			p8 : 0 ,
+			p46 : 0 ,
+			p48 : 0 ,
+			p68 : 0 ,
+			p468 : 0
 		} ,
 		autosys: []										//	TODO	need to declare autosys before?		
 	};
@@ -2865,21 +2820,21 @@ var reduceCountriesRelays = function ( key, values ) {
 		temp.osv.freebsd += v.osv.freebsd ;
 		temp.osv.windows += v.osv.windows ;
 		temp.osv.other += v.osv.other ;
-		temp.tsv.010 += v.tsv.010 ;
-		temp.tsv.011 += v.tsv.011 ;
-		temp.tsv.012 += v.tsv.012 ;
-		temp.tsv.020 += v.tsv.020 ;
-		temp.tsv.021 += v.tsv.021 ;
-		temp.tsv.022 += v.tsv.022 ;
-		temp.tsv.023 += v.tsv.023 ;
-		temp.tsv.024 += v.tsv.024 ;
-		temp.pex.4 += v.pex.4 ;
-		temp.pex.6 += v.pex.6 ;
-		temp.pex.8 += v.pex.8 ;
-		temp.pex.46 += v.pex.46 ;
-		temp.pex.48 += v.pex.48 ;
-		temp.pex.68 += v.pex.68 ;
-		temp.pex.468 += v.pex.468 ;
+		temp.tsv.v010 += v.tsv.v010 ;
+		temp.tsv.v011 += v.tsv.v011 ;
+		temp.tsv.v012 += v.tsv.v012 ;
+		temp.tsv.v020 += v.tsv.v020 ;
+		temp.tsv.v021 += v.tsv.v021 ;
+		temp.tsv.v022 += v.tsv.v022 ;
+		temp.tsv.v023 += v.tsv.v023 ;
+		temp.tsv.v024 += v.tsv.v024 ;
+		temp.pex.p4 += v.pex.p4 ;
+		temp.pex.p6 += v.pex.p6 ;
+		temp.pex.p8 += v.pex.p8 ;
+		temp.pex.p46 += v.pex.p46 ;
+		temp.pex.p48 += v.pex.p48 ;
+		temp.pex.p68 += v.pex.p68 ;
+		temp.pex.p468 += v.pex.p468 ;
 		if (temp.autosys.indexOf(as) == -1) {			//	TODO	will this work?	
 			temp.autosys.push(as);
 		};
@@ -2889,7 +2844,6 @@ var reduceCountriesRelays = function ( key, values ) {
 };
 	
 var reduceCountries = function ( key, values ) {
-	var v;
 	var countries = new Array();
 	var fact = { countries };
 	var country = {	
@@ -2917,23 +2871,23 @@ var reduceCountries = function ( key, values ) {
 			other : 0
 		} ,
 		tsv : {
-			010 : 0 ,
-			011 : 0 ,
-			012 : 0 ,
-			020 : 0 ,
-			021 : 0 ,
-			022 : 0 ,
-			023 : 0 ,
-			024 : 0
+			v010 : 0 ,
+			v011 : 0 ,
+			v012 : 0 ,
+			v020 : 0 ,
+			v021 : 0 ,
+			v022 : 0 ,
+			v023 : 0 ,
+			v024 : 0
 		} ,
 		pex : {
-			4 : 0 ,
-			6 : 0 ,
-			8 : 0 ,
-			46 : 0 ,
-			48 : 0 ,
-			68 : 0 ,
-			468 : 0
+			p4 : 0 ,
+			p6 : 0 ,
+			p8 : 0 ,
+			p46 : 0 ,
+			p48 : 0 ,
+			p68 : 0 ,
+			p468 : 0
 		} ,
 		as: [] 				
 	};
@@ -2959,21 +2913,21 @@ var reduceCountries = function ( key, values ) {
 		country.osv.freebsd = v.osv.freebsd ;
 		country.osv.windows = v.osv.windows ;
 		country.osv.other = v.osv.other ;
-		country.tsv.010 = v.tsv.010 ;
-		country.tsv.011 = v.tsv.011 ;
-		country.tsv.012 = v.tsv.012 ;
-		country.tsv.020 = v.tsv.020 ;
-		country.tsv.021 = v.tsv.021 ;
-		country.tsv.022 = v.tsv.022 ;
-		country.tsv.023 = v.tsv.023 ;
-		country.tsv.024 = v.tsv.024 ;
-		country.pex.4 = v.pex.4 ;
-		country.pex.6 = v.pex.6 ;
-		country.pex.8 = v.pex.8 ;
-		country.pex.46 = v.pex.46 ;
-		country.pex.48 = v.pex.48 ;
-		country.pex.68 = v.pex.68 ;
-		country.pex.468 = v.pex.468 ;
+		country.tsv.v010 = v.tsv.v010 ;
+		country.tsv.v011 = v.tsv.v011 ;
+		country.tsv.v012 = v.tsv.v012 ;
+		country.tsv.v020 = v.tsv.v020 ;
+		country.tsv.v021 = v.tsv.v021 ;
+		country.tsv.v022 = v.tsv.v022 ;
+		country.tsv.v023 = v.tsv.v023 ;
+		country.tsv.v024 = v.tsv.v024 ;
+		country.pex.p4 = v.pex.p4 ;
+		country.pex.p6 = v.pex.p6 ;
+		country.pex.p8 = v.pex.p8 ;
+		country.pex.p46 = v.pex.p46 ;
+		country.pex.p48 = v.pex.p48 ;
+		country.pex.p68 = v.pex.p68 ;
+		country.pex.p468 = v.pex.p468 ;
 		country.as = v.as ;
 		//	finally push 'country' object onto 'countries' array
 		countries.push(country);						
@@ -2982,7 +2936,6 @@ var reduceCountries = function ( key, values ) {
 };
 
 var reduceAutosys = function ( key, values ) {
-	var v;
 	var autosys =new Array();
 	var countries =new Array();
 	var fact = autosys ;
@@ -3258,3 +3211,42 @@ var aggregateAutosys = db.tempAutosys.mapReduce (
 		finalize : finalizeFacts
 	}
 );
+
+
+
+
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	EXECUTION
+//	let the damn thing run
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//	PRELIMINARIES
+
+var cleanup = function() {
+    db.tempCountries.remove();
+    db.tempAutosys.remove();
+    db.tempFacts.remove();
+};
+
+
+//	CONFIG DATE
+
+var date = "2013-04-03 22" ;
+
+
+//	START MAPREDUCE JOBS
+
+cleanup();
+
+aggregateClients();
+aggregateServersRelays();
+aggregateServersBridges();
+aggregateServers();
+aggregateBridges();
+aggregateRelays();
+aggregateCountriesClientsCR();
+aggregateCountriesClientsCB();
+aggregateCountriesRelays();
+aggregateCountries();
+aggregateAutosys();
