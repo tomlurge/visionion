@@ -1,42 +1,4 @@
-﻿/*		aggregation steps
-	0.	aggregation starts either triggered by the import of new data 
-		or periodically, first checking the import collection for newly imported documents
-		from the newly imported documents it extracts the dates and for each distinct date starts the following aggregation procedure:
-	1.	more than one mapReduce for one import collection
-		some mapReduce steps are to complex to put them together in one map/reduce
-	A.	they can be run sequentially and all be reduced to one result { out: { reduce : "tempFacts" }
-		http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
-		http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
-	2.	probably we can then also aggregate from different import tables
-		should still be possible with  { out: { reduce : "tempFacts" }
-	B.	amounting to the following mapReduce steps:
-		* clients				from clients import collection
-		* servers
-			**					from bridges import collection
-			**					from relays import collection
-		* bridges				from bridges import collection
-		* relays				from relays import collection
-		* countries
-			**					from clients import collection
-			**					from relays import collection
-		* autonomous systems	from relays import collection
-	3.	server and countries need to be aggregated from 2 import collections
-		and the resulting aggregates merged into one, like: { out: { merge : "servers/countries/autosys" } }
-	p4.	to get rid of the "value" object we need one further step
-		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
-		this is not part of the mapReduce operation
-	5.	the resulting fact document has to be added to the facts collection
-		overwriting older documents for the same date if need be (e.g. if new data arrived for already existing imports)
-		using the update() method
-		The update() method can either replace the existing document with the new document or update specific fields in the existing document.
-		If the <update> argument contains fields not currently in the document, the update() method adds the new fields to the document.
-		If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
-*/
-
-
-
-
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
+﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 //
 //	ENGINE ROOM
 //	everything you need to aggregate facts for one date
@@ -63,15 +25,12 @@ var mapClients = function() {
 		cptOR : this.cpt.OR ,
 		cptUnknown : this.cpt.Unknown
 	};
-	emit( date , clients );
+	emit( this.date , clients );
 };
 
-
-//	servers													in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.					
-														/*	the emit fuctions only differ in their KEYs 
-															to prevent overwriting intermediate data from different sources, the 2 intermediate emits
-															can't use just 'date' as the key. apart from that it's all the same */
+//	servers													in 3 steps, because it has to be gathererd from 2 collections and then aggregated to a 3.		
 var mapServersRelays = function() {
+	var theDate = this.date;
 	var ServersRelays = {
 		count : 1 ,
 		bwa : this.bwa ,
@@ -94,10 +53,12 @@ var mapServersRelays = function() {
 			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
-	emit( (date + " relays") , ServersRelays );   		//	combined key '{date, "relays"}'
+//	emit( (theDate, "relays") , ServersRelays );   		//	combined key '{date, "relays"}'
+    emit( theDate , ServersRelays );                    //  TODO    only for testing
 };
 
 var mapServersBridges = function() {
+	var theDate = this.date;
 	var ServersBridges = {
 		count : 1 ,
 		bwa : this.bwa ,
@@ -120,10 +81,12 @@ var mapServersBridges = function() {
 			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
-	emit( (date + " bridges") , ServersBridges );		//	combined key '{date, "bridges"}'
+//	emit( (theDate, "bridges") , ServersBridges );		//	combined key '{theDate, "bridges"}'
+    emit( theDate , ServersBridges );                    //  TODO    only for testing
 };
 
 var mapServers = function() {
+	var theDate = this.date;
 	var servers = {
 		count : 1 ,
 		bwa : this.bwa ,
@@ -146,12 +109,12 @@ var mapServers = function() {
 			v024 : (this.tsv == "024") ? 1 : 0
 		}
 	};
-	emit( date , servers );								//	ordinary key 'date'
+	emit( theDate , servers );							//	ordinary key 'date'
 };
-
 
 //	bridges	
 var mapBridges = function() {
+	var theDate = this.date;
 	var bridges = {
 		servers : {
 			bridges : {
@@ -264,7 +227,7 @@ var mapBridges = function() {
 						v023 : (this.bre == "true" && this.tsv == "023") ? 1 : 0 ,
 						v024 : (this.bre == "true" && this.tsv == "024") ? 1 : 0
 					}
-				} ,
+				} /* ,
 				brtObfs2 : {
 					count : (this.brt == [obfs2]) ? 1 : 0 ,
 					bwa : (this.brt == [obfs2]) ? this.bwa : 0 ,
@@ -331,15 +294,16 @@ var mapBridges = function() {
 						v024 : (this.brt == [obfs23, obfs3] && this.tsv == "024") ? 1 : 0
 					}
 				}
+				*/
 			}
 		}
 	};
-	emit( date , bridges );
+	emit( theDate , bridges );
 };
-
 
 //	relays
 var mapRelays = function() {
+	var theDate = this.date;
 	var relays = {
 		servers : {
 			relays : {
@@ -913,16 +877,11 @@ var mapRelays = function() {
 			}
 		}
 	};
-	emit( date , relays );
+	emit( theDate , relays );
 };
 
-//	countries												in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
-														/*	. aggregate CountriesClientss.cbcc into a collection tempCountries with key country
-															. aggregate CountriesClientss.crcc into the same collection tempCountries with key country
-															. aggregate CountriesRelays into the same collection tempCountries with key country
-															. aggregate all documents from that tempCountries collection into an array of objects 
-															  in one field into the facts collection with key date
-														*/																				
+//	countries												in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays																	
+/*
 var mapCountriesClientsCR = function() {
 	var country =  {
 		cc: "" ,
@@ -1127,10 +1086,10 @@ var mapCountries = function() {							//	putting it all together
 	};
 	emit( date , country );
 };
-
+*/
 
 //	autonomous systems 					
-
+/*
 var mapAutosys = function() {
 	var autosys = {
 		as : this.as ,
@@ -1160,19 +1119,15 @@ var mapAutosys = function() {
 			pbe : (this.role == "exit") ? this.pbe : 0
 		}
 	};
-    /*
-	autosys.name = function(this.as) { return ""; }		//	TODO	lookup name for AS
-	autosys.home = function(this.as) { return ""; }		//	TODO	lookup jurisdiction for AS
-	emit( date , autosys );
-	*/
 };
 
-
+*/
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	REDUCE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//	reduceClients
 var reduceClients = function ( key, values ) {
 	var fact = {	
 		clients : {
@@ -1201,8 +1156,9 @@ var reduceClients = function ( key, values ) {
 	return fact;
 };
 
-//	reduceServersRelays and reduceServersBridgess are exact duplicates and could be reduced to one, 
-//	but for the sake of readability i'm leaving them alone for now
+
+//	reduceServersRelays										reduceServersRelays and reduceServersBridges are exact duplicates and could be reduced to one
+/*
 var reduceServersRelays = function ( key, values ) {	
 	var temp = {
 		count : 0 ,
@@ -1246,8 +1202,10 @@ var reduceServersRelays = function ( key, values ) {
 	});
 	return temp;
 };
-
-var reduceServersBridgess = function ( key, values ) {
+*/
+//	reduceServersBridges
+/*
+var reduceServersBridges = function ( key, values ) {
 	var temp = {	
 		count : 0 ,
 		bwa : 0 ,
@@ -1290,8 +1248,9 @@ var reduceServersBridgess = function ( key, values ) {
 	});
 	return temp;
 };
-
-//	aggregating ServersRelays and ServersBridges into the combined servers fact
+*/
+//	reduceServers											aggregating ServersRelays and ServersBridges into the combined servers fact
+/*
 var reduceServers = function ( key, values ) {
 	var fact = {	
 		count : 0 ,
@@ -1336,7 +1295,8 @@ var reduceServers = function ( key, values ) {
 	});
 	return fact;
 };
-
+*/
+//	reduceBridges
 var reduceBridges = function ( key, values ) {
 	var fact = {										
 		servers : {
@@ -1660,6 +1620,8 @@ var reduceBridges = function ( key, values ) {
 	return fact;
 };
 
+
+//	reduceRelays
 var reduceRelays = function ( key, values ) {
 	var fact = {
 		servers : {
@@ -2663,7 +2625,10 @@ var reduceRelays = function ( key, values ) {
 	});
 	return fact;
 };
-	
+
+
+//	reduceCountriesClients
+/*	
 var reduceCountriesClients = function ( key, values ) {	//	same reduce function for CB and CR map functions	
 	var temp = {	
 		cc: "" ,
@@ -2751,7 +2716,10 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 	});
 	return temp;
 };
-	
+*/
+
+//	reduceCountriesRelays
+/*	
 var reduceCountriesRelays = function ( key, values ) {
 	var temp = {	
 		cc: "" ,
@@ -2842,10 +2810,13 @@ var reduceCountriesRelays = function ( key, values ) {
 	});
 	return temp;
 };
-	
+*/
+
+//	reduceCountries
+/*
 var reduceCountries = function ( key, values ) {
 	var countries = new Array();
-	var fact = { countries : [] };
+	var fact = { countries : [] };							// TODO 	ERROR
 	var country = {	
 		cc: "" ,
 		cbcc: 0 ,
@@ -2934,7 +2905,10 @@ var reduceCountries = function ( key, values ) {
 	});
 	return fact;
 };
+*/
 
+//	reduceAutosys
+/*
 var reduceAutosys = function ( key, values ) {
 	var autosys =new Array();
 	var countries =new Array();
@@ -3022,16 +2996,15 @@ var reduceAutosys = function ( key, values ) {
 	});
 	return fact;
 };
-
+*/
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	FINALIZE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var finalizeFacts = function ( key, fact ) {
-														// doing stuff e.g. some averages
+														//	doing stuff e.g. some averages
 };
-
 
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3039,178 +3012,186 @@ var finalizeFacts = function ( key, fact ) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //	clients
-var aggregateClients = db.importClients.mapReduce (			
-	mapClients,
-	reduceClients,
-	{ 
-		out: { 
-			reduce : "tempFacts", 						// the temporary fact collection, with _id:value structure
-			nonAtomic : true							// prevents locking of the db during post-processing
-		} ,			
-		query : { "date" : date } ,						// limit aggregation to date
-		// sort											   sorts the input documents for fewer reduce operations
-		jsMode: true ,									// check if feasable! is faster, but needs more memory
-		finalize : finalizeFacts
-	}
-);
+var aggregateClients = function(theDate) {
+	db.importClients.mapReduce (			
+		mapClients,
+		reduceClients,
+		{ 
+			out: { 
+				reduce : "tempFacts", 					//	the temporary fact collection, with _id:value structure
+				nonAtomic : true						//	prevents locking of the db during post-processing
+			} ,			
+			query : { "date" : theDate } ,				//	limit aggregation to date
+			// sort										   	sorts the input documents for fewer reduce operations
+			jsMode: true ,								//	check if feasable! is faster, but needs more memory
+			finalize : finalizeFacts
+		}
+	);
+};
 
-
-//	servers 
-//	in 3 steps, because it has to be gathererd from 2 collections 
-
-var aggregateServersRelays = db.importRelays.mapReduce (			
-	mapServersRelays,
-	reduceServers,
-	{ 
-		out: { 
-			reduce : "tempServers",						//	reduce to intermediate collection
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-var aggregateServersBridges = db.importBridges.mapReduce (			
-	mapServersBridges,
-	reduceServers,
-	{ 
-		out: { 
-			reduce : "tempServers",						//	reduce to intermediate collection
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-var aggregateServers = db.tempServers.mapReduce (		//	take the intermediate collection as input
-	mapServers,
-	reduceServers,
-	{ 
-		out: { 
-			reduce : "tempFacts",						//	reduce intermediates to final destination: tempFacts
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
+//	servers 												in 3 steps, because it has to be gathererd from 2 collections 
+var aggregateServersRelays = function(theDate) {
+	db.importRelays.mapReduce (			
+		mapServersRelays,
+		reduceServers,
+		{ 
+			out: { 
+				reduce : "tempServers",					//	reduce to intermediate collection
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+		    finalize : finalizeFacts
+		}
+	);
+};
+var aggregateServersBridges = function(theDate) {
+	db.importBridges.mapReduce (			
+		mapServersBridges,
+		reduceServers,
+		{ 
+			out: { 
+				reduce : "tempServers",					//	reduce to intermediate collection
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+var aggregateServers = function(theDate) {
+	db.tempServers.mapReduce (							//	take the intermediate collection as input
+		mapServers,
+		reduceServers,
+		{ 
+			out: { 
+				reduce : "tempFacts",					//	reduce intermediates to final destination: tempFacts
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
 
 //	bridges
-
-var aggregateBridges = db.importBridges.mapReduce (			
-	mapBridges,
-	reduceBridges,
-	{ 
-		out: { 
-			reduce : "tempFacts",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
+var aggregateBridges = function(theDate) {
+	db.importBridges.mapReduce (			
+		mapBridges,
+		reduceBridges,
+		{ 
+			out: { 
+				reduce : "tempFacts",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
 
 //	relays
+var aggregateRelays = function(theDate) {
+	db.importRelays.mapReduce (			
+		mapRelays,
+		reduceRelays,
+		{ 
+			out: { 
+				reduce : "tempFacts",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
 
-var aggregateRelays = db.importRelays.mapReduce (			
-	mapRelays,
-	reduceRelays,
-	{ 
-		out: { 
-			reduce : "tempFacts",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-
-//	countries 		
-//	in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
-
-var aggregateCountriesClientsCR = db.importClients.mapReduce (			
-	mapCountriesClientsCR,
-	reduceCountriesClients,
-	{ 
-		out: { 
-			reduce : "tempCountries",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-var aggregateCountriesClientsCB = db.importClients.mapReduce (			
-	mapCountriesClientsCB,
-	reduceCountriesClients,
-	{ 
-		out: { 
-			reduce : "tempCountries",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-var aggregateCountriesRelays = db.importRelays.mapReduce (			
-	mapCountriesRelays,
-	reduceCountriesRelays,
-	{ 
-		out: { 
-			reduce : "tempCountries",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
-var aggregateCountries = db.tempCountries.mapReduce (			
-	mapCountries,
-	reduceCountries,
-	{ 
-		out: { 
-			reduce : "tempFacts",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
+//	countries 												in 4 steps, because it has to be gathererd from 2 collections, one of them with 2 arrays
+/*	
+var aggregateCountriesClientsCR = function(theDate) {
+	db.importClients.mapReduce (			
+		mapCountriesClientsCR,
+		reduceCountriesClients,
+		{ 
+			out: { 
+				reduce : "tempCountries",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+var aggregateCountriesClientsCB = function(theDate) {
+	db.importClients.mapReduce (			
+		mapCountriesClientsCB,
+		reduceCountriesClients,
+		{ 
+			out: { 
+				reduce : "tempCountries",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+var aggregateCountriesRelays = function(theDate) {
+	db.importRelays.mapReduce (			
+		mapCountriesRelays,
+		reduceCountriesRelays,
+		{ 
+			out: { 
+				reduce : "tempCountries",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+var aggregateCountries = function(theDate) {
+	db.tempCountries.mapReduce (			
+		mapCountries,
+		reduceCountries,
+		{ 
+			out: { 
+				reduce : "tempFacts",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+*/
 
 //	autonomous systems
-
-var aggregateAutosys = db.tempAutosys.mapReduce (			
-	mapAutosys,
-	reduceAutosys,
-	{ 
-		out: { 
-			reduce : "tempFacts",
-			nonAtomic : true
-		} ,			
-		query : { "date" : date } ,
-		jsMode: true ,
-		finalize : finalizeFacts
-	}
-);
-
+/*
+var aggregateAutosys = function(theDate) {
+	db.tempAutosys.mapReduce (			
+		mapAutosys,
+		reduceAutosys,
+		{ 
+			out: { 
+				reduce : "tempFacts",
+				nonAtomic : true
+			} ,			
+			query : { "date" : theDate } ,
+			jsMode: true ,
+			finalize : finalizeFacts
+		}
+	);
+};
+*/
 
 
 
@@ -3219,33 +3200,28 @@ var aggregateAutosys = db.tempAutosys.mapReduce (
 //	let the damn thing run
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//	CONFIG DATE
+var date = "2013-04-03 22" ;
 
-//	PRELIMINARIES
+var run = function(date) {
 
-var cleanup = function() {
     db.tempCountries.remove();
     db.tempAutosys.remove();
     db.tempFacts.remove();
+
+	aggregateClients(date);
+//	aggregateServersRelays(date);
+//	aggregateServersBridges(date);
+//	aggregateServers(date);
+	aggregateBridges(date);
+	aggregateRelays(date);
+	/*
+	aggregateCountriesClientsCR(date);
+	aggregateCountriesClientsCB(date);
+	aggregateCountriesRelays(date);
+	aggregateCountries(date);
+	aggregateAutosys(date);
+	*/
 };
 
-
-//	CONFIG DATE
-
-var date = "2013-04-03 22" ;
-
-
-//	START MAPREDUCE JOBS
-
-cleanup();
-
-aggregateClients();
-aggregateServersRelays();
-aggregateServersBridges();
-aggregateServers();
-aggregateBridges();
-aggregateRelays();
-aggregateCountriesClientsCR();
-aggregateCountriesClientsCB();
-aggregateCountriesRelays();
-aggregateCountries();
-aggregateAutosys();
+run(date);

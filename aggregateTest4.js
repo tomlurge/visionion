@@ -78,21 +78,21 @@ run();
 
 	AND WHAT IT IS
 
+	> db.testFact4.findOne()
+	{
+		"_id" : "2013-04-03 21 server",
+		"value" : {
+			"count" : 101,
+			"bwa" : 3636971212,
+			"bwc" : 2525709180,
+			"osv" : {
+				"linux" : 2523,
+				"darwin" : 93,
+				"freebsd" : 110,
+				"windows" : 625,
+				"other" : 0
+			}
+		}
+	}
 
-     > db.testFact3.findOne()
-     {
-         "_id" : "2013-04-03 21",
-         "value" : {
-             "count" : 101,
-             "bwa" : 3636971212,
-             "bwc" : 2525709180,
-             "osv" : {
-                 "linux" : NaN,
-                 "darwin" : NaN,
-                 "freebsd" : NaN,
-                 "windows" : NaN,
-                 "other" : NaN
-             }
-         }
-     }
 */
