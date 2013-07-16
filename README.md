@@ -319,7 +319,7 @@ These 3 collections contain all raw data as it is imported into the database.
 				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
 				crcc	clients@relays per country	array	object	mean		{cc:integer}
-				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/<OR>/<??>:integer}
+				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/Unknown:integer}
 				cip		ip-version used				object			mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------

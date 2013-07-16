@@ -13,7 +13,7 @@
 		cip6: int,					copy cip.[version:v6].count
 		cptObfs2: int,				copy
 		cptObfs3: int,				copy
-		cptOR: int,				copy
+		cptOR: int,					copy
 		cptUnknown: int				copy
 		}
 	},

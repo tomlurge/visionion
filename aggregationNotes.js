@@ -31,7 +31,7 @@ http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calcula
 Subsequent Incremental Map-Reduce
 http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
 
-*	wenn verschiedene collections mit unterschiedlichen feldern in eine ziel_collection aggregiert 
+*	wenn verschiedene collections mit unterschiedlichen feldern in eine ziel-collection aggregiert 
 	werden sollen, müssen entweder alle map-funktionen alle felder mit jeweils sinnvollen angaben 
 	enthalten (also 0 oder null o.ä. wenn die ausgangs-collection die felder nicht enthält), oder die 
 	reduce funktion muss den fall, dass ein feld in der map nicht auftaucht, sinnvoll abfangen (also 
@@ -49,7 +49,7 @@ for all fields
 
 //	doing other stuff
 http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
-The following map function may call emit(key,value) multiple times depending on the number of elements in the input document’s items field:
+The following map function may call emit(key,value) multiple times depending on the number of elements in the input document's items field:
 function() {
 	this.items.forEach(function(item){ emit(item.sku, 1); });
 }
@@ -160,15 +160,15 @@ var reduce = function(k, values) {
     };
     values.forEach(function(value) {
         var field;
-        if ("comment" in value) {								//	take care of comments
-            if (!("comments" in result)) {						//	funny: 'if ("comment" in value)'
-                result.comments = [];							//	checks if ANY of the fields in 
-            }													//	value is named "comment"
-            result.comments.push(value);
+        if ("comment" in value) {								//	if one of the values fields is named 'comment's the value is a comment document
+            if (!("comments" in result)) {						//	if there havn't been added any 'comment's to 'result' so far
+                result.comments = [];							//	create a 'comments' array in 'result' 
+            }
+            result.comments.push(value);						//	add the 'comment' document to the 'comments' array in 'result'
         } 
-/*      else if ("comments" in value) {							//	this 'else' makes no sense -
-            if (!("comments" in result)) {						//	removing it seems to make
-                result.comments = [];							//	no difference in the result
+/*      else if ("comments" in value) {							//	this 'else' clause covers a case that can't occur here:
+            if (!("comments" in result)) {						//	adding a 'comments' array from one result to another result
+                result.comments = [];							//	removing it seems to make no difference in the result
             }
             result.comments.push.apply(result.comments, value.comments);
         }

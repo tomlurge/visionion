@@ -381,7 +381,7 @@
                         "type": "string",
                         "title": "Pluggable transport",
                         "format": "Expected values are ONE of the following: 
-                                   'obfs2', 'obfs3', '<OR>', '<??>'" 
+                                   'obfs2', 'obfs3', 'OR', 'Unknown'" 
                     },
                     "count": {
                         "type": "integer",
