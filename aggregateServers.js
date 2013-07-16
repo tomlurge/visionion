@@ -3,25 +3,25 @@ var mapServers = function() {
 	var mapping = {
 		servers : {
 			total : {
-				count : 1 ,
-				bwa : this.bwa ,
-				bwc : this.bwc ,
+				count : this.value.count ,
+				bwa : this.value.bwa ,
+				bwc : this.value.bwc ,
 				osv : {
-					linux : (this.osv == "linux") ? 1 : 0 ,
-					darwin : (this.osv == "darwin") ? 1 : 0 ,
-					freebsd : (this.osv == "freebsd") ? 1 : 0 ,
-					windows : (this.osv == "windows") ? 1 : 0 ,
-					other : (this.osv == "other") ? 1 : 0
+					linux : this.value.osv.linux ,
+					darwin : this.value.osv.darwin ,
+					freebsd : this.value.osv.freebsd ,
+					windows : this.value.osv.windows ,
+					other : this.value.osv.other
 				} ,
 				tsv : {
-					v010 : (this.tsv == "010") ? 1 : 0 ,
-					v011 : (this.tsv == "011") ? 1 : 0 ,
-					v012 : (this.tsv == "012") ? 1 : 0 ,
-					v020 : (this.tsv == "020") ? 1 : 0 ,
-					v021 : (this.tsv == "021") ? 1 : 0 ,
-					v022 : (this.tsv == "022") ? 1 : 0 ,
-					v023 : (this.tsv == "023") ? 1 : 0 ,
-					v024 : (this.tsv == "024") ? 1 : 0
+					v010 : this.value.tsv.v010 ,
+					v011 : this.value.tsv.v011 ,
+					v012 : this.value.tsv.v012 ,
+					v020 : this.value.tsv.v020 ,
+					v021 : this.value.tsv.v021 ,
+					v022 : this.value.tsv.v022 ,
+					v023 : this.value.tsv.v023 ,
+					v024 : this.value.tsv.v024
 				}
 			}
 		}
@@ -58,7 +58,7 @@ var reduceServers = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
-		fact.servers.total.count += 1 ;
+		fact.servers.total.count += v.servers.total.count ;
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
 		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
@@ -85,10 +85,10 @@ var aggregateServers = function(theDate) {
 		reduceServers,
 		{ 
 			out: { 
-				reduce : "tempFacts",
+				reduce : "tempFacts"//,
 			//	nonAtomic : true
 			} ,			
-			query : { "date" : theDate } ,
+			// query : { "date" : theDate } //,
 			//	jsMode: true ,
 			//	finalize : finalizeFacts
 		}
