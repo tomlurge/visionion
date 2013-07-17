@@ -1,6 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapAutosys = function() {
-	var mapping = {
+	var map = {
+		date: this.date ,
 		autosys : {
 			as : this.as ,
 			name : "" ,
@@ -34,7 +35,7 @@ var mapAutosys = function() {
 	autosys.name = function(this.as) { return ""; }		//	TODO	lookup name for AS
 	autosys.home = function(this.as) { return ""; }		//	TODO	lookup jurisdiction for AS
 	*/
-    emit( this.date , mapping );
+    emit( this.date + " Autosys" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,6 +44,7 @@ var reduceAutosys = function ( key, values ) {
 	var countries =new Array();
 	var fact = autosys ;
 	var asObject = {
+		date : 0 ,
 		as : "" ,
 		name : "" ,
 		hone : "",
@@ -101,27 +103,28 @@ var reduceAutosys = function ( key, values ) {
 		}
 		if (!ccAquired) {
 			autosys[asPos].countries[ccPos].cc = v.countries.cc;
-		}
-		autosys[asPos].relay += 1 ,
-		autosys[asPos].bwa += v.bwa ,
-		autosys[asPos].bwc += v.bwc ,
-		autosys[asPos].fast += v.fast ,
-		autosys[asPos].stable += v.stable ,
-		autosys[asPos].guard += v.guard ,
-		autosys[asPos].middle += v.middle ,
-		autosys[asPos].exit += v.exit ,
-		autosys[asPos].dir += v.dir ,
-		autosys[asPos].pbr += v.pbr ,
-		autosys[asPos].pbg += v.pbg ,
-		autosys[asPos].pbm += v.pbm ,
-		autosys[asPos].pbe += v.pbe ,
-		autosys[asPos].countries[ccPos].relay += v.relay ,
-		autosys[asPos].countries[ccPos].bwa += v.countries.bwa ,
-		autosys[asPos].countries[ccPos].bwc += v.countries.bwc ,
-		autosys[asPos].countries[ccPos].pbr += v.countries.pbr ,
-		autosys[asPos].countries[ccPos].pbg += v.countries.pbg ,
-		autosys[asPos].countries[ccPos].pbm += v.countries.pbm ,
-		autosys[asPos].countries[ccPos].pbe += v.countries.pbe
+		};
+		autosys[asPos].date = v.date ;
+		autosys[asPos].relay += 1 ;
+		autosys[asPos].bwa += v.bwa ;
+		autosys[asPos].bwc += v.bwc ;
+		autosys[asPos].fast += v.fast ;
+		autosys[asPos].stable += v.stable ;
+		autosys[asPos].guard += v.guard ;
+		autosys[asPos].middle += v.middle ;
+		autosys[asPos].exit += v.exit ;
+		autosys[asPos].dir += v.dir ;
+		autosys[asPos].pbr += v.pbr ;
+		autosys[asPos].pbg += v.pbg ;
+		autosys[asPos].pbm += v.pbm ;
+		autosys[asPos].pbe += v.pbe ;
+		autosys[asPos].countries[ccPos].relay += v.relay ;
+		autosys[asPos].countries[ccPos].bwa += v.countries.bwa ;
+		autosys[asPos].countries[ccPos].bwc += v.countries.bwc ;
+		autosys[asPos].countries[ccPos].pbr += v.countries.pbr ;
+		autosys[asPos].countries[ccPos].pbg += v.countries.pbg ;
+		autosys[asPos].countries[ccPos].pbm += v.countries.pbm ;
+		autosys[asPos].countries[ccPos].pbe += v.countries.pbe ;
 	});
 	return fact;
 };
@@ -133,12 +136,13 @@ var aggregateAutosys = function(theDate) {
 		reduceAutosys,
 		{ 
 			out: { 
-				reduce : "tempFacts",
-			//	nonAtomic : true
+				reduce : "tempFacts" 					//	the temporary fact collection
+			//	, nonAtomic : true						//	prevents locking of the db during post-processing
 			} ,			
-			query : { "date" : theDate } ,
-			//	jsMode: true ,
-			//	finalize : finalizeFacts
+			query : { "date" : theDate } 				//	limit aggregation to date
+			//	, sort									//  sorts the input documents for fewer reduce operations
+			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
+			//	, finalize : finalizeFacts
 		}
 	);
 };
@@ -146,9 +150,6 @@ var aggregateAutosys = function(theDate) {
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var date = "2013-04-03 22" ;
 var run = function(date) {
-/*	housekeeping	*/
-    db.tempFacts.remove();
-/*	aggregation	*/
 	aggregateAutosys(date);
 };
 run(date);

@@ -1,6 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapClients = function() {
-	var mapping = {
+	var map = {
+		date: this.date ,
 		clients : {
 			total : this.cr + this.cb ,
 			atBridges : this.cb ,
@@ -13,12 +14,13 @@ var mapClients = function() {
 			cptUnknown : this.cpt.Unknown
 		}
 	};
-	emit( this.date , mapping );
+	emit( this.date + " Clients" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceClients = function ( key, values ) {
 	var fact = {	
+		date : 0 ,
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -32,6 +34,7 @@ var reduceClients = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) { 
+		fact.date = v.date ;
 		fact.clients.total += v.clients.total;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
@@ -52,13 +55,13 @@ var aggregateClients = function(theDate) {
 		reduceClients,
 		{ 
 			out: { 
-				reduce : "tempFacts", 					//	the temporary fact collection, with _id:value structure
-			//	nonAtomic : true						//	prevents locking of the db during post-processing
+				reduce : "tempFacts" 					//	the temporary fact collection
+			//	, nonAtomic : true						//	prevents locking of the db during post-processing
 			} ,			
-			query : { "date" : theDate } ,				//	limit aggregation to date
-			//	sort									//  sorts the input documents for fewer reduce operations
-			//	jsMode: true ,							//	check if feasable! is faster, but needs more memory
-			//	finalize : finalizeFacts
+			query : { "date" : theDate } 				//	limit aggregation to date
+			//	, sort									//  sorts the input documents for fewer reduce operations
+			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
+			//	, finalize : finalizeFacts
 		}
 	);
 };
@@ -66,9 +69,6 @@ var aggregateClients = function(theDate) {
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var date = "2013-04-03 22" ;	
 var run = function(date) {
-/*	housekeeping	*/
-    db.tempFacts.remove();	
-/*	aggregation		*/
-	aggregateClients(date);								//	OKAY
+	aggregateClients(date);
 };
 run(date);

@@ -167,8 +167,8 @@ var reduce = function(k, values) {
             result.comments.push(value);						//	add the 'comment' document to the 'comments' array in 'result'
         } 
 /*      else if ("comments" in value) {							//	this 'else' clause covers a case that can't occur here:
-            if (!("comments" in result)) {						//	adding a 'comments' array from one result to another result
-                result.comments = [];							//	removing it seems to make no difference in the result
+            if (!("comments" in result)) {						//	adding a 'comments' array from one result to another result.
+                result.comments = [];							//	removing the clause seems to make no difference in the result
             }
             result.comments.push.apply(result.comments, value.comments);
         }
@@ -503,3 +503,19 @@ var reduceFunction = function(key, values) {
 	);
 	return reducedObject;						//	und fertig ist die laube
 };
+
+
+
+
+//	GETTING RID OF THAT !!*#?/\!!..cking >>VALUE<< FIELD
+	Looka here:
+		function clean(collection) { 
+		  collection.find().forEach( function(result) {
+		  var value = result.value;
+		  delete value._id;     
+		  collection.update({_id: result._id}, value);     
+		  collection.update({_id: result.id}, {$unset: {value: 1}} ) } )};
+		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
+	Maybe:
+		insert that at the beginning of "aggregateFacts.js", cleaning the "tempFacts" collection
+		and then do the same to the aggregated fact (in the finalize section?) before adding it to the "facts" collection 

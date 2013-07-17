@@ -1,6 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapBridges = function() {
-	var mapping = {
+	var map = {
+		date: this.date ,
 		servers : {
 			bridges : {
 				total : {
@@ -188,13 +189,14 @@ var mapBridges = function() {
 			}
 		}
 	};
-	emit( this.date , mapping );
+	emit( this.date + " Bridges" , map );
 };
 
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceBridges = function ( key, values ) {
-	var fact = {										
+	var fact = {		
+		date : 0 ,								
 		servers : {
 			bridges : {
 				total : {
@@ -382,6 +384,7 @@ var reduceBridges = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
+		fact.date = v.date ;
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -530,12 +533,13 @@ var aggregateBridges = function(theDate) {
 		reduceBridges,
 		{ 
 			out: { 
-				reduce : "tempFacts"//,
-			//	nonAtomic : true
+				reduce : "tempFacts" 					//	the temporary fact collection
+			//	, nonAtomic : true						//	prevents locking of the db during post-processing
 			} ,			
-			query : { "date" : theDate } //,
-			//	jsMode: true ,
-			//	finalize : finalizeFacts
+			query : { "date" : theDate } 				//	limit aggregation to date
+			//	, sort									//  sorts the input documents for fewer reduce operations
+			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
+			//	, finalize : finalizeFacts
 		}
 	);
 };
@@ -543,9 +547,6 @@ var aggregateBridges = function(theDate) {
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var date = "2013-04-03 22" ;
 var run = function(date) {
-/*	housekeeping	*/
-    db.tempFacts.remove();	
-/*	aggregation		*/
-	aggregateBridges(date);								//	OKAY
+	aggregateBridges(date);
 };
 run(date);
