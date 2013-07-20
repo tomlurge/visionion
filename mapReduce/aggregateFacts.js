@@ -1,59 +1,14 @@
-﻿/*		aggregation steps
-	0.	aggregation starts either triggered by the import of new data 
-		or periodically, first checking the import collection for newly imported documents
-		from the newly imported documents it extracts the dates and for each distinct date starts the following aggregation procedure:
-	1.	more than one mapReduce for one import collection
-		some mapReduce steps are to complex to put them together in one map/reduce
-	A.	they can be run sequentially and all be reduced to one result { out: { reduce : "tempFacts" }
-		http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
-		http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
-	2.	probably we can then also aggregate from different import tables
-		should still be possible with  { out: { reduce : "tempFacts" }
-	B.	amounting to the following mapReduce steps:
-		* clients				from clients import collection
-		* servers
-			**					from bridges import collection
-			**					from relays import collection
-		* bridges				from bridges import collection
-		* relays				from relays import collection
-		* countries
-			**					from clients import collection
-			**					from relays import collection
-		* autonomous systems	from relays import collection
-	3.	server and countries need to be aggregated from 2 import collections
-		and the resulting aggregates merged into one, like: { out: { merge : "servers/countries/autosys" } }
-	p4.	to get rid of the "value" object we need one further step
-		http://stackoverflow.com/questions/7257989/in-mongodb-mapreduce-how-can-i-flatten-the-values-object
-		this is not part of the mapReduce operation
-	5.	the resulting fact document has to be added to the facts collection
-		overwriting older documents for the same date if need be (e.g. if new data arrived for already existing imports)
-		using the update() method
-		The update() method can either replace the existing document with the new document or update specific fields in the existing document.
-		If the <update> argument contains fields not currently in the document, the update() method adds the new fields to the document.
-		If you set the upsert option in the <options> argument to true or 1 and no existing document match the <query> argument, the update() method can insert a new document into the collection.
-*/
-
-/*
-um das mal festzuhalten
-
-	der trick ist, dass in den kleinen aggregierungsfu ktionen, 
-	die diese finale hier nur vorbereiten, alle aggFunktionen verscheidene keys haben, 
-	aber alle datensätze enthalten das date. 
-	diese date mache ich hier zum key. so kann ich alle felder aus der pre-aggregation 
-	in einem rutsch in ein document schreiben
-	"in einem rutsch" ist das entscheidende detail, weil nur so felder zu einem schon exístoerenden document zugefügt werden können.
-*/	
-
-
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
+﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 //
 //	everything you need to aggregate facts for one date
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	MAP
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	clients
 var mapFacts = function() {
 	var map = {
 		date: this.value.date ,
@@ -855,7 +810,7 @@ var mapFacts = function() {
 		*/
 		
 	};
-	emit( this.date + " Fact" , map );
+	emit( (this.value.date + " Fact") , map );
 };
 
 
@@ -1657,597 +1612,597 @@ var reduceFacts = function ( key, values ) {
 	
 		fact.date = v.date ;
 	
-		fact.clients.total += v.value.clients.total;
-		fact.clients.atBridges += v.value.clients.atBridges ;
-		fact.clients.atRelays += v.value.clients.atRelays ;
-		fact.clients.cip4 += v.value.clients.cip4 ;
-		fact.clients.cip6 += v.value.clients.cip6 ;
-		fact.clients.cptObfs2 += v.value.clients.cptObfs2 ;
-		fact.clients.cptObfs3 += v.value.clients.cptObfs3 ;
-		fact.clients.cptOR += v.value.clients.cptOR ;
-		fact.clients.cptUnknown += v.value.clients.cptUnknown ;
+		fact.clients.total += v.clients.total;
+		fact.clients.atBridges += v.clients.atBridges ;
+		fact.clients.atRelays += v.clients.atRelays ;
+		fact.clients.cip4 += v.clients.cip4 ;
+		fact.clients.cip6 += v.clients.cip6 ;
+		fact.clients.cptObfs2 += v.clients.cptObfs2 ;
+		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
+		fact.clients.cptOR += v.clients.cptOR ;
+		fact.clients.cptUnknown += v.clients.cptUnknown ;
 		
-		fact.servers.total.count += v.value.servers.total.count ;
-		fact.servers.total.bwa += v.value.servers.total.bwa ;
-		fact.servers.total.bwc += v.value.servers.total.bwc ;
-		fact.servers.total.osv.linux += v.value.servers.total.osv.linux ;
-		fact.servers.total.osv.darwin += v.value.servers.total.osv.darwin ;
-		fact.servers.total.osv.freebsd += v.value.servers.total.osv.freebsd ;
-		fact.servers.total.osv.windows += v.value.servers.total.osv.windows ;
-		fact.servers.total.osv.other += v.value.servers.total.osv.other ;
-		fact.servers.total.tsv.v010 += v.value.servers.total.tsv.v010 ;
-		fact.servers.total.tsv.v011 += v.value.servers.total.tsv.v011 ;
-		fact.servers.total.tsv.v012 += v.value.servers.total.tsv.v012 ;
-		fact.servers.total.tsv.v020 += v.value.servers.total.tsv.v020 ;
-		fact.servers.total.tsv.v021 += v.value.servers.total.tsv.v021 ;
-		fact.servers.total.tsv.v022 += v.value.servers.total.tsv.v022 ;
-		fact.servers.total.tsv.v023 += v.value.servers.total.tsv.v023 ;
-		fact.servers.total.tsv.v024 += v.value.servers.total.tsv.v024 ;	
+		fact.servers.total.count += v.servers.total.count ;
+		fact.servers.total.bwa += v.servers.total.bwa ;
+		fact.servers.total.bwc += v.servers.total.bwc ;
+		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
+		fact.servers.total.osv.darwin += v.servers.total.osv.darwin ;
+		fact.servers.total.osv.freebsd += v.servers.total.osv.freebsd ;
+		fact.servers.total.osv.windows += v.servers.total.osv.windows ;
+		fact.servers.total.osv.other += v.servers.total.osv.other ;
+		fact.servers.total.tsv.v010 += v.servers.total.tsv.v010 ;
+		fact.servers.total.tsv.v011 += v.servers.total.tsv.v011 ;
+		fact.servers.total.tsv.v012 += v.servers.total.tsv.v012 ;
+		fact.servers.total.tsv.v020 += v.servers.total.tsv.v020 ;
+		fact.servers.total.tsv.v021 += v.servers.total.tsv.v021 ;
+		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
+		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
+		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;	
 		
-		fact.servers.bridges.total.count += v.value.servers.bridges.total.count ;
-		fact.servers.bridges.total.bwa += v.value.servers.bridges.total.bwa ;
-		fact.servers.bridges.total.bwc += v.value.servers.bridges.total.bwc ;
-		fact.servers.bridges.total.osv.linux += v.value.servers.bridges.total.osv.linux ;
-		fact.servers.bridges.total.osv.darwin += v.value.servers.bridges.total.osv.darwin ;
-		fact.servers.bridges.total.osv.freebsd += v.value.servers.bridges.total.osv.freebsd ;
-		fact.servers.bridges.total.osv.windows += v.value.servers.bridges.total.osv.windows ;
-		fact.servers.bridges.total.osv.other += v.value.servers.bridges.total.osv.other ;
-		fact.servers.bridges.total.tsv.v010 += v.value.servers.bridges.total.tsv.v010 ;
-		fact.servers.bridges.total.tsv.v011 += v.value.servers.bridges.total.tsv.v011 ;
-		fact.servers.bridges.total.tsv.v012 += v.value.servers.bridges.total.tsv.v012 ;
-		fact.servers.bridges.total.tsv.v020 += v.value.servers.bridges.total.tsv.v020 ;
-		fact.servers.bridges.total.tsv.v021 += v.value.servers.bridges.total.tsv.v021 ;
-		fact.servers.bridges.total.tsv.v022 += v.value.servers.bridges.total.tsv.v022 ;
-		fact.servers.bridges.total.tsv.v023 += v.value.servers.bridges.total.tsv.v023 ;
-		fact.servers.bridges.total.tsv.v024 += v.value.servers.bridges.total.tsv.v024 ; 
+		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
+		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
+		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
+		fact.servers.bridges.total.osv.linux += v.servers.bridges.total.osv.linux ;
+		fact.servers.bridges.total.osv.darwin += v.servers.bridges.total.osv.darwin ;
+		fact.servers.bridges.total.osv.freebsd += v.servers.bridges.total.osv.freebsd ;
+		fact.servers.bridges.total.osv.windows += v.servers.bridges.total.osv.windows ;
+		fact.servers.bridges.total.osv.other += v.servers.bridges.total.osv.other ;
+		fact.servers.bridges.total.tsv.v010 += v.servers.bridges.total.tsv.v010 ;
+		fact.servers.bridges.total.tsv.v011 += v.servers.bridges.total.tsv.v011 ;
+		fact.servers.bridges.total.tsv.v012 += v.servers.bridges.total.tsv.v012 ;
+		fact.servers.bridges.total.tsv.v020 += v.servers.bridges.total.tsv.v020 ;
+		fact.servers.bridges.total.tsv.v021 += v.servers.bridges.total.tsv.v021 ;
+		fact.servers.bridges.total.tsv.v022 += v.servers.bridges.total.tsv.v022 ;
+		fact.servers.bridges.total.tsv.v023 += v.servers.bridges.total.tsv.v023 ;
+		fact.servers.bridges.total.tsv.v024 += v.servers.bridges.total.tsv.v024 ; 
 		
-		fact.servers.bridges.brpEmail.count += v.value.servers.bridges.brpEmail.count ;
-		fact.servers.bridges.brpEmail.bwa += v.value.servers.bridges.brpEmail.bwa ;
-		fact.servers.bridges.brpEmail.bwc += v.value.servers.bridges.brpEmail.bwc ;
-		fact.servers.bridges.brpEmail.osv.linux += v.value.servers.bridges.brpEmail.osv.linux ;
-		fact.servers.bridges.brpEmail.osv.darwin += v.value.servers.bridges.brpEmail.osv.darwin ;
-		fact.servers.bridges.brpEmail.osv.freebsd += v.value.servers.bridges.brpEmail.osv.freebsd ;
-		fact.servers.bridges.brpEmail.osv.windows += v.value.servers.bridges.brpEmail.osv.windows ;
-		fact.servers.bridges.brpEmail.osv.other += v.value.servers.bridges.brpEmail.osv.other ;
-		fact.servers.bridges.brpEmail.tsv.v010 += v.value.servers.bridges.brpEmail.tsv.v010 ;
-		fact.servers.bridges.brpEmail.tsv.v011 += v.value.servers.bridges.brpEmail.tsv.v011 ;
-		fact.servers.bridges.brpEmail.tsv.v012 += v.value.servers.bridges.brpEmail.tsv.v012 ;
-		fact.servers.bridges.brpEmail.tsv.v020 += v.value.servers.bridges.brpEmail.tsv.v020 ;
-		fact.servers.bridges.brpEmail.tsv.v021 += v.value.servers.bridges.brpEmail.tsv.v021 ;
-		fact.servers.bridges.brpEmail.tsv.v022 += v.value.servers.bridges.brpEmail.tsv.v022 ;
-		fact.servers.bridges.brpEmail.tsv.v023 += v.value.servers.bridges.brpEmail.tsv.v023 ;
-		fact.servers.bridges.brpEmail.tsv.v024 += v.value.servers.bridges.brpEmail.tsv.v024 ; 
+		fact.servers.bridges.brpEmail.count += v.servers.bridges.brpEmail.count ;
+		fact.servers.bridges.brpEmail.bwa += v.servers.bridges.brpEmail.bwa ;
+		fact.servers.bridges.brpEmail.bwc += v.servers.bridges.brpEmail.bwc ;
+		fact.servers.bridges.brpEmail.osv.linux += v.servers.bridges.brpEmail.osv.linux ;
+		fact.servers.bridges.brpEmail.osv.darwin += v.servers.bridges.brpEmail.osv.darwin ;
+		fact.servers.bridges.brpEmail.osv.freebsd += v.servers.bridges.brpEmail.osv.freebsd ;
+		fact.servers.bridges.brpEmail.osv.windows += v.servers.bridges.brpEmail.osv.windows ;
+		fact.servers.bridges.brpEmail.osv.other += v.servers.bridges.brpEmail.osv.other ;
+		fact.servers.bridges.brpEmail.tsv.v010 += v.servers.bridges.brpEmail.tsv.v010 ;
+		fact.servers.bridges.brpEmail.tsv.v011 += v.servers.bridges.brpEmail.tsv.v011 ;
+		fact.servers.bridges.brpEmail.tsv.v012 += v.servers.bridges.brpEmail.tsv.v012 ;
+		fact.servers.bridges.brpEmail.tsv.v020 += v.servers.bridges.brpEmail.tsv.v020 ;
+		fact.servers.bridges.brpEmail.tsv.v021 += v.servers.bridges.brpEmail.tsv.v021 ;
+		fact.servers.bridges.brpEmail.tsv.v022 += v.servers.bridges.brpEmail.tsv.v022 ;
+		fact.servers.bridges.brpEmail.tsv.v023 += v.servers.bridges.brpEmail.tsv.v023 ;
+		fact.servers.bridges.brpEmail.tsv.v024 += v.servers.bridges.brpEmail.tsv.v024 ; 
 	
-		fact.servers.bridges.brpHttps.count += v.value.servers.bridges.brpHttps.count ;
-		fact.servers.bridges.brpHttps.bwa += v.value.servers.bridges.brpHttps.bwa ;
-		fact.servers.bridges.brpHttps.bwc += v.value.servers.bridges.brpHttps.bwc ;
-		fact.servers.bridges.brpHttps.osv.linux += v.value.servers.bridges.brpHttps.osv.linux ;
-		fact.servers.bridges.brpHttps.osv.darwin += v.value.servers.bridges.brpHttps.osv.darwin ;
-		fact.servers.bridges.brpHttps.osv.freebsd += v.value.servers.bridges.brpHttps.osv.freebsd ;
-		fact.servers.bridges.brpHttps.osv.windows += v.value.servers.bridges.brpHttps.osv.windows ;
-		fact.servers.bridges.brpHttps.osv.other += v.value.servers.bridges.brpHttps.osv.other ;
-		fact.servers.bridges.brpHttps.tsv.v010 += v.value.servers.bridges.brpHttps.tsv.v010 ;
-		fact.servers.bridges.brpHttps.tsv.v011 += v.value.servers.bridges.brpHttps.tsv.v011 ;
-		fact.servers.bridges.brpHttps.tsv.v012 += v.value.servers.bridges.brpHttps.tsv.v012 ;
-		fact.servers.bridges.brpHttps.tsv.v020 += v.value.servers.bridges.brpHttps.tsv.v020 ;
-		fact.servers.bridges.brpHttps.tsv.v021 += v.value.servers.bridges.brpHttps.tsv.v021 ;
-		fact.servers.bridges.brpHttps.tsv.v022 += v.value.servers.bridges.brpHttps.tsv.v022 ;
-		fact.servers.bridges.brpHttps.tsv.v023 += v.value.servers.bridges.brpHttps.tsv.v023 ;
-		fact.servers.bridges.brpHttps.tsv.v024 += v.value.servers.bridges.brpHttps.tsv.v024 ; 
+		fact.servers.bridges.brpHttps.count += v.servers.bridges.brpHttps.count ;
+		fact.servers.bridges.brpHttps.bwa += v.servers.bridges.brpHttps.bwa ;
+		fact.servers.bridges.brpHttps.bwc += v.servers.bridges.brpHttps.bwc ;
+		fact.servers.bridges.brpHttps.osv.linux += v.servers.bridges.brpHttps.osv.linux ;
+		fact.servers.bridges.brpHttps.osv.darwin += v.servers.bridges.brpHttps.osv.darwin ;
+		fact.servers.bridges.brpHttps.osv.freebsd += v.servers.bridges.brpHttps.osv.freebsd ;
+		fact.servers.bridges.brpHttps.osv.windows += v.servers.bridges.brpHttps.osv.windows ;
+		fact.servers.bridges.brpHttps.osv.other += v.servers.bridges.brpHttps.osv.other ;
+		fact.servers.bridges.brpHttps.tsv.v010 += v.servers.bridges.brpHttps.tsv.v010 ;
+		fact.servers.bridges.brpHttps.tsv.v011 += v.servers.bridges.brpHttps.tsv.v011 ;
+		fact.servers.bridges.brpHttps.tsv.v012 += v.servers.bridges.brpHttps.tsv.v012 ;
+		fact.servers.bridges.brpHttps.tsv.v020 += v.servers.bridges.brpHttps.tsv.v020 ;
+		fact.servers.bridges.brpHttps.tsv.v021 += v.servers.bridges.brpHttps.tsv.v021 ;
+		fact.servers.bridges.brpHttps.tsv.v022 += v.servers.bridges.brpHttps.tsv.v022 ;
+		fact.servers.bridges.brpHttps.tsv.v023 += v.servers.bridges.brpHttps.tsv.v023 ;
+		fact.servers.bridges.brpHttps.tsv.v024 += v.servers.bridges.brpHttps.tsv.v024 ; 
 	
-		fact.servers.bridges.brpOther.count += v.value.servers.bridges.brpOther.count ;
-		fact.servers.bridges.brpOther.bwa += v.value.servers.bridges.brpOther.bwa ;
-		fact.servers.bridges.brpOther.bwc += v.value.servers.bridges.brpOther.bwc ;
-		fact.servers.bridges.brpOther.osv.linux += v.value.servers.bridges.brpOther.osv.linux ;
-		fact.servers.bridges.brpOther.osv.darwin += v.value.servers.bridges.brpOther.osv.darwin ;
-		fact.servers.bridges.brpOther.osv.freebsd += v.value.servers.bridges.brpOther.osv.freebsd ;
-		fact.servers.bridges.brpOther.osv.windows += v.value.servers.bridges.brpOther.osv.windows ;
-		fact.servers.bridges.brpOther.osv.other += v.value.servers.bridges.brpOther.osv.other ;
-		fact.servers.bridges.brpOther.tsv.v010 += v.value.servers.bridges.brpOther.tsv.v010 ;
-		fact.servers.bridges.brpOther.tsv.v011 += v.value.servers.bridges.brpOther.tsv.v011 ;
-		fact.servers.bridges.brpOther.tsv.v012 += v.value.servers.bridges.brpOther.tsv.v012 ;
-		fact.servers.bridges.brpOther.tsv.v020 += v.value.servers.bridges.brpOther.tsv.v020 ;
-		fact.servers.bridges.brpOther.tsv.v021 += v.value.servers.bridges.brpOther.tsv.v021 ;
-		fact.servers.bridges.brpOther.tsv.v022 += v.value.servers.bridges.brpOther.tsv.v022 ;
-		fact.servers.bridges.brpOther.tsv.v023 += v.value.servers.bridges.brpOther.tsv.v023 ;
-		fact.servers.bridges.brpOther.tsv.v024 += v.value.servers.bridges.brpOther.tsv.v024 ; 
+		fact.servers.bridges.brpOther.count += v.servers.bridges.brpOther.count ;
+		fact.servers.bridges.brpOther.bwa += v.servers.bridges.brpOther.bwa ;
+		fact.servers.bridges.brpOther.bwc += v.servers.bridges.brpOther.bwc ;
+		fact.servers.bridges.brpOther.osv.linux += v.servers.bridges.brpOther.osv.linux ;
+		fact.servers.bridges.brpOther.osv.darwin += v.servers.bridges.brpOther.osv.darwin ;
+		fact.servers.bridges.brpOther.osv.freebsd += v.servers.bridges.brpOther.osv.freebsd ;
+		fact.servers.bridges.brpOther.osv.windows += v.servers.bridges.brpOther.osv.windows ;
+		fact.servers.bridges.brpOther.osv.other += v.servers.bridges.brpOther.osv.other ;
+		fact.servers.bridges.brpOther.tsv.v010 += v.servers.bridges.brpOther.tsv.v010 ;
+		fact.servers.bridges.brpOther.tsv.v011 += v.servers.bridges.brpOther.tsv.v011 ;
+		fact.servers.bridges.brpOther.tsv.v012 += v.servers.bridges.brpOther.tsv.v012 ;
+		fact.servers.bridges.brpOther.tsv.v020 += v.servers.bridges.brpOther.tsv.v020 ;
+		fact.servers.bridges.brpOther.tsv.v021 += v.servers.bridges.brpOther.tsv.v021 ;
+		fact.servers.bridges.brpOther.tsv.v022 += v.servers.bridges.brpOther.tsv.v022 ;
+		fact.servers.bridges.brpOther.tsv.v023 += v.servers.bridges.brpOther.tsv.v023 ;
+		fact.servers.bridges.brpOther.tsv.v024 += v.servers.bridges.brpOther.tsv.v024 ; 
 		
-		fact.servers.bridges.breTrue.count += v.value.servers.bridges.breTrue.count ;
-		fact.servers.bridges.breTrue.bwa += v.value.servers.bridges.breTrue.bwa ;
-		fact.servers.bridges.breTrue.bwc += v.value.servers.bridges.breTrue.bwc ;
-		fact.servers.bridges.breTrue.osv.linux += v.value.servers.bridges.breTrue.osv.linux ;
-		fact.servers.bridges.breTrue.osv.darwin += v.value.servers.bridges.breTrue.osv.darwin ;
-		fact.servers.bridges.breTrue.osv.freebsd += v.value.servers.bridges.breTrue.osv.freebsd ;
-		fact.servers.bridges.breTrue.osv.windows += v.value.servers.bridges.breTrue.osv.windows ;
-		fact.servers.bridges.breTrue.osv.other += v.value.servers.bridges.breTrue.osv.other ;
-		fact.servers.bridges.breTrue.tsv.v010 += v.value.servers.bridges.breTrue.tsv.v010 ;
-		fact.servers.bridges.breTrue.tsv.v011 += v.value.servers.bridges.breTrue.tsv.v011 ;
-		fact.servers.bridges.breTrue.tsv.v012 += v.value.servers.bridges.breTrue.tsv.v012 ;
-		fact.servers.bridges.breTrue.tsv.v020 += v.value.servers.bridges.breTrue.tsv.v020 ;
-		fact.servers.bridges.breTrue.tsv.v021 += v.value.servers.bridges.breTrue.tsv.v021 ;
-		fact.servers.bridges.breTrue.tsv.v022 += v.value.servers.bridges.breTrue.tsv.v022 ;
-		fact.servers.bridges.breTrue.tsv.v023 += v.value.servers.bridges.breTrue.tsv.v023 ;
-		fact.servers.bridges.breTrue.tsv.v024 += v.value.servers.bridges.breTrue.tsv.v024 ; 
+		fact.servers.bridges.breTrue.count += v.servers.bridges.breTrue.count ;
+		fact.servers.bridges.breTrue.bwa += v.servers.bridges.breTrue.bwa ;
+		fact.servers.bridges.breTrue.bwc += v.servers.bridges.breTrue.bwc ;
+		fact.servers.bridges.breTrue.osv.linux += v.servers.bridges.breTrue.osv.linux ;
+		fact.servers.bridges.breTrue.osv.darwin += v.servers.bridges.breTrue.osv.darwin ;
+		fact.servers.bridges.breTrue.osv.freebsd += v.servers.bridges.breTrue.osv.freebsd ;
+		fact.servers.bridges.breTrue.osv.windows += v.servers.bridges.breTrue.osv.windows ;
+		fact.servers.bridges.breTrue.osv.other += v.servers.bridges.breTrue.osv.other ;
+		fact.servers.bridges.breTrue.tsv.v010 += v.servers.bridges.breTrue.tsv.v010 ;
+		fact.servers.bridges.breTrue.tsv.v011 += v.servers.bridges.breTrue.tsv.v011 ;
+		fact.servers.bridges.breTrue.tsv.v012 += v.servers.bridges.breTrue.tsv.v012 ;
+		fact.servers.bridges.breTrue.tsv.v020 += v.servers.bridges.breTrue.tsv.v020 ;
+		fact.servers.bridges.breTrue.tsv.v021 += v.servers.bridges.breTrue.tsv.v021 ;
+		fact.servers.bridges.breTrue.tsv.v022 += v.servers.bridges.breTrue.tsv.v022 ;
+		fact.servers.bridges.breTrue.tsv.v023 += v.servers.bridges.breTrue.tsv.v023 ;
+		fact.servers.bridges.breTrue.tsv.v024 += v.servers.bridges.breTrue.tsv.v024 ; 
 	
-		fact.servers.bridges.brtObfs2.count += v.value.servers.bridges.brtObfs2.count ;
-		fact.servers.bridges.brtObfs2.bwa += v.value.servers.bridges.brtObfs2.bwa ;
-		fact.servers.bridges.brtObfs2.bwc += v.value.servers.bridges.brtObfs2.bwc ;
-		fact.servers.bridges.brtObfs2.osv.linux += v.value.servers.bridges.brtObfs2.osv.linux ;
-		fact.servers.bridges.brtObfs2.osv.darwin += v.value.servers.bridges.brtObfs2.osv.darwin ;
-		fact.servers.bridges.brtObfs2.osv.freebsd += v.value.servers.bridges.brtObfs2.osv.freebsd ;
-		fact.servers.bridges.brtObfs2.osv.windows += v.value.servers.bridges.brtObfs2.osv.windows ;
-		fact.servers.bridges.brtObfs2.osv.other += v.value.servers.bridges.brtObfs2.osv.other ;
-		fact.servers.bridges.brtObfs2.tsv.v010 += v.value.servers.bridges.brtObfs2.tsv.v010 ;
-		fact.servers.bridges.brtObfs2.tsv.v011 += v.value.servers.bridges.brtObfs2.tsv.v011 ;
-		fact.servers.bridges.brtObfs2.tsv.v012 += v.value.servers.bridges.brtObfs2.tsv.v012 ;
-		fact.servers.bridges.brtObfs2.tsv.v020 += v.value.servers.bridges.brtObfs2.tsv.v020 ;
-		fact.servers.bridges.brtObfs2.tsv.v021 += v.value.servers.bridges.brtObfs2.tsv.v021 ;
-		fact.servers.bridges.brtObfs2.tsv.v022 += v.value.servers.bridges.brtObfs2.tsv.v022 ;
-		fact.servers.bridges.brtObfs2.tsv.v023 += v.value.servers.bridges.brtObfs2.tsv.v023 ;
-		fact.servers.bridges.brtObfs2.tsv.v024 += v.value.servers.bridges.brtObfs2.tsv.v024 ; 
+		fact.servers.bridges.brtObfs2.count += v.servers.bridges.brtObfs2.count ;
+		fact.servers.bridges.brtObfs2.bwa += v.servers.bridges.brtObfs2.bwa ;
+		fact.servers.bridges.brtObfs2.bwc += v.servers.bridges.brtObfs2.bwc ;
+		fact.servers.bridges.brtObfs2.osv.linux += v.servers.bridges.brtObfs2.osv.linux ;
+		fact.servers.bridges.brtObfs2.osv.darwin += v.servers.bridges.brtObfs2.osv.darwin ;
+		fact.servers.bridges.brtObfs2.osv.freebsd += v.servers.bridges.brtObfs2.osv.freebsd ;
+		fact.servers.bridges.brtObfs2.osv.windows += v.servers.bridges.brtObfs2.osv.windows ;
+		fact.servers.bridges.brtObfs2.osv.other += v.servers.bridges.brtObfs2.osv.other ;
+		fact.servers.bridges.brtObfs2.tsv.v010 += v.servers.bridges.brtObfs2.tsv.v010 ;
+		fact.servers.bridges.brtObfs2.tsv.v011 += v.servers.bridges.brtObfs2.tsv.v011 ;
+		fact.servers.bridges.brtObfs2.tsv.v012 += v.servers.bridges.brtObfs2.tsv.v012 ;
+		fact.servers.bridges.brtObfs2.tsv.v020 += v.servers.bridges.brtObfs2.tsv.v020 ;
+		fact.servers.bridges.brtObfs2.tsv.v021 += v.servers.bridges.brtObfs2.tsv.v021 ;
+		fact.servers.bridges.brtObfs2.tsv.v022 += v.servers.bridges.brtObfs2.tsv.v022 ;
+		fact.servers.bridges.brtObfs2.tsv.v023 += v.servers.bridges.brtObfs2.tsv.v023 ;
+		fact.servers.bridges.brtObfs2.tsv.v024 += v.servers.bridges.brtObfs2.tsv.v024 ; 
 		
-		fact.servers.bridges.brtObfs3.count += v.value.servers.bridges.brtObfs3.count ;
-		fact.servers.bridges.brtObfs3.bwa += v.value.servers.bridges.brtObfs3.bwa ;
-		fact.servers.bridges.brtObfs3.bwc += v.value.servers.bridges.brtObfs3.bwc ;
-		fact.servers.bridges.brtObfs3.osv.linux += v.value.servers.bridges.brtObfs3.osv.linux ;
-		fact.servers.bridges.brtObfs3.osv.darwin += v.value.servers.bridges.brtObfs3.osv.darwin ;
-		fact.servers.bridges.brtObfs3.osv.freebsd += v.value.servers.bridges.brtObfs3.osv.freebsd ;
-		fact.servers.bridges.brtObfs3.osv.windows += v.value.servers.bridges.brtObfs3.osv.windows ;
-		fact.servers.bridges.brtObfs3.osv.other += v.value.servers.bridges.brtObfs3.osv.other ;
-		fact.servers.bridges.brtObfs3.tsv.v010 += v.value.servers.bridges.brtObfs3.tsv.v010 ;
-		fact.servers.bridges.brtObfs3.tsv.v011 += v.value.servers.bridges.brtObfs3.tsv.v011 ;
-		fact.servers.bridges.brtObfs3.tsv.v012 += v.value.servers.bridges.brtObfs3.tsv.v012 ;
-		fact.servers.bridges.brtObfs3.tsv.v020 += v.value.servers.bridges.brtObfs3.tsv.v020 ;
-		fact.servers.bridges.brtObfs3.tsv.v021 += v.value.servers.bridges.brtObfs3.tsv.v021 ;
-		fact.servers.bridges.brtObfs3.tsv.v022 += v.value.servers.bridges.brtObfs3.tsv.v022 ;
-		fact.servers.bridges.brtObfs3.tsv.v023 += v.value.servers.bridges.brtObfs3.tsv.v023 ;
-		fact.servers.bridges.brtObfs3.tsv.v024 += v.value.servers.bridges.brtObfs3.tsv.v024 ; 
+		fact.servers.bridges.brtObfs3.count += v.servers.bridges.brtObfs3.count ;
+		fact.servers.bridges.brtObfs3.bwa += v.servers.bridges.brtObfs3.bwa ;
+		fact.servers.bridges.brtObfs3.bwc += v.servers.bridges.brtObfs3.bwc ;
+		fact.servers.bridges.brtObfs3.osv.linux += v.servers.bridges.brtObfs3.osv.linux ;
+		fact.servers.bridges.brtObfs3.osv.darwin += v.servers.bridges.brtObfs3.osv.darwin ;
+		fact.servers.bridges.brtObfs3.osv.freebsd += v.servers.bridges.brtObfs3.osv.freebsd ;
+		fact.servers.bridges.brtObfs3.osv.windows += v.servers.bridges.brtObfs3.osv.windows ;
+		fact.servers.bridges.brtObfs3.osv.other += v.servers.bridges.brtObfs3.osv.other ;
+		fact.servers.bridges.brtObfs3.tsv.v010 += v.servers.bridges.brtObfs3.tsv.v010 ;
+		fact.servers.bridges.brtObfs3.tsv.v011 += v.servers.bridges.brtObfs3.tsv.v011 ;
+		fact.servers.bridges.brtObfs3.tsv.v012 += v.servers.bridges.brtObfs3.tsv.v012 ;
+		fact.servers.bridges.brtObfs3.tsv.v020 += v.servers.bridges.brtObfs3.tsv.v020 ;
+		fact.servers.bridges.brtObfs3.tsv.v021 += v.servers.bridges.brtObfs3.tsv.v021 ;
+		fact.servers.bridges.brtObfs3.tsv.v022 += v.servers.bridges.brtObfs3.tsv.v022 ;
+		fact.servers.bridges.brtObfs3.tsv.v023 += v.servers.bridges.brtObfs3.tsv.v023 ;
+		fact.servers.bridges.brtObfs3.tsv.v024 += v.servers.bridges.brtObfs3.tsv.v024 ; 
 		
-		fact.servers.bridges.brtObfs23.count += v.value.servers.bridges.brtObfs23.count ;
-		fact.servers.bridges.brtObfs23.bwa += v.value.servers.bridges.brtObfs23.bwa ;
-		fact.servers.bridges.brtObfs23.bwc += v.value.servers.bridges.brtObfs23.bwc ;
-		fact.servers.bridges.brtObfs23.osv.linux += v.value.servers.bridges.brtObfs23.osv.linux ;
-		fact.servers.bridges.brtObfs23.osv.darwin += v.value.servers.bridges.brtObfs23.osv.darwin ;
-		fact.servers.bridges.brtObfs23.osv.freebsd += v.value.servers.bridges.brtObfs23.osv.freebsd ;
-		fact.servers.bridges.brtObfs23.osv.windows += v.value.servers.bridges.brtObfs23.osv.windows ;
-		fact.servers.bridges.brtObfs23.osv.other += v.value.servers.bridges.brtObfs23.osv.other ;
-		fact.servers.bridges.brtObfs23.tsv.v010 += v.value.servers.bridges.brtObfs23.tsv.v010 ;
-		fact.servers.bridges.brtObfs23.tsv.v011 += v.value.servers.bridges.brtObfs23.tsv.v011 ;
-		fact.servers.bridges.brtObfs23.tsv.v012 += v.value.servers.bridges.brtObfs23.tsv.v012 ;
-		fact.servers.bridges.brtObfs23.tsv.v020 += v.value.servers.bridges.brtObfs23.tsv.v020 ;
-		fact.servers.bridges.brtObfs23.tsv.v021 += v.value.servers.bridges.brtObfs23.tsv.v021 ;
-		fact.servers.bridges.brtObfs23.tsv.v022 += v.value.servers.bridges.brtObfs23.tsv.v022 ;
-		fact.servers.bridges.brtObfs23.tsv.v023 += v.value.servers.bridges.brtObfs23.tsv.v023 ;
-		fact.servers.bridges.brtObfs23.tsv.v024 += v.value.servers.bridges.brtObfs23.tsv.v024 ; 
+		fact.servers.bridges.brtObfs23.count += v.servers.bridges.brtObfs23.count ;
+		fact.servers.bridges.brtObfs23.bwa += v.servers.bridges.brtObfs23.bwa ;
+		fact.servers.bridges.brtObfs23.bwc += v.servers.bridges.brtObfs23.bwc ;
+		fact.servers.bridges.brtObfs23.osv.linux += v.servers.bridges.brtObfs23.osv.linux ;
+		fact.servers.bridges.brtObfs23.osv.darwin += v.servers.bridges.brtObfs23.osv.darwin ;
+		fact.servers.bridges.brtObfs23.osv.freebsd += v.servers.bridges.brtObfs23.osv.freebsd ;
+		fact.servers.bridges.brtObfs23.osv.windows += v.servers.bridges.brtObfs23.osv.windows ;
+		fact.servers.bridges.brtObfs23.osv.other += v.servers.bridges.brtObfs23.osv.other ;
+		fact.servers.bridges.brtObfs23.tsv.v010 += v.servers.bridges.brtObfs23.tsv.v010 ;
+		fact.servers.bridges.brtObfs23.tsv.v011 += v.servers.bridges.brtObfs23.tsv.v011 ;
+		fact.servers.bridges.brtObfs23.tsv.v012 += v.servers.bridges.brtObfs23.tsv.v012 ;
+		fact.servers.bridges.brtObfs23.tsv.v020 += v.servers.bridges.brtObfs23.tsv.v020 ;
+		fact.servers.bridges.brtObfs23.tsv.v021 += v.servers.bridges.brtObfs23.tsv.v021 ;
+		fact.servers.bridges.brtObfs23.tsv.v022 += v.servers.bridges.brtObfs23.tsv.v022 ;
+		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
+		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ; 
 		
-		fact.servers.relays.roleAll.total.count += v.value.servers.relays.roleAll.total.count ;
-		fact.servers.relays.roleAll.total.bwa += v.value.servers.relays.roleAll.total.bwa ;
-		fact.servers.relays.roleAll.total.bwc += v.value.servers.relays.roleAll.total.bwc ;
-		fact.servers.relays.roleAll.total.osv.linux += v.value.servers.relays.roleAll.total.osv.linux ;
-		fact.servers.relays.roleAll.total.osv.darwin += v.value.servers.relays.roleAll.total.osv.darwin ;
-		fact.servers.relays.roleAll.total.osv.freebsd += v.value.servers.relays.roleAll.total.osv.freebsd ;
-		fact.servers.relays.roleAll.total.osv.windows += v.value.servers.relays.roleAll.total.osv.windows ;
-		fact.servers.relays.roleAll.total.osv.other += v.value.servers.relays.roleAll.total.osv.other ;
-		fact.servers.relays.roleAll.total.tsv.v010 += v.value.servers.relays.roleAll.total.tsv.v010 ;
-		fact.servers.relays.roleAll.total.tsv.v011 += v.value.servers.relays.roleAll.total.tsv.v011 ;
-		fact.servers.relays.roleAll.total.tsv.v012 += v.value.servers.relays.roleAll.total.tsv.v012 ;
-		fact.servers.relays.roleAll.total.tsv.v020 += v.value.servers.relays.roleAll.total.tsv.v020 ;
-		fact.servers.relays.roleAll.total.tsv.v021 += v.value.servers.relays.roleAll.total.tsv.v021 ;
-		fact.servers.relays.roleAll.total.tsv.v022 += v.value.servers.relays.roleAll.total.tsv.v022 ;
-		fact.servers.relays.roleAll.total.tsv.v023 += v.value.servers.relays.roleAll.total.tsv.v023 ;
-		fact.servers.relays.roleAll.total.tsv.v024 += v.value.servers.relays.roleAll.total.tsv.v024 ;
-		fact.servers.relays.roleAll.total.pbr += v.value.servers.relays.roleAll.total.pbr ;
+		fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;
+		fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
+		fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;
+		fact.servers.relays.roleAll.total.osv.linux += v.servers.relays.roleAll.total.osv.linux ;
+		fact.servers.relays.roleAll.total.osv.darwin += v.servers.relays.roleAll.total.osv.darwin ;
+		fact.servers.relays.roleAll.total.osv.freebsd += v.servers.relays.roleAll.total.osv.freebsd ;
+		fact.servers.relays.roleAll.total.osv.windows += v.servers.relays.roleAll.total.osv.windows ;
+		fact.servers.relays.roleAll.total.osv.other += v.servers.relays.roleAll.total.osv.other ;
+		fact.servers.relays.roleAll.total.tsv.v010 += v.servers.relays.roleAll.total.tsv.v010 ;
+		fact.servers.relays.roleAll.total.tsv.v011 += v.servers.relays.roleAll.total.tsv.v011 ;
+		fact.servers.relays.roleAll.total.tsv.v012 += v.servers.relays.roleAll.total.tsv.v012 ;
+		fact.servers.relays.roleAll.total.tsv.v020 += v.servers.relays.roleAll.total.tsv.v020 ;
+		fact.servers.relays.roleAll.total.tsv.v021 += v.servers.relays.roleAll.total.tsv.v021 ;
+		fact.servers.relays.roleAll.total.tsv.v022 += v.servers.relays.roleAll.total.tsv.v022 ;
+		fact.servers.relays.roleAll.total.tsv.v023 += v.servers.relays.roleAll.total.tsv.v023 ;
+		fact.servers.relays.roleAll.total.tsv.v024 += v.servers.relays.roleAll.total.tsv.v024 ;
+		fact.servers.relays.roleAll.total.pbr += v.servers.relays.roleAll.total.pbr ;
 		
-		fact.servers.relays.roleAll.flagNone.count += v.value.servers.relays.roleAll.flagNone.count ;
-		fact.servers.relays.roleAll.flagNone.bwa += v.value.servers.relays.roleAll.flagNone.bwa ;
-		fact.servers.relays.roleAll.flagNone.bwc += v.value.servers.relays.roleAll.flagNone.bwc ;
-		fact.servers.relays.roleAll.flagNone.osv.linux += v.value.servers.relays.roleAll.flagNone.osv.linux ;
-		fact.servers.relays.roleAll.flagNone.osv.darwin += v.value.servers.relays.roleAll.flagNone.osv.darwin ;
-		fact.servers.relays.roleAll.flagNone.osv.freebsd += v.value.servers.relays.roleAll.flagNone.osv.freebsd ;
-		fact.servers.relays.roleAll.flagNone.osv.windows += v.value.servers.relays.roleAll.flagNone.osv.windows ;
-		fact.servers.relays.roleAll.flagNone.osv.other += v.value.servers.relays.roleAll.flagNone.osv.other ;
-		fact.servers.relays.roleAll.flagNone.tsv.v010 += v.value.servers.relays.roleAll.flagNone.tsv.v010 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v011 += v.value.servers.relays.roleAll.flagNone.tsv.v011 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v012 += v.value.servers.relays.roleAll.flagNone.tsv.v012 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v020 += v.value.servers.relays.roleAll.flagNone.tsv.v020 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v021 += v.value.servers.relays.roleAll.flagNone.tsv.v021 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v022 += v.value.servers.relays.roleAll.flagNone.tsv.v022 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v023 += v.value.servers.relays.roleAll.flagNone.tsv.v023 ;
-		fact.servers.relays.roleAll.flagNone.tsv.v024 += v.value.servers.relays.roleAll.flagNone.tsv.v024 ;
-		fact.servers.relays.roleAll.flagNone.pbr += v.value.servers.relays.roleAll.flagNone.pbr ;
+		fact.servers.relays.roleAll.flagNone.count += v.servers.relays.roleAll.flagNone.count ;
+		fact.servers.relays.roleAll.flagNone.bwa += v.servers.relays.roleAll.flagNone.bwa ;
+		fact.servers.relays.roleAll.flagNone.bwc += v.servers.relays.roleAll.flagNone.bwc ;
+		fact.servers.relays.roleAll.flagNone.osv.linux += v.servers.relays.roleAll.flagNone.osv.linux ;
+		fact.servers.relays.roleAll.flagNone.osv.darwin += v.servers.relays.roleAll.flagNone.osv.darwin ;
+		fact.servers.relays.roleAll.flagNone.osv.freebsd += v.servers.relays.roleAll.flagNone.osv.freebsd ;
+		fact.servers.relays.roleAll.flagNone.osv.windows += v.servers.relays.roleAll.flagNone.osv.windows ;
+		fact.servers.relays.roleAll.flagNone.osv.other += v.servers.relays.roleAll.flagNone.osv.other ;
+		fact.servers.relays.roleAll.flagNone.tsv.v010 += v.servers.relays.roleAll.flagNone.tsv.v010 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v011 += v.servers.relays.roleAll.flagNone.tsv.v011 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v012 += v.servers.relays.roleAll.flagNone.tsv.v012 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v020 += v.servers.relays.roleAll.flagNone.tsv.v020 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v021 += v.servers.relays.roleAll.flagNone.tsv.v021 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v022 += v.servers.relays.roleAll.flagNone.tsv.v022 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v023 += v.servers.relays.roleAll.flagNone.tsv.v023 ;
+		fact.servers.relays.roleAll.flagNone.tsv.v024 += v.servers.relays.roleAll.flagNone.tsv.v024 ;
+		fact.servers.relays.roleAll.flagNone.pbr += v.servers.relays.roleAll.flagNone.pbr ;
 		
-		fact.servers.relays.roleAll.flagStable.count += v.value.servers.relays.roleAll.flagStable.count ;
-		fact.servers.relays.roleAll.flagStable.bwa += v.value.servers.relays.roleAll.flagStable.bwa ;
-		fact.servers.relays.roleAll.flagStable.bwc += v.value.servers.relays.roleAll.flagStable.bwc ;
-		fact.servers.relays.roleAll.flagStable.osv.linux += v.value.servers.relays.roleAll.flagStable.osv.linux ;
-		fact.servers.relays.roleAll.flagStable.osv.darwin += v.value.servers.relays.roleAll.flagStable.osv.darwin ;
-		fact.servers.relays.roleAll.flagStable.osv.freebsd += v.value.servers.relays.roleAll.flagStable.osv.freebsd ;
-		fact.servers.relays.roleAll.flagStable.osv.windows += v.value.servers.relays.roleAll.flagStable.osv.windows ;
-		fact.servers.relays.roleAll.flagStable.osv.other += v.value.servers.relays.roleAll.flagStable.osv.other ;
-		fact.servers.relays.roleAll.flagStable.tsv.v010 += v.value.servers.relays.roleAll.flagStable.tsv.v010 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v011 += v.value.servers.relays.roleAll.flagStable.tsv.v011 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v012 += v.value.servers.relays.roleAll.flagStable.tsv.v012 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v020 += v.value.servers.relays.roleAll.flagStable.tsv.v020 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v021 += v.value.servers.relays.roleAll.flagStable.tsv.v021 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v022 += v.value.servers.relays.roleAll.flagStable.tsv.v022 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v023 += v.value.servers.relays.roleAll.flagStable.tsv.v023 ;
-		fact.servers.relays.roleAll.flagStable.tsv.v024 += v.value.servers.relays.roleAll.flagStable.tsv.v024 ;
-		fact.servers.relays.roleAll.flagStable.pbr += v.value.servers.relays.roleAll.flagStable.pbr ;
+		fact.servers.relays.roleAll.flagStable.count += v.servers.relays.roleAll.flagStable.count ;
+		fact.servers.relays.roleAll.flagStable.bwa += v.servers.relays.roleAll.flagStable.bwa ;
+		fact.servers.relays.roleAll.flagStable.bwc += v.servers.relays.roleAll.flagStable.bwc ;
+		fact.servers.relays.roleAll.flagStable.osv.linux += v.servers.relays.roleAll.flagStable.osv.linux ;
+		fact.servers.relays.roleAll.flagStable.osv.darwin += v.servers.relays.roleAll.flagStable.osv.darwin ;
+		fact.servers.relays.roleAll.flagStable.osv.freebsd += v.servers.relays.roleAll.flagStable.osv.freebsd ;
+		fact.servers.relays.roleAll.flagStable.osv.windows += v.servers.relays.roleAll.flagStable.osv.windows ;
+		fact.servers.relays.roleAll.flagStable.osv.other += v.servers.relays.roleAll.flagStable.osv.other ;
+		fact.servers.relays.roleAll.flagStable.tsv.v010 += v.servers.relays.roleAll.flagStable.tsv.v010 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v011 += v.servers.relays.roleAll.flagStable.tsv.v011 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v012 += v.servers.relays.roleAll.flagStable.tsv.v012 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v020 += v.servers.relays.roleAll.flagStable.tsv.v020 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v021 += v.servers.relays.roleAll.flagStable.tsv.v021 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v022 += v.servers.relays.roleAll.flagStable.tsv.v022 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v023 += v.servers.relays.roleAll.flagStable.tsv.v023 ;
+		fact.servers.relays.roleAll.flagStable.tsv.v024 += v.servers.relays.roleAll.flagStable.tsv.v024 ;
+		fact.servers.relays.roleAll.flagStable.pbr += v.servers.relays.roleAll.flagStable.pbr ;
 		
-		fact.servers.relays.roleAll.flagFast.count += v.value.servers.relays.roleAll.flagFast.count ;
-		fact.servers.relays.roleAll.flagFast.bwa += v.value.servers.relays.roleAll.flagFast.bwa ;
-		fact.servers.relays.roleAll.flagFast.bwc += v.value.servers.relays.roleAll.flagFast.bwc ;
-		fact.servers.relays.roleAll.flagFast.osv.linux += v.value.servers.relays.roleAll.flagFast.osv.linux ;
-		fact.servers.relays.roleAll.flagFast.osv.darwin += v.value.servers.relays.roleAll.flagFast.osv.darwin ;
-		fact.servers.relays.roleAll.flagFast.osv.freebsd += v.value.servers.relays.roleAll.flagFast.osv.freebsd ;
-		fact.servers.relays.roleAll.flagFast.osv.windows += v.value.servers.relays.roleAll.flagFast.osv.windows ;
-		fact.servers.relays.roleAll.flagFast.osv.other += v.value.servers.relays.roleAll.flagFast.osv.other ;
-		fact.servers.relays.roleAll.flagFast.tsv.v010 += v.value.servers.relays.roleAll.flagFast.tsv.v010 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v011 += v.value.servers.relays.roleAll.flagFast.tsv.v011 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v012 += v.value.servers.relays.roleAll.flagFast.tsv.v012 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v020 += v.value.servers.relays.roleAll.flagFast.tsv.v020 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v021 += v.value.servers.relays.roleAll.flagFast.tsv.v021 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v022 += v.value.servers.relays.roleAll.flagFast.tsv.v022 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v023 += v.value.servers.relays.roleAll.flagFast.tsv.v023 ;
-		fact.servers.relays.roleAll.flagFast.tsv.v024 += v.value.servers.relays.roleAll.flagFast.tsv.v024 ;
-		fact.servers.relays.roleAll.flagFast.pbr += v.value.servers.relays.roleAll.flagFast.pbr ;
+		fact.servers.relays.roleAll.flagFast.count += v.servers.relays.roleAll.flagFast.count ;
+		fact.servers.relays.roleAll.flagFast.bwa += v.servers.relays.roleAll.flagFast.bwa ;
+		fact.servers.relays.roleAll.flagFast.bwc += v.servers.relays.roleAll.flagFast.bwc ;
+		fact.servers.relays.roleAll.flagFast.osv.linux += v.servers.relays.roleAll.flagFast.osv.linux ;
+		fact.servers.relays.roleAll.flagFast.osv.darwin += v.servers.relays.roleAll.flagFast.osv.darwin ;
+		fact.servers.relays.roleAll.flagFast.osv.freebsd += v.servers.relays.roleAll.flagFast.osv.freebsd ;
+		fact.servers.relays.roleAll.flagFast.osv.windows += v.servers.relays.roleAll.flagFast.osv.windows ;
+		fact.servers.relays.roleAll.flagFast.osv.other += v.servers.relays.roleAll.flagFast.osv.other ;
+		fact.servers.relays.roleAll.flagFast.tsv.v010 += v.servers.relays.roleAll.flagFast.tsv.v010 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v011 += v.servers.relays.roleAll.flagFast.tsv.v011 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v012 += v.servers.relays.roleAll.flagFast.tsv.v012 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v020 += v.servers.relays.roleAll.flagFast.tsv.v020 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v021 += v.servers.relays.roleAll.flagFast.tsv.v021 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v022 += v.servers.relays.roleAll.flagFast.tsv.v022 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v023 += v.servers.relays.roleAll.flagFast.tsv.v023 ;
+		fact.servers.relays.roleAll.flagFast.tsv.v024 += v.servers.relays.roleAll.flagFast.tsv.v024 ;
+		fact.servers.relays.roleAll.flagFast.pbr += v.servers.relays.roleAll.flagFast.pbr ;
 		
-		fact.servers.relays.roleAll.flagFastStable.count += v.value.servers.relays.roleAll.flagFastStable.count ;
-		fact.servers.relays.roleAll.flagFastStable.bwa += v.value.servers.relays.roleAll.flagFastStable.bwa ;
-		fact.servers.relays.roleAll.flagFastStable.bwc += v.value.servers.relays.roleAll.flagFastStable.bwc ;
-		fact.servers.relays.roleAll.flagFastStable.osv.linux += v.value.servers.relays.roleAll.flagFastStable.osv.linux ;
-		fact.servers.relays.roleAll.flagFastStable.osv.darwin += v.value.servers.relays.roleAll.flagFastStable.osv.darwin ;
-		fact.servers.relays.roleAll.flagFastStable.osv.freebsd += v.value.servers.relays.roleAll.flagFastStable.osv.freebsd ;
-		fact.servers.relays.roleAll.flagFastStable.osv.windows += v.value.servers.relays.roleAll.flagFastStable.osv.windows ;
-		fact.servers.relays.roleAll.flagFastStable.osv.other += v.value.servers.relays.roleAll.flagFastStable.osv.other ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v010 += v.value.servers.relays.roleAll.flagFastStable.tsv.v010 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v011 += v.value.servers.relays.roleAll.flagFastStable.tsv.v011 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v012 += v.value.servers.relays.roleAll.flagFastStable.tsv.v012 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v020 += v.value.servers.relays.roleAll.flagFastStable.tsv.v020 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v021 += v.value.servers.relays.roleAll.flagFastStable.tsv.v021 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v022 += v.value.servers.relays.roleAll.flagFastStable.tsv.v022 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v023 += v.value.servers.relays.roleAll.flagFastStable.tsv.v023 ;
-		fact.servers.relays.roleAll.flagFastStable.tsv.v024 += v.value.servers.relays.roleAll.flagFastStable.tsv.v024 ;
-		fact.servers.relays.roleAll.flagFastStable.pbr += v.value.servers.relays.roleAll.flagFastStable.pbr ;
+		fact.servers.relays.roleAll.flagFastStable.count += v.servers.relays.roleAll.flagFastStable.count ;
+		fact.servers.relays.roleAll.flagFastStable.bwa += v.servers.relays.roleAll.flagFastStable.bwa ;
+		fact.servers.relays.roleAll.flagFastStable.bwc += v.servers.relays.roleAll.flagFastStable.bwc ;
+		fact.servers.relays.roleAll.flagFastStable.osv.linux += v.servers.relays.roleAll.flagFastStable.osv.linux ;
+		fact.servers.relays.roleAll.flagFastStable.osv.darwin += v.servers.relays.roleAll.flagFastStable.osv.darwin ;
+		fact.servers.relays.roleAll.flagFastStable.osv.freebsd += v.servers.relays.roleAll.flagFastStable.osv.freebsd ;
+		fact.servers.relays.roleAll.flagFastStable.osv.windows += v.servers.relays.roleAll.flagFastStable.osv.windows ;
+		fact.servers.relays.roleAll.flagFastStable.osv.other += v.servers.relays.roleAll.flagFastStable.osv.other ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v010 += v.servers.relays.roleAll.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v011 += v.servers.relays.roleAll.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v012 += v.servers.relays.roleAll.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v020 += v.servers.relays.roleAll.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v021 += v.servers.relays.roleAll.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v022 += v.servers.relays.roleAll.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v023 += v.servers.relays.roleAll.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleAll.flagFastStable.tsv.v024 += v.servers.relays.roleAll.flagFastStable.tsv.v024 ;
+		fact.servers.relays.roleAll.flagFastStable.pbr += v.servers.relays.roleAll.flagFastStable.pbr ;
 		
-		fact.servers.relays.roleGuard.total.count += v.value.servers.relays.roleGuard.total.count ;
-		fact.servers.relays.roleGuard.total.bwa += v.value.servers.relays.roleGuard.total.bwa ;
-		fact.servers.relays.roleGuard.total.bwc += v.value.servers.relays.roleGuard.total.bwc ;
-		fact.servers.relays.roleGuard.total.osv.linux += v.value.servers.relays.roleGuard.total.osv.linux ;
-		fact.servers.relays.roleGuard.total.osv.darwin += v.value.servers.relays.roleGuard.total.osv.darwin ;
-		fact.servers.relays.roleGuard.total.osv.freebsd += v.value.servers.relays.roleGuard.total.osv.freebsd ;
-		fact.servers.relays.roleGuard.total.osv.windows += v.value.servers.relays.roleGuard.total.osv.windows ;
-		fact.servers.relays.roleGuard.total.osv.other += v.value.servers.relays.roleGuard.total.osv.other ;
-		fact.servers.relays.roleGuard.total.tsv.v010 += v.value.servers.relays.roleGuard.total.tsv.v010 ;
-		fact.servers.relays.roleGuard.total.tsv.v011 += v.value.servers.relays.roleGuard.total.tsv.v011 ;
-		fact.servers.relays.roleGuard.total.tsv.v012 += v.value.servers.relays.roleGuard.total.tsv.v012 ;
-		fact.servers.relays.roleGuard.total.tsv.v020 += v.value.servers.relays.roleGuard.total.tsv.v020 ;
-		fact.servers.relays.roleGuard.total.tsv.v021 += v.value.servers.relays.roleGuard.total.tsv.v021 ;
-		fact.servers.relays.roleGuard.total.tsv.v022 += v.value.servers.relays.roleGuard.total.tsv.v022 ;
-		fact.servers.relays.roleGuard.total.tsv.v023 += v.value.servers.relays.roleGuard.total.tsv.v023 ;
-		fact.servers.relays.roleGuard.total.tsv.v024 += v.value.servers.relays.roleGuard.total.tsv.v024 ;
-		fact.servers.relays.roleGuard.total.pbg += v.value.servers.relays.roleGuard.total.pbg ;
+		fact.servers.relays.roleGuard.total.count += v.servers.relays.roleGuard.total.count ;
+		fact.servers.relays.roleGuard.total.bwa += v.servers.relays.roleGuard.total.bwa ;
+		fact.servers.relays.roleGuard.total.bwc += v.servers.relays.roleGuard.total.bwc ;
+		fact.servers.relays.roleGuard.total.osv.linux += v.servers.relays.roleGuard.total.osv.linux ;
+		fact.servers.relays.roleGuard.total.osv.darwin += v.servers.relays.roleGuard.total.osv.darwin ;
+		fact.servers.relays.roleGuard.total.osv.freebsd += v.servers.relays.roleGuard.total.osv.freebsd ;
+		fact.servers.relays.roleGuard.total.osv.windows += v.servers.relays.roleGuard.total.osv.windows ;
+		fact.servers.relays.roleGuard.total.osv.other += v.servers.relays.roleGuard.total.osv.other ;
+		fact.servers.relays.roleGuard.total.tsv.v010 += v.servers.relays.roleGuard.total.tsv.v010 ;
+		fact.servers.relays.roleGuard.total.tsv.v011 += v.servers.relays.roleGuard.total.tsv.v011 ;
+		fact.servers.relays.roleGuard.total.tsv.v012 += v.servers.relays.roleGuard.total.tsv.v012 ;
+		fact.servers.relays.roleGuard.total.tsv.v020 += v.servers.relays.roleGuard.total.tsv.v020 ;
+		fact.servers.relays.roleGuard.total.tsv.v021 += v.servers.relays.roleGuard.total.tsv.v021 ;
+		fact.servers.relays.roleGuard.total.tsv.v022 += v.servers.relays.roleGuard.total.tsv.v022 ;
+		fact.servers.relays.roleGuard.total.tsv.v023 += v.servers.relays.roleGuard.total.tsv.v023 ;
+		fact.servers.relays.roleGuard.total.tsv.v024 += v.servers.relays.roleGuard.total.tsv.v024 ;
+		fact.servers.relays.roleGuard.total.pbg += v.servers.relays.roleGuard.total.pbg ;
 		
-		fact.servers.relays.roleGuard.flagNone.count += v.value.servers.relays.roleGuard.flagNone.count ;
-		fact.servers.relays.roleGuard.flagNone.bwa += v.value.servers.relays.roleGuard.flagNone.bwa ;
-		fact.servers.relays.roleGuard.flagNone.bwc += v.value.servers.relays.roleGuard.flagNone.bwc ;
-		fact.servers.relays.roleGuard.flagNone.osv.linux += v.value.servers.relays.roleGuard.flagNone.osv.linux ;
-		fact.servers.relays.roleGuard.flagNone.osv.darwin += v.value.servers.relays.roleGuard.flagNone.osv.darwin ;
-		fact.servers.relays.roleGuard.flagNone.osv.freebsd += v.value.servers.relays.roleGuard.flagNone.osv.freebsd ;
-		fact.servers.relays.roleGuard.flagNone.osv.windows += v.value.servers.relays.roleGuard.flagNone.osv.windows ;
-		fact.servers.relays.roleGuard.flagNone.osv.other += v.value.servers.relays.roleGuard.flagNone.osv.other ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v010 += v.value.servers.relays.roleGuard.flagNone.tsv.v010 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v011 += v.value.servers.relays.roleGuard.flagNone.tsv.v011 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v012 += v.value.servers.relays.roleGuard.flagNone.tsv.v012 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v020 += v.value.servers.relays.roleGuard.flagNone.tsv.v020 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v021 += v.value.servers.relays.roleGuard.flagNone.tsv.v021 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v022 += v.value.servers.relays.roleGuard.flagNone.tsv.v022 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v023 += v.value.servers.relays.roleGuard.flagNone.tsv.v023 ;
-		fact.servers.relays.roleGuard.flagNone.tsv.v024 += v.value.servers.relays.roleGuard.flagNone.tsv.v024 ;
-		fact.servers.relays.roleGuard.flagNone.pbg += v.value.servers.relays.roleGuard.flagNone.pbg ;
+		fact.servers.relays.roleGuard.flagNone.count += v.servers.relays.roleGuard.flagNone.count ;
+		fact.servers.relays.roleGuard.flagNone.bwa += v.servers.relays.roleGuard.flagNone.bwa ;
+		fact.servers.relays.roleGuard.flagNone.bwc += v.servers.relays.roleGuard.flagNone.bwc ;
+		fact.servers.relays.roleGuard.flagNone.osv.linux += v.servers.relays.roleGuard.flagNone.osv.linux ;
+		fact.servers.relays.roleGuard.flagNone.osv.darwin += v.servers.relays.roleGuard.flagNone.osv.darwin ;
+		fact.servers.relays.roleGuard.flagNone.osv.freebsd += v.servers.relays.roleGuard.flagNone.osv.freebsd ;
+		fact.servers.relays.roleGuard.flagNone.osv.windows += v.servers.relays.roleGuard.flagNone.osv.windows ;
+		fact.servers.relays.roleGuard.flagNone.osv.other += v.servers.relays.roleGuard.flagNone.osv.other ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v010 += v.servers.relays.roleGuard.flagNone.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v011 += v.servers.relays.roleGuard.flagNone.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v012 += v.servers.relays.roleGuard.flagNone.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v020 += v.servers.relays.roleGuard.flagNone.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v021 += v.servers.relays.roleGuard.flagNone.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v022 += v.servers.relays.roleGuard.flagNone.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v023 += v.servers.relays.roleGuard.flagNone.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagNone.tsv.v024 += v.servers.relays.roleGuard.flagNone.tsv.v024 ;
+		fact.servers.relays.roleGuard.flagNone.pbg += v.servers.relays.roleGuard.flagNone.pbg ;
 		
-		fact.servers.relays.roleGuard.flagStable.count += v.value.servers.relays.roleGuard.flagStable.count ;
-		fact.servers.relays.roleGuard.flagStable.bwa += v.value.servers.relays.roleGuard.flagStable.bwa ;
-		fact.servers.relays.roleGuard.flagStable.bwc += v.value.servers.relays.roleGuard.flagStable.bwc ;
-		fact.servers.relays.roleGuard.flagStable.osv.linux += v.value.servers.relays.roleGuard.flagStable.osv.linux ;
-		fact.servers.relays.roleGuard.flagStable.osv.darwin += v.value.servers.relays.roleGuard.flagStable.osv.darwin ;
-		fact.servers.relays.roleGuard.flagStable.osv.freebsd += v.value.servers.relays.roleGuard.flagStable.osv.freebsd ;
-		fact.servers.relays.roleGuard.flagStable.osv.windows += v.value.servers.relays.roleGuard.flagStable.osv.windows ;
-		fact.servers.relays.roleGuard.flagStable.osv.other += v.value.servers.relays.roleGuard.flagStable.osv.other ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v010 += v.value.servers.relays.roleGuard.flagStable.tsv.v010 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v011 += v.value.servers.relays.roleGuard.flagStable.tsv.v011 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v012 += v.value.servers.relays.roleGuard.flagStable.tsv.v012 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v020 += v.value.servers.relays.roleGuard.flagStable.tsv.v020 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v021 += v.value.servers.relays.roleGuard.flagStable.tsv.v021 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v022 += v.value.servers.relays.roleGuard.flagStable.tsv.v022 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v023 += v.value.servers.relays.roleGuard.flagStable.tsv.v023 ;
-		fact.servers.relays.roleGuard.flagStable.tsv.v024 += v.value.servers.relays.roleGuard.flagStable.tsv.v024 ;
-		fact.servers.relays.roleGuard.flagStable.pbg += v.value.servers.relays.roleGuard.flagStable.pbg ;
+		fact.servers.relays.roleGuard.flagStable.count += v.servers.relays.roleGuard.flagStable.count ;
+		fact.servers.relays.roleGuard.flagStable.bwa += v.servers.relays.roleGuard.flagStable.bwa ;
+		fact.servers.relays.roleGuard.flagStable.bwc += v.servers.relays.roleGuard.flagStable.bwc ;
+		fact.servers.relays.roleGuard.flagStable.osv.linux += v.servers.relays.roleGuard.flagStable.osv.linux ;
+		fact.servers.relays.roleGuard.flagStable.osv.darwin += v.servers.relays.roleGuard.flagStable.osv.darwin ;
+		fact.servers.relays.roleGuard.flagStable.osv.freebsd += v.servers.relays.roleGuard.flagStable.osv.freebsd ;
+		fact.servers.relays.roleGuard.flagStable.osv.windows += v.servers.relays.roleGuard.flagStable.osv.windows ;
+		fact.servers.relays.roleGuard.flagStable.osv.other += v.servers.relays.roleGuard.flagStable.osv.other ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v010 += v.servers.relays.roleGuard.flagStable.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v011 += v.servers.relays.roleGuard.flagStable.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v012 += v.servers.relays.roleGuard.flagStable.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v020 += v.servers.relays.roleGuard.flagStable.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v021 += v.servers.relays.roleGuard.flagStable.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v022 += v.servers.relays.roleGuard.flagStable.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v023 += v.servers.relays.roleGuard.flagStable.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagStable.tsv.v024 += v.servers.relays.roleGuard.flagStable.tsv.v024 ;
+		fact.servers.relays.roleGuard.flagStable.pbg += v.servers.relays.roleGuard.flagStable.pbg ;
 		
-		fact.servers.relays.roleGuard.flagFast.count += v.value.servers.relays.roleGuard.flagFast.count ;
-		fact.servers.relays.roleGuard.flagFast.bwa += v.value.servers.relays.roleGuard.flagFast.bwa ;
-		fact.servers.relays.roleGuard.flagFast.bwc += v.value.servers.relays.roleGuard.flagFast.bwc ;
-		fact.servers.relays.roleGuard.flagFast.osv.linux += v.value.servers.relays.roleGuard.flagFast.osv.linux ;
-		fact.servers.relays.roleGuard.flagFast.osv.darwin += v.value.servers.relays.roleGuard.flagFast.osv.darwin ;
-		fact.servers.relays.roleGuard.flagFast.osv.freebsd += v.value.servers.relays.roleGuard.flagFast.osv.freebsd ;
-		fact.servers.relays.roleGuard.flagFast.osv.windows += v.value.servers.relays.roleGuard.flagFast.osv.windows ;
-		fact.servers.relays.roleGuard.flagFast.osv.other += v.value.servers.relays.roleGuard.flagFast.osv.other ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v010 += v.value.servers.relays.roleGuard.flagFast.tsv.v010 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v011 += v.value.servers.relays.roleGuard.flagFast.tsv.v011 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v012 += v.value.servers.relays.roleGuard.flagFast.tsv.v012 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v020 += v.value.servers.relays.roleGuard.flagFast.tsv.v020 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v021 += v.value.servers.relays.roleGuard.flagFast.tsv.v021 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v022 += v.value.servers.relays.roleGuard.flagFast.tsv.v022 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v023 += v.value.servers.relays.roleGuard.flagFast.tsv.v023 ;
-		fact.servers.relays.roleGuard.flagFast.tsv.v024 += v.value.servers.relays.roleGuard.flagFast.tsv.v024 ;
-		fact.servers.relays.roleGuard.flagFast.pbg += v.value.servers.relays.roleGuard.flagFast.pbg ;
+		fact.servers.relays.roleGuard.flagFast.count += v.servers.relays.roleGuard.flagFast.count ;
+		fact.servers.relays.roleGuard.flagFast.bwa += v.servers.relays.roleGuard.flagFast.bwa ;
+		fact.servers.relays.roleGuard.flagFast.bwc += v.servers.relays.roleGuard.flagFast.bwc ;
+		fact.servers.relays.roleGuard.flagFast.osv.linux += v.servers.relays.roleGuard.flagFast.osv.linux ;
+		fact.servers.relays.roleGuard.flagFast.osv.darwin += v.servers.relays.roleGuard.flagFast.osv.darwin ;
+		fact.servers.relays.roleGuard.flagFast.osv.freebsd += v.servers.relays.roleGuard.flagFast.osv.freebsd ;
+		fact.servers.relays.roleGuard.flagFast.osv.windows += v.servers.relays.roleGuard.flagFast.osv.windows ;
+		fact.servers.relays.roleGuard.flagFast.osv.other += v.servers.relays.roleGuard.flagFast.osv.other ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v010 += v.servers.relays.roleGuard.flagFast.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v011 += v.servers.relays.roleGuard.flagFast.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v012 += v.servers.relays.roleGuard.flagFast.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v020 += v.servers.relays.roleGuard.flagFast.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v021 += v.servers.relays.roleGuard.flagFast.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v022 += v.servers.relays.roleGuard.flagFast.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v023 += v.servers.relays.roleGuard.flagFast.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagFast.tsv.v024 += v.servers.relays.roleGuard.flagFast.tsv.v024 ;
+		fact.servers.relays.roleGuard.flagFast.pbg += v.servers.relays.roleGuard.flagFast.pbg ;
 		
-		fact.servers.relays.roleGuard.flagFastStable.count += v.value.servers.relays.roleGuard.flagFastStable.count ;
-		fact.servers.relays.roleGuard.flagFastStable.bwa += v.value.servers.relays.roleGuard.flagFastStable.bwa ;
-		fact.servers.relays.roleGuard.flagFastStable.bwc += v.value.servers.relays.roleGuard.flagFastStable.bwc ;
-		fact.servers.relays.roleGuard.flagFastStable.osv.linux += v.value.servers.relays.roleGuard.flagFastStable.osv.linux ;
-		fact.servers.relays.roleGuard.flagFastStable.osv.darwin += v.value.servers.relays.roleGuard.flagFastStable.osv.darwin ;
-		fact.servers.relays.roleGuard.flagFastStable.osv.freebsd += v.value.servers.relays.roleGuard.flagFastStable.osv.freebsd ;
-		fact.servers.relays.roleGuard.flagFastStable.osv.windows += v.value.servers.relays.roleGuard.flagFastStable.osv.windows ;
-		fact.servers.relays.roleGuard.flagFastStable.osv.other += v.value.servers.relays.roleGuard.flagFastStable.osv.other ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v010 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v010 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v011 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v011 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v012 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v012 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v020 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v020 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v021 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v021 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v022 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v022 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v023 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v023 ;
-		fact.servers.relays.roleGuard.flagFastStable.tsv.v024 += v.value.servers.relays.roleGuard.flagFastStable.tsv.v024 ;
-		fact.servers.relays.roleGuard.flagFastStable.pbg += v.value.servers.relays.roleGuard.flagFastStable.pbg ;
+		fact.servers.relays.roleGuard.flagFastStable.count += v.servers.relays.roleGuard.flagFastStable.count ;
+		fact.servers.relays.roleGuard.flagFastStable.bwa += v.servers.relays.roleGuard.flagFastStable.bwa ;
+		fact.servers.relays.roleGuard.flagFastStable.bwc += v.servers.relays.roleGuard.flagFastStable.bwc ;
+		fact.servers.relays.roleGuard.flagFastStable.osv.linux += v.servers.relays.roleGuard.flagFastStable.osv.linux ;
+		fact.servers.relays.roleGuard.flagFastStable.osv.darwin += v.servers.relays.roleGuard.flagFastStable.osv.darwin ;
+		fact.servers.relays.roleGuard.flagFastStable.osv.freebsd += v.servers.relays.roleGuard.flagFastStable.osv.freebsd ;
+		fact.servers.relays.roleGuard.flagFastStable.osv.windows += v.servers.relays.roleGuard.flagFastStable.osv.windows ;
+		fact.servers.relays.roleGuard.flagFastStable.osv.other += v.servers.relays.roleGuard.flagFastStable.osv.other ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v010 += v.servers.relays.roleGuard.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v011 += v.servers.relays.roleGuard.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v012 += v.servers.relays.roleGuard.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v020 += v.servers.relays.roleGuard.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v021 += v.servers.relays.roleGuard.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v022 += v.servers.relays.roleGuard.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v023 += v.servers.relays.roleGuard.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleGuard.flagFastStable.tsv.v024 += v.servers.relays.roleGuard.flagFastStable.tsv.v024 ;
+		fact.servers.relays.roleGuard.flagFastStable.pbg += v.servers.relays.roleGuard.flagFastStable.pbg ;
 		
-		fact.servers.relays.roleMiddle.total.count += v.value.servers.relays.roleMiddle.total.count ;
-		fact.servers.relays.roleMiddle.total.bwa += v.value.servers.relays.roleMiddle.total.bwa ;
-		fact.servers.relays.roleMiddle.total.bwc += v.value.servers.relays.roleMiddle.total.bwc ;
-		fact.servers.relays.roleMiddle.total.osv.linux += v.value.servers.relays.roleMiddle.total.osv.linux ;
-		fact.servers.relays.roleMiddle.total.osv.darwin += v.value.servers.relays.roleMiddle.total.osv.darwin ;
-		fact.servers.relays.roleMiddle.total.osv.freebsd += v.value.servers.relays.roleMiddle.total.osv.freebsd ;
-		fact.servers.relays.roleMiddle.total.osv.windows += v.value.servers.relays.roleMiddle.total.osv.windows ;
-		fact.servers.relays.roleMiddle.total.osv.other += v.value.servers.relays.roleMiddle.total.osv.other ;
-		fact.servers.relays.roleMiddle.total.tsv.v010 += v.value.servers.relays.roleMiddle.total.tsv.v010 ;
-		fact.servers.relays.roleMiddle.total.tsv.v011 += v.value.servers.relays.roleMiddle.total.tsv.v011 ;
-		fact.servers.relays.roleMiddle.total.tsv.v012 += v.value.servers.relays.roleMiddle.total.tsv.v012 ;
-		fact.servers.relays.roleMiddle.total.tsv.v020 += v.value.servers.relays.roleMiddle.total.tsv.v020 ;
-		fact.servers.relays.roleMiddle.total.tsv.v021 += v.value.servers.relays.roleMiddle.total.tsv.v021 ;
-		fact.servers.relays.roleMiddle.total.tsv.v022 += v.value.servers.relays.roleMiddle.total.tsv.v022 ;
-		fact.servers.relays.roleMiddle.total.tsv.v023 += v.value.servers.relays.roleMiddle.total.tsv.v023 ;
-		fact.servers.relays.roleMiddle.total.tsv.v024 += v.value.servers.relays.roleMiddle.total.tsv.v024 ;
-		fact.servers.relays.roleMiddle.total.pbm += v.value.servers.relays.roleMiddle.total.pbm ;
+		fact.servers.relays.roleMiddle.total.count += v.servers.relays.roleMiddle.total.count ;
+		fact.servers.relays.roleMiddle.total.bwa += v.servers.relays.roleMiddle.total.bwa ;
+		fact.servers.relays.roleMiddle.total.bwc += v.servers.relays.roleMiddle.total.bwc ;
+		fact.servers.relays.roleMiddle.total.osv.linux += v.servers.relays.roleMiddle.total.osv.linux ;
+		fact.servers.relays.roleMiddle.total.osv.darwin += v.servers.relays.roleMiddle.total.osv.darwin ;
+		fact.servers.relays.roleMiddle.total.osv.freebsd += v.servers.relays.roleMiddle.total.osv.freebsd ;
+		fact.servers.relays.roleMiddle.total.osv.windows += v.servers.relays.roleMiddle.total.osv.windows ;
+		fact.servers.relays.roleMiddle.total.osv.other += v.servers.relays.roleMiddle.total.osv.other ;
+		fact.servers.relays.roleMiddle.total.tsv.v010 += v.servers.relays.roleMiddle.total.tsv.v010 ;
+		fact.servers.relays.roleMiddle.total.tsv.v011 += v.servers.relays.roleMiddle.total.tsv.v011 ;
+		fact.servers.relays.roleMiddle.total.tsv.v012 += v.servers.relays.roleMiddle.total.tsv.v012 ;
+		fact.servers.relays.roleMiddle.total.tsv.v020 += v.servers.relays.roleMiddle.total.tsv.v020 ;
+		fact.servers.relays.roleMiddle.total.tsv.v021 += v.servers.relays.roleMiddle.total.tsv.v021 ;
+		fact.servers.relays.roleMiddle.total.tsv.v022 += v.servers.relays.roleMiddle.total.tsv.v022 ;
+		fact.servers.relays.roleMiddle.total.tsv.v023 += v.servers.relays.roleMiddle.total.tsv.v023 ;
+		fact.servers.relays.roleMiddle.total.tsv.v024 += v.servers.relays.roleMiddle.total.tsv.v024 ;
+		fact.servers.relays.roleMiddle.total.pbm += v.servers.relays.roleMiddle.total.pbm ;
 		
-		fact.servers.relays.roleMiddle.flagNone.count += v.value.servers.relays.roleMiddle.flagNone.count ;
-		fact.servers.relays.roleMiddle.flagNone.bwa += v.value.servers.relays.roleMiddle.flagNone.bwa ;
-		fact.servers.relays.roleMiddle.flagNone.bwc += v.value.servers.relays.roleMiddle.flagNone.bwc ;
-		fact.servers.relays.roleMiddle.flagNone.osv.linux += v.value.servers.relays.roleMiddle.flagNone.osv.linux ;
-		fact.servers.relays.roleMiddle.flagNone.osv.darwin += v.value.servers.relays.roleMiddle.flagNone.osv.darwin ;
-		fact.servers.relays.roleMiddle.flagNone.osv.freebsd += v.value.servers.relays.roleMiddle.flagNone.osv.freebsd ;
-		fact.servers.relays.roleMiddle.flagNone.osv.windows += v.value.servers.relays.roleMiddle.flagNone.osv.windows ;
-		fact.servers.relays.roleMiddle.flagNone.osv.other += v.value.servers.relays.roleMiddle.flagNone.osv.other ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v010 += v.value.servers.relays.roleMiddle.flagNone.tsv.v010 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v011 += v.value.servers.relays.roleMiddle.flagNone.tsv.v011 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v012 += v.value.servers.relays.roleMiddle.flagNone.tsv.v012 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v020 += v.value.servers.relays.roleMiddle.flagNone.tsv.v020 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v021 += v.value.servers.relays.roleMiddle.flagNone.tsv.v021 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v022 += v.value.servers.relays.roleMiddle.flagNone.tsv.v022 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v023 += v.value.servers.relays.roleMiddle.flagNone.tsv.v023 ;
-		fact.servers.relays.roleMiddle.flagNone.tsv.v024 += v.value.servers.relays.roleMiddle.flagNone.tsv.v024 ;
-		fact.servers.relays.roleMiddle.flagNone.pbm += v.value.servers.relays.roleMiddle.flagNone.pbm ;
+		fact.servers.relays.roleMiddle.flagNone.count += v.servers.relays.roleMiddle.flagNone.count ;
+		fact.servers.relays.roleMiddle.flagNone.bwa += v.servers.relays.roleMiddle.flagNone.bwa ;
+		fact.servers.relays.roleMiddle.flagNone.bwc += v.servers.relays.roleMiddle.flagNone.bwc ;
+		fact.servers.relays.roleMiddle.flagNone.osv.linux += v.servers.relays.roleMiddle.flagNone.osv.linux ;
+		fact.servers.relays.roleMiddle.flagNone.osv.darwin += v.servers.relays.roleMiddle.flagNone.osv.darwin ;
+		fact.servers.relays.roleMiddle.flagNone.osv.freebsd += v.servers.relays.roleMiddle.flagNone.osv.freebsd ;
+		fact.servers.relays.roleMiddle.flagNone.osv.windows += v.servers.relays.roleMiddle.flagNone.osv.windows ;
+		fact.servers.relays.roleMiddle.flagNone.osv.other += v.servers.relays.roleMiddle.flagNone.osv.other ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v010 += v.servers.relays.roleMiddle.flagNone.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v011 += v.servers.relays.roleMiddle.flagNone.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v012 += v.servers.relays.roleMiddle.flagNone.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v020 += v.servers.relays.roleMiddle.flagNone.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v021 += v.servers.relays.roleMiddle.flagNone.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v022 += v.servers.relays.roleMiddle.flagNone.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v023 += v.servers.relays.roleMiddle.flagNone.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagNone.tsv.v024 += v.servers.relays.roleMiddle.flagNone.tsv.v024 ;
+		fact.servers.relays.roleMiddle.flagNone.pbm += v.servers.relays.roleMiddle.flagNone.pbm ;
 		
-		fact.servers.relays.roleMiddle.flagStable.count += v.value.servers.relays.roleMiddle.flagStable.count ;
-		fact.servers.relays.roleMiddle.flagStable.bwa += v.value.servers.relays.roleMiddle.flagStable.bwa ;
-		fact.servers.relays.roleMiddle.flagStable.bwc += v.value.servers.relays.roleMiddle.flagStable.bwc ;
-		fact.servers.relays.roleMiddle.flagStable.osv.linux += v.value.servers.relays.roleMiddle.flagStable.osv.linux ;
-		fact.servers.relays.roleMiddle.flagStable.osv.darwin += v.value.servers.relays.roleMiddle.flagStable.osv.darwin ;
-		fact.servers.relays.roleMiddle.flagStable.osv.freebsd += v.value.servers.relays.roleMiddle.flagStable.osv.freebsd ;
-		fact.servers.relays.roleMiddle.flagStable.osv.windows += v.value.servers.relays.roleMiddle.flagStable.osv.windows ;
-		fact.servers.relays.roleMiddle.flagStable.osv.other += v.value.servers.relays.roleMiddle.flagStable.osv.other ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v010 += v.value.servers.relays.roleMiddle.flagStable.tsv.v010 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v011 += v.value.servers.relays.roleMiddle.flagStable.tsv.v011 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v012 += v.value.servers.relays.roleMiddle.flagStable.tsv.v012 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v020 += v.value.servers.relays.roleMiddle.flagStable.tsv.v020 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v021 += v.value.servers.relays.roleMiddle.flagStable.tsv.v021 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v022 += v.value.servers.relays.roleMiddle.flagStable.tsv.v022 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v023 += v.value.servers.relays.roleMiddle.flagStable.tsv.v023 ;
-		fact.servers.relays.roleMiddle.flagStable.tsv.v024 += v.value.servers.relays.roleMiddle.flagStable.tsv.v024 ;
-		fact.servers.relays.roleMiddle.flagStable.pbm += v.value.servers.relays.roleMiddle.flagStable.pbm ;
+		fact.servers.relays.roleMiddle.flagStable.count += v.servers.relays.roleMiddle.flagStable.count ;
+		fact.servers.relays.roleMiddle.flagStable.bwa += v.servers.relays.roleMiddle.flagStable.bwa ;
+		fact.servers.relays.roleMiddle.flagStable.bwc += v.servers.relays.roleMiddle.flagStable.bwc ;
+		fact.servers.relays.roleMiddle.flagStable.osv.linux += v.servers.relays.roleMiddle.flagStable.osv.linux ;
+		fact.servers.relays.roleMiddle.flagStable.osv.darwin += v.servers.relays.roleMiddle.flagStable.osv.darwin ;
+		fact.servers.relays.roleMiddle.flagStable.osv.freebsd += v.servers.relays.roleMiddle.flagStable.osv.freebsd ;
+		fact.servers.relays.roleMiddle.flagStable.osv.windows += v.servers.relays.roleMiddle.flagStable.osv.windows ;
+		fact.servers.relays.roleMiddle.flagStable.osv.other += v.servers.relays.roleMiddle.flagStable.osv.other ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v010 += v.servers.relays.roleMiddle.flagStable.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v011 += v.servers.relays.roleMiddle.flagStable.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v012 += v.servers.relays.roleMiddle.flagStable.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v020 += v.servers.relays.roleMiddle.flagStable.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v021 += v.servers.relays.roleMiddle.flagStable.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v022 += v.servers.relays.roleMiddle.flagStable.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v023 += v.servers.relays.roleMiddle.flagStable.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagStable.tsv.v024 += v.servers.relays.roleMiddle.flagStable.tsv.v024 ;
+		fact.servers.relays.roleMiddle.flagStable.pbm += v.servers.relays.roleMiddle.flagStable.pbm ;
 		
-		fact.servers.relays.roleMiddle.flagFast.count += v.value.servers.relays.roleMiddle.flagFast.count ;
-		fact.servers.relays.roleMiddle.flagFast.bwa += v.value.servers.relays.roleMiddle.flagFast.bwa ;
-		fact.servers.relays.roleMiddle.flagFast.bwc += v.value.servers.relays.roleMiddle.flagFast.bwc ;
-		fact.servers.relays.roleMiddle.flagFast.osv.linux += v.value.servers.relays.roleMiddle.flagFast.osv.linux ;
-		fact.servers.relays.roleMiddle.flagFast.osv.darwin += v.value.servers.relays.roleMiddle.flagFast.osv.darwin ;
-		fact.servers.relays.roleMiddle.flagFast.osv.freebsd += v.value.servers.relays.roleMiddle.flagFast.osv.freebsd ;
-		fact.servers.relays.roleMiddle.flagFast.osv.windows += v.value.servers.relays.roleMiddle.flagFast.osv.windows ;
-		fact.servers.relays.roleMiddle.flagFast.osv.other += v.value.servers.relays.roleMiddle.flagFast.osv.other ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v010 += v.value.servers.relays.roleMiddle.flagFast.tsv.v010 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v011 += v.value.servers.relays.roleMiddle.flagFast.tsv.v011 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v012 += v.value.servers.relays.roleMiddle.flagFast.tsv.v012 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v020 += v.value.servers.relays.roleMiddle.flagFast.tsv.v020 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v021 += v.value.servers.relays.roleMiddle.flagFast.tsv.v021 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v022 += v.value.servers.relays.roleMiddle.flagFast.tsv.v022 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v023 += v.value.servers.relays.roleMiddle.flagFast.tsv.v023 ;
-		fact.servers.relays.roleMiddle.flagFast.tsv.v024 += v.value.servers.relays.roleMiddle.flagFast.tsv.v024 ;
-		fact.servers.relays.roleMiddle.flagFast.pbm += v.value.servers.relays.roleMiddle.flagFast.pbm ;
+		fact.servers.relays.roleMiddle.flagFast.count += v.servers.relays.roleMiddle.flagFast.count ;
+		fact.servers.relays.roleMiddle.flagFast.bwa += v.servers.relays.roleMiddle.flagFast.bwa ;
+		fact.servers.relays.roleMiddle.flagFast.bwc += v.servers.relays.roleMiddle.flagFast.bwc ;
+		fact.servers.relays.roleMiddle.flagFast.osv.linux += v.servers.relays.roleMiddle.flagFast.osv.linux ;
+		fact.servers.relays.roleMiddle.flagFast.osv.darwin += v.servers.relays.roleMiddle.flagFast.osv.darwin ;
+		fact.servers.relays.roleMiddle.flagFast.osv.freebsd += v.servers.relays.roleMiddle.flagFast.osv.freebsd ;
+		fact.servers.relays.roleMiddle.flagFast.osv.windows += v.servers.relays.roleMiddle.flagFast.osv.windows ;
+		fact.servers.relays.roleMiddle.flagFast.osv.other += v.servers.relays.roleMiddle.flagFast.osv.other ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v010 += v.servers.relays.roleMiddle.flagFast.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v011 += v.servers.relays.roleMiddle.flagFast.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v012 += v.servers.relays.roleMiddle.flagFast.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v020 += v.servers.relays.roleMiddle.flagFast.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v021 += v.servers.relays.roleMiddle.flagFast.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v022 += v.servers.relays.roleMiddle.flagFast.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v023 += v.servers.relays.roleMiddle.flagFast.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagFast.tsv.v024 += v.servers.relays.roleMiddle.flagFast.tsv.v024 ;
+		fact.servers.relays.roleMiddle.flagFast.pbm += v.servers.relays.roleMiddle.flagFast.pbm ;
 		
-		fact.servers.relays.roleMiddle.flagFastStable.count += v.value.servers.relays.roleMiddle.flagFastStable.count ;
-		fact.servers.relays.roleMiddle.flagFastStable.bwa += v.value.servers.relays.roleMiddle.flagFastStable.bwa ;
-		fact.servers.relays.roleMiddle.flagFastStable.bwc += v.value.servers.relays.roleMiddle.flagFastStable.bwc ;
-		fact.servers.relays.roleMiddle.flagFastStable.osv.linux += v.value.servers.relays.roleMiddle.flagFastStable.osv.linux ;
-		fact.servers.relays.roleMiddle.flagFastStable.osv.darwin += v.value.servers.relays.roleMiddle.flagFastStable.osv.darwin ;
-		fact.servers.relays.roleMiddle.flagFastStable.osv.freebsd += v.value.servers.relays.roleMiddle.flagFastStable.osv.freebsd ;
-		fact.servers.relays.roleMiddle.flagFastStable.osv.windows += v.value.servers.relays.roleMiddle.flagFastStable.osv.windows ;
-		fact.servers.relays.roleMiddle.flagFastStable.osv.other += v.value.servers.relays.roleMiddle.flagFastStable.osv.other ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v010 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v010 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v011 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v011 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v012 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v012 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v020 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v020 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v021 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v021 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v022 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v022 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v023 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v023 ;
-		fact.servers.relays.roleMiddle.flagFastStable.tsv.v024 += v.value.servers.relays.roleMiddle.flagFastStable.tsv.v024 ;
-		fact.servers.relays.roleMiddle.flagFastStable.pbm += v.value.servers.relays.roleMiddle.flagFastStable.pbm ;
+		fact.servers.relays.roleMiddle.flagFastStable.count += v.servers.relays.roleMiddle.flagFastStable.count ;
+		fact.servers.relays.roleMiddle.flagFastStable.bwa += v.servers.relays.roleMiddle.flagFastStable.bwa ;
+		fact.servers.relays.roleMiddle.flagFastStable.bwc += v.servers.relays.roleMiddle.flagFastStable.bwc ;
+		fact.servers.relays.roleMiddle.flagFastStable.osv.linux += v.servers.relays.roleMiddle.flagFastStable.osv.linux ;
+		fact.servers.relays.roleMiddle.flagFastStable.osv.darwin += v.servers.relays.roleMiddle.flagFastStable.osv.darwin ;
+		fact.servers.relays.roleMiddle.flagFastStable.osv.freebsd += v.servers.relays.roleMiddle.flagFastStable.osv.freebsd ;
+		fact.servers.relays.roleMiddle.flagFastStable.osv.windows += v.servers.relays.roleMiddle.flagFastStable.osv.windows ;
+		fact.servers.relays.roleMiddle.flagFastStable.osv.other += v.servers.relays.roleMiddle.flagFastStable.osv.other ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v010 += v.servers.relays.roleMiddle.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v011 += v.servers.relays.roleMiddle.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v012 += v.servers.relays.roleMiddle.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v020 += v.servers.relays.roleMiddle.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v021 += v.servers.relays.roleMiddle.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v022 += v.servers.relays.roleMiddle.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v023 += v.servers.relays.roleMiddle.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleMiddle.flagFastStable.tsv.v024 += v.servers.relays.roleMiddle.flagFastStable.tsv.v024 ;
+		fact.servers.relays.roleMiddle.flagFastStable.pbm += v.servers.relays.roleMiddle.flagFastStable.pbm ;
 		
-		fact.servers.relays.roleExit.total.count += v.value.servers.relays.roleExit.total.count ;
-		fact.servers.relays.roleExit.total.bwa += v.value.servers.relays.roleExit.total.bwa ;
-		fact.servers.relays.roleExit.total.bwc += v.value.servers.relays.roleExit.total.bwc ;
-		fact.servers.relays.roleExit.total.osv.linux += v.value.servers.relays.roleExit.total.osv.linux ;
-		fact.servers.relays.roleExit.total.osv.darwin += v.value.servers.relays.roleExit.total.osv.darwin ;
-		fact.servers.relays.roleExit.total.osv.freebsd += v.value.servers.relays.roleExit.total.osv.freebsd ;
-		fact.servers.relays.roleExit.total.osv.windows += v.value.servers.relays.roleExit.total.osv.windows ;
-		fact.servers.relays.roleExit.total.osv.other += v.value.servers.relays.roleExit.total.osv.other ;
-		fact.servers.relays.roleExit.total.tsv.v010 += v.value.servers.relays.roleExit.total.tsv.v010 ;
-		fact.servers.relays.roleExit.total.tsv.v011 += v.value.servers.relays.roleExit.total.tsv.v011 ;
-		fact.servers.relays.roleExit.total.tsv.v012 += v.value.servers.relays.roleExit.total.tsv.v012 ;
-		fact.servers.relays.roleExit.total.tsv.v020 += v.value.servers.relays.roleExit.total.tsv.v020 ;
-		fact.servers.relays.roleExit.total.tsv.v021 += v.value.servers.relays.roleExit.total.tsv.v021 ;
-		fact.servers.relays.roleExit.total.tsv.v022 += v.value.servers.relays.roleExit.total.tsv.v022 ;
-		fact.servers.relays.roleExit.total.tsv.v023 += v.value.servers.relays.roleExit.total.tsv.v023 ;
-		fact.servers.relays.roleExit.total.tsv.v024 += v.value.servers.relays.roleExit.total.tsv.v024 ;
-		fact.servers.relays.roleExit.total.pex.p4 += v.value.servers.relays.roleExit.total.pex.p4 ;
-		fact.servers.relays.roleExit.total.pex.p6 += v.value.servers.relays.roleExit.total.pex.p6 ;
-		fact.servers.relays.roleExit.total.pex.p8 += v.value.servers.relays.roleExit.total.pex.p8 ;
-		fact.servers.relays.roleExit.total.pex.p46 += v.value.servers.relays.roleExit.total.pex.p46 ;
-		fact.servers.relays.roleExit.total.pex.p48 += v.value.servers.relays.roleExit.total.pex.p48 ;
-		fact.servers.relays.roleExit.total.pex.p68 += v.value.servers.relays.roleExit.total.pex.p68 ;
-		fact.servers.relays.roleExit.total.pex.p468 += v.value.servers.relays.roleExit.total.pex.p468 ;
-		fact.servers.relays.roleExit.total.pbe += v.value.servers.relays.roleExit.total.pbe ;
+		fact.servers.relays.roleExit.total.count += v.servers.relays.roleExit.total.count ;
+		fact.servers.relays.roleExit.total.bwa += v.servers.relays.roleExit.total.bwa ;
+		fact.servers.relays.roleExit.total.bwc += v.servers.relays.roleExit.total.bwc ;
+		fact.servers.relays.roleExit.total.osv.linux += v.servers.relays.roleExit.total.osv.linux ;
+		fact.servers.relays.roleExit.total.osv.darwin += v.servers.relays.roleExit.total.osv.darwin ;
+		fact.servers.relays.roleExit.total.osv.freebsd += v.servers.relays.roleExit.total.osv.freebsd ;
+		fact.servers.relays.roleExit.total.osv.windows += v.servers.relays.roleExit.total.osv.windows ;
+		fact.servers.relays.roleExit.total.osv.other += v.servers.relays.roleExit.total.osv.other ;
+		fact.servers.relays.roleExit.total.tsv.v010 += v.servers.relays.roleExit.total.tsv.v010 ;
+		fact.servers.relays.roleExit.total.tsv.v011 += v.servers.relays.roleExit.total.tsv.v011 ;
+		fact.servers.relays.roleExit.total.tsv.v012 += v.servers.relays.roleExit.total.tsv.v012 ;
+		fact.servers.relays.roleExit.total.tsv.v020 += v.servers.relays.roleExit.total.tsv.v020 ;
+		fact.servers.relays.roleExit.total.tsv.v021 += v.servers.relays.roleExit.total.tsv.v021 ;
+		fact.servers.relays.roleExit.total.tsv.v022 += v.servers.relays.roleExit.total.tsv.v022 ;
+		fact.servers.relays.roleExit.total.tsv.v023 += v.servers.relays.roleExit.total.tsv.v023 ;
+		fact.servers.relays.roleExit.total.tsv.v024 += v.servers.relays.roleExit.total.tsv.v024 ;
+		fact.servers.relays.roleExit.total.pex.p4 += v.servers.relays.roleExit.total.pex.p4 ;
+		fact.servers.relays.roleExit.total.pex.p6 += v.servers.relays.roleExit.total.pex.p6 ;
+		fact.servers.relays.roleExit.total.pex.p8 += v.servers.relays.roleExit.total.pex.p8 ;
+		fact.servers.relays.roleExit.total.pex.p46 += v.servers.relays.roleExit.total.pex.p46 ;
+		fact.servers.relays.roleExit.total.pex.p48 += v.servers.relays.roleExit.total.pex.p48 ;
+		fact.servers.relays.roleExit.total.pex.p68 += v.servers.relays.roleExit.total.pex.p68 ;
+		fact.servers.relays.roleExit.total.pex.p468 += v.servers.relays.roleExit.total.pex.p468 ;
+		fact.servers.relays.roleExit.total.pbe += v.servers.relays.roleExit.total.pbe ;
 					
-		fact.servers.relays.roleExit.flagNone.count += v.value.servers.relays.roleExit.flagNone.count ;
-		fact.servers.relays.roleExit.flagNone.bwa += v.value.servers.relays.roleExit.flagNone.bwa ;
-		fact.servers.relays.roleExit.flagNone.bwc += v.value.servers.relays.roleExit.flagNone.bwc ;
-		fact.servers.relays.roleExit.flagNone.osv.linux += v.value.servers.relays.roleExit.flagNone.osv.linux ;
-		fact.servers.relays.roleExit.flagNone.osv.darwin += v.value.servers.relays.roleExit.flagNone.osv.darwin ;
-		fact.servers.relays.roleExit.flagNone.osv.freebsd += v.value.servers.relays.roleExit.flagNone.osv.freebsd ;
-		fact.servers.relays.roleExit.flagNone.osv.windows += v.value.servers.relays.roleExit.flagNone.osv.windows ;
-		fact.servers.relays.roleExit.flagNone.osv.other += v.value.servers.relays.roleExit.flagNone.osv.other ;
-		fact.servers.relays.roleExit.flagNone.tsv.v010 += v.value.servers.relays.roleExit.flagNone.tsv.v010 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v011 += v.value.servers.relays.roleExit.flagNone.tsv.v011 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v012 += v.value.servers.relays.roleExit.flagNone.tsv.v012 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v020 += v.value.servers.relays.roleExit.flagNone.tsv.v020 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v021 += v.value.servers.relays.roleExit.flagNone.tsv.v021 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v022 += v.value.servers.relays.roleExit.flagNone.tsv.v022 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v023 += v.value.servers.relays.roleExit.flagNone.tsv.v023 ;
-		fact.servers.relays.roleExit.flagNone.tsv.v024 += v.value.servers.relays.roleExit.flagNone.tsv.v024 ;
-		fact.servers.relays.roleExit.flagNone.pex.p4 += v.value.servers.relays.roleExit.flagNone.pex.p4 ;
-		fact.servers.relays.roleExit.flagNone.pex.p6 += v.value.servers.relays.roleExit.flagNone.pex.p6 ;
-		fact.servers.relays.roleExit.flagNone.pex.p8 += v.value.servers.relays.roleExit.flagNone.pex.p8 ;
-		fact.servers.relays.roleExit.flagNone.pex.p46 += v.value.servers.relays.roleExit.flagNone.pex.p46 ;
-		fact.servers.relays.roleExit.flagNone.pex.p48 += v.value.servers.relays.roleExit.flagNone.pex.p48 ;
-		fact.servers.relays.roleExit.flagNone.pex.p68 += v.value.servers.relays.roleExit.flagNone.pex.p68 ;
-		fact.servers.relays.roleExit.flagNone.pex.p468 += v.value.servers.relays.roleExit.flagNone.pex.p468 ;
-		fact.servers.relays.roleExit.flagNone.pbe += v.value.servers.relays.roleExit.flagNone.pbe ;
+		fact.servers.relays.roleExit.flagNone.count += v.servers.relays.roleExit.flagNone.count ;
+		fact.servers.relays.roleExit.flagNone.bwa += v.servers.relays.roleExit.flagNone.bwa ;
+		fact.servers.relays.roleExit.flagNone.bwc += v.servers.relays.roleExit.flagNone.bwc ;
+		fact.servers.relays.roleExit.flagNone.osv.linux += v.servers.relays.roleExit.flagNone.osv.linux ;
+		fact.servers.relays.roleExit.flagNone.osv.darwin += v.servers.relays.roleExit.flagNone.osv.darwin ;
+		fact.servers.relays.roleExit.flagNone.osv.freebsd += v.servers.relays.roleExit.flagNone.osv.freebsd ;
+		fact.servers.relays.roleExit.flagNone.osv.windows += v.servers.relays.roleExit.flagNone.osv.windows ;
+		fact.servers.relays.roleExit.flagNone.osv.other += v.servers.relays.roleExit.flagNone.osv.other ;
+		fact.servers.relays.roleExit.flagNone.tsv.v010 += v.servers.relays.roleExit.flagNone.tsv.v010 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v011 += v.servers.relays.roleExit.flagNone.tsv.v011 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v012 += v.servers.relays.roleExit.flagNone.tsv.v012 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v020 += v.servers.relays.roleExit.flagNone.tsv.v020 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v021 += v.servers.relays.roleExit.flagNone.tsv.v021 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v022 += v.servers.relays.roleExit.flagNone.tsv.v022 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v023 += v.servers.relays.roleExit.flagNone.tsv.v023 ;
+		fact.servers.relays.roleExit.flagNone.tsv.v024 += v.servers.relays.roleExit.flagNone.tsv.v024 ;
+		fact.servers.relays.roleExit.flagNone.pex.p4 += v.servers.relays.roleExit.flagNone.pex.p4 ;
+		fact.servers.relays.roleExit.flagNone.pex.p6 += v.servers.relays.roleExit.flagNone.pex.p6 ;
+		fact.servers.relays.roleExit.flagNone.pex.p8 += v.servers.relays.roleExit.flagNone.pex.p8 ;
+		fact.servers.relays.roleExit.flagNone.pex.p46 += v.servers.relays.roleExit.flagNone.pex.p46 ;
+		fact.servers.relays.roleExit.flagNone.pex.p48 += v.servers.relays.roleExit.flagNone.pex.p48 ;
+		fact.servers.relays.roleExit.flagNone.pex.p68 += v.servers.relays.roleExit.flagNone.pex.p68 ;
+		fact.servers.relays.roleExit.flagNone.pex.p468 += v.servers.relays.roleExit.flagNone.pex.p468 ;
+		fact.servers.relays.roleExit.flagNone.pbe += v.servers.relays.roleExit.flagNone.pbe ;
 		
-		fact.servers.relays.roleExit.flagFast.count += v.value.servers.relays.roleExit.flagFast.count ;
-		fact.servers.relays.roleExit.flagFast.bwa += v.value.servers.relays.roleExit.flagFast.bwa ;
-		fact.servers.relays.roleExit.flagFast.bwc += v.value.servers.relays.roleExit.flagFast.bwc ;
-		fact.servers.relays.roleExit.flagFast.osv.linux += v.value.servers.relays.roleExit.flagFast.osv.linux ;
-		fact.servers.relays.roleExit.flagFast.osv.darwin += v.value.servers.relays.roleExit.flagFast.osv.darwin ;
-		fact.servers.relays.roleExit.flagFast.osv.freebsd += v.value.servers.relays.roleExit.flagFast.osv.freebsd ;
-		fact.servers.relays.roleExit.flagFast.osv.windows += v.value.servers.relays.roleExit.flagFast.osv.windows ;
-		fact.servers.relays.roleExit.flagFast.osv.other += v.value.servers.relays.roleExit.flagFast.osv.other ;
-		fact.servers.relays.roleExit.flagFast.tsv.v010 += v.value.servers.relays.roleExit.flagFast.tsv.v010 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v011 += v.value.servers.relays.roleExit.flagFast.tsv.v011 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v012 += v.value.servers.relays.roleExit.flagFast.tsv.v012 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v020 += v.value.servers.relays.roleExit.flagFast.tsv.v020 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v021 += v.value.servers.relays.roleExit.flagFast.tsv.v021 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v022 += v.value.servers.relays.roleExit.flagFast.tsv.v022 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v023 += v.value.servers.relays.roleExit.flagFast.tsv.v023 ;
-		fact.servers.relays.roleExit.flagFast.tsv.v024 += v.value.servers.relays.roleExit.flagFast.tsv.v024 ;
-		fact.servers.relays.roleExit.flagFast.pex.p4 += v.value.servers.relays.roleExit.flagFast.pex.p4 ;
-		fact.servers.relays.roleExit.flagFast.pex.p6 += v.value.servers.relays.roleExit.flagFast.pex.p6 ;
-		fact.servers.relays.roleExit.flagFast.pex.p8 += v.value.servers.relays.roleExit.flagFast.pex.p8 ;
-		fact.servers.relays.roleExit.flagFast.pex.p46 += v.value.servers.relays.roleExit.flagFast.pex.p46 ;
-		fact.servers.relays.roleExit.flagFast.pex.p48 += v.value.servers.relays.roleExit.flagFast.pex.p48 ;
-		fact.servers.relays.roleExit.flagFast.pex.p68 += v.value.servers.relays.roleExit.flagFast.pex.p68 ;
-		fact.servers.relays.roleExit.flagFast.pex.p468 += v.value.servers.relays.roleExit.flagFast.pex.p468 ;
-		fact.servers.relays.roleExit.flagFast.pbe += v.value.servers.relays.roleExit.flagFast.pbe ;
+		fact.servers.relays.roleExit.flagFast.count += v.servers.relays.roleExit.flagFast.count ;
+		fact.servers.relays.roleExit.flagFast.bwa += v.servers.relays.roleExit.flagFast.bwa ;
+		fact.servers.relays.roleExit.flagFast.bwc += v.servers.relays.roleExit.flagFast.bwc ;
+		fact.servers.relays.roleExit.flagFast.osv.linux += v.servers.relays.roleExit.flagFast.osv.linux ;
+		fact.servers.relays.roleExit.flagFast.osv.darwin += v.servers.relays.roleExit.flagFast.osv.darwin ;
+		fact.servers.relays.roleExit.flagFast.osv.freebsd += v.servers.relays.roleExit.flagFast.osv.freebsd ;
+		fact.servers.relays.roleExit.flagFast.osv.windows += v.servers.relays.roleExit.flagFast.osv.windows ;
+		fact.servers.relays.roleExit.flagFast.osv.other += v.servers.relays.roleExit.flagFast.osv.other ;
+		fact.servers.relays.roleExit.flagFast.tsv.v010 += v.servers.relays.roleExit.flagFast.tsv.v010 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v011 += v.servers.relays.roleExit.flagFast.tsv.v011 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v012 += v.servers.relays.roleExit.flagFast.tsv.v012 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v020 += v.servers.relays.roleExit.flagFast.tsv.v020 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v021 += v.servers.relays.roleExit.flagFast.tsv.v021 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v022 += v.servers.relays.roleExit.flagFast.tsv.v022 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v023 += v.servers.relays.roleExit.flagFast.tsv.v023 ;
+		fact.servers.relays.roleExit.flagFast.tsv.v024 += v.servers.relays.roleExit.flagFast.tsv.v024 ;
+		fact.servers.relays.roleExit.flagFast.pex.p4 += v.servers.relays.roleExit.flagFast.pex.p4 ;
+		fact.servers.relays.roleExit.flagFast.pex.p6 += v.servers.relays.roleExit.flagFast.pex.p6 ;
+		fact.servers.relays.roleExit.flagFast.pex.p8 += v.servers.relays.roleExit.flagFast.pex.p8 ;
+		fact.servers.relays.roleExit.flagFast.pex.p46 += v.servers.relays.roleExit.flagFast.pex.p46 ;
+		fact.servers.relays.roleExit.flagFast.pex.p48 += v.servers.relays.roleExit.flagFast.pex.p48 ;
+		fact.servers.relays.roleExit.flagFast.pex.p68 += v.servers.relays.roleExit.flagFast.pex.p68 ;
+		fact.servers.relays.roleExit.flagFast.pex.p468 += v.servers.relays.roleExit.flagFast.pex.p468 ;
+		fact.servers.relays.roleExit.flagFast.pbe += v.servers.relays.roleExit.flagFast.pbe ;
 		
-		fact.servers.relays.roleExit.flagStable.count += v.value.servers.relays.roleExit.flagStable.count ;
-		fact.servers.relays.roleExit.flagStable.bwa += v.value.servers.relays.roleExit.flagStable.bwa ;
-		fact.servers.relays.roleExit.flagStable.bwc += v.value.servers.relays.roleExit.flagStable.bwc ;
-		fact.servers.relays.roleExit.flagStable.osv.linux += v.value.servers.relays.roleExit.flagStable.osv.linux ;
-		fact.servers.relays.roleExit.flagStable.osv.darwin += v.value.servers.relays.roleExit.flagStable.osv.darwin ;
-		fact.servers.relays.roleExit.flagStable.osv.freebsd += v.value.servers.relays.roleExit.flagStable.osv.freebsd ;
-		fact.servers.relays.roleExit.flagStable.osv.windows += v.value.servers.relays.roleExit.flagStable.osv.windows ;
-		fact.servers.relays.roleExit.flagStable.osv.other += v.value.servers.relays.roleExit.flagStable.osv.other ;
-		fact.servers.relays.roleExit.flagStable.tsv.v010 += v.value.servers.relays.roleExit.flagStable.tsv.v010 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v011 += v.value.servers.relays.roleExit.flagStable.tsv.v011 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v012 += v.value.servers.relays.roleExit.flagStable.tsv.v012 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v020 += v.value.servers.relays.roleExit.flagStable.tsv.v020 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v021 += v.value.servers.relays.roleExit.flagStable.tsv.v021 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v022 += v.value.servers.relays.roleExit.flagStable.tsv.v022 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v023 += v.value.servers.relays.roleExit.flagStable.tsv.v023 ;
-		fact.servers.relays.roleExit.flagStable.tsv.v024 += v.value.servers.relays.roleExit.flagStable.tsv.v024 ;
-		fact.servers.relays.roleExit.flagStable.pex.p4 += v.value.servers.relays.roleExit.flagStable.pex.p4 ;
-		fact.servers.relays.roleExit.flagStable.pex.p6 += v.value.servers.relays.roleExit.flagStable.pex.p6 ;
-		fact.servers.relays.roleExit.flagStable.pex.p8 += v.value.servers.relays.roleExit.flagStable.pex.p8 ;
-		fact.servers.relays.roleExit.flagStable.pex.p46 += v.value.servers.relays.roleExit.flagStable.pex.p46 ;
-		fact.servers.relays.roleExit.flagStable.pex.p48 += v.value.servers.relays.roleExit.flagStable.pex.p48 ;
-		fact.servers.relays.roleExit.flagStable.pex.p68 += v.value.servers.relays.roleExit.flagStable.pex.p68 ;
-		fact.servers.relays.roleExit.flagStable.pex.p468 += v.value.servers.relays.roleExit.flagStable.pex.p468 ;
-		fact.servers.relays.roleExit.flagStable.pbe += v.value.servers.relays.roleExit.flagStable.pbe ;
+		fact.servers.relays.roleExit.flagStable.count += v.servers.relays.roleExit.flagStable.count ;
+		fact.servers.relays.roleExit.flagStable.bwa += v.servers.relays.roleExit.flagStable.bwa ;
+		fact.servers.relays.roleExit.flagStable.bwc += v.servers.relays.roleExit.flagStable.bwc ;
+		fact.servers.relays.roleExit.flagStable.osv.linux += v.servers.relays.roleExit.flagStable.osv.linux ;
+		fact.servers.relays.roleExit.flagStable.osv.darwin += v.servers.relays.roleExit.flagStable.osv.darwin ;
+		fact.servers.relays.roleExit.flagStable.osv.freebsd += v.servers.relays.roleExit.flagStable.osv.freebsd ;
+		fact.servers.relays.roleExit.flagStable.osv.windows += v.servers.relays.roleExit.flagStable.osv.windows ;
+		fact.servers.relays.roleExit.flagStable.osv.other += v.servers.relays.roleExit.flagStable.osv.other ;
+		fact.servers.relays.roleExit.flagStable.tsv.v010 += v.servers.relays.roleExit.flagStable.tsv.v010 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v011 += v.servers.relays.roleExit.flagStable.tsv.v011 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v012 += v.servers.relays.roleExit.flagStable.tsv.v012 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v020 += v.servers.relays.roleExit.flagStable.tsv.v020 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v021 += v.servers.relays.roleExit.flagStable.tsv.v021 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v022 += v.servers.relays.roleExit.flagStable.tsv.v022 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v023 += v.servers.relays.roleExit.flagStable.tsv.v023 ;
+		fact.servers.relays.roleExit.flagStable.tsv.v024 += v.servers.relays.roleExit.flagStable.tsv.v024 ;
+		fact.servers.relays.roleExit.flagStable.pex.p4 += v.servers.relays.roleExit.flagStable.pex.p4 ;
+		fact.servers.relays.roleExit.flagStable.pex.p6 += v.servers.relays.roleExit.flagStable.pex.p6 ;
+		fact.servers.relays.roleExit.flagStable.pex.p8 += v.servers.relays.roleExit.flagStable.pex.p8 ;
+		fact.servers.relays.roleExit.flagStable.pex.p46 += v.servers.relays.roleExit.flagStable.pex.p46 ;
+		fact.servers.relays.roleExit.flagStable.pex.p48 += v.servers.relays.roleExit.flagStable.pex.p48 ;
+		fact.servers.relays.roleExit.flagStable.pex.p68 += v.servers.relays.roleExit.flagStable.pex.p68 ;
+		fact.servers.relays.roleExit.flagStable.pex.p468 += v.servers.relays.roleExit.flagStable.pex.p468 ;
+		fact.servers.relays.roleExit.flagStable.pbe += v.servers.relays.roleExit.flagStable.pbe ;
 		
-		fact.servers.relays.roleExit.flagFastStable.count += v.value.servers.relays.roleExit.flagFastStable.count ;
-		fact.servers.relays.roleExit.flagFastStable.bwa += v.value.servers.relays.roleExit.flagFastStable.bwa ;
-		fact.servers.relays.roleExit.flagFastStable.bwc += v.value.servers.relays.roleExit.flagFastStable.bwc ;
-		fact.servers.relays.roleExit.flagFastStable.osv.linux += v.value.servers.relays.roleExit.flagFastStable.osv.linux ;
-		fact.servers.relays.roleExit.flagFastStable.osv.darwin += v.value.servers.relays.roleExit.flagFastStable.osv.darwin ;
-		fact.servers.relays.roleExit.flagFastStable.osv.freebsd += v.value.servers.relays.roleExit.flagFastStable.osv.freebsd ;
-		fact.servers.relays.roleExit.flagFastStable.osv.windows += v.value.servers.relays.roleExit.flagFastStable.osv.windows ;
-		fact.servers.relays.roleExit.flagFastStable.osv.other += v.value.servers.relays.roleExit.flagFastStable.osv.other ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v010 += v.value.servers.relays.roleExit.flagFastStable.tsv.v010 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v011 += v.value.servers.relays.roleExit.flagFastStable.tsv.v011 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v012 += v.value.servers.relays.roleExit.flagFastStable.tsv.v012 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v020 += v.value.servers.relays.roleExit.flagFastStable.tsv.v020 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v021 += v.value.servers.relays.roleExit.flagFastStable.tsv.v021 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v022 += v.value.servers.relays.roleExit.flagFastStable.tsv.v022 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v023 += v.value.servers.relays.roleExit.flagFastStable.tsv.v023 ;
-		fact.servers.relays.roleExit.flagFastStable.tsv.v024 += v.value.servers.relays.roleExit.flagFastStable.tsv.v024 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p4 += v.value.servers.relays.roleExit.flagFastStable.pex.p4 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p6 += v.value.servers.relays.roleExit.flagFastStable.pex.p6 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p8 += v.value.servers.relays.roleExit.flagFastStable.pex.p8 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p46 += v.value.servers.relays.roleExit.flagFastStable.pex.p46 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p48 += v.value.servers.relays.roleExit.flagFastStable.pex.p48 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p68 += v.value.servers.relays.roleExit.flagFastStable.pex.p68 ;
-		fact.servers.relays.roleExit.flagFastStable.pex.p468 += v.value.servers.relays.roleExit.flagFastStable.pex.p468 ;
-		fact.servers.relays.roleExit.flagFastStable.pbe += v.value.servers.relays.roleExit.flagFastStable.pbe ;
+		fact.servers.relays.roleExit.flagFastStable.count += v.servers.relays.roleExit.flagFastStable.count ;
+		fact.servers.relays.roleExit.flagFastStable.bwa += v.servers.relays.roleExit.flagFastStable.bwa ;
+		fact.servers.relays.roleExit.flagFastStable.bwc += v.servers.relays.roleExit.flagFastStable.bwc ;
+		fact.servers.relays.roleExit.flagFastStable.osv.linux += v.servers.relays.roleExit.flagFastStable.osv.linux ;
+		fact.servers.relays.roleExit.flagFastStable.osv.darwin += v.servers.relays.roleExit.flagFastStable.osv.darwin ;
+		fact.servers.relays.roleExit.flagFastStable.osv.freebsd += v.servers.relays.roleExit.flagFastStable.osv.freebsd ;
+		fact.servers.relays.roleExit.flagFastStable.osv.windows += v.servers.relays.roleExit.flagFastStable.osv.windows ;
+		fact.servers.relays.roleExit.flagFastStable.osv.other += v.servers.relays.roleExit.flagFastStable.osv.other ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v010 += v.servers.relays.roleExit.flagFastStable.tsv.v010 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v011 += v.servers.relays.roleExit.flagFastStable.tsv.v011 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v012 += v.servers.relays.roleExit.flagFastStable.tsv.v012 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v020 += v.servers.relays.roleExit.flagFastStable.tsv.v020 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v021 += v.servers.relays.roleExit.flagFastStable.tsv.v021 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v022 += v.servers.relays.roleExit.flagFastStable.tsv.v022 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v023 += v.servers.relays.roleExit.flagFastStable.tsv.v023 ;
+		fact.servers.relays.roleExit.flagFastStable.tsv.v024 += v.servers.relays.roleExit.flagFastStable.tsv.v024 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p4 += v.servers.relays.roleExit.flagFastStable.pex.p4 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p6 += v.servers.relays.roleExit.flagFastStable.pex.p6 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p8 += v.servers.relays.roleExit.flagFastStable.pex.p8 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p46 += v.servers.relays.roleExit.flagFastStable.pex.p46 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p48 += v.servers.relays.roleExit.flagFastStable.pex.p48 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p68 += v.servers.relays.roleExit.flagFastStable.pex.p68 ;
+		fact.servers.relays.roleExit.flagFastStable.pex.p468 += v.servers.relays.roleExit.flagFastStable.pex.p468 ;
+		fact.servers.relays.roleExit.flagFastStable.pbe += v.servers.relays.roleExit.flagFastStable.pbe ;
 		
-		fact.servers.relays.roleDir.total.count += v.value.servers.relays.roleDir.total.count ;
-		fact.servers.relays.roleDir.total.bwa += v.value.servers.relays.roleDir.total.bwa ;
-		fact.servers.relays.roleDir.total.bwc += v.value.servers.relays.roleDir.total.bwc ;
-		fact.servers.relays.roleDir.total.osv.linux += v.value.servers.relays.roleDir.total.osv.linux ;
-		fact.servers.relays.roleDir.total.osv.darwin += v.value.servers.relays.roleDir.total.osv.darwin ;
-		fact.servers.relays.roleDir.total.osv.freebsd += v.value.servers.relays.roleDir.total.osv.freebsd ;
-		fact.servers.relays.roleDir.total.osv.windows += v.value.servers.relays.roleDir.total.osv.windows ;
-		fact.servers.relays.roleDir.total.osv.other += v.value.servers.relays.roleDir.total.osv.other ;
-		fact.servers.relays.roleDir.total.tsv.v010 += v.value.servers.relays.roleDir.total.tsv.v010 ;
-		fact.servers.relays.roleDir.total.tsv.v011 += v.value.servers.relays.roleDir.total.tsv.v011 ;
-		fact.servers.relays.roleDir.total.tsv.v012 += v.value.servers.relays.roleDir.total.tsv.v012 ;
-		fact.servers.relays.roleDir.total.tsv.v020 += v.value.servers.relays.roleDir.total.tsv.v020 ;
-		fact.servers.relays.roleDir.total.tsv.v021 += v.value.servers.relays.roleDir.total.tsv.v021 ;
-		fact.servers.relays.roleDir.total.tsv.v022 += v.value.servers.relays.roleDir.total.tsv.v022 ;
-		fact.servers.relays.roleDir.total.tsv.v023 += v.value.servers.relays.roleDir.total.tsv.v023 ;
-		fact.servers.relays.roleDir.total.tsv.v024 += v.value.servers.relays.roleDir.total.tsv.v024 ;
+		fact.servers.relays.roleDir.total.count += v.servers.relays.roleDir.total.count ;
+		fact.servers.relays.roleDir.total.bwa += v.servers.relays.roleDir.total.bwa ;
+		fact.servers.relays.roleDir.total.bwc += v.servers.relays.roleDir.total.bwc ;
+		fact.servers.relays.roleDir.total.osv.linux += v.servers.relays.roleDir.total.osv.linux ;
+		fact.servers.relays.roleDir.total.osv.darwin += v.servers.relays.roleDir.total.osv.darwin ;
+		fact.servers.relays.roleDir.total.osv.freebsd += v.servers.relays.roleDir.total.osv.freebsd ;
+		fact.servers.relays.roleDir.total.osv.windows += v.servers.relays.roleDir.total.osv.windows ;
+		fact.servers.relays.roleDir.total.osv.other += v.servers.relays.roleDir.total.osv.other ;
+		fact.servers.relays.roleDir.total.tsv.v010 += v.servers.relays.roleDir.total.tsv.v010 ;
+		fact.servers.relays.roleDir.total.tsv.v011 += v.servers.relays.roleDir.total.tsv.v011 ;
+		fact.servers.relays.roleDir.total.tsv.v012 += v.servers.relays.roleDir.total.tsv.v012 ;
+		fact.servers.relays.roleDir.total.tsv.v020 += v.servers.relays.roleDir.total.tsv.v020 ;
+		fact.servers.relays.roleDir.total.tsv.v021 += v.servers.relays.roleDir.total.tsv.v021 ;
+		fact.servers.relays.roleDir.total.tsv.v022 += v.servers.relays.roleDir.total.tsv.v022 ;
+		fact.servers.relays.roleDir.total.tsv.v023 += v.servers.relays.roleDir.total.tsv.v023 ;
+		fact.servers.relays.roleDir.total.tsv.v024 += v.servers.relays.roleDir.total.tsv.v024 ;
 
-		fact.servers.relays.roleDir.authorityTrue.count += v.value.servers.relays.roleDir.authorityTrue.count ;
-		fact.servers.relays.roleDir.authorityTrue.bwa += v.value.servers.relays.roleDir.authorityTrue.bwa ;
-		fact.servers.relays.roleDir.authorityTrue.bwc += v.value.servers.relays.roleDir.authorityTrue.bwc ;
-		fact.servers.relays.roleDir.authorityTrue.osv.linux += v.value.servers.relays.roleDir.authorityTrue.osv.linux ;
-		fact.servers.relays.roleDir.authorityTrue.osv.darwin += v.value.servers.relays.roleDir.authorityTrue.osv.darwin ;
-		fact.servers.relays.roleDir.authorityTrue.osv.freebsd += v.value.servers.relays.roleDir.authorityTrue.osv.freebsd ;
-		fact.servers.relays.roleDir.authorityTrue.osv.windows += v.value.servers.relays.roleDir.authorityTrue.osv.windows ;
-		fact.servers.relays.roleDir.authorityTrue.osv.other += v.value.servers.relays.roleDir.authorityTrue.osv.other ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v010 += v.value.servers.relays.roleDir.authorityTrue.tsv.v010 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v011 += v.value.servers.relays.roleDir.authorityTrue.tsv.v011 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v012 += v.value.servers.relays.roleDir.authorityTrue.tsv.v012 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v020 += v.value.servers.relays.roleDir.authorityTrue.tsv.v020 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v021 += v.value.servers.relays.roleDir.authorityTrue.tsv.v021 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.value.servers.relays.roleDir.authorityTrue.tsv.v022 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.value.servers.relays.roleDir.authorityTrue.tsv.v023 ;
-		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.value.servers.relays.roleDir.authorityTrue.tsv.v024 ;
+		fact.servers.relays.roleDir.authorityTrue.count += v.servers.relays.roleDir.authorityTrue.count ;
+		fact.servers.relays.roleDir.authorityTrue.bwa += v.servers.relays.roleDir.authorityTrue.bwa ;
+		fact.servers.relays.roleDir.authorityTrue.bwc += v.servers.relays.roleDir.authorityTrue.bwc ;
+		fact.servers.relays.roleDir.authorityTrue.osv.linux += v.servers.relays.roleDir.authorityTrue.osv.linux ;
+		fact.servers.relays.roleDir.authorityTrue.osv.darwin += v.servers.relays.roleDir.authorityTrue.osv.darwin ;
+		fact.servers.relays.roleDir.authorityTrue.osv.freebsd += v.servers.relays.roleDir.authorityTrue.osv.freebsd ;
+		fact.servers.relays.roleDir.authorityTrue.osv.windows += v.servers.relays.roleDir.authorityTrue.osv.windows ;
+		fact.servers.relays.roleDir.authorityTrue.osv.other += v.servers.relays.roleDir.authorityTrue.osv.other ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v010 += v.servers.relays.roleDir.authorityTrue.tsv.v010 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v011 += v.servers.relays.roleDir.authorityTrue.tsv.v011 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v012 += v.servers.relays.roleDir.authorityTrue.tsv.v012 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v020 += v.servers.relays.roleDir.authorityTrue.tsv.v020 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v021 += v.servers.relays.roleDir.authorityTrue.tsv.v021 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
+		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
 	
 		/*
 		
@@ -2276,19 +2231,22 @@ var finalizeFacts = function ( key, fact ) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var aggregateServers = function(theDate) {
+var aggregateFacts = function(theDate) {
 	db.tempFacts.mapReduce (			
 		mapFacts,
 		reduceFacts,
 		{ 
 			out: { 
-				reduce : "visionionFacts" 				//	the final fact collection
-			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate }				//	limit aggregation to date
-			//	, sort									//  sorts the input documents for fewer reduce operations
-			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
-			//	, finalize : finalizeFacts
+				reduce : "visFacts"		 				//	the final fact collection
+//				, nonAtomic : true						//	prevents locking of the db during post-processing
+			}	
+//			, query : { "date" : theDate } 				//	limit aggregation to date
+//			, query : { "value.date" : theDate } 					//	TEST
+//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST
+			, query : { "_id" : "2013-04-03 22 ServersRelays" }		//	TEST
+//			, sort										//  sorts the input documents for fewer reduce operations
+//			, jsMode: true								//	check if feasable! is faster, but needs more memory
+//			, finalize : finalizeFacts
 		}
 	);
 };
@@ -2296,22 +2254,19 @@ var aggregateServers = function(theDate) {
 
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	EXECUTION
-//	let the damn thing run
+//	EXECUTE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//	CONFIG DATE
-	var date = "2013-04-03 22" ;
-	
+var date = "2013-04-03 22" ;							//	CONFIG DATE
 	
 var run = function(date) {
 
-/*	housekeeping	*/
+/*	housekeeping	
     db.tempServers.remove();
     db.tempCountries.remove();
     db.tempFacts.remove();
-	
-/*	aggregation steps	*/
+*/	
+/*	aggregation steps	
 
 	aggregateClients(date);							
 
@@ -2329,6 +2284,9 @@ var run = function(date) {
 	aggregateCountries(date);						
 
 	aggregateAutosys(date);							
+*/
+
+	aggregateFacts(date);
 
 };
 
