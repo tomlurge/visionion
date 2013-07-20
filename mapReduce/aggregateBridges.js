@@ -115,11 +115,11 @@ var mapBridges = function() {
 					}
 				} ,
 				brtObfs2 : {
-					count : 0   // TODO solve problem "TypeError: Cannot call method 'indexOf' of undefined"
+					// count : 0   TODO solve problem "TypeError: Cannot call method 'indexOf' of undefined"
                     /*
-                    count : (this.brt.indexOf("obfs2") > -1) ? 1 : 0 ,
+					count : (this.brt.indexOf('obfs2') > -1) ? 1 : 0 ,
 					bwa : (this.brt.indexOf('obfs2') > -1) ? this.bwa : 0 ,
-					bwc : (this.brt.indexOf('obfs2') > -1) ? this.bwc : 0 ,
+					bwc : (this.brt.indexOf('obfs2') > -1) ? this.bwc : 0  ,
 					osv : {
 						linux : (this.brt.indexOf('obfs2') > -1 && this.osv == "linux") ? 1 : 0 ,
 						darwin : (this.brt.indexOf('obfs2') > -1 && this.osv == "darwin") ? 1 : 0 ,
@@ -310,11 +310,11 @@ var reduceBridges = function ( key, values ) {
 					}
 				} ,
 				brtObfs2 : {
-					count : 0
+					count : 0 ,
+					bwa : 0 ,
+					bwc : 0 
                     /*
                     ,
-					bwa : 0 ,
-					bwc : 0 ,
 					osv : {
 						linux : 0 ,
 						darwin : 0 ,
@@ -471,9 +471,9 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.breTrue.tsv.v024 += v.servers.bridges.breTrue.tsv.v024 ;
 
 		fact.servers.bridges.brtObfs2.count += v.servers.bridges.brtObfs2.count ;
-		/*
 		fact.servers.bridges.brtObfs2.bwa += v.servers.bridges.brtObfs2.bwa ;
 		fact.servers.bridges.brtObfs2.bwc += v.servers.bridges.brtObfs2.bwc ;
+		/*
 		fact.servers.bridges.brtObfs2.osv.linux += v.servers.bridges.brtObfs2.osv.linux ;
 		fact.servers.bridges.brtObfs2.osv.darwin += v.servers.bridges.brtObfs2.osv.darwin ;
 		fact.servers.bridges.brtObfs2.osv.freebsd += v.servers.bridges.brtObfs2.osv.freebsd ;
