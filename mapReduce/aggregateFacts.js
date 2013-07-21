@@ -2250,7 +2250,7 @@ var aggregateFacts = function(theDate) {
 //			, query : { "date" : theDate } 				//	limit aggregation to date
 //			, query : { "value.date" : theDate } 					//	TEST
 //			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST
-			, query : { "_id" : "2013-04-03 22 ServersRelays" }		//	TEST
+			, query : { "_id" : "2013-04-03 22 ServersBridges" }		//	TEST
 //			, sort										//  sorts the input documents for fewer reduce operations
 //			, jsMode: true								//	check if feasable! is faster, but needs more memory
 //			, finalize : finalizeFacts
@@ -2266,6 +2266,7 @@ var aggregateFacts = function(theDate) {
 
 var date = "2013-04-03 22" ;
 var run = function(date) {
+	db.visFacts.remove();
 	aggregateFacts(date);
 };
 run(date);
