@@ -2248,9 +2248,10 @@ var aggregateFacts = function(theDate) {
 //				, nonAtomic : true						//	prevents locking of the db during post-processing
 			}	
 //			, query : { "date" : theDate } 				//	limit aggregation to date
-//			, query : { "value.date" : theDate } 					//	TEST
-//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST
-			, query : { "_id" : "2013-04-03 22 ServersBridges" }		//	TEST
+//			, query : { "value.date" : theDate } 					//	TEST	query does NOT work		complains about TypeError: Cannot read property 'count' of undefined near 'vers.total.count , \t\t\t\tbwa : this.value.s'  (line 19)"
+//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work OKAY	but null results
+			, query : { value : { "date" : theDate } }				//	TEST	query does work OKAY	but null results	
+//			, query : { "_id" : "2013-04-03 22 ServersBridges" }	//	TEST	query does work OKAY 	and good result
 //			, sort										//  sorts the input documents for fewer reduce operations
 //			, jsMode: true								//	check if feasable! is faster, but needs more memory
 //			, finalize : finalizeFacts
