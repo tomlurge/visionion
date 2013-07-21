@@ -1,6 +1,6 @@
 ﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 //
-//	everything you need to aggregate facts for one date
+//	STEP 2 : COLLECTING ALL PRE-AGGREGATED DATA INTO THE FINAL visFacts COLLECTION
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
@@ -10,19 +10,21 @@
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var mapFacts = function() {
-	var map = {
-		date: this.value.date ,
-		clients : {
-			total : this.value.clients.cr + this.value.clients.cb ,
-			atBridges : this.value.clients.cb ,
-			atRelays : this.value.clients.cr ,
-			cip4 : this.value.clients.cip.v4 ,
-			cip6 : this.value.clients.cip.v6 ,
-			cptObfs2 : this.value.clients.cpt.obfs2 ,
-			cptObfs3 : this.value.clients.cpt.obfs3 ,
-			cptOR : this.value.clients.cpt.OR ,
-			cptUnknown : this.value.clients.cpt.Unknown
-		} ,
+	var map = {					 
+		date: this.value.date ,						
+/*
+		clients : {										//	no real aggregation going on with client 
+			total : this.value.clients.total ,			//	since client data is already aggregated when imported - 
+			atBridges : this.value.clients.atBridges ,	//	just copying values here
+			atRelays : this.value.clients.atRelays ,
+			cip4 : this.value.clients.cip4 ,
+			cip6 : this.value.clients.cip6 ,
+			cptObfs2 : this.value.clients.cptObfs2 ,
+			cptObfs3 : this.value.clients.cptObfs3 ,
+			cptOR : this.value.clients.cptOR ,
+			cptUnknown : this.value.clients.cptUnknown
+		} ,	
+*/
 		servers : {
 			total : {
 				count : this.value.servers.total.count ,
@@ -45,7 +47,9 @@ var mapFacts = function() {
 					v023 : this.value.servers.total.tsv.v023 ,
 					v024 : this.value.servers.total.tsv.v024
 				}
-			} ,
+			}
+/*
+			 ,
 			bridges : {
 				total : {
 					count : this.value.servers.bridges.total.count ,
@@ -156,9 +160,7 @@ var mapFacts = function() {
 						v023 : this.value.servers.bridges.breTrue.tsv.v023 ,
 						v024 : this.value.servers.bridges.breTrue.tsv.v024
 					}
-				} 
-				/*
-				,
+				} ,
 				brtObfs2 : {
 					count : this.value.servers.bridges.brtObfs2.count ,
 					bwa : this.value.servers.bridges.brtObfs2.bwa ,
@@ -225,7 +227,6 @@ var mapFacts = function() {
 						v024 : this.value.servers.bridges.brtObfs23.tsv.v024
 					}
 				}
-				*/
 			} ,
 			relays : {
 				roleAll : {
@@ -796,6 +797,7 @@ var mapFacts = function() {
 					}
 				}
 			} 
+*/
 		} 
 		
 		/* ,
@@ -822,6 +824,7 @@ var mapFacts = function() {
 var reduceFacts = function ( key, values ) {
 	var fact = {
 		date : 0 ,
+/*
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -833,6 +836,7 @@ var reduceFacts = function ( key, values ) {
 			cptOR : 0 ,
 			cptUnknown : 0
 		} ,
+*/
 		servers : {
 			total : {
 				count : 0 ,
@@ -855,7 +859,9 @@ var reduceFacts = function ( key, values ) {
 					v023 : 0 ,
 					v024 : 0
 				}
-			} ,
+			}
+/*
+			 ,
 			bridges : {
 				total : {
 					count : 0 ,
@@ -1595,6 +1601,7 @@ var reduceFacts = function ( key, values ) {
 					}
 				}
 			}
+*/
 		}
 			
 		/* ,
@@ -1611,7 +1618,7 @@ var reduceFacts = function ( key, values ) {
 	values.forEach( function(v) {
 	
 		fact.date = v.date ;
-	
+/*	
 		fact.clients.total += v.clients.total;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
@@ -1621,7 +1628,7 @@ var reduceFacts = function ( key, values ) {
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
-		
+*/		
 		fact.servers.total.count += v.servers.total.count ;
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
@@ -1638,7 +1645,7 @@ var reduceFacts = function ( key, values ) {
 		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;	
-		
+/*		
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -2203,7 +2210,7 @@ var reduceFacts = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
-	
+*/	
 		/*
 		
 		countries
@@ -2257,38 +2264,42 @@ var aggregateFacts = function(theDate) {
 //	EXECUTE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var date = "2013-04-03 22" ;							//	CONFIG DATE
-	
+var date = "2013-04-03 22" ;
+var run = function(date) {
+	aggregateFacts(date);
+};
+run(date);
+
+
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	SNIPPETS for a future version with more administrative features 
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+
 var run = function(date) {
 
-/*	housekeeping	
+//	housekeeping	
     db.tempServers.remove();
     db.tempCountries.remove();
     db.tempFacts.remove();
-*/	
-/*	aggregation steps	
+
+//	aggregation steps										TODO	how to include those files?
 
 	aggregateClients(date);							
-
 	aggregateServersRelays(date);					
 	aggregateServersBridges(date);					
 	aggregateServers(date);							
-
 	aggregateBridges(date);							
-
 	aggregateRelays(date);							
-													
 	aggregateCountriesClientsCR(date);				
 	aggregateCountriesClientsCB(date);				
 	aggregateCountriesRelays(date);					
 	aggregateCountries(date);						
-
 	aggregateAutosys(date);							
-*/
 
 	aggregateFacts(date);
 
-};
+}("2013-04-03 22");
 
-
-run(date);
+*/
