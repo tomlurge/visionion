@@ -1,5 +1,4 @@
-visionion
-=========
+# visionion
 
 visionion aims to provide a webbased visualization tool for Tor metrics data.
 
@@ -14,16 +13,16 @@ These generic views can then be combined and tailored to elucidate structural pa
 
 
 
-Tor Metrics Data
-----------------
+## Tor Metrics Data
+
 The project website provides the [currently available data in JSON](https://metrics.torproject.org/graphs/) as well as an [overview of metrics descriptor formats](https://metrics.torproject.org/index.html) and the [raw data](https://metrics.torproject.org/data.html). 
 It's currently saved to a PostgreSQL database ([SQL schema](https://gitweb.torproject.org/metrics-web.git/blob/HEAD:/db/tordir.sql)).
 
 
 
 
-Usage Scenario
---------------
+## Usage Scenario
+
 A user might just have some simple questions: how many relays were there running in the past 3 months in .de? How much bandwidth was provided by relays running Tor version 0.2.3.x.?     
 Such questions might just ask for a number and therefor need no visualization at all. 
 When a series of numbers is asked for or when information needs get more complex because they involve different factors and sources of data a visualization can be very handy to ease comprehension of the answer. 
@@ -68,8 +67,8 @@ checks (de-) centralizations in the infrastructure.
 
 
 
-Technical Overview
-------------------
+## Technical Overview
+
 In a nutshell:
 * Tor metrics data get's imported into a [MongoDB](http://www.mongodb.org/) database.  
 * Aggregation and indexing transforms the imported data into a big fact table suitable to drive the visualization. 
@@ -101,8 +100,8 @@ It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using th
 
 
 
-Tor network terminology
------------------------
+## Tor network terminology
+
 The Tor network is comprised of a lot of different nodes. 
 All these nodes operate - despite their different functions - from the same software, just with different configuration flags set. 
 A single node can be in _most_ categories at the same time and in _every_ category over time.  
@@ -652,6 +651,7 @@ Therefor we have to change perspective: we can't start from the perspective of s
 
 Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
+```
 	41	countries 					array of objects
 			country					cc											country
 			cbcc					int											how many clients in this country connecting through bridges
@@ -694,6 +694,7 @@ Again there are differences: while there exist about 37.000 autonomous systems, 
 				p468				int
 			autosys					array of objects 
 				as					int	
+```
 
 This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
 
@@ -702,6 +703,7 @@ Additionally countries could be grouped into continents, political regions (like
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
+```
 	42	autosys		 				array of objects							one result object per AS
 			as						string										number of as (format is string because it's a name)
 			name					string										name of as	
@@ -728,7 +730,8 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 				pbg					float										total probability of all guards in that country and this AS
 				pbm					float										total probability of all middles in that country and this AS
 				pbe					float										total probability of all exits in that country and this AS
-				
+```	
+
 This is still sketchy. More input and ideas on handling AS would be welcome. 
 
 
@@ -882,111 +885,184 @@ r    pbe    m    exit prob.      float
 -->
 
 
+## Usecases
 
-Usecases
---------
-How well would the schema developed so far from the inherent characteristics of the data and the limitations of the database fit the usecases we already gathered?
+How well would the schema developed so far from the inherent characteristics of
+the data and the limitations of the database fit the usecases we already
+gathered?
 
-_1_   
+### 1
+
 Visualizing the total pbr of all relays with a certain characteristic. 
 For example, what's the total pbr of all relays in Germany?    
 _._ covered by the aggregations outlined above! (by the countries subcollection)
 
-_2_   
+### 2
+
 Right now, if you ask for relays running version 0.2.4, it looks up those numbers in the static JSON file that metrics exports.  You cannot ask for the number of relays running version 0.2.4 on Linux, and you cannot ask for bandwidth provided by relays running version 0.2.4.   
 _._ I described the aggregation required to fulfill this usecase above and dismissed it as too expensive. 
 But it may be tackled again.    
 
-_3_   
+### 3
+
 One could ask how many bytes per day are transported by relays running Linus. 
 Or, what's the probability of having a Windows relay as your entry guard.   
 _._ more software version tasks. 
 My question is still: is this really important on such a detailed level?   
 
-_4_   
+### 4
+
 Note that you wouldn't have to aggregate by single relay or bridge, but you could aggregate all relays or bridges with the same combination of dimensions.  For example, you only care about facts like "on May 23, 2013, there were 25 relays running with type Guard and Middle, with the Fast and Stable flag, with version 0.2.3.x, on OS X, in AS 1234, not permitting any ports, in Germany".    
 When I wrote that example, I wanted to express the maximum level of detail that you'd have to keep to answer any question that anybody could ever want to ask.  I wanted to say that you don't need to remember which particular relay fingerprints are behind that number.  But you're right that nobody would actually want to know the answer to such a detailed question.    
 Starting from the other end, I suggest you start with questions touching only a single dimension: "how many relays were there in Germany?" or "how many relays were there on OS X?"  And when people want to know more, like: "how many relays on OS X were there in Germany?", it would be good if the system can be extended to answer such questions.  But actually extending it could be step two.    
 _._ The schema above could be extended, with not too much effort, to cover such queries. In this case I would probably add 5 os columns relay to the country sub-collection.   
 
-_5_   
+### 5
+
 There's a large emphasis on node numbers, but really, bwa, bwc, and pbr are more important measures than the number of nodes. Here's my idea: how about you keep osv_r, tsv_r, fast_r, stable_r, and as_r and store arrays of [#nodes, bwa, bwc, pbr] for each of them?  For osv_r, tsv_r, and as_r that would mean storing an array of arrays, and for fast_r and stable_r it would be just that array.    
 _._ I hope I took this into account with the new aggregation concept.   
 
-_7_    
+### 6
+
 But still, visualizing the average pbr (consensus weight fraction) or all relays doesn't make much sense to me.  The pbr values of all relays add up to 100%, so that the average is always 1 / #relays. What makes more sense is visualizing the total pbr of all relays with a certain characteristic.  For example, what's the total pbr of all relays in Germany? That makes much more sense to me.    
 _._ covered    
 
 
+## Visualization Interface Wishlist
 
-
-Visualization Interface Wishlist
---------------------------------
-* chrome colors green and purple
-* coloring of data should be readable for color blind people
-* selecting countries by region, by other criterias (eg number of relays), on a map etc
-* visualize countries on a fisheye map, with suitable projection
-* selecting time period by widget, zoom in/out, move left/right in time
-* ability to change scale on vertical axis
-* ensure that any field not accessible through predefined vis options is accessible through gerneric interface
-* combine criteria eg stable and fast relays runnix linux with OS version xy in country z
-* combine/add/stack graphs to show complete datasets (eg cake diagrams)
-* SVG export
-* [future] consumed bandwidth between relays  
+  * chrome colors green and purple
+  
+  * coloring of data should be readable for color blind people
+  
+  * selecting countries by region, by other criterias (eg number of relays), on a map etc
+  
+  * visualize countries on a fisheye map, with suitable projection
+  
+  * selecting time period by widget, zoom in/out, move left/right in time
+  
+  * ability to change scale on vertical axis
+  
+  * ensure that any field not accessible through predefined vis options is accessible through gerneric interface
+  
+  * combine criteria eg stable and fast relays runnix linux with OS version xy in country z
+  
+  * combine/add/stack graphs to show complete datasets (eg cake diagrams)
+  
+  * SVG export
+  
+  * [future] consumed bandwidth between relays  
 
 this list is unsorted
 
 Some useful links:  
+
 [Topojson](https://github.com/mbostock/topojson/)  
+
 [Fisheye](http://bost.ocks.org/mike/fisheye/)  
 
 
-Visualization Mechanics Wishlist
---------------------------------
-* notify the client of new fields so he can add them to the generic interface 
-* RESTfulness: having the URL represent the complete state of a visualization e.g. including zoom factor, 
-  active facets, selected clipping etc
-
-
-JavaScript Issues
------------------
-
-_framework_
-still not sure which framework to use. something lightweight should suffice. 
-angular.js maybe to involved. 
-knockout.js like angular.js takes a declarative approach.
-can.js doesn't have that declarative touch but apart from that looks very promising.
+## Visualization Mechanics Wishlist
   
-_datetime_    
-Handling of date and time can get difficult with JavaScript because not every environment handles every possible datetime format equally well. 
-Besides the ubiquitious UTC-epoch format which is rather inaccessable to humans we settle on "YYYY-MM-DD HH" as defined in ISO-8601 which is supported across all browsers and serves our needs just well.   
-If D3.js doesn't provide all we need we may use the [Moment.JS](http://momentjs.com) library which "was designed to work both in the browser and in Node.JS". 
-For further discussion of the topic see [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
+  * notify the client of new fields so he can add them to the generic interface 
+
+  * RESTfulness: having the URL represent the complete state of a visualization e.g. including zoom factor, 
+    active facets, selected clipping etc
 
 
+## JavaScript Issues
+
+**framework**
+
+still not sure which framework to use. something lightweight should suffice.
+angular.js maybe to involved.  knockout.js like angular.js takes a declarative
+approach.  can.js doesn't have that declarative touch but apart from that looks
+very promising.
+  
+**datetime**
+
+Handling of date and time can get difficult with JavaScript because not every
+environment handles every possible datetime format equally well.  Besides the
+ubiquitious UTC-epoch format which is rather inaccessable to humans we settle
+on "YYYY-MM-DD HH" as defined in ISO-8601 which is supported across all
+browsers and serves our needs just well.   If D3.js doesn't provide all we need
+we may use the [Moment.JS](http://momentjs.com) library which "was designed to
+work both in the browser and in Node.JS".  For further discussion of the topic
+see
+[Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
 
 
-Data Import
------------
-An importer tool takes metrics descriptors as input and produces JSON or BSON to be imported into MongoDB. 
-Such a tool should use Stem, which is a Python library that parses all relevant metrics descriptors. 
-I think it even has an export function that may or may not support JSON. 
-See Tor ticket #6171 for more details: https://trac.torproject.org/projects/tor/ticket/6171.  
-[import.py](visionion/blob/master/import/import.py) is a simple data importer that uses Stem to read consensuses and server descriptors and that prints out dicts that could be imported into MongoDB.
+## Data Import
+
+An importer tool takes metrics descriptors as input and produces JSON or BSON
+to be imported into MongoDB.  Such a tool should use Stem, which is a Python
+library that parses all relevant metrics descriptors.  I think it even has an
+export function that may or may not support JSON.  See Tor ticket #6171 for
+more details: https://trac.torproject.org/projects/tor/ticket/6171.
+[import.py](visionion/blob/master/import/import.py) is a simple data importer
+that uses Stem to read consensuses and server descriptors and that prints out
+dicts that could be imported into MongoDB.
 
 
+## Next Steps
 
+  * sketches of a visualization
+  
+  * more documentation of pre-import aggregation (extract from karsten's mails)
+  
+  * aggregation of visualization primitives and timespans
+  
+  * figure out how to control MongoDB via external scripts   
+      http://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
+      e.g. prompt:> mongo localhost:27017/tor ~/visionion/aggregation.js
+    particularily aggregation, indexing and status/control-queries
+  
+  * Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
+  
+  * When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
+  
+  * Then the real work on the visualizations can begin.
+  
+  * tbc
 
-Next Steps
-----------
-* sketches of a visualization
-* more documentation of pre-import aggregation (extract from karsten's mails)
-* aggregation of visualization primitives and timespans
-* figure out how to control MongoDB via external scripts   
-		http://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
-		e.g. prompt:> mongo localhost:27017/tor ~/visionion/aggregation.js
-  particularily aggregation, indexing and status/control-queries
-* Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
-* When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
-* Then the real work on the visualizations can begin.
-* tbc
+## Setup guide
+
+On OSX:
+
+```
+brew install mongodb
+
+# Start mongo db and create the database
+mkdir MONGOdata
+mongod --dbpath MONGOdata
+
+# Import the data
+mongoimport --db tor --collection importRelays --stopOnError --upsert --file RAWdata/relays.json
+mongoimport --db tor --collection importBridges --stopOnError --upsert --file RAWdata/bridges.json
+mongoimport --db tor --collection importClients --stopOnError --upsert --file RAWdata/clients.json
+
+# start mongo shell
+mongo
+
+# ensure index over date of import collections
+db.importClients.ensureIndex({date:1})
+db.importBridges.ensureIndex({date:1})
+db.importRelays.ensureIndex({date:1})
+```
+
+## Notes on using the mongo shell
+
+```
+# run a javascript file through a new mongo shell
+mongo localhost:27017/tor visionion/aggregateFacts.js
+# housekeeping tasks in mongo shell
+show dbs
+use dbName
+db.dropDatabase()
+show collections
+db.collectionName.remove()
+db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
+db.collectionName.dropIndex("indexName")
+db.collectionName.getIndexSpecs()
+db.collectionName.findOne()
+```
+
