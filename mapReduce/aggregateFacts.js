@@ -11,8 +11,8 @@
 
 var mapFacts = function() {
 	var map = {					 
-		date: this.value.date ,						
-/*
+//		date: this.value.date ,						
+
 		clients : {										//	no real aggregation going on with client 
 			total : this.value.clients.total ,			//	since client data is already aggregated when imported - 
 			atBridges : this.value.clients.atBridges ,	//	just copying values here
@@ -23,8 +23,9 @@ var mapFacts = function() {
 			cptObfs3 : this.value.clients.cptObfs3 ,
 			cptOR : this.value.clients.cptOR ,
 			cptUnknown : this.value.clients.cptUnknown
-		} ,	
-*/
+		} 
+		/*
+		,	
 		servers : {
 			total : {
 				count : this.value.servers.total.count ,
@@ -48,7 +49,9 @@ var mapFacts = function() {
 					v024 : this.value.servers.total.tsv.v024
 				}
 			}
-/*
+		} 
+		*/
+		/*
 			 ,
 			bridges : {
 				total : {
@@ -798,7 +801,6 @@ var mapFacts = function() {
 				}
 			} 
 */
-		} 
 		
 		/* ,
 		
@@ -812,7 +814,9 @@ var mapFacts = function() {
 		*/
 		
 	};
-	emit( (this.value.date + " Fact") , map );
+//	emit( ( date + " Fact") , map );					//	date isn't reachable
+//	emit( ("Fact") , map );
+	emit( ( "2013-04-03 22 Fact") , map );
 };
 
 
@@ -823,8 +827,8 @@ var mapFacts = function() {
 
 var reduceFacts = function ( key, values ) {
 	var fact = {
-		date : 0 ,
-/*
+//		date : 0 ,
+
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -835,8 +839,10 @@ var reduceFacts = function ( key, values ) {
 			cptObfs3 : 0 ,
 			cptOR : 0 ,
 			cptUnknown : 0
-		} ,
-*/
+		} 
+		/*		
+		,
+
 		servers : {
 			total : {
 				count : 0 ,
@@ -860,7 +866,9 @@ var reduceFacts = function ( key, values ) {
 					v024 : 0
 				}
 			}
-/*
+		}
+		*/			
+		/*
 			 ,
 			bridges : {
 				total : {
@@ -1601,8 +1609,7 @@ var reduceFacts = function ( key, values ) {
 					}
 				}
 			}
-*/
-		}
+		*/
 			
 		/* ,
 		
@@ -1617,8 +1624,15 @@ var reduceFacts = function ( key, values ) {
 	} ;
 	values.forEach( function(v) {
 	
-		fact.date = v.date ;
-/*	
+//		fact.date = v.date ;
+        print("OBJECT DUMP");
+        for (var k in v) {
+            print("===");
+        	print(k);
+        	print(v[k]);
+            print("===");
+        }
+
 		fact.clients.total += v.clients.total;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
@@ -1628,7 +1642,7 @@ var reduceFacts = function ( key, values ) {
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
-*/		
+		/*		
 		fact.servers.total.count += v.servers.total.count ;
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
@@ -1645,7 +1659,8 @@ var reduceFacts = function ( key, values ) {
 		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;	
-/*		
+		*/	
+		/*		
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -2247,11 +2262,18 @@ var aggregateFacts = function(theDate) {
 				reduce : "visFacts"		 				//	the final fact collection
 //				, nonAtomic : true						//	prevents locking of the db during post-processing
 			}	
-//			, query : { "date" : theDate } 				//	limit aggregation to date
+//			, query : { "date" : theDate } 				//	TEST	query does work BUT 	null results
 //			, query : { "value.date" : theDate } 					//	TEST	query does NOT work		complains about TypeError: Cannot read property 'count' of undefined near 'vers.total.count , \t\t\t\tbwa : this.value.s'  (line 19)"
-//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work OKAY	but null results
-			, query : { value : { "date" : theDate } }				//	TEST	query does work OKAY	but null results	
-//			, query : { "_id" : "2013-04-03 22 ServersBridges" }	//	TEST	query does work OKAY 	and good result
+//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work BUT 	null results
+//			, query : { value : { "date" : theDate } }				//	TEST	query does work BUT 	null results	
+			, query : { "_id" : "2013-04-03 22 Clients" }	//	TEST	query does work OKAY 	and good result
+														/*	
+															ServersRelays 	ok
+															ServersBridges	ok
+															Bridges			bad
+															Relays			bad
+															Clients			bad
+														*/
 //			, sort										//  sorts the input documents for fewer reduce operations
 //			, jsMode: true								//	check if feasable! is faster, but needs more memory
 //			, finalize : finalizeFacts
@@ -2264,10 +2286,9 @@ var aggregateFacts = function(theDate) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	EXECUTE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 var date = "2013-04-03 22" ;
 var run = function(date) {
-	db.visFacts.remove();
+//	db.visFacts.remove();
 	aggregateFacts(date);
 };
 run(date);

@@ -1,191 +1,187 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapBridges = function() {
-	var map = {
-		date: this.date ,
+	var self = this,
+	  map = {
+//		date: this.date ,
 		servers : {
 			bridges : {
 				total : {
 					count : 1 ,
-					bwa : this.bwa ,
-					bwc : this.bwc ,
+					bwa : self.bwa ,
+					bwc : self.bwc ,
 					osv : {
-						linux : (this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.osv == "windows") ? 1 : 0 ,
-						other : (this.osv == "other") ? 1 : 0
+						linux : (self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.osv == "windows") ? 1 : 0 ,
+						other : (self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.tsv == "024") ? 1 : 0
+						v010 : (self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpEmail : {
-					count : (this.brp == "email") ? 1 : 0 ,
-					bwa : (this.brp == "email") ? this.bwa : 0 ,
-					bwc : (this.brp == "email") ? this.bwc : 0 ,
+					count : (self.brp == "email") ? 1 : 0 ,
+					bwa : (self.brp == "email") ? self.bwa : 0 ,
+					bwc : (self.brp == "email") ? self.bwc : 0 ,
 					osv : {
-						linux : (this.brp == "email" && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brp == "email" && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brp == "email" && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brp == "email" && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brp == "email" && this.osv == "other") ? 1 : 0
+						linux : (self.brp == "email" && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brp == "email" && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brp == "email" && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brp == "email" && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brp == "email" && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brp == "email" && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brp == "email" && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brp == "email" && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brp == "email" && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brp == "email" && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brp == "email" && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brp == "email" && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brp == "email" && this.tsv == "024") ? 1 : 0
+						v010 : (self.brp == "email" && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brp == "email" && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brp == "email" && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brp == "email" && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brp == "email" && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brp == "email" && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brp == "email" && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brp == "email" && self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpHttps : {
-					count : (this.brp == "https") ? 1 : 0 ,
-					bwa : (this.brp == "https") ? this.bwa : 0 ,
-					bwc : (this.brp == "https") ? this.bwc : 0 ,
+					count : (self.brp == "https") ? 1 : 0 ,
+					bwa : (self.brp == "https") ? self.bwa : 0 ,
+					bwc : (self.brp == "https") ? self.bwc : 0 ,
 					osv : {
-						linux : (this.brp == "https" && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brp == "https" && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brp == "https" && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brp == "https" && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brp == "https" && this.osv == "other") ? 1 : 0
+						linux : (self.brp == "https" && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brp == "https" && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brp == "https" && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brp == "https" && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brp == "https" && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brp == "https" && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brp == "https" && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brp == "https" && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brp == "https" && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brp == "https" && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brp == "https" && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brp == "https" && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brp == "https" && this.tsv == "024") ? 1 : 0
+						v010 : (self.brp == "https" && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brp == "https" && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brp == "https" && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brp == "https" && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brp == "https" && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brp == "https" && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brp == "https" && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brp == "https" && self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brpOther : {
-					count : (this.brp == "other") ? 1 : 0 ,
-					bwa : (this.brp == "other") ? this.bwa : 0 ,
-					bwc : (this.brp == "other") ? this.bwc : 0 ,
+					count : (self.brp == "other") ? 1 : 0 ,
+					bwa : (self.brp == "other") ? self.bwa : 0 ,
+					bwc : (self.brp == "other") ? self.bwc : 0 ,
 					osv : {
-						linux : (this.brp == "other" && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brp == "other" && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brp == "other" && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brp == "other" && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brp == "other" && this.osv == "other") ? 1 : 0
+						linux : (self.brp == "other" && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brp == "other" && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brp == "other" && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brp == "other" && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brp == "other" && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brp == "other" && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brp == "other" && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brp == "other" && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brp == "other" && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brp == "other" && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brp == "other" && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brp == "other" && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brp == "other" && this.tsv == "024") ? 1 : 0
+						v010 : (self.brp == "other" && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brp == "other" && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brp == "other" && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brp == "other" && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brp == "other" && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brp == "other" && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brp == "other" && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brp == "other" && self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				breTrue : {
-					count : (this.bre == "true") ? 1 : 0 ,
-					bwa : (this.bre == "true") ? this.bwa : 0 ,
-					bwc : (this.bre == "true") ? this.bwc : 0 ,
+					count : (self.bre == "true") ? 1 : 0 ,
+					bwa : (self.bre == "true") ? self.bwa : 0 ,
+					bwc : (self.bre == "true") ? self.bwc : 0 ,
 					osv : {
-						linux : (this.bre == "true" && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.bre == "true" && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.bre == "true" && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.bre == "true" && this.osv == "windows") ? 1 : 0 ,
-						other : (this.bre == "true" && this.osv == "other") ? 1 : 0
+						linux : (self.bre == "true" && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.bre == "true" && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.bre == "true" && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.bre == "true" && self.osv == "windows") ? 1 : 0 ,
+						other : (self.bre == "true" && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.bre == "true" && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.bre == "true" && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.bre == "true" && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.bre == "true" && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.bre == "true" && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.bre == "true" && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.bre == "true" && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.bre == "true" && this.tsv == "024") ? 1 : 0
+						v010 : (self.bre == "true" && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.bre == "true" && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.bre == "true" && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.bre == "true" && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.bre == "true" && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.bre == "true" && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.bre == "true" && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.bre == "true" && self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs2 : {
-					// count : 0   TODO solve problem "TypeError: Cannot call method 'indexOf' of undefined"
-                    /*
-					count : (this.brt.indexOf('obfs2') > -1) ? 1 : 0 ,
-					bwa : (this.brt.indexOf('obfs2') > -1) ? this.bwa : 0 ,
-					bwc : (this.brt.indexOf('obfs2') > -1) ? this.bwc : 0  ,
+					count : (self.brt.indexOf('obfs2') > -1) ? 1 : 0 ,
+					bwa : (self.brt.indexOf('obfs2') > -1) ? self.bwa : 0 ,
+					bwc : (self.brt.indexOf('obfs2') > -1) ? self.bwc : 0  ,
 					osv : {
-						linux : (this.brt.indexOf('obfs2') > -1 && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brt.indexOf('obfs2') > -1 && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brt.indexOf('obfs2') > -1 && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brt.indexOf('obfs2') > -1 && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brt.indexOf('obfs2') > -1 && this.osv == "other") ? 1 : 0
+						linux : (self.brt.indexOf('obfs2') > -1 && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brt.indexOf('obfs2') > -1 && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brt.indexOf('obfs2') > -1 && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brt.indexOf('obfs2') > -1 && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brt.indexOf('obfs2') > -1 && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brt.indexOf('obfs2') > -1 && this.tsv == "024") ? 1 : 0
+						v010 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brt.indexOf('obfs2') > -1 && self.tsv == "024") ? 1 : 0
 					}
-                    */
-				}
-                /*
-                ,
+
+				} ,
 				brtObfs3 : {
-					count : (this.brt.indexOf('obfs3') > -1) ? 1 : 0 ,
-					bwa : (this.brt.indexOf('obfs3') > -1) ? this.bwa : 0 ,
-					bwc : (this.brt.indexOf('obfs3') > -1) ? this.bwc : 0 ,
+					count : (self.brt.indexOf('obfs3') > -1) ? 1 : 0 ,
+					bwa : (self.brt.indexOf('obfs3') > -1) ? self.bwa : 0 ,
+					bwc : (self.brt.indexOf('obfs3') > -1) ? self.bwc : 0 ,
 					osv : {
-						linux : (this.brt.indexOf('obfs3') > -1 && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brt.indexOf('obfs3') > -1 && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brt.indexOf('obfs3') > -1 && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brt.indexOf('obfs3') > -1 && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brt.indexOf('obfs3') > -1 && this.osv == "other") ? 1 : 0
+						linux : (self.brt.indexOf('obfs3') > -1 && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brt.indexOf('obfs3') > -1 && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brt.indexOf('obfs3') > -1 && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brt.indexOf('obfs3') > -1 && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brt.indexOf('obfs3') > -1 && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brt.indexOf('obfs3') > -1 && this.tsv == "024") ? 1 : 0
+						v010 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brt.indexOf('obfs3') > -1 && self.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs23 : {
-					count : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1) ? 1 : 0 ,
-					bwa : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1) ? this.bwa : 0 ,
-					bwc : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1) ? this.bwc : 0 ,
+					count : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1) ? 1 : 0 ,
+					bwa : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1) ? self.bwa : 0 ,
+					bwc : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1) ? self.bwc : 0 ,
 					osv : {
-						linux : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.osv == "windows") ? 1 : 0 ,
-						other : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.osv == "other") ? 1 : 0
+						linux : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.osv == "windows") ? 1 : 0 ,
+						other : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.brt.indexOf('obfs2') > -1 && this.brt.indexOf('obfs3') > -1 && this.tsv == "024") ? 1 : 0
+						v010 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.brt.indexOf('obfs2') > -1 && self.brt.indexOf('obfs3') > -1 && self.tsv == "024") ? 1 : 0
 					}
 				}
-                */
 			}
 		}
 	};
@@ -195,8 +191,7 @@ var mapBridges = function() {
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceBridges = function ( key, values ) {
-	var fact = {		
-		date : 0 ,								
+	var fact = {								
 		servers : {
 			bridges : {
 				total : {
@@ -312,9 +307,7 @@ var reduceBridges = function ( key, values ) {
 				brtObfs2 : {
 					count : 0 ,
 					bwa : 0 ,
-					bwc : 0 
-                    /*
-                    ,
+					bwc : 0 ,
 					osv : {
 						linux : 0 ,
 						darwin : 0 ,
@@ -332,9 +325,7 @@ var reduceBridges = function ( key, values ) {
 						v023 : 0 ,
 						v024 : 0
 					}
-                    */
-				}
-                /*,
+				} ,
 				brtObfs3 : {
 					count : 0 ,
 					bwa : 0 ,
@@ -379,12 +370,11 @@ var reduceBridges = function ( key, values ) {
 						v024 : 0
 					}
 				}
-                */
 			}
 		}
 	};
 	values.forEach( function(v) {
-		fact.date = v.date ;
+//		fact.date = v.date ;
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -473,7 +463,6 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brtObfs2.count += v.servers.bridges.brtObfs2.count ;
 		fact.servers.bridges.brtObfs2.bwa += v.servers.bridges.brtObfs2.bwa ;
 		fact.servers.bridges.brtObfs2.bwc += v.servers.bridges.brtObfs2.bwc ;
-		/*
 		fact.servers.bridges.brtObfs2.osv.linux += v.servers.bridges.brtObfs2.osv.linux ;
 		fact.servers.bridges.brtObfs2.osv.darwin += v.servers.bridges.brtObfs2.osv.darwin ;
 		fact.servers.bridges.brtObfs2.osv.freebsd += v.servers.bridges.brtObfs2.osv.freebsd ;
@@ -521,7 +510,6 @@ var reduceBridges = function ( key, values ) {
 		fact.servers.bridges.brtObfs23.tsv.v022 += v.servers.bridges.brtObfs23.tsv.v022 ;
 		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
 		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ;
-        */
 	});
 	return fact;
 };

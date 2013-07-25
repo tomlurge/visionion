@@ -1,7 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapServersRelays = function() {
 	var map = {
-		date: this.date ,
+//		date: this.date ,
 		servers : {
 			total : {
 				count : 1 ,
@@ -27,13 +27,14 @@ var mapServersRelays = function() {
 			}
 		}
 	};
-    emit( this.date + " ServersRelays" , map );
+	emit( this.date + " ServersRelays" , map );
+//	emit( this.date , map ); 							//	that didn't work out
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceServersRelays = function ( key, values ) {	
 	var temp = {
-		date : 0 ,
+//		date : 0 ,
 		servers : {
 			total : {
 				count : 0 ,
@@ -60,7 +61,7 @@ var reduceServersRelays = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
-		temp.date = v.date ;
+//		temp.date = v.date ;
 		temp.servers.total.count += 1 ;
 		temp.servers.total.bwa += v.servers.total.bwa ;
 		temp.servers.total.bwc += v.servers.total.bwc ;
@@ -89,6 +90,7 @@ var aggregateServersRelays = function(theDate) {
 		{ 
 			out: { 
 				reduce : "tempFacts" 					//	the temporary fact collection
+//				reduce : "visFacts" 					//	that didn't work out
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
 			} ,			
 			query : { "date" : theDate } 				//	limit aggregation to date

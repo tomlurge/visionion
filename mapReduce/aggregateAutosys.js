@@ -1,7 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapAutosys = function() {
 	var map = {
-		date: this.date ,
+//		date: this.date ,
 		autosys : {
 			as : this.as ,
 			name : "" ,
@@ -44,7 +44,7 @@ var reduceAutosys = function ( key, values ) {
 	var countries =new Array();
 	var fact = autosys ;
 	var asObject = {
-		date : 0 ,
+//		date : 0 ,
 		as : "" ,
 		name : "" ,
 		hone : "",
@@ -104,7 +104,7 @@ var reduceAutosys = function ( key, values ) {
 		if (!ccAquired) {
 			autosys[asPos].countries[ccPos].cc = v.countries.cc;
 		};
-		autosys[asPos].date = v.date ;
+//		autosys[asPos].date = v.date ;
 		autosys[asPos].relay += 1 ;
 		autosys[asPos].bwa += v.bwa ;
 		autosys[asPos].bwc += v.bwc ;
