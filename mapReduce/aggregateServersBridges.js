@@ -36,7 +36,7 @@ var mapServersBridges = function(theDate) {
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceServersBridges = function ( key, values ) {	
 	var temp = {
-		date : 0 ,
+//		date : 0 ,
 		servers : {
 			total : {
 				count : 0 ,
@@ -63,7 +63,7 @@ var reduceServersBridges = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
-		temp.date = v.date ;
+//		temp.date = v.date ;
 		temp.servers.total.count += 1 ;
 		temp.servers.total.bwa += v.servers.total.bwa ;
 		temp.servers.total.bwc += v.servers.total.bwc ;
@@ -88,11 +88,12 @@ var reduceServersBridges = function ( key, values ) {
 var aggregateServersBridges = function(theDate) {
   // http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
 	db.importBridges.mapReduce (			
-		mapServersBridges(theDate),
+		mapServersBridges,
 		reduceServersBridges,
 		{ 
 			out: { 
 				reduce : "tempFacts" 					//	the temporary fact collection
+//				reduce : "visFacts" 					//	that didn't work out
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
 			} ,			
 			query : { "date" : theDate } 				//	limit aggregation to date
@@ -106,6 +107,7 @@ var aggregateServersBridges = function(theDate) {
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var date = "2013-04-03 22" ;
 var run = function(date) {
+	db.tempFacts.remove()
 	aggregateServersBridges(date);
 };
 run(date);

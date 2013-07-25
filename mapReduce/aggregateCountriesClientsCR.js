@@ -1,7 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountriesClientsCR = function() {
 	var map = {
-		date: this.date ,
+//		date: this.date ,
 		country :  {
 			cc: "" ,
 			cbcc: 0 ,
@@ -60,7 +60,7 @@ var mapCountriesClientsCR = function() {
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceCountriesClients = function ( key, values ) {	//	same reduce function for CB and CR map functions	
 	var temp = {	
-		date : 0 ,
+//		date : 0 ,
 		cc: "" ,
 		cbcc: 0 ,
 		crcc: 0 ,
@@ -106,7 +106,7 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 		as: "" 				
 	};
 	values.forEach( function(v) {						// 	not much happening here since clients are already aggregated
-		temp.date = v.date ;
+//		temp.date = v.date ;
 		temp.cc = v.cc ;								//	getting the cc
 		temp.cbcc = v.cbcc ;							//	catching the fish from mapCountriesClientsCB
 		temp.crcc = v.crcc ;							//	catching the fish from mapCountriesClientsCR

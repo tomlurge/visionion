@@ -1,4 +1,4 @@
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
+﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 //
 //	STEP 2 : COLLECTING ALL PRE-AGGREGATED DATA INTO THE FINAL visFacts COLLECTION
 //
@@ -11,8 +11,13 @@
 
 var mapFacts = function() {
 	var map = {					 
+<<<<<<< HEAD
+		date: this.value.date ,						
+/*
+=======
 //		date: this.value.date ,						
 
+>>>>>>> skip-tempFacts-step
 		clients : {										//	no real aggregation going on with client 
 			total : this.value.clients.total ,			//	since client data is already aggregated when imported - 
 			atBridges : this.value.clients.atBridges ,	//	just copying values here
@@ -23,9 +28,14 @@ var mapFacts = function() {
 			cptObfs3 : this.value.clients.cptObfs3 ,
 			cptOR : this.value.clients.cptOR ,
 			cptUnknown : this.value.clients.cptUnknown
+<<<<<<< HEAD
+		} ,	
+*/
+=======
 		} 
 		/*
 		,	
+>>>>>>> skip-tempFacts-step
 		servers : {
 			total : {
 				count : this.value.servers.total.count ,
@@ -49,9 +59,13 @@ var mapFacts = function() {
 					v024 : this.value.servers.total.tsv.v024
 				}
 			}
+<<<<<<< HEAD
+/*
+=======
 		} 
 		*/
 		/*
+>>>>>>> skip-tempFacts-step
 			 ,
 			bridges : {
 				total : {
@@ -801,6 +815,10 @@ var mapFacts = function() {
 				}
 			} 
 */
+<<<<<<< HEAD
+		} 
+=======
+>>>>>>> skip-tempFacts-step
 		
 		/* ,
 		
@@ -814,9 +832,13 @@ var mapFacts = function() {
 		*/
 		
 	};
+<<<<<<< HEAD
+	emit( (this.value.date + " Fact") , map );
+=======
 //	emit( ( date + " Fact") , map );					//	date isn't reachable
 //	emit( ("Fact") , map );
 	emit( ( "2013-04-03 22 Fact") , map );
+>>>>>>> skip-tempFacts-step
 };
 
 
@@ -827,8 +849,13 @@ var mapFacts = function() {
 
 var reduceFacts = function ( key, values ) {
 	var fact = {
+<<<<<<< HEAD
+		date : 0 ,
+/*
+=======
 //		date : 0 ,
 
+>>>>>>> skip-tempFacts-step
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -839,10 +866,15 @@ var reduceFacts = function ( key, values ) {
 			cptObfs3 : 0 ,
 			cptOR : 0 ,
 			cptUnknown : 0
+<<<<<<< HEAD
+		} ,
+*/
+=======
 		} 
 		/*		
 		,
 
+>>>>>>> skip-tempFacts-step
 		servers : {
 			total : {
 				count : 0 ,
@@ -866,9 +898,13 @@ var reduceFacts = function ( key, values ) {
 					v024 : 0
 				}
 			}
+<<<<<<< HEAD
+/*
+=======
 		}
 		*/			
 		/*
+>>>>>>> skip-tempFacts-step
 			 ,
 			bridges : {
 				total : {
@@ -1609,7 +1645,12 @@ var reduceFacts = function ( key, values ) {
 					}
 				}
 			}
+<<<<<<< HEAD
+*/
+		}
+=======
 		*/
+>>>>>>> skip-tempFacts-step
 			
 		/* ,
 		
@@ -1624,6 +1665,10 @@ var reduceFacts = function ( key, values ) {
 	} ;
 	values.forEach( function(v) {
 	
+<<<<<<< HEAD
+		fact.date = v.date ;
+/*	
+=======
 //		fact.date = v.date ;
         print("OBJECT DUMP");
         for (var k in v) {
@@ -1633,6 +1678,7 @@ var reduceFacts = function ( key, values ) {
             print("===");
         }
 
+>>>>>>> skip-tempFacts-step
 		fact.clients.total += v.clients.total;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
@@ -1642,7 +1688,11 @@ var reduceFacts = function ( key, values ) {
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
+<<<<<<< HEAD
+*/		
+=======
 		/*		
+>>>>>>> skip-tempFacts-step
 		fact.servers.total.count += v.servers.total.count ;
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
@@ -1659,8 +1709,12 @@ var reduceFacts = function ( key, values ) {
 		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;	
+<<<<<<< HEAD
+/*		
+=======
 		*/	
 		/*		
+>>>>>>> skip-tempFacts-step
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -2262,6 +2316,13 @@ var aggregateFacts = function(theDate) {
 				reduce : "visFacts"		 				//	the final fact collection
 //				, nonAtomic : true						//	prevents locking of the db during post-processing
 			}	
+<<<<<<< HEAD
+//			, query : { "date" : theDate } 				//	limit aggregation to date
+//			, query : { "value.date" : theDate } 					//	TEST	query does NOT work		complains about TypeError: Cannot read property 'count' of undefined near 'vers.total.count , \t\t\t\tbwa : this.value.s'  (line 19)"
+//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work OKAY	but null results
+			, query : { value : { "date" : theDate } }				//	TEST	query does work OKAY	but null results	
+//			, query : { "_id" : "2013-04-03 22 ServersBridges" }	//	TEST	query does work OKAY 	and good result
+=======
 //			, query : { "date" : theDate } 				//	TEST	query does work BUT 	null results
 //			, query : { "value.date" : theDate } 					//	TEST	query does NOT work		complains about TypeError: Cannot read property 'count' of undefined near 'vers.total.count , \t\t\t\tbwa : this.value.s'  (line 19)"
 //			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work BUT 	null results
@@ -2274,6 +2335,7 @@ var aggregateFacts = function(theDate) {
 															Relays			bad
 															Clients			bad
 														*/
+>>>>>>> skip-tempFacts-step
 //			, sort										//  sorts the input documents for fewer reduce operations
 //			, jsMode: true								//	check if feasable! is faster, but needs more memory
 //			, finalize : finalizeFacts
@@ -2300,8 +2362,28 @@ run(date);
 
 /*
 
+<<<<<<< HEAD
+var date = "2013-04-03 22" ;
+=======
+>>>>>>> skip-tempFacts-step
+var run = function(date) {
+	db.visFacts.remove();
+	aggregateFacts(date);
+};
+run(date);
+
+
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	SNIPPETS for a future version with more administrative features 
+//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<<<<<<< HEAD
+/*
+
 var run = function(date) {
 
+=======
+>>>>>>> skip-tempFacts-step
 //	housekeeping	
     db.tempServers.remove();
     db.tempCountries.remove();
@@ -2325,4 +2407,8 @@ var run = function(date) {
 
 }("2013-04-03 22");
 
+<<<<<<< HEAD
 */
+=======
+*/
+>>>>>>> skip-tempFacts-step

@@ -1,5 +1,39 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
-var mapServersRelays = function() {
+<<<<<<< HEAD
+var mapServersBridges = function(theDate) {
+  return function() {
+    var self = this,
+      map = {
+        date: self.date ,
+        servers : {
+          total : {
+            count : 1 ,
+            bwa : self.bwa ,
+            bwc : self.bwc ,
+            osv : {
+              linux : (self.osv == "linux") ? 1 : 0 ,
+              darwin : (self.osv == "darwin") ? 1 : 0 ,
+              freebsd : (self.osv == "freebsd") ? 1 : 0 ,
+              windows : (self.osv == "windows") ? 1 : 0 ,
+              other : (self.osv == "other") ? 1 : 0
+            } ,
+            tsv : {
+              v010 : (self.tsv == "010") ? 1 : 0 ,
+              v011 : (self.tsv == "011") ? 1 : 0 ,
+              v012 : (self.tsv == "012") ? 1 : 0 ,
+              v020 : (self.tsv == "020") ? 1 : 0 ,
+              v021 : (self.tsv == "021") ? 1 : 0 ,
+              v022 : (self.tsv == "022") ? 1 : 0 ,
+              v023 : (self.tsv == "023") ? 1 : 0 ,
+              v024 : (self.tsv == "024") ? 1 : 0
+            }
+          }
+        }
+      };
+    emit( theDate + " ServersBridges" , map );
+  } 
+=======
+var mapServersBridges = function() {
 	var map = {
 //		date: this.date ,
 		servers : {
@@ -27,12 +61,13 @@ var mapServersRelays = function() {
 			}
 		}
 	};
-	emit( this.date + " ServersRelays" , map );
+	emit( this.date + " ServersBridges" , map );
 //	emit( this.date , map ); 							//	that didn't work out
+>>>>>>> skip-tempFacts-step
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
-var reduceServersRelays = function ( key, values ) {	
+var reduceServersBridges = function ( key, values ) {	
 	var temp = {
 //		date : 0 ,
 		servers : {
@@ -83,10 +118,11 @@ var reduceServersRelays = function ( key, values ) {
 };
 
 //	BINDING MAP AND REDUCE  //////////////////////////////////////////////////////////////////////////////////
-var aggregateServersRelays = function(theDate) {
-	db.importRelays.mapReduce (			
-		mapServersRelays,
-		reduceServersRelays,
+var aggregateServersBridges = function(theDate) {
+  // http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
+	db.importBridges.mapReduce (			
+		mapServersBridges(theDate),
+		reduceServersBridges,
 		{ 
 			out: { 
 				reduce : "tempFacts" 					//	the temporary fact collection
@@ -104,6 +140,6 @@ var aggregateServersRelays = function(theDate) {
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var date = "2013-04-03 22" ;
 var run = function(date) {
-	aggregateServersRelays(date);
+	aggregateServersBridges(date);
 };
 run(date);

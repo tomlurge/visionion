@@ -1,7 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountries = function() {							//	putting it all together
 	var map = {
-		date: this.date ,
+//		date: this.date ,
 		country : {
 			cc: this.cc ,
 			cbcc: this.cbcc ,
@@ -55,11 +55,11 @@ var mapCountries = function() {							//	putting it all together
 var reduceCountries = function ( key, values ) {
 	var countries = new Array();
 	var fact = { 
-		fact.date = this.date ;							//	TODO	not sure if this will work
+//		fact.date = this.date ;							//	TODO	not sure if this will work
 		countries : [] ; 								//	TODO 	ERROR
 	};	
 	var country = {	
-		date : 0 ,
+//		date : 0 ,
 		cc: "" ,
 		cbcc: 0 ,
 		crcc: 0 ,

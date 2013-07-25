@@ -1,7 +1,7 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountriesRelays = function() {
 	var map = {
-		date: this.date ,
+//		date: this.date ,
 		country : {
 			cc: this.cc ,
 			cbcc: 0 ,
@@ -54,7 +54,7 @@ var mapCountriesRelays = function() {
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceCountriesRelays = function ( key, values ) {
 	var temp = {	
-		date : 0 ,
+//		date : 0 ,
 		cc: "" ,
 		cbcc: 0 ,
 		crcc: 0 ,
@@ -100,7 +100,7 @@ var reduceCountriesRelays = function ( key, values ) {
 		autosys: []										//	TODO	need to declare autosys before?		
 	};
 	values.forEach( function(v) {						//	adding up counts (except cc, cbcc, and crcc from clients)
-		temp.date = v.date ;
+//		temp.date = v.date ;
 		temp.cc = v.cc ;
 		temp.cbcc = v.cbcc ;
 		temp.crcc = v.crcc ;
