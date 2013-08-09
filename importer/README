@@ -1,0 +1,65 @@
+README: producing sample data for Visionion
+===========================================
+
+Disclaimer: everything in this subdirectory has the sole purpose of
+producing sample data for testing and developing Visionion.
+
+To be even clearer: nothing in this subdirectory is meant to be used in a
+production environment!
+
+Okay, this should be clear now.  Here are the instructions for producing
+sample data on Debian Squeeze:
+
+Download userstats.csv from the metrics website and store it in this
+directory:
+
+  $ wget https://metrics.torproject.org/csv/userstats.csv
+
+Install Java 6 for descriptor parsing and PostgreSQL 8.4 for descriptor
+data storage and aggregation:
+
+  $ sudo apt-get install openjdk-6-jdk postgresql-8.4
+
+Create a database user and database:
+
+  $ sudo -u postgres createuser -P karsten
+  $ sudo -u postgres createdb -O karsten visionion
+  $ echo "password" > ~/.pgpass
+  $ chmod 0600 ~/.pgpass
+  $ psql -f init-visionion.sql visionion
+
+Create empty bin/, lib/, geoip/, in/, and out/ directories.
+
+Put required .jar files into the lib/ directory.  See metrics-lib.git for
+instructions:
+
+  - lib/gson-2.2.3.jar
+  - lib/commons-codec-1.6.jar
+  - lib/commons-compress-1.4.1.jar
+  - lib/descriptor.jar
+
+Create the following three directories and put tarballs from the metrics
+website into them:
+
+  - in/bridge-descriptors
+  - in/bridge-pool-assignments
+  - in/relay-descriptors
+
+Get IP-to-country and IP-to-ASN databases from MaxMind and put them into
+the geoip/ directory.  At least the two following files should be present:
+
+  - geoip/GeoIPCountryWhois.csv
+  - GeoIPASNum2.csv
+
+Run the run-visionion.sh script (requires 4G+ of RAM):
+
+  $ ./run-visionion.sh
+
+There should now be three output files in the current directory:
+
+ - bridges.json
+ - clients.json
+ - relays.json
+
+Enjoy!
+
