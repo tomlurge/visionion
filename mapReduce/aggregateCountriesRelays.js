@@ -1,7 +1,6 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountriesRelays = function() {
 	var map = {
-//		date: this.date ,
 		country : {
 			cc: this.cc ,
 			cbcc: 0 ,
@@ -54,8 +53,8 @@ var mapCountriesRelays = function() {
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceCountriesRelays = function ( key, values ) {
 	var temp = {	
-//		date : 0 ,
-		cc: "" ,
+		cc: "" ,										//	TODO	this is strange
+														//			why no "countries : {...}" sublevel ?
 		cbcc: 0 ,
 		crcc: 0 ,
 		relay: 0 ,
@@ -100,7 +99,6 @@ var reduceCountriesRelays = function ( key, values ) {
 		autosys: []										//	TODO	need to declare autosys before?		
 	};
 	values.forEach( function(v) {						//	adding up counts (except cc, cbcc, and crcc from clients)
-//		temp.date = v.date ;
 		temp.cc = v.cc ;
 		temp.cbcc = v.cbcc ;
 		temp.crcc = v.crcc ;
@@ -140,7 +138,7 @@ var reduceCountriesRelays = function ( key, values ) {
 		if (temp.autosys.indexOf(as) == -1) {			//	TODO	will this work?	
 			temp.autosys.push(as);
 		}
-		temp.autosys.as += 1;
+		temp.autosys.as += v.autosys.as;
 	});
 	return temp;
 };
@@ -154,18 +152,17 @@ var aggregateCountriesRelays = function(theDate) {
 			out: { 
 				reduce : "tempFacts" 					//	the temporary fact collection
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-	aggregateCountriesRelays(date);	
-};
-run(date);
+var run = function(theDate) {
+	aggregateCountriesRelays(theDate);
+}("2013-04-03 22" );

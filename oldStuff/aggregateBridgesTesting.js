@@ -1,6 +1,16 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapBridges = function() {
+/*															TODO	remove after testing
+    print("XXXX");
+    for (var key in this) {
+       print("YYY");
+       print(key);
+       print(this[key]);
+    }
+    print(this.brt);
+*/	
 	var map = {
+		date: this.date ,
 		servers : {
 			bridges : {
 				total : {
@@ -92,25 +102,25 @@ var mapBridges = function() {
 					}
 				} ,
 				breTrue : {
-					count : (this.bre == true) ? 1 : 0 ,
-					bwa : (this.bre == true) ? this.bwa : 0 ,
-					bwc : (this.bre == true) ? this.bwc : 0 ,
+					count : (this.bre == "true") ? 1 : 0 ,
+					bwa : (this.bre == "true") ? this.bwa : 0 ,
+					bwc : (this.bre == "true") ? this.bwc : 0 ,
 					osv : {
-						linux : (this.bre == true && this.osv == "linux") ? 1 : 0 ,
-						darwin : (this.bre == true && this.osv == "darwin") ? 1 : 0 ,
-						freebsd : (this.bre == true && this.osv == "freebsd") ? 1 : 0 ,
-						windows : (this.bre == true && this.osv == "windows") ? 1 : 0 ,
-						other : (this.bre == true && this.osv == "other") ? 1 : 0
+						linux : (this.bre == "true" && this.osv == "linux") ? 1 : 0 ,
+						darwin : (this.bre == "true" && this.osv == "darwin") ? 1 : 0 ,
+						freebsd : (this.bre == "true" && this.osv == "freebsd") ? 1 : 0 ,
+						windows : (this.bre == "true" && this.osv == "windows") ? 1 : 0 ,
+						other : (this.bre == "true" && this.osv == "other") ? 1 : 0
 					} ,
 					tsv : {
-						v010 : (this.bre == true && this.tsv == "010") ? 1 : 0 ,
-						v011 : (this.bre == true && this.tsv == "011") ? 1 : 0 ,
-						v012 : (this.bre == true && this.tsv == "012") ? 1 : 0 ,
-						v020 : (this.bre == true && this.tsv == "020") ? 1 : 0 ,
-						v021 : (this.bre == true && this.tsv == "021") ? 1 : 0 ,
-						v022 : (this.bre == true && this.tsv == "022") ? 1 : 0 ,
-						v023 : (this.bre == true && this.tsv == "023") ? 1 : 0 ,
-						v024 : (this.bre == true && this.tsv == "024") ? 1 : 0
+						v010 : (this.bre == "true" && this.tsv == "010") ? 1 : 0 ,
+						v011 : (this.bre == "true" && this.tsv == "011") ? 1 : 0 ,
+						v012 : (this.bre == "true" && this.tsv == "012") ? 1 : 0 ,
+						v020 : (this.bre == "true" && this.tsv == "020") ? 1 : 0 ,
+						v021 : (this.bre == "true" && this.tsv == "021") ? 1 : 0 ,
+						v022 : (this.bre == "true" && this.tsv == "022") ? 1 : 0 ,
+						v023 : (this.bre == "true" && this.tsv == "023") ? 1 : 0 ,
+						v024 : (this.bre == "true" && this.tsv == "024") ? 1 : 0
 					}
 				} ,
 				brtObfs2 : {
@@ -182,13 +192,13 @@ var mapBridges = function() {
 			}
 		}
 	};
-	emit( "Bridges" , map );
+	emit( this.date + " Bridges" , map );
 };
 
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceBridges = function ( key, values ) {
-	var fact = {				
+	var fact = {								
 		servers : {
 			bridges : {
 				total : {
@@ -372,7 +382,7 @@ var reduceBridges = function ( key, values ) {
 	};
 	
 	values.forEach( function(v) {
-	
+		fact.date = v.date ;
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -520,10 +530,10 @@ var aggregateBridges = function(theDate) {
 		reduceBridges,
 		{ 
 			out: { 
-				merge : "tempFacts" 					//	the temporary fact collection
+				reduce : "tempFacts" 					//	the temporary fact collection
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			}
-			, query : { "date" : theDate } 				//	limit aggregation to date
+			} ,			
+			query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
@@ -534,5 +544,6 @@ var aggregateBridges = function(theDate) {
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
 var run = function(theDate) {
+	db.tempFacts.remove();								//	TODO remove after testing
 	aggregateBridges(theDate);
 }("2013-04-03 22" );

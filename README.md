@@ -258,7 +258,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmedr		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmedr		_id		document ID					string			(*)			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
 	bgmedr		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 	bgmedr		node	node id						string			-			Tor fingerprint
 	bgmedr		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
@@ -266,8 +266,8 @@ These 3 collections contain all raw data as it is imported into the database.
 	bgmedr		date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 	bgmedr		nick	nickname					string			mode		nickname of relay
-	 gmedr		role	roles/functions of relay	array	string	mode [*]	some of: Guard,  Middle,  Exit,  Dir
-	 gmedr		flag	flags 						array	string	mode [*]	some of: Authority,  BadExit,  BadDirectory,  Fast,  
+	 gmedr		role	roles/functions of relay	array	string	mode (*)	some of: Guard,  Middle,  Exit,  Dir
+	 gmedr		flag	flags 						array	string	mode (*)	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
 	b    r		bwa		bandwidth advertized 		integer			mean		B/s
@@ -287,7 +287,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	
 	in			field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_id		document ID					string			[*]			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
+	bgmed		_id		document ID					string			(*)			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
 	bgmed		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 	bgmed		node	node id						string			-			Tor fingerprint
 	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
@@ -301,7 +301,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	bgmed		osv		operating system			string			mode		one of: linux, darwin, freebsd, windows, other 
 	b			brp		bridge pool     			string			mode		one of: email, https, other 
 	b			bre		bridge is in EC2 cloud		boolean			mode
-	b			brt		bridge pluggable transport	array	string	mode [*]	some of: obfs2, obfs3
+	b			brt		bridge pluggable transport	array	string	mode (*)	some of: obfs2, obfs3
 
 
 **importClients**  
@@ -315,9 +315,9 @@ These 3 collections contain all raw data as it is imported into the database.
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 				cb		clients at bridges			integer			mean
-				cbcc	clients@bridges per country	array	object	mean		{cc:integer}	// an array of {countrycode : int } objects
+				cbcc	clients@bridges per country	object			mean		{cc:integer}	// an array of {countrycode : int } objects
 				cr		clients at relays			integer			mean
-				crcc	clients@relays per country	array	object	mean		{cc:integer}
+				crcc	clients@relays per country	object			mean		{cc:integer}
 				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/Unknown:integer}
 				cip		ip-version used				object			mode		{v4/v6:integer}
 	
@@ -331,7 +331,7 @@ These 3 collections contain all raw data as it is imported into the database.
 	valuespace	expected values
 				for lists of possible values "some of" where multiple values are possible 
 				or "one of" where possible values are mutually exclusive
-	[*]			if the relay provides the functionality in question for at least half of the timespan in question
+	(*)			if the relay provides the functionality in question for at least half of the timespan in question
 
 Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
 Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
@@ -492,6 +492,53 @@ Only the flags "Fast", "Stable" and "Authority" will be aggregated for the follo
 	Middle		x		x
 	Exit		x		x
 	Directory 					x
+
+_default values_
+To reduce complexity in the mapReduce script it has proven helpful that every field of import data always has at least a default value.
+For importRelays these are:
+	addd	""
+	node	""
+	span	0
+	date	""	
+	nick	""
+	role	[]
+	flag	[]	
+	bwa		0	
+	bwc		0	
+	tsv		""	
+	osv		""	
+	pbr		0	
+	pbg		0	
+	pbm		0	
+	pbe		0	
+	pex		[]	
+	as		0	
+	cc		""	
+	
+For importBridges:
+	addd	""
+	node	""
+	span	0	
+	date	""	
+	nick	""
+	bwa		0	
+	bwc		0	
+	tsv		""	
+	osv		""	
+	brp		""	
+	bre		0	
+	brt		[]	
+	
+And for importClients:
+	addd	""
+	span	0	
+	date	""	
+	cb		0	
+	cbcc	{}
+	cr		0	
+	crcc	{}
+	cpt		{}	
+	cip		{}
 
 
 Data aggregation
@@ -884,6 +931,29 @@ r    pbe    m    exit prob.      float
 
 -->
 
+**aggregation admin interface**
+
+	TODO
+
+IMPORT
+* field/browse: specify location of json data to import (local file or url)
+* select: in which importCollection should the data be imported (importClients, importBridges, importRelays)
+* remark: make sure that the import command allows overwriting existing records
+* problem: this is a OS shell command - how to control it through a webinterface?
+
+AGGREGATION
+* field: select a date or a timspan (start: date or min, end: date or max) of the original data
+* field: select a date or a timspan (start: date or min, end: date or max) of the last modification (addd) 
+* both fields are optional and complementary. if nothing is selecetd everything get's generated
+
+LOGIC
+* the app needs to generate all datasets within the given time span 
+* it also needs to (re-) generate all aggregated time spans (6h, 24h) during which single records have been added or modified
+
+REMARKS
+* updating existing data or adding new data should make no difference to the admin interface
+  existing records in visFacts will be overwritten (aggregateFacts -> out:merge)
+
 
 ## Usecases
 
@@ -1036,9 +1106,9 @@ mkdir MONGOdata
 mongod --dbpath MONGOdata
 
 # Import the data
-mongoimport --db tor --collection importRelays --stopOnError --upsert --file RAWdata/relays.json
-mongoimport --db tor --collection importBridges --stopOnError --upsert --file RAWdata/bridges.json
-mongoimport --db tor --collection importClients --stopOnError --upsert --file RAWdata/clients.json
+mongoimport --db tor --collection importRelays --stopOnError --upsert --file ~/relays.json
+mongoimport --db tor --collection importBridges --stopOnError --upsert --file ~/bridges.json
+mongoimport --db tor --collection importClients --stopOnError --upsert --file ~/clients.json
 
 # start mongo shell
 mongo
@@ -1059,10 +1129,13 @@ show dbs
 use dbName
 db.dropDatabase()
 show collections
-db.collectionName.remove()
+db.collectionName.drop()							// deletes the collection		
+db.collectionName.remove()							// removes the content of the collection							
 db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
 db.collectionName.dropIndex("indexName")
 db.collectionName.getIndexSpecs()
 db.collectionName.findOne()
+db.collectionName.find().pretty()
+db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
 ```
 

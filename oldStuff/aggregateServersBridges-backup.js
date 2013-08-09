@@ -1,75 +1,44 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-var mapServersBridges = function(theDate) {
-  return function() {
-    var self = this,
-      map = {
-        date: self.date ,
-        servers : {
-          total : {
-            count : 1 ,
-            bwa : self.bwa ,
-            bwc : self.bwc ,
-            osv : {
-              linux : (self.osv == "linux") ? 1 : 0 ,
-              darwin : (self.osv == "darwin") ? 1 : 0 ,
-              freebsd : (self.osv == "freebsd") ? 1 : 0 ,
-              windows : (self.osv == "windows") ? 1 : 0 ,
-              other : (self.osv == "other") ? 1 : 0
-            } ,
-            tsv : {
-              v010 : (self.tsv == "010") ? 1 : 0 ,
-              v011 : (self.tsv == "011") ? 1 : 0 ,
-              v012 : (self.tsv == "012") ? 1 : 0 ,
-              v020 : (self.tsv == "020") ? 1 : 0 ,
-              v021 : (self.tsv == "021") ? 1 : 0 ,
-              v022 : (self.tsv == "022") ? 1 : 0 ,
-              v023 : (self.tsv == "023") ? 1 : 0 ,
-              v024 : (self.tsv == "024") ? 1 : 0
-            }
-          }
-        }
-      };
-    emit( theDate + " ServersBridges" , map );
-  } 
-=======
 var mapServersBridges = function() {
-	var map = {
-//		date: this.date ,
-		servers : {
-			total : {
-				count : 1 ,
-				bwa : this.bwa ,
-				bwc : this.bwc ,
-				osv : {
-					linux : (this.osv == "linux") ? 1 : 0 ,
-					darwin : (this.osv == "darwin") ? 1 : 0 ,
-					freebsd : (this.osv == "freebsd") ? 1 : 0 ,
-					windows : (this.osv == "windows") ? 1 : 0 ,
-					other : (this.osv == "other") ? 1 : 0
-				} ,
-				tsv : {
-					v010 : (this.tsv == "010") ? 1 : 0 ,
-					v011 : (this.tsv == "011") ? 1 : 0 ,
-					v012 : (this.tsv == "012") ? 1 : 0 ,
-					v020 : (this.tsv == "020") ? 1 : 0 ,
-					v021 : (this.tsv == "021") ? 1 : 0 ,
-					v022 : (this.tsv == "022") ? 1 : 0 ,
-					v023 : (this.tsv == "023") ? 1 : 0 ,
-					v024 : (this.tsv == "024") ? 1 : 0
+	    print("ASDASDSADSA");
+	    print(theDate);
+		var self = this,
+			map = {
+				date: self.date ,
+				servers : {
+				  total : {
+					count : 1 ,
+					bwa : self.bwa ,
+					bwc : self.bwc ,
+					osv : {
+						linux : (self.osv == "linux") ? 1 : 0 ,
+						darwin : (self.osv == "darwin") ? 1 : 0 ,
+						freebsd : (self.osv == "freebsd") ? 1 : 0 ,
+						windows : (self.osv == "windows") ? 1 : 0 ,
+						other : (self.osv == "other") ? 1 : 0
+					} ,
+					tsv : {
+						v010 : (self.tsv == "010") ? 1 : 0 ,
+						v011 : (self.tsv == "011") ? 1 : 0 ,
+						v012 : (self.tsv == "012") ? 1 : 0 ,
+						v020 : (self.tsv == "020") ? 1 : 0 ,
+						v021 : (self.tsv == "021") ? 1 : 0 ,
+						v022 : (self.tsv == "022") ? 1 : 0 ,
+						v023 : (self.tsv == "023") ? 1 : 0 ,
+						v024 : (self.tsv == "024") ? 1 : 0
+					}
 				}
 			}
-		}
-	};
-	emit( this.date + " ServersBridges" , map );
-//	emit( this.date , map ); 							//	that didn't work out
->>>>>>> skip-tempFacts-step
+		};
+		print("AAA");
+	    emit( theDate + " ServersBridges" , map );
+	    print(map);
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceServersBridges = function ( key, values ) {	
 	var temp = {
-//		date : 0 ,
+		date : 0 ,
 		servers : {
 			total : {
 				count : 0 ,
@@ -96,7 +65,7 @@ var reduceServersBridges = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
-//		temp.date = v.date ;
+		temp.date = v.date ;
 		temp.servers.total.count += 1 ;
 		temp.servers.total.bwa += v.servers.total.bwa ;
 		temp.servers.total.bwc += v.servers.total.bwc ;
@@ -121,7 +90,7 @@ var reduceServersBridges = function ( key, values ) {
 var aggregateServersBridges = function(theDate) {
   // http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
 	db.importBridges.mapReduce (			
-		mapServersBridges(theDate),
+		mapServersBridges,
 		reduceServersBridges,
 		{ 
 			out: { 
@@ -133,13 +102,15 @@ var aggregateServersBridges = function(theDate) {
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-	aggregateServersBridges(date);
+var run = function() {
+  	var theDate = "2013-04-03 22";
+	db.tempFacts.remove()
+	aggregateServersBridges(theDate);
 };
-run(date);
+run();

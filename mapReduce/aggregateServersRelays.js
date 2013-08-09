@@ -1,7 +1,6 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapServersRelays = function() {
 	var map = {
-//		date: this.date ,
 		servers : {
 			total : {
 				count : 1 ,
@@ -27,14 +26,12 @@ var mapServersRelays = function() {
 			}
 		}
 	};
-	emit( this.date + " ServersRelays" , map );
-//	emit( this.date , map ); 							//	that didn't work out
+	emit( "Servers" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceServersRelays = function ( key, values ) {	
-	var temp = {
-//		date : 0 ,
+	var fact = {
 		servers : {
 			total : {
 				count : 0 ,
@@ -61,25 +58,24 @@ var reduceServersRelays = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) {
-//		temp.date = v.date ;
-		temp.servers.total.count += 1 ;
-		temp.servers.total.bwa += v.servers.total.bwa ;
-		temp.servers.total.bwc += v.servers.total.bwc ;
-		temp.servers.total.osv.linux += v.servers.total.osv.linux ;
-		temp.servers.total.osv.darwin += v.servers.total.osv.darwin ;
-		temp.servers.total.osv.freebsd += v.servers.total.osv.freebsd ;
-		temp.servers.total.osv.windows += v.servers.total.osv.windows ;
-		temp.servers.total.osv.other += v.servers.total.osv.other ;
-		temp.servers.total.tsv.v010 += v.servers.total.tsv.v010 ;
-		temp.servers.total.tsv.v011 += v.servers.total.tsv.v011 ;
-		temp.servers.total.tsv.v012 += v.servers.total.tsv.v012 ;
-		temp.servers.total.tsv.v020 += v.servers.total.tsv.v020 ;
-		temp.servers.total.tsv.v021 += v.servers.total.tsv.v021 ;
-		temp.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
-		temp.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
-		temp.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;
+		fact.servers.total.count += v.servers.total.count ;
+		fact.servers.total.bwa += v.servers.total.bwa ;
+		fact.servers.total.bwc += v.servers.total.bwc ;
+		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
+		fact.servers.total.osv.darwin += v.servers.total.osv.darwin ;
+		fact.servers.total.osv.freebsd += v.servers.total.osv.freebsd ;
+		fact.servers.total.osv.windows += v.servers.total.osv.windows ;
+		fact.servers.total.osv.other += v.servers.total.osv.other ;
+		fact.servers.total.tsv.v010 += v.servers.total.tsv.v010 ;
+		fact.servers.total.tsv.v011 += v.servers.total.tsv.v011 ;
+		fact.servers.total.tsv.v012 += v.servers.total.tsv.v012 ;
+		fact.servers.total.tsv.v020 += v.servers.total.tsv.v020 ;
+		fact.servers.total.tsv.v021 += v.servers.total.tsv.v021 ;
+		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
+		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
+		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;
 	});
-	return temp;
+	return fact;
 };
 
 //	BINDING MAP AND REDUCE  //////////////////////////////////////////////////////////////////////////////////
@@ -92,18 +88,17 @@ var aggregateServersRelays = function(theDate) {
 				reduce : "tempFacts" 					//	the temporary fact collection
 //				reduce : "visFacts" 					//	that didn't work out
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-	aggregateServersRelays(date);
-};
-run(date);
+var run = function(theDate) {
+	aggregateServersRelays(theDate);
+}("2013-04-03 22");

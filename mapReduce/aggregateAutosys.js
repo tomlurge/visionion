@@ -1,7 +1,6 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapAutosys = function() {
 	var map = {
-//		date: this.date ,
 		autosys : {
 			as : this.as ,
 			name : "" ,
@@ -35,7 +34,7 @@ var mapAutosys = function() {
 	autosys.name = function(this.as) { return ""; }		//	TODO	lookup name for AS
 	autosys.home = function(this.as) { return ""; }		//	TODO	lookup jurisdiction for AS
 	*/
-    emit( this.date + " Autosys" , map );
+    emit( "Autosys" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +43,6 @@ var reduceAutosys = function ( key, values ) {
 	var countries =new Array();
 	var fact = autosys ;
 	var asObject = {
-//		date : 0 ,
 		as : "" ,
 		name : "" ,
 		hone : "",
@@ -104,8 +102,7 @@ var reduceAutosys = function ( key, values ) {
 		if (!ccAquired) {
 			autosys[asPos].countries[ccPos].cc = v.countries.cc;
 		};
-//		autosys[asPos].date = v.date ;
-		autosys[asPos].relay += 1 ;
+		autosys[asPos].relay += v.relay ;
 		autosys[asPos].bwa += v.bwa ;
 		autosys[asPos].bwc += v.bwc ;
 		autosys[asPos].fast += v.fast ;
@@ -138,18 +135,17 @@ var aggregateAutosys = function(theDate) {
 			out: { 
 				reduce : "tempFacts" 					//	the temporary fact collection
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate }				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-	aggregateAutosys(date);
-};
-run(date);
+var run = function(theDate) {
+	aggregateAutosys(theDate);
+}("2013-04-03 22" );

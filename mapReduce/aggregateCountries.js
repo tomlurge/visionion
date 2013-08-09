@@ -1,7 +1,6 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountries = function() {							//	putting it all together
 	var map = {
-//		date: this.date ,
 		country : {
 			cc: this.cc ,
 			cbcc: this.cbcc ,
@@ -48,18 +47,17 @@ var mapCountries = function() {							//	putting it all together
 			autosys: this.autosys						//	already an array of as:#
 		}
 	};
-	emit( this.date + " Countries" , map );
+	emit( "Countries" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceCountries = function ( key, values ) {
 	var countries = new Array();
 	var fact = { 
-//		fact.date = this.date ;							//	TODO	not sure if this will work
+		date = theDate ;								//	TODO	not sure if this will work
 		countries : [] ; 								//	TODO 	ERROR
 	};	
 	var country = {	
-//		date : 0 ,
 		cc: "" ,
 		cbcc: 0 ,
 		crcc: 0 ,
@@ -155,20 +153,19 @@ var aggregateCountries = function(theDate) {
 		reduceCountries,
 		{ 
 			out: { 
-				reduce : "tempFacts" 					//	the temporary fact collection
+				merge : "tempFacts" 					//	the temporary fact collection
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-	aggregateCountries(date);
-};
-run(date);
+var run = function(theDate) {
+	aggregateCountries(theDate);
+}("2013-04-03 22" );

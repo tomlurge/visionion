@@ -1,6 +1,6 @@
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
+﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 //
-//	STEP 2 : COLLECTING ALL PRE-AGGREGATED DATA INTO THE FINAL visFacts COLLECTION
+//	STEP 2 : AGGREGATING ALL PRE-AGGREGATED DATA FROM tempFacts INTO THE FINAL visFacts COLLECTION
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
@@ -10,10 +10,12 @@
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var mapFacts = function() {
-	var map = {					 
-//		date: this.value.date ,						
-
-		clients : {										//	no real aggregation going on with client 
+	var map = {		
+	
+		date : theDate ,
+		
+		/*
+		clients : {										//	no real aggregation going on with clients
 			total : this.value.clients.total ,			//	since client data is already aggregated when imported - 
 			atBridges : this.value.clients.atBridges ,	//	just copying values here
 			atRelays : this.value.clients.atRelays ,
@@ -24,11 +26,11 @@ var mapFacts = function() {
 			cptOR : this.value.clients.cptOR ,
 			cptUnknown : this.value.clients.cptUnknown
 		} 
-		/*
 		,	
+		*/
 		servers : {
 			total : {
-				count : this.value.servers.total.count ,
+				count : !(this.value.servers.total.count) ?  0 : this.value.servers.total.count ,
 				bwa : this.value.servers.total.bwa ,
 				bwc : this.value.servers.total.bwc ,
 				osv : {
@@ -50,7 +52,6 @@ var mapFacts = function() {
 				}
 			}
 		} 
-		*/
 		/*
 			 ,
 			bridges : {
@@ -813,10 +814,8 @@ var mapFacts = function() {
 		
 		*/
 		
-	};
-//	emit( ( date + " Fact") , map );					//	date isn't reachable
-//	emit( ("Fact") , map );
-	emit( ( "2013-04-03 22 Fact") , map );
+	};				
+	emit( theDate + "Fact  Test"  , map );
 };
 
 
@@ -827,8 +826,9 @@ var mapFacts = function() {
 
 var reduceFacts = function ( key, values ) {
 	var fact = {
-//		date : 0 ,
+		date : "" ,
 
+		/*	
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -839,9 +839,9 @@ var reduceFacts = function ( key, values ) {
 			cptObfs3 : 0 ,
 			cptOR : 0 ,
 			cptUnknown : 0
-		} 
-		/*		
+		} 	
 		,
+		*/	
 
 		servers : {
 			total : {
@@ -866,8 +866,7 @@ var reduceFacts = function ( key, values ) {
 					v024 : 0
 				}
 			}
-		}
-		*/			
+		}		
 		/*
 			 ,
 			bridges : {
@@ -1623,17 +1622,17 @@ var reduceFacts = function ( key, values ) {
 		*/
 	} ;
 	values.forEach( function(v) {
-	
-//		fact.date = v.date ;
-        print("OBJECT DUMP");
+/*        print("OBJECT DUMP");
         for (var k in v) {
             print("===");
         	print(k);
         	print(v[k]);
             print("===");
         }
-
-		fact.clients.total += v.clients.total;
+*/
+		fact.date = v.date ;
+		/*		
+		fact.clients.total += v.clients.total ;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
 		fact.clients.cip4 += v.clients.cip4 ;
@@ -1642,7 +1641,7 @@ var reduceFacts = function ( key, values ) {
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
-		/*		
+		*/	
 		fact.servers.total.count += v.servers.total.count ;
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
@@ -1659,7 +1658,6 @@ var reduceFacts = function ( key, values ) {
 		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;	
-		*/	
 		/*		
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
@@ -2262,21 +2260,12 @@ var aggregateFacts = function(theDate) {
 				reduce : "visFacts"		 				//	the final fact collection
 //				, nonAtomic : true						//	prevents locking of the db during post-processing
 			}	
-//			, query : { "date" : theDate } 				//	TEST	query does work BUT 	null results
-//			, query : { "value.date" : theDate } 					//	TEST	query does NOT work		complains about TypeError: Cannot read property 'count' of undefined near 'vers.total.count , \t\t\t\tbwa : this.value.s'  (line 19)"
-//			, query : { value : { "date" : "2013-04-03 22" } }		//	TEST	query does work BUT 	null results
-//			, query : { value : { "date" : theDate } }				//	TEST	query does work BUT 	null results	
-			, query : { "_id" : "2013-04-03 22 Clients" }	//	TEST	query does work OKAY 	and good result
-														/*	
-															ServersRelays 	ok
-															ServersBridges	ok
-															Bridges			bad
-															Relays			bad
-															Clients			bad
-														*/
+//			, query : { "value.date" : theDate } 		//	TODO	this maybe unnecessarily adds complexity
+														//			could be skipped if we decided never to store tempFacts	
 //			, sort										//  sorts the input documents for fewer reduce operations
 //			, jsMode: true								//	check if feasable! is faster, but needs more memory
 //			, finalize : finalizeFacts
+			, scope: { theDate: theDate}		
 		}
 	);
 };
@@ -2286,12 +2275,16 @@ var aggregateFacts = function(theDate) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	EXECUTE
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {
-//	db.visFacts.remove();
-	aggregateFacts(date);
-};
-run(date);
+
+var run = function(theDate) {
+    db.visFacts.remove();								//	TODO 	remove only Fact+theDate
+	aggregateFacts(theDate);
+}("2013-04-03 22");
+
+
+
+
+
 
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2307,7 +2300,7 @@ var run = function(date) {
     db.tempCountries.remove();
     db.tempFacts.remove();
 
-//	aggregation steps										TODO	how to include those files?
+//	aggregation steps										TODO	build Node app which includes these files
 
 	aggregateClients(date);							
 	aggregateServersRelays(date);					

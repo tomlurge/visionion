@@ -1,7 +1,6 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapCountriesClientsCR = function() {
 	var map = {
-//		date: this.date ,
 		country :  {
 			cc: "" ,
 			cbcc: 0 ,
@@ -60,7 +59,6 @@ var mapCountriesClientsCR = function() {
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceCountriesClients = function ( key, values ) {	//	same reduce function for CB and CR map functions	
 	var temp = {	
-//		date : 0 ,
 		cc: "" ,
 		cbcc: 0 ,
 		crcc: 0 ,
@@ -106,7 +104,6 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 		as: "" 				
 	};
 	values.forEach( function(v) {						// 	not much happening here since clients are already aggregated
-//		temp.date = v.date ;
 		temp.cc = v.cc ;								//	getting the cc
 		temp.cbcc = v.cbcc ;							//	catching the fish from mapCountriesClientsCB
 		temp.crcc = v.crcc ;							//	catching the fish from mapCountriesClientsCR
@@ -155,20 +152,19 @@ var aggregateCountriesClientsCR = function(theDate) {
 		reduceCountriesClients,
 		{ 
 			out: { 
-				reduce : "tempFacts" 					//	the temporary fact collection
+				reduce : "tempFacts" 					//	TODO	rather merge than reduce ?
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;
-var run = function(date) {	
-	aggregateCountriesClientsCR(date);	
-};
-run(date);
+var run = function(theDate) {
+	aggregateCountriesClientsCR(theDate);
+}("2013-04-03 22" );

@@ -1,27 +1,24 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapClients = function() {
 	var map = {
-//		date: this.date ,
 		clients : {
 			total : this.cr + this.cb ,
 			atBridges : this.cb ,
 			atRelays : this.cr ,
-			cip4 : this.cip.v4 ,
-			cip6 : this.cip.v6 ,
-			cptObfs2 : this.cpt.obfs2 ,
-			cptObfs3 : this.cpt.obfs3 ,
-			cptOR : this.cpt.OR ,
-			cptUnknown : this.cpt.Unknown
+			cip4 : !this.cip.v4 ? 0 : this.cip.v4 ,
+			cip6 : !this.cip.v6 ? 0 : this.cip.v6 ,
+			cptObfs2 : !this.cpt.obfs2 ? 0 : this.cpt.obfs2 ,
+			cptObfs3 : !this.cpt.obfs3 ? 0 : this.cpt.obfs3 ,
+			cptOR : !this.cpt.OR ? 0 : this.cpt.OR ,
+			cptUnknown : !this.cpt.Unknown ? 0 : this.cpt.Unknown
 		}
 	};
-	emit( this.date + " Clients" , map );
-//	emit( this.date , map ); 							//	that didn't work out
+	emit( "Clients" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
 var reduceClients = function ( key, values ) {
 	var fact = {	
-//		date : 0 ,
 		clients : {
 			total : 0 ,
 			atBridges : 0 ,
@@ -35,8 +32,7 @@ var reduceClients = function ( key, values ) {
 		}
 	};
 	values.forEach( function(v) { 
-//		fact.date = v.date ;
-		fact.clients.total += v.clients.total;
+		fact.clients.total += v.clients.total ;
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
 		fact.clients.cip4 += v.clients.cip4 ;
@@ -56,21 +52,20 @@ var aggregateClients = function(theDate) {
 		reduceClients,
 		{ 
 			out: { 
-				reduce : "tempFacts" 					//	the temporary fact collection
+				merge : "tempFacts" 					//	the temporary fact collection
 //				reduce : "visFacts" 					//	that didn't work out
 			//	, nonAtomic : true						//	prevents locking of the db during post-processing
-			} ,			
-			query : { "date" : theDate } 				//	limit aggregation to date
+			}
+			, query : { "date" : theDate } 				//	limit aggregation to date
 			//	, sort									//  sorts the input documents for fewer reduce operations
 			//	, jsMode: true							//	check if feasable! is faster, but needs more memory
 			//	, finalize : finalizeFacts
+			, scope: { theDate: theDate}				//	http://stackoverflow.com/questions/2996268/mongodb-mapreduce-global-variables-within-map-function-instance
 		}
 	);
 };
 
 //	EXECUTION  ///////////////////////////////////////////////////////////////////////////////////////////////
-var date = "2013-04-03 22" ;	
-var run = function(date) {
-	aggregateClients(date);
-};
-run(date);
+var run = function(theDate) {
+	aggregateClients(theDate);
+}("2013-04-03 22");
