@@ -26,7 +26,8 @@ var mapServersRelays = function() {
 			}
 		}
 	};
-	emit( "Servers" , map );
+	emit( theDate , map );
+//	emit( "Servers" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////

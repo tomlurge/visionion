@@ -182,7 +182,8 @@ var mapBridges = function() {
 			}
 		}
 	};
-	emit( "Bridges" , map );
+	emit( theDate , map );
+//	emit( "Bridges" , map );
 };
 
 

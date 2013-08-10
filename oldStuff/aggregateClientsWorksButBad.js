@@ -1,9 +1,9 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapClients = function() {
-	var map = {
-		clients : 
-			this.cr ? {
-				total : this.cr + this.cb  ,
+	if(this.bre) {
+		var map = {
+			clients : {
+				total : this.cr + this.cb ,
 				atBridges : this.cb ,
 				atRelays : this.cr ,
 				cip4 : !this.cip.v4 ? 0 : this.cip.v4 ,
@@ -12,16 +12,23 @@ var mapClients = function() {
 				cptObfs3 : !this.cpt.obfs3 ? 0 : this.cpt.obfs3 ,
 				cptOR : !this.cpt.OR ? 0 : this.cpt.OR ,
 				cptUnknown : !this.cpt.Unknown ? 0 : this.cpt.Unknown
-			} : {
-				total : 0 ,
+			}
+		}
+	}
+	else
+	{
+		var map = {
+			clients : {
+				total : 0,
 				atBridges : 0 ,
 				atRelays : 0 ,
 				cip4 : 0 ,
-				cip6 : 0,
+				cip6 : 0 ,
 				cptObfs2 : 0 ,
 				cptObfs3 : 0 ,
 				cptOR : 0 ,
 				cptUnknown : 0
+			}
 		}
 	};
 	emit( theDate , map );

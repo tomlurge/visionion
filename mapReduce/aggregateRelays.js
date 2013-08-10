@@ -576,7 +576,8 @@ var mapRelays = function() {
 			}
 		}
 	};
-	emit( "Relays" , map );
+	emit( theDate , map );
+//	emit( "Relays" , map );
 };
 
 //	REDUCE  //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1158,7 +1159,7 @@ var reduceRelays = function ( key, values ) {
 	};
 	values.forEach( function(v) {
 
-		// TOTAL
+		// ALL RELAYS
         fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;
 		fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
 		fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;

@@ -1,27 +1,16 @@
 ﻿//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
 var mapClients = function() {
 	var map = {
-		clients : 
-			this.cr ? {
-				total : this.cr + this.cb  ,
-				atBridges : this.cb ,
-				atRelays : this.cr ,
-				cip4 : !this.cip.v4 ? 0 : this.cip.v4 ,
-				cip6 : !this.cip.v6 ? 0 : this.cip.v6 ,
-				cptObfs2 : !this.cpt.obfs2 ? 0 : this.cpt.obfs2 ,
-				cptObfs3 : !this.cpt.obfs3 ? 0 : this.cpt.obfs3 ,
-				cptOR : !this.cpt.OR ? 0 : this.cpt.OR ,
-				cptUnknown : !this.cpt.Unknown ? 0 : this.cpt.Unknown
-			} : {
-				total : 0 ,
-				atBridges : 0 ,
-				atRelays : 0 ,
-				cip4 : 0 ,
-				cip6 : 0,
-				cptObfs2 : 0 ,
-				cptObfs3 : 0 ,
-				cptOR : 0 ,
-				cptUnknown : 0
+		clients : {
+			total : this.cr + this.cb ,
+			atBridges : this.cb ,
+			atRelays : this.cr ,
+			cip4 : !this.cip.v4 ? 0 : this.cip.v4 ,
+			cip6 : !this.cip.v6 ? 0 : this.cip.v6 ,
+			cptObfs2 : !this.cpt.obfs2 ? 0 : this.cpt.obfs2 ,
+			cptObfs3 : !this.cpt.obfs3 ? 0 : this.cpt.obfs3 ,
+			cptOR : !this.cpt.OR ? 0 : this.cpt.OR ,
+			cptUnknown : !this.cpt.Unknown ? 0 : this.cpt.Unknown
 		}
 	};
 	emit( theDate , map );
