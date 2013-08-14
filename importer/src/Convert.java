@@ -75,6 +75,7 @@ public class Convert {
 
   private static class Node {
     private String _id;
+    private String type;
     private String addd;
     private String node;
     private String nick;
@@ -100,6 +101,7 @@ public class Convert {
 
   private static class Client {
     private String _id;
+    private String type = "c";
     private String addd = "";
     private String date = "";
     private Integer span = 0;
@@ -287,11 +289,13 @@ public class Convert {
   private static void writeVisionionLine(Node node) throws IOException {
     List<String> roles = Arrays.asList(node.role);
     if (roles.contains("Bridge")) {
+      node.type = "b";
       node.role = null;
       node.pex = null;
       String nodeString = gson.toJson(node);      
       bridgesWriter.write(nodeString + "\n");
     } else {
+      node.type = "r";
       String nodeString = gson.toJson(node);
       relaysWriter.write(nodeString + "\n");
     }
