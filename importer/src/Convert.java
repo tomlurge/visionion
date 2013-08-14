@@ -260,6 +260,15 @@ public class Convert {
         }
         cbcc.get(date).put(country, users);
       } else if (transport.length() > 0) {
+        if (transport.equals("<OR>")) {
+          transport = "OR";
+        } else if (transport.equals("<??>")) {
+          transport = "unknown";
+        } else if (transport.startsWith("<")) {
+          System.err.println("Unrecognized transport name '" + transport
+              + "'.  Skipping.");
+          return;
+        }
         if (!bptu.containsKey(date)) {
           bptu.put(date, new TreeMap<String, Integer>());
         }
