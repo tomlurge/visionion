@@ -277,13 +277,10 @@ public class Convert {
 
   private static Gson gson = new Gson();
 
-  private static BufferedWriter relaysWriter, bridgesWriter,
-      clientsWriter;
+  private static BufferedWriter nodesWriter;
 
   private static void openOutputFiles() throws IOException {
-    relaysWriter = new BufferedWriter(new FileWriter("relays.json"));
-    bridgesWriter = new BufferedWriter(new FileWriter("bridges.json"));
-    clientsWriter = new BufferedWriter(new FileWriter("clients.json"));
+    nodesWriter = new BufferedWriter(new FileWriter("nodes.json"));
   }
 
   private static void writeVisionionLine(Node node) throws IOException {
@@ -293,11 +290,11 @@ public class Convert {
       node.role = null;
       node.pex = null;
       String nodeString = gson.toJson(node);      
-      bridgesWriter.write(nodeString + "\n");
+      nodesWriter.write(nodeString + "\n");
     } else {
       node.type = "r";
       String nodeString = gson.toJson(node);
-      relaysWriter.write(nodeString + "\n");
+      nodesWriter.write(nodeString + "\n");
     }
   }
 
@@ -325,7 +322,7 @@ public class Convert {
         client.cip = distributeUserstatsToHours(ipvu.get(date), hour);
         String clientString = gson.toJson(client).
             replaceAll("\\\\u003c", "<").replaceAll("\\\\u003e", ">");
-        clientsWriter.write(clientString + "\n");
+        nodesWriter.write(clientString + "\n");
       }
     }
   }
@@ -356,8 +353,6 @@ public class Convert {
   }
 
   private static void closeOutputFiles() throws IOException {
-    relaysWriter.close();
-    bridgesWriter.close();
-    clientsWriter.close();
+    nodesWriter.close();
   }
 }
