@@ -319,11 +319,11 @@ var reduceCountriesClients = function ( key, values ) {	//	same reduce function 
 		} ,
 		as: "" 				
 	};
-	values.forEach( function(v) {						// 	not much happening here since clients are already aggregated
-		temp.cc = v.cc ;								//	getting the cc
-		temp.cbcc = v.cbcc ;							//	catching the fish from mapCountriesClientsCB
-		temp.crcc = v.crcc ;							//	catching the fish from mapCountriesClientsCR
-		temp.relay = v.relay ;							//	only 0's from here on
+	values.forEach( function(v) {
+		temp.cc = v.cc ;		
+		temp.cbcc = v.cbcc ;	
+		temp.crcc = v.crcc ;	
+		temp.relay = v.relay ;	
 		temp.guard = v.guard ;
 		temp.middle = v.middle ;
 		temp.exit = v.exit ;
@@ -502,11 +502,11 @@ var reduceCountries = function ( key, values ) {
 		} ,
 		as: [] 				
 	};
-	values.forEach( function(v) {
-		country.cc = v.cc ;
-		country.cbcc = v.cbcc ;
-		country.crcc = v.crcc ;
-		country.relay = v.relay ;
+	values.forEach( function(v) {				// 	not much happening here since clients are already aggregated
+		country.cc = v.cc ;						//	getting the cc
+		country.cbcc = v.cbcc ;					//	catching the fish from mapCountriesClientsCB
+		country.crcc = v.crcc ;					//	catching the fish from mapCountriesClientsCR
+		country.relay = v.relay ;				//	only 0's from here on
 		country.guard = v.guard ;
 		country.middle = v.middle ;
 		country.exit = v.exit ;

@@ -1,10 +1,19 @@
 ﻿TODO
-	defaults for every field
-	then check if 
-		aggregateBridges - brtObfs2, brtObfs, brtObfs23 now working?
-		aggregateRelays still contains so many empty (0) fields
-
-
+	test suite
+	autosys
+	countries
+	update docs
+	type abfrage (zu c/b/r/s) durch abfragen nach feldern ersetzen
+		vielleicht doch keien gute idee, weil es den zwang zu defaults verstärkt
+	über diesen zwang zum default ist der weg zu zwanglosen erweiterungen des schema verstellt
+		das ist schlecht
+		ein wenig eleganter ausweg wäre, in mapValues jeder zuweisung zu einem feld eine existenzabfrage nach dem feld vorzustellen
+		unelegant, aber besser
+	defaults für die values von cip, cpt, osv, tsv, pex
+		wenn wir von den defaults nicht generell wegkommen können, müssen sie hier auch implementiert werden
+	<OR> und <??> müssen im export script nach OR und Unknown umbenannt werden
+	
+	
 /*	
 
 import collection index 
@@ -149,7 +158,40 @@ um das mal festzuhalten
 				can that be solved programmatically by a loop?
 				do we have to ask for each object too?
 					could that even facilitate the procedure? 
+			OR:	let's add a type field
+				copy all raw data into one import collection called "import"
+				copy all aggregate scripts into one big script (like in the beginning)
+				modify aggregation script
+					either where appropriate add "if type == xxx" statements to the map step
+					or, easier but longer, if/else whole blocks copied over from the current scripts
+						with the else being default values ("", 0, etc)
+				use out:reduce instead of merge
 */
+
+
+/*	countries
+	countries occur in relay data
+		one per relay, very nice
+	and in client data
+		in 2 places - crcc and cbcc - as lists of name:value pairs
+	also folgender algorithmus
+		wenn dies ein relay ist
+			was hat es für ein cc
+				ist dieses cc schon in unserer liste
+					nein, dann nimm es auf
+		wenn dies ein clients ist
+			für jedes cc in cbcc und crcc
+				ist dieses cc schon in unserer liste
+					nein, dann nimm es auf
+		
+
+http://web.archive.org/web/20110722134154/http://www.mongodb.org/display/DOCS/MapReduce
+Map Function
+The map function references the variable this to inspect the current object under consideration. A map function calls emit(key,value) any number of times to feed data to the reducer. In most cases you will emit once per input document, but in some cases such as counting tags, a given document may have one, many, or even zero tags. 
+Reduce Function
+When you run a map/reduce, the reduce function will receive an array of emitted values and reduce them to a single value. Because the reduce function might be invoked more than once for the same key, the structure of the object returned by the reduce function must be identical to the structure of the map function's emitted value.
+*/
+
 
 /* testing example */
 

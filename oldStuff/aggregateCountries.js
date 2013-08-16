@@ -102,11 +102,11 @@ var reduceCountries = function ( key, values ) {
 		} ,
 		as: [] 				
 	};
-	values.forEach( function(v) {
-		country.cc = v.cc ;
-		country.cbcc = v.cbcc ;
-		country.crcc = v.crcc ;
-		country.relay = v.relay ;
+	values.forEach( function(v) {				// 	not much happening here since clients are already aggregated
+		country.cc = v.cc ;						//	getting the cc
+		country.cbcc = v.cbcc ;					//	catching the fish from mapCountriesClientsCB
+		country.crcc = v.crcc ;					//	catching the fish from mapCountriesClientsCR
+		country.relay = v.relay ;				//	only 0's from here on
 		country.guard = v.guard ;
 		country.middle = v.middle ;
 		country.exit = v.exit ;

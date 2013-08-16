@@ -1,13 +1,13 @@
-﻿//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+﻿//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	MAP
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var mapValues = function() {
 
-    var c = ( this.type == "c" ) ;																			//	clients
-    var b = ( this.type == "b" ) ;																			//	bridges
-    var r = ( this.type == "r" ) ;																			//	relays
-    var s = ( this.type == "b" ||this.type == "r" ) ;														//	servers
+    var c = ( this.type == "c" ) ;																//	clients
+    var b = ( this.type == "b" ) ;																//	bridges
+    var r = ( this.type == "r" ) ;																//	relays
+    var s = ( this.type == "b" ||this.type == "r" ) ;											//	servers
 	
 	var osLinux = ( s && this.osv == "linux" ) ;
 	var osDarwin = ( s && this.osv == "darwin" ) ;
@@ -44,26 +44,17 @@ var mapValues = function() {
 	var values = {
 		date : theDate ,
 		clients : {
-			total : 					c ?  this.cr + this.cb  : 0,									 
+			total : 					c ?  this.cr + this.cb  : 0,
 			atBridges :					c ?  this.cb : 0 ,
-			atRelays : 					c ?  this.cr : 0 ,
-			cip4 : 						c && this.cip.v4 ? this.cip.v4 : 0 ,
+			atRelays : 					c ?  this.cr : 0,
+			cip4 : 						c && this.cip.v4 ? this.cip.v4 : 0,
 			cip6 : 						c && this.cip.v6 ? this.cip.v6 : 0 ,
 			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown : 				c && this.cpt.Unknown ? this.cpt.Unknown : 0							
-		/*	total : 					this.cr && this.cb ?  this.cr + this.cb  : 0,				//	TODO	ALLEN  
-			atBridges :					this.cb ?  this.cb : 0 ,									//			zuweisungen
-			atRelays : 					this.cr ?  this.cr : 0,										//			eine
-			cip4 : 						this.cip ? this.cip.v4 : 0,									//			existenzabfrage
-			cip6 : 						this.cip ? this.cip.v6 : 0 ,								//			voranstellen
-			cptObfs2 : 					this.cpt ? this.cpt.obfs2 : 0 ,								//			aber das hier
-			cptObfs3 : 					this.cpt ? this.cpt.obfs3 : 0 ,								//			funzt noch nicht
-			cptOR : 					this.cpt ? this.cpt.OR : 0 ,								//			richtig
-			cptUnknown : 				this.cpt ? this.cpt.Unknown : 0								*/
+			cptUnknown : 				c && this.cpt.Unknown ? this.cpt.Unknown : 0
 		} ,		
-		servers : {	
+/*		servers : {	
 			total : {
 				count : 				s ?  1 : 0 ,
 				bwa :	  				s ?  this.bwa : 0 ,
@@ -265,7 +256,7 @@ var mapValues = function() {
 				}
 			} ,
 			relays : {
-				roleAll : {																					//	RELAYS ALL
+				roleAll : {																		//	RELAYS	ALL
 					total : {
 						count :			r ?  1 : 0 ,
 						bwa : 			r ?  this.bwa : 0  ,
@@ -382,7 +373,7 @@ var mapValues = function() {
 						pbr :			r && fast && stable ? this.pbr : 0.0
 					}
 				} ,							
-				roleGuard : {																				//	RELAYS GUARD
+				roleGuard : {																	//	RELAYS	GUARD
 					total : {
 						count :			r && guard ? 1 : 0 ,
 						bwa :			r && guard ? this.bwa : 0 ,
@@ -499,7 +490,7 @@ var mapValues = function() {
 						pbg :			r && guard && fast && stable ? this.pbg : 0.0
 					}
 				} ,				
-				roleMiddle : {																				//	RELAYS MIDDLE
+				roleMiddle : {																	//	RELAYS	MIDDLE
 					total : {
 						count :			r && middle ? 1 : 0 ,
 						bwa :			r && middle ? this.bwa : 0 ,
@@ -616,7 +607,7 @@ var mapValues = function() {
 						pbm :			r && middle && fast && stable ? this.pbm : 0.0
 					}
 				} ,
-				roleExit : {																				//	RELAYS EXIT
+				roleExit : {																	//	RELAYS	EXIT
 					total : {
 						count :			r && exit ? 1 : 0 ,
 						bwa :			r && exit ? this.bwa : 0 ,
@@ -778,7 +769,7 @@ var mapValues = function() {
 						pbe :			r && exit && fast && stable ? this.pbe : 0.0	
 					}
 				} ,		
-				roleDir : {																					//	RELAYS DIR
+				roleDir : {																		//	RELAYS	DIR
 					total : {
 						count :			r && dir ? 1 : 0 ,
 						bwa :			r && dir ? this.bwa : 0 ,
@@ -825,23 +816,220 @@ var mapValues = function() {
 					}
 				}
 			}
+		} ,			*/		
+		countries :	[] ,
+		autosys: []
+	};				
+	
+
+/* 	aggregating countries
+	country information can come from 2 sources: client data and relay data. 
+	when it comes from clients it contains 2 arrays: one for number of clients connecting 
+	through bridges by country, one for number of clients connecting through relays by 
+	country (this data is already pre-aggregated before import in one clients document 
+	per datetime). when the document comes from a relay it may contain at most 1 country 
+	(the country the relay is located in) and eventually the autonomous system. 
+	in the end we want to have an array of uniform country objects with all the data 
+	available.  these two types require rather different procedures when aggregating. 
+	in the map step 
+	we therefor first check if the type of the document at hand is "c" 
+	(client) or "r" (relay) and populate a country template accordingly.
+	we have 3 cases since clients data contains 2 country arrays: cbcc and crcc. in each 
+	case we work from the same country template and fill it with the data from the mapped 
+	document.
+	the countries array constructed from a mapped client type document may contain 2 
+	documents for each country - one from cbcc and one from crcc - and a total of about 
+	500 country documents (currently iso 3166 lists 254 countries) whereas a relay 
+	document maps to at most one country entry in the countries array.
+	
+	in the reduce step
+	we than always first check if the country at hand is already contained in the 
+	fact.countries array. if so, we add new data to the values of that object, if not we 
+	push the country object at hand onto the fact.countries array.
+	autosys is an array within the object and therefor needs an inner loop.
+*/
+	var countryObject = {
+		country: 			"" ,
+		cbcc:				0 ,		
+		crcc:				0 ,
+		relay: 				0 ,
+		guard: 				0 ,
+		middle: 			0 ,
+		exit:  				0 ,
+		dir: 				0 ,
+		bwa: 				0 ,
+		bwc: 				0 ,
+		pbr: 				0 ,
+		pbg: 				0 ,
+		pbm: 				0 ,
+		pbe: 				0 ,
+		fast: 				0 ,
+		stable: 			0 ,
+		osv : {				
+			linux : 		0 ,
+			darwin : 		0 ,
+			freebsd :		0 ,
+			windows :		0 ,
+			other : 		0
+		} , 				
+		tsv : {				
+			v010 : 			0 ,
+			v011 : 			0 ,
+			v012 : 			0 ,
+			v020 : 			0 ,
+			v021 : 			0 ,
+			v022 : 			0 ,
+			v023 : 			0 ,
+			v024 : 			0
+		} ,					
+		pex : {				
+			p4 :			0 ,
+			p6 :			0 ,
+			p8 :			0 ,
+			p46 :			0 ,
+			p48 :			0 ,
+			p68 :			0 ,
+			p468 :			0
+		} ,					
+		autosys :			[]
+	} ;
+	if (c) {		
+		for(cc in this.cbcc) {
+			if (this.cbcc.hasOwnProperty(cc)) {
+				countryObject.country = cc ;
+				countryObject.cbcc = this[cc] ;													//	TODO	ou liewa! wie den wert des feldes erreichen?!
+			}
+			values.countries.push(countryObject);
 		}
-	};		
+		for(cc in this.crcc) {
+			if (this.crcc.hasOwnProperty(cc)) {
+				countryObject.country = cc ;
+				countryObject.crcc = this[cc] ;													//	TODO	ou liewa! wie den wert des feldes erreichen?!
+			}
+			values.countries.push(countryObject);
+		}
+	}
+	if (r && this.cc) {																			//	check if cc field is not empty
+		countryObject.country = this.cc ;
+		countryObject.cbcc = 0 ;
+		countryObject.crcc = 0 ;
+		guard ? countryObject.guard = 1 : countryObject.guard = 0 ;
+		middle ? countryObject.middle = 1 : countryObject.middle = 0 ;
+		exit ? countryObject.exit = 1 : countryObject.exit =  0 ;
+		dir ? countryObject.dir = 1 : countryObject.dir =  0 ;
+		this.bwa ? countryObject.bwa = this.bwa : countryObject.bwa = 0 ;
+		this.bwc ? countryObject.bwc = this.bwc : countryObject.bwc = 0 ;
+		this.pbr ? countryObject.pbr = this.pbr : countryObject.pbr = 0 ;
+		guard ? countryObject.pbg =	this.pbg : countryObject.pbg =	0 ;
+		middle ? countryObject.pbm = this.pbm : countryObject.pbm = 0 ;
+		exit ? countryObject.pbe = this.pbe : countryObject.pbe = 0 ;
+		fast ? countryObject.fast =1 : countryObject.fast =0 ;
+		stable ? countryObject.stable =1 : countryObject.stable = 0 ;
+		osLinux ? countryObject.osv.linux = 1 : countryObject.osv.linux = 0 ;
+		osDarwin ? countryObject.osv.darwin = 1 : countryObject.osv.darwin = 0 ;
+		osFreebsd ? countryObject.osv.freebsd = 1 : countryObject.osv.freebsd = 0 ;
+		osWindows ? countryObject.osv.windows = 1 : countryObject.osv.windows = 0 ;
+		osOther ? countryObject.osv.other = 1 : countryObject.osv.other = 0 ;			
+		v010 ? countryObject.tsv.v010 = 1 : countryObject.tsv.v010 = 0 ;
+		v011 ? countryObject.tsv.v011 = 1 : countryObject.tsv.v011 = 0 ;
+		v012 ? countryObject.tsv.v012 = 1 : countryObject.tsv.v012 = 0 ;
+		v020 ? countryObject.tsv.v020 = 1 : countryObject.tsv.v020 = 0 ;
+		v021 ? countryObject.tsv.v021 = 1 : countryObject.tsv.v021 = 0 ;
+		v022 ? countryObject.tsv.v022 = 1 : countryObject.tsv.v022 = 0 ;
+		v023 ? countryObject.tsv.v023 = 1 : countryObject.tsv.v023 = 0 ;
+		v024 ? countryObject.tsv.v024 = 1 : countryObject.tsv.v024 = 0 ;
+		exit && this.pex.indexOf(443) > -1 ? countryObject.pex.p4 = 1 : countryObject.pex.p4 = 0 ;
+		exit && this.pex.indexOf(6667) > -1 ? countryObject.pex.p6 = 1 : countryObject.pex.p6 = 0 ;
+		exit && this.pex.indexOf(80) > -1 ? countryObject.pex.p8 = 1 : countryObject.pex.p8 = 0 ;
+		exit && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p46 = 1 : countryObject.pex.p46 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? countryObject.pex.p48 = 1 : countryObject.pex.p48 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p68 = 1 : countryObject.pex.p68 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p468 = 1 : countryObject.pex.p468 = 0 ;
+		this.as ? countryObject.autosys.push({this.as:1}) : countryObject.autosys.push() ;							
+		values.countries.push(countryObject);
+	}
+		
+/*
+	aggregating autonomous systems
+	only relays contain as information which makes aggrebation rather straightfoward 
+	compared to countries. OTOH the nested countries arrays contains slightly more 
+	involved objects than the autosys array nested in country objects above.
+*/
+	var asObject = {
+		as : "" ,
+		name : "" ,
+		hone : "",
+		relay : 0 ,
+		bwa : 0 ,
+		bwc : 0 ,
+		fast : 0 ,
+		stable : 0 ,
+		guard : 0 ,
+		middle : 0 ,
+		exit : 0 ,
+		dir : 0 ,
+		pbr: 0,
+		pbg : 0 ,
+		pbm : 0 ,
+		pbe : 0 ,
+		countries : []
+	};
+	var asCountryObject = {
+		country : "" ,
+		relay : 0 ,
+		bwa : 0 ,
+		bwc : 0 ,
+		pbr : 0 ,
+		pbg : 0 ,
+		pbm : 0 ,
+		pbe : 0
+	} ;
+	if (r && this.as) {
+		asObject.as = this.as ;
+		asObject.name = function(this.as) { return ""; } ;										//	TODO	lookup name for AS
+		asObject.home = function(this.as) { return ""; } ;										//	TODO	lookup jurisdiction for AS
+		asObject.relay = 1 ;
+		this.bwa ? asObject.bwa = this.bwa : asObject.bwa = 0 ;
+		this.bwc ? asObject.bwc = this.bwc : asObject.bwc = 0 ;
+		fast ? asObject.fast = 1 : asObject.fast = 0 ;
+		stable ? asObject.stable = 1 : asObject.stable = 0 ;
+		guard ? asObject.guard = 1 : asObject.guard = 0 ;
+		middle ? asObject.middle = 1 : asObject.middle = 0 ;
+		exit ? asObject.exit = 1 : asObject.exit = 0 ;
+		dir ? asObject.dir = 1 : asObject.dir = 0 ;
+		this.pbr ? asObject.pbr = this.pbr : asObject.pbr = 0 ;
+		this.pbg ? asObject.pbg = this.pbg : asObject.pbg = 0 ;
+		this.pbm ? asObject.pbm = this.pbm : asObject.pbm = 0 ;
+		this.pbe ? asObject.pbe = this.pbe : asObject.pbe = 0 ;
+		asObject.countries = [] ;
+		if (this.cc) {
+			asCountryObject.country = this.cc ;
+			asCountryObject.relay = 1 ;
+			this.bwa ? asCountryObject.bwa = this.bwa : asCountryObject.bwa = 0 ;
+			this.bwc ? asCountryObject.bwc = this.bwc : asCountryObject.bwc = 0 ;
+			this.pbr ? asCountryObject.pbr = this.pbr : asCountryObject.pbr = 0 ;
+			this.pbg ? asCountryObject.pbg = this.pbg : asCountryObject.pbg = 0 ;
+			this.pbm ? asCountryObject.pbm = this.pbm : asCountryObject.pbm = 0 ;
+			this.pbe ? asCountryObject.pbe = this.pbe : asCountryObject.pbe = 0 ;
+			asObject.countries.push(asCountryObject);
+		}
+		values.autosys.push(asObject);
+	}
 	emit( "Fact " + theDate , values );
 };
 
 
 
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	REDUCE
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 var reduceFact = function ( key, values ) {
 
 	var fact = {
 		date : "" ,
-		clients : {																							//	CLIENTS
+		clients : {																				//	CLIENTS
 			total : 0 ,
 			atBridges : 0 ,
 			atRelays : 0 ,
@@ -852,7 +1040,7 @@ var reduceFact = function ( key, values ) {
 			cptOR : 0 ,
 			cptUnknown : 0
 		} ,
-		servers : {																							//	SERVERS
+/*		servers : {																				//	SERVERS
 			total : {
 				count : 0 ,
 				bwa : 0 ,
@@ -875,7 +1063,7 @@ var reduceFact = function ( key, values ) {
 					v024 : 0
 				}
 			},
-			bridges : {																						//	BRIDGES
+			bridges : {																			//	BRIDGES
 				total : {
 					count : 0 ,
 					bwa : 0 ,
@@ -1054,7 +1242,7 @@ var reduceFact = function ( key, values ) {
 				}
 			} ,
 			relays : {
-				roleAll : {																					//	RELAYS ALL
+				roleAll : {																		//	RELAYS	ALL
 					total : {
 						count : 0 ,
 						bwa : 0 ,
@@ -1171,7 +1359,7 @@ var reduceFact = function ( key, values ) {
 						pbr : 0
 					}
 				} ,
-				roleGuard : {																				//	RELAYS GUARD
+				roleGuard : {																	//	RELAYS	GUARD
 					total : {
 						count : 0 ,
 						bwa : 0 ,
@@ -1288,7 +1476,7 @@ var reduceFact = function ( key, values ) {
 						pbg : 0
 					}
 				} ,
-				roleMiddle : {																				//	RELAYS MIDDLE
+				roleMiddle : {																	//	RELAYS	MIDDLE
 					total : {
 						count : 0 ,
 						bwa : 0 ,
@@ -1405,7 +1593,7 @@ var reduceFact = function ( key, values ) {
 						pbm : 0
 					}
 				} ,
-				roleExit : {																				//	RELAYS EXIT
+				roleExit : {																	//	RELAYS	EXIT
 					total : {
 						count : 0 ,
 						bwa : 0 ,
@@ -1567,7 +1755,7 @@ var reduceFact = function ( key, values ) {
 						pbe : 0
 					}
 				} ,
-				roleDir : {																					//	RELAYS DIR
+				roleDir : {																		//	RELAYS	DIR
 					total : {
 						count : 0 ,
 						bwa : 0 ,
@@ -1614,13 +1802,15 @@ var reduceFact = function ( key, values ) {
 					}	
 				}
 			}
-		} 
+	} ,		*/
+		countries : [] ,
+		autosys: []
 	};
-
+	
 	values.forEach( function(v) {
 		fact.date = v.date ;
 
-		fact.clients.total += v.clients.total ;																//	CLIENTS
+		fact.clients.total += v.clients.total ;													//	CLIENTS
 		fact.clients.atBridges += v.clients.atBridges ;
 		fact.clients.atRelays += v.clients.atRelays ;
 		fact.clients.cip4 += v.clients.cip4 ;
@@ -1630,7 +1820,7 @@ var reduceFact = function ( key, values ) {
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
 		
-		fact.servers.total.count += v.servers.total.count ;													//	SERVERS
+/*		fact.servers.total.count += v.servers.total.count ;													//	SERVERS
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
 		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
@@ -2210,15 +2400,140 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
+*/				
+																								//	COUNTRIES
+																								//	http://stackoverflow.com/questions/14138344/mongodb-mapreduce-not-working-as-expected-for-more-than-1000-records
+		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in mapped
+			var countryInFact = false ;
+			for ( var c = 0; c < fact.countries.length; c++ ) {									//	<- double loop part 2: countries in fact
+				var countryFact = fact.countries[c] ;											//	check the array for countries already added to the aggregation process
+				if ( countryFact.country == countryMapped.country ) {							//	if an object for this country was already added to the array
+					countryFact.cbcc += countryMapped.cbcc ;									//	add values from countryMapped to that already existing object
+					countryFact.crcc += countryMapped.crcc ;
+					countryFact.relay += countryMapped.relay ;
+					countryFact.guard += countryMapped.guard ;
+					countryFact.middle += countryMapped.middle ;
+					countryFact.exit += countryMapped.exit ;
+					countryFact.dir += countryMapped.dir ;
+					countryFact.bwa += countryMapped.bwa ;
+					countryFact.bwc += countryMapped.bwc ;
+					countryFact.pbr += countryMapped.pbr ;
+					countryFact.pbg += countryMapped.pbg ;
+					countryFact.pbm += countryMapped.pbm ;
+					countryFact.pbe += countryMapped.pbe ;
+					countryFact.fast += countryMapped.fast ;
+					countryFact.stable += countryMapped.stable ;
+					countryFact.osv.linux += countryMapped.osv.linux ;
+					countryFact.osv.darwin += countryMapped.osv.darwin ;
+					countryFact.osv.freebsd += countryMapped.osv.freebsd ;
+					countryFact.osv.windows += countryMapped.osv.windows ;
+					countryFact.osv.other += countryMapped.osv.other ;
+					countryFact.tsv.v010 += countryMapped.tsv.v010 ;
+					countryFact.tsv.v011 += countryMapped.tsv.v011 ;
+					countryFact.tsv.v012 += countryMapped.tsv.v012 ;
+					countryFact.tsv.v020 += countryMapped.tsv.v020 ;
+					countryFact.tsv.v021 += countryMapped.tsv.v021 ;
+					countryFact.tsv.v022 += countryMapped.tsv.v022 ;
+					countryFact.tsv.v023 += countryMapped.tsv.v023 ;
+					countryFact.tsv.v024 += countryMapped.tsv.v024 ;
+					countryFact.pex.p4 += countryMapped.pex.p4 ;
+					countryFact.pex.p6 += countryMapped.pex.p6 ;
+					countryFact.pex.p8 += countryMapped.pex.p8 ;
+					countryFact.pex.p46 += countryMapped.pex.p46 ;
+					countryFact.pex.p48 += countryMapped.pex.p48 ;
+					countryFact.pex.p68 += countryMapped.pex.p68 ;
+					countryFact.pex.p468 += countryMapped.pex.p468 ;
+					for ( var m = 0; m < countryMapped.autosys.length; m++ ) {					//	<- inner double loop part 1: 'as' in mapped.countries (can be nmore than one, because incoming could be pre-aggregated)
+						var asInCountryInFact = false ;
+						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int }
+						var asMapName ;															//	this var is gonna hold the property name, the actual string denominating the 'as'
+						if ( asMap.hasOwnProperty(asMapName) ) {					
+							for ( var f = 0; f < countryFact.autosys.length; f++ ) {			//	<- inner double loop part 2: 'as' in fact.countries
+								var asFact = countryFact.autosys.[f] ;	
+								var asFactName ;												//	this var is gonna hold the property name								
+								if (asFact.hasOwnProperty(asFactName) && asMapName == asFactName) {
+									asFact.asFactName += asMap.asMapName ;						//	TODO	check if that works alright
+								}
+								asInCountryInFact = true ;
+								break ;
+							}
+							if ( !asInCountryInFact ) { 										//	after the inner loop is through
+								countryFact.autosys.push(asMap) ;								//	if the 'as' wasn't found in the array add it
+							}
+						}
+					}
+					countryInFact = true ;
+					break ;
+				}
+			}
+			if ( !countryInFact ) { 															//	if the country does not exist in the array so far
+				fact.countries.push(countryMapped) ;											//	add the country object to the array
+			}
+		});
 
-	});
+		v.autosys.forEach( function(asMapped) {													//	AUTOSYS
+			var asInFact = false ;
+			for ( var a = 0; a < fact.autosys.length; a++ ) {
+				var asFact = fact.autosys[a] ;													//	for each object in fact.autosys
+				if ( asFact.as == asMapped.as ) {												//	if that objects 'as' field equals that of the relay getting mapped
+					asFact.relay += asMapped.relay ;											//	add up the numbers
+					asFact.name = asMapped.name ;
+					asFact.home = asMapped.home ;
+					asFact.bwa += asMapped.bwa ;
+					asFact.bwc += asMapped.bwc ;
+					asFact.fast += asMapped.fast ;
+					asFact.stable += asMapped.stable ;
+					asFact.guard += asMapped.guard ;
+					asFact.middle += asMapped.middle ;
+					asFact.exit += asMapped.exit ;
+					asFact.dir += asMapped.dir ;
+					asFact.pbr += asMapped.pbr ;
+					asFact.pbg += asMapped.pbg ;
+					asFact.pbm += asMapped.pbm ;
+					asFact.pbe += asMapped.pbe ;				
+					for ( var m = 0; m < asMapped.countries.length; m++ ) {						//	<- inner double loop part 1: 'as' in mapped.countries (can be nmore than one, because incoming could be pre-aggregated)
+						var countryInAsInFact = false ;
+						var cMap = asMapped.countries.[m] ;										//	acMap is the whole object { as : int }
+						var cMapName ;															//	this var is gonna hold the property name, the actual string denominating the 'as'
+						if ( cMap.hasOwnProperty(cMapName) ) {									//	get the objects name (if it is not empty)
+							for ( var f = 0; f < asFact.countries.length; f++ ) {				//	<- inner double loop part 2: 'as' in fact.countries
+								var cFact = asFact.countries.[f] ;	
+								var cFactName ;													//	this var is gonna hold the property name								
+								if (cFact.hasOwnProperty(cFactName) && cMapName == cFactName) {
+									cFact.relay += cMap.relay ;								
+									cFact.bwa += cMap.bwa ;
+									cFact.bwc += cMap.bwc ;									
+									cFact.pbr += cMap.pbr ;									
+									cFact.pbg += cMap.pbg ;									
+									cFact.pbm += cMap.pbm ;									
+									cFact.pbe += cMap.pbe ;									
+								}
+								countryInAsInFact = true ;
+								break ;
+							}
+							if ( !countryInAsInFact ) { 										//	after the inner loop is through
+								asFact.countries.push(acMap) ;									//	if the 'as' wasn't found in the array add it
+							}
+						}
+					}
+					asInFact = true ;
+					break ;
+				}
+			}
+			if ( !asInFact ) { 																	//	TODO	is this right ?
+				fact.autosys.push(asMapped) ;													//	and where is the corresponding break ?
+			}
+			
+		});
+		
+	}
 	return fact;
 };
 
 
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	FINALIZE
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var finalizeFact = function ( key, fact ) {
 	/*	
@@ -2231,24 +2546,24 @@ var finalizeFact = function ( key, fact ) {
 };
 
 
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	CONFIGURE AND EXECUTE
-//	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	EXECUTE
+//	////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var runAggregation = function(theDate) {
-    db.facts.remove({ _id : "Fact " + theDate });		//	clean DB, otherwise we would add to the old values
+    db.facts.remove({ _id : "Fact " + theDate });												//	clean DB, otherwise we would add to the old values
 	db.import.mapReduce (			
 		mapValues,
 		reduceFact,
 		{ 
 			out: { 
-				reduce : "facts"		 				//	the final fact collection
-				, nonAtomic : true						//	prevents locking of the db during post-processing
-			}	
+				reduce : "facts"		 														//	the final fact collection
+				, nonAtomic : true																//	prevents locking of the db during post-processing
+			}
 			, query : { "date" : theDate }
-			, jsMode: true								//	check if feasable! is faster, but needs more memory
+			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
 			, scope: { theDate: theDate }
 		}
 	);
-}("2013-04-03 22");										//	TODO	remove self-call after testing
+}("2013-04-03 22");																				//	TODO	remove self call after testing

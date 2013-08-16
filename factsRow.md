@@ -28,14 +28,14 @@
 					other: int
 				},
 				tsv: {
-					010: int,
-					011: int, 
-					012: int, 
-					020: int, 
-					021: int, 
-					022: int, 
-					023: int, 
-					024: int
+					v010: int,
+					v011: int, 
+					v012: int, 
+					v020: int, 
+					v021: int, 
+					v022: int, 
+					v023: int, 
+					v024: int
 				}
 			},
 			bridges: {
@@ -86,38 +86,38 @@
 						tsv: ... ,		tsv like above
 						pbr: float,
 						pex: {
-							4: int,
-							6: int,
-							8: int,
-							46: int,
-							48: int,
-							68: int,
-							468: int
+							p4: int,
+							p6: int,
+							p8: int,
+							p46: int,
+							p48: int,
+							p68: int,
+							p468: int
 					},
 					...					flagNone, flagFast, flagStable, flagFastStable like above
 				...						roleDir like above
 		},
-		countries: [
-			{
-				country: cc,
-				cbcc: int,
-				crcc: int,
-				relay: int,
-				guard: int,
-				middle: int,
-				exit: int,
-				dir: int,
-				bwa: int,
-				bwc: int,
-				pbr: float,
-				pbg: float,
-				pbm: float,
-				pbe: float,
-				fast:int,
-				stable: int,
-				osv: ... ,				osv like above
-				tsv: ... ,				tsv like above
-				pex: ... ,				pex like above
+		countries: [					first establish a list of all countries from countries and relays data
+			{							from that list populate the countries array with country objects
+				country: cc,			from clients
+				cbcc: int,				from clients
+				crcc: int,				from clients
+				relay: int,				from relays
+				guard: int,				from relays
+				middle: int,			from relays
+				exit: int,				from relays
+				dir: int,				from relays
+				bwa: int,				from relays
+				bwc: int,				from relays
+				pbr: float,				from relays
+				pbg: float,				from relays
+				pbm: float,				from relays
+				pbe: float,				from relays
+				fast:int,				from relays
+				stable: int,			from relays
+				osv: ... ,				from relays				osv like above
+				tsv: ... ,				from relays				tsv like above
+				pex: ... ,				from relays				pex like above
 				autosys: [
 					{
 						as: int
@@ -148,7 +148,7 @@
 				countries: [
 					{
 						country: cc,
-						relays: int,
+						relay: int,
 						bwa: int,
 						bwc: int,
 						pbr: float,

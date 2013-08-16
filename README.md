@@ -315,9 +315,9 @@ These 3 collections contain all raw data as it is imported into the database.
 				date	datetime					string						Start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 				cb		clients at bridges			integer			mean
-				cbcc	clients@bridges per country	object			mean		{cc:integer}	// an array of {countrycode : int } objects
+				cbcc	clients@bridges per country	object			mean		{cc:integer ...}
 				cr		clients at relays			integer			mean
-				crcc	clients@relays per country	object			mean		{cc:integer}
+				crcc	clients@relays per country	object			mean		{cc:integer ...}
 				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/Unknown:integer}
 				cip		ip-version used				object			mode		{v4/v6:integer}
 	
@@ -696,7 +696,7 @@ But so far this was all peanuts compared to country and AS information.
 These are enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves. 
 Therefor we have to change perspective: we can't start from the perspective of servers and clients anymore, we have to start from the properties country and AS.
 
-Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but also a lot less than AS. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
+Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but manageable. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
 ```
 	41	countries 					array of objects
@@ -1106,17 +1106,17 @@ mkdir MONGOdata
 mongod --dbpath MONGOdata
 
 # Import the data
-mongoimport --db tor --collection importRelays --stopOnError --upsert --file ~/relays.json
-mongoimport --db tor --collection importBridges --stopOnError --upsert --file ~/bridges.json
-mongoimport --db tor --collection importClients --stopOnError --upsert --file ~/clients.json
+Get sample data (caveat: it might not always be available):
+https://people.torproject.org/~karsten/volatile/nodes-2013-08-14.json.gz
+Unzip it. Then import it into MongoDB from your system shell:
+mongoimport --db visionion --collection import --stopOnError --upsert --file ~/nodes-2013-08-14.json
 
 # start mongo shell
 mongo
 
 # ensure index over date of import collections
-db.importClients.ensureIndex({date:1})
-db.importBridges.ensureIndex({date:1})
-db.importRelays.ensureIndex({date:1})
+db.import.ensureIndex({date:1})
+db.import.ensureIndex({type:1})
 ```
 
 ## Notes on using the mongo shell
