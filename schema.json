@@ -16,6 +16,17 @@
  
 */
 
+/*  TODO
+    
+    schema is getting out of sync
+        field "type" is missing
+        no more importRelay, importBridges, importClients - only one import
+    crcc and cbcc are problematic
+        would "country" be the field name or the cc itself?    
+*/
+
+
+
 
 
 {
@@ -339,11 +350,11 @@
                     "type": "integer",
                     "title": "Pluggable transport obfs3"
                 },
-                "<OR>": {
+                "OR": {
                     "type": "integer",
                     "title": "Pluggable transport <OR>"
                 },
-                "<??>": {
+                "unknown": {
                     "type": "integer",
                     "title": "Pluggable transport <??>"
                 }
@@ -381,7 +392,7 @@
                         "type": "string",
                         "title": "Pluggable transport",
                         "format": "Expected values are ONE of the following: 
-                                   'obfs2', 'obfs3', 'OR', 'Unknown'" 
+                                   'obfs2', 'obfs3', 'OR', 'unknown'" 
                     },
                     "count": {
                         "type": "integer",

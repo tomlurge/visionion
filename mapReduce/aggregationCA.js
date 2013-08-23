@@ -1,6 +1,6 @@
-﻿//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+﻿//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	MAP
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 var mapValues = function() {
 
@@ -52,7 +52,7 @@ var mapValues = function() {
 			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown : 				c && this.cpt.Unknown ? this.cpt.Unknown : 0
+			cptUnknown : 				c && this.cpt.unknown ? this.cpt.unknown : 0
 		} ,		
 /*		servers : {	
 			total : {
@@ -945,8 +945,15 @@ var mapValues = function() {
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? countryObject.pex.p48 = 1 : countryObject.pex.p48 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p68 = 1 : countryObject.pex.p68 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p468 = 1 : countryObject.pex.p468 = 0 ;
-		this.as ? countryObject.autosys.push({this.as:1}) : countryObject.autosys.push() ;							
-		values.countries.push(countryObject);
+        if (this.as)  {
+            var thisAS = this.as ;
+            countryObject.autosys.push( {thisAS:1} ) ;
+        }
+        else {
+            countryObject.autosys.push() ;
+        }
+
+        values.countries.push(countryObject);
 	}
 		
 /*
@@ -985,9 +992,12 @@ var mapValues = function() {
 		pbe : 0
 	} ;
 	if (r && this.as) {
-		asObject.as = this.as ;
-		asObject.name = function(this.as) { return ""; } ;										//	TODO	lookup name for AS
-		asObject.home = function(this.as) { return ""; } ;										//	TODO	lookup jurisdiction for AS
+        asObject.as = this.as ;
+        /*
+         * var thisAS = this.as ;
+		 * asObject.name = function(thisAS) { return ""; } ;										//	TODO	lookup name for AS
+		 * asObject.home = function(thisAS) { return ""; } ;        								//	TODO	lookup jurisdiction for AS
+		 */
 		asObject.relay = 1 ;
 		this.bwa ? asObject.bwa = this.bwa : asObject.bwa = 0 ;
 		this.bwc ? asObject.bwc = this.bwc : asObject.bwc = 0 ;
@@ -1020,9 +1030,9 @@ var mapValues = function() {
 
 
 
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	REDUCE
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 var reduceFact = function ( key, values ) {
@@ -2402,7 +2412,6 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
 */				
 																								//	COUNTRIES
-																								//	http://stackoverflow.com/questions/14138344/mongodb-mapreduce-not-working-as-expected-for-more-than-1000-records
 		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in mapped
 			var countryInFact = false ;
 			for ( var c = 0; c < fact.countries.length; c++ ) {									//	<- double loop part 2: countries in fact
@@ -2443,16 +2452,18 @@ var reduceFact = function ( key, values ) {
 					countryFact.pex.p48 += countryMapped.pex.p48 ;
 					countryFact.pex.p68 += countryMapped.pex.p68 ;
 					countryFact.pex.p468 += countryMapped.pex.p468 ;
-					for ( var m = 0; m < countryMapped.autosys.length; m++ ) {					//	<- inner double loop part 1: 'as' in mapped.countries (can be nmore than one, because incoming could be pre-aggregated)
+					for ( var m = 0; m < countryMapped.autosys.length; m++ ) {					//	<- inner double loop part 1: 'as' in mapped.countries
+					                                                                            //  (can be nmore than one, because incoming could be pre-aggregated)
 						var asInCountryInFact = false ;
 						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int }
-						var asMapName ;															//	this var is gonna hold the property name, the actual string denominating the 'as'
+						var asMapName ;															//	this var is gonna hold the property name,
+						                                                                        //  the actual string denominating the 'as'
 						if ( asMap.hasOwnProperty(asMapName) ) {					
 							for ( var f = 0; f < countryFact.autosys.length; f++ ) {			//	<- inner double loop part 2: 'as' in fact.countries
-								var asFact = countryFact.autosys.[f] ;	
+								var asFact = countryFact.autosys[f] ;
 								var asFactName ;												//	this var is gonna hold the property name								
 								if (asFact.hasOwnProperty(asFactName) && asMapName == asFactName) {
-									asFact.asFactName += asMap.asMapName ;						//	TODO	check if that works alright
+									asFact.asFactName += asMap.asMapName ;						//	TODO	check if this works alright
 								}
 								asInCountryInFact = true ;
 								break ;
@@ -2491,13 +2502,15 @@ var reduceFact = function ( key, values ) {
 					asFact.pbg += asMapped.pbg ;
 					asFact.pbm += asMapped.pbm ;
 					asFact.pbe += asMapped.pbe ;				
-					for ( var m = 0; m < asMapped.countries.length; m++ ) {						//	<- inner double loop part 1: 'as' in mapped.countries (can be nmore than one, because incoming could be pre-aggregated)
+					for ( var m = 0; m < asMapped.countries.length; m++ ) {						//	<- inner double loop part 1: 'as' in mapped.countries
+					                                                                            //  (can be nmore than one, because incoming could be pre-aggregated)
 						var countryInAsInFact = false ;
-						var cMap = asMapped.countries.[m] ;										//	acMap is the whole object { as : int }
-						var cMapName ;															//	this var is gonna hold the property name, the actual string denominating the 'as'
+						var cMap = asMapped.countries[m] ;										//	acMap is the whole object { as : int }
+						var cMapName ;															//	this var is gonna hold the property name,
+						                                                                        //  the actual string denominating the 'as'
 						if ( cMap.hasOwnProperty(cMapName) ) {									//	get the objects name (if it is not empty)
 							for ( var f = 0; f < asFact.countries.length; f++ ) {				//	<- inner double loop part 2: 'as' in fact.countries
-								var cFact = asFact.countries.[f] ;	
+								var cFact = asFact.countries[f] ;
 								var cFactName ;													//	this var is gonna hold the property name								
 								if (cFact.hasOwnProperty(cFactName) && cMapName == cFactName) {
 									cFact.relay += cMap.relay ;								
@@ -2526,19 +2539,20 @@ var reduceFact = function ( key, values ) {
 			
 		});
 		
-	}
+	});
 	return fact;
 };
 
 
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	FINALIZE
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 var finalizeFact = function ( key, fact ) {
 	/*	
 	//	do fancy stuff like averages etc.
-	//	note that the fact.average field would have to be present in map and reduce too even if unused until finalize
+	//	note that the fact.average field would have to be present in map and reduce too even if
+    //  unused until finalize
 	//	example from http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
 	if (fact.count > 0) fact.average = fact.total / fact.count;
 	*/
@@ -2546,9 +2560,9 @@ var finalizeFact = function ( key, fact ) {
 };
 
 
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	EXECUTE
-//	////////////////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 var runAggregation = function(theDate) {
     db.facts.remove({ _id : "Fact " + theDate });												//	clean DB, otherwise we would add to the old values

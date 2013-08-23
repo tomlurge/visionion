@@ -52,7 +52,7 @@ var mapValues = function() {
 			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown : 				c && this.cpt.Unknown ? this.cpt.Unknown : 0
+			cptUnknown : 				c && this.cpt.unknown ? this.cpt.unknown : 0
 		} ,		
 /*		servers : {	
 			total : {
@@ -819,7 +819,7 @@ var mapValues = function() {
 		} ,			*/		
 		countries :	[] ,
 		autosys: []
-	};				
+	} ;
 	
 
 /* 	aggregating countries
@@ -950,7 +950,13 @@ var mapValues = function() {
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? countryObject.pex.p48 = 1 : countryObject.pex.p48 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p68 = 1 : countryObject.pex.p68 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p468 = 1 : countryObject.pex.p468 = 0 ;
-		this.as ? countryObject.autosys.push({this.as:1}) : countryObject.autosys.push() ;					
+		if (this.as)  {
+            var thisAS = this.as ;
+            countryObject.autosys.push( {thisAS:1} ) ;
+        }
+        else {
+            countryObject.autosys.push() ;
+        }
 		
 		values.countries.push(countryObject);
 	}
@@ -961,7 +967,7 @@ var mapValues = function() {
 */
 
 	emit( "Fact " + theDate , values );
-};
+} ;
 
 
 
@@ -2388,7 +2394,7 @@ var reduceFact = function ( key, values ) {
 					countryFact.pex.p68 += countryMapped.pex.p68 ;
 					countryFact.pex.p468 += countryMapped.pex.p468 ;
 					if (countryMapped.autosys[0]) {												//	max one entry if relay, none if clients
-						var asMap = countryMapped.autosys[0] ;									
+						var asMap = countryMapped.autosys[0] ;									//  TODO    denotes asMap the whole object or just the property name?
 						if (countryFact.autosys.indexOf({asMap}) == -1) {						//	TODO 	how to query if an array contains an object with a certain field?
 							countryFact.autosys.push(asMap) ;
 						}
@@ -2404,14 +2410,6 @@ var reduceFact = function ( key, values ) {
 				fact.countries.push(countryMapped);												//	add the country object to the array
 			}
 		});
-		
-				
-
-		/*  autonomous systems
-		if (temp.autosys.indexOf(as) == -1) {			                                        //	TODO	will this work?
-			temp.autosys.push(as);
-		}
-		*/
 
 	});
 	return fact;

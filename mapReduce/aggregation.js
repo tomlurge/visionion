@@ -52,7 +52,7 @@ var mapValues = function() {
 			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown : 				c && this.cpt.Unknown ? this.cpt.Unknown : 0							
+			cptUnknown : 				c && this.cpt.unknown ? this.cpt.unknown : 0							
 		/*	total : 					this.cr && this.cb ?  this.cr + this.cb  : 0,				//	TODO	ALLEN  
 			atBridges :					this.cb ?  this.cb : 0 ,									//			zuweisungen
 			atRelays : 					this.cr ?  this.cr : 0,										//			eine

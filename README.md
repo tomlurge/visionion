@@ -318,7 +318,7 @@ These 3 collections contain all raw data as it is imported into the database.
 				cbcc	clients@bridges per country	object			mean		{cc:integer ...}
 				cr		clients at relays			integer			mean
 				crcc	clients@relays per country	object			mean		{cc:integer ...}
-				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/Unknown:integer}
+				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/unknown:integer}
 				cip		ip-version used				object			mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
