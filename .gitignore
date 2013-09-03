@@ -38,3 +38,9 @@ oldStuff/visOgram.xlsx
 oldStuff/aggregateFacts_3.js
 
 oldStuff/aggregateServers.js
+
+.idea/.name
+
+*.xml
+
+.idea/visionion.iml

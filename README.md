@@ -249,81 +249,51 @@ For example, we don't have country information about bridges, but we have that f
 
 Data Schema Outline
 -------------------
-The initial database import schema has only 3 collections for all node types: 'relay', 'bridge' and'client'. 
-Documents of type "guard", "middle", "exit" and "directory" will be added to the collection named "importRelays", documents of type "bridge" will be added to the collection named "importBridges", documents of type "client" will be added to the collection named "importClients". 
-These 3 collections contain all raw data as it is imported into the database. 
+The initial database import schema has only one collection for all node types: 'relay', 'bridge' and'client'. 
 
-
-**importRelays**  
+**import**  
 	
-	in			field	description					type	subtype	aggregation	valuespace
+	in type		field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmedr		_id		document ID					string			(*)			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmedr		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-	bgmedr		node	node id						string			-			Tor fingerprint
-	bgmedr		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default), 6, 24, 168
-	bgmedr		date	datetime					string			-			start of the time span that this document describes
+	cbr			_id		document ID					string			(*)			fingerprint/'client'+span+date 
+																				eg 'fingerprint-1-YYYYMMDDHH', 'client-24-YYYYMMDDHH'
+	cbr			addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
+	cbr			span	period of validity			integer			-			length of the interval this dataset describes, in hours:
+																				one of: 1(default for b and r)), 6, 24 (default for c), 168
+	cbr			date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmedr		nick	nickname					string			mode		nickname of relay
-	 gmedr		role	roles/functions of relay	array	string	mode (*)	some of: Guard,  Middle,  Exit,  Dir
-	 gmedr		flag	flags 						array	string	mode (*)	some of: Authority,  BadExit,  BadDirectory,  Fast,  
+	cbr			type	type of document			string						one of: c (clients), b (bridge), r (relay)	
+	c			cb		clients at bridges			integer			mean
+	c			cbcc	clients@bridges per country	object			mean		{cc:integer ...}
+	c			cr		clients at relays			integer			mean
+	c			crcc	clients@relays per country	object			mean		{cc:integer ...}
+	c			cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/unknown:integer}
+	c			cip		ip-version used				object			mode		{v4/v6:integer}																		
+	 br			nick	nickname					string			mode		nickname of relay
+	 br			node	node id						string			-			Tor fingerprint
+	 br			bwa		bandwidth advertized 		integer			mean		B/s
+	 br			bwc		bandwidth consumed 			integer			mean		B/s
+	 br			tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
+	 br			osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	 b			brp		bridge pool     			string			mode		one of: email, https, other 
+	 b			bre		bridge is in EC2 cloud		boolean			mode
+	 b			brt		bridge pluggable transport	array	string	mode (*)	some of: obfs2, obfs3
+	  r			role	roles/functions of relay	array	string	mode (*)	some of: Guard,  Middle,  Exit,  Dir
+	  r			flag	flags 						array	string	mode (*)	some of: Authority,  BadExit,  BadDirectory,  Fast,  
 	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
 	 																					 V2Dir,  V3Dir
-	b    r		bwa		bandwidth advertized 		integer			mean		B/s
-	b    r		bwc		bandwidth consumed 			integer			mean		B/s
-	bgmedr		tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	bgmedr		osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
-	     r		pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
-	 g			pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
-	  m			pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
-	   e		pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
-	   e		pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
-	 gmedr		as		autonomous system			integer			mode		
-	 gmedr		cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
+	  r			pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
+	  r			pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
+	  r			pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
+	  r			pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
+	  r			pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
+	  r			as		autonomous system			integer			mode		
+	  r			cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 
-
-**importBridges**  
-	
-	in			field	description					type	subtype	aggregation	valuespace
-	+----------+-------+---------------------------+--------+------+-----------+----------
-	bgmed		_id		document ID					string			(*)			fingerprint+span+date eg 'fingerprint-1-YYYYMMDDHH'
-	bgmed		addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-	bgmed		node	node id						string			-			Tor fingerprint
-	bgmed		span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default), 6, 24, 168
-	bgmed		date	datetime					string			-			start of the time span that this document describes
-																				format "YYYY-MM-DD HH" as defined in ISO-8601
-	bgmed		nick	nickname					string			mode		nickname of bridge
-	bgmed		bwa		bandwidth advertized 		integer			mean		B/s
-	bgmed		bwc		bandwidth consumed 			integer			mean		B/s
-	bgmed		tsv		Tor software version		string			mode		one of: 010, 011, 012, 020, 021, 022, 023, 024
-	bgmed		osv		operating system			string			mode		one of: linux, darwin, freebsd, windows, other 
-	b			brp		bridge pool     			string			mode		one of: email, https, other 
-	b			bre		bridge is in EC2 cloud		boolean			mode
-	b			brt		bridge pluggable transport	array	string	mode (*)	some of: obfs2, obfs3
-
-
-**importClients**  
-
-				field	description					type	subtype	aggregation	valuespace
-				+-------+---------------------------+-------+------+------------+---------
-				_id		document ID					string						'client'+span+date eg 'client-24-YYYYMMDDHH'
-				addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-				span	duration					integer						Length of the time span that this dataset describes, in hours:
-																				one of: 24 (default), 168
-				date	datetime					string						Start of the time span that this document describes
-																				format "YYYY-MM-DD HH" as defined in ISO-8601
-				cb		clients at bridges			integer			mean
-				cbcc	clients@bridges per country	object			mean		{cc:integer ...}
-				cr		clients at relays			integer			mean
-				crcc	clients@relays per country	object			mean		{cc:integer ...}
-				cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/unknown:integer}
-				cip		ip-version used				object			mode		{v4/v6:integer}
 	
 	LEGEND --------------------------------------------------------------------
 	in			indicates, for which type of node the field is relevant, 
-				'bgmed' standing for Bridge Guard Middle Exit Directory
+				c (clients), b (bridge), r (relay)
 	field		name of the field in the database
 	description	short description of the field's semantics
 	type		as defined in 3.5 of http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1 
@@ -376,7 +346,7 @@ The imported data represents the following dimensions:
 	8 software versions for tor
 	5 software versions for os
  areas
-	about 200 countries
+	up to about 250 countries
 	and many more autonomous systems
  clients
 	2 types: @relays, @bridges
@@ -546,7 +516,7 @@ Data aggregation
 
 **MongoDB**    
 In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
-MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets we retrieve from the network are not as uniform and regular as we'd like them to be. As MongoDB is a schemaless database we do not have to worry about future structural changes. When e.g. more performance data becomes available we can seamlessly add it without having to touch any of the existing documents.
+MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets retrieved from the network are not as uniform and regular as we'd like them to be. As MongoDB is a schemaless database we do not have to worry about future structural changes. When e.g. more performance data becomes available we can seamlessly add it without having to touch any of the existing documents.
 MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
 - no joins    
  (but we can work around that by visually layering querie results on top of each other)    
@@ -557,11 +527,7 @@ MongoDB has some constraints of it's own that need to be taken into account when
 
 
 **Preparing the import tables**    
-A few indices over the 3 import tables "relays", "bridges" and "clients" will speed up the aggregation:     
-. an index over "date" for "bridges" and "clients    
-. an index over "date + flag" for "relays"    
-. an index over "cc + date" for "relays"    
-. an index over "date + as + role + node" for "relays" (?)    
+During mapReduce MongoDB can only take advantage of two indices: one covering the query and one covering the sort. For that reason the import collection will need to be indexed by date to support the query. Sort is less clear (to me). Maybe an index over type woud be beneficial.  
 
 
 **Aggregation**    

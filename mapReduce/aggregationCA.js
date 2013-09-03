@@ -7,7 +7,7 @@ var mapValues = function() {
     var c = ( this.type == "c" ) ;																//	clients
     var b = ( this.type == "b" ) ;																//	bridges
     var r = ( this.type == "r" ) ;																//	relays
-    var s = ( this.type == "b" ||this.type == "r" ) ;											//	servers
+    var s = ( this.type == "b" || this.type == "r" ) ;											//	servers
 	
 	var osLinux = ( s && this.osv == "linux" ) ;
 	var osDarwin = ( s && this.osv == "darwin" ) ;
@@ -817,8 +817,10 @@ var mapValues = function() {
 				}
 			}
 		} ,			*/		
-		countries :	[] ,
+		countries :	[]
+        /*  ,
 		autosys: []
+		*/
 	};				
 	
 
@@ -848,9 +850,10 @@ var mapValues = function() {
 	push the country object at hand onto the fact.countries array.
 	autosys is an array within the object and therefor needs an inner loop.
 */
-	var countryObject = {
+	function CountryObject() {}
+    CountryObject.prototype = {
 		country: 			"" ,
-		cbcc:				0 ,		
+		cbcc:				0 ,
 		crcc:				0 ,
 		relay: 				0 ,
 		guard: 				0 ,
@@ -893,26 +896,33 @@ var mapValues = function() {
 		} ,					
 		autosys :			[]
 	} ;
-	if (c) {		
-		for(cc in this.cbcc) {
-			if (this.cbcc.hasOwnProperty(cc)) {
-				countryObject.country = cc ;
-				countryObject.cbcc = this[cc] ;													//	TODO	ou liewa! wie den wert des feldes erreichen?!
-			}
-			values.countries.push(countryObject);
+
+	if (c) {																					//	if input document is of type "c" (client) just add client information,
+		for(var cb in this.cbcc) {
+			if (this.cbcc.hasOwnProperty(cb)) {
+                var cbccCountryObject = new CountryObject();
+                cbccCountryObject.country = cb ;
+                cbccCountryObject.cbcc = this.cbcc[cb] ;
+                values.countries.push(cbccCountryObject) ;
+            }
 		}
-		for(cc in this.crcc) {
-			if (this.crcc.hasOwnProperty(cc)) {
-				countryObject.country = cc ;
-				countryObject.crcc = this[cc] ;													//	TODO	ou liewa! wie den wert des feldes erreichen?!
+		for(var cr in this.crcc) {
+			if (this.crcc.hasOwnProperty(cr)) {
+                var crccCountryObject = new CountryObject();
+                crccCountryObject.country = cr ;
+                crccCountryObject.cbcc = 0 ;											        //	reset cbcc to 0, otherwise it will still hold the value from the last cbcc run
+                crccCountryObject.crcc = this.crcc[cr] ;
+                values.countries.push(crccCountryObject);
 			}
-			values.countries.push(countryObject);
+
 		}
 	}
-	if (r && this.cc) {																			//	check if cc field is not empty
+	if (r && this.cc) {																			//	if it's a relay and  cc field is not empty
+        var countryObject = new CountryObject();
 		countryObject.country = this.cc ;
 		countryObject.cbcc = 0 ;
 		countryObject.crcc = 0 ;
+		countryObject.relay = 1 ;
 		guard ? countryObject.guard = 1 : countryObject.guard = 0 ;
 		middle ? countryObject.middle = 1 : countryObject.middle = 0 ;
 		exit ? countryObject.exit = 1 : countryObject.exit =  0 ;
@@ -946,26 +956,27 @@ var mapValues = function() {
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p68 = 1 : countryObject.pex.p68 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p468 = 1 : countryObject.pex.p468 = 0 ;
         if (this.as)  {
-            var thisAS = this.as ;
-            countryObject.autosys.push( {thisAS:1} ) ;
+            var thisAS = this.as ;                                                              //  TODO    thisAS is defined here
+            countryObject.autosys.push( {thisAS:1} ) ;                                          //  TODO    but thisAS is invisible here
         }
         else {
             countryObject.autosys.push() ;
         }
-
         values.countries.push(countryObject);
 	}
-		
+	else {}	                                                                                    //	do nothing for bridges which contain no country information
+	
 /*
 	aggregating autonomous systems
-	only relays contain as information which makes aggrebation rather straightfoward 
+	only relays contain as information which makes aggregation rather straightfoward 
 	compared to countries. OTOH the nested countries arrays contains slightly more 
 	involved objects than the autosys array nested in country objects above.
 */
+/*
 	var asObject = {
 		as : "" ,
 		name : "" ,
-		hone : "",
+		home : "",
 		relay : 0 ,
 		bwa : 0 ,
 		bwc : 0 ,
@@ -993,11 +1004,11 @@ var mapValues = function() {
 	} ;
 	if (r && this.as) {
         asObject.as = this.as ;
-        /*
-         * var thisAS = this.as ;
-		 * asObject.name = function(thisAS) { return ""; } ;										//	TODO	lookup name for AS
-		 * asObject.home = function(thisAS) { return ""; } ;        								//	TODO	lookup jurisdiction for AS
-		 */
+
+        //  var thisAS = this.as ;
+		//  asObject.name = function(thisAS) { return ""; } ;									//	TODO	lookup name for AS
+		//  asObject.home = function(thisAS) { return ""; } ;        							//	TODO	lookup jurisdiction for AS
+
 		asObject.relay = 1 ;
 		this.bwa ? asObject.bwa = this.bwa : asObject.bwa = 0 ;
 		this.bwc ? asObject.bwc = this.bwc : asObject.bwc = 0 ;
@@ -1025,6 +1036,8 @@ var mapValues = function() {
 		}
 		values.autosys.push(asObject);
 	}
+*/
+
 	emit( "Fact " + theDate , values );
 };
 
@@ -1809,14 +1822,16 @@ var reduceFact = function ( key, values ) {
 							v023 : 0 ,
 							v024 : 0
 						}
-					}	
+					}
 				}
 			}
 	} ,		*/
-		countries : [] ,
-		autosys: []
+		countries : []
+		 /*   ,																		//	COUNTRIES
+		autosys: []													        					//	AUTOSYS
+		*/
 	};
-	
+
 	values.forEach( function(v) {
 		fact.date = v.date ;
 
@@ -1829,7 +1844,7 @@ var reduceFact = function ( key, values ) {
 		fact.clients.cptObfs3 += v.clients.cptObfs3 ;
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
-		
+
 /*		fact.servers.total.count += v.servers.total.count ;													//	SERVERS
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
@@ -1846,7 +1861,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.total.tsv.v022 += v.servers.total.tsv.v022 ;
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;
-		
+
 		fact.servers.bridges.total.count += v.servers.bridges.total.count ;									//	BRIDGES
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
@@ -1931,7 +1946,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.breTrue.tsv.v022 += v.servers.bridges.breTrue.tsv.v022 ;
 		fact.servers.bridges.breTrue.tsv.v023 += v.servers.bridges.breTrue.tsv.v023 ;
 		fact.servers.bridges.breTrue.tsv.v024 += v.servers.bridges.breTrue.tsv.v024 ;
-		
+
 		fact.servers.bridges.brtObfs2.count += v.servers.bridges.brtObfs2.count ;
 		fact.servers.bridges.brtObfs2.bwa += v.servers.bridges.brtObfs2.bwa ;
 		fact.servers.bridges.brtObfs2.bwc += v.servers.bridges.brtObfs2.bwc ;
@@ -1948,7 +1963,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.brtObfs2.tsv.v022 += v.servers.bridges.brtObfs2.tsv.v022 ;
 		fact.servers.bridges.brtObfs2.tsv.v023 += v.servers.bridges.brtObfs2.tsv.v023 ;
 		fact.servers.bridges.brtObfs2.tsv.v024 += v.servers.bridges.brtObfs2.tsv.v024 ;
-		
+
 		fact.servers.bridges.brtObfs3.count += v.servers.bridges.brtObfs3.count ;
 		fact.servers.bridges.brtObfs3.bwa += v.servers.bridges.brtObfs3.bwa ;
 		fact.servers.bridges.brtObfs3.bwc += v.servers.bridges.brtObfs3.bwc ;
@@ -1965,7 +1980,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.brtObfs3.tsv.v022 += v.servers.bridges.brtObfs3.tsv.v022 ;
 		fact.servers.bridges.brtObfs3.tsv.v023 += v.servers.bridges.brtObfs3.tsv.v023 ;
 		fact.servers.bridges.brtObfs3.tsv.v024 += v.servers.bridges.brtObfs3.tsv.v024 ;
-		
+
 		fact.servers.bridges.brtObfs23.count += v.servers.bridges.brtObfs23.count ;
 		fact.servers.bridges.brtObfs23.bwa += v.servers.bridges.brtObfs23.bwa ;
 		fact.servers.bridges.brtObfs23.bwc += v.servers.bridges.brtObfs23.bwc ;
@@ -1982,7 +1997,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.brtObfs23.tsv.v022 += v.servers.bridges.brtObfs23.tsv.v022 ;
 		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
 		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ;
-		
+
         fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;					//	RELAYS ALL
 		fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
 		fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;
@@ -2018,7 +2033,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleAll.flagNone.tsv.v023 += v.servers.relays.roleAll.flagNone.tsv.v023 ;
 		fact.servers.relays.roleAll.flagNone.tsv.v024 += v.servers.relays.roleAll.flagNone.tsv.v024 ;
 		fact.servers.relays.roleAll.flagNone.pbr += v.servers.relays.roleAll.flagNone.pbr ;
-		
+
 		fact.servers.relays.roleAll.flagStable.count += v.servers.relays.roleAll.flagStable.count ;
 		fact.servers.relays.roleAll.flagStable.bwa += v.servers.relays.roleAll.flagStable.bwa ;
 		fact.servers.relays.roleAll.flagStable.bwc += v.servers.relays.roleAll.flagStable.bwc ;
@@ -2036,7 +2051,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleAll.flagStable.tsv.v023 += v.servers.relays.roleAll.flagStable.tsv.v023 ;
 		fact.servers.relays.roleAll.flagStable.tsv.v024 += v.servers.relays.roleAll.flagStable.tsv.v024 ;
 		fact.servers.relays.roleAll.flagStable.pbr += v.servers.relays.roleAll.flagStable.pbr ;
-		
+
 		fact.servers.relays.roleAll.flagFast.count += v.servers.relays.roleAll.flagFast.count ;
 		fact.servers.relays.roleAll.flagFast.bwa += v.servers.relays.roleAll.flagFast.bwa ;
 		fact.servers.relays.roleAll.flagFast.bwc += v.servers.relays.roleAll.flagFast.bwc ;
@@ -2054,7 +2069,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleAll.flagFast.tsv.v023 += v.servers.relays.roleAll.flagFast.tsv.v023 ;
 		fact.servers.relays.roleAll.flagFast.tsv.v024 += v.servers.relays.roleAll.flagFast.tsv.v024 ;
 		fact.servers.relays.roleAll.flagFast.pbr += v.servers.relays.roleAll.flagFast.pbr ;
-		
+
 		fact.servers.relays.roleAll.flagFastStable.count += v.servers.relays.roleAll.flagFastStable.count ;
 		fact.servers.relays.roleAll.flagFastStable.bwa += v.servers.relays.roleAll.flagFastStable.bwa ;
 		fact.servers.relays.roleAll.flagFastStable.bwc += v.servers.relays.roleAll.flagFastStable.bwc ;
@@ -2071,7 +2086,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleAll.flagFastStable.tsv.v022 += v.servers.relays.roleAll.flagFastStable.tsv.v022 ;
 		fact.servers.relays.roleAll.flagFastStable.tsv.v023 += v.servers.relays.roleAll.flagFastStable.tsv.v023 ;
 		fact.servers.relays.roleAll.flagFastStable.tsv.v024 += v.servers.relays.roleAll.flagFastStable.tsv.v024 ;
-	
+
 		fact.servers.relays.roleGuard.total.count += v.servers.relays.roleGuard.total.count ;				//	RELAYS GUARD
 		fact.servers.relays.roleGuard.total.bwa += v.servers.relays.roleGuard.total.bwa ;
 		fact.servers.relays.roleGuard.total.bwc += v.servers.relays.roleGuard.total.bwc ;
@@ -2089,7 +2104,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.total.tsv.v023 += v.servers.relays.roleGuard.total.tsv.v023 ;
 		fact.servers.relays.roleGuard.total.tsv.v024 += v.servers.relays.roleGuard.total.tsv.v024 ;
 		fact.servers.relays.roleGuard.total.pbg += v.servers.relays.roleGuard.total.pbg ;
-		
+
 		fact.servers.relays.roleGuard.flagNone.count += v.servers.relays.roleGuard.flagNone.count ;
 		fact.servers.relays.roleGuard.flagNone.bwa += v.servers.relays.roleGuard.flagNone.bwa ;
 		fact.servers.relays.roleGuard.flagNone.bwc += v.servers.relays.roleGuard.flagNone.bwc ;
@@ -2107,7 +2122,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagNone.tsv.v023 += v.servers.relays.roleGuard.flagNone.tsv.v023 ;
 		fact.servers.relays.roleGuard.flagNone.tsv.v024 += v.servers.relays.roleGuard.flagNone.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagNone.pbg += v.servers.relays.roleGuard.flagNone.pbg ;
-		
+
 		fact.servers.relays.roleGuard.flagStable.count += v.servers.relays.roleGuard.flagStable.count ;
 		fact.servers.relays.roleGuard.flagStable.bwa += v.servers.relays.roleGuard.flagStable.bwa ;
 		fact.servers.relays.roleGuard.flagStable.bwc += v.servers.relays.roleGuard.flagStable.bwc ;
@@ -2125,7 +2140,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagStable.tsv.v023 += v.servers.relays.roleGuard.flagStable.tsv.v023 ;
 		fact.servers.relays.roleGuard.flagStable.tsv.v024 += v.servers.relays.roleGuard.flagStable.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagStable.pbg += v.servers.relays.roleGuard.flagStable.pbg ;
-		
+
 		fact.servers.relays.roleGuard.flagFast.count += v.servers.relays.roleGuard.flagFast.count ;
 		fact.servers.relays.roleGuard.flagFast.bwa += v.servers.relays.roleGuard.flagFast.bwa ;
 		fact.servers.relays.roleGuard.flagFast.bwc += v.servers.relays.roleGuard.flagFast.bwc ;
@@ -2143,7 +2158,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagFast.tsv.v023 += v.servers.relays.roleGuard.flagFast.tsv.v023 ;
 		fact.servers.relays.roleGuard.flagFast.tsv.v024 += v.servers.relays.roleGuard.flagFast.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagFast.pbg += v.servers.relays.roleGuard.flagFast.pbg ;
-		
+
 		fact.servers.relays.roleGuard.flagFastStable.count += v.servers.relays.roleGuard.flagFastStable.count ;
 		fact.servers.relays.roleGuard.flagFastStable.bwa += v.servers.relays.roleGuard.flagFastStable.bwa ;
 		fact.servers.relays.roleGuard.flagFastStable.bwc += v.servers.relays.roleGuard.flagFastStable.bwc ;
@@ -2161,7 +2176,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagFastStable.tsv.v023 += v.servers.relays.roleGuard.flagFastStable.tsv.v023 ;
 		fact.servers.relays.roleGuard.flagFastStable.tsv.v024 += v.servers.relays.roleGuard.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagFastStable.pbg += v.servers.relays.roleGuard.flagFastStable.pbg ;
-		
+
 		fact.servers.relays.roleMiddle.total.count += v.servers.relays.roleMiddle.total.count ;				//	RELAYS MIDDLE
 		fact.servers.relays.roleMiddle.total.bwa += v.servers.relays.roleMiddle.total.bwa ;
 		fact.servers.relays.roleMiddle.total.bwc += v.servers.relays.roleMiddle.total.bwc ;
@@ -2179,7 +2194,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleMiddle.total.tsv.v023 += v.servers.relays.roleMiddle.total.tsv.v023 ;
 		fact.servers.relays.roleMiddle.total.tsv.v024 += v.servers.relays.roleMiddle.total.tsv.v024 ;
 		fact.servers.relays.roleMiddle.total.pbm += v.servers.relays.roleMiddle.total.pbm ;
-		
+
 		fact.servers.relays.roleMiddle.flagNone.count += v.servers.relays.roleMiddle.flagNone.count ;
 		fact.servers.relays.roleMiddle.flagNone.bwa += v.servers.relays.roleMiddle.flagNone.bwa ;
 		fact.servers.relays.roleMiddle.flagNone.bwc += v.servers.relays.roleMiddle.flagNone.bwc ;
@@ -2197,7 +2212,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagNone.tsv.v023 += v.servers.relays.roleMiddle.flagNone.tsv.v023 ;
 		fact.servers.relays.roleMiddle.flagNone.tsv.v024 += v.servers.relays.roleMiddle.flagNone.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagNone.pbm += v.servers.relays.roleMiddle.flagNone.pbm ;
-		
+
 		fact.servers.relays.roleMiddle.flagStable.count += v.servers.relays.roleMiddle.flagStable.count ;
 		fact.servers.relays.roleMiddle.flagStable.bwa += v.servers.relays.roleMiddle.flagStable.bwa ;
 		fact.servers.relays.roleMiddle.flagStable.bwc += v.servers.relays.roleMiddle.flagStable.bwc ;
@@ -2215,7 +2230,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagStable.tsv.v023 += v.servers.relays.roleMiddle.flagStable.tsv.v023 ;
 		fact.servers.relays.roleMiddle.flagStable.tsv.v024 += v.servers.relays.roleMiddle.flagStable.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagStable.pbm += v.servers.relays.roleMiddle.flagStable.pbm ;
-		
+
 		fact.servers.relays.roleMiddle.flagFast.count += v.servers.relays.roleMiddle.flagFast.count ;
 		fact.servers.relays.roleMiddle.flagFast.bwa += v.servers.relays.roleMiddle.flagFast.bwa ;
 		fact.servers.relays.roleMiddle.flagFast.bwc += v.servers.relays.roleMiddle.flagFast.bwc ;
@@ -2233,7 +2248,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagFast.tsv.v023 += v.servers.relays.roleMiddle.flagFast.tsv.v023 ;
 		fact.servers.relays.roleMiddle.flagFast.tsv.v024 += v.servers.relays.roleMiddle.flagFast.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagFast.pbm += v.servers.relays.roleMiddle.flagFast.pbm ;
-		
+
 		fact.servers.relays.roleMiddle.flagFastStable.count += v.servers.relays.roleMiddle.flagFastStable.count ;
 		fact.servers.relays.roleMiddle.flagFastStable.bwa += v.servers.relays.roleMiddle.flagFastStable.bwa ;
 		fact.servers.relays.roleMiddle.flagFastStable.bwc += v.servers.relays.roleMiddle.flagFastStable.bwc ;
@@ -2276,7 +2291,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleExit.total.pex.p68 += v.servers.relays.roleExit.total.pex.p68 ;
 		fact.servers.relays.roleExit.total.pex.p468 += v.servers.relays.roleExit.total.pex.p468 ;
 		fact.servers.relays.roleExit.total.pbe += v.servers.relays.roleExit.total.pbe ;
-					
+
 		fact.servers.relays.roleExit.flagNone.count += v.servers.relays.roleExit.flagNone.count ;
 		fact.servers.relays.roleExit.flagNone.bwa += v.servers.relays.roleExit.flagNone.bwa ;
 		fact.servers.relays.roleExit.flagNone.bwc += v.servers.relays.roleExit.flagNone.bwc ;
@@ -2301,7 +2316,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleExit.flagNone.pex.p68 += v.servers.relays.roleExit.flagNone.pex.p68 ;
 		fact.servers.relays.roleExit.flagNone.pex.p468 += v.servers.relays.roleExit.flagNone.pex.p468 ;
 		fact.servers.relays.roleExit.flagNone.pbe += v.servers.relays.roleExit.flagNone.pbe ;
-		
+
 		fact.servers.relays.roleExit.flagFast.count += v.servers.relays.roleExit.flagFast.count ;
 		fact.servers.relays.roleExit.flagFast.bwa += v.servers.relays.roleExit.flagFast.bwa ;
 		fact.servers.relays.roleExit.flagFast.bwc += v.servers.relays.roleExit.flagFast.bwc ;
@@ -2326,7 +2341,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleExit.flagFast.pex.p68 += v.servers.relays.roleExit.flagFast.pex.p68 ;
 		fact.servers.relays.roleExit.flagFast.pex.p468 += v.servers.relays.roleExit.flagFast.pex.p468 ;
 		fact.servers.relays.roleExit.flagFast.pbe += v.servers.relays.roleExit.flagFast.pbe ;
-		
+
 		fact.servers.relays.roleExit.flagStable.count += v.servers.relays.roleExit.flagStable.count ;
 		fact.servers.relays.roleExit.flagStable.bwa += v.servers.relays.roleExit.flagStable.bwa ;
 		fact.servers.relays.roleExit.flagStable.bwc += v.servers.relays.roleExit.flagStable.bwc ;
@@ -2351,7 +2366,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleExit.flagStable.pex.p68 += v.servers.relays.roleExit.flagStable.pex.p68 ;
 		fact.servers.relays.roleExit.flagStable.pex.p468 += v.servers.relays.roleExit.flagStable.pex.p468 ;
 		fact.servers.relays.roleExit.flagStable.pbe += v.servers.relays.roleExit.flagStable.pbe ;
-		
+
 		fact.servers.relays.roleExit.flagFastStable.count += v.servers.relays.roleExit.flagFastStable.count ;
 		fact.servers.relays.roleExit.flagFastStable.bwa += v.servers.relays.roleExit.flagFastStable.bwa ;
 		fact.servers.relays.roleExit.flagFastStable.bwc += v.servers.relays.roleExit.flagFastStable.bwc ;
@@ -2410,10 +2425,11 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
-*/				
-																								//	COUNTRIES
-		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in mapped
-			var countryInFact = false ;
+*/
+
+																				        		//	COUNTRIES
+		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in values emitted from map
+			var countryInFact = false ;                                                         //  assuming data about this country has not already been aded to fact
 			for ( var c = 0; c < fact.countries.length; c++ ) {									//	<- double loop part 2: countries in fact
 				var countryFact = fact.countries[c] ;											//	check the array for countries already added to the aggregation process
 				if ( countryFact.country == countryMapped.country ) {							//	if an object for this country was already added to the array
@@ -2452,16 +2468,17 @@ var reduceFact = function ( key, values ) {
 					countryFact.pex.p48 += countryMapped.pex.p48 ;
 					countryFact.pex.p68 += countryMapped.pex.p68 ;
 					countryFact.pex.p468 += countryMapped.pex.p468 ;
+
 					for ( var m = 0; m < countryMapped.autosys.length; m++ ) {					//	<- inner double loop part 1: 'as' in mapped.countries
 					                                                                            //  (can be nmore than one, because incoming could be pre-aggregated)
 						var asInCountryInFact = false ;
 						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int }
 						var asMapName ;															//	this var is gonna hold the property name,
 						                                                                        //  the actual string denominating the 'as'
-						if ( asMap.hasOwnProperty(asMapName) ) {					
+						if ( asMap.hasOwnProperty(asMapName) ) {
 							for ( var f = 0; f < countryFact.autosys.length; f++ ) {			//	<- inner double loop part 2: 'as' in fact.countries
 								var asFact = countryFact.autosys[f] ;
-								var asFactName ;												//	this var is gonna hold the property name								
+								var asFactName ;												//	this var is gonna hold the property name
 								if (asFact.hasOwnProperty(asFactName) && asMapName == asFactName) {
 									asFact.asFactName += asMap.asMapName ;						//	TODO	check if this works alright
 								}
@@ -2473,6 +2490,7 @@ var reduceFact = function ( key, values ) {
 							}
 						}
 					}
+                    
 					countryInFact = true ;
 					break ;
 				}
@@ -2482,6 +2500,7 @@ var reduceFact = function ( key, values ) {
 			}
 		});
 
+        /*
 		v.autosys.forEach( function(asMapped) {													//	AUTOSYS
 			var asInFact = false ;
 			for ( var a = 0; a < fact.autosys.length; a++ ) {
@@ -2501,7 +2520,7 @@ var reduceFact = function ( key, values ) {
 					asFact.pbr += asMapped.pbr ;
 					asFact.pbg += asMapped.pbg ;
 					asFact.pbm += asMapped.pbm ;
-					asFact.pbe += asMapped.pbe ;				
+					asFact.pbe += asMapped.pbe ;
 					for ( var m = 0; m < asMapped.countries.length; m++ ) {						//	<- inner double loop part 1: 'as' in mapped.countries
 					                                                                            //  (can be nmore than one, because incoming could be pre-aggregated)
 						var countryInAsInFact = false ;
@@ -2511,15 +2530,15 @@ var reduceFact = function ( key, values ) {
 						if ( cMap.hasOwnProperty(cMapName) ) {									//	get the objects name (if it is not empty)
 							for ( var f = 0; f < asFact.countries.length; f++ ) {				//	<- inner double loop part 2: 'as' in fact.countries
 								var cFact = asFact.countries[f] ;
-								var cFactName ;													//	this var is gonna hold the property name								
+								var cFactName ;													//	this var is gonna hold the property name
 								if (cFact.hasOwnProperty(cFactName) && cMapName == cFactName) {
-									cFact.relay += cMap.relay ;								
+									cFact.relay += cMap.relay ;
 									cFact.bwa += cMap.bwa ;
-									cFact.bwc += cMap.bwc ;									
-									cFact.pbr += cMap.pbr ;									
-									cFact.pbg += cMap.pbg ;									
-									cFact.pbm += cMap.pbm ;									
-									cFact.pbe += cMap.pbe ;									
+									cFact.bwc += cMap.bwc ;
+									cFact.pbr += cMap.pbr ;
+									cFact.pbg += cMap.pbg ;
+									cFact.pbm += cMap.pbm ;
+									cFact.pbe += cMap.pbe ;
 								}
 								countryInAsInFact = true ;
 								break ;
@@ -2536,9 +2555,10 @@ var reduceFact = function ( key, values ) {
 			if ( !asInFact ) { 																	//	TODO	is this right ?
 				fact.autosys.push(asMapped) ;													//	and where is the corresponding break ?
 			}
-			
+
 		});
-		
+		*/
+
 	});
 	return fact;
 };
@@ -2549,7 +2569,7 @@ var reduceFact = function ( key, values ) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 
 var finalizeFact = function ( key, fact ) {
-	/*	
+	/*
 	//	do fancy stuff like averages etc.
 	//	note that the fact.average field would have to be present in map and reduce too even if
     //  unused until finalize
@@ -2566,7 +2586,7 @@ var finalizeFact = function ( key, fact ) {
 
 var runAggregation = function(theDate) {
     db.facts.remove({ _id : "Fact " + theDate });												//	clean DB, otherwise we would add to the old values
-	db.import.mapReduce (			
+	db.import.mapReduce (
 		mapValues,
 		reduceFact,
 		{ 
@@ -2578,6 +2598,7 @@ var runAggregation = function(theDate) {
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
 			, scope: { theDate: theDate }
+//          , sort
 		}
 	);
 }("2013-04-03 22");																				//	TODO	remove self call after testing

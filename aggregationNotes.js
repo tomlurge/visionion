@@ -3,17 +3,34 @@
 	autosys
 	countries
 	update docs
+		nur noch ein import
+		type
+		was noch?
 	type abfrage (zu c/b/r/s) durch abfragen nach feldern ersetzen
-		vielleicht doch keien gute idee, weil es den zwang zu defaults verstärkt
+		vielleicht doch keine gute idee, weil es den zwang zu defaults verstärkt
 	über diesen zwang zum default ist der weg zu zwanglosen erweiterungen des schema verstellt
 		das ist schlecht
 		ein wenig eleganter ausweg wäre, in mapValues jeder zuweisung zu einem feld eine existenzabfrage nach dem feld vorzustellen
 		unelegant, aber besser
 	defaults für die values von cip, cpt, osv, tsv, pex
 		wenn wir von den defaults nicht generell wegkommen können, müssen sie hier auch implementiert werden
-	<OR> und <??> müssen im export script nach OR und Unknown umbenannt werden
-	
-	
+	indices
+		http://stackoverflow.com/questions/15106869/mongodb-mapreduce-performance-using-indexes
+		indices über die import tabellen sind nur an 2 punkten interessant
+			query	also date
+			sort	aha...
+					maybe country or autosys, to speed up the rather expensive operations on arrays?
+					or type?
+					http://stackoverflow.com/questions/12015064/mongodb-mapreduce-and-sorting
+					
+					> db.import.ensureIndex({type:1})
+					> db.import.ensureIndex({date:1})
+
+It can't be overestimated enough that what you output in the map step has to have the exact same structure than what you output in the reduce step. It's called idempotence but few people have a good idea of what it actually means. I had a lot of problems with scripts running fine on the testdata but then failing strangely on the actual data.  The reason was that the actual data set was much bigger and the mapReduce engine started to work through it in chunks: processing the first 100 documents in teh collection, then the next 100 documents and so forth, and then aggregatig those results together like they were new input documents. So what you spit out in the reduce step - and you think you're done with that - get's sucked into another mapreduce circle again, and again... That's why it's so important that when implementing the reduce step you always have in mind that you might not always chew through one more of those single-document map outputs, but through one of the results - which in this case were much more complex and therefor required some additional checkbacks and logic. E.g. since we are counting a lot of single relay entries on a given date there was more than one place where it was tempting to add a +1 in the reduce step instead of adding the actual value contained in the document to be reduced - which might as well be 100 (and in one case actually was because MongoDBs mapReduce worked through the data in chunks of 100 documents). 
+
+Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence (see above). Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document and is logically not very interesting. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be handled that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend again. They examples other people posted really opened my eyes of what is possible within the reduce step - as long as the final output can be fed into it again (the importance of idempotence...).
+
+
 /*	
 
 import collection index 
@@ -136,7 +153,7 @@ um das mal festzuhalten
 
 /* newest tactical considerations  (Friday, August 9, 2013)
 	it's not possible to aggregate from multiple documents in tempFacts into one visFacts document
-		if thos emultiple documents in tempFacts do not each carry every field of the final visFacts document
+		if those multiple documents in tempFacts do not each carry every field of the final visFacts document
 		which means that they each would have to be around 3000 lines long and contain a template of the final aggregated monster
 		that's just not feasable. while it would be a nice show off of dedication and diligence it would also be a maintenance nightmare, not to mention evolution and diversification
 	that said: what alternatives do we have?
