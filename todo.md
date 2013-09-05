@@ -5,8 +5,7 @@
 		aggregationCA
 			BUGS
 			in countries
-				countries.country.crcc and cbcc always 0
-				countries.country.autosys "thisAS"
+				countries.country.autosys
 			in autonomous systems
 				eg	{
 						"as" : 20115,
@@ -43,8 +42,11 @@
 					only one country
 					and only 1 relay in that country
 					
-		unknown
-			we're missing the field unknown. therfor a lot of numbers don't add up
+		unknown/noData
+			we're missing the field "unknown" for every instance where we have no data. 
+			therfor a lot of numbers don't add up and it's not easy to see why (or if) that happens.
+			the only exemption seems to be cpt (bridge pluggable transport) but i'll have to check that too
+			
 			
 		command+control
 			update

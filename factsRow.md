@@ -113,14 +113,15 @@
 				pbg: float,				from relays
 				pbm: float,				from relays
 				pbe: float,				from relays
-				fast:int,				from relays
+				fast: int,				from relays
 				stable: int,			from relays
 				osv: ... ,				from relays				osv like above
 				tsv: ... ,				from relays				tsv like above
 				pex: ... ,				from relays				pex like above
 				autosys: [
 					{
-						as: int
+						name: int,
+						count: int
 					},
 					...					for all AS serving this country
 				]

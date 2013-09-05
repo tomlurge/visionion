@@ -287,7 +287,7 @@ The initial database import schema has only one collection for all node types: '
 	  r			pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
 	  r			pbe		exit_probability			number			mean		probability of a client picking a relay for their exit position
 	  r			pex		permitted exit ports		array	integer	mode		some of: 80, 443, 6667
-	  r			as		autonomous system			integer			mode		
+	  r			as		autonomous system			integer			mode		AS number
 	  r			cc		country code				string			mode		two-letter (ISO 3166-1 alpha-2), upper case
 
 	
@@ -706,7 +706,8 @@ Again there are differences: while there exist about 37.000 autonomous systems, 
 				p68					int
 				p468				int
 			autosys					array of objects 
-				as					int	
+				name				int											as number
+				count				int
 ```
 
 This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.

@@ -41,7 +41,7 @@ var mapValues = function() {
 	var authority = ( r && this.flag.indexOf("Authority") > -1 ) ;
 	
 	
-	var values = {
+	var value = {
 		date : theDate ,
 		clients : {
 			total : 					c ?  this.cr + this.cb  : 0,
@@ -54,7 +54,7 @@ var mapValues = function() {
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
 			cptUnknown : 				c && this.cpt.unknown ? this.cpt.unknown : 0
 		} ,		
-/*		servers : {	
+/*		servers : {
 			total : {
 				count : 				s ?  1 : 0 ,
 				bwa :	  				s ?  this.bwa : 0 ,
@@ -868,13 +868,13 @@ var mapValues = function() {
 		pbe: 				0 ,
 		fast: 				0 ,
 		stable: 			0 ,
-		osv : {				
+		osv : {
 			linux : 		0 ,
 			darwin : 		0 ,
 			freebsd :		0 ,
 			windows :		0 ,
 			other : 		0
-		} , 				
+		} ,
 		tsv : {				
 			v010 : 			0 ,
 			v011 : 			0 ,
@@ -903,69 +903,202 @@ var mapValues = function() {
                 var cbccCountryObject = new CountryObject();
                 cbccCountryObject.country = cb ;
                 cbccCountryObject.cbcc = this.cbcc[cb] ;
-                values.countries.push(cbccCountryObject) ;
+                cbccCountryObject.crcc = 0 ;
+                cbccCountryObject.relay = 0 ;
+                cbccCountryObject.guard = 0 ;
+                cbccCountryObject.middle = 0 ;
+                cbccCountryObject.exit =  0 ;
+                cbccCountryObject.dir =  0 ;
+                cbccCountryObject.bwa = 0 ;
+                cbccCountryObject.bwc = 0 ;
+                cbccCountryObject.pbr = 0 ;
+                cbccCountryObject.pbg =	0 ;
+                cbccCountryObject.pbm = 0 ;
+                cbccCountryObject.pbe = 0 ;
+                cbccCountryObject.fast =0 ;
+                cbccCountryObject.stable = 0 ;
+                cbccCountryObject.osv = {} ;
+                cbccCountryObject.osv.linux = 0 ;
+                cbccCountryObject.osv.darwin = 0 ;
+                cbccCountryObject.osv.freebsd = 0 ;
+                cbccCountryObject.osv.windows = 0 ;
+                cbccCountryObject.osv.other = 0 ;
+                cbccCountryObject.tsv = {} ;
+                cbccCountryObject.tsv.v010 = 0 ;
+                cbccCountryObject.tsv.v011 = 0 ;
+                cbccCountryObject.tsv.v012 = 0 ;
+                cbccCountryObject.tsv.v020 = 0 ;
+                cbccCountryObject.tsv.v021 = 0 ;
+                cbccCountryObject.tsv.v022 = 0 ;
+                cbccCountryObject.tsv.v023 = 0 ;
+                cbccCountryObject.tsv.v024 = 0 ;
+                cbccCountryObject.pex = {} ;
+                cbccCountryObject.pex.p4 = 0 ;
+                cbccCountryObject.pex.p6 = 0 ;
+                cbccCountryObject.pex.p8 = 0 ;
+                cbccCountryObject.pex.p46 = 0 ;
+                cbccCountryObject.pex.p48 = 0 ;
+                cbccCountryObject.pex.p68 = 0 ;
+                cbccCountryObject.pex.p468 = 0 ;
+                cbccCountryObject.autosys = [] ;
+                value.countries.push(cbccCountryObject) ;
             }
 		}
 		for(var cr in this.crcc) {
 			if (this.crcc.hasOwnProperty(cr)) {
                 var crccCountryObject = new CountryObject();
                 crccCountryObject.country = cr ;
-                crccCountryObject.cbcc = 0 ;											        //	reset cbcc to 0, otherwise it will still hold the value from the last cbcc run
                 crccCountryObject.crcc = this.crcc[cr] ;
-                values.countries.push(crccCountryObject);
+                crccCountryObject.cbcc = 0 ;											        //	reset cbcc to 0, otherwise it will still hold the value from the last cbcc run
+                crccCountryObject.relay = 0 ;
+                crccCountryObject.guard = 0 ;
+                crccCountryObject.middle = 0 ;
+                crccCountryObject.exit =  0 ;
+                crccCountryObject.dir =  0 ;
+                crccCountryObject.bwa = 0 ;
+                crccCountryObject.bwc = 0 ;
+                crccCountryObject.pbr = 0 ;
+                crccCountryObject.pbg =	0 ;
+                crccCountryObject.pbm = 0 ;
+                crccCountryObject.pbe = 0 ;
+                crccCountryObject.fast =0 ;
+                crccCountryObject.stable = 0 ;
+                crccCountryObject.osv = {} ;
+                crccCountryObject.osv.linux = 0 ;
+                crccCountryObject.osv.darwin = 0 ;
+                crccCountryObject.osv.freebsd = 0 ;
+                crccCountryObject.osv.windows = 0 ;
+                crccCountryObject.osv.other = 0 ;
+                crccCountryObject.tsv = {} ;
+                crccCountryObject.tsv.v010 = 0 ;
+                crccCountryObject.tsv.v011 = 0 ;
+                crccCountryObject.tsv.v012 = 0 ;
+                crccCountryObject.tsv.v020 = 0 ;
+                crccCountryObject.tsv.v021 = 0 ;
+                crccCountryObject.tsv.v022 = 0 ;
+                crccCountryObject.tsv.v023 = 0 ;
+                crccCountryObject.tsv.v024 = 0 ;
+                crccCountryObject.pex = {} ;
+                crccCountryObject.pex.p4 = 0 ;
+                crccCountryObject.pex.p6 = 0 ;
+                crccCountryObject.pex.p8 = 0 ;
+                crccCountryObject.pex.p46 = 0 ;
+                crccCountryObject.pex.p48 = 0 ;
+                crccCountryObject.pex.p68 = 0 ;
+                crccCountryObject.pex.p468 = 0 ;
+                crccCountryObject.autosys = [] ;
+                value.countries.push(crccCountryObject);
 			}
-
 		}
 	}
-	if (r && this.cc) {																			//	if it's a relay and  cc field is not empty
-        var countryObject = new CountryObject();
-		countryObject.country = this.cc ;
-		countryObject.cbcc = 0 ;
-		countryObject.crcc = 0 ;
-		countryObject.relay = 1 ;
-		guard ? countryObject.guard = 1 : countryObject.guard = 0 ;
-		middle ? countryObject.middle = 1 : countryObject.middle = 0 ;
-		exit ? countryObject.exit = 1 : countryObject.exit =  0 ;
-		dir ? countryObject.dir = 1 : countryObject.dir =  0 ;
-		this.bwa ? countryObject.bwa = this.bwa : countryObject.bwa = 0 ;
-		this.bwc ? countryObject.bwc = this.bwc : countryObject.bwc = 0 ;
-		this.pbr ? countryObject.pbr = this.pbr : countryObject.pbr = 0 ;
-		guard ? countryObject.pbg =	this.pbg : countryObject.pbg =	0 ;
-		middle ? countryObject.pbm = this.pbm : countryObject.pbm = 0 ;
-		exit ? countryObject.pbe = this.pbe : countryObject.pbe = 0 ;
-		fast ? countryObject.fast =1 : countryObject.fast =0 ;
-		stable ? countryObject.stable =1 : countryObject.stable = 0 ;
-		osLinux ? countryObject.osv.linux = 1 : countryObject.osv.linux = 0 ;
-		osDarwin ? countryObject.osv.darwin = 1 : countryObject.osv.darwin = 0 ;
-		osFreebsd ? countryObject.osv.freebsd = 1 : countryObject.osv.freebsd = 0 ;
-		osWindows ? countryObject.osv.windows = 1 : countryObject.osv.windows = 0 ;
-		osOther ? countryObject.osv.other = 1 : countryObject.osv.other = 0 ;			
-		v010 ? countryObject.tsv.v010 = 1 : countryObject.tsv.v010 = 0 ;
-		v011 ? countryObject.tsv.v011 = 1 : countryObject.tsv.v011 = 0 ;
-		v012 ? countryObject.tsv.v012 = 1 : countryObject.tsv.v012 = 0 ;
-		v020 ? countryObject.tsv.v020 = 1 : countryObject.tsv.v020 = 0 ;
-		v021 ? countryObject.tsv.v021 = 1 : countryObject.tsv.v021 = 0 ;
-		v022 ? countryObject.tsv.v022 = 1 : countryObject.tsv.v022 = 0 ;
-		v023 ? countryObject.tsv.v023 = 1 : countryObject.tsv.v023 = 0 ;
-		v024 ? countryObject.tsv.v024 = 1 : countryObject.tsv.v024 = 0 ;
-		exit && this.pex.indexOf(443) > -1 ? countryObject.pex.p4 = 1 : countryObject.pex.p4 = 0 ;
-		exit && this.pex.indexOf(6667) > -1 ? countryObject.pex.p6 = 1 : countryObject.pex.p6 = 0 ;
-		exit && this.pex.indexOf(80) > -1 ? countryObject.pex.p8 = 1 : countryObject.pex.p8 = 0 ;
-		exit && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p46 = 1 : countryObject.pex.p46 = 0 ;
-		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? countryObject.pex.p48 = 1 : countryObject.pex.p48 = 0 ;
-		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p68 = 1 : countryObject.pex.p68 = 0 ;
-		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? countryObject.pex.p468 = 1 : countryObject.pex.p468 = 0 ;
+	else if (r && this.cc) {                                                                    //	if it's a relay and cc field is not empty
+        var rCountryObject = new CountryObject();
+		rCountryObject.country = this.cc ;
+		rCountryObject.cbcc = 0 ;
+		rCountryObject.crcc = 0 ;
+		rCountryObject.relay = 1 ;
+		guard ? rCountryObject.guard = 1 : rCountryObject.guard = 0 ;
+		middle ? rCountryObject.middle = 1 : rCountryObject.middle = 0 ;
+		exit ? rCountryObject.exit = 1 : rCountryObject.exit =  0 ;
+		dir ? rCountryObject.dir = 1 : rCountryObject.dir =  0 ;
+		this.bwa ? rCountryObject.bwa = this.bwa : rCountryObject.bwa = 0 ;                     //  this.   is needed here because bwa is not defined as as a variable above
+		this.bwc ? rCountryObject.bwc = this.bwc : rCountryObject.bwc = 0 ;                     //          same here and in the next few lines
+		this.pbr ? rCountryObject.pbr = this.pbr : rCountryObject.pbr = 0 ;
+		guard ? rCountryObject.pbg = this.pbg : rCountryObject.pbg = 0 ;
+		middle ? rCountryObject.pbm = this.pbm : rCountryObject.pbm = 0 ;
+		exit ? rCountryObject.pbe = this.pbe : rCountryObject.pbe = 0 ;
+		fast ? rCountryObject.fast =1 : rCountryObject.fast = 0 ;
+		stable ? rCountryObject.stable =1 : rCountryObject.stable = 0 ;
+        rCountryObject.osv = {} ;                                                               //  TODO    understand why this bastard is necessary
+                                                                                                //          seems to be a bug since he doesn't change emit values
+                                                                                                //          but is needed for the reduce step to work correctly
+                                                                                                //          reduce otherwise skips osv{} for relays
+		osLinux ? rCountryObject.osv.linux = 1 : rCountryObject.osv.linux = 0 ;
+		osDarwin ? rCountryObject.osv.darwin = 1 : rCountryObject.osv.darwin = 0 ;
+		osFreebsd ? rCountryObject.osv.freebsd = 1 : rCountryObject.osv.freebsd = 0 ;
+		osWindows ? rCountryObject.osv.windows = 1 : rCountryObject.osv.windows = 0 ;
+		osOther ? rCountryObject.osv.other = 1 : rCountryObject.osv.other = 0 ;
+        rCountryObject.tsv = {} ;                                                               //  TODO    understand why this bastard is necessary
+                                                                                                //          seems to be a bug since he doesn't change emit values
+                                                                                                //          but is needed for the reduce step to work correctly
+                                                                                                //          reduce otherwise skips tsv{} for relays
+		v010 ? rCountryObject.tsv.v010 = 1 : rCountryObject.tsv.v010 = 0 ;
+		v011 ? rCountryObject.tsv.v011 = 1 : rCountryObject.tsv.v011 = 0 ;
+		v012 ? rCountryObject.tsv.v012 = 1 : rCountryObject.tsv.v012 = 0 ;
+		v020 ? rCountryObject.tsv.v020 = 1 : rCountryObject.tsv.v020 = 0 ;
+		v021 ? rCountryObject.tsv.v021 = 1 : rCountryObject.tsv.v021 = 0 ;
+		v022 ? rCountryObject.tsv.v022 = 1 : rCountryObject.tsv.v022 = 0 ;
+		v023 ? rCountryObject.tsv.v023 = 1 : rCountryObject.tsv.v023 = 0 ;
+		v024 ? rCountryObject.tsv.v024 = 1 : rCountryObject.tsv.v024 = 0 ;
+        rCountryObject.pex = {} ;                                                               //  TODO    understand why this bastard is necessary
+                                                                                                //          seems to be a bug since he doesn't change emit values
+                                                                                                //          but is needed for the reduce step to work correctly
+                                                                                                //          reduce otherwise skips pex{} for relays
+		exit && this.pex.indexOf(443) > -1 ? rCountryObject.pex.p4 = 1 : rCountryObject.pex.p4 = 0 ;
+		exit && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p6 = 1 : rCountryObject.pex.p6 = 0 ;
+		exit && this.pex.indexOf(80) > -1 ? rCountryObject.pex.p8 = 1 : rCountryObject.pex.p8 = 0 ;
+		exit && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p46 = 1 : rCountryObject.pex.p46 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? rCountryObject.pex.p48 = 1 : rCountryObject.pex.p48 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p68 = 1 : rCountryObject.pex.p68 = 0 ;
+		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p468 = 1 : rCountryObject.pex.p468 = 0 ;
+        rCountryObject.autosys = [] ;                                                           //  TODO    understand why this bastard is necessary
+                                                                                                //          seems to be a bug since he doesn't change emit values
+                                                                                                //          but is needed for the reduce step to work correctly
+                                                                                                //          reduce otherwise skips autosys[] for relays
         if (this.as)  {
-            var thisAS = this.as ;                                                              //  TODO    thisAS is defined here
-            countryObject.autosys.push( {thisAS:1} ) ;                                          //  TODO    but thisAS is invisible here
+            var asObject = {
+                as : this.as ,
+                count : 1
+            } ;
+            rCountryObject.autosys.push( asObject ) ;
         }
-        else {
-            countryObject.autosys.push() ;
-        }
-        values.countries.push(countryObject);
+        value.countries.push( rCountryObject ) ;
+
 	}
-	else {}	                                                                                    //	do nothing for bridges which contain no country information
-	
+	else {	                                                                                    //	if it's a bridge which never contains any country information
+     /*   var bridgeCountryObject = new CountryObject();                                            TODO    probably this serves no purpose and can be removed
+        bridgeCountryObject.country = "" ;                                                                  since it only pushes empty objects on the country array
+        bridgeCountryObject.cbcc = 0 ;                                                                      which has no fixed length anyway
+        bridgeCountryObject.crcc = 0 ;
+        bridgeCountryObject.relay = 0 ;
+        bridgeCountryObject.guard = 0 ;
+        bridgeCountryObject.middle = 0 ;
+        bridgeCountryObject.exit =  0 ;
+        bridgeCountryObject.dir =  0 ;
+        bridgeCountryObject.bwa = 0 ;
+        bridgeCountryObject.bwc = 0 ;
+        bridgeCountryObject.pbr = 0 ;
+        bridgeCountryObject.pbg =	0 ;
+        bridgeCountryObject.pbm = 0 ;
+        bridgeCountryObject.pbe = 0 ;
+        bridgeCountryObject.fast =0 ;
+        bridgeCountryObject.stable = 0 ;
+        bridgeCountryObject.osv = {} ;
+        bridgeCountryObject.osv.linux = 0 ;
+        bridgeCountryObject.osv.darwin = 0 ;
+        bridgeCountryObject.osv.freebsd = 0 ;
+        bridgeCountryObject.osv.windows = 0 ;
+        bridgeCountryObject.osv.other = 0 ;
+        bridgeCountryObject.tsv = {} ;
+        bridgeCountryObject.tsv.v010 = 0 ;
+        bridgeCountryObject.tsv.v011 = 0 ;
+        bridgeCountryObject.tsv.v012 = 0 ;
+        bridgeCountryObject.tsv.v020 = 0 ;
+        bridgeCountryObject.tsv.v021 = 0 ;
+        bridgeCountryObject.tsv.v022 = 0 ;
+        bridgeCountryObject.tsv.v023 = 0 ;
+        bridgeCountryObject.tsv.v024 = 0 ;
+        bridgeCountryObject.pex = {} ;
+        bridgeCountryObject.pex.p4 = 0 ;
+        bridgeCountryObject.pex.p6 = 0 ;
+        bridgeCountryObject.pex.p8 = 0 ;
+        bridgeCountryObject.pex.p46 = 0 ;
+        bridgeCountryObject.pex.p48 = 0 ;
+        bridgeCountryObject.pex.p68 = 0 ;
+        bridgeCountryObject.pex.p468 = 0 ;
+        bridgeCountryObject.autosys = [] ;
+        value.countries.push(bridgeCountryObject) ; */
+    }
 /*
 	aggregating autonomous systems
 	only relays contain as information which makes aggregation rather straightfoward 
@@ -1037,8 +1170,8 @@ var mapValues = function() {
 		values.autosys.push(asObject);
 	}
 */
-
-	emit( "Fact " + theDate , values );
+    printjson(value);                                                                           //  TODO remove debug
+	emit( "Fact " + theDate , value );
 };
 
 
@@ -1826,10 +1959,8 @@ var reduceFact = function ( key, values ) {
 				}
 			}
 	} ,		*/
-		countries : []
-		 /*   ,																		//	COUNTRIES
-		autosys: []													        					//	AUTOSYS
-		*/
+		countries : [] //,																		//	COUNTRIES
+		//  autosys: []													        				//	AUTOSYS
 	};
 
 	values.forEach( function(v) {
@@ -1845,7 +1976,7 @@ var reduceFact = function ( key, values ) {
 		fact.clients.cptOR += v.clients.cptOR ;
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
 
-/*		fact.servers.total.count += v.servers.total.count ;													//	SERVERS
+    /*  fact.servers.total.count += v.servers.total.count ;					    			    //	SERVERS
 		fact.servers.total.bwa += v.servers.total.bwa ;
 		fact.servers.total.bwc += v.servers.total.bwc ;
 		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
@@ -1862,7 +1993,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.total.tsv.v023 += v.servers.total.tsv.v023 ;
 		fact.servers.total.tsv.v024 += v.servers.total.tsv.v024 ;
 
-		fact.servers.bridges.total.count += v.servers.bridges.total.count ;									//	BRIDGES
+		fact.servers.bridges.total.count += v.servers.bridges.total.count ;					    //	BRIDGES
 		fact.servers.bridges.total.bwa += v.servers.bridges.total.bwa ;
 		fact.servers.bridges.total.bwc += v.servers.bridges.total.bwc ;
 		fact.servers.bridges.total.osv.linux += v.servers.bridges.total.osv.linux ;
@@ -1998,7 +2129,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
 		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ;
 
-        fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;					//	RELAYS ALL
+        fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;       //	RELAYS ALL
 		fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
 		fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;
 		fact.servers.relays.roleAll.total.osv.linux += v.servers.relays.roleAll.total.osv.linux ;
@@ -2087,7 +2218,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleAll.flagFastStable.tsv.v023 += v.servers.relays.roleAll.flagFastStable.tsv.v023 ;
 		fact.servers.relays.roleAll.flagFastStable.tsv.v024 += v.servers.relays.roleAll.flagFastStable.tsv.v024 ;
 
-		fact.servers.relays.roleGuard.total.count += v.servers.relays.roleGuard.total.count ;				//	RELAYS GUARD
+		fact.servers.relays.roleGuard.total.count += v.servers.relays.roleGuard.total.count ;   //	RELAYS GUARD
 		fact.servers.relays.roleGuard.total.bwa += v.servers.relays.roleGuard.total.bwa ;
 		fact.servers.relays.roleGuard.total.bwc += v.servers.relays.roleGuard.total.bwc ;
 		fact.servers.relays.roleGuard.total.osv.linux += v.servers.relays.roleGuard.total.osv.linux ;
@@ -2177,7 +2308,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleGuard.flagFastStable.tsv.v024 += v.servers.relays.roleGuard.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleGuard.flagFastStable.pbg += v.servers.relays.roleGuard.flagFastStable.pbg ;
 
-		fact.servers.relays.roleMiddle.total.count += v.servers.relays.roleMiddle.total.count ;				//	RELAYS MIDDLE
+		fact.servers.relays.roleMiddle.total.count += v.servers.relays.roleMiddle.total.count ;	//	RELAYS MIDDLE
 		fact.servers.relays.roleMiddle.total.bwa += v.servers.relays.roleMiddle.total.bwa ;
 		fact.servers.relays.roleMiddle.total.bwc += v.servers.relays.roleMiddle.total.bwc ;
 		fact.servers.relays.roleMiddle.total.osv.linux += v.servers.relays.roleMiddle.total.osv.linux ;
@@ -2267,7 +2398,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleMiddle.flagFastStable.tsv.v024 += v.servers.relays.roleMiddle.flagFastStable.tsv.v024 ;
 		fact.servers.relays.roleMiddle.flagFastStable.pbm += v.servers.relays.roleMiddle.flagFastStable.pbm ;
 
-		fact.servers.relays.roleExit.total.count += v.servers.relays.roleExit.total.count ;					//	RELAYS EXIT
+		fact.servers.relays.roleExit.total.count += v.servers.relays.roleExit.total.count ;	    //	RELAYS EXIT
 		fact.servers.relays.roleExit.total.bwa += v.servers.relays.roleExit.total.bwa ;
 		fact.servers.relays.roleExit.total.bwc += v.servers.relays.roleExit.total.bwc ;
 		fact.servers.relays.roleExit.total.osv.linux += v.servers.relays.roleExit.total.osv.linux ;
@@ -2392,7 +2523,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleExit.flagFastStable.pex.p468 += v.servers.relays.roleExit.flagFastStable.pex.p468 ;
 		fact.servers.relays.roleExit.flagFastStable.pbe += v.servers.relays.roleExit.flagFastStable.pbe ;
 
-		fact.servers.relays.roleDir.total.count += v.servers.relays.roleDir.total.count ;					//	RELAYS DIR
+		fact.servers.relays.roleDir.total.count += v.servers.relays.roleDir.total.count ;       //	RELAYS DIR
 		fact.servers.relays.roleDir.total.bwa += v.servers.relays.roleDir.total.bwa ;
 		fact.servers.relays.roleDir.total.bwc += v.servers.relays.roleDir.total.bwc ;
 		fact.servers.relays.roleDir.total.osv.linux += v.servers.relays.roleDir.total.osv.linux ;
@@ -2426,8 +2557,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
 */
-
-																				        		//	COUNTRIES
+																        		                //	COUNTRIES
 		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in values emitted from map
 			var countryInFact = false ;                                                         //  assuming data about this country has not already been aded to fact
 			for ( var c = 0; c < fact.countries.length; c++ ) {									//	<- double loop part 2: countries in fact
@@ -2468,31 +2598,24 @@ var reduceFact = function ( key, values ) {
 					countryFact.pex.p48 += countryMapped.pex.p48 ;
 					countryFact.pex.p68 += countryMapped.pex.p68 ;
 					countryFact.pex.p468 += countryMapped.pex.p468 ;
-
+                    //  countryFact.autosys = [] ;                                              //  this is wrong - it would reset the array with every new countryMapped
 					for ( var m = 0; m < countryMapped.autosys.length; m++ ) {					//	<- inner double loop part 1: 'as' in mapped.countries
-					                                                                            //  (can be nmore than one, because incoming could be pre-aggregated)
-						var asInCountryInFact = false ;
-						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int }
-						var asMapName ;															//	this var is gonna hold the property name,
-						                                                                        //  the actual string denominating the 'as'
-						if ( asMap.hasOwnProperty(asMapName) ) {
-							for ( var f = 0; f < countryFact.autosys.length; f++ ) {			//	<- inner double loop part 2: 'as' in fact.countries
-								var asFact = countryFact.autosys[f] ;
-								var asFactName ;												//	this var is gonna hold the property name
-								if (asFact.hasOwnProperty(asFactName) && asMapName == asFactName) {
-									asFact.asFactName += asMap.asMapName ;						//	TODO	check if this works alright
-								}
-								asInCountryInFact = true ;
-								break ;
-							}
-							if ( !asInCountryInFact ) { 										//	after the inner loop is through
-								countryFact.autosys.push(asMap) ;								//	if the 'as' wasn't found in the array add it
-							}
-						}
+                        var asInCountryInFact = false ;                                         //     (can be nmore than one, because incoming may be pre-aggregated)
+						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int, count : int }
+                        for ( var f = 0; f < countryFact.autosys.length; f++ ) {			    //	<- inner double loop part 2: 'as' in fact.countries
+                            var asFact = countryFact.autosys[f] ;
+                            if (asFact.as == asMap.as) {
+                                asFact.count += asMap.count ;
+                            }
+                            asInCountryInFact = true ;
+                           // break ;
+                        }
+                        if ( !asInCountryInFact ) { 										    //	after the inner loop is through
+                            countryFact.autosys.push(asMap) ;								    //	if the 'as' wasn't found in the array add it
+                        }                                                                       //  return to the outer loop, check the next country passed in by mapValues
 					}
-                    
 					countryInFact = true ;
-					break ;
+					// break ;
 				}
 			}
 			if ( !countryInFact ) { 															//	if the country does not exist in the array so far
