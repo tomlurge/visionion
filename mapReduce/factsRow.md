@@ -120,7 +120,7 @@
 				pex: ... ,				from relays				pex like above
 				autosys: [
 					{
-						name: int,
+						as: int,
 						count: int
 					},
 					...					for all AS serving this country
@@ -132,7 +132,7 @@
 			{
 				as: int,
 				name: string,
-				home: string,
+				country: cc,
 				relay: int,
 				bwa: int,
 				bwc: int,
@@ -145,20 +145,7 @@
 				pbr: float,
 				pbg: float,
 				pbm: float,
-				pbe: float,
-				countries: [
-					{
-						country: cc,
-						relay: int,
-						bwa: int,
-						bwc: int,
-						pbr: float,
-						pbg: float,
-						pbm: float,
-						pbe: float
-					},
-					...					for all countries served by this AS
-				]
+				pbe: float
 			},
 			...							for all AS at this date
 		]

@@ -706,7 +706,7 @@ Again there are differences: while there exist about 37.000 autonomous systems, 
 				p68					int
 				p468				int
 			autosys					array of objects 
-				name				int											as number
+				as					int											as number
 				count				int
 ```
 
@@ -721,7 +721,7 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 	42	autosys		 				array of objects							one result object per AS
 			as						string										number of as (format is string because it's a name)
 			name					string										name of as	
-			home					string										home country of as, jurisdiction
+			country					string										home country of as
 			relay					int											how many relays in this AS
 			bwa						int											total bwa of all relays in this AS
 			bwc						int											total bwc of all relays in this AS
@@ -735,16 +735,7 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 			pbg						int											total pbg of all guards in this AS 
 			pbm						int											total pbm of all middles in this AS 
 			pbe						int											total pbe of all exits in this AS 
-			countries				array of objects
-				cc					string										two-letter (ISO 3166-1 alpha-2) country code
-				relay				int											how many relays in that country in this AS
-				bwa					int											how much bwa in that country in this AS
-				bwc					int											how much bwc in that country in this AS
-				pbr					float										total probability of all relays in that country and this AS
-				pbg					float										total probability of all guards in that country and this AS
-				pbm					float										total probability of all middles in that country and this AS
-				pbe					float										total probability of all exits in that country and this AS
-```	
+			```	
 
 This is still sketchy. More input and ideas on handling AS would be welcome. 
 

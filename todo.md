@@ -2,46 +2,6 @@
 
 	AGGREGATION
 	
-		aggregationCA
-			BUGS
-			in countries
-				countries.country.autosys
-			in autonomous systems
-				eg	{
-						"as" : 20115,
-						"name" : "",
-						"home" : "",
-						"relay" : 24,
-						"bwa" : 4817220,
-						"bwc" : 1325809,
-						"fast" : 22,
-						"stable" : 14,
-						"guard" : 3,
-						"middle" : 24,
-						"exit" : 1,
-						"dir" : 16,
-						"pbr" : 0.00049,
-						"pbg" : 0.000449,
-						"pbm" : 0.0010119999999999997,
-						"pbe" : 0.00001,
-						"countries" : [
-							{
-								"country" : "US",
-								"relay" : 1,
-								"bwa" : 215639,
-								"bwc" : 7755,
-								"pbr" : 0.000015,
-								"pbg" : 0.000031,
-								"pbm" : 0.000014,
-								"pbe" : 0
-							}
-						]
-					},
-				number of relays seems plausible (corresponds to stable, guard etc)
-				but in countries 2 things implausible
-					only one country
-					and only 1 relay in that country
-					
 		unknown/noData
 			we're missing the field "unknown" for every instance where we have no data. 
 			therfor a lot of numbers don't add up and it's not easy to see why (or if) that happens.
