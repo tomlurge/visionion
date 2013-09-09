@@ -56,7 +56,7 @@ var mapValues = function() {
 			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
 			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown : 				c && this.cpt.unknown ? this.cpt.unknown : 0
+			cptUnknown :				c && this.cpt.unknown ? this.cpt.unknown : 0
 		} ,		                                                                                //  SERVERS
 		servers : {
 			total : {
@@ -1036,7 +1036,7 @@ var mapValues = function() {
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p68 = 1 : rCountryObject.pex.p68 = 0 ;
 		exit && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? rCountryObject.pex.p468 = 1 : rCountryObject.pex.p468 = 0 ;
         rCountryObject.autosys = [] ;                                                           //  reduce otherwise skips autosys[] for relays
-        if (this.as)  {
+        if (this.as) {
             var countryASobject = {
                 as : this.as ,
                 count : 1
@@ -1058,7 +1058,6 @@ var mapValues = function() {
 		as : "" ,
 		//  name : "" ,
 		//  home : "",
-		country : "" ,
 		relay : 0 ,
 		bwa : 0 ,
 		bwc : 0 ,
@@ -1073,11 +1072,23 @@ var mapValues = function() {
 		pbm : 0 ,
 		pbe : 0
 	} ;
+	function AScountryObject() {}
+	AScountryObject.prototype = {
+		cc : "" ,
+		relay : 0 ,
+		bwa : 0 ,
+		bwc : 0 ,
+		dir : 0 ,
+		pbr: 0,
+		pbg : 0 ,
+		pbm : 0 ,
+		pbe : 0
+	} ;
 	if (r && this.as) {
 		var asObject = new ASobject();
         asObject.as = this.as ;
 		//  asObject.name = function(asObject.as ) { return ""; } ;								//	TODO	lookup name for AS
-		asObject.country = this.cc ;
+		//  asObject.home = function(asObject.as ) { return ""; } ;								//	TODO	lookup home country for AS
 		asObject.relay = 1 ;
 		this.bwa ? asObject.bwa = this.bwa : asObject.bwa = 0 ;
 		this.bwc ? asObject.bwc = this.bwc : asObject.bwc = 0 ;
@@ -1091,6 +1102,19 @@ var mapValues = function() {
 		this.pbg ? asObject.pbg = this.pbg : asObject.pbg = 0 ;
 		this.pbm ? asObject.pbm = this.pbm : asObject.pbm = 0 ;
 		this.pbe ? asObject.pbe = this.pbe : asObject.pbe = 0 ;
+		asObject.countries = [] ;
+		if (this.cc) {
+			var asCountryObject = new AScountryObject();
+			asCountryObject.cc = "";
+			asCountryObject.relay = 1 ;
+			this.bwa ? asCountryObject.bwa = this.bwa : asCountryObject.bwa = 0 ;
+			this.bwc ? asCountryObject.bwc = this.bwc : asCountryObject.bwc = 0 ;
+			this.pbr ? asCountryObject.pbr = this.pbr : asCountryObject.pbr = 0 ;
+			this.pbg ? asCountryObject.pbg = this.pbg : asCountryObject.pbg = 0 ;
+			this.pbm ? asCountryObject.pbm = this.pbm : asCountryObject.pbm = 0 ;
+			this.pbe ? asCountryObject.pbe = this.pbe : asCountryObject.pbe = 0 ;
+			asObject.countries.push(asCountryObject) ;
+		}
 		value.autosys.push(asObject);
 	}
 
@@ -2574,6 +2598,34 @@ var reduceFact = function ( key, values ) {
 					asFact.pbg += asMapped.pbg ;
 					asFact.pbm += asMapped.pbm ;
 					asFact.pbe += asMapped.pbe ;
+
+
+
+
+					for ( var b = 0 , ma = asMapped.countries.length ;  b < ma ; b++ ) {
+
+						var incomingCountryIsAlreadyKown = false ;
+						var asMap = asMapped.countries[b] ;
+
+						for ( var c = 0 , fc = asFact.autosys.countries.length; c < fc ; c++ ) {
+							var asFactCountry = countryFact.autosys[f] ;
+							if (asFact.as == asMap.as) {
+								asFact.count += asMap.count ;
+								incomingCountryIsAlreadyKown = true ;
+								break ;
+							}
+						}
+						if ( !incomingCountryIsAlreadyKown ) {
+							countryFact.autosys.push(asMap) ;
+						}
+
+					}
+
+
+
+
+
+
 
 					asInFact = true ;
 					break ;
