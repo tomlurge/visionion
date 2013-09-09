@@ -132,7 +132,7 @@
 			{
 				as: int,
 				name: string,
-				country: cc,
+				home: cc,
 				relay: int,
 				bwa: int,
 				bwc: int,
@@ -145,7 +145,20 @@
 				pbr: float,
 				pbg: float,
 				pbm: float,
-				pbe: float
+				pbe: float,
+				countries: [
+					{
+						cc: string,
+						relay: int,
+						bwa: int,
+						bwc: int,
+						pbr: float,
+						pbg: float,
+						pbm: float,
+						pbe: float
+					},
+					...					for all countries served by this AS
+				]
 			},
 			...							for all AS at this date
 		]
