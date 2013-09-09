@@ -821,9 +821,39 @@ var mapValues = function() {
 				}
 			}
 		} ,
-		countries :	[] ,
-		autosys: []
-
+		countries :	[] ,                                                                        //  COUNTRIES   more below
+		autosys : [                                                                             //  AUTOSYS
+			{
+				as :                    r && this.as ? this.as : "" ,
+				//  name :              r && this.as ? function(as) { return name; } : "" ;	    //	TODO	lookup name for AS
+				//  home :              r && this.as ? function(as) { return home; } : "" ;		//	TODO	lookup home country for AS
+				relay :                 r && this.as ? 1 : 0 ,
+				bwa :                   r && this.as && this.bwa ? this.bwa : 0 ,
+				bwc :                   r && this.as && this.bwc ? this.bwc : 0 ,
+				fast :                  this.as && fast ? 1 : 0 ,
+				stable :                this.as && stable ? 1 : 0 ,
+				guard :                 this.as && guard ? 1 : 0 ,
+				middle :                this.as && middle ? 1 : 0 ,
+				exit :                  this.as && exit ? 1 : 0 ,
+				dir :                   this.as && dir ? 1 : 0 ,
+				pbr:                    r && this.as && this.pbr ? this.pbr : 0,
+				pbg :                   r && this.as && this.pbg ? this.pbg : 0 ,
+				pbm :                   r && this.as && this.pbm ? this.pbm : 0 ,
+				pbe :                   r && this.as && this.pbe ? this.pbe : 0 ,
+				countries : [
+					{
+						cc :            r && this.as && this.cc ? this.cc : "" ,
+						relay :         r && this.as && this.cc ? 1 : 0 ,
+						bwa :           r && this.as && this.cc && this.bwa ? this.bwa : 0 ,
+						bwc :           r && this.as && this.cc && this.bwc ? this.bwc : 0 ,
+						pbr:            r && this.as && this.cc && this.pbr ? this.pbr : 0 ,
+						pbg :           r && this.as && this.cc && this.pbg ? this.pbg : 0 ,
+						pbm :           r && this.as && this.cc && this.pbm ? this.pbm : 0 ,
+						pbe :           r && this.as && this.cc && this.pbe ? this.pbe : 0
+					}
+				]
+			}
+		]
 	};				
 	
 																								//  COUNTRIES
@@ -1047,11 +1077,9 @@ var mapValues = function() {
 
 	}
 
-
  /*	only relays contain AS information which makes aggregation rather straightforward			//  AUTOSYS
-	compared to countries. OTOH the nested countries arrays contains slightly more 
-	involved objects than the autosys array nested in country objects above.
-*/
+	compared to countries.                                                                      //  TODO    this should be obsolete by now
+
 
 	function ASobject() {}
 	ASobject.prototype = {
@@ -1117,6 +1145,7 @@ var mapValues = function() {
 		}
 		value.autosys.push(asObject);
 	}
+  */
 
 	emit( "Fact " + theDate , value );
 };
@@ -2510,133 +2539,134 @@ var reduceFact = function ( key, values ) {
 
 
 																        		                //	COUNTRIES
-		v.countries.forEach( function (countryMapped) {											//	<- double loop part 1: countries in values emitted from map
-			var countryInFact = false ;                                                         //  assuming data about this country has not already been aded to fact
-			for ( var c = 0; c < fact.countries.length; c++ ) {									//	<- double loop part 2: countries in fact
-				var countryFact = fact.countries[c] ;											//	check the array for countries already added to the aggregation process
-				if ( countryFact.country == countryMapped.country ) {							//	if an object for this country was already added to the array
-					countryFact.cbcc += countryMapped.cbcc ;									//	add values from countryMapped to that already existing object
-					countryFact.crcc += countryMapped.crcc ;
-					countryFact.relay += countryMapped.relay ;
-					countryFact.guard += countryMapped.guard ;
-					countryFact.middle += countryMapped.middle ;
-					countryFact.exit += countryMapped.exit ;
-					countryFact.dir += countryMapped.dir ;
-					countryFact.bwa += countryMapped.bwa ;
-					countryFact.bwc += countryMapped.bwc ;
-					countryFact.pbr += countryMapped.pbr ;
-					countryFact.pbg += countryMapped.pbg ;
-					countryFact.pbm += countryMapped.pbm ;
-					countryFact.pbe += countryMapped.pbe ;
-					countryFact.fast += countryMapped.fast ;
-					countryFact.stable += countryMapped.stable ;
-					countryFact.osv.linux += countryMapped.osv.linux ;
-					countryFact.osv.darwin += countryMapped.osv.darwin ;
-					countryFact.osv.freebsd += countryMapped.osv.freebsd ;
-					countryFact.osv.windows += countryMapped.osv.windows ;
-					countryFact.osv.other += countryMapped.osv.other ;
-					countryFact.tsv.v010 += countryMapped.tsv.v010 ;
-					countryFact.tsv.v011 += countryMapped.tsv.v011 ;
-					countryFact.tsv.v012 += countryMapped.tsv.v012 ;
-					countryFact.tsv.v020 += countryMapped.tsv.v020 ;
-					countryFact.tsv.v021 += countryMapped.tsv.v021 ;
-					countryFact.tsv.v022 += countryMapped.tsv.v022 ;
-					countryFact.tsv.v023 += countryMapped.tsv.v023 ;
-					countryFact.tsv.v024 += countryMapped.tsv.v024 ;
-					countryFact.pex.p4 += countryMapped.pex.p4 ;
-					countryFact.pex.p6 += countryMapped.pex.p6 ;
-					countryFact.pex.p8 += countryMapped.pex.p8 ;
-					countryFact.pex.p46 += countryMapped.pex.p46 ;
-					countryFact.pex.p48 += countryMapped.pex.p48 ;
-					countryFact.pex.p68 += countryMapped.pex.p68 ;
-					countryFact.pex.p468 += countryMapped.pex.p468 ;
+		v.countries.forEach( function (vCountry) {											    //	<- double loop part 1: countries in values emitted from map
+			var incomingCountryAlreadyknown = false ;                                           //  assuming data about this country has not already been aded to fact
+			for ( var fc = 0 , fcl = fact.countries.length; fc < fcl ; fc++ ) {					//	<- double loop part 2: countries in fact
+				var countryFact = fact.countries[fc] ;											//	check the array for countries already added to the aggregation process
+				if ( countryFact.country == vCountry.country ) {							    //	if an object for this country was already added to the array
+					countryFact.cbcc += vCountry.cbcc ;									        //	add values from countryMapped to that already existing object
+					countryFact.crcc += vCountry.crcc ;
+					countryFact.relay += vCountry.relay ;
+					countryFact.guard += vCountry.guard ;
+					countryFact.middle += vCountry.middle ;
+					countryFact.exit += vCountry.exit ;
+					countryFact.dir += vCountry.dir ;
+					countryFact.bwa += vCountry.bwa ;
+					countryFact.bwc += vCountry.bwc ;
+					countryFact.pbr += vCountry.pbr ;
+					countryFact.pbg += vCountry.pbg ;
+					countryFact.pbm += vCountry.pbm ;
+					countryFact.pbe += vCountry.pbe ;
+					countryFact.fast += vCountry.fast ;
+					countryFact.stable += vCountry.stable ;
+					countryFact.osv.linux += vCountry.osv.linux ;
+					countryFact.osv.darwin += vCountry.osv.darwin ;
+					countryFact.osv.freebsd += vCountry.osv.freebsd ;
+					countryFact.osv.windows += vCountry.osv.windows ;
+					countryFact.osv.other += vCountry.osv.other ;
+					countryFact.tsv.v010 += vCountry.tsv.v010 ;
+					countryFact.tsv.v011 += vCountry.tsv.v011 ;
+					countryFact.tsv.v012 += vCountry.tsv.v012 ;
+					countryFact.tsv.v020 += vCountry.tsv.v020 ;
+					countryFact.tsv.v021 += vCountry.tsv.v021 ;
+					countryFact.tsv.v022 += vCountry.tsv.v022 ;
+					countryFact.tsv.v023 += vCountry.tsv.v023 ;
+					countryFact.tsv.v024 += vCountry.tsv.v024 ;
+					countryFact.pex.p4 += vCountry.pex.p4 ;
+					countryFact.pex.p6 += vCountry.pex.p6 ;
+					countryFact.pex.p8 += vCountry.pex.p8 ;
+					countryFact.pex.p46 += vCountry.pex.p46 ;
+					countryFact.pex.p48 += vCountry.pex.p48 ;
+					countryFact.pex.p68 += vCountry.pex.p68 ;
+					countryFact.pex.p468 += vCountry.pex.p468 ;
 
-					for ( var m = 0 , ma = countryMapped.autosys.length ;  m < ma ; m++ ) {		//	<- inner double loop part 1: 'as' in mapped.countries
-																								//     (can be nmore than one, because incoming may be pre-aggregated)
-						var incomingASisalreadykown = false ;
-						var asMap = countryMapped.autosys[m] ;									//	asMap is the whole object { as : int, count : int }
+					for ( var vca = 0 , vcal = vCountry.autosys.length ; vca < vcal ; vca++ ) { //	<- inner double loop part 1: 'as' in mapped.countries
+					    var incomingASinCountryAlreadyKown = false ;	                        //     (can be nmore than one, because incoming may be pre-aggregated)						var incomingASinCountryAlreadyKown = false ;
+						var countryASmap = vCountry.autosys[vca] ;						        //	countryASmap is the whole object { as : int, count : int }
 
-						for ( var f = 0 , fa = countryFact.autosys.length; f < fa ; f++ ) {     //	<- inner double loop part 2: 'as' in fact.countries
-                            var asFact = countryFact.autosys[f] ;
-                            if (asFact.as == asMap.as) {
-                                asFact.count += asMap.count ;
-	                            incomingASisalreadykown = true ;
+						for ( var fca = 0 , fcal = countryFact.autosys.length; fca < fcal ; fca++ ) {   //	<- inner double loop part 2: 'as' in fact.countries
+						    var countryAsFact = countryFact.autosys[fca] ;
+							if (countryAsFact.as == countryASmap.as) {
+                                countryAsFact.count += countryASmap.count ;
+	                            incomingASinCountryAlreadyKown = true ;
 	                            break ;
                             }
                         }
-                        if ( !incomingASisalreadykown ) {                                       //	after the inner loop is through
-                            countryFact.autosys.push(asMap) ;	        				        //	if the 'as' wasn't found in the array add it
+                        if ( !incomingASinCountryAlreadyKown ) {                                //	after the inner loop is through
+                            countryFact.autosys.push(countryASmap) ;                            //	if the 'as' wasn't found in the array add it
 						}
 
 					}                                                                           //  return to the outer loop, check the next country passed in by mapValues
 
-					countryInFact = true ;
+					incomingCountryAlreadyknown = true ;
 					break ;
 				}
 			}
-			if ( !countryInFact ) { 															//	if the country does not exist in the array so far
-				fact.countries.push(countryMapped) ;											//	add the country object to the array
+			if ( !incomingCountryAlreadyknown ) { 															//	if the country does not exist in the array so far
+				fact.countries.push(vCountry) ;											        //	add the country object to the array
 			}
 		});
 
 
-		v.autosys.forEach( function(asMapped) {													//	AUTOSYS
-			var asInFact = false ;
-			for ( var a = 0 , la = fact.autosys.length ; a < la ; a++ ) {
-				var asFact = fact.autosys[a] ;													//	for each object in fact.autosys
-				if ( asFact.as == asMapped.as ) {												//	if that objects 'as' field equals that of the relay getting mapped
-					asFact.relay += asMapped.relay ;											//	add up the numbers
-					asFact.bwa += asMapped.bwa ;
-					asFact.bwc += asMapped.bwc ;
-					asFact.fast += asMapped.fast ;
-					asFact.stable += asMapped.stable ;
-					asFact.guard += asMapped.guard ;
-					asFact.middle += asMapped.middle ;
-					asFact.exit += asMapped.exit ;
-					asFact.dir += asMapped.dir ;
-					asFact.pbr += asMapped.pbr ;
-					asFact.pbg += asMapped.pbg ;
-					asFact.pbm += asMapped.pbm ;
-					asFact.pbe += asMapped.pbe ;
+		v.autosys.forEach( function(vAutosys) {													//	AUTOSYS
+			var incomingASalreadyKnown = false ;
+			for ( var fa = 0 , fal = fact.autosys.length ; fa < fal ; fa++ ) {
+				var asFact = fact.autosys[fa] ;													//	for each object in fact.autosys
+				if ( asFact.as == vAutosys.as ) {												//	if that objects 'as' field equals that of the relay getting mapped
+					asFact.relay += vAutosys.relay ;											//	add up the numbers
+					asFact.bwa += vAutosys.bwa ;
+					asFact.bwc += vAutosys.bwc ;
+					asFact.fast += vAutosys.fast ;
+					asFact.stable += vAutosys.stable ;
+					asFact.guard += vAutosys.guard ;
+					asFact.middle += vAutosys.middle ;
+					asFact.exit += vAutosys.exit ;
+					asFact.dir += vAutosys.dir ;
+					asFact.pbr += vAutosys.pbr ;
+					asFact.pbg += vAutosys.pbg ;
+					asFact.pbm += vAutosys.pbm ;
+					asFact.pbe += vAutosys.pbe ;
 
+					for ( var vac = 0 , vacl = vAutosys.countries.length ;  vac < vacl ; vac++ ) {
+						var incomingCountryInASalreadyKown = false ;
+						var asCountryMap = vAutosys.countries[vac] ;
 
+						for ( var fac = 0 , facl = asFact.countries.length; fac < facl ; fac++ ) {
+							var asCountryFact = asFact.countries[fac] ;
 
-
-					for ( var b = 0 , ma = asMapped.countries.length ;  b < ma ; b++ ) {
-
-						var incomingCountryIsAlreadyKown = false ;
-						var asMap = asMapped.countries[b] ;
-
-						for ( var c = 0 , fc = asFact.autosys.countries.length; c < fc ; c++ ) {
-							var asFactCountry = countryFact.autosys[f] ;
-							if (asFact.as == asMap.as) {
-								asFact.count += asMap.count ;
-								incomingCountryIsAlreadyKown = true ;
+							if (asCountryFact.cc == asCountryMap.as) {
+								asCountryFact.relay += asCountryMap.count ;
+								asCountryFact.bwa += asCountryMap.bwa ;
+								asCountryFact.bwc += asCountryMap.bwc ;
+								asCountryFact.fast += asCountryMap.fast ;
+								asCountryFact.stable += asCountryMap.stable ;
+								asCountryFact.guard += asCountryMap.guard ;
+								asCountryFact.middle += asCountryMap.middle ;
+								asCountryFact.exit += asCountryMap.exit ;
+								asCountryFact.dir += asCountryMap.dir ;
+								asCountryFact.pbr += asCountryMap.pbr ;
+								asCountryFact.pbg += asCountryMap.pbg ;
+								asCountryFact.pbm += asCountryMap.pbm ;
+								asCountryFact.pbe += asCountryMap.pbe ;
+								incomingCountryInASalreadyKown = true ;
 								break ;
 							}
 						}
-						if ( !incomingCountryIsAlreadyKown ) {
-							countryFact.autosys.push(asMap) ;
+						if ( !incomingCountryInASalreadyKown ) {
+							asFact.countries.push(asCountryMap) ;
 						}
 
 					}
 
-
-
-
-
-
-
-					asInFact = true ;
+					incomingASalreadyKnown = true ;
 					break ;
 				}
 			}
-			if ( !asInFact ) {
-				fact.autosys.push(asMapped) ;
+			if ( !incomingASalreadyKnown ) {
+				fact.autosys.push(vAutosys) ;
 			}
 
 		});
-
 
 	});
 	return fact;
