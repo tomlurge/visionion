@@ -352,13 +352,12 @@ public class Convert {
 
   private static Integer distributeUserstatsToHours(
       Integer userstatsPerDay, int hour) {
-    Integer usersPerHour = (userstatsPerDay / 24)
+    Integer userstatsPerHour = (userstatsPerDay / 24)
         + (userstatsPerDay % 24 > hour ? 1 : 0);
-    if (usersPerHour < 1) {
-      usersPerHour = null;
+    if (userstatsPerHour < 1) {
+      userstatsPerHour = null;
     }
-    return userstatsPerDay;
-
+    return userstatsPerHour;
   }
 
   private static void closeOutputFiles() throws IOException {
