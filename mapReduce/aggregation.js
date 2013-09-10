@@ -822,6 +822,7 @@ var mapValues = function() {
 			}
 		} ,
 		countries :	[] ,                                                                        //  COUNTRIES   more below
+
 		autosys : [                                                                             //  AUTOSYS
 			{
 				as :                    r && this.as ? this.as : "" ,
@@ -846,6 +847,12 @@ var mapValues = function() {
 						relay :         r && this.as && this.cc ? 1 : 0 ,
 						bwa :           r && this.as && this.cc && this.bwa ? this.bwa : 0 ,
 						bwc :           r && this.as && this.cc && this.bwc ? this.bwc : 0 ,
+						fast :          this.as && fast ? 1 : 0 ,
+						stable :        this.as && stable ? 1 : 0 ,
+						guard :         this.as && guard ? 1 : 0 ,
+						middle :        this.as && middle ? 1 : 0 ,
+						exit :          this.as && exit ? 1 : 0 ,
+						dir :           this.as && dir ? 1 : 0 ,
 						pbr:            r && this.as && this.cc && this.pbr ? this.pbr : 0 ,
 						pbg :           r && this.as && this.cc && this.pbg ? this.pbg : 0 ,
 						pbm :           r && this.as && this.cc && this.pbm ? this.pbm : 0 ,
@@ -1076,76 +1083,6 @@ var mapValues = function() {
         value.countries.push( rCountryObject ) ;
 
 	}
-
- /*	only relays contain AS information which makes aggregation rather straightforward			//  AUTOSYS
-	compared to countries.                                                                      //  TODO    this should be obsolete by now
-
-
-	function ASobject() {}
-	ASobject.prototype = {
-		as : "" ,
-		//  name : "" ,
-		//  home : "",
-		relay : 0 ,
-		bwa : 0 ,
-		bwc : 0 ,
-		fast : 0 ,
-		stable : 0 ,
-		guard : 0 ,
-		middle : 0 ,
-		exit : 0 ,
-		dir : 0 ,
-		pbr: 0,
-		pbg : 0 ,
-		pbm : 0 ,
-		pbe : 0
-	} ;
-	function AScountryObject() {}
-	AScountryObject.prototype = {
-		cc : "" ,
-		relay : 0 ,
-		bwa : 0 ,
-		bwc : 0 ,
-		dir : 0 ,
-		pbr: 0,
-		pbg : 0 ,
-		pbm : 0 ,
-		pbe : 0
-	} ;
-	if (r && this.as) {
-		var asObject = new ASobject();
-        asObject.as = this.as ;
-		//  asObject.name = function(asObject.as ) { return ""; } ;								//	TODO	lookup name for AS
-		//  asObject.home = function(asObject.as ) { return ""; } ;								//	TODO	lookup home country for AS
-		asObject.relay = 1 ;
-		this.bwa ? asObject.bwa = this.bwa : asObject.bwa = 0 ;
-		this.bwc ? asObject.bwc = this.bwc : asObject.bwc = 0 ;
-		fast ? asObject.fast = 1 : asObject.fast = 0 ;
-		stable ? asObject.stable = 1 : asObject.stable = 0 ;
-		guard ? asObject.guard = 1 : asObject.guard = 0 ;
-		middle ? asObject.middle = 1 : asObject.middle = 0 ;
-		exit ? asObject.exit = 1 : asObject.exit = 0 ;
-		dir ? asObject.dir = 1 : asObject.dir = 0 ;
-		this.pbr ? asObject.pbr = this.pbr : asObject.pbr = 0 ;
-		this.pbg ? asObject.pbg = this.pbg : asObject.pbg = 0 ;
-		this.pbm ? asObject.pbm = this.pbm : asObject.pbm = 0 ;
-		this.pbe ? asObject.pbe = this.pbe : asObject.pbe = 0 ;
-		asObject.countries = [] ;
-		if (this.cc) {
-			var asCountryObject = new AScountryObject();
-			asCountryObject.cc = "";
-			asCountryObject.relay = 1 ;
-			this.bwa ? asCountryObject.bwa = this.bwa : asCountryObject.bwa = 0 ;
-			this.bwc ? asCountryObject.bwc = this.bwc : asCountryObject.bwc = 0 ;
-			this.pbr ? asCountryObject.pbr = this.pbr : asCountryObject.pbr = 0 ;
-			this.pbg ? asCountryObject.pbg = this.pbg : asCountryObject.pbg = 0 ;
-			this.pbm ? asCountryObject.pbm = this.pbm : asCountryObject.pbm = 0 ;
-			this.pbe ? asCountryObject.pbe = this.pbe : asCountryObject.pbe = 0 ;
-			asObject.countries.push(asCountryObject) ;
-		}
-		value.autosys.push(asObject);
-	}
-  */
 
 	emit( "Fact " + theDate , value );
 };
