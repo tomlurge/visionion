@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TimeZone;
@@ -323,41 +322,17 @@ public class Convert {
         client.addd = importTimestamp;
         client.date = date + " " + String.format("%02d", hour);
         client.span = 1;
-        client.cb = distributeUserstatsToHours(cb.get(date), hour);
-        client.cr = distributeUserstatsToHours(cr.get(date), hour);
-        client.cbcc = distributeUserstatsToHours(cbcc.get(date), hour);
-        client.crcc = distributeUserstatsToHours(crcc.get(date), hour);
-        client.cpt = distributeUserstatsToHours(bptu.get(date), hour);
-        client.cip = distributeUserstatsToHours(ipvu.get(date), hour);
+        client.cb = cb.get(date);
+        client.cr = cr.get(date);
+        client.cbcc = cbcc.get(date);
+        client.crcc = crcc.get(date);
+        client.cpt = bptu.get(date);
+        client.cip = ipvu.get(date);
         String clientString = gson.toJson(client).
             replaceAll("\\\\u003c", "<").replaceAll("\\\\u003e", ">");
         nodesWriter.write(clientString + "\n");
       }
     }
-  }
-
-  private static SortedMap<String, Integer> distributeUserstatsToHours(
-      SortedMap<String, Integer> userstatsPerDay, int hour) {
-    SortedMap<String, Integer> userstatsPerHour =
-        new TreeMap<String, Integer>();
-    for (Map.Entry<String, Integer> e : userstatsPerDay.entrySet()) {
-      int usersPerHour = (e.getValue() / 24)
-          + (e.getValue() % 24 > hour ? 1 : 0);
-      if (usersPerHour > 0) {
-        userstatsPerHour.put(e.getKey(), usersPerHour);
-      }
-    }
-    return userstatsPerHour;
-  }
-
-  private static Integer distributeUserstatsToHours(
-      Integer userstatsPerDay, int hour) {
-    Integer userstatsPerHour = (userstatsPerDay / 24)
-        + (userstatsPerDay % 24 > hour ? 1 : 0);
-    if (userstatsPerHour < 1) {
-      userstatsPerHour = null;
-    }
-    return userstatsPerHour;
   }
 
   private static void closeOutputFiles() throws IOException {
