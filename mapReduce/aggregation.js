@@ -2595,9 +2595,7 @@ var reduceFact = function ( key, values ) {
                         if ( !incomingASinCountryAlreadyKown ) {                                //	after the inner loop is through
                             countryFact.autosys.push(countryASmap) ;                            //	if the 'as' wasn't found in the array add it
 						}
-
 					}                                                                           //  return to the outer loop, check the next country passed in by mapValues
-
 					incomingCountryAlreadyknown = true ;
 					break ;
 				}
@@ -2634,8 +2632,8 @@ var reduceFact = function ( key, values ) {
 						for ( var fac = 0 , facl = asFact.countries.length; fac < facl ; fac++ ) {
 							var asCountryFact = asFact.countries[fac] ;
 
-							if (asCountryFact.cc == asCountryMap.as) {
-								asCountryFact.relay += asCountryMap.count ;
+							if (asCountryFact.cc == asCountryMap.cc) {
+								asCountryFact.relay += asCountryMap.relay ;
 								asCountryFact.bwa += asCountryMap.bwa ;
 								asCountryFact.bwc += asCountryMap.bwc ;
 								asCountryFact.fast += asCountryMap.fast ;
