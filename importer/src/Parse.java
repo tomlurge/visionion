@@ -237,12 +237,18 @@ public class Parse {
     for (String fingerprint : consensusWeights.keySet()) {
       consensusWeightFractions.put(fingerprint,
           consensusWeights.get(fingerprint) / totalConsensusWeight);
-      guardProbabilities.put(fingerprint,
-          guardWeights.get(fingerprint) / totalGuardWeight);
-      middleProbabilities.put(fingerprint,
-          middleWeights.get(fingerprint) / totalMiddleWeight);
-      exitProbabilities.put(fingerprint,
-          exitWeights.get(fingerprint) / totalExitWeight);
+      if (guardProbabilities.containsKey(fingerprint)) {
+        guardProbabilities.put(fingerprint,
+            guardWeights.get(fingerprint) / totalGuardWeight);
+      }
+      if (middleProbabilities.containsKey(fingerprint)) {
+        middleProbabilities.put(fingerprint,
+            middleWeights.get(fingerprint) / totalMiddleWeight);
+      }
+      if (exitProbabilities.containsKey(fingerprint)) {
+        exitProbabilities.put(fingerprint,
+            exitWeights.get(fingerprint) / totalExitWeight);
+      }
     }
   }
 
@@ -502,6 +508,9 @@ public class Parse {
 
   private static String formatPorts(String defaultPolicy,
       String portList) {
+    if (defaultPolicy == null || portList == null) {
+      return null;
+    }
     boolean accept = defaultPolicy.equals("accept");
     SortedSet<Integer> relevantPorts = new TreeSet<Integer>();
     relevantPorts.add(80);

@@ -297,7 +297,7 @@ public class Convert {
       node.type = "b";
       node.role = null;
       node.pex = null;
-      String nodeString = gson.toJson(node);      
+      String nodeString = gson.toJson(node);
       nodesWriter.write(nodeString + "\n");
     } else {
       node.type = "r";
