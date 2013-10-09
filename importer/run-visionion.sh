@@ -7,7 +7,7 @@ java -Xmx4g -cp bin/:lib/commons-codec-1.6.jar:lib/commons-compress-1.4.1.jar:li
 for i in $(ls out/*.sql)
 do
   echo `date` "Importing $i."
-  psql -f $i userstats
+  psql -f $i visionion
 done
 echo `date` "Exporting results."
 psql -c "COPY (SELECT * FROM joined) TO STDOUT WITH CSV HEADER DELIMITER ';';" visionion > visionion.csv
