@@ -53,8 +53,8 @@ The following fields don't have default values because they are mandatory:
 	node	(only for relays and bridges)
 	
 Question: Why not always use 'null' when no value is known?  
-Answer: That would be much harder to process.
-Discussion: 
+Answer: That would be much harder to process.   
+Discussion:    
 **strings**: this concerns 'nick', 'osv', 'tsv', 'as', 'cc' and 'brp'. An empty string "" and a value 'null' are processed quite differently. Having to handle the 'null' case makes things more complicated than just using "" for unknown values. And it makes no difference practically, since in all cases where we expect string values a default of 'null' wouldn't make much sense: if there's no nick then we can't help it, no matter if it was omitted or didn't exist in the first place. Knowing the difference doesn't make a difference for our usecase. If there's no value for 'osv', 'tsv', 'as', 'cc' and 'brp' then we already know that it was omitted, because there necessarily is a value (no relay runs without operating system, no bridge was not assigned by some pool etc).
 **numbers**: numbers are the one case where it makes perfect sense to distnguish '0' (zero) and 'null'. It adds no complexity to the code since 'null' adds up just as nicely as '0' and it makes a difference if the value of 'bwa', 'bwc' etc is '0' or not known to us (and both is perfectly possible).
 **arrays**: this concerns 'role', 'flag', 'pex' and 'brt'. Replacing empty arrays ('[]') by 'null' doesn't make processing them considerably more expensive. In some cases like 'flag' or 'role' it makes a difference if we know that there is no value set or if we don't know anything about the value. 
