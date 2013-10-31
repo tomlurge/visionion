@@ -9,8 +9,8 @@ For relays these are:
 
 			OLD		NEW
 	nick	""		""	
-	role	[]		?
-	flag	[]		?
+	role	[]		
+	flag	[]		
 	bwa		0		null
 	bwc		0		null
 	tsv		""		""
@@ -19,7 +19,7 @@ For relays these are:
 	pbg		0		null
 	pbm		0		null
 	pbe		0		null
-	pex		[]		?
+	pex		[]		
 	as		""		""
 	cc		""		""
 	
@@ -32,7 +32,7 @@ For bridges:
 	osv		""		""
 	brp		""		""
 	bre		0		null
-	brt		[]		?
+	brt		[]		
 	
 And for clients:
 
