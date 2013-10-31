@@ -1,3 +1,5 @@
+/* the aggregated fact for 2013-04-03 22 */
+
 {
 	"_id" : "Fact 2013-04-03 22",
 	"value" : {

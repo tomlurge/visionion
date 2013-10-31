@@ -1,36 +1,37 @@
 ﻿**A schematic example of a document in the facts collection **
-(SQL-speak for: row in the facts table)
 
 	{ 	
-		_id: string,
+		_id: string,					
 		date: string,
+		span: integer,
 		clients: {
-			total: int,
-			atBridges: int,
-			atRelays: int;
-			cip4: int,
-			cip6: int,
-			cptObfs2: int,
-			cptObfs3: int,
-			cptOR: int,
-			cptOther: int
+			total: int,					sum cr+cb
+			atBridges: int,				copy cr
+			atRelays: int;				copy cb
+			cip4: int,					copy cip.[version:v4].count
+			cip6: int,					copy cip.[version:v6].count
+			cptObfs2: int,				copy
+			cptObfs3: int,				copy
+			cptOR: int,					copy
+			cptUnknown: int				copy
+			}
 		},
 		servers: {
 			total: {
-				count: int,
-				bwa: int,
-				bwc: int,
+				count: int,				+1 for each relay or bridge
+				bwa: int,				sum over all relays and bridges
+				bwc: int,				dito
 				osv: {
-					linux: int,
-					darwin: int,
-					freebsd: int,
+					linux: int,			sum over all relays/bridges with os linux
+					darwin: int,											darwin
+					freebsd: int,											etc
 					windows: int,
 					other: int
 				},
 				tsv: {
-					v010: int,
-					v011: int, 
-					v012: int, 
+					v010: int,			sum over all relays/bridges with tsv 010
+					v011: int, 												 011
+					v012: int, 												 etc
 					v020: int, 
 					v021: int, 
 					v022: int, 
@@ -40,16 +41,16 @@
 			},
 			bridges: {
 				total: {
-					count: int,
-					bwa: int,
-					bwc: int,
+					count: int,			+1 for each bridge
+					bwa: int,			sum over all bridges
+					bwc: int,			dito
 					osv: ... ,			osv like above
 					tsv: ... ,			tsv like above
 				},
 				brpEmail: {
-					count: int,
-					bwa: int,
-					bwc: int,
+					count: int,			+1 for each bridge with brpEmail
+					bwa: int,			sum over all bridges with brpEmail
+					bwc: int,			dito
 					osv: ... ,			osv like above
 					tsv: ... ,			tsv like above
 				},
@@ -84,7 +85,7 @@
 						bwc: int,
 						osv: ... ,		osv like above
 						tsv: ... ,		tsv like above
-						pbr: float,
+						pbe: float,
 						pex: {
 							p4: int,
 							p6: int,
@@ -95,33 +96,32 @@
 							p468: int
 					},
 					...					flagNone, flagFast, flagStable, flagFastStable like above
-				...						roleDir like above
+				...						roleDir (total + authorityTrue) like above
 		},
-		countries: [					first establish a list of all countries from countries and relays data
-			{							from that list populate the countries array with country objects
-				country: cc,			from clients
-				cbcc: int,				from clients
-				crcc: int,				from clients
-				relay: int,				from relays
-				guard: int,				from relays
-				middle: int,			from relays
-				exit: int,				from relays
-				dir: int,				from relays
-				bwa: int,				from relays
-				bwc: int,				from relays
-				pbr: float,				from relays
-				pbg: float,				from relays
-				pbm: float,				from relays
-				pbe: float,				from relays
-				fast: int,				from relays
-				stable: int,			from relays
-				osv: ... ,				from relays				osv like above
-				tsv: ... ,				from relays				tsv like above
-				pex: ... ,				from relays				pex like above
+		countries: [
+			{
+				country: cc,
+				cbcc: int,
+				crcc: int,
+				relay: int,
+				guard: int,
+				middle: int,
+				exit: int,
+				dir: int,
+				bwa: int,
+				bwc: int,
+				pbr: float,
+				pbg: float,
+				pbm: float,
+				pbe: float,
+				fast:int,
+				stable: int,
+				osv: ... ,				osv like above
+				tsv: ... ,				tsv like above
+				pex: ... ,				pex like above
 				autosys: [
 					{
-						as: int,
-						count: int
+						as: int
 					},
 					...					for all AS serving this country
 				]
@@ -132,7 +132,7 @@
 			{
 				as: int,
 				name: string,
-				home: cc,
+				home: string,
 				relay: int,
 				bwa: int,
 				bwc: int,
@@ -163,5 +163,5 @@
 			...							for all AS at this date
 		]
 	}
-	
-				
+
+			

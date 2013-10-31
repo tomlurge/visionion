@@ -47,6 +47,7 @@ var mapValues = function() {
 	
 	var value = {
 		date : theDate ,
+		span : theSpan ,
 		clients : {                                                                             //  CLIENTS
 			total : 					c ?  this.cr + this.cb  : 0,
 			atBridges :					c ?  this.cb : 0 ,
@@ -321,11 +322,11 @@ var mapValues = function() {
 						tsv : {
 							v010 :		r && !fast && stable && v010 ? 1 : 0 ,
 							v011 :		r && !fast && stable && v011 ? 1 : 0 ,
-							v012 :		r && !fast &&	stable && v012 ? 1 : 0 ,
-							v020 :		r && !fast &&	stable && v020 ? 1 : 0 ,
-							v021 :		r && !fast &&	stable && v021 ? 1 : 0 ,
-							v022 :		r && !fast &&	stable && v022 ? 1 : 0 ,
-							v023 :		r && !fast &&	stable && v023 ? 1 : 0 ,
+							v012 :		r && !fast && stable && v012 ? 1 : 0 ,
+							v020 :		r && !fast && stable && v020 ? 1 : 0 ,
+							v021 :		r && !fast && stable && v021 ? 1 : 0 ,
+							v022 :		r && !fast && stable && v022 ? 1 : 0 ,
+							v023 :		r && !fast && stable && v023 ? 1 : 0 ,
 							v024 :		r && !fast && stable && v024 ? 1 : 0
 						} ,
 						pbr :			r && !fast && stable ? this.pbr : 0.0
@@ -1084,7 +1085,7 @@ var mapValues = function() {
 
 	}
 
-	emit( "Fact " + theDate , value );
+	emit( "Fact " + theSpan + " " + theDate , value );
 };
 
 
@@ -1102,6 +1103,7 @@ var reduceFact = function ( key, values ) {
 
 	var fact = {
 		date : "" ,
+		span : 0 ,
 		clients : {																				//	CLIENTS
 			total : 0 ,
 			atBridges : 0 ,
@@ -1882,6 +1884,7 @@ var reduceFact = function ( key, values ) {
 
 	values.forEach( function(v) {
 		fact.date = v.date ;
+		fact.span = v.span ;
 
 		fact.clients.total += v.clients.total ;													//	CLIENTS
 		fact.clients.atBridges += v.clients.atBridges ;
@@ -2537,7 +2540,7 @@ var reduceFact = function ( key, values ) {
 					break ;
 				}
 			}
-			if ( !incomingCountryAlreadyknown ) { 															//	if the country does not exist in the array so far
+			if ( !incomingCountryAlreadyknown ) { 												//	if the country does not exist in the array so far
 				fact.countries.push(vCountry) ;											        //	add the country object to the array
 			}
 		});
@@ -2604,6 +2607,7 @@ var reduceFact = function ( key, values ) {
 		});
 
 	});
+	printjson(fact.date);
 	return fact;
 };
 
@@ -2624,7 +2628,8 @@ var finalizeFact = function ( key, fact ) {
 	//	note that the fact.average field would have to be present in map and reduce too even if
     //  unused until finalize
 	//	example from http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
-	if (fact.count > 0) fact.average = fact.total / fact.count;
+			if (fact.count > 0) fact.average = fact.total / fact.count;
+	//  see also http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#calculate-order-and-total-quantity-with-average-quantity-per-item
 	*/
 	return fact ;
 };
@@ -2640,21 +2645,23 @@ var finalizeFact = function ( key, fact ) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var runAggregation = function(theDate) {
-    db.facts.remove({ _id : "Fact " + theDate });												//	clean DB, otherwise we would add to the old values
+var runAggregation = function(theDate, theSpan, theUpdate) {
+   //  db.facts.remove();				 		//	{ _id : "Fact " + theSpan + " " + theDate }     TODO    remove after testing
 	db.import.mapReduce (
 		mapValues,
 		reduceFact,
 		{ 
 			out: { 
-				reduce : "facts"		 														//	the final fact collection
+				merge : "facts"		 														    //	the final fact collection
+																								//  'merge' replaces existing documents with the same key
+																								//  'reduce' would add values to exsiting documents - we don't want that
 				, nonAtomic : true																//	prevents locking of the db during post-processing
 			}
-			, query : { "date" : theDate }
+			, query : { "addd" : { "$gte" : theUpdate}  }
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
-			, scope: { theDate: theDate }
-//          , sort
+			, scope: { theDate: theDate, theSpan: theSpan }                                     //  globally (in the mapReduce job) available  variables
+            , sort : { date : 1 }                                                               //  speeds up mapReduce as 'date' is indexed in the import collection
 		}
 	);
-}("2013-04-03 22");																				//	TODO	remove self call after testing
+}("2013-04-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing

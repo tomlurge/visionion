@@ -35,34 +35,27 @@ How to achieve all this?
 Basically, take all network graphs and merge them into one single graph with plenty of options. 
 Users should be able to navigate into any factor (bridge vs. relay, country, flags, Tor software version, operating system, EC2 cloud bridge or not) and learn the total relay number or advertised bandwidth or bandwidth history for their selection. 
 
-**1**   
-the most prominent usecase is the timeline with a graph representing volumina of bandwidth or number of hosts or number of clients etc. on the vertical axis   
-**1a**   
-it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg consumed bandwidth and number of clients   
-**2**   
+**usecase 1**   
+the most prominent usecase is the timeline with a graph representing volumina of bandwidth or numbers of hosts or number of clients etc. on the vertical axis   
+**usecase 1a**   
+it should also be possible to layer timeline graphs for the same time period but with different subject on each other to compare eg correlations between consumed bandwidth and number of clients   
+**usecase 2**   
 now imagine a plane orthogonal to the graph, representing some other data at that point in time eg adding to the graph of linux driven relays a cake diagram of all operating systems driving relays   
-**3**   
+**usecase 3**   
 now imagine a third plane on the floor showing geogrgraphic distribution of linux driven relays and how much bandwidth each of them handles, the imaginary center of linux driven traffic at the crosspoint of the first two planes   
-**4**   
+**usecase 4**   
 now add markers for certain events: the day when traffic from linux driven relays peaked, the day it hit an alltime low, the days it plummeted, the days it spiked etc.   
-**5**   
+**usecase 5**   
 show the biggest nodes for a given metric and their share of the total  
 
-**1** 
-represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 
-**1a** 
-is available as a prototype at [interactive graphs](http://tigerpa.ws/tor_metrics/).   
-**2** 
-attempts to combine different visualization techniques like timeline and cake diagram. 
+**1** represents the usecase that's presently handled by the Tor metrics project [graph visualizations](https://metrics.torproject.org/network.html). 
+**1a** is available as a prototype at [interactive graphs](http://tigerpa.ws/tor_metrics/).   
+**2** attempts to combine different visualization techniques like timeline and cake diagram. 
 Different visualizations get rendered on different layers. 
 Control shifts from the visualization framework to the web application.   
-**3** 
-introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective.   
-**4** 
-points the user in directions that might be worth to explore. 
-It will need some analytics in the background.   
-**5** 
-checks (de-) centralizations in the infrastructure.   
+**3** introduces the geographical dimension which is not very strongly represented in the raw data but nonetheless an interesting perspective.   
+**4** points the user in directions that might be worth to explore. It will need some analytics in the background.   
+**5** checks (de-) centralizations in the infrastructure.   
 
 
 
@@ -70,21 +63,19 @@ checks (de-) centralizations in the infrastructure.
 ## Technical Overview
 
 In a nutshell:
+	
 * Tor metrics data get's imported into a [MongoDB](http://www.mongodb.org/) database.  
 * Aggregation and indexing transforms the imported data into a big fact table suitable to drive the visualization. 
-* Visualization Framework is [D3.js](http://d3js.org/), additionally [Crossfilter](http://square.github.io/crossfilter/).   
-* Client side application framework is not yet decided. Either [Angular.js](http://angularjs.org/), Knockout.js or Can.js.   
+* Visualization Framework is [D3.js](http://d3js.org/), additionally [Crossfilter](http://square.github.io/crossfilter/), maybe also [dc.js](http://nickqizhu.github.io/dc.js/).   
+* Client side application framework used is [Angular.js](http://angularjs.org/).
 * Targeted web browsers are Chrome and Firefox. Others might work as well.
 Most of the visualization facets get rendered seperatly, on seperate planes (technically DIVs).   
 The application prepares the joins and our eyes carry them out.   
 
-
-**Visualization framework**   
-[D3.js](http://d3js.org/) is a [leading](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web. 
-It keeps a strong link between the data and it's visual representation, expresses it in a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.   
+	TODO 	the different steps and how they relate should be explained more thoroughly
 
 
-**Database**   
+### Database  
 Since the data schema is quite flat and in a certain flux a NoSQL database seems appropriate. 
 [MongoDB](http://www.mongodb.org/) was [chosen](http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis "Cassandra vs MongoDB vs CouchDB vs Redis vs Riak vs HBase vs Couchbase vs Neo4j vs Hypertable vs ElasticSearch vs Accumulo vs VoltDB vs Scalaris comparison") because of it's JavaScript support which promises nice integration with client side logic. 
 Since the complexity of the underlying data is rather limited MongoDBs query capabilities, although less expressive than SQL, should be sufficient. 
@@ -93,9 +84,14 @@ The ability to store JavaScript-code in the MongoDB might help in the developmen
 Support for geo-data could be beneficial either (no other NoSQL database has that so easily available AFAIK).  
 
 
-**Web application framework**   
+### Web application framework   
 [Angular.js](http://angularjs.org/) is the likely candidate because of it's declarative style and it's attractive approach to routing and HTML extensions ([discussion](http://blog.stevensanderson.com/2012/08/01/rich-javascript-applications-the-seven-frameworks-throne-of-js-2012/ "Rich JavaScript Applications – the Seven Frameworks")). 
 It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).  
+
+
+### Visualization framework  
+[D3.js](http://d3js.org/) is a [leading](http://www.netmagazine.com/features/top-20-data-visualisation-tools "The top 20 data visualisation tools") data visualization framework for the web. 
+It keeps a strong link between the data and it's visual representation, expresses it in a nice declarative and CSS-like style, provides an impressive set of features and renders to SVG.   
 
 
 
@@ -107,159 +103,67 @@ All these nodes operate - despite their different functions - from the same soft
 A single node can be in _most_ categories at the same time and in _every_ category over time.  
  
 **Nodes** are all the actors that form the network. 
-Nodes encompass clients, bridges and relays.    
-**Clients** are the end users, connecting to the Tor network to anonymously use the internet.   
-**Servers** are everything except clients. 
+Nodes encompass clients and servers. Servers again encompass bridges and relays. Nodes can be either client or server, servers can be either bridge or relay. Relays can play different roles: Guard, Middle, Exit and Directory.    
+**Clients** are end user nodes, connecting to the Tor network to anonymously use the internet.   
+**Servers** are all nodes except clients. 
 Servers encompass relays and bridges.   
 **Bridges** are the nodes that clients connect to to circumvent attempts to block access to Tor.   
 **Relays** are the nodes that form the actual Tor network which provides anonymity. 
-Relays encompass guard nodes, middle nodes, exit nodes and directory nodes.   
-**Guard** nodes function as entry points to an anonymized route through the Tor network. 
+Relays can take the roles of guard nodes, middle nodes, exit nodes and directory nodes.   
+**Guard** relays function as entry points to an anonymized route through the Tor network. 
 They are reached by the client either directly or, if a censor blocks them, through a bridge.   
-**Middle** nodes function as intermediary steps on that route.   
-**Exit** nodes function as exit points, leaving the Tor network and continuing to the destination on the internet.   
-**Directory** nodes provide some auxiliary services to the Tor network.   
+**Middle** relays function as intermediary steps on that route.   
+**Exit** relays function as exit points, leaving the Tor network and continuing to the destination on the internet.   
+**Directory** relays provide some auxiliary services to the Tor network.   
 
-	node					everything in the tor network
-		client				the users
-		server				everything serving the user
-			bridge			special entry points for clients that need to circumvent blocking 
-			relay			the actual anonymization network
-				guard		entry points into the network (accessed by client directky or by bridge)
-				middle		intermediary nodes on anonymizing route
-				exit		now anonymized, continue route to actual destination on the internet
-				directory	some auxiliary services 
+	node				everything in the tor network
+		client			the users
+		server			everything serving the user
+			bridge		special entry points for clients that need to circumvent blocking 
+			relay		the actual anonymization network, with different roles:
+						guard		entry points into the network (accessed by client directky or by bridge)
+						middle		intermediary nodes on anonymizing route
+						exit		now anonymized, continue route to actual destination on the internet
+						directory	some auxiliary services 
 
+A node may have been configured as bridge before or after being configured as a relay and that same node can switch to being a client at any time. But:   
+- a node can't be a client and a server at the same time.   
+- a node can't be a bridge and a relay at the same time.
+For relays it's quite common that they fulfill some roles simultaneously: a relay can be configured as guard node, middle node, exit node and directory mirror at the same time. 
 
-It's quite common that a relay is guard node, middle node, exit node, and directory mirror at the same time and that same node can be used as client at any time. 
-Also, the node may have been configured as bridge before or after being configured as a relay.   
-But there are two exceptions to the general rule:   
-1) a node can't be a client and a server at the same time.   
-2) a node can't be a bridge and a relay at the same time.
-
-**A more detailed description of the different nodes and measures**
-
-*clients*   
-Tor doesn't log any data at individual clients themselves, but it logs abstract data about clients at bridges and directory mirrors. 
-Bridges are obvious, but directory mirrors maybe not so much. 
-The idea is to count network status requests per day and per country, aggregate that data for all directory mirrors, and derive the number of clients from that number.   
-The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" parts are learned from clients run by the Tor project itself.   
-See https://metrics.torproject.org/formats.html for details: "Second, we describe the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."   
-
-*servers*    
-These are the documents you have per relay/bridge:   
-- Network status entry: There's a network status entry for every relay or bridge with some summary information. 
-It's a confirmation by either the directory authorities (for relays) or the bridge authority (for bridges) that the given relay/bridge information is valid.  
-But this summary doesn't contain, e.g., OS information or number of bytes spent on answering directory requests.
-- Server descriptor: Every relay or bridge publishes a descriptor containing its contact information and capabilities to the directory authorities or bridge authority every 12--18 hours. 
-This server descriptor is then referenced by digest from one or typically multiple network status entries.   
-- Extra-info descriptor: Statistical information about a relay or bridge is not contained in the server descriptor, but in an extra-info descriptor. 
-These are referenced from server descriptors by digest, with a 1:1 relationship.   
-See https://metrics.torproject.org/formats.html for details about "the numerous aggregate statistics that relays publish about their usage (PDF), including byte histories, directory request statistics, connecting client statistics, bridge user statistics, cell-queue statistics, exit-port statistics, and bidirectional connection use."  
-
-*bridges*  
-Bridges are simply nodes with a I-want-to-be-a-bridge bit set in their configuration. 
-However, whether a node is a bridge or a relay determines to some extend what data we have about that node. 
-For example, we don't have country information about bridges, but we have that for relays.
-
-*relays*
-* guard node   
-* middle node  
-* exit node  
-* directory mirror  
-  Directory mirrors are just relays with an open directory ports.  So, the set of directory mirrors is a subset of the set of relays, and there'd be flags and all that for directory mirrors, too.
-* combinations of guard, middle, exit and directory
-  Knowing if an exit may also be used in the guard position can be interesting. 
-  In general comparisons between any two types of relays should be possible,
-  
-*flags*
-* BadExit
-  The BadExit flag is already taken into account in the importer: a relay that has the Exit flag _and_ the BadExit flag isn't put into the Exit category. 
-  The BadExit flag doesn't have any impact on the other types.
-* Authority
-  Being an authority is mostly relevant for directories, if at all. It's not a very important flag.
-* Fast
-
-	TODO
-
-* Stable
-
-	TODO
-
-  
-*other dimensions*  
-
-* bandwidth   
-  Bandwidth is measured for relays and bridges in two values: bandwidth advertized and bandwidth consumed.   
-
-* probabilities   
-  You can assign a consensus weight fraction to each relay, for any given date and hour. 
-  Then you can say that all clients used that relay for about x% of their paths, or that a particular client used that relay for a particular path with a probability of x%.   
-  There are currently four such weights/probabilities defined for relays (this does not apply to bridges). 
-   
-  Quoting from Onionoo's protocol specification:    
-  "consensus_weight_fraction": Fraction of this relay's consensus weight compared to the sum of all consensus weights in the network. This fraction is a very rough approximation of the probability of this relay to be selected by clients.   
-  "guard_probability": Probability of this relay to be selected for the guard position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
-  "middle_probability": Probability of this relay to be selected for the middle position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.   
-  "exit_probability": Probability of this relay to be selected for the exit position. This probability is calculated based on consensus weights, relay flags, and bandwidth weights in the consensus. Path selection depends on more factors, so that this probability can only be an approximation.
-  
-  Probabilities for selecting a node in the guard/middle/exit position are calculated based on the node's consensus weight, whether it has the Guard and/or Exit flag, and the bandwidth weights in the consensus. 
-  
-* autonomous systems    
-  For visualization, autonomous systems are very similar to countries. Think of an autonomous system as a group of IP address blocks belonging to the same organization. 
-  You want to avoid that all relays in a path, or at least entry and exit, are located in the same autonomous system and thereby controlled by the same organization. 
-  And you want to avoid that a single AS/organization sees a too high percentage of Tor traffic. For example, AS39138 rrbone UG (haftungsbeschraenkt) currently sees almost 20% of Tor's exit traffic. 
-  That's about as interesting as the fact that over 30% of Tor's traffic exits from U.S. relays.
-
-* pluggable transports   
-  <OR> steht hier für Onion Routing, sprich das normale Tor-Protocol. 
-  Eine Bridge, die Pluggable Transports anbietet kann auch normale Tor-Verbindungen zulassen, die unter <OR> zusammengefasst würden. 
-  Das ist auch gleichzeitig der Default-Wert wenn eine Bridge keine Statistiken zu Pluggable Transports übermittelt, daher der große Anteil. 
-  Außerdem gibt es noch <??> für den Fall, dass weder ein bekannter Pluggable Transport noch <OR> benutzt wurden. 
-  Das wird aber wahrscheinlich nur sehr selten passieren.
+For a more detailed and extensive description see the [**doc.tor**](https://github.com/tomlurge/visionion/blob/master/doc/tor.md) page.
 
 
 
-**even more**
-* for some rather detailed explenations see the [Tor directory protocol, version 3](https://gitweb.torproject.org/torspec.git/blob/HEAD:/dir-spec.txt)
+
+## Import data
+
+	TODO	re-formulate
+
+- what data is available
+- how do we load it into the database
+
+A [discussion](https://github.com/tomlurge/visionion/issues/5) about client data provides a good example about how an issue that seems intuitively clear to the unanticipating user quickly can become complex and subtly entagled. 
+In [**doc.gestalt**](https://github.com/tomlurge/visionion/blob/master/doc/gestalt.md) we try to have a more thorough take on what the numbers at hand actually represent.
+
+The initial database import schema has only one collection for all node types: 'client', 'bridge' and 'relay'. 
+(A "collection" is the MongoDB equivalent to a "table" in an RDBMS. 
+Likewise a "document" is the equivalent to a "table row" in an RDBMS). 
+
+
+### Data Schema Outline 
+
+The following import outline documents the fields and values that each imported document may have depending on the type of node it represents. 
+(The field names are rather short to achieve better performance in MongoDB. 
+Memorizing them a little or looking them up again in the table below might be helpful when reading through the rest of the documentation and code.)
 	
-
-**postponed**
-
-* performance measures   
-  The "time to download files over Tor" and "timeouts and failures of downloading files over Tor" are learned from clients we run ourselves, coming from Torperf output files. 
-  The gathering of this data is currently worked on and work on it's visualization is postponed.
-
-* measuring bandwidths for types of relays    
-
-  Bandwidth figures (advertized and consumed) include all types of services offered by a node. Currently they can not be refined to the level of indidividual services like bandwidth consumed by guard nodes, middle nodes etc.   
-  In theory, we have data about consumed directory bandwidth for newer relays or bridges, but not for traffic as bridge, guard, middle, or  exit node. 
-  We only have that data for the directory role, and only for a subset of relays, and deriving this data is difficult. 
-  There are privacy implications of gathering too detailed data, so we can't get more detailed data.    
-  We can also not simply derive these values from the data we already have since relays can offer more than one service. 
-  E.g. relays with the Guard flag are not exclusively used in the guard position, but could also be used in the middle position and possibly also as directory server. 
-  And if relays also have the Exit flag, they'll be used less in the previously mentioned positions, but therefore also in the exit position.    
-  We could derive advertised or consumed guard bandwidth for types of relays from relay bandwidth similar to how we derive guard probability from consensus weight using the Guard/Exit/BadExit flag and Wgd/Wgg bandwidth weights.   
-  I'm uncertain whether this would produce good metrics or not. We'd mix path selection probabilities with actual usage data, and I'm not sure whether we can do that. This is a fine question for an analysis task and a later extension of Visionion, but currently we don't feel confident enough now to implement this in the current database importer. Results might be misleading.
-  
-  An additional note: We can count relays that are *suitable* for guard position, and we can sum up advertised and observed bandwidth of those relays.   
-  We cannot sum up advertised and observed bandwidth of relays that have actually been used as guards.  In fact, we cannot even count those relays, because a relay may have been used 20% in guard position, 30% in middle position, 40% in exit position, and 10% as directory.  We don't know those fractions.
-
-
-
-Data Schema Outline
--------------------
-The initial database import schema has only one collection for all node types: 'relay', 'bridge' and'client'. 
-
-**import**  
-	
-	in type		field	description					type	subtype	aggregation	valuespace
+	node		field	description					type	subtype	aggregation	valuespace
 	+----------+-------+---------------------------+--------+------+-----------+----------
 	cbr			_id		document ID					string			(*)			fingerprint/'client'+span+date 
 																				eg 'fingerprint-1-YYYYMMDDHH', 'client-24-YYYYMMDDHH'
 	cbr			addd	timedate the doc was added	string						ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
 	cbr			span	period of validity			integer			-			length of the interval this dataset describes, in hours:
-																				one of: 1(default for b and r)), 6, 24 (default for c), 168
+																				one of: 1(default), 6, 24, 168
 	cbr			date	datetime					string			-			start of the time span that this document describes
 																				format "YYYY-MM-DD HH" as defined in ISO-8601
 	cbr			type	type of document			string						one of: c (clients), b (bridge), r (relay)	
@@ -268,20 +172,19 @@ The initial database import schema has only one collection for all node types: '
 	c			cr		clients at relays			integer			mean
 	c			crcc	clients@relays per country	object			mean		{cc:integer ...}
 	c			cpt		bridge pluggbl.transp.used	object						{obfs2/obfs3/OR/unknown:integer}
-	c			cip		ip-version used				object			mode		{v4/v6:integer}																		
+	c			cip		ip-version used				object			mode		{v4/v6:integer}		
+	 br			node	node id						string			-			Tor fingerprint																
 	 br			nick	nickname					string			mode		nickname of relay
-	 br			node	node id						string			-			Tor fingerprint
 	 br			bwa		bandwidth advertized 		integer			mean		B/s
 	 br			bwc		bandwidth consumed 			integer			mean		B/s
-	 br			tsv		Tor software version		string			mode		one of: 010,  011,  012,  020,  021,  022,  023,  024
-	 br			osv		operating system			string			mode		one of: linux,  darwin,  freebsd,  windows,  other 
+	 br			tsv		Tor software version		string			mode		one of: 010, 011, 012, 020, 021, 022, 023, 024
+	 br			osv		operating system			string			mode		one of: linux, darwin, freebsd, windows, other 
 	 b			brp		bridge pool     			string			mode		one of: email, https, other 
 	 b			bre		bridge is in EC2 cloud		boolean			mode
 	 b			brt		bridge pluggable transport	array	string	mode (*)	some of: obfs2, obfs3
-	  r			role	roles/functions of relay	array	string	mode (*)	some of: Guard,  Middle,  Exit,  Dir
-	  r			flag	flags 						array	string	mode (*)	some of: Authority,  BadExit,  BadDirectory,  Fast,  
-	 																					 Named,  Stable,  Running,  Unnamed,  Valid,  
-	 																					 V2Dir,  V3Dir
+	  r			role	roles/functions of relay	array	string	mode (*)	some of: Guard, Middle, Exit, Dir
+	  r			flag	flags 						array	string	mode (*)	some of: Authority, Fast, Stable, 
+	  																			BadExit, BadDirectory, Named, Running, Unnamed,  Valid, V2Dir, V3Dir
 	  r			pbr		consensus_weight_fraction	number			mean        probability of a client picking a relay for their path
 	  r			pbg		guard_probability			number			mean		probability of a client picking a relay for their guard position
 	  r			pbm		middle_probability			number			mean		probability of a client picking a relay for their middle position
@@ -292,229 +195,71 @@ The initial database import schema has only one collection for all node types: '
 
 	
 	LEGEND --------------------------------------------------------------------
-	in			indicates, for which type of node the field is relevant, 
+	node		indicates, for which type of node the field is relevant, 
 				c (clients), b (bridge), r (relay)
 	field		name of the field in the database
-	description	short description of the field's semantics
+	description	short characterization
 	type		as defined in 3.5 of http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1 
 	subtype		if type is array, type of array content
 	valuespace	expected values
-				for lists of possible values "some of" where multiple values are possible 
-				or "one of" where possible values are mutually exclusive
+				for lists of possible values "some of" where multiple values are possible or "one of" where possible values are mutually exclusive
 	(*)			if the relay provides the functionality in question for at least half of the timespan in question
 
-Client data is - unlikey all relay and bridge data - never collected at the client nodes themselves (otherwise anonymity could be compromised). 
-Instead client data is derived from relay data through special means and is already aggregated into timespans when it is imported into the MongoDB. 
+The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over large periods of time.
+
+There's a big differemce between client data and relay data that isn't immediatly obvious from the schema. 
+Client data is - unlike all relay and bridge data - never collected at the client nodes themselves because that could compromise anonymity. 
+Instead client data is estimated by some calculations over relay data. During that calculation client data is already aggregated into timespans. One entry of client data in the import database represents all clients during a given timespan. 
+OTOH we import data for each and any server active during a given timespan. We keep this data to be able to look up individual relays but for most visualization tasks we want data for all servers (that have certain characteristics) during a timespan. This data is only aggregated within MongoDB by the mapReduce operation outlined below. 
+So the import database contains many server entries per hour, one for each relay and bridge active during that timespan, but only one client entry, with numbers for all clients active during that timespan. 
+
+One more detail: client data is originally calculated per day. The import data for clients contains one document for each hour because the default  timespan for server data is 1 hour. That means we have 24 client documents per day (one for each hour), each with the same values (see the [discussion](https://github.com/tomlurge/visionion/issues/5) for more details).
+
+Check out an [**example**](https://github.com/tomlurge/visionion/blob/master/doc/import.md) of each of the 3 types of documents the import collection to get a better idea of its structure.
 
 
-**JSON schema**  
-The above has been transformed into a JSON [schema](schema.json).   
-		
-If the outline above and the schema get out of sync, the *schema is authorative*.   
-For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/JSON#Schema) and the [Draft Specification](http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1).
-
-The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks this can be useful to detect if somethings goes wrong.
-More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
-
-
-**Import checks**    
-We are making assumptions about the imported data that wouldn't hurt to be checked. 
-The following query checks if Bridges and all other types of relays are really disjunct sets:
-
-	TODO
-
-
-Import data gestalt
--------------------
-
-	TODO 	this section is of questionable quality
-
-The imported data represents the following dimensions:
-	
- node types
-	3 node types: relays, bridges, clients
-	4 relay types: guard, middle, exit, directory (not mutually exclusive)
- flags
-	2 flags for relays only: stable, fast - both boolean (the others are too unimportant to aggregate) 
-	1 flag for exits: permitted exit ports (3 values, not mutually exclusive)
-	3 flags for bridges only: pool (one of 3), ec2 (boolean), transport (2 values, n.m.e.)
- bandwidths	
-	2 bandwidths for all servers: advertized and consumed
- probabilities
-	4 probabilties: for relay in general and for guard, middle, exit
- software
-	8 software versions for tor
-	5 software versions for os
- areas
-	up to about 250 countries
-	and many more autonomous systems
- clients
-	2 types: @relays, @bridges
-	2 types per country: @relays, @bridges
-	2 flags: transport used (4 values) and ip-version used (2 values)
-
-
-The fields in the 3 import collections overlap only in one case: date. That's the only clamp between all datasets. 
-The table below tries to capture the multiple dimensions and qualities of the imported data.
-
-"Mode" refers to the essential quality of the thing being counted. 
-This may be the numbers of hardware instances, software characteristics, measures of quality of service, number of users.   
-"Measure" documents if the numbers denote absolute values, percentages, averages etc. 
-Percentages don't easily compare to absolute values and also not all absolute values in one category add up to a meaningful sum because value spaces overlap. 
-Therefor it's important to carefully select, construct and arrange meaningful and actually comparable configurations.   
-"Unit" is not much different from Measure, mainly reflecting if the field is single value or multi valued.
-"Upper limit" denotes the upper limit of the value space. For percentages it's 100. 
-For each relay type it's the total number of relays - the important implication being that each relay can simultaneously belong to multiple types: the types alltogether don't add up to the number of relays, the're up to 4 times more. Bridges are distinct from relays.
-	
-
-	TYPE	FIELD	MODE	MEASURE			UNIT				UPPER LIMIT
-	-----------------------------------------------------------------------
-	SERVER								
-			server	hard	sum				count				server
-			osv		soft	sum...s			count/item			server
-			tsv		soft	sum...s			count/item			server
-			upt		quality	avg				percentage			100
-			bwa		ip		sum				count				-
-			bwc		ip		sum				count				bwa
-									
-	RELAY								
-			relay	hard	sum				count				Server minus Bridge
-			g		hard	sum				count				< relay
-			m		hard	sum				count				< relay
-			e		hard	sum				count				< relay
-			d		hard	sum				count				< relay
-			pbr		quality	avg				percentage			100 (but should be much less)
-			pbg		quality	avg				percentage			100 (but should be much less)
-			pbm		quality	avg				percentage			100 (but should be much less)
-			pbe		quality	avg				percentage			100 (but should be much less)
-			flag	soft	sum...s			count/item			< relay
-			as		net		sum...s			count/item			< relay (but really much less)
-			pex		soft	sum,sum,sum		count/item			< relay
-									
-	BRIDGE														Server minus Relay
-			bridge	hard	sum	count		relay	
-			brp		net		sum,sum,sum		count/item			bridge
-			bre		hard	sum				count				< bridge
-			brt		soft	sum,sum			count/item			bridge
-								
-	CLIENT							
-			cb		user	sum				client
-			cr		user	sum				client
-			cpt		soft	sum,sum,sum,sum	count/item		
-			cip		soft	sum,sum			count/item
-						
-	COUTRY					
-	clients					
-			cbcc	user	sum				client/country
-			crcc	user	sum				client/country
-	relays					
-			osv		soft	sum...s			count/item/country	relay
-			tsv		soft					count/item/country	relay
-			upt		quality	avg				percentage/country	100
-			bwa		ip		sum				count/country		
-			bwc		ip		sum				count/country		bwa
-			g		hard	sum				count/country		< relay
-			m		hard	sum				count/country		< relay
-			e		hard	sum				count/country		< relay
-			d		hard	sum				count/country		< relay
-			pbr		quality	avg				percentage/country	100 (but should be much less)
-			pbg		quality	avg				percentage/country	100 (but should be much less)
-			pbm		quality	avg				percentage/country	100 (but should be much less)
-			pbe		quality	avg				percentage/country	100 (but should be much less)
-			flag	soft	sum...s			count/item/country	< gmed
-			as		net		scat + sum...s	count/item/country	< gmed (but really much less)
-			
-
-Overview data on clients and relays:   
-We have some very general data on all relays and bridges: total count, software version, operating system version, total bandwidth provided and consumed. 
-Correspondingly we have quite general data on clients: how many clients in total were connected to the tor network via bridges or directly via guard nodes. 
-These two fit well together.
-We also know which IP-version and which obfuscation techniques clients use. 
-But that's about it with clients and relays. 
-
-Clients:   
-Client data is on purpose quite sparse and we can't do much more than compare numbers of clients with the more detailed data about the relays and bridges. 
-We will eg not be able to follow clients through the network.
-
-Countries:   
-The most detailed view we can get on clients is their distribution by country. This is interesting since we also know from each relay the country in which it is located. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
-
-Relays:   
-Additionally to the data on relays and bridges we have quite specific data on different types of relays (but not bridges), namely guards, middle nodes, exits and directory servers. 
-This data is detailed but not easy to handle. 
-Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.   
-For each relay we know with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add more meaning to these numbers. 
-We also know for most relays through which AS they are connected but this is a very large number of different AS which we first need to aggregate to find the most used ones and how high the concentration is. 
-We then have some flags and exit port information which again are not particularily easy to visualize (and interpret).
-
-Bridges:    
-Last not least we have some data about bridges, but not as much as about relays. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors' job easier. 
-Since bridges are distinct from relays their numbers add up to the total number of servers.
-Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
-
-
-_flags_
+_flags_   
 Most of the flags collected in the "relays" import collection actually serve so little purpose that we will not use them in the visualization, to avoid visual clutter and distraction and improve performance on the backend. 
 They will be imported into the database but will not be aggregated. 
 Only the flags "Fast", "Stable" and "Authority" will be aggregated for the following types of relays:   
+
 				Fast	Stable	Authority
 	Guard		x		x
 	Middle		x		x
 	Exit		x		x
 	Directory 					x
 
-_default values_
-To reduce complexity in the mapReduce script it has proven helpful that every field of import data always has at least a default value.
-For importRelays these are:
-	addd	""
-	node	""
-	span	0
-	date	""	
-	nick	""
-	role	[]
-	flag	[]	
-	bwa		0	
-	bwc		0	
-	tsv		""	
-	osv		""	
-	pbr		0	
-	pbg		0	
-	pbm		0	
-	pbe		0	
-	pex		[]	
-	as		0	
-	cc		""	
-	
-For importBridges:
-	addd	""
-	node	""
-	span	0	
-	date	""	
-	nick	""
-	bwa		0	
-	bwc		0	
-	tsv		""	
-	osv		""	
-	brp		""	
-	bre		0	
-	brt		[]	
-	
-And for importClients:
-	addd	""
-	span	0	
-	date	""	
-	cb		0	
-	cbcc	{}
-	cr		0	
-	crcc	{}
-	cpt		{}	
-	cip		{}
+
+_default values_   
+Please see the seperate doc about [**default values**](https://github.com/tomlurge/visionion/blob/master/doc/defaults.md).
 
 
-Data aggregation
-----------------
 
-**MongoDB**    
+### JSON schema  
+The above has been transformed into a JSON [schema](schema.json).   
+
+The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks this can be useful to detect if somethings goes wrong.
+More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
+		
+If the outline above and the schema get out of sync, the *outline is authorative*. 
+This may seem unusual but it reflects reality...   
+For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/JSON#Schema) and the [Draft Specification](http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1).
+
+
+### Import checks  
+We are making assumptions about the imported data that wouldn't hurt to be checked. 
+E.g. a query checking if Bridges and all other types of relays are really disjunct sets:
+
+	TODO
+
+
+
+
+
+## Data aggregation
+
+
+### MongoDB    
 In proven OLAP fashion we'll aggregate all data into one big facts collection ('collections' are the MongoDB equivalent to SQL tables). 
 MongoDB does fit this purpose well because it allows sparsely populated collections. As a document store it also supports nested collections which comes in very handy when the data sets retrieved from the network are not as uniform and regular as we'd like them to be. As MongoDB is a schemaless database we do not have to worry about future structural changes. When e.g. more performance data becomes available we can seamlessly add it without having to touch any of the existing documents.
 MongoDB has some constraints of it's own that need to be taken into account when designiing the facts collection:
@@ -526,11 +271,11 @@ MongoDB has some constraints of it's own that need to be taken into account when
  (no workaround: we have to avoid arrays if they aren't really necessary)   
 
 
-**Preparing the import tables**    
-During mapReduce MongoDB can only take advantage of two indices: one covering the query and one covering the sort. For that reason the import collection will need to be indexed by date to support the query. Sort is less clear (to me). Maybe an index over type woud be beneficial.  
+### Indexing the import tables    
+During mapReduce MongoDB can only take advantage of two indices: one covering the query and one covering the sort. For that reason the import collection will need to be indexed by date to support the query. Sort is less clear (to me). Maybe an index over type would be beneficial.  
 
 
-**Aggregation**    
+### Aggregation   
 Aggregation of the imported data is necessary for several reasons:    
 . the imported server data is ordered by individual server by date but most of the time we will not want to look at individual servers but at all servers or at a subset of servers sharing certain attributes during a given timespan.     
 . the imported data reflects only a certain view on the underlying network, highly influenced by how the data is collected. A visualization needs to provide other and more diverse perspectives and the imported data has to be aggregated in different shapes and combinations to support the visualization accordingly. A well prepared database is a prerequisite for a responsive and interactive visualization.    
@@ -544,9 +289,11 @@ The aggregated collections will be indexed to gain further speed advantages.
 Additionally indices over the 3 import collections are needed to facilitate generic and unforseen queries and lookups on specific nodes.     
 
 
-**step 1 : import data aggregation**   
+#### aggregation step 1 : import data aggregation 
 
-tl;dr: a schematic example of a row of the resulting facts collection can be found [here](factsRow.md)   
+tl;dr: a schematic example of a row of the resulting facts collection can be found [here](doc/factsRow.md)   
+
+	TODO 	check if the relative link works
 
 A rather minimal fact table would include:   
 	(4 relays x 2 flags + 3 nodes) x 2 bandwidths = 22 bandwidths
@@ -566,6 +313,7 @@ We'll see how far we can get on the way.
 	7		cptObfs3				int
 	8		cptOr					int
 	9		cptOther				int
+	
 For clients this is all we know, save the clients per country which we'll tackle later. 
 Clients @bridges and @relays are mutually exclusive, the other fields aren't. We'll just list them one after another. 
 For transports we currently have 4 possible values: obfs2, obfs3, OR, other. 
@@ -636,6 +384,7 @@ _Mutually non exclusive relay types_
 Up to now it looks like we have everything covered. Or is there a combination of type, flag and probabilty that we couldn't find in this table in one easy step?
 The astute reader will have noticed that there indeed is indeed a problem: guards, middles, exits and directories aren't mutually exclusive. To capture any combination thereof we would need not only 4 but 15 rows, so add 9 to 40 = 49. 
 Plus we wouldn't want to loose track of the flags and add another - hold your breath - 66 rows. 
+
 	combinations of relay types and flags
 	type	g	d	gd
 			m		gmd
@@ -647,6 +396,7 @@ Plus we wouldn't want to loose track of the flags and add another - hold your br
 	flags	4	2	6
 	total	28	2	36
 					66
+					
 Alltogether 115 columns. Maybe we can get rid of this scary situation by stuffing the combinations of types and flags into a seperate collection? 
 
 _OS or Tor software versions_    
@@ -664,7 +414,6 @@ Therefor we have to change perspective: we can't start from the perspective of s
 
 Again there are differences: while there exist about 37.000 autonomous systems, there are less than 200 countries - which is still a lot, but manageable. We already have very interesting data about clients per country, which makes it mandatory to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
 
-```
 	41	countries 					array of objects
 			country					cc											country
 			cbcc					int											how many clients in this country connecting through bridges
@@ -708,7 +457,6 @@ Again there are differences: while there exist about 37.000 autonomous systems, 
 			autosys					array of objects 
 				as					string										as number
 				count				int
-```
 
 This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and pex this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
 
@@ -717,7 +465,6 @@ Additionally countries could be grouped into continents, political regions (like
 
 Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-```
 	42	autosys		 				array of objects							one result object per AS
 			as						string										number of as (format is string because it's a name)
 			name					string										name of as	
@@ -744,7 +491,6 @@ Because of their sheer number also autonomous systems have to be analyzed on the
 				pbg					float										total probability of all guards in that country and this AS
 				pbm					float										total probability of all middles in that country and this AS
 				pbe					float										total probability of all exits in that country and this AS
-```	
 
 This is still sketchy. More input and ideas on handling AS would be welcome. 
 
@@ -776,7 +522,7 @@ But this is just a reminder and a list of notes. We agreed to postpone this doma
 	TODO
 
 
-**step 2 : consolidation and simplification**    
+#### aggregation step 2 : consolidation and simplification  
 
 aggregations over time and space. 
 Time quite obviously translates to the ability to watch the data from the finest level available - hourly - to an overview that shows the whole timespan available - currently 5 years - in a single view. The equivalent to zooming in and out. 
@@ -786,6 +532,7 @@ Space translates to the ability to group countries to meaningful regions, either
 _timedate intervals / periods_    
 The default timespan is 1 hour for relays and 24 hours for  clients. At a scale of 1 pixel per default timespan we can't see the whole data on a regular display.
 So far we collected about 5 years of data so far, which leads the following numbers of pixels   
+
 	5					5		years since 2008
 	5 x 12				60		months
 		   x 4			240 	weeks
@@ -797,10 +544,12 @@ So far we collected about 5 years of data so far, which leads the following numb
 
 We will want to zoom in and out of the data visualization and henceforth need to define aggregated timespans. 
 Sensible spans coudl be
+
 	6h		6 hours
 	1d		24 hours, 1 day
 	1w		168 hours, 7 days, 1 week
 	1m		1 month, about 4 weeks, about 30.5 days
+
 If we skip months as too coarse anyway (but actually because they are so unwieldy irregular) we could get by with 4 possible integer values: 1, 6, 24, 168
 
 
@@ -812,11 +561,6 @@ _continents and political regions_
 	TODO
 
 
-
-**step 3 : indexing**    
-
-* import collections   
-	relay: node+timespan to look up specific nodes   
 
 
 **Issues**    
@@ -898,7 +642,20 @@ r    pbe    m    exit prob.      float
 
 -->
 
-**aggregation admin interface**
+
+
+
+
+## Indexing
+
+* import collections   
+	relay: node+timespan to look up specific nodes   
+
+
+
+
+
+## aggregation admin interface
 
 	TODO
 
@@ -920,6 +677,8 @@ LOGIC
 REMARKS
 * updating existing data or adding new data should make no difference to the admin interface
   existing records in visFacts will be overwritten (aggregateFacts -> out:merge)
+
+
 
 
 ## Usecases
@@ -965,6 +724,8 @@ But still, visualizing the average pbr (consensus weight fraction) or all relays
 _._ covered    
 
 
+
+
 ## Visualization Interface Wishlist
 
   * chrome colors green and purple
@@ -998,6 +759,8 @@ Some useful links:
 [Fisheye](http://bost.ocks.org/mike/fisheye/)  
 
 
+
+
 ## Visualization Mechanics Wishlist
   
   * notify the client of new fields so he can add them to the generic interface 
@@ -1006,14 +769,9 @@ Some useful links:
     active facets, selected clipping etc
 
 
+
+
 ## JavaScript Issues
-
-**framework**
-
-still not sure which framework to use. something lightweight should suffice.
-angular.js maybe to involved.  knockout.js like angular.js takes a declarative
-approach.  can.js doesn't have that declarative touch but apart from that looks
-very promising.
   
 **datetime**
 
@@ -1028,6 +786,8 @@ see
 [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
 
 
+
+
 ## Data Import
 
 An importer tool takes metrics descriptors as input and produces JSON or BSON
@@ -1038,6 +798,8 @@ more details: https://trac.torproject.org/projects/tor/ticket/6171.
 [import.py](visionion/blob/master/import/import.py) is a simple data importer
 that uses Stem to read consensuses and server descriptors and that prints out
 dicts that could be imported into MongoDB.
+
+
 
 
 ## Next Steps
@@ -1061,48 +823,51 @@ dicts that could be imported into MongoDB.
   
   * tbc
 
+
+
+
 ## Setup guide
 
 On OSX:
 
-```
-brew install mongodb
-
-# Start mongo db and create the database
-mkdir MONGOdata
-mongod --dbpath MONGOdata
-
-# Import the data
-Get sample data (caveat: it might not always be available):
-https://people.torproject.org/~karsten/volatile/nodes-2013-08-14.json.gz
-Unzip it. Then import it into MongoDB from your system shell:
-mongoimport --db visionion --collection import --stopOnError --upsert --file ~/nodes-2013-08-14.json
-
-# start mongo shell
-mongo
-
-# ensure index over date of import collections
-db.import.ensureIndex({date:1})
-db.import.ensureIndex({type:1})
-```
+	brew install mongodb
+	
+	# Start mongo db and create the database
+	mkdir MONGOdata
+	mongod --dbpath MONGOdata
+	
+	# Import the data
+	Get sample data (caveat: it might not always be available):
+	https://people.torproject.org/~karsten/volatile/nodes-2013-08-14.json.gz
+	Unzip it. Then import it into MongoDB from your system shell:
+	mongoimport --db visionion --collection import --stopOnError --upsert --file ~/nodes-2013-08-14.json
+	
+	# start mongo shell
+	mongo
+	
+	# ensure index over date of import collections
+	db.import.ensureIndex({date:1})
+	db.import.ensureIndex({type:1})
+	
+	
+	
 
 ## Notes on using the mongo shell
 
-```
-# run a javascript file through a new mongo shell
-mongo localhost:27017/tor visionion/aggregateFacts.js
-# housekeeping tasks in mongo shell
-show dbs
-use dbName
-db.dropDatabase()
-show collections
-db.collectionName.drop()							// deletes the collection		
-db.collectionName.remove()							// removes the content of the collection							
-db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
-db.collectionName.dropIndex("indexName")
-db.collectionName.getIndexSpecs()
-db.collectionName.findOne()
-db.collectionName.find().pretty()
-db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
-```
+	# run a javascript file through a new mongo shell
+	mongo localhost:27017/tor visionion/aggregateFacts.js
+	# housekeeping tasks in mongo shell
+	show dbs
+	use dbName
+	db.dropDatabase()
+	show collections
+	db.collectionName.drop()							// deletes the collection		
+	db.collectionName.remove()							// removes the content of the collection							
+	db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
+	db.collectionName.dropIndex("indexName")
+	db.collectionName.getIndexSpecs()
+	db.collectionName.findOne()
+	db.collectionName.find().pretty()
+	db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
+
 

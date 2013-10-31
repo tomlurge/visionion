@@ -1,58 +1,26 @@
-﻿TODO
-	test suite
-	autosys
-	countries
-	update docs
-		nur noch ein import
-		type
-		was noch?
-	type abfrage (zu c/b/r/s) durch abfragen nach feldern ersetzen
-		vielleicht doch keine gute idee, weil es den zwang zu defaults verstärkt
-	über diesen zwang zum default ist der weg zu zwanglosen erweiterungen des schema verstellt
-		das ist schlecht
-		ein wenig eleganter ausweg wäre, in mapValues jeder zuweisung zu einem feld eine existenzabfrage nach dem feld vorzustellen
-		unelegant, aber besser
-	defaults für die values von cip, cpt, osv, tsv, pex
-		wenn wir von den defaults nicht generell wegkommen können, müssen sie hier auch implementiert werden
-	indices
-		http://stackoverflow.com/questions/15106869/mongodb-mapreduce-performance-using-indexes
-		indices über die import tabellen sind nur an 2 punkten interessant
-			query	also date
-			sort	aha...
-					maybe country or autosys, to speed up the rather expensive operations on arrays?
-					or type?
-					http://stackoverflow.com/questions/12015064/mongodb-mapreduce-and-sorting
-					
-					> db.import.ensureIndex({type:1})
-					> db.import.ensureIndex({date:1})
+﻿It can't be overestimated enough that what you output in the map step has to have the exact same structure than what you output in the reduce step. It's called idempotence but few people have a good idea of what it actually means. I had a lot of problems with scripts running fine on the testdata but then failing strangely on the actual data.  The reason was that the actual data set was much bigger and the mapReduce engine started to work through it in chunks: processing the first 100 documents in the collection, then the next 100 documents and so forth, and then aggregatig those results together like they were new input documents. So what you spit out in the reduce step - and you think you're done with that - get's sucked into another mapreduce circle again, and again... That's why it's so important that when implementing the reduce step to always have in mind that you might not just chew through one more of those single-document map outputs, but through one of the results - which in this case were much more complex and therefor required some additional checks and logic. E.g. since we are counting a lot of single relay entries on a given date there was more than one place where it was tempting to add a +1 in the reduce step instead of adding the actual value contained in the document to be reduced - which might as well be 100 (and in that case actually was because MongoDBs mapReduce workes through the data in chunks of 100 documents). 
 
-It can't be overestimated enough that what you output in the map step has to have the exact same structure than what you output in the reduce step. It's called idempotence but few people have a good idea of what it actually means. I had a lot of problems with scripts running fine on the testdata but then failing strangely on the actual data.  The reason was that the actual data set was much bigger and the mapReduce engine started to work through it in chunks: processing the first 100 documents in teh collection, then the next 100 documents and so forth, and then aggregatig those results together like they were new input documents. So what you spit out in the reduce step - and you think you're done with that - get's sucked into another mapreduce circle again, and again... That's why it's so important that when implementing the reduce step you always have in mind that you might not always chew through one more of those single-document map outputs, but through one of the results - which in this case were much more complex and therefor required some additional checkbacks and logic. E.g. since we are counting a lot of single relay entries on a given date there was more than one place where it was tempting to add a +1 in the reduce step instead of adding the actual value contained in the document to be reduced - which might as well be 100 (and in one case actually was because MongoDBs mapReduce worked through the data in chunks of 100 documents). 
+Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence (see above). Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document and is logically not very interesting. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be handled that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend again. The examples other people had posted really opened my eyes for what is possible within the reduce step - as long as the final output can be fed into it again (the importance of idempotence...).
 
-Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence (see above). Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document and is logically not very interesting. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be handled that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend again. They examples other people posted really opened my eyes of what is possible within the reduce step - as long as the final output can be fed into it again (the importance of idempotence...).
+Indices to support MapReduce
+Indices over the import table are useful to speed up mapReduce. Two indices can be used:
+	an index on "addd" since we query over "addd"
+	an index on "date" since we emit date as (part of) the key 
+see also:	
+	http://stackoverflow.com/questions/15106869/mongodb-mapreduce-performance-using-indexes
+	http://stackoverflow.com/questions/12015064/mongodb-mapreduce-and-sorting
+	http://edgystuff.tumblr.com/post/7624019777/optimizing-map-reduce-with-mongodb
+The respective MongoDB commands are:					
+	> db.import.ensureIndex({date:1})
+	> db.import.ensureIndex({addd:-1})	// 	descending since normally we are only interested 
+										//	in the newest additions
 
 
 /*	
 
-import collection index 
-	nach zeit
-	mapreduce tage+stunden-weise anstossen
-		zum einen ist das resourcenschonender
-		zum anderen können dann updates leichter eingearbeitet werden
-	query
-		zeitabfrage
-		tag und stunde,
-		wenn keine stunde verfügbar (clients collection), dann nur tag
 		
-out : { 
-		merge : collectionName ,			//	in this case 'merge' instead of 'reduce'
-											//	because reduce would add new values to existing documents  
-											//	whereas merge replaces already existing documents with the same _id
-		nonAtomic : true					//	prevents locking of the db during post-processing
-		query : timespan(date)				//	aggregates only documents of a given time, 
-											//	since a given time or for a given timespan
-}
 
-note:	out.merge	replaces existing documents woth the same _id
+note:	out.merge	replaces existing documents with the same _id
 		out.reduce	adds fields if they aren't already present, 
 					but doesn't touch fields that are (no updates!)
 
@@ -75,12 +43,6 @@ http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
 
 //	doing stuff
 
-for all fields
-	if field == bwa || bwc || pbr || pbg || pbm || pbe || pex
-		 add value
-	else add 1
-
-//	doing other stuff
 http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
 The following map function may call emit(key,value) multiple times depending on the number of elements in the input document's items field:
 function() {
@@ -184,49 +146,6 @@ um das mal festzuhalten
 						with the else being default values ("", 0, etc)
 				use out:reduce instead of merge
 */
-
-
-/*	countries
-	countries occur in relay data
-		one per relay, very nice
-	and in client data
-		in 2 places - crcc and cbcc - as lists of name:value pairs
-	also folgender algorithmus
-		wenn dies ein relay ist
-			was hat es für ein cc
-				ist dieses cc schon in unserer liste
-					nein, dann nimm es auf
-		wenn dies ein clients ist
-			für jedes cc in cbcc und crcc
-				ist dieses cc schon in unserer liste
-					nein, dann nimm es auf
-		
-
-http://web.archive.org/web/20110722134154/http://www.mongodb.org/display/DOCS/MapReduce
-Map Function
-The map function references the variable this to inspect the current object under consideration. A map function calls emit(key,value) any number of times to feed data to the reducer. In most cases you will emit once per input document, but in some cases such as counting tags, a given document may have one, many, or even zero tags. 
-Reduce Function
-When you run a map/reduce, the reduce function will receive an array of emitted values and reduce them to a single value. Because the reduce function might be invoked more than once for the same key, the structure of the object returned by the reduce function must be identical to the structure of the map function's emitted value.
-*/
-
-
-/* testing example */
-
-//	MAP  /////////////////////////////////////////////////////////////////////////////////////////////////////
-var mapBridges = function() {
-    print("XXXX");
-    for (var key in this) {
-       print("YYY");
-       print(key);
-       print(this[key]);
-    }
-    print(this.brt);
-	map = {
-		date: this.date ,
-		servers : {
-			bridges : {
-// 	etc
-
 
 
 
