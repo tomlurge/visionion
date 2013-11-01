@@ -64,7 +64,7 @@ Discussion:
 
 Still two questions remain:   
 - Did we know at any point through gathering the data for sure if the value in question is just missing/unknown or really/deliberatly empty? E.g. do we have a way to distinguish if the flag-field was lost during transmission or if there was really no single flag set? Is the answer to that question for all fields the same?  
-- What do we do with it? So far there's no concept on why or how to visualize unknown data, and neither the aggregation script not the data schema for aggregated data does take it into account. Of course both could easily change resp. be changed. 
+- What do we do with it? So far there's no concept on why or how to visualize unknown data, and neither the aggregation script nor the data schema for aggregated data does take it into account. Of course both could easily change resp. be changed. 
 
 
 #### Implementation
@@ -114,9 +114,9 @@ We'd only have to add new fields to the aggregated data, counting for example al
 			tsv						# of relays for which we don't know tsv
 	countries
 		total
-			cbcc
-			crcc
-			relay
+			count					# of countries from which some fields have a value of null
+			cbcc					# of countries for which we don't know cbcc
+			crcc					# of countries for which we don't know crcc
 
 That would be a start. 
 We could of course get into more details regarding bridge pools, relay roles, country probabilities etc. 
