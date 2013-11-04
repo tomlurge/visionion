@@ -735,8 +735,16 @@ see
 	(http://stackoverflow.com/questions/8743385/running-a-script-having-mongodb-queries-from-mongodb-shell)
 	on a macbook pro 2.66ghz core2duo 8gb ram 500gb hd early 2009 this takes about
 	and the database grows onto
+	
+	without sort
 	Sun Nov  3 23:35:18.519 [conn7] 		M/R: (1/3) Emit Progress: 300/4619038	0%
 	Mon Nov  4 00:48:44.547 [conn7] CMD: drop visionion.facts
+		more than 1 hour on one (!) fact
+	with key "date" and sort on date
+	Mon Nov  4 01:30:16.748 [conn8] 
+	Mon Nov  4 02:26:33.475 [conn8] CMD: drop visionion.tmp.mr.import_4
+		slightly less than an hour
+	
 	
 #### Notes on using the mongo shell
 

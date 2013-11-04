@@ -1085,7 +1085,8 @@ var mapValues = function() {
 
 	}
 
-	emit( "Fact " + theSpan + " " + theDate , value );
+//	emit( "Fact " + theSpan + " " + theDate , value );
+	emit( theDate , value );
 };
 
 
@@ -2661,8 +2662,8 @@ var runAggregation = function(date, span, update) {
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
 			, scope: { theDate: date, theSpan: span } 		                                    //  globally (in the mapReduce job) available  variables
-//          , sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
+	        , sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
 																								//	but seems to expect that "sort" equals the key of the map operation
 		}
 	);
-}("2013-04-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
+}("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
