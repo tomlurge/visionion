@@ -1,5 +1,7 @@
-﻿**A schematic example of a document in the facts collection **
+﻿**A schematic and annotated example of a document in the facts collection **
 
+		fieldname: datatype				description
+        -------------------				-----------
 	{ 	
 		_id: string,					
 		date: string,

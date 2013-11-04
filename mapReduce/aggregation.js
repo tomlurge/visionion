@@ -52,12 +52,12 @@ var mapValues = function() {
 			total : 					c ?  this.cr + this.cb  : 0,
 			atBridges :					c ?  this.cb : 0 ,
 			atRelays : 					c ?  this.cr : 0,
-			cip4 : 						c && this.cip.v4 ? this.cip.v4 : 0,
-			cip6 : 						c && this.cip.v6 ? this.cip.v6 : 0 ,
-			cptObfs2 : 					c && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
-			cptObfs3 : 					c && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
-			cptOR : 					c && this.cpt.OR ? this.cpt.OR : 0 ,
-			cptUnknown :				c && this.cpt.unknown ? this.cpt.unknown : 0
+			cip4 : 						c && this.cip && this.cip.v4 ? this.cip.v4 : 0,			// line 55 to 60 this.cip + this.cpt tests to account fpr missing values in import data
+			cip6 : 						c && this.cip && this.cip.v6 ? this.cip.v6 : 0 ,
+			cptObfs2 : 					c && this.cpt && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
+			cptObfs3 : 					c && this.cpt && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
+			cptOR : 					c && this.cpt && this.cpt.OR ? this.cpt.OR : 0 ,
+			cptUnknown :				c && this.cpt && this.cpt.unknown ? this.cpt.unknown : 0
 		} ,		                                                                                //  SERVERS
 		servers : {
 			total : {
@@ -2645,7 +2645,7 @@ var finalizeFact = function ( key, fact ) {
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-var runAggregation = function(theDate, theSpan, theUpdate) {
+var runAggregation = function(date, span, update) {
    //  db.facts.remove();				 		//	{ _id : "Fact " + theSpan + " " + theDate }     TODO    remove after testing
 	db.import.mapReduce (
 		mapValues,
@@ -2657,11 +2657,12 @@ var runAggregation = function(theDate, theSpan, theUpdate) {
 																								//  'reduce' would add values to exsiting documents - we don't want that
 				, nonAtomic : true																//	prevents locking of the db during post-processing
 			}
-			, query : { "addd" : { "$gte" : theUpdate}  }
+			, query : { "addd" : { "$gte" : update}  }
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
-			, scope: { theDate: theDate, theSpan: theSpan }                                     //  globally (in the mapReduce job) available  variables
-            , sort : { date : 1 }                                                               //  speeds up mapReduce as 'date' is indexed in the import collection
+			, scope: { theDate: date, theSpan: span } 		                                    //  globally (in the mapReduce job) available  variables
+//          , sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
+																								//	but seems to expect that "sort" equals the key of the map operation
 		}
 	);
 }("2013-04-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing

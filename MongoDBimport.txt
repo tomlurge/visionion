@@ -1,8 +1,0 @@
-# the following are shell commands,
-# assuming that the path to mongoimport (which by default lives next to mongod) is known to the shell
-
-mongoimport --db tor --collection importRelays --stopOnError --upsert --file /Volumes/zut/visionion/RAWdata/relays.json
-mongoimport --db tor --collection importBridges --stopOnError --upsert --file /Volumes/zut/visionion/RAWdata/bridges.json
-mongoimport --db tor --collection importClients --stopOnError --upsert --file /Volumes/zut/visionion/RAWdata/clients.json
-
-﻿
