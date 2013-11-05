@@ -823,7 +823,6 @@ var mapValues = function() {
 			}
 		} ,
 		countries :	[] ,                                                                        //  COUNTRIES   more below
-
 		autosys : [                                                                             //  AUTOSYS
 			{
 				as :                    r && this.as ? this.as : "" ,
@@ -891,6 +890,7 @@ var mapValues = function() {
 	push the country object at hand onto the fact.countries array.
 	autosys is an array within the object and therefor needs an inner loop.
 */
+
 	function CountryObject() {}
     CountryObject.prototype = {
 		country: 			"" ,
@@ -2663,7 +2663,7 @@ var runAggregation = function(date, span, update) {
 //			, finalize : finalizeFact
 			, scope: { theDate: date, theSpan: span } 		                                    //  globally (in the mapReduce job) available  variables
 	        , sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
-																								//	but seems to expect that "sort" equals the key of the map operation
+																								//	but demands that "sort" equals the key of the map operation
 		}
 	);
 }("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing

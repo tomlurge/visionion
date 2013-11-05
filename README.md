@@ -537,7 +537,7 @@ It can't be overestimated enough that what you output in the map step has to hav
 Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence (see above). Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be handled that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend again. The examples other people had posted really opened my eyes for what is possible within the reduce step - as long as the final output can be fed into it again (the importance of idempotence...).
 
 For more nitty gritty details on aggregation with MongoDBs mapReduce see a compilation of [mapReduce](docs/mongoReduce.md) examples compiled from the web (mostly Stackoverflow) and some weird [working notes](docs/aggregation.md) on how to tackle the aggregation.   
-And there's of course the mapReduce script [itself](mapReduce/aggregation.js).
+And there's of course the mapReduce script [itself](aggregation/mapreduce.js).
 
 
 
@@ -731,21 +731,74 @@ see
 	
 	# run aggregation
 	on the system shell
-		mongo localhost:27017/visionion ~/visionion/mapReduce/aggregation.js
+		mongo localhost:27017/visionion ~/visionion/aggregation/mapreduce.js
 	(http://stackoverflow.com/questions/8743385/running-a-script-having-mongodb-queries-from-mongodb-shell)
 	on a macbook pro 2.66ghz core2duo 8gb ram 500gb hd early 2009 this takes about
 	and the database grows onto
+
+
+#### performance issues
 	
+better late than never? after a few months of working on the damn aggregation script and a few weeks of feeling good because it works I finally realized that it is DAAAAAAMMMMMNNNNN SLOOOOOOOOOOOOOOOOOOOOWWWWWWWW
+
+	performance when aggregating 1 hour of data (1 fact)
 	without sort
-	Sun Nov  3 23:35:18.519 [conn7] 		M/R: (1/3) Emit Progress: 300/4619038	0%
-	Mon Nov  4 00:48:44.547 [conn7] CMD: drop visionion.facts
-		more than 1 hour on one (!) fact
+		Sun Nov  3 23:35:18.519 [conn7]
+		Mon Nov  4 00:48:44.547 [conn7]
+			73 min
 	with key "date" and sort on date
-	Mon Nov  4 01:30:16.748 [conn8] 
-	Mon Nov  4 02:26:33.475 [conn8] CMD: drop visionion.tmp.mr.import_4
-		slightly less than an hour
+		Mon Nov  4 01:30:16.748 [conn8] 
+		Mon Nov  4 02:26:33.475 [conn8]
+			56 min
+	country and AS removed
+		Mon Nov  4 12:30:32.085 [conn9]
+		Mon Nov  4 12:45:05.562 [conn9] 
+			15 min
+	moving db from HD to SSD
+		Mon Nov  4 13:12:21.691 [conn1]
+		Mon Nov  4 13:25:14.630 [conn1]
+			13 min
+	a second run with that configuration
+		Mon Nov  4 13:31:22.063 [conn1]
+		Mon Nov  4 13:43:03.567 [conn1]	
+			12 min
+	after seeting mongo file limits to 2048 (see below)
+		Mon Nov  4 14:45:20.064 [conn1]
+		Mon Nov  4 14:57:02.174 [conn1]
+			12 min
+	again with countries and AS, but running from ssd, with file limits 2048, with sort key on date
+		Mon Nov  4 15:01:45.733 [conn2] 
+		Mon Nov  4 16:04:50.240 [conn2]
+			63 min
+
+
+working notes 05/11/13:    
+
+mapReduce of the basic timespan of 1 hour takes about 1 hour to compute (on my macbook pro, 2.6 ghz core 2 duo). "realtime"… leaving out countries and AS it still takes more than 10 minutes.
+this is problematic for new data alone: i don't know if the Tor project can, wants to or even should dedicate that much computing power to the visualization task. it is even more problematic for the 5 years worth of raw data that we have amassed so far. with my macbook it would take another 5 years to churn through that. how frustrating! after months of work on the damn script…
+
+i don't think that the script itself is flawed or that i missed optimization options (of course, being a newb to mongo, mapreduce and olap in general, i can't be sure about that)
+2 alternatives: 
+a) rent five 12 core servers and have the backlog data be mapreduced in 1 month (or 1 week, skipping countries and AS)
+b) implement aggregation in either Hadoop or with mongodb's alternative "aggregation pipeline" implementation.
+
+the disadvantage of (a) is inflexibility: if after 1 month and some investment (mayby 1000e) the aggregated data is flawed we have to start again. 
+the advantage of (b) is that we need a second implementation anyway to check for correctness - although i would have liked to postpone that.
+hadoop mapreduce or mongodb's aggregation pipeline? hadoop is scalable and since it's mapreduce too the mongodb mapreduce script should be rather straightforward to translate. but it may be a hassle to set up and connect to mongodb (although there exists a mongodb module for that) and it's java ... arrrg. 
+mongodb's aggregation pipeline otoh is not as flexible as mapreduce, not as scalable as hadoop (but still 20x faster than mogodb mapreduce, so they say) but much less trouble to set up (none at all actually). it has one downside: it needs an application in front that feeds it with the importdata day by day, since it can't handle results that are bigger than 16 mb. silly mongodb limitations. mogodb's inferior scalability is not that much of an issue since the dataset can easily be split into chunks (years, months, days, hours) that again can be crunched by seperate mongodb instances, one per processor core. that means a little more setup and administration work but not prohibitivly much (and it's all easy steps whereas with hadoop it might prove challenging at least since it's a first time).
+we will need such an application to control the whole beast anyway but that again is something that like the second implementation of aggregation i would have liked to postpone.
+
+it's not bad to have the mapreduce implementation because it's powerful and flexible and we need a second implementation anyway. we can use it for testing, maybe updating and modifying existing aggregated data, just not for the initial import.
+
+now, how to proceed? i'll have a look into hadoop aggregation for the next 2 days and see how far i get. after that maybe 2 days for hadoop. after that another week for one or the other if it seems like that would be enough time to implement the aggregation. that second week would seem to be justified since after that i have to completely switch tools and mindset and tackle the visualization itself:
+- i do have the client data which is aggregated already. that's enough for testing a basic implementation of the visualization frontend
+- with that basic frontend i have something to show
+- i need a prototype to test if my facts scheme works well with D3 or if i have to rework it anyway
+
+so, that's a plan. hoorray!
 	
 	
+
 #### Notes on using the mongo shell
 
 	# housekeeping tasks in mongo shell
@@ -763,3 +816,28 @@ see
 	db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
 
 
+#### modifying mongo defaults
+
+(if mongodb was installed through homebrew's 'brew' command - see above)
+	http://stackoverflow.com/questions/10760223/sane-defaults-for-mongodb-on-osx (first answer)
+	It is probably worth raising the hard and soft limits for NumberOfFiles, as MongoDB uses this limit to determine the maximum number of connections that it will accept. On some versions, OS X defaults this number to 256, which means you can have a maximum of around 205 connections, which may be too low even for a development environment. 
+	therefor adding
+	  <key>HardResourceLimits</key>
+	  <dict>
+		<key>NumberOfFiles</key>
+		<integer>1024</integer>
+	  </dict>
+	  <key>SoftResourceLimits</key>
+	  <dict>
+		<key>NumberOfFiles</key>
+		<integer>1024</integer>
+	  </dict>
+	to 
+		/usr/local/Cellar/mongodb/2.2.2-x86_64/homebrew.mxcl.mongodb.plist
+
+(if mongodb was not installed through brew)
+	ulimit -S -n 2048		// adjust file limits for this shell session
+	ulimit -a 				// to check currently valid values 
+	momgod --dbpath xyz		// then start mongo deamon
+	further reading: 		http://superuser.com/questions/433746/is-there-a-fix-for-the-too-many-open-files-in-system-error-on-os-x-10-7-1 (first answer)
+							http://krypted.com/mac-os-x/maximum-files-in-mac-os-x/
