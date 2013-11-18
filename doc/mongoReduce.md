@@ -1,4 +1,8 @@
-﻿	out.merge	replaces existing documents with the same _id
+﻿some hints on the usage of mapReduce in MongoDB
+	
+	
+	//  out.MERGE versus out.REDUCE
+	out.merge	replaces existing documents with the same _id
 			this is ideal if we want to add updated documents, overwriting the existing ones
 
 	out.reduce	adds fields if they aren't already present, 

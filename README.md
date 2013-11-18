@@ -797,7 +797,46 @@ now, how to proceed? i'll have a look into hadoop aggregation for the next 2 day
 
 so, that's a plan. hoorray!
 	
+	mongoDB aggregation framework
+	http://docs.mongodb.org/manual/reference/operator/aggregation/
+	http://docs.mongodb.org/manual/core/aggregation-pipeline-limits/
+	http://docs.mongodb.org/manual/tutorial/aggregation-zip-code-data-set/
 	
+update, half a day later: MongoDB Aggregation Framework won't cut it. no javascript, verbose syntax, and some rather unfortunate restrictions  make it close to impossible to re-implement the mapReduce script. so let's go with Hadoop.
+	
+	http://stackoverflow.com/questions/9287585/hadoop-map-reduce-vs-built-in-map-reduce
+	http://steveeichert.com/2010/03/31/data-analysis-using-mongodb-map-reduce.html/
+	https://github.com/mongodb/mongo-hadoop
+
+working notes 07/11/13:	
+hadoop is not that hard to set up after all (at last). 
+problem is: java sucks.
+other problem is: no debian package for hadoop.    
+looked into alternatives briefly: mondrian (olap solution) is available for debian, as is virtuoso which claims to support map reduce and be very modern and fast. both not really sure bets and also not effortless to check out either.   
+along come articels about json support in PostgreSQL 9.4 being faster than in mongodb, and python in postgresql being very well supported, even suitable to implement map reduce jobs. the latter, together with the support of materialized views in the same PostgreSQL 9.4 should make it possible to put away mongodb for good. and python (which is much more fun than java) is also supported by hadoops "streaming" extension.
+so the plan is: 
+- get a simple java based map reduce job running in hadoop (like: number of relays). 
+- then implement the whole hadoop mapreduce job in python. 
+- deploy a hadoop cluster on amazons Elastic MapReduce cloud service and get those 5 years crunched. 
+- port the python script to PostgreSQL and make that the engine generate future (hourly) updates
+- keep the mongodb implementation as a backup
+
+	http://casbon.me/a-python-map-reduce-data-store
+	http://obartunov.livejournal.com/175235.html
+
+well, turning PostgreSQL into a mapreduce engine might prove a little harder than just porting the script to python. but as long as we get by with a single machine to process new data this should be doable. remember: the python-based-mapreduce-engine-in-postgresql is only intended for (hourly) data updates, not for crunching the 5 years backlog.
+
+working notes 11/11/13:	
+the preferred version of hadoop is 1.1.2 because it is (not the most but) rather current, supported by the mongo-hadoop connector, supported by oreillys "hadoop definitive guide" (which itself is better than "hadoop in action" and "hadoop beginners guide") and the installation instructions that saved my live 
+	http://importantfish.com/how-to-run-hadoop-in-standalone-mode-using-eclipse-on-mac-os-x/
+there exists a hadoop eclipse plugin but it only runs with older versions of eclipse and since it only helps in settin up new hadoop jobs it's not worth the trouble for me (as i only need one map reduce) (forever?).    
+Btw there's also a map reduce tutorial on the hadoop 1.1.2 documentation site
+	http://hadoop.apache.org/docs/r1.1.2/mapred_tutorial.html#Source+Code
+
+
+
+
+
 
 #### Notes on using the mongo shell
 
