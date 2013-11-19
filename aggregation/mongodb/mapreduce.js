@@ -2667,3 +2667,4 @@ var runAggregation = function(date, span, update) {
 		}
 	);
 }("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
+																								//	2013-04-03 23 ^= 1365030000000

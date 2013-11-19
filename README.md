@@ -301,7 +301,7 @@ The aggregated collections has to be indexed to gain further speed advantages.
 
 An exhaustive fact table should encompass everything we know from a certain timespan, about all node types woith any combination of characteristics. 
 We can't really pre-aggregate all possible permutations because all possible combinations of say roles and flags and software-versions and os-versions and AS a relay could run under are practically countless. 
-The structure of teh facts collection is more based on the gestalt of the imported data than on real usecases. 
+The structure of the facts collection is more based on the gestalt of the imported data than on real usecases. 
 This is guesswork and probably will have to be modified after some user experiences have been collected.
 
 Some administrative information first:
@@ -537,7 +537,7 @@ It can't be overestimated enough that what you output in the map step has to hav
 Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence (see above). Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be handled that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend again. The examples other people had posted really opened my eyes for what is possible within the reduce step - as long as the final output can be fed into it again (the importance of idempotence...).
 
 For more nitty gritty details on aggregation with MongoDBs mapReduce see a compilation of [mapReduce](docs/mongoReduce.md) examples compiled from the web (mostly Stackoverflow) and some weird [working notes](docs/aggregation.md) on how to tackle the aggregation.   
-And there's of course the mapReduce script [itself](aggregation/mapreduce.js).
+And there's of course the mapReduce script [itself](aggregation/mongodb/mapreduce.js).
 
 
 
@@ -701,7 +701,7 @@ see
 ### [TODO](todo.md)
 
 
-### Setup guide
+### technicalities
 
 #### On OSX:
 	
@@ -731,13 +731,120 @@ see
 	
 	# run aggregation
 	on the system shell
-		mongo localhost:27017/visionion ~/visionion/aggregation/mapreduce.js
+		mongo localhost:27017/visionion ~/visionion/aggregation/mongodb/mapreduce.js
 	(http://stackoverflow.com/questions/8743385/running-a-script-having-mongodb-queries-from-mongodb-shell)
 	on a macbook pro 2.66ghz core2duo 8gb ram 500gb hd early 2009 this takes about
 	and the database grows onto
+	
+
+#### setting up hadoop
+
+on a mac install hadoop with homebrew
+	hadoop version 1.1.2
+1.1.2 is the version that supports streaming and is supported by the mongodb-adapter (below)
+for testing purposes a single hadoop instance is just fine, no cluster or pseudo cluster needed. this saves us all the configuration troubles. the single hadoop instance can be called from the command line by just entering
+	hadoop jar <location of streaming jar>
+further information on installing hadoop as a pseudo-cluster or with eclpise
+	http://ragrawal.wordpress.com/2012/04/28/installing-hadoop-on-mac-osx-lion/
+	http://importantfish.com/how-to-install-hadoop-on-mac-os-x/ (quite the same, though shorter)
+	http://importantfish.com/how-to-run-hadoop-in-standalone-mode-using-eclipse-on-mac-os-x/
 
 
-#### performance issues
+#### setting up mongodb-hadoop
+
+instructions for how to install and use the mongo-hadoop adapter
+	http://docs.mongodb.org/ecosystem/tutorial/getting-started-with-hadoop/
+	https://github.com/mongodb/mongo-hadoop/blob/master/README.md#supported-distributions-of-hadoop
+
+install the mongodb adapter 
+	download from https://github.com/mongodb/mongo-hadoop
+	in build.sbt add line
+		hadoopRelease in ThisBuild := "1.1.x"
+	build
+		 ./sbt package
+	copy files from targets (core, flume, hive, pig ...) into hadoop/libexec/lib
+		mongo-hadoop-core_1.1.2-1.1.0.jar
+		mongo-hadoop_1.1.2-1.1.0.jar
+		possibly also mongo-hadoop-pig_1.1.2-1.1.0.jar and others (hive, flume ...)
+	build 'fat' jar for streaming support
+		./sbt mongo-hadoop-streaming/assembly
+		"This jar file is runnable with hadoop jar, and contains all of the dependencies necessary to run the job."	
+install the latest mongodb java driver
+	get it from https://github.com/mongodb/mongo-java-driver/downloads
+	and copy it also into hadoop/libexec/lib
+for javascript streaming install node.js driver
+	npm install node_mongo_hadoop
+	
+	
+#### streaming command
+
+see https://github.com/mongodb/mongo-hadoop/blob/master/streaming/README.md
+
+	hadoop 
+		jar 			/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar
+		-libjars  		/usr/local/Cellar/hadoop/1.1.2/_mongo-hadoop/streaming/target/mongo-hadoop-streaming-assembly-1.1.0.jar
+		-input 			/tmp/in
+		-output			/tmp/out
+		-inputformat 	com.mongodb.hadoop.mapred.MongoInputFormat 
+		-outputformat 	com.mongodb.hadoop.mapred.MongoOutputFormat 
+		-jobconf 		mongo.input.uri=mongodb://127.0.0.1:4000/visionion.import?readPreference=primary
+		-jobconf 		mongo.output.uri=mongodb://127.0.0.1:4000/visionion.facts
+     	-jobconf 		stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver 
+		-io 			mongodb 
+		-mapper			/Users/tl/visionion/aggregation/hadoop/mapper.js 
+		-reducer		/Users/tl/visionion/aggregation/hadoop/reducer.js 
+	//	-jobconf		mongo.input.query={_id:{\\$gt:{\\$date:883440000000}}}     original example
+		-jobconf		mongo.input.query={_id:{\\$date:1365030000000}}
+		
+the date has to be given as the number of milliseconds since the Unix epoch (http://docs.mongodb.org/manual/reference/bson-types/#timestamps). maybe useful: http://www.epochconverter.com/
+
+
+#### Notes on using the mongo shell
+
+	# housekeeping tasks in mongo shell
+	show dbs
+	use dbName
+	db.dropDatabase()
+	show collections
+	db.collectionName.drop()							// deletes the collection		
+	db.collectionName.remove()							// removes the content of the collection							
+	db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
+	db.collectionName.dropIndex("indexName")
+	db.collectionName.getIndexSpecs()
+	db.collectionName.findOne()
+	db.collectionName.find().pretty()
+	db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
+
+
+#### modifying mongo defaults for macOS
+
+(if mongodb was installed through homebrew's 'brew' command - see above)
+	http://stackoverflow.com/questions/10760223/sane-defaults-for-mongodb-on-osx (first answer)
+	It is probably worth raising the hard and soft limits for NumberOfFiles, as MongoDB uses this limit to determine the maximum number of connections that it will accept. On some versions, OS X defaults this number to 256, which means you can have a maximum of around 205 connections, which may be too low even for a development environment. 
+	therefor adding
+	  <key>HardResourceLimits</key>
+	  <dict>
+		<key>NumberOfFiles</key>
+		<integer>1024</integer>
+	  </dict>
+	  <key>SoftResourceLimits</key>
+	  <dict>
+		<key>NumberOfFiles</key>
+		<integer>1024</integer>
+	  </dict>
+	to 
+		/usr/local/Cellar/mongodb/2.2.2-x86_64/homebrew.mxcl.mongodb.plist
+
+(if mongodb was not installed through brew)
+	ulimit -S -n 2048		// adjust file limits for this shell session
+	ulimit -a 				// to check currently valid values 
+	momgod --dbpath xyz		// then start mongo deamon
+	further reading: 		http://superuser.com/questions/433746/is-there-a-fix-for-the-too-many-open-files-in-system-error-on-os-x-10-7-1 (first answer)
+							http://krypted.com/mac-os-x/maximum-files-in-mac-os-x/
+							
+
+
+### performance issues
 	
 better late than never? after a few months of working on the damn aggregation script and a few weeks of feeling good because it works I finally realized that it is DAAAAAAMMMMMNNNNN SLOOOOOOOOOOOOOOOOOOOOWWWWWWWW
 
@@ -772,7 +879,9 @@ better late than never? after a few months of working on the damn aggregation sc
 			63 min
 
 
-working notes 05/11/13:    
+### working notes 
+
+#### working notes 05/11/13:    
 
 mapReduce of the basic timespan of 1 hour takes about 1 hour to compute (on my macbook pro, 2.6 ghz core 2 duo). "realtime"… leaving out countries and AS it still takes more than 10 minutes.
 this is problematic for new data alone: i don't know if the Tor project can, wants to or even should dedicate that much computing power to the visualization task. it is even more problematic for the 5 years worth of raw data that we have amassed so far. with my macbook it would take another 5 years to churn through that. how frustrating! after months of work on the damn script…
@@ -802,18 +911,19 @@ so, that's a plan. hoorray!
 	http://docs.mongodb.org/manual/core/aggregation-pipeline-limits/
 	http://docs.mongodb.org/manual/tutorial/aggregation-zip-code-data-set/
 	
-update, half a day later: MongoDB Aggregation Framework won't cut it. no javascript, verbose syntax, and some rather unfortunate restrictions  make it close to impossible to re-implement the mapReduce script. so let's go with Hadoop.
+#### update, half a day later
+MongoDB Aggregation Framework won't cut it. no javascript, verbose syntax, and some rather unfortunate restrictions  make it close to impossible to re-implement the mapReduce script. so let's go with Hadoop.
 	
 	http://stackoverflow.com/questions/9287585/hadoop-map-reduce-vs-built-in-map-reduce
 	http://steveeichert.com/2010/03/31/data-analysis-using-mongodb-map-reduce.html/
 	https://github.com/mongodb/mongo-hadoop
 
-working notes 07/11/13:	
+####  working notes 07/11/13:	
 hadoop is not that hard to set up after all (at last). 
 problem is: java sucks.
 other problem is: no debian package for hadoop.    
-looked into alternatives briefly: mondrian (olap solution) is available for debian, as is virtuoso which claims to support map reduce and be very modern and fast. both not really sure bets and also not effortless to check out either.   
-along come articels about json support in PostgreSQL 9.4 being faster than in mongodb, and python in postgresql being very well supported, even suitable to implement map reduce jobs. the latter, together with the support of materialized views in the same PostgreSQL 9.4 should make it possible to put away mongodb for good. and python (which is much more fun than java) is also supported by hadoops "streaming" extension.
+looked into alternatives briefly: mondrian (olap solution) is available for debian (but not in debian stable), as is virtuoso which claims to support map reduce (but only in a newer version, not the one in debian stable) and be very modern and fast (dito only in the newest version, not the one in debian stable). both not really sure bets and also not effortless to test either.   
+along come articels about json support in PostgreSQL 9.4 being faster than in mongodb, and python in postgresql being very well supported, even suitable to implement map reduce jobs. the latter, together with the support of materialized views in the same PostgreSQL 9.4 should make it possible to put away mongodb for good (problem: debian stable contains only 9.1). and python (which is much more fun than java) is also supported by hadoops "streaming" extension.
 so the plan is: 
 - get a simple java based map reduce job running in hadoop (like: number of relays). 
 - then implement the whole hadoop mapreduce job in python. 
@@ -826,57 +936,43 @@ so the plan is:
 
 well, turning PostgreSQL into a mapreduce engine might prove a little harder than just porting the script to python. but as long as we get by with a single machine to process new data this should be doable. remember: the python-based-mapreduce-engine-in-postgresql is only intended for (hourly) data updates, not for crunching the 5 years backlog.
 
-working notes 11/11/13:	
-the preferred version of hadoop is 1.1.2 because it is (not the most but) rather current, supported by the mongo-hadoop connector, supported by oreillys "hadoop definitive guide" (which itself is better than "hadoop in action" and "hadoop beginners guide") and the installation instructions that saved my live 
+#### working notes 11/11/13:	
+the preferred version of hadoop is 1.1.2 because it is (not the most but) rather current, supported by the mongo-hadoop connector, supported by oreillys "hadoop definitive guide" (which itself is better than "hadoop in action" and "hadoop beginners guide") and the following installation instructions that saved my live 
+	http://ragrawal.wordpress.com/2012/04/28/installing-hadoop-on-mac-osx-lion/
+	http://importantfish.com/how-to-install-hadoop-on-mac-os-x/ (quite the same, though shorter)
 	http://importantfish.com/how-to-run-hadoop-in-standalone-mode-using-eclipse-on-mac-os-x/
+	note: 	installation for standalone mode is much easier. 
+			the ssh stuff is not needed and neither is editing the config files
 there exists a hadoop eclipse plugin but it only runs with older versions of eclipse and since it only helps in settin up new hadoop jobs it's not worth the trouble for me (as i only need one map reduce) (forever?).    
 Btw there's also a map reduce tutorial on the hadoop 1.1.2 documentation site
 	http://hadoop.apache.org/docs/r1.1.2/mapred_tutorial.html#Source+Code
 
+#### working notes 12/11/13:	
+making progress with understanding hadoop. the def.guide is useful (although mostly for admin tasks, not for developing m/r jobs). the python idea though ... python is definitely slower than java so implementing the hadoop map reduce job in python probably was not such a good idea. will drop that. it would be more interesting to add hbase to the mix which is a column store that adds interactive queries to hadoop. but since both hadoop and hbase are not in debian stable, we seem to be stuck with postgresql, mongodb and an occassional import of data aggregated in hadoop...
 
+#### working notes 18/11/13
+it's raining and progress is slow. 
+will next install streaming support for javascript with node.js and see how much impact the de-serialization to JSON (which the default mongodb job requires but node.js streaming does not)
+then (if js streaming isn't surprising me with screamingly fast performance) implementation of a native hadoop job in either java or through Pig will be uncircumventable.
 
+quick back-of-an-envelope calculations about the cost of aggregating 5 yours with mongodb on amazons ec2 cloud
+	my macbook pro with 2.6 ghz core 2 duo equals roughly 5 EC2 Compute Units (ECU) 
+	one 	High-CPU Extra Large Instance 7 GB of memory, 
+			20 EC2 Compute Units* (8 virtual cores with 2.5 EC2 Compute Units each), 
+			1690 GB of instance storage, 64-bit platform
+			costs 	0.58	$ per h
+					0.029	$ per ECU/h
+	one		Cluster Compute Eight Extra Large 60.5 GB memory, 
+			88 EC2 Compute Units*, 
+			3370 GB of local instance storage, 64-bit platform, 10 Gigabit Ethernet
+			costs 	2.40	$ per h
+					0.02727	$ per ECU/h
+	so, size of instance doesn't make much difference in cost. 1 ECU costs $ 0.028, which is about € 0.021
+	we need 5 ECUs for 5 years, which is 5 x (5 x 365 x 24) = 219.000 ECUs
+															  219.000 x 0.021 € = 4600 €
+practically that's prohibitively expensive. there's no way around either re-implementing the m/r job or give up the countries and AS (which account to 80% of the computation) - or both.
+it's also important to consider that EC2 computation costs 4x that of EMR (elastic map reduce) - although it's the same computing power. we need EC2 only for mongodb m/r. so the mongodb solution is from the start 4x more expensive than hadoop. but EMR doesn't support JavaScript (node.js streaming). one more reason to go with hadoop (java or pig).
 
+a dedicated server of our own would cost about € 1300 (according to c't magazine 24/2013, 6 core 3.2 Ghz core i7 CPU) and provide about 20 ECU. it would need 1.25 years to crunch 5 years of data. cost for electricity (160 Watt) would have to be added, approx. 200 €. for the cost of the EC2 installation above we would get 3 servers, and a result in 4 months. after that the servers are worth about 2500 €, so the total cost would be about 2000 € (optimistically).
 
-
-#### Notes on using the mongo shell
-
-	# housekeeping tasks in mongo shell
-	show dbs
-	use dbName
-	db.dropDatabase()
-	show collections
-	db.collectionName.drop()							// deletes the collection		
-	db.collectionName.remove()							// removes the content of the collection							
-	db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
-	db.collectionName.dropIndex("indexName")
-	db.collectionName.getIndexSpecs()
-	db.collectionName.findOne()
-	db.collectionName.find().pretty()
-	db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
-
-
-#### modifying mongo defaults
-
-(if mongodb was installed through homebrew's 'brew' command - see above)
-	http://stackoverflow.com/questions/10760223/sane-defaults-for-mongodb-on-osx (first answer)
-	It is probably worth raising the hard and soft limits for NumberOfFiles, as MongoDB uses this limit to determine the maximum number of connections that it will accept. On some versions, OS X defaults this number to 256, which means you can have a maximum of around 205 connections, which may be too low even for a development environment. 
-	therefor adding
-	  <key>HardResourceLimits</key>
-	  <dict>
-		<key>NumberOfFiles</key>
-		<integer>1024</integer>
-	  </dict>
-	  <key>SoftResourceLimits</key>
-	  <dict>
-		<key>NumberOfFiles</key>
-		<integer>1024</integer>
-	  </dict>
-	to 
-		/usr/local/Cellar/mongodb/2.2.2-x86_64/homebrew.mxcl.mongodb.plist
-
-(if mongodb was not installed through brew)
-	ulimit -S -n 2048		// adjust file limits for this shell session
-	ulimit -a 				// to check currently valid values 
-	momgod --dbpath xyz		// then start mongo deamon
-	further reading: 		http://superuser.com/questions/433746/is-there-a-fix-for-the-too-many-open-files-in-system-error-on-os-x-10-7-1 (first answer)
-							http://krypted.com/mac-os-x/maximum-files-in-mac-os-x/
+#### working notes 
