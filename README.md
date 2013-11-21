@@ -791,8 +791,8 @@ see https://github.com/mongodb/mongo-hadoop/blob/master/streaming/README.md
 		-jobconf 		mongo.output.uri=mongodb://127.0.0.1:4000/visionion.facts
      	-jobconf 		stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver 
 		-io 			mongodb 
-		-mapper			/Users/tl/visionion/aggregation/hadoop/mapper.js 
-		-reducer		/Users/tl/visionion/aggregation/hadoop/reducer.js 
+		-mapper			~/visionion/aggregation/hadoop/mapper.js 
+		-reducer		~/visionion/aggregation/hadoop/reducer.js 
 	//	-jobconf		mongo.input.query={_id:{\\$gt:{\\$date:883440000000}}}     original example
 		-jobconf		mongo.input.query={_id:{\\$date:1365030000000}}
 		
@@ -958,13 +958,13 @@ then (if js streaming isn't surprising me with screamingly fast performance) imp
 quick back-of-an-envelope calculations about the cost of aggregating 5 yours with mongodb on amazons ec2 cloud
 	my macbook pro with 2.6 ghz core 2 duo equals roughly 5 EC2 Compute Units (ECU) 
 	one 	High-CPU Extra Large Instance 7 GB of memory, 
-			20 EC2 Compute Units* (8 virtual cores with 2.5 EC2 Compute Units each), 
-			1690 GB of instance storage, 64-bit platform
+				20 EC2 Compute Units* (8 virtual cores with 2.5 EC2 Compute Units each), 
+				1690 GB of instance storage, 64-bit platform
 			costs 	0.58	$ per h
 					0.029	$ per ECU/h
 	one		Cluster Compute Eight Extra Large 60.5 GB memory, 
-			88 EC2 Compute Units*, 
-			3370 GB of local instance storage, 64-bit platform, 10 Gigabit Ethernet
+				88 EC2 Compute Units*, 
+				3370 GB of local instance storage, 64-bit platform, 10 Gigabit Ethernet
 			costs 	2.40	$ per h
 					0.02727	$ per ECU/h
 	so, size of instance doesn't make much difference in cost. 1 ECU costs $ 0.028, which is about € 0.021

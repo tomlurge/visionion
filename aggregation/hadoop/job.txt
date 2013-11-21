@@ -1,0 +1,16 @@
+﻿hadoop 
+		jar 			/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar
+		-libjars  		/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar
+		-input 			/tmp/in
+		-output			/tmp/out
+		-inputformat 	com.mongodb.hadoop.mapred.MongoInputFormat 
+		-outputformat 	com.mongodb.hadoop.mapred.MongoOutputFormat 
+		-jobconf 		mongo.input.uri=mongodb://127.0.0.1:27017/visionion.import?readPreference=primary
+		-jobconf 		mongo.output.uri=mongodb://127.0.0.1:27017/visionion.hadoopfacts
+     	-jobconf 		stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver 
+		-io 			mongodb 
+		-mapper			/Users/tl/visionion/aggregation/hadoop/mapper.js 
+		-reducer		/Users/tl/visionion/aggregation/hadoop/reducer.js 
+		-jobconf		mongo.input.query={_id:{\\$date:1365030000000}}
+		
+hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar -libjars /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar -input /tmp/in -output /tmp/out -inputformat com.mongodb.hadoop.mapred.MongoInputFormat -outputformat com.mongodb.hadoop.mapred.MongoOutputFormat -jobconf mongo.input.uri=mongodb://127.0.0.1:27017/visionion.import?readPreference=primary -jobconf mongo.output.uri=mongodb://127.0.0.1:27017/visionion.hadoopfacts -jobconf stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver -io  mongodb -mapper /Users/tl/visionion/aggregation/hadoop/mapper.js -reducer /Users/tl/visionion/aggregation/hadoop/reducer.js -jobconf  mongo.input.query={_id:{\\$date:1365030000000}}
