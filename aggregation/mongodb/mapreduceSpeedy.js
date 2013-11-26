@@ -12,119 +12,201 @@ var mapValues = function() {
     var b = ( this.type == "b" ) ;																//	bridges
     var r = ( this.type == "r" ) ;																//	relays
     var s = ( this.type == "b" || this.type == "r" ) ;											//	servers
+    
+    var osv = [ 
+    	{ 	name : "linux" , 
+    		test : ( this.osv == "linux" )
+    	} ,
+    	{ 	name : "darwin" , 
+    		test : ( this.osv == "darwin" )
+    	} ,
+    	{ 	name : "freebsd" , 
+    		test : ( this.osv == "freebsd" )
+    	} ,
+    	{ 	name : "windows" , 
+    		test : ( this.osv == "windows" )
+    	} ,
+    	{ 	name : "other" , 
+    		test : ( this.osv == "other" )
+    	}
+    ] ;
+	var osvL = osv.length() ;
 	
-	var osLinux = ( s && this.osv == "linux" ) ;
-	var osDarwin = ( s && this.osv == "darwin" ) ;
-	var osFreebsd = ( s && this.osv == "freebsd" ) ;
-	var osWindows = ( s && this.osv == "windows" ) ;
-	var osOther = ( s && this.osv == "other" ) ;
-	
-	var v010 = ( s && this.tsv == "010" ) ;
-	var v011 = ( s && this.tsv == "011" ) ;
-	var v012 = ( s && this.tsv == "012" ) ;
-	var v020 = ( s && this.tsv == "020" ) ;
-	var v021 = ( s && this.tsv == "021" ) ;
-	var v022 = ( s && this.tsv == "022" ) ;
-	var v023 = ( s && this.tsv == "023" ) ;
-	var v024 = ( s && this.tsv == "024" ) ;
-	
-	var brpEmail = ( b && this.brp == "email" ) ;
-	var brpHttps = ( b && this.brp == "https" ) ;
-	var brpOther = ( b && this.brp == "other" ) ;
-	var breTrue  = ( b && this.bre ) ;
-	
-	var brtObfs2 = ( b && this.brt.indexOf('obfs2') ) ;
-	var brtObfs3 = ( b && this.brt.indexOf('obfs3') ) ;
-	var brtObfs23 = ( b && this.brt.indexOf('obfs2') && this.brt.indexOf('obfs3') ) ;
-	
-	var guard = ( r && this.role.indexOf("Guard") > -1 ) ;
-	var middle = ( r && this.role.indexOf("Middle") > -1 ) ;
-	var exit = ( r && this.role.indexOf("Exit") > -1 ) ;
-	var dir = ( r && this.role.indexOf("Dir") > -1 ) ;
-	
-	var fast = ( r && this.flag.indexOf("Fast") > -1 ) ;
-	var stable = ( r && this.flag.indexOf("Stable") > -1 ) ;
-	var authority = ( r && this.flag.indexOf("Authority") > -1 ) ;
-	
-	var positive = {																			//	template positive
-		count : 		1 ,
-		bwa : 			this.bwa ,
-		bwc : 			this.bwc ,
-		osv : {
-			linux :  	osLinux ? 1 : 0 ,
-			darwin :  	osDarwin ? 1 : 0 ,
-			freebsd :	osFreebsd ? 1 : 0 ,
-			windows :	osWindows ? 1 : 0 ,
-			other :  	osOther ? 1 : 0
+	var tsv = [
+		{	name : "010" ,
+			test : ( this.tsv == "010" ) ,
+			labl : "v010"
 		} ,
-		tsv : {
-			v010 :  	v010 ? 1 : 0 ,
-			v011 :  	v011 ? 1 : 0 ,
-			v012 :  	v012 ? 1 : 0 ,
-			v020 :  	v020 ? 1 : 0 ,
-			v021 :  	v021 ? 1 : 0 ,
-			v022 :  	v022 ? 1 : 0 ,
-			v023 :  	v023 ? 1 : 0 ,
-			v024 :  	v024 ? 1 : 0
-		}
-	} ;
-	
-	var posPex = {
-		p4  :			1 ,
-		p6  :			1 ,
-		p8  :			1 ,
-		p46  :			1 ,
-		p48  :			1 ,
-		p68  :			1 ,
-		p468  :			1
-		/*
-
-		 p4  :			this.pex.indexOf(443) > -1 ? 1 : 0 ,
-		 p6  :			this.pex.indexOf(6667) > -1 ? 1 : 0 ,
-		 p8  :			this.pex.indexOf(80) > -1 ? 1 : 0 ,
-		 p46  :			this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? 1 : 0 ,
-		 p48  :			this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ? 1 : 0 ,
-		 p68  :			this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ? 1 : 0 ,
-		 p468  :			this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ? 1 : 0
-
-		 */
-	} ;
-	
-	
-	var negative = {																			//	template negative
-		count :			0 ,
-		bwa :			0 ,
-		bwc :			0 ,
-		osv : {
-			linux :		0 ,
-			darwin :	0 ,
-			freebsd :	0 ,
-			windows :	0 ,
-			other :		0
+		{	name : "011" ,
+			test : ( this.tsv == "011" ) ,
+			labl : "v011"
 		} ,
-		tsv : {
-			v010 :		0 ,
-			v011 :		0 ,
-			v012 :		0 ,
-			v020 :		0 ,
-			v021 :		0 ,
-			v022 :		0 ,
-			v023 :		0 ,
-			v024 :		0
+		{	name : "012" ,
+			test : ( this.tsv == "012" ) ,
+			labl : "v012"
+		} ,
+		{	name : "020" ,
+			test : ( this.tsv == "020" ) ,
+			labl : "v020"
+		} ,
+		{	name : "021" ,
+			test : ( this.tsv == "021" ) ,
+			labl : "v021"
+		} ,
+		{	name : "022" ,
+			test : ( this.tsv == "022" ) ,
+			labl : "v022"
+		} ,
+		{	name : "023" ,
+			test : ( this.tsv == "023" ) ,
+			labl : "v023"
+		} ,
+		{	name : "024" ,
+			test : ( this.tsv == "024" ) ,
+			labl : "v024"
+		} ,
+		{	name : "025" ,
+			test : ( this.tsv == "025" ) ,
+			labl : "v025"
 		}
-	} ;
+	] ;
+	var tsvL = tsv.length() ;
 	
-	var negPex = {
-		p4  :			0 ,
-		p6  :			0 ,
-		p8  :			0 ,
-		p46  :			0 ,
-		p48  :			0 ,
-		p68  :			0 ,
-		p468  :			0
-	} ;
+	var sBridge = [
+		{	name : "email" ,
+			test : ( this.brp == "email" ) ,
+			labl : "brpEmail"
+		} ,
+		{	name : "https" ,
+			test : ( this.brp == "https" ) ,
+			labl : "brpHttps"
+		} ,
+		{	name : "other" ,
+			test : ( this.brp == "other" ) ,
+			labl : "brpOther"
+		} ,
+		{	name : "obfs2" ,
+			test : ( this.brt.indexOf('obfs2') ) ,
+			labl : "brtObfs2"
+		} ,
+		{	name : "obfs3" ,
+			test : ( this.brt.indexOf('obfs3') ) ,
+			labl : "brtObfs3"
+		} ,
+		{	name : "obfs23" ,
+			test : ( this.brt.indexOf('obfs2') && this.brt.indexOf('obfs3') ) ,
+			labl : "brtObfs23"
+		} ,
+		{	name : "bre" ,
+			test : ( this.bre ) ,
+			labl : "breTrue"
+		}
+	] ;
+	var bridgeL = sBridge.length() ;
 	
 	
+	var sRole = [	
+		{ 	name : "all" , 
+			test : () ,
+			labl : "roleAll" ,
+			prob : ( this.pbr )
+		} ,
+		{ 	name : "guard" , 
+			test : ( this.role.indexOf("Guard") > -1 ) ,
+			labl : "roleGuard" ,
+			prob : ( this.pbg )
+		} ,
+		{	name : "middle" , 
+			test : ( this.role.indexOf("Middle") > -1 ) ,
+			labl : "roleMiddle" ,
+			prob : ( this.pbm )
+		} ,
+		{ 	name : "exit" , 
+			test : ( this.role.indexOf("Exit") > -1 ) ,
+			labl : "roleExit" ,
+			prob : ( this.pbe )
+		} ,
+		{ 	name : "dir" , 
+			test : ( this.role.indexOf("Dir") > -1 ) ,
+			labl : "roleDir"
+		}
+	] ;
+	var roleL = sRole.length() ;
+	
+	
+	var sFlag = [	
+		{ 	name : "notFastStable" , 
+			test : ( !this.flag.indexOf("Fast") > -1 && !this.flag.indexOf("Stable") > -1 ) ,
+			labl : "notFastStable"
+		} ,
+		{ 	name : "fast" , 
+			test : ( this.flag.indexOf("Fast") > -1  && !this.flag.indexOf("Stable") > -1 ) ,
+			labl : "flagFast"
+		} ,
+		{ 	name : "stable" , 
+			test : ( !this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 ) ,
+			labl : "flagStable"
+		} ,
+		{ 	name : "fastStable" , 
+			test : ( this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 ) ,
+			labl : "flagFastStable"
+		}
+	] ;
+	var flagL = sFlag.length() ;
+	
+	
+	var sExit = [
+		{ 	name : "p4" , 
+			test : ( this.pex.indexOf(443) > -1 ) ,
+			labl : "p4"
+		} ,
+		{ 	name : "p6" , 
+			test : ( this.pex.indexOf(6667) > -1 ) ,
+			labl : "p6"
+		} ,
+		{ 	name : "p8" , 
+			test : ( this.pex.indexOf(80) > -1 ) ,
+			labl : "p8"
+		} ,
+		{ 	name : "p46" , 
+			test : ( this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ) ,
+			labl : "p46"
+		} ,
+		{ 	name : "p48" , 
+			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 ) ,
+			labl : "p48"
+		} ,
+		{ 	name : "p68" , 
+			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 ) ,
+			labl : "p68"
+		} ,
+		{ 	name : "p468" , 
+			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 ) ,
+			labl : "p468"
+		}
+	] ;
+	var pexL = sExit.length() ;
+	
+	
+	var sDir = [	
+		{ 	name : "authority" , 
+			test : ( this.flag.indexOf("Authority") > -1 ) ,
+			labl : "flagAuthority"
+		}
+	] ;
+	
+	
+																								//	templates
+	Server.prototype = {
+		count :  	1 ,
+		bwa :  		this.bwa ,
+		bwc :		this.bwc ,
+		osv :		{} ,
+		tsv :		{}
+	} ;																				
+
+							
+																								
 																								// START MAPPING
 	
 	var value = {																				// the mothership
@@ -135,14 +217,44 @@ var mapValues = function() {
 		countries : 	[] ,
 		autosys :		[]
 	} ;
-	
-	
-	if( c ) {																					//	CLIENTS
+		
+
+	if( this.type == "r" ) {																	//	RELAYS
+		value.servers.total = new Server() ;
+		// value.servers.relays.roleAll.total = new Server() ;
+		
+		var i = 0 
+			j = 0 ;
+		while ( i < rolesLength ) {										//	vulgo for (for each role in roles)
+			if ( roles[i].test ) {										//	HPFJS s.63
+				value.servers.relays.(roles[i].name) = {				//	for each role add a new role object to servers.relays
+				
+					while ( j < flagsLength ) {							//	for each flag add a new flag object to servers.relays.roles[i]
+						if ( flags[j].test ) {
+							var thisFlag = flags[j].name ;
+																		//	populate each flag object with a server object and get the actual server values
+						}
+					}
+				
+				}
+			}
+		}
+		
+	}
+	else if( this.type == "b" ) {																//	BRIDGES
+		value.servers.total = new Server() ;													//	don't forget to pay credit to servers
+		// value.servers.bridges.total = new Server();
+		
+		
+		
+		
+	}
+	else if( this.type == "c" ) {																//	CLIENTS
 		value.clients = {
 			total : 	this.cr + this.cb ,
 			atBridges :	this.cb ,
 			atRelays : 	this.cr ,
-			cip4 : 		this.cip && this.cip.v4 ? this.cip.v4 : 0 ,									// line 55 to 60 this.cip + this.cpt tests to account fpr missing values in import data
+			cip4 : 		this.cip && this.cip.v4 ? this.cip.v4 : 0 ,								// line 55 to 60 this.cip + this.cpt tests to account for missing values in import data
 			cip6 : 		this.cip && this.cip.v6 ? this.cip.v6 : 0 ,
 			cptObfs2 : 	this.cpt && this.cpt.obfs2 ? this.cpt.obfs2 : 0 ,
 			cptObfs3 : 	this.cpt && this.cpt.obfs3 ? this.cpt.obfs3 : 0 ,
@@ -150,293 +262,9 @@ var mapValues = function() {
 			cptUnknown :this.cpt && this.cpt.unknown ? this.cpt.unknown : 0
 		}
 	}
-	else {
-		value.clients = {
-			total : 	0 ,
-			atBridges :	0 ,
-			atRelays : 	0 ,
-			cip4 : 		0 ,	
-			cip6 : 		0 ,
-			cptObfs2 : 	0 ,
-			cptObfs3 : 	0 ,
-			cptOR : 	0 ,
-			cptUnknown :0 
-		}
-	}
 	
-	if( s ) {																					//	SERVERS
-		value.servers.total = positive
-	}
-	else {
-		value.servers.total = negative
-	}
 	
-	if( b ) {																					//	BRIDGES
-		value.servers.bridges.total = positive
-	}
-	else {
-		value.servers.bridges.total = negative
-	}
-	
-	if( b && brpEmail ) {																					
-		value.servers.bridges.brpEmail = positive
-	}
-	else {
-		value.servers.bridges.brpEmail = negative
-	}
 		
-	if( b && brpHttps ) {																					
-		value.servers.bridges.brpHttps = positive
-	}
-	else {
-		value.servers.bridges.brpHttps = negative
-	}
-		
-	if( b && brpOther ) {																					
-		value.servers.bridges.brpOther = positive
-	}
-	else {
-		value.servers.bridges.brpOther = negative
-	}
-	
-	if( b && breTrue ) {																					
-		value.servers.bridges.breTrue = positive
-	}
-	else {
-		value.servers.bridges.breTrue = negative
-	}
-		
-	if( b && brtObfs2 ) {																					
-		value.servers.bridges.brtObfs2 = positive
-	}
-	else {
-		value.servers.bridges.brtObfs2 = negative
-	}
-		
-	if( b && brtObfs3 ) {																					
-		value.servers.bridges.brtObfs3 = positive
-	}
-	else {
-		value.servers.bridges.brtObfs3 = negative
-	}
-		
-	if( b && brtObfs23 ) {																					
-		value.servers.bridges.brtObfs23 = positive
-	}
-	else {
-		value.servers.bridges.brtObfs23 = negative
-	}
-		
-	
-	if( r ) {																					//	RELAYS
-		value.servers.relays.roleAll.total = positive ;
-		value.servers.relays.roleAll.total.pbr = this.pbr ;
-	}
-	else {
-		value.servers.relays.roleAll.total = negative ;
-		value.servers.relays.roleAll.total.pbr = 0 ;
-	}
-	
-	if( r && !fast && !stable ) {
-		value.servers.relays.roleAll.flagNone = positive ;
-		value.servers.relays.roleAll.flagNone.pbr = this.pbr ;
-	}
-	else {
-		value.servers.relays.roleAll.flagNone = negative ;
-		value.servers.relays.roleAll.flagNone.pbr = 0 ;
-	}
-	
-	if( r && !fast && stable ) {
-		value.servers.relays.roleAll.flagStable = positive ;
-		value.servers.relays.roleAll.flagStable.pbr = this.pbr ;
-	}
-	else {
-		value.servers.relays.roleAll.flagStable = negative ;
-		value.servers.relays.roleAll.flagStable.pbr = 0 ;
-	}
-	
-	if( r && fast && !stable ) {
-		value.servers.relays.roleAll.flagFast = positive ;
-		value.servers.relays.roleAll.flagFast.pbr = this.pbr ;
-	}
-	else {
-		value.servers.relays.roleAll.flagFast = negative ;
-		value.servers.relays.roleAll.flagFast.pbr = 0 ;
-	}
-	
-	if( r && fast && stable ) {
-		value.servers.relays.roleAll.flagFastStable = positive ;
-		value.servers.relays.roleAll.flagFastStable.pbr = this.pbr ;
-	}
-	else {
-		value.servers.relays.roleAll.flagFastStable = negative ;
-		value.servers.relays.roleAll.flagFastStable.pbr = 0 ;
-	}
-	
-	
-	if( r && guard ) {																			//	guard
-		value.servers.relays.roleGuard.total = positive ;
-		value.servers.relays.roleGuard.total.pbg = this.pbg ;
-	}
-	else {
-		value.servers.relays.roleGuard.total = negative ;
-		value.servers.relays.roleGuard.total.pbg = 0 ;
-	}
-	
-	if( r && guard && !fast && !stable ) {
-		value.servers.relays.roleGuard.flagNone = positive ;
-		value.servers.relays.roleGuard.flagNone.pbg = this.pbg ;
-	}
-	else {
-		value.servers.relays.roleGuard.flagNone = negative ;
-		value.servers.relays.roleGuard.flagNone.pbg = 0 ;
-	}
-	
-	if( r && guard && !fast && stable ) {
-		value.servers.relays.roleGuard.flagStable = positive ;
-		value.servers.relays.roleGuard.flagStable.pbg = this.pbg ;
-	}
-	else {
-		value.servers.relays.roleGuard.flagStable = negative ;
-		value.servers.relays.roleGuard.flagStable.pbg = 0 ;
-	}
-	
-	if( r && guard && fast && !stable ) {
-		value.servers.relays.roleGuard.flagFast = positive ;
-		value.servers.relays.roleGuard.flagFast.pbg = this.pbg ;
-	}
-	else {
-		value.servers.relays.roleGuard.flagFast = negative ;
-		value.servers.relays.roleGuard.flagFast.pbg = 0 ;
-	}
-	
-	if( r && guard && fast && stable ) {
-		value.servers.relays.roleGuard.flagFastStable = positive ;
-		value.servers.relays.roleGuard.flagFastStable.pbg = this.pbg ;
-	}
-	else {
-		value.servers.relays.roleGuard.flagFastStable = negative ;
-		value.servers.relays.roleGuard.flagFastStable.pbg = 0 ;
-	}
-	
-	
-	if( r && middle ) {																		//	midddle
-		value.servers.relays.roleMiddle.total = positive ;
-		value.servers.relays.roleMiddle.total.pbm = this.pbm ;
-	}
-	else {
-		value.servers.relays.roleMiddle.total = negative ;
-		value.servers.relays.roleMiddle.total.pbm = 0 ;
-	}
-	
-	if( r && middle && !fast && !stable ) {	
-		value.servers.relays.roleMiddle.flagNone = positive ;
-		value.servers.relays.roleMiddle.flagNone.pbm = this.pbm ;
-	}
-	else {
-		value.servers.relays.roleMiddle.flagNone = negative ;
-		value.servers.relays.roleMiddle.flagNone.pbm = 0 ;
-	}
-	
-	if( r && middle && !fast && stable ) {
-		value.servers.relays.roleMiddle.flagStable = positive ;
-		value.servers.relays.roleMiddle.flagStable.pbm = this.pbm ;
-	}
-	else {
-		value.servers.relays.roleMiddle.flagStable = negative ;
-		value.servers.relays.roleMiddle.flagStable.pbm = 0 ;
-	}
-	
-	if( r && middle && fast && !stable ) {
-		value.servers.relays.roleMiddle.flagFast = positive ;
-		value.servers.relays.roleMiddle.flagFast.pbm = this.pbm ;
-	}
-	else {
-		value.servers.relays.roleMiddle.flagFast = negative ;
-		value.servers.relays.roleMiddle.flagFast.pbm = 0 ;
-	}
-	
-	if( r && middle && fast && stable ) {
-		value.servers.relays.roleMiddle.flagFastStable = positive ;
-		value.servers.relays.roleMiddle.flagFastStable.pbm = this.pbm ;
-	}
-	else {
-		value.servers.relays.roleMiddle.flagFastStable = negative ;
-		value.servers.relays.roleMiddle.flagFastStable.pbm = 0 ;
-	}
-	
-	
-	if( r && exit ) {																			//	exit
-		value.servers.relays.roleExit.total = positive ;
-		value.servers.relays.roleExit.total.pbe = this.pbe ;
-		value.servers.relays.roleExit.total.pex = posPex ;
-	}
-	else {
-		value.servers.relays.roleExit.total = negative ;
-		value.servers.relays.roleExit.total.pbe = 0 ;
-		value.servers.relays.roleExit.total.pex = negPex ;
-	}
-	
-	if( r && exit && !fast && !stable ) {
-		value.servers.relays.roleExit.flagNone = positive ;
-		value.servers.relays.roleExit.flagNone.pbe = this.pbe ;
-		value.servers.relays.roleExit.flagNone.pex = posPex ;
-	}
-	else {
-		value.servers.relays.roleExit.flagNone = negative ;
-		value.servers.relays.roleExit.flagNone.pbe = 0 ;
-		value.servers.relays.roleExit.flagNone.pex = negPex ;
-	}
-	
-	if( r && exit && !fast && stable ) {
-		value.servers.relays.roleExit.flagStable = positive ;
-		value.servers.relays.roleExit.flagStable.pbe = this.pbe ;
-		value.servers.relays.roleExit.flagStable.pex = posPex ;
-	}
-	else {
-		value.servers.relays.roleExit.flagStable = negative ;
-		value.servers.relays.roleExit.flagStable.pbe = 0 ;
-		value.servers.relays.roleExit.flagStable.pex = negPex ;
-	}
-	
-	if( r && exit && fast && !stable ) {
-		value.servers.relays.roleExit.flagFast = positive ;
-		value.servers.relays.roleExit.flagFast.pbe = this.pbe ;
-		value.servers.relays.roleExit.flagFast.pex = posPex ;
-	}
-	else {
-		value.servers.relays.roleExit.flagFast = negative ;
-		value.servers.relays.roleExit.flagFast.pbe = 0 ;
-		value.servers.relays.roleExit.flagFast.pex = negPex ;
-	}
-	
-	if( r && exit && fast && stable ) {
-		value.servers.relays.roleExit.flagFastStable = positive ;
-		value.servers.relays.roleExit.flagFastStable.pbe = this.pbe ;
-		value.servers.relays.roleExit.flagFastStable.pex = posPex ;
-	}
-	else {
-		value.servers.relays.roleExit.flagFastStable = negative ;
-		value.servers.relays.roleExit.flagFastStable.pbe = 0 ;
-		value.servers.relays.roleExit.flagFastStable.pex = negPex ;
-		
-	}
-	
-	
-	if( r && dir ) {																			//	dir
-		value.servers.relays.roleDir.total = positive ;
-	}
-	else {
-		value.servers.relays.roleDir.total = negative ;
-	}
-	
-	if( r && dir && authority ) {
-		value.servers.relays.roleDir.authorityTrue = positive ;
-	}
-	else {
-		value.servers.relays.roleDir.authorityTrue = negative ;
-	}
-	
 	
 	
 	if( r && this.as ) {																		//  AUTOSYS
@@ -474,46 +302,6 @@ var mapValues = function() {
 						pbg :           this.cc && this.pbg ? this.pbg : 0 ,
 						pbm :           this.cc && this.pbm ? this.pbm : 0 ,
 						pbe :           this.cc && this.pbe ? this.pbe : 0
-					}
-				]
-			}
-		)
-	}
-	else {
-		value.autosys.push(
-			{                                      		                                       //  AUTOSYS
-				as :                    "" ,
-				//  name :              "" ,
-				//  home :            	"" ,
-				relay :           		0 ,
-				bwa :                 	0 ,
-				bwc :               	0 ,
-				fast :                  0 ,
-				stable :                0 ,
-				guard :                 0 ,
-				middle :                0 ,
-				exit :                  0 ,
-				dir :                   0 ,
-				pbr:                    0,
-				pbg :                   0 ,
-				pbm :                   0 ,
-				pbe :                   0 ,
-				countries : [
-					{
-						cc :           	"" ,
-						relay :			0 ,
-						bwa :			0 ,
-						bwc :			0 ,
-						fast :          0 ,
-						stable :        0 ,
-						guard :        	0 ,
-						middle :        0 ,
-						exit :          0 ,
-						dir :           0 ,
-						pbr:            0 ,
-						pbg :           0 ,
-						pbm :           0 ,
-						pbe :           0
 					}
 				]
 			}

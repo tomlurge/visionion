@@ -61,7 +61,7 @@ var mapValues = function() {
 		} ,		                                                                                //  SERVERS
 		servers : {
 			total : {
-				count : 				s ?  1 : 0 ,
+ 				count : 				s ?  1 : 0 ,
 				bwa :	  				s ?  this.bwa : 0 ,
 				bwc :	 				s ?  this.bwc : 0 ,
 				osv : {	
@@ -81,7 +81,9 @@ var mapValues = function() {
 					v023 :				s && v023 ? 1 : 0 ,
 					v024 :				s && v024 ? 1 : 0
 				}
-			} ,
+			} 
+/*			,
+
 			bridges : {
 				total : {
 					count : 			b ?  1 : 0 ,
@@ -259,7 +261,9 @@ var mapValues = function() {
 						v024 :			b && brtObfs2 && brtObfs3 && v024 ? 1 : 0
 					}
 				}
-			} ,
+			}  
+*/
+/*			 ,
 			relays : {
 				roleAll : {																		//	RELAYS	ALL
 					total : {
@@ -284,7 +288,8 @@ var mapValues = function() {
 							v024 :		r && v024 ? 1 : 0
 						} ,
 						pbr : 			r ? this.pbr : 0
-					} ,
+					} 
+					/*,
 					flagNone : {
 						count : 		r && !fast && !stable ? 1 : 0 ,
 						bwa : 			r && !fast && !stable ? this.bwa : 0 ,
@@ -821,6 +826,7 @@ var mapValues = function() {
 					}
 				}
 			}
+				*/
 		}
 /* 		,
 		countries :	[]    	                                                                  	//  COUNTRIES   more below
@@ -1089,7 +1095,8 @@ var mapValues = function() {
 
 	}
 */
-//	emit( "Fact " + theSpan + " " + theDate , value );
+//	emit( "Fact " + theSpan + " " + theDate , value );	
+//	printjson("one more emit -  " + Date.now());
 	emit( theDate , value );
 };
 
@@ -1320,7 +1327,8 @@ var reduceFact = function ( key, values ) {
 						v024 : 0
 					}
 				}
-			} ,
+			}
+			/* ,
 			relays : {
 				roleAll : {																		//	RELAYS	ALL
 					total : {
@@ -1881,12 +1889,12 @@ var reduceFact = function ( key, values ) {
 						}
 					}
 				}
-			}
-	}
-/*	 ,
+				*/
+		}
+/*	 	 ,
 		countries : []																			//	COUNTRIES
 */
-/*		,
+/*		 ,
 		autosys: []													        				    //	AUTOSYS
 */
 	};
@@ -1906,7 +1914,9 @@ var reduceFact = function ( key, values ) {
 		fact.clients.cptUnknown += v.clients.cptUnknown ;
 
         fact.servers.total.count += v.servers.total.count ;					    			    //	SERVERS
+//	printjson("one more fact.servers.total.count - " + Date.now());
 		fact.servers.total.bwa += v.servers.total.bwa ;
+//	printjson("one more fact.servers.total.bwa -  " + Date.now());
 		fact.servers.total.bwc += v.servers.total.bwc ;
 		fact.servers.total.osv.linux += v.servers.total.osv.linux ;
 		fact.servers.total.osv.darwin += v.servers.total.osv.darwin ;
@@ -2057,7 +2067,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.bridges.brtObfs23.tsv.v022 += v.servers.bridges.brtObfs23.tsv.v022 ;
 		fact.servers.bridges.brtObfs23.tsv.v023 += v.servers.bridges.brtObfs23.tsv.v023 ;
 		fact.servers.bridges.brtObfs23.tsv.v024 += v.servers.bridges.brtObfs23.tsv.v024 ;
-
+/*
         fact.servers.relays.roleAll.total.count += v.servers.relays.roleAll.total.count ;       //	RELAYS ALL
 		fact.servers.relays.roleAll.total.bwa += v.servers.relays.roleAll.total.bwa ;
 		fact.servers.relays.roleAll.total.bwc += v.servers.relays.roleAll.total.bwc ;
@@ -2485,7 +2495,7 @@ var reduceFact = function ( key, values ) {
 		fact.servers.relays.roleDir.authorityTrue.tsv.v022 += v.servers.relays.roleDir.authorityTrue.tsv.v022 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v023 += v.servers.relays.roleDir.authorityTrue.tsv.v023 ;
 		fact.servers.relays.roleDir.authorityTrue.tsv.v024 += v.servers.relays.roleDir.authorityTrue.tsv.v024 ;
-
+*/
 
 /*																        		                //	COUNTRIES
 		v.countries.forEach( function (vCountry) {											    //	<- double loop part 1: countries in values emitted from map
@@ -2617,6 +2627,7 @@ var reduceFact = function ( key, values ) {
 */
 	});
 //	printjson(fact.date);																			TODO	remove after testing
+	printjson("one more doc -  " + Date.now());
 	return fact;
 };
 

@@ -2658,7 +2658,10 @@ var runAggregation = function(date, span, update) {
 																								//  'reduce' would add values to exsiting documents - we don't want that
 				, nonAtomic : true																//	prevents locking of the db during post-processing
 			}
-			, query : { "addd" : { "$gte" : update}  }
+			, query : { 
+				"date": date , 
+				"addd" : { "$gte" : update}  
+			  }
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
 			, scope: { theDate: date, theSpan: span } 		                                    //  globally (in the mapReduce job) available  variables
@@ -2666,5 +2669,5 @@ var runAggregation = function(date, span, update) {
 																								//	but demands that "sort" equals the key of the map operation
 		}
 	);
-}("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
+}("2013-04-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
 																								//	2013-04-03 23 ^= 1365030000000
