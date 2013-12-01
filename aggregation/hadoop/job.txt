@@ -1,4 +1,4 @@
-﻿hadoop 
+hadoop 
 		jar 			/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar
 		-libjars  		/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar
 		-input 			/tmp/in
@@ -14,3 +14,57 @@
 		-jobconf		mongo.input.query={_id:{\\$date:1365030000000}}
 		
 hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar -libjars /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar -input /tmp/in -output /tmp/out -inputformat com.mongodb.hadoop.mapred.MongoInputFormat -outputformat com.mongodb.hadoop.mapred.MongoOutputFormat -jobconf mongo.input.uri=mongodb://127.0.0.1:27017/visionion.import?readPreference=primary -jobconf mongo.output.uri=mongodb://127.0.0.1:27017/visionion.hadoopfacts -jobconf stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver -io  mongodb -mapper /Users/tl/visionion/aggregation/hadoop/mapper.js -reducer /Users/tl/visionion/aggregation/hadoop/reducer.js -jobconf  mongo.input.query={_id:{\\$date:1365030000000}}
+
+
+me@h:/usr/local/Cellar/hadoop/1.1.2$ hadoop jar /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/hadoop-streaming-1.1.2.jar -libjars /usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar -input /tmp/in -output /tmp/out -inputformat com.mongodb.hadoop.mapred.MongoInputFormat -outputformat com.mongodb.hadoop.mapred.MongoOutputFormat -jobconf mongo.input.uri=mongodb://127.0.0.1:27017/visionion.import?readPreference=primary -jobconf mongo.output.uri=mongodb://127.0.0.1:27017/visionion.hadoopfacts -jobconf stream.io.identifier.resolver.class=com.mongodb.hadoop.streaming.io.MongoIdentifierResolver -io  mongodb -mapper /Users/tl/visionion/aggregation/hadoop/mapper.js -reducer /Users/tl/visionion/aggregation/hadoop/reducer.js -jobconf  mongo.input.query={_id:{\\$date:1365030000000}}
+13/11/22 15:49:47 WARN streaming.StreamJob: -jobconf option is deprecated, please use -D instead.
+13/11/22 15:49:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+13/11/22 15:49:47 WARN mapred.JobClient: No job jar file set.  User classes may not be found. See JobConf(Class) or JobConf#setJar(String).
+13/11/22 15:49:48 INFO mapred.MongoInputFormat: Using com.mongodb.hadoop.splitter.StandaloneMongoSplitter@5f90a0d6 to calculate splits. (old mapreduce API)
+13/11/22 15:49:48 INFO splitter.StandaloneMongoSplitter: Running splitvector to check splits against mongodb://127.0.0.1:27017/visionion.import?readPreference=primary
+13/11/22 15:49:51 INFO filecache.TrackerDistributedCacheManager: Creating mongo-hadoop-streaming-assembly-1.1.0.jar in /tmp/hadoop-tl/mapred/local/archive/-2241676408291490685_-2111303317_1891993332/file/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar-work-7071417491876680604 with rwxr-xr-x
+13/11/22 15:49:52 INFO filecache.TrackerDistributedCacheManager: Extracting /tmp/hadoop-tl/mapred/local/archive/-2241676408291490685_-2111303317_1891993332/file/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar-work-7071417491876680604/mongo-hadoop-streaming-assembly-1.1.0.jar to /tmp/hadoop-tl/mapred/local/archive/-2241676408291490685_-2111303317_1891993332/file/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar-work-7071417491876680604
+13/11/22 15:49:52 INFO filecache.TrackerDistributedCacheManager: Cached file:///usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar as /tmp/hadoop-tl/mapred/local/archive/-2241676408291490685_-2111303317_1891993332/file/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar
+13/11/22 15:49:52 INFO filecache.TrackerDistributedCacheManager: Cached file:///usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar as /tmp/hadoop-tl/mapred/local/archive/-2241676408291490685_-2111303317_1891993332/file/usr/local/Cellar/hadoop/1.1.2/libexec/contrib/streaming/mongo-hadoop-streaming-assembly-1.1.0.jar
+13/11/22 15:49:52 WARN mapred.LocalJobRunner: LocalJobRunner does not support symlinking into current working dir.
+13/11/22 15:49:52 INFO streaming.StreamJob: getLocalDirs(): [/tmp/hadoop-tl/mapred/local]
+13/11/22 15:49:52 INFO streaming.StreamJob: Running job: job_local_0001
+13/11/22 15:49:52 INFO streaming.StreamJob: Job running in-process (local Hadoop)
+13/11/22 15:49:52 INFO mapred.Task:  Using ResourceCalculatorPlugin : null
+13/11/22 15:49:52 INFO mapred.MapTask: numReduceTasks: 1
+13/11/22 15:49:52 INFO mapred.MapTask: io.sort.mb = 100
+13/11/22 15:49:52 INFO mapred.MapTask: data buffer = 79691776/99614720
+13/11/22 15:49:52 INFO mapred.MapTask: record buffer = 262144/327680
+13/11/22 15:49:52 INFO streaming.PipeMapRed: PipeMapRed exec [/Users/tl/visionion/aggregation/hadoop/mapper.js]
+/Users/tl/visionion/aggregation/hadoop/mapper.js: line 1: syntax error near unexpected token `('
+/Users/tl/visionion/aggregation/hadoop/mapper.js: line 1: `?function mapValues(doc,callback) {						//	was: 	var mapValues = function() {'
+13/11/22 15:49:52 INFO streaming.PipeMapRed: MRErrorThread done
+13/11/22 15:49:52 INFO io.BSONWritable: No Length Header available.java.io.EOFException
+13/11/22 15:49:52 INFO input.MongoRecordReader: Read 0.0 documents from:
+13/11/22 15:49:52 INFO input.MongoRecordReader: MongoInputSplit{URI=mongodb://127.0.0.1:27017/visionion.import?readPreference=primary, authURI=null, min={ }, max={ }, query={ "_id" : { "" : 1365030000000}}, sort={ }, fields={ }, notimeout=false}
+13/11/22 15:49:52 INFO input.MongoRecordReader: Cursor exhausted.
+13/11/22 15:49:52 INFO streaming.PipeMapRed: PipeMapRed failed!
+java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 2
+	at org.apache.hadoop.streaming.PipeMapRed.waitOutputThreads(PipeMapRed.java:362)
+	at org.apache.hadoop.streaming.PipeMapRed.mapRedFinished(PipeMapRed.java:576)
+	at org.apache.hadoop.streaming.PipeMapper.close(PipeMapper.java:135)
+	at org.apache.hadoop.mapred.MapRunner.run(MapRunner.java:57)
+	at org.apache.hadoop.streaming.PipeMapRunner.run(PipeMapRunner.java:36)
+	at org.apache.hadoop.mapred.MapTask.runOldMapper(MapTask.java:436)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:372)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.run(LocalJobRunner.java:214)
+13/11/22 15:49:52 WARN mapred.LocalJobRunner: job_local_0001
+java.lang.RuntimeException: PipeMapRed.waitOutputThreads(): subprocess failed with code 2
+	at org.apache.hadoop.streaming.PipeMapRed.waitOutputThreads(PipeMapRed.java:362)
+	at org.apache.hadoop.streaming.PipeMapRed.mapRedFinished(PipeMapRed.java:576)
+	at org.apache.hadoop.streaming.PipeMapper.close(PipeMapper.java:135)
+	at org.apache.hadoop.mapred.MapRunner.run(MapRunner.java:57)
+	at org.apache.hadoop.streaming.PipeMapRunner.run(PipeMapRunner.java:36)
+	at org.apache.hadoop.mapred.MapTask.runOldMapper(MapTask.java:436)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:372)
+	at org.apache.hadoop.mapred.LocalJobRunner$Job.run(LocalJobRunner.java:214)
+13/11/22 15:49:53 INFO streaming.StreamJob:  map 0%  reduce 0%
+13/11/22 15:49:53 INFO streaming.StreamJob: Job running in-process (local Hadoop)
+13/11/22 15:49:53 ERROR streaming.StreamJob: Job not successful. Error: NA
+13/11/22 15:49:53 INFO streaming.StreamJob: killJob...
+Streaming Command Failed!

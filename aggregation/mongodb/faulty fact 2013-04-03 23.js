@@ -1,4 +1,15 @@
-﻿{
+﻿/*  because of a missing query for "date" parameter
+    this aggregation ran over the whole import database
+    and added up every document
+    
+    client numbers presumably returned NaN because the result surpassed 
+    the value space that javascript can handle
+    servers.total.count:4600366 means we so far have 4.600.366 documents in the database.
+    servers.osv.other:0 means that no server ever reported an OS of type “other”
+    servers.tsv results suggest that only tor version 022 or newer were used
+*/
+ 
+{
 	"_id" : "2013-04-03 23",
 	"value" : {
 		"date" : "2013-04-03 23",
