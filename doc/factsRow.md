@@ -1,4 +1,52 @@
-﻿**A schematic and annotated example of a document in the facts collection **
+﻿**	sketch of a new design **
+
+	clients						client
+	servers						box
+		total					server
+		bridges					box
+			total				server
+			brps				box
+				email			server
+				https			server
+				other			server
+			brts				box
+				obfs2			server
+				obfs3			server
+				obfs23			server
+			bres				box
+				bre				server
+		relays					box
+			total				server	+ prob
+			roles				box
+				guard			server	+ prob
+				middle			server	+ prob
+				exit			server	+ prob + pex
+				dir				server
+			flags				box
+				notFastStable	server
+				fast			server
+				stable			server
+				fastStable		server
+				authority		server
+			combinations		box						// later...
+	countries
+	autosys
+
+
+TODO
+	* die meisten a ? a : 0 abfragen sind überflüssig, 
+		weil ein nicht-existierendes element "undefined" zurückgibt
+		ausnahme: elemente von nicht existierenden objekten - 
+			TypeError: Cannot read property 'xyz' of undefined
+		deswegen muss nach den äusseren objekten (zb pex) ( = knoten) gefragt werden, 
+			aber nicht nach all ihren werten (blättern)
+	* die wahrscheinlichkeiten könnten noch in config+for_in loops gepackt werden	
+	* ein config array für die grundstruktur (also flags, roles etc) 
+		per foreach abfragen und tatsächlich die ganze konstruktion per script generieren
+	* exit pex 446ff
+	+ 226 ende ? plbl rather?
+
+**	A schematic and annotated example of a document in the facts collection **
 
 		fieldname: datatype				description
         -------------------				-----------

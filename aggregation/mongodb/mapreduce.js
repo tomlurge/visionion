@@ -32,8 +32,8 @@ var mapValues = function() {
 	var brpHttps = ( b && this.brp == "https" ) ;
 	var brpOther = ( b && this.brp == "other" ) ;
 	
-	var brtObfs2 = ( b && this.brt.indexOf('obfs2') ) ;
-	var brtObfs3 = ( b && this.brt.indexOf('obfs3') ) ;
+	var brtObfs2 = ( b && this.brt.indexOf('obfs2') ) ;			//	TODO why not  "> -1" ?
+	var brtObfs3 = ( b && this.brt.indexOf('obfs3') ) ;			//	TODO why not  "> -1" ?
 	
 	var guard = ( r && this.role.indexOf("Guard") > -1 ) ;
 	var middle = ( r && this.role.indexOf("Middle") > -1 ) ;
