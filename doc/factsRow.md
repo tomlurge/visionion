@@ -16,11 +16,11 @@
 			bres				box
 				bre				server
 		relays					box
-			total				server	+ prob
+			total				server	
 			roles				box
-				guard			server	+ prob
-				middle			server	+ prob
-				exit			server	+ prob + pex
+				guard			server	
+				middle			server	
+				exit			server	 + pex
 				dir				server
 			flags				box
 				notFastStable	server
@@ -28,23 +28,25 @@
 				stable			server
 				fastStable		server
 				authority		server
-			combinations		box						// later...
+			probs				box
+				relay			value
+				guard			value
+				middle			value
+				exit			value
+			mixes				box						// later...
+				role*flag*prob	value (80 permutations)			
 	countries
 	autosys
 
 
 TODO
-	* die meisten a ? a : 0 abfragen sind überflüssig, 
-		weil ein nicht-existierendes element "undefined" zurückgibt
-		ausnahme: elemente von nicht existierenden objekten - 
-			TypeError: Cannot read property 'xyz' of undefined
-		deswegen muss nach den äusseren objekten (zb pex) ( = knoten) gefragt werden, 
-			aber nicht nach all ihren werten (blättern)
-	* die wahrscheinlichkeiten könnten noch in config+for_in loops gepackt werden	
 	* ein config array für die grundstruktur (also flags, roles etc) 
 		per foreach abfragen und tatsächlich die ganze konstruktion per script generieren
-	* exit pex 446ff
-	+ 226 ende ? plbl rather?
+	* exit pex 436ff
+	* probs in eigene abteilung
+		servers.relays.probs[guard, middle, exit, total]
+		in config+for_in loops gepackt werden	
+	* country und autosys in reduce mit map abgleichen
 
 **	A schematic and annotated example of a document in the facts collection **
 

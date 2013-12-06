@@ -46,3 +46,5 @@ oldStuff/aggregateServers.js
 .idea/visionion.iml
 
 BBEditPreviewTemp.md
+
+aggregation/mongodb/mapreduceSpeedy2.js
