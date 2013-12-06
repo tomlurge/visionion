@@ -2659,8 +2659,8 @@ var runAggregation = function(date, span, update) {
 				, nonAtomic : true																//	prevents locking of the db during post-processing
 			}
 			, query : { 
-				"date": date , 
-				"addd" : { "$gte" : update}  
+				"date": date 
+				, "addd" : { "$gte" : update}  
 			  }
 			, jsMode: true																		//	TODO    check: is faster, but needs more memory
 //			, finalize : finalizeFact
@@ -2669,5 +2669,5 @@ var runAggregation = function(date, span, update) {
 																								//	but demands that "sort" equals the key of the map operation
 		}
 	);
-}("2013-04-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
+}("2013-03-03 22" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
 																								//	2013-04-03 23 ^= 1365030000000

@@ -57,58 +57,58 @@
 
 	var pex = [
 		{ 	name : "p4" ,
-			test : ( this.pex.indexOf(443) > -1 )
+			test : ( this.pex && this.pex.indexOf(443) > -1 )
 		} ,
 		{ 	name : "p6" ,
-			test : ( this.pex.indexOf(6667) > -1 )
+			test : ( this.pex && this.pex.indexOf(6667) > -1 )
 		} ,
 		{ 	name : "p8" ,
-			test : ( this.pex.indexOf(80) > -1 )
+			test : ( this.pex && this.pex.indexOf(80) > -1 )
 		} ,
 		{ 	name : "p46" ,
-			test : ( this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
+			test : ( this.pex && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
 		} ,
 		{ 	name : "p48" ,
-			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 )
+			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 )
 		} ,
 		{ 	name : "p68" ,
-			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 )
+			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 )
 		} ,
 		{ 	name : "p468" ,
-			test : ( this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
+			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
 		}
 	] ;
 
 	var roles = [
 		{ 	name : "guard" ,
-			test : ( this.role.indexOf("Guard") > -1 )
+			test : ( this.role && this.role.indexOf("Guard") > -1 )
 		} ,
 		{	name : "middle" ,
-			test : ( this.role.indexOf("Middle") > -1 )
+			test : ( this.role && this.role.indexOf("Middle") > -1 )
 		} ,
 		{ 	name : "exit" ,
-			test : ( this.role.indexOf("Exit") > -1 )
+			test : ( this.role && this.role.indexOf("Exit") > -1 )
 		} ,
 		{ 	name : "dir" ,
-			test : ( this.role.indexOf("Dir") > -1 )
+			test : ( this.role && this.role.indexOf("Dir") > -1 )
 		}
 	] ;
 
 	var flags = [
 		{ 	name : "notFastStable" ,
-			test : ( !this.flag.indexOf("Fast") > -1 && !this.flag.indexOf("Stable") > -1 )
+			test : ( this.flag && !this.flag.indexOf("Fast") > -1 && !this.flag.indexOf("Stable") > -1 )
 		} ,
 		{ 	name : "fast" ,
-			test : ( this.flag.indexOf("Fast") > -1  && !this.flag.indexOf("Stable") > -1 )
+			test : ( this.flag && this.flag.indexOf("Fast") > -1  && !this.flag.indexOf("Stable") > -1 )
 		} ,
 		{ 	name : "stable" ,
-			test : ( !this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
+			test : ( this.flag && !this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
 		} ,
 		{ 	name : "fastStable" ,
-			test : ( this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
+			test : ( this.flag && this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
 		} ,
 		{ 	name : "authority" ,
-			test : ( this.flag.indexOf("Authority") > -1 )
+			test : ( this.flag && this.flag.indexOf("Authority") > -1 )
 		}
 	] ;
 
@@ -145,13 +145,13 @@
 
 	var brts = [
 		{	name : "obfs2" ,
-			test : ( this.brt.indexOf('obfs2')  > -1 )                                          //  TODO check if "> -1"  is the right thing to do
+			test : ( this.brt && this.brt.indexOf('obfs2')  > -1 )                                          //  TODO check if "> -1"  is the right thing to do
 		} ,
 		{	name : "obfs3" ,
-			test : ( this.brt.indexOf('obfs3')  > -1 )
+			test : ( this.brt && this.brt.indexOf('obfs3')  > -1 )
 		} ,
 		{	name : "obfs23" ,
-			test : ( this.brt.indexOf('obfs2')  > -1 && this.brt.indexOf('obfs3')  > -1 )
+			test : ( this.brt && this.brt.indexOf('obfs2')  > -1 && this.brt.indexOf('obfs3')  > -1 )
 		}
 	] ;
 
@@ -161,30 +161,41 @@
 		}
 	] ;
 
+	// for in variables
+	var role, flag, prob, o, t, p;
+
 
 																									//	templates
-	var Server = new Object();
+	var Server = {} ;
 	Server.prototype = {
 		count :  	1 ,
 		bwa :  		this.bwa ,
 		bwc :   	this.bwc ,
-		osv :		pop(osv) ,
+		osv :       {} ,
+		tsv :       {}
+	} ;
+	for (o in osv)
+		Server.prototype[o.name]  = o.test ;
+	for (t in tsv)
+		Server.prototype[t.name]  = t.test ;
+
+	/*	osv :		pop(osv) ,
 		tsv :		pop(tsv)
 	} ;
 
 	function pop(x) {
 		var p = {} ;
 		for ( var v in x ) {
-			p[v.name]  = v.test() ;       // die klammern hinter test sollen bewirken, dass er sofort ausgeführt wird
+			p[v.name]  = function() { v.test() } ;
 		}
 		return p;
-	}
+	}*/
 
-	var ServerInit = new Object();
+	var ServerInit = {} ;
 	ServerInit.prototype = {
 		count :  	0 ,
 		bwa :  		0 ,
-		bwc :   	0 ,
+		bwc :   	0 , /*
 		osv :		popInit(osv) ,
 		tsv :		popInit(tsv)
 	} ;
@@ -195,7 +206,14 @@
 			p[v.name] = 0 ;
 		}
 		return p;
-	}
+	}*/
+		osv :       {} ,
+		tsv :       {}
+	} ;
+	for (o in osv)
+		ServerInit.prototype[o.name]  = 0 ;
+	for (t in tsv)
+		ServerInit.prototype[t.name]  = 0 ;
 
 
 
@@ -224,7 +242,7 @@
 			value.servers.relays = {} ;
 			value.servers.relays.total = new Server() ;
 			value.servers.relays.roles = {} ;                                                       // really necessary?
-			for (var role in roles) {
+			for (role in roles) {
 				if (role.test) {
 					value.servers.relays.roles[role.name] = new Server() ;			                // populate roles
 					if (role.name == "exit")
@@ -232,11 +250,11 @@
 				}
 			}
 			value.servers.relays.flags = {} ;                                                       // really necessary?
-			for (var flag in flags) {
+			for (flag in flags) {
 				if (flag.test) value.servers.relays.flags[flag.name] = new Server() ; 	            // populate flags
 			}
 			value.servers.relays.probs = {} ;
-			for (var prob in probs) {
+			for (prob in probs) {
 				if (prob.test) value.servers.relays.probs[prob.name] = prob.test ;
 			}
 			value.servers.relays.mixes = {} ;
@@ -310,18 +328,27 @@
 			bwc : 				0 ,
 		    roles : 			{} ,
 		    flags : 			{} ,
-		    probs : 			{} ,
-			osv :               popInit(osv),
-			tsv :               popInit(tsv) ,
-			pex :               popInit(pex) ,
+		    probs : 			{} ,/*
+		    osv :               popInit(osv),
+		    tsv :               popInit(tsv) ,
+		    pex :               popInit(pex) ,*/
+		    osv :               {},
+		    tsv :               {} ,
+		    pex :               {} ,
 			autosys :			[]
 		} ;
-		for (var role in roles)
+		for (role in roles)
 			CountryObject.prototype.roles[role.name] = 0 ;
-		for (var flag in flags)
+		for (flag in flags)
 			CountryObject.prototype.flags[flag.name] = 0 ;
-		for (var prob in probs)
+		for (prob in probs)
 			CountryObject.prototype.probs[prob.name] = 0 ;
+		for (o in osv)
+			CountryObject.prototype.osv[o.name]  = 0 ;
+		for (t in tsv)
+			CountryObject.prototype.tsv[t.name]  = 0 ;
+		for (p in pex)
+			CountryObject.prototype.pex[p.name]  = 0 ;
 
 
 
@@ -337,14 +364,14 @@
 	                cbccCountryObject.bwa = 0 ;
 	                cbccCountryObject.bwc = 0 ;
 	                cbccCountryObject.pbr = 0 ;
-					for (var role in roles) { cbccCountryObject[role.name] = 0 ; }
-					for (var flag in flags) { cbccCountryObject[flag.name] = 0 ; }
+					for (role in roles) { cbccCountryObject[role.name] = 0 ; }
+					for (flag in flags) { cbccCountryObject[flag.name] = 0 ; }
 	                cbccCountryObject.osv = {} ;
-					for (var o in osv) { cbccCountryObject.osv[o.name] = 0 ; }
+					for (o in osv) { cbccCountryObject.osv[o.name] = 0 ; }
 	                cbccCountryObject.tsv = {} ;
-					for (var t in tsv) { cbccCountryObject.tsv[t.name] = 0 ; }
+					for (t in tsv) { cbccCountryObject.tsv[t.name] = 0 ; }
 	                cbccCountryObject.pex = {} ;
-					for (var p in pex) { cbccCountryObject.pex[p.name] = 0 ; }
+					for (p in pex) { cbccCountryObject.pex[p.name] = 0 ; }
 	                cbccCountryObject.autosys = [] ;
 	                */
 	                value.countries.push(cbccCountryObject) ;
@@ -361,14 +388,14 @@
 	                crccCountryObject.bwa = 0 ;
 	                crccCountryObject.bwc = 0 ;
 	                crccCountryObject.pbr = 0 ;
-					for (var role in roles) { crccCountryObject[role.name] = 0 ; }
-					for (var flag in flags) { crccCountryObject[flag.name] = 0 ; }
+					for (role in roles) { crccCountryObject[role.name] = 0 ; }
+					for (flag in flags) { crccCountryObject[flag.name] = 0 ; }
 					crccCountryObject.osv = {} ;
-					for (var o in osv) { crccCountryObject.osv[o.name] = 0 ; }
+					for (o in osv) { crccCountryObject.osv[o.name] = 0 ; }
 					crccCountryObject.tsv = {} ;
-					for (var t in tsv) { crccCountryObject.tsv[t.name] = 0 ; }
+					for (t in tsv) { crccCountryObject.tsv[t.name] = 0 ; }
 					crccCountryObject.pex = {} ;
-					for (var p in pex) { crccCountryObject.pex[p.name] = 0 ; }
+					for (p in pex) { crccCountryObject.pex[p.name] = 0 ; }
 	                crccCountryObject.autosys = [] ;
 	                 */
 	                value.countries.push(crccCountryObject);
@@ -383,18 +410,18 @@
 			rCountryObject.relay = 1 ;
 			rCountryObject.bwa = this.bwa ;
 			rCountryObject.bwc = this.bwc ;
-			for (var role in roles)
+			for (role in roles)
 				if (role.test)  rCountryObject.roles[role.name] = 1 ;
-			for (var flag in flags)
+			for (flag in flags)
 				if (flag.test)  rCountryObject.flags[flag.name] = 1 ;
-			for (var prob in probs)
+			for (prob in probs)
 				if (prob.test)  rCountryObject.probs[prob.name] = this[prob.labl] ;                 //  "labl", because here we're querying the import data
-	        for (var o in osv)
+	        for (o in osv)
 		        if (o.test) rCountryObject.osv[o.name] = 1 ;
-			for (var t in tsv)
+			for (t in tsv)
 				if (t.test) rCountryObject.tsv[t.name] = 1 ;
 			if ( this.role.indexOf("Exit") > -1 ) {
-				for (var p in pex)
+				for (p in pex)
 					if (p.test) rCountryObject.pex[p.name] = 1 ;
 			}
 			rCountryObject.autosys = [] ;                                                           //  reduce otherwise skips autosys[] for relays
@@ -431,15 +458,15 @@
 					probs :             {}
 				}]
 			} ;
-			for (var role in roles) {
+			for (role in roles) {
 				(role.test) ? sys.roles[role.name] = 1 : sys.roles[role.name] = 0 ;
 				(role.test) ? sys.countries[0].roles[role.name] = 1 :sys.countries[0].roles[role.name] = 0 ;
 			}
-			for (var flag in flags) {
+			for (flag in flags) {
 				(flag.test) ? sys.flags[flag.name] = 1 : sys.flags[flag.name] = 0 ;
 				(flag.test) ? sys.countries[0].flags[flag.name] = 1 : sys.countries[0].flags[flag.name] = 0 ;
 			}
-			for (var prob in probs) {
+			for (prob in probs) {
 				(prob.test) ? sys.probs[prob.name] = prob.test : sys.probs[prob.name] = 0 ;
 				(prob.test) ? sys.countries[0].probs[prob.name] = prob.test : sys.countries[0].probs[prob.name] = 0 ;
 			}
@@ -499,14 +526,14 @@
 			fact.servers.bridges.brps[brp.name] = new ServerInit();
 		for (var brt in brts)
 			fact.servers.bridges.brts[brt.name] = new ServerInit();
-		for (var role in roles)
+		for (role in roles)
 			fact.servers.relays.roles[role.name] = new ServerInit();
-		for (var flag in flags)
+		for (flag in flags)
 			fact.servers.relays.flags[flag.name] = new ServerInit();
-		for (var prob in probs)
+		for (prob in probs)
 			fact.servers.relays.probs[prob.name] = 0;
 		fact.servers.relays.roles.exit.pex = {} ;
-		for (var p in pex)
+		for (p in pex)
 			fact.servers.relays.roles.exit.pex[p.name] = 0 ;
 
 
@@ -528,160 +555,160 @@
 	        fact.servers.total.count += v.servers.total.count ;					    			    //	SERVERS
 			fact.servers.total.bwa += v.servers.total.bwa ;
 			fact.servers.total.bwc 	+= v.servers.total.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.total.osv[o.name] 					+= v.servers.total.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.total.tsv[t.name] 					+= v.servers.total.tsv[t.name] ;
 
 			fact.servers.bridges.total.count 					+= v.servers.bridges.total.count ;	//	BRIDGES
 			fact.servers.bridges.total.bwa 						+= v.servers.bridges.total.bwa ;
 			fact.servers.bridges.total.bwc 						+= v.servers.bridges.total.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.total.osv[o.name] 			+= v.servers.bridges.total.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.total.tsv[t.name] 			+= v.servers.bridges.total.tsv[t.name] ;
 
 			fact.servers.bridges.brps.email.count 				+= v.servers.bridges.brps.email.count ;
 			fact.servers.bridges.brps.email.bwa 				+= v.servers.bridges.brps.email.bwa ;
 			fact.servers.bridges.brps.email.bwc 				+= v.servers.bridges.brps.email.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brps.email.osv[o.name] 	+= v.servers.bridges.brps.email.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brps.email.tsv[t.name] 	+= v.servers.bridges.brps.email.tsv[t.name] ;
 
 			fact.servers.bridges.brps.https.count 				+= v.servers.bridges.brps.https.count ;
 			fact.servers.bridges.brps.https.bwa 				+= v.servers.bridges.brps.https.bwa ;
 			fact.servers.bridges.brps.https.bwc 				+= v.servers.bridges.brps.https.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brps.https.osv[o.name] 	+= v.servers.bridges.brps.https.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brps.https.tsv[t.name] 	+= v.servers.bridges.brps.https.tsv[t.name] ;
 
 			fact.servers.bridges.brps.other.count 				+= v.servers.bridges.brps.other.count ;
 			fact.servers.bridges.brps.other.bwa 				+= v.servers.bridges.brps.other.bwa ;
 			fact.servers.bridges.brps.other.bwc 				+= v.servers.bridges.brps.other.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brps.other.osv[o.name] 	+= v.servers.bridges.brps.other.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brps.other.tsv[t.name] 	+= v.servers.bridges.brps.other.tsv[t.name] ;
 
 			fact.servers.bridges.brts.obfs2.count 				+= v.servers.bridges.brts.obfs2.count ;
 			fact.servers.bridges.brts.obfs2.bwa 				+= v.servers.bridges.brts.obfs2.bwa ;
 			fact.servers.bridges.brts.obfs2.bwc 				+= v.servers.bridges.brts.obfs2.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brts.obfs2.osv[o.name] 	+= v.servers.bridges.brts.obfs2.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brts.obfs2.tsv[t.name] 	+= v.servers.bridges.brts.obfs2.tsv[t.name] ;
 
 			fact.servers.bridges.brts.obfs3.count 				+= v.servers.bridges.brts.obfs3.count ;
 			fact.servers.bridges.brts.obfs3.bwa 				+= v.servers.bridges.brts.obfs3.bwa ;
 			fact.servers.bridges.brts.obfs3.bwc 				+= v.servers.bridges.brts.obfs3.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brts.obfs3.osv[o.name] 	+= v.servers.bridges.brts.obfs3.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brts.obfs3.tsv[t.name] 	+= v.servers.bridges.brts.obfs3.tsv[t.name] ;
 
 			fact.servers.bridges.brts.obfs23.count 				+= v.servers.bridges.brts.obfs23.count ;
 			fact.servers.bridges.brts.obfs23.bwa 				+= v.servers.bridges.brts.obfs23.bwa ;
 			fact.servers.bridges.brts.obfs23.bwc 				+= v.servers.bridges.brts.obfs23.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.brts.obfs23.osv[o.name] 	+= v.servers.bridges.brts.obfs23.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.brts.obfs23.tsv[t.name] 	+= v.servers.bridges.brts.obfs23.tsv[t.name] ;
 
 			fact.servers.bridges.bres.bre.count 				+= v.servers.bridges.bres.bre.count ;
 			fact.servers.bridges.bres.bre.bwa 					+= v.servers.bridges.bres.bre.bwa ;
 			fact.servers.bridges.bres.bre.bwc 					+= v.servers.bridges.bres.bre.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.bridges.bres.bre.osv[o.name] 		+= v.servers.bridges.bres.bre.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.bridges.bres.bre.tsv[t.name] 		+= v.servers.bridges.bres.bre.tsv[t.name] ;
 
 
 	        fact.servers.relays.total.count 					+= v.servers.relays.total.count ;	//	RELAYS
 			fact.servers.relays.total.bwa 						+= v.servers.relays.total.bwa ;
 			fact.servers.relays.total.bwc 						+= v.servers.relays.total.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.total.osv[o.name] 			+= v.servers.relays.total.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.total.tsv[t.name] 			+= v.servers.relays.total.tsv[t.name] ;
 
 			fact.servers.relays.roles.guard.count 				+= v.servers.relays.roles.guard.count ;
 			fact.servers.relays.roles.guard.bwa 				+= v.servers.relays.roles.guard.bwa ;
 			fact.servers.relays.roles.guard.bwc 				+= v.servers.relays.roles.guard.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.roles.guard.osv[o.name] 	+= v.servers.relays.roles.guard.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.roles.guard.tsv[t.name] 	+= v.servers.relays.roles.guard.tsv[t.name] ;
 
 			fact.servers.relays.roles.middle.count 				+= v.servers.relays.roles.middle.count ;
 			fact.servers.relays.roles.middle.bwa 				+= v.servers.relays.roles.middle.bwa ;
 			fact.servers.relays.roles.middle.bwc 				+= v.servers.relays.roles.middle.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.roles.middle.osv[o.name] 	+= v.servers.relays.roles.middle.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.roles.middle.tsv[t.name] 	+= v.servers.relays.roles.middle.tsv[t.name] ;
 
 			fact.servers.relays.roles.exit.count 				+= v.servers.relays.roles.exit.count ;
 			fact.servers.relays.roles.exit.bwa 					+= v.servers.relays.roles.exit.bwa ;
 			fact.servers.relays.roles.exit.bwc 					+= v.servers.relays.roles.exit.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.roles.exit.osv[o.name] 	    += v.servers.relays.roles.exit.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.roles.exit.tsv[t.name] 	    += v.servers.relays.roles.exit.tsv[t.name] ;
-			for (var p in pex)
+			for (p in pex)
 				fact.servers.relays.roles.exit.pex[p.name] 	    += v.servers.relays.roles.exit.pex[p.name] ;
 
 			fact.servers.relays.roles.dir.count 				+= v.servers.relays.roles.dir.count ;
 			fact.servers.relays.roles.dir.bwa 					+= v.servers.relays.roles.dir.bwa ;
 			fact.servers.relays.roles.dir.bwc 					+= v.servers.relays.roles.dir.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.roles.dir.osv[o.name] 	    += v.servers.relays.roles.dir.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.roles.dir.tsv[t.name] 	    += v.servers.relays.roles.dir.tsv[t.name] ;
 
 
 			fact.servers.relays.flags.notFastStable.count 		+= v.servers.relays.flags.notFastStable.count ;
 			fact.servers.relays.flags.notFastStable.bwa 		+= v.servers.relays.flags.notFastStable.bwa ;
 			fact.servers.relays.flags.notFastStable.bwc 		+= v.servers.relays.flags.notFastStable.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.flags.notFastStable.osv[o.name] += v.servers.relays.flags.notFastStable.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.flags.notFastStable.tsv[t.name] += v.servers.relays.flags.notFastStable.tsv[t.name] ;
 
 			fact.servers.relays.flags.fast.count 				+= v.servers.relays.flags.fast.count ;
 			fact.servers.relays.flags.fast.bwa 					+= v.servers.relays.flags.fast.bwa ;
 			fact.servers.relays.flags.fast.bwc 					+= v.servers.relays.flags.fast.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.flags.fast.osv[o.name] 	    += v.servers.relays.flags.fast.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.flags.fast.tsv[t.name] 	    += v.servers.relays.flags.fast.tsv[t.name] ;
 
 			fact.servers.relays.flags.stable.count 				+= v.servers.relays.flags.stable.count ;
 			fact.servers.relays.flags.stable.bwa 				+= v.servers.relays.flags.stable.bwa ;
 			fact.servers.relays.flags.stable.bwc 				+= v.servers.relays.flags.stable.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.flags.stable.osv[o.name] 	+= v.servers.relays.flags.stable.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.flags.stable.tsv[t.name] 	+= v.servers.relays.flags.stable.tsv[t.name] ;
 
 			fact.servers.relays.flags.fastStable.count 			+= v.servers.relays.flags.fastStable.count ;
 			fact.servers.relays.flags.fastStable.bwa 			+= v.servers.relays.flags.fastStable.bwa ;
 			fact.servers.relays.flags.fastStable.bwc 			+= v.servers.relays.flags.fastStable.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.flags.fastStable.osv[o.name] += v.servers.relays.flags.fastStable.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.flags.fastStable.tsv[t.name] += v.servers.relays.flags.fastStable.tsv[t.name] ;
 
 			fact.servers.relays.flags.authority.count 			+= v.servers.relays.flags.authority.count ;
 			fact.servers.relays.flags.authority.bwa 			+= v.servers.relays.flags.authority.bwa ;
 			fact.servers.relays.flags.authority.bwc 			+= v.servers.relays.flags.authority.bwc ;
-			for (var o in osv)
+			for (o in osv)
 				fact.servers.relays.flags.authority.osv[o.name] += v.servers.relays.flags.authority.osv[o.name] ;
-			for (var t in tsv)
+			for (t in tsv)
 				fact.servers.relays.flags.authority.tsv[t.name] += v.servers.relays.flags.authority.tsv[t.name] ;
 
-			for (var prob in probs)
+			for (prob in probs)
 				fact.servers.relays.probs[prob.name]            += v.servers.relays.probs[prob.name] ;
 
 
@@ -698,17 +725,17 @@
 						countryFact.relay += vCountry.relay ;
 						countryFact.bwa += vCountry.bwa ;
 						countryFact.bwc += vCountry.bwc ;
-						for (var role in roles)
+						for (role in roles)
 							countryFact.roles[role.name] += vCountry.roles[role.name] ;
-						for (var flag in flags)
+						for (flag in flags)
 							countryFact.flags[flag.name] += vCountry.flags[flag.name] ;
-						for (var prob in probs)
+						for (prob in probs)
 							countryFact.probs[prob.name] += vCountry.probs[prob.name] ;
-						for (var o in osv)
+						for (o in osv)
 							countryFact.osv[o.name] += vCountry.osv[o.name] ;
-						for (var t in tsv)
+						for (t in tsv)
 							countryFact.tsv[t.name] += vCountry.tsv[t.name] ;
-						for (var p in pex)
+						for (p in pex)
 							countryFact.pex[p.name] += vCountry.pex[p.name] ;
 
 						for ( var vca = 0 , vcal = vCountry.autosys.length ; vca < vcal ; vca++ ) { //	<- inner double loop part 1: 'as' in mapped.countries
@@ -745,11 +772,11 @@
 						asFact.relay += vAutosys.relay ;											//	add up the numbers
 						asFact.bwa += vAutosys.bwa ;
 						asFact.bwc += vAutosys.bwc ;
-						for (var role in roles)
+						for (role in roles)
 							asFact.roles[role.name] += vAutosys.roles[role.name] ;
-						for (var flag in flags)
+						for (flag in flags)
 							asFact.flags[flag.name] += vAutosys.flags[flag.name] ;
-						for (var prob in probs)
+						for (prob in probs)
 							asFact.probs[prob.name] += vAutosys.probs[prob.name] ;
 
 						for ( var vac = 0 , vacl = vAutosys.countries.length ;  vac < vacl ; vac++ ) {
@@ -763,11 +790,11 @@
 									asCountryFact.relay += asCountryMap.relay ;
 									asCountryFact.bwa += asCountryMap.bwa ;
 									asCountryFact.bwc += asCountryMap.bwc ;
-									for (var role in roles)
+									for (role in roles)
 										asCountryFact.roles[role.name] += asCountryMap.roles[role.name] ;
-									for (var flag in flags)
+									for (flag in flags)
 										asCountryFact.flags[flag.name] += asCountryMap.flags[flag.name] ;
-									for (var prob in probs)
+									for (prob in probs)
 										asCountryFact.probs[prob.name] += asCountryMap.probs[prob.name] ;
 									incomingCountryInASalreadyKown = true ;
 									break ;
@@ -790,7 +817,7 @@
 			});
 
 		});
-		printjson(fact.date);
+//		printjson(fact.date);
 		return fact;
 	};
 
