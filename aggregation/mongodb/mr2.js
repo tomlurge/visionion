@@ -1,231 +1,285 @@
-﻿var runAggregation = function(date, span, update) {
+﻿var osv = [
+	{ 	name : "linux" ,
+		test : ( this.osv == "linux" )
+	} ,
+	{ 	name : "darwin" ,
+		test : ( this.osv == "darwin" )
+	} ,
+	{ 	name : "freebsd" ,
+		test : ( this.osv == "freebsd" )
+	} ,
+	{ 	name : "windows" ,
+		test : ( this.osv == "windows" )
+	} ,
+	{ 	name : "other" ,
+		test : ( this.osv == "other" )
+	}
+] ;
+
+var tsv = [
+	{	name : "v010" ,
+		test : ( this.tsv == "010" )
+	} ,
+	{	name : "v011" ,
+		test : ( this.tsv == "011" )
+	} ,
+	{	name : "v012" ,
+		test : ( this.tsv == "012" )
+	} ,
+	{	name : "v020" ,
+		test : ( this.tsv == "020" )
+	} ,
+	{	name : "v021" ,
+		test : ( this.tsv == "021" )
+	} ,
+	{	name : "v022" ,
+		test : ( this.tsv == "022" )
+	} ,
+	{	name : "v023" ,
+		test : ( this.tsv == "023" )
+	} ,
+	{	name : "v024" ,
+		test : ( this.tsv == "024" )
+	} ,
+	{	name : "v025" ,
+		test : ( this.tsv == "025" )
+	}
+] ;
+
+var pex = [
+	{ 	name : "p4" ,
+		test : ( this.pex && this.pex.indexOf(443) > -1 )
+	} ,
+	{ 	name : "p6" ,
+		test : ( this.pex && this.pex.indexOf(6667) > -1 )
+	} ,
+	{ 	name : "p8" ,
+		test : ( this.pex && this.pex.indexOf(80) > -1 )
+	} ,
+	{ 	name : "p46" ,
+		test : ( this.pex && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
+	} ,
+	{ 	name : "p48" ,
+		test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 )
+	} ,
+	{ 	name : "p68" ,
+		test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 )
+	} ,
+	{ 	name : "p468" ,
+		test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
+	}
+] ;
+
+var roles = [
+	{ 	name : "guard" ,
+		test : ( this.role && this.role.indexOf("Guard") > -1 )
+	} ,
+	{	name : "middle" ,
+		test : ( this.role && this.role.indexOf("Middle") > -1 )
+	} ,
+	{ 	name : "exit" ,
+		test : ( this.role && this.role.indexOf("Exit") > -1 )
+	} ,
+	{ 	name : "dir" ,
+		test : ( this.role && this.role.indexOf("Dir") > -1 )
+	}
+] ;
+
+var flags = [
+	{ 	name : "notFastStable" ,
+		test : ( this.flag && !this.flag.indexOf("Fast") > -1 && !this.flag.indexOf("Stable") > -1 )
+	} ,
+	{ 	name : "fast" ,
+		test : ( this.flag && this.flag.indexOf("Fast") > -1  && !this.flag.indexOf("Stable") > -1 )
+	} ,
+	{ 	name : "stable" ,
+		test : ( this.flag && !this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
+	} ,
+	{ 	name : "fastStable" ,
+		test : ( this.flag && this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
+	} ,
+	{ 	name : "authority" ,
+		test : ( this.flag && this.flag.indexOf("Authority") > -1 )
+	}
+] ;
+
+var probs = [
+	{ 	name : "relay" ,
+		test : ( this.pbr ) ,
+		labl : "pbr"
+	} ,
+	{ 	name : "guard" ,
+		test : ( this.pbg ) ,
+		labl : "pbg"
+	} ,
+	{	name : "middle" ,
+		test : ( this.pbm ) ,
+		labl : "pbm"
+	} ,
+	{ 	name : "exit" ,
+		test : ( this.pbe ) ,
+		labl : "pbe"
+	}
+] ;
+
+var brps = [
+	{	name : "email" ,
+		test : ( this.brp == "email" )
+	} ,
+	{	name : "https" ,
+		test : ( this.brp == "https" )
+	} ,
+	{	name : "other" ,
+		test : ( this.brp == "other" )
+	}
+] ;
+
+var brts = [
+	{	name : "obfs2" ,
+		test : ( this.brt && this.brt.indexOf('obfs2')  > -1 )                                          //  TODO check if "> -1"  is the right thing to do
+	} ,
+	{	name : "obfs3" ,
+		test : ( this.brt && this.brt.indexOf('obfs3')  > -1 )
+	} ,
+	{	name : "obfs23" ,
+		test : ( this.brt && this.brt.indexOf('obfs2')  > -1 && this.brt.indexOf('obfs3')  > -1 )
+	}
+] ;
+
+var bres = [
+	{	name : "bre" ,
+		test : ( this.bre )
+	}
+] ;
+
+//  for-in variables
+var role,
+	flag,
+	prob,
+	o,
+	t,
+	p,
+	brp,
+	brt ;
+//	templates
+var Server = function() {} ;
+Server.prototype = {
+	count :  	1 ,
+	bwa :  		this.bwa ,
+	bwc :   	this.bwc ,/*
+	 osv :		pop(osv) ,
+	 tsv :		pop(tsv)
+	 } ;*/
+	osv :       {} ,
+	tsv :       {}
+} ;
+for (o in osv)
+	Server.prototype[o.name]  = o.test ;
+for (t in tsv)
+	Server.prototype[t.name]  = t.test ;
+
+
+var ServerInit = function(){} ;
+ServerInit.prototype = {
+	count :  	0 ,
+	bwa :  		0 ,
+	bwc :   	0 , /*
+	 osv :		popInit(osv) ,
+	 tsv :		popInit(tsv)
+	 } ;*/
+	osv :       {} ,
+	tsv :       {}
+} ;
+for (o in osv)
+	ServerInit.prototype[o.name]  = 0 ;
+for (t in tsv)
+	ServerInit.prototype[t.name]  = 0 ;
+
+
+
+function pop(x) {
+	var p = {} ;
+	for ( var v in x ) {
+		p[v.name]  = function() { v.test() } ;
+	}
+	return p;
+}
+
+function popInit(x) {
+	var p = {} ;
+	for ( var v in x ) {
+		p[v.name] = 0 ;
+	}
+	return p;
+}
+
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //
-//	PRELIMINARIES
+//	EXECUTE
 //
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	var osv = [
-		{ 	name : "linux" ,
-			test : ( this.osv == "linux" )
-		} ,
-		{ 	name : "darwin" ,
-			test : ( this.osv == "darwin" )
-		} ,
-		{ 	name : "freebsd" ,
-			test : ( this.osv == "freebsd" )
-		} ,
-		{ 	name : "windows" ,
-			test : ( this.osv == "windows" )
-		} ,
-		{ 	name : "other" ,
-			test : ( this.osv == "other" )
+var runAggregation = function(date, span, update) {
+	//  db.facts.remove();				 		//	{ _id : "Fact " + theSpan + " " + theDate }     TODO    remove after testing
+	db.import.mapReduce (
+		mapValues,
+		reduceFact,
+		{
+			out: {
+				merge : "facts"		 														    //	the final fact collection
+																								//  'merge' replaces existing documents with the same key
+																								//  'reduce' would add values to exsiting documents - we don't want that
+				, nonAtomic : false																//	prevents locking of the db during post-processing
+			}
+			, query : { "addd" : { "$gte" : update}  }
+			, jsMode : true																		//	is faster, but needs more memory
+//			, finalize : finalizeFact
+			, sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
+																								//	but demands that "sort" equals the key of the map operation
+			, scope : {  		                                                                //  globally (in the mapReduce job) available  variables
+				theDate : date ,
+				theSpan : span ,
+				roles : roles ,
+				flags : flags ,
+				probs : probs ,
+				osv : osv ,
+				tsv : tsv ,
+				pex : pex ,
+				brts : brts ,
+				brps : brps ,
+				role : role ,
+				flag : flag ,
+				prob : prob ,
+				o : o ,
+				t : t ,
+				p : p ,
+				brp : brp ,
+				brt : brt ,
+				Server : Server ,
+				ServerInit : ServerInit
+			}
 		}
-	] ;
-
-	var tsv = [
-		{	name : "v010" ,
-			test : ( this.tsv == "010" )
-		} ,
-		{	name : "v011" ,
-			test : ( this.tsv == "011" )
-		} ,
-		{	name : "v012" ,
-			test : ( this.tsv == "012" )
-		} ,
-		{	name : "v020" ,
-			test : ( this.tsv == "020" )
-		} ,
-		{	name : "v021" ,
-			test : ( this.tsv == "021" )
-		} ,
-		{	name : "v022" ,
-			test : ( this.tsv == "022" )
-		} ,
-		{	name : "v023" ,
-			test : ( this.tsv == "023" )
-		} ,
-		{	name : "v024" ,
-			test : ( this.tsv == "024" )
-		} ,
-		{	name : "v025" ,
-			test : ( this.tsv == "025" )
-		}
-	] ;
-
-	var pex = [
-		{ 	name : "p4" ,
-			test : ( this.pex && this.pex.indexOf(443) > -1 )
-		} ,
-		{ 	name : "p6" ,
-			test : ( this.pex && this.pex.indexOf(6667) > -1 )
-		} ,
-		{ 	name : "p8" ,
-			test : ( this.pex && this.pex.indexOf(80) > -1 )
-		} ,
-		{ 	name : "p46" ,
-			test : ( this.pex && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
-		} ,
-		{ 	name : "p48" ,
-			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 )
-		} ,
-		{ 	name : "p68" ,
-			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(6667) > -1 )
-		} ,
-		{ 	name : "p468" ,
-			test : ( this.pex && this.pex.indexOf(80) > -1 && this.pex.indexOf(443) > -1 && this.pex.indexOf(6667) > -1 )
-		}
-	] ;
-
-	var roles = [
-		{ 	name : "guard" ,
-			test : ( this.role && this.role.indexOf("Guard") > -1 )
-		} ,
-		{	name : "middle" ,
-			test : ( this.role && this.role.indexOf("Middle") > -1 )
-		} ,
-		{ 	name : "exit" ,
-			test : ( this.role && this.role.indexOf("Exit") > -1 )
-		} ,
-		{ 	name : "dir" ,
-			test : ( this.role && this.role.indexOf("Dir") > -1 )
-		}
-	] ;
-
-	var flags = [
-		{ 	name : "notFastStable" ,
-			test : ( this.flag && !this.flag.indexOf("Fast") > -1 && !this.flag.indexOf("Stable") > -1 )
-		} ,
-		{ 	name : "fast" ,
-			test : ( this.flag && this.flag.indexOf("Fast") > -1  && !this.flag.indexOf("Stable") > -1 )
-		} ,
-		{ 	name : "stable" ,
-			test : ( this.flag && !this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
-		} ,
-		{ 	name : "fastStable" ,
-			test : ( this.flag && this.flag.indexOf("Fast") > -1 && this.flag.indexOf("Stable") > -1 )
-		} ,
-		{ 	name : "authority" ,
-			test : ( this.flag && this.flag.indexOf("Authority") > -1 )
-		}
-	] ;
-
-	var probs = [
-		{ 	name : "relay" ,
-			test : ( this.pbr ) ,
-			labl : "pbr"
-		} ,
-		{ 	name : "guard" ,
-			test : ( this.pbg ) ,
-			labl : "pbg"
-		} ,
-		{	name : "middle" ,
-			test : ( this.pbm ) ,
-			labl : "pbm"
-		} ,
-		{ 	name : "exit" ,
-			test : ( this.pbe ) ,
-			labl : "pbe"
-		}
-	] ;
-
-	var brps = [
-		{	name : "email" ,
-			test : ( this.brp == "email" )
-		} ,
-		{	name : "https" ,
-			test : ( this.brp == "https" )
-		} ,
-		{	name : "other" ,
-			test : ( this.brp == "other" )
-		}
-	] ;
-
-	var brts = [
-		{	name : "obfs2" ,
-			test : ( this.brt && this.brt.indexOf('obfs2')  > -1 )                                          //  TODO check if "> -1"  is the right thing to do
-		} ,
-		{	name : "obfs3" ,
-			test : ( this.brt && this.brt.indexOf('obfs3')  > -1 )
-		} ,
-		{	name : "obfs23" ,
-			test : ( this.brt && this.brt.indexOf('obfs2')  > -1 && this.brt.indexOf('obfs3')  > -1 )
-		}
-	] ;
-
-	var bres = [
-		{	name : "bre" ,
-			test : ( this.bre )
-		}
-	] ;
-
-	// for in variables
-	var role, flag, prob, o, t, p;
-
-
-																									//	templates
-	var Server = {} ;
-	Server.prototype = {
-		count :  	1 ,
-		bwa :  		this.bwa ,
-		bwc :   	this.bwc ,
-		osv :       {} ,
-		tsv :       {}
-	} ;
-	for (o in osv)
-		Server.prototype[o.name]  = o.test ;
-	for (t in tsv)
-		Server.prototype[t.name]  = t.test ;
-
-	/*	osv :		pop(osv) ,
-		tsv :		pop(tsv)
-	} ;
-
-	function pop(x) {
-		var p = {} ;
-		for ( var v in x ) {
-			p[v.name]  = function() { v.test() } ;
-		}
-		return p;
-	}*/
-
-	var ServerInit = {} ;
-	ServerInit.prototype = {
-		count :  	0 ,
-		bwa :  		0 ,
-		bwc :   	0 , /*
-		osv :		popInit(osv) ,
-		tsv :		popInit(tsv)
-	} ;
-
-	function popInit(x) {
-		var p = {} ;
-		for ( var v in x ) {
-			p[v.name] = 0 ;
-		}
-		return p;
-	}*/
-		osv :       {} ,
-		tsv :       {}
-	} ;
-	for (o in osv)
-		ServerInit.prototype[o.name]  = 0 ;
-	for (t in tsv)
-		ServerInit.prototype[t.name]  = 0 ;
+	);
+}("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
+																								//	2013-04-03 23 ^= 1365030000000
 
 
 
 
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	MAP
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	var mapValues = function() {
+	function mapValues() {
 
 		var value = {																				// the mothership
 			date : 		theDate ,
@@ -245,8 +299,10 @@
 			for (role in roles) {
 				if (role.test) {
 					value.servers.relays.roles[role.name] = new Server() ;			                // populate roles
-					if (role.name == "exit")
+					if (role.name == "exit") {
+						value.servers.relays.roles.exit.pex = {} ;
 						value.servers.relays.roles.exit.pex = pop(pex) ;
+					}
 				}
 			}
 			value.servers.relays.flags = {} ;                                                       // really necessary?
@@ -264,11 +320,11 @@
 			value.servers.bridges = {} ;
 			value.servers.bridges.total = new Server();
 			value.servers.bridges.brps = {} ;
-			for (var brp in brps) {
+			for (brp in brps) {
 				if (brp.test) value.servers.bridges.brps[brp.name] = new Server() ;
 			}
 			value.servers.bridges.brts = {} ;
-			for (var brt in brts) {
+			for (brt in brts) {
 				if (brt.test) value.servers.bridges.brts[brt.name] = new Server() ;
 			}
 			if (bres[0].test) {
@@ -312,7 +368,7 @@
 		document maps to at most one country entry in the countries array.
 
 		in the reduce step
-		we than always first check if the country at hand is already contained in the
+		we than always check first if the country at hand is already contained in the
 		fact.countries array. if so, we add new data to the values of that object, if not we
 		push the country object at hand onto the fact.countries array.
 		autosys is an array within the object and therefor needs an inner loop.
@@ -415,7 +471,7 @@
 			for (flag in flags)
 				if (flag.test)  rCountryObject.flags[flag.name] = 1 ;
 			for (prob in probs)
-				if (prob.test)  rCountryObject.probs[prob.name] = this[prob.labl] ;                 //  "labl", because here we're querying the import data
+				if (prob.test)  rCountryObject.probs[prob.name] = this[prob.labl] ;                 //  "labl", because here the import data follows a different naming convention
 	        for (o in osv)
 		        if (o.test) rCountryObject.osv[o.name] = 1 ;
 			for (t in tsv)
@@ -476,19 +532,21 @@
 
 	//	emit( "Fact " + theSpan + " " + theDate , value );
 		emit( theDate , value );
-	};
+	} ;
 
 
 
 
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	REDUCE
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	var reduceFact = function ( key, values ) {
+	function reduceFact( key, values ) {
 
 		var fact = {																				//	INITIALIZE FACT
 			date : "" ,
@@ -522,9 +580,9 @@
 			countries : [] ,
 			autosys: []
 		};
-		for (var brp in brps)
+		for (brp in brps)
 			fact.servers.bridges.brps[brp.name] = new ServerInit();
-		for (var brt in brts)
+		for (brt in brts)
 			fact.servers.bridges.brts[brt.name] = new ServerInit();
 		for (role in roles)
 			fact.servers.relays.roles[role.name] = new ServerInit();
@@ -830,9 +888,10 @@
 //	FINALIZE
 //
 //	//////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	var finalizeFact = function ( key, fact ) {
+	function finalizeFact( key, fact ) {
 		/*
 		//	do fancy stuff like averages etc.
 		//	note that the fact.average field would have to be present in map and reduce too even if
@@ -847,32 +906,3 @@
 
 
 
-//	//////////////////////////////////////////////////////////////////////////////////////////////
-//	//////////////////////////////////////////////////////////////////////////////////////////////
-//
-//	EXECUTE
-//
-//	//////////////////////////////////////////////////////////////////////////////////////////////
-
-
-   //  db.facts.remove();				 		//	{ _id : "Fact " + theSpan + " " + theDate }     TODO    remove after testing
-	db.import.mapReduce (
-		mapValues,
-		reduceFact,
-		{
-			out: {
-				merge : "facts"		 														    //	the final fact collection
-																								//  'merge' replaces existing documents with the same key
-																								//  'reduce' would add values to exsiting documents - we don't want that
-				, nonAtomic : false																//	prevents locking of the db during post-processing
-			}
-			, query : { "addd" : { "$gte" : update}  }
-			, jsMode: true																		//	TODO    check: is faster, but needs more memory
-//			, finalize : finalizeFact
-			, scope: { theDate: date, theSpan: span } 		                                    //  globally (in the mapReduce job) available  variables
-	        , sort : { "date" : 1 }                                                             //  speeds up mapReduce as 'date' is indexed in the import collection
-																								//	but demands that "sort" equals the key of the map operation
-		}
-	);
-}("2013-04-03 23" , 1 , "2013-08-14T09:23:45.302Z");										    //	TODO	remove self call after testing
-																								//	2013-04-03 23 ^= 1365030000000

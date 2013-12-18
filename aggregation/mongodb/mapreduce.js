@@ -892,7 +892,7 @@ var mapValues = function() {
 */
 
 	function CountryObject() {}
-    CountryObject.prototype = {
+    CountryObject.prototype = {                                                                  // TODO    maybe superfluous
 		country: 			"" ,
 		cbcc:				0 ,
 		crcc:				0 ,

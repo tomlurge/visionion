@@ -1040,3 +1040,18 @@ OMG.
 now the question is if i should continue work on a "cleaner" implementation of the mapreduce script. it definitely is quite verbose. but getting a prototype running might be more important right now.
 
 i'll definitely not need to continue work on a hadoop implementation right now (although that's a pity because i was very close to getting something started) since with the current performance i can aggregate 1 year of data in about 10-12 days on my macbook. that's fast enough.
+
+
+#### working notes 16/12/13 
+(working on mr script version 3 - "functional" - now)    
+those mongodb crashes... http://dabeals.com/software/2013/08/23/illegal-instruction-4/ says: "Googling “Illegal instruction: 4″ suggested a number of problems, all pointing to some issue with native binaries compiled with various versions of gcc on various minor versions of Mac OS."
+switching to a mongodb 2.4.8 downloaded from mongodb.org instead of the homebrew version. maybe even switch back to 2.0.9? we have to use that in production anyway and bug reports on teh interwebs seem to suggest that the problem has to do with the v8 engine. would be a pity though since the initial mapReduce of 5 years data would take much longer without the multithreading introduced by v8 in mongodb 2.2
+
+now look at that: 2.4.8 directly from mongodb.org crashes in exactly the same way as teh hjomebrew version. 2.0.6 instead (who's javascript engine is not googles v8 but mozillas spidermonkey) fails gracefully with the following message:   
+	Mon Dec 16 13:35:38 uncaught exception: map reduce failed:{
+		"assertion" : "invoke failed: JS Error: InternalError: too much recursion nofile_b:21",
+		"assertionCode" : 9004,
+		"errmsg" : "db assertion failure",
+		"ok" : 0
+	}
+f**k'n s**t

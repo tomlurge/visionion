@@ -42,10 +42,7 @@
 TODO
 	* ein config array für die grundstruktur (also flags, roles etc) 
 		per foreach abfragen und tatsächlich die ganze konstruktion per script generieren
-	* exit pex 436ff
-	* probs in eigene abteilung
-		servers.relays.probs[guard, middle, exit, total]
-		in config+for_in loops gepackt werden	
+	* noch viel mehr modularisierung mit funktionen
 	* country und autosys in reduce mit map abgleichen
 
 **	A schematic and annotated example of a document in the facts collection **
