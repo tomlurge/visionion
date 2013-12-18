@@ -48,3 +48,31 @@ oldStuff/aggregateServers.js
 BBEditPreviewTemp.md
 
 aggregation/mongodb/mapreduceSpeedy2.js
+
+_MR aufräumen/killMongoDB.js
+
+_MR aufräumen/mapreduceFunc.js
+
+_MR aufräumen/mapreduceFuncTest.js
+
+_MR aufräumen/mapreduceSpeedy2.js
+
+_MR aufräumen/mapreduceSpeedy4.js
+
+_MR aufräumen/mapreduceSpeedy3.js
+
+_MR aufräumen/mapreduceSpeedyKILLSmongodb.js
+
+_MR aufräumen/mapreduceTest.js
+
+_MR aufräumen/mapreduceTestMicro.js
+
+_MR aufräumen/mapreduceTestMini.js
+
+_MR aufräumen/killMongoDB
+
+_MR aufräumen/mapreduceFuncFUNZT.js
+
+_MR aufräumen/mapreduceSpeedy.js
+
+_MR aufräumen/mapreduceSpeedy5.js
