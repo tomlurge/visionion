@@ -47,68 +47,6 @@ var mainConfig = {
 	autosys: {}
 };
 
-/*  ALTERNATIVE MAIN STRUCTURE
-
-var rootConfig = [
-	"clients",
-	"servers",
-	"countries",
-	"autosys"
-];
-
-var serversConfig = [
-	"total",
-	"relays",
-	"bridges"
-];
-
-var relaysConfig = [
-	"total",
-	"roles",
-	"flags",
-	"probs"
-];
-
-var bridgesConfig = [
-	"total",
-	"brps",
-	"brts",
-	"bres"
-];
-
-var rolesConfig = [
-	"Guard",
-	"Middle",
-	"Exit",
-	"Dir"
-];
-
-var flagsConfig = [
-	"notFastStable",
-	"fast",
-	"stable",
-	"fastStable",
-	"authority"
-];
-
-var brpsConfig = [
-	"email",
-	"https",
-	"other"
-];
-
-var brtsConfig = [
-	"obfs2",
-	"obfs3",
-	"obfs23"
-];
-
-var bresConfig = [
-	"bre"
-];
-*/
-
-
 //  SERVER SETUP
 
 var osvConfig = [
@@ -183,6 +121,8 @@ function mapValues() {
 			if (testIt(c)) {                                        //  if test returns false no initialization needed
 				if (config == tsvConfig)
 					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
+				else if (config == probsConfig)
+					list[c] = that.c;
 				else
 					list[c] = 1;
 			}
@@ -191,9 +131,9 @@ function mapValues() {
 	};
 
 	var Server = function(args){
-		this.count = 1 ;
-		this.bwa = that.bwa ;
-		this.bwc = that.bwc ;
+		this.count = 1;
+		this.bwa = that.bwa;
+		this.bwc = that.bwc;
 		this.osv = new PropInit(
 			osvConfig,
 			function(c){return (that.osv == c);}
@@ -204,7 +144,7 @@ function mapValues() {
 		);
 		args.forEach( function(arg) {
 			if (arg == pex) {
-				new PropInit(
+				this.pex = new PropInit(
 					pexConfig,
 					function(c) {
 						if (that.pex)
@@ -229,11 +169,15 @@ function mapValues() {
 					}
 				);
 			}
-			else if (arg == pbr || pbg || pbm || pbe) {             //  TODO    stub
-
+			else if (arg == pbr || pbg || pbm || pbe) {
+				if (that.arg)
+					this[arg] = that.arg;
 			}
-			else if (arg == probs) {                                //  TODO    stub
-
+			else if (arg == probs) {
+				this.probs =  new PropInit(
+					probsConfig,
+					function(p){return (that[p] == p);}
+				)
 			}
 		});
 	};
@@ -256,7 +200,7 @@ function mapValues() {
 						return (that.flag && that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
 						break;
 					case 'notFastStable':
-	//				return (that.flag && !that.flag.indexOf("Fast") > -1 && !that.flag.indexOf("Stable") > -1);
+						// return (that.flag && !that.flag.indexOf("Fast") > -1 && !that.flag.indexOf("Stable") > -1);
 						return true;
 						break;
 				}
@@ -350,16 +294,11 @@ function mapValues() {
 function reduceFact( key, values ) {
 
 
-//  A HELPER FUNCTION
+//  A HELPER FUNCTION - see http://stackoverflow.com/a/122190/128165 for details
 	function clone(input){
 		if(input == null || typeof(input) != 'object')
 			return input;
 
-		/*  the nect line of code might not work well with Server() generated objects beacuse it
-		    "breaks if the object being cloned has a constructor that requires parameters."
-		    see the comments to  http://stackoverflow.com/a/122190/128165 for more detail.
-		//	var temp = input.constructor();
-			therefor we're replacing it with the following block */
 		var newProto = function(){};
 		newProto.prototype = obj.constructor;
 		var temp = new newProto();
@@ -368,72 +307,6 @@ function reduceFact( key, values ) {
 			temp[key] = clone(input[key]);
 		return temp;
 	}
-	/*
-	 //  a much more comprehensive alternative to the clone function above would be the following.
-	 //  it promises to also work with objects whose constructor has required parameters.
-	 //  i'm not sure yet if Server() fits that description.
-
-	 function deepCopy(src, _visited) {    // _visited is INTERNAL
-	 if(src == null || typeof(src) !== 'object'){
-	 return src;
-	 }
-
-	 // Initialize the visited objects array if needed
-	 // This is used to detect cyclic references
-	 if (_visited == undefined){
-	 _visited = [];
-	 }
-	 // Otherwise, ensure src has not already been visited
-	 else {
-	 var i, len = _visited.length;
-	 for (i = 0; i < len; i++) {
-	 // If src was already visited, don't try to copy it, just return the reference
-	 if (src === _visited[i]) {
-	 return src;
-	 }
-	 }
-	 }
-
-	 // Add this object to the visited array
-	 _visited.push(src);
-
-	 //Honor native/custom clone methods
-	 if(typeof src.clone == 'function'){
-	 return src.clone(true);
-	 }
-
-	 //Special cases:
-	 //Date
-	 if (src instanceof Date){
-	 return new Date(src.getTime());
-	 }
-	 //RegExp
-	 if(src instanceof RegExp){
-	 return new RegExp(src);
-	 }
-	 //DOM Elements
-	 if(src.nodeType && typeof src.cloneNode == 'function'){
-	 return src.cloneNode(true);
-	 }
-
-	 //If we've reached here, we have a regular object, array, or function
-
-	 //make sure the returned object has the same prototype as the original
-	 var proto = (Object.getPrototypeOf ? Object.getPrototypeOf(src): src.__proto__);
-	 if (!proto) {
-	 proto = src.constructor.prototype; //this line would probably only be reached by very old browsers
-	 }
-	 var ret = object_create(proto);
-
-	 for(var key in src){
-	 //Note: this does NOT preserve ES5 property attributes like 'writable', 'enumerable', etc.
-	 //For an example of how this could be modified to do so, see the singleMixin() function
-	 ret[key] = deepCopy(src[key], _visited);
-	 }
-	 return ret;
-	 }
-
-	 */
 
 //  DEFINING THE WORKHORSE - WILL GO THROUGH EVERY PROPERTY IN INCOMING DATA AND ADD IT TO THE 'FACT'
 	function update(fact, value){
@@ -455,7 +328,7 @@ function reduceFact( key, values ) {
 	}
 
 
-//  STARTING REDUCTION WITH THE GATHERING OF BUREAUCRATIC DETAILS
+//  STARTING REDUCTION WITH THE GATHERING OF BUREAUCRATIC DETAIL
 	var fact = {
 		date: theDate ,
 		span: theSpan ,
@@ -467,7 +340,7 @@ function reduceFact( key, values ) {
 		update(fact,value);
 	});
 
-//  AND BE DONE WITH IT, THIS TIME FOR REAL
+//  AND BE DONE WITH IT, AGAIN
 	return fact;
 
 } ;
@@ -501,8 +374,7 @@ var runAggregation = function(date, span, update) {
 				osvConfig: osvConfig,
 				tsvConfig: tsvConfig,
 				pexConfig: pexConfig,
-				probsConfig: probsConfig,
-				testConfig: testConfig
+				probsConfig: probsConfig
 			}
 		}
 	);
