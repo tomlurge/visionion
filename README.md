@@ -738,7 +738,7 @@ see
 	
 	# run aggregation
 	on the system shell
-		mongo localhost:27017/visionion ~/visionion/aggregation/mongodb/mapreduce.js
+		mongo localhost:27017/visionion ~/visionion/aggregation/mongodb/mr3.js
 	(http://stackoverflow.com/questions/8743385/running-a-script-having-mongodb-queries-from-mongodb-shell)
 
 #### setting up hadoop
