@@ -11,37 +11,36 @@
 var mainConfig = {
 	clients: {},
 	servers: {
-		total : function() { return new Server();},     //  total : []
+		total : [],
 		relays: {
-			total: function() {return new Server("pbr");},      // total : ["pbr"]
+			total: ["pbr"],
 			roles: {
-				guard: function() {return new Server("pbg");},
-				middle: function() {return new Server("pbm");},
-				exit: function() {return new Server("pbe", "pex");},
-				dir: function() {return new Server();}
+				guard: ["pbg"],
+				middle: ["pbe", "pex"],
+				dir: []
 			},
 			flags: {
-				notFastStable: function() {return new Server("probs");},
-				fast: function() {return new Server("probs");},
-				stable: function() {return new Server("probs");},
-				fastStable: function() {return new Server("probs");},
-				authority: function() {return new Server("probs");}
+				notFastStable: ["probs"],
+				fast: ["probs"],
+				stable: ["probs"],
+				fastStable: ["probs"],
+				authority: ["probs"]
 			}
 		},
 		bridges: {
-			total: function() {return new Server();},
+			total: [],
 			brps: {
-				email: function() {return new Server();},
-				https: function() {return new Server();},
-				other: function() {return new Server();}
+				email: [],
+				https: [],
+				other: []
 			},
 			brts: {
-				obfs2: function() {return new Server();},
-				obfs3: function() {return new Server();},
-				obfs23: function() {return new Server();}
+				obfs2: [],
+				obfs3: [],
+				obfs23: []
 			},
 			bres: {
-				bre: function() {return new Server();}
+				bre: []
 			}
 		}
 	},
@@ -124,8 +123,32 @@ function mapValues() {
 		return list;
 	};
 
+
 //  construct server object
+
+	var pexTest = function() {
+		if (that.pex) {
+			var result = {};
+			result.p4 = (that.pex.indexOf(443) > -1);
+			result.p6 =  (that.pex.indexOf(6667) > -1);
+			result.p8 =  (that.pex.indexOf(80) > -1);
+			result.p46 =  (that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
+			result.p48 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1);
+			result.p68 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1);
+			result.p468 =  (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
+			return result;  // TODO     what to do with the result?
+		}
+		else {
+			return false;
+		}
+	};
+
+	var propsTest = function(p) {
+		return (that[p] === p);
+	};
+
 	var Server = function(args){
+		args  = args || [];
 		this.count = 1;
 		this.bwa = that.bwa;
 		this.bwc = that.bwc;
@@ -137,105 +160,82 @@ function mapValues() {
 			tsvConfig,
 			function(c){return (that.tsv === c);}
 		);
-
-		for (var arg in args) {
+		var thus = this;
+		args.forEach(function(arg) {
 			if (arg === "pex") {
-				this.pex = new PropInit(
+				thus.pex = new PropInit(
 					pexConfig,
-					pexTest(arg)            // TODO arg? welches arg?
+					pexTest()
 				);
 			}
 			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") { // TODO das hört nach dem ersten treffer auf, muss aber alle überprüfen, da mehrfachvorkommnisse möglich sind
 				if (that.arg) {
-					this[arg] = that.arg;
+					thus[arg] = that.arg;
 				}
 			}
 			else if (arg === "probs") {
-				this.probs =  new PropInit(
+				thus.probs =  new PropInit(
 					probsConfig,
 					propsTest(arg)
 				);
 			}
-		}
-
-		function pexTest(c) {
-			var result = {};
-			if (that.pex) {
-				result.p4 = (that.pex.indexOf(443) > -1);
-				result.p6 =  (that.pex.indexOf(6667) > -1);
-				result.p8 =  (that.pex.indexOf(80) > -1);
-				result.p46 =  (that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-				result.p48 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1);
-				result.p68 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1);
-				result.p468 =  (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-				return result;
-			}
-			else {
-				return false;
-			}
-		}
-
-		function propsTest(p) {
-			return (that[p] === p);
-		}
+		});
 
 	};
 
+
 //  test if a specific server should be constructed
+
+	var flagsTest = function() {
+		var result = {};
+		result.authority = (that.flag && that.flag.indexOf("Authority") > -1);
+		result.fast = (that.flag && that.flag.indexOf("Fast") > -1  && that.flag.indexOf("Stable") <= -1);
+		result.stable = (that.flag && that.flag.indexOf("Fast") <= -1 && that.flag.indexOf("Stable") > -1);
+		result.fastStable = (that.flag && that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
+		result.notFastStable = (that.flag && that.flag.indexOf("Fast") <= -1 && that.flag.indexOf("Stable") <= -1);
+		return result;  // TODO     what to do with the result?
+	};
+
+	var rolesTest = function() {
+		var result = {};
+		result.obfs2 = (that.brt && that.brt.indexOf('obfs2')  > -1);
+		result.obfs3 = (that.brt && that.brt.indexOf('obfs3') > -1);
+		result.obfs23 = (that.brt && that.brt.indexOf('obfs2')  > -1 && that.brt.indexOf('obfs3')  > -1);
+		return result;  // TODO     what to do with the result?
+	};
+
 	var testServers = function(toTest) {
+		var result = {};
 		if (that.type === "r") {
 			if (toTest in mainConfig.servers.relays.roles) {
-				return (that.role.indexOf(toTest) > -1);
+				result = (that.role.indexOf(toTest) > -1);
 			}
 			else if (toTest in mainConfig.servers.relays.flags) {
-				switch(toTest) {
-					case 'authority':   //  TODO    when will that be relevant? should it really be part of flagsTest? is the logic ok?
-						return (that.flag && that.flag.indexOf("Authority") > -1);
-					case 'fast':
-						return (that.flag && that.flag.indexOf("Fast") > -1  && !that.flag.indexOf("Stable") > -1);
-						break;
-					case 'stable':
-						return (that.flag && !that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
-						break;
-					case 'fastStable':
-						return (that.flag && that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
-						break;
-					case 'notFastStable':
-						// return (that.flag && !that.flag.indexOf("Fast") > -1 && !that.flag.indexOf("Stable") > -1);
-						return true;
-						break;
-				}
+				result = flagsTest();
 			}
 		}
 		else if (that.type === "b") {
 			if (toTest in mainConfig.servers.bridges.brps) {
-				return (that.brp && that.brp === toTest);
+				result = (that.brp && that.brp === toTest);
 			}
 			else if (toTest in mainConfig.servers.bridges.brts) {
-				switch(toTest) {
-					case 'obfs2':
-						return (that.brt && that.brt.indexOf('obfs2')  > -1);
-						break;
-					case 'obfs3':
-						return (that.brt && that.brt.indexOf('obfs3') > -1);
-						break;
-					case 'obfs23':
-						return (that.brt && that.brt.indexOf('obfs2')  > -1 && that.brt.indexOf('obfs3')  > -1);
-						break;
-				}
+				result = rolesTest();
 			}
 			else if (toTest in mainConfig.servers.bridges.bres) {
-				return (that.bre);
+				result = (that.bre);
 			}
 		}
+		else {
+			result = false;
+		}
+		return result;
 	};
 
 //  controls populating the mapped object with servers
 	var buildMain = function(config) {
 		for (var c in config) {
-			if (typeof(c) === "function" && testServers(c)) {       //  TODO abfrgae ob das ein array ist
-																	// Object.prototype.toString.call(val) == [object Array]
-				value[c] = c();                                     //  TODO  value[c] = new Server(args);  und oben die args als
+			if (Object.prototype.toString.call(c) === "[object Array]" && testServers(c)) {
+				value[c] = new Server(c);                                    //  TODO  args
 			}
 			else {
 				value[c] = {};
@@ -260,17 +260,13 @@ function mapValues() {
 //  FILLING IN RELAYS
 	if (this.type === "r") {
 		value.servers.total = new Server(); //	pay credit to servers
-		value.servers.relays = function() {
-			buildMain(mainConfig.servers.relays);
-		};
+		value.servers.relays = buildMain(mainConfig.servers.relays);
 	}
 
 //	FILLING IN BRIDGES
 	else if (this.type === "b") {
 		value.servers.total = new Server(); //	pay credit to servers
-		value.servers.bridges = function() {
-			buildMain(mainConfig.servers.bridges);
-		};
+		value.servers.bridges = buildMain(mainConfig.servers.bridges);
 	}
 
 //	FILLING IN CLIENTS
