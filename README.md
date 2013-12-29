@@ -1062,3 +1062,14 @@ now look at that: 2.4.8 directly from mongodb.org crashes in exactly the same wa
 		"ok" : 0
 	}
 f**k'n s**t
+
+##Vagrant
+
+Requires [vagrant](http://www.vagrantup.com/downloads.html) to build a development virtual machine.
+
+    vagrant up
+    # if ready ssh into the vm
+    vagrant ssh
+    # in the shell execute (alias mongo localhost:27017/visionion /vagrant/aggregation/mongodb/mr3.js )
+    mr3
+    # to run the aggregation
