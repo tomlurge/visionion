@@ -47,7 +47,7 @@ var mainConfig = {
 	autosys: {}
 };
 
-//  SERVER SETUP
+//  SERVER COMPONENTS
 
 var osvConfig = [
 	"linux",
@@ -88,8 +88,6 @@ var pexConfig = [
 
 
 
-
-
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 //	//////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -98,22 +96,13 @@ var pexConfig = [
 
 function mapValues() {
 
-//  THE MOTHERSHIP
-	var value = {
-		date: theDate,
-		span: theSpan,
-		updt: theUpdate,
-		clients: {},
-		servers: {},
-		countries: {},
-		autosys: {}
-	};
-
 
 //  MACHINERY
 
+//  make "this" - the  document currently being mapped - referencable inside function
 	var that = this;
 
+//  construct nested objects inside the server object
 	var PropInit = function (config, test) {                        //  TODO    if this doesn't work call Server() with 3. parameter "this"
 		var list = {} ;
 		var testIt = test || false;                                 //  if no test is provided we don't want the value
@@ -122,14 +111,15 @@ function mapValues() {
 				if (config == tsvConfig)
 					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
 				else if (config == probsConfig)
-					list[c] = that.c;
+					list[c] = that.c;                               //  summing up probabilities
 				else
-					list[c] = 1;
+					list[c] = 1;                                    //  everybody else just counts numbers of servers
 			}
 		});
 		return list;
 	};
 
+//  construct server object
 	var Server = function(args){
 		this.count = 1;
 		this.bwa = that.bwa;
@@ -142,7 +132,7 @@ function mapValues() {
 			tsvConfig,
 			function(c){return (that.tsv == c);}
 		);
-		args.forEach( function(arg) {
+		for (var arg in args) {
 			if (arg == pex) {
 				this.pex = new PropInit(
 					pexConfig,
@@ -179,9 +169,10 @@ function mapValues() {
 					function(p){return (that[p] == p);}
 				)
 			}
-		});
+		};
 	};
 
+//  test if a specific server should be constructed
 	var testServers = function(toTest) {
 		if (that.type == "r") {
 			if (toTest in mainConfig.servers.relays.roles)
@@ -229,18 +220,31 @@ function mapValues() {
 		}
 	};
 
+//  controls populating the mapped object with servers
 	var buildMain = function(config) {
 		for (var c in config)
 			if (typeof(c) == "function" && testServers(c))
 				value[c] = c;                                       //  TODO    or value[c] = c(); ?
 			else {
 				value[c] = {};
-				buildMain(config[c]);
+				buildMain(config[c]);                               //  todo    wo schreibt er denn das hin?
+																	//	todo	woher weiss er, dass er in das gerade erzeugte objekt schreiben soll
 			};
 	};
 
 
-//	RELAYS
+//  SEEDING MAPPED OBJECT
+	var value = {
+		date: theDate,
+		span: theSpan,
+		updt: theUpdate,
+		clients: {},
+		servers: {},
+		countries: {},
+		autosys: {}
+	};
+
+//  FILLING IN RELAYS
 	if (this.type == "r") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.relays = function() {
@@ -248,7 +252,7 @@ function mapValues() {
 		};
 	}
 
-//	BRIDGES
+//	FILLING IN BRIDGES
 	else if (this.type == "b") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.bridges = function() {
@@ -256,7 +260,7 @@ function mapValues() {
 		};
 	}
 
-//	CLIENTS
+//	FILLING IN CLIENTS
 	else if (this.type == "c") {
 		value.clients = {
 			total: this.cr && this.cb ? this.cr + this.cb : 0,
@@ -293,14 +297,13 @@ function mapValues() {
 
 function reduceFact( key, values ) {
 
-
-//  A HELPER FUNCTION - see http://stackoverflow.com/a/122190/128165 for details
+//  HELPER FUNCTION - see http://stackoverflow.com/a/122190/128165 for details
 	function clone(input){
 		if(input == null || typeof(input) != 'object')
 			return input;
 
 		var newProto = function(){};
-		newProto.prototype = obj.constructor;
+		newProto.prototype = input.constructor;
 		var temp = new newProto();
 
 		for(var key in input)
@@ -328,14 +331,14 @@ function reduceFact( key, values ) {
 	}
 
 
-//  STARTING REDUCTION WITH THE GATHERING OF BUREAUCRATIC DETAIL
+//  INITIALIZING REDUCTION WITH THE GATHERING OF BUREAUCRATIC DETAIL
 	var fact = {
 		date: theDate ,
 		span: theSpan ,
 		updt: theUpdate
 	};
 
-//  RUNNING THE WORKHORSE
+//  STARTING THE WORKHORSE
 	values.forEach( function(value) {
 		update(fact,value);
 	});
