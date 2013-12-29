@@ -3,9 +3,8 @@
 cd /vagrant
 
 # create clean tmp dir
-#rm -rf tmp/*
-#mkdir -p tmp/db
 rm -rf tmp/*
+mkdir -p tmp/db
 mkdir -p /data/db
 
 # download onionoo dumps

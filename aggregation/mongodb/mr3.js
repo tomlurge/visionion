@@ -3,27 +3,29 @@
 //
 //	CONFIG
 
+(function () {
+	"use strict";
 
 //  MAIN STRUCTURE
 
 var mainConfig = {
 	clients: {},
 	servers: {
-		total : function() {return new Server();},
+		total : function() { return new Server();},     //  total : []
 		relays: {
-			total: function() {return new Server(pbr);},
+			total: function() {return new Server("pbr");},      // total : ["pbr"]
 			roles: {
-				guard: function() {return new Server(pbg);},
-				middle: function() {return new Server(pbm);},
-				exit: function() {return new Server(pbe, pex);},
+				guard: function() {return new Server("pbg");},
+				middle: function() {return new Server("pbm");},
+				exit: function() {return new Server("pbe", "pex");},
 				dir: function() {return new Server();}
 			},
 			flags: {
-				notFastStable: function() {return new Server(probs);},
-				fast: function() {return new Server(probs);},
-				stable: function() {return new Server(probs);},
-				fastStable: function() {return new Server(probs);},
-				authority: function() {return new Server(probs);}
+				notFastStable: function() {return new Server("probs");},
+				fast: function() {return new Server("probs");},
+				stable: function() {return new Server("probs");},
+				fastStable: function() {return new Server("probs");},
+				authority: function() {return new Server("probs");}
 			}
 		},
 		bridges: {
@@ -106,16 +108,17 @@ function mapValues() {
 	var PropInit = function (config, test) {                        //  TODO    if this doesn't work call Server() with 3. parameter "this"
 		var list = {} ;
 		var testIt = test || false;                                 //  if no test is provided we don't want the value
-		config.forEach(function(c) {                                //  iterate through config array
+		config.forEach( function(c) {                                //  iterate through config array
 			if (testIt(c)) {                                        //  if test returns false no initialization needed
-				if (config == tsvConfig)
+				if (config === tsvConfig) {
 					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
-/*
-				else if (config == probsConfig)
+				}
+				else if (config === probsConfig) {
 					list[c] = that.c;                               //  summing up probabilities
-*/
-				else
+				}
+				else {
 					list[c] = 1;                                    //  everybody else just counts numbers of servers
+				}
 			}
 		});
 		return list;
@@ -128,61 +131,62 @@ function mapValues() {
 		this.bwc = that.bwc;
 		this.osv = new PropInit(
 			osvConfig,
-			function(c){return (that.osv == c);}
+			function(c){return (that.osv === c);}
 		);
 		this.tsv = new PropInit(
 			tsvConfig,
-			function(c){return (that.tsv == c);}
+			function(c){return (that.tsv === c);}
 		);
+
 		for (var arg in args) {
-			if (arg == pex) {
-				/*this.pex = */new PropInit(
+			if (arg === "pex") {
+				this.pex = new PropInit(
 					pexConfig,
-					function(c) {
-						if (that.pex)
-							switch(c) {
-								case 'p4':
-									return (that.pex.indexOf(443) > -1);
-								case 'p6':
-									return (that.pex.indexOf(6667) > -1);
-								case 'p8':
-									return (that.pex.indexOf(80) > -1);
-								case 'p46':
-									return (that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-								case 'p48':
-									return (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1);
-								case 'p68':
-									return (that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1);
-								case 'p468':
-									return (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-									break;
-							}
-						else return false;
-					}
+					pexTest(arg)            // TODO arg? welches arg?
 				);
 			}
-			else if (arg == pbr || pbg || pbm || pbe) {
-/*
-				if (that.arg)
+			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") { // TODO das hört nach dem ersten treffer auf, muss aber alle überprüfen, da mehrfachvorkommnisse möglich sind
+				if (that.arg) {
 					this[arg] = that.arg;
-*/
+				}
 			}
-			else if (arg == probs) {
-/*
+			else if (arg === "probs") {
 				this.probs =  new PropInit(
 					probsConfig,
-					function(p){return (that[p] == p);}
-				)
-*/
+					propsTest(arg)
+				);
 			}
-		};
+		}
+
+		function pexTest(c) {
+			var result = {};
+			if (that.pex) {
+				result.p4 = (that.pex.indexOf(443) > -1);
+				result.p6 =  (that.pex.indexOf(6667) > -1);
+				result.p8 =  (that.pex.indexOf(80) > -1);
+				result.p46 =  (that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
+				result.p48 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1);
+				result.p68 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1);
+				result.p468 =  (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
+				return result;
+			}
+			else {
+				return false;
+			}
+		}
+
+		function propsTest(p) {
+			return (that[p] === p);
+		}
+
 	};
 
 //  test if a specific server should be constructed
 	var testServers = function(toTest) {
-		if (that.type == "r") {
-			if (toTest in mainConfig.servers.relays.roles)
+		if (that.type === "r") {
+			if (toTest in mainConfig.servers.relays.roles) {
 				return (that.role.indexOf(toTest) > -1);
+			}
 			else if (toTest in mainConfig.servers.relays.flags) {
 				switch(toTest) {
 					case 'authority':   //  TODO    when will that be relevant? should it really be part of flagsTest? is the logic ok?
@@ -203,9 +207,9 @@ function mapValues() {
 				}
 			}
 		}
-		else if (that.type == "b") {
+		else if (that.type === "b") {
 			if (toTest in mainConfig.servers.bridges.brps) {
-				return (that.brp && that.brp == toTest);
+				return (that.brp && that.brp === toTest);
 			}
 			else if (toTest in mainConfig.servers.bridges.brts) {
 				switch(toTest) {
@@ -228,14 +232,17 @@ function mapValues() {
 
 //  controls populating the mapped object with servers
 	var buildMain = function(config) {
-		for (var c in config)
-			if (typeof(c) == "function" && testServers(c))
-				value[c] = c;                                       //  TODO    or value[c] = c(); ?
+		for (var c in config) {
+			if (typeof(c) === "function" && testServers(c)) {       //  TODO abfrgae ob das ein array ist
+																	// Object.prototype.toString.call(val) == [object Array]
+				value[c] = c();                                     //  TODO  value[c] = new Server(args);  und oben die args als
+			}
 			else {
 				value[c] = {};
 				buildMain(config[c]);                               //  todo    wo schreibt er denn das hin?
 																	//	todo	woher weiss er, dass er in das gerade erzeugte objekt schreiben soll
-			};
+			}
+		}
 	};
 
 
@@ -251,7 +258,7 @@ function mapValues() {
 	};
 
 //  FILLING IN RELAYS
-	if (this.type == "r") {
+	if (this.type === "r") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.relays = function() {
 			buildMain(mainConfig.servers.relays);
@@ -259,7 +266,7 @@ function mapValues() {
 	}
 
 //	FILLING IN BRIDGES
-	else if (this.type == "b") {
+	else if (this.type === "b") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.bridges = function() {
 			buildMain(mainConfig.servers.bridges);
@@ -267,7 +274,7 @@ function mapValues() {
 	}
 
 //	FILLING IN CLIENTS
-	else if (this.type == "c") {
+	else if (this.type === "c") {
 		value.clients = {
 			total: this.cr && this.cb ? this.cr + this.cb : 0,
 			atBridges:  this.cb ? this.cb : 0,
@@ -291,7 +298,7 @@ function mapValues() {
 //  AND BE DONE WITH IT
 
 	emit( theDate , value );
-} ;
+}
 
 
 
@@ -305,15 +312,19 @@ function reduceFact( key, values ) {
 
 //  HELPER FUNCTION - see http://stackoverflow.com/a/122190/128165 for details
 	function clone(input){
-		if(input == null || typeof(input) != 'object')
+		if(input === null || typeof(input) !== 'object') {
 			return input;
+		}
 
 		var newProto = function(){};
 		newProto.prototype = input.constructor;
 		var temp = new newProto();
 
-		for(var key in input)
-			temp[key] = clone(input[key]);
+		for(var key in input) {
+			if (input.hasOwnProperty(key)) {
+				temp[key] = clone(input[key]);
+			}
+		}
 		return temp;
 	}
 
@@ -352,7 +363,7 @@ function reduceFact( key, values ) {
 //  AND BE DONE WITH IT, AGAIN
 	return fact;
 
-} ;
+}
 
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,5 +399,7 @@ var runAggregation = function(date, span, update) {
 		}
 	);
 }("2013-04-03 23" , "1" , "2013-08-14T09:23:45.302Z");
+
+})();
 
 
