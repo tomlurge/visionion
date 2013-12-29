@@ -1,51 +1,69 @@
-﻿**	sketch of a new design **
+﻿**	new design **
+as implemented in mr3.js - the 3. version of my MongoDB mapRerduce scripts
 
-	clients						client
-	servers						box
-		total					server
-		bridges					box
-			total				server
-			brps				box
-				email			server
-				https			server
-				other			server
-			brts				box
-				obfs2			server
-				obfs3			server
-				obfs23			server
-			bres				box
-				bre				server
-		relays					box
-			total				server	
-			roles				box
-				guard			server	
-				middle			server	
-				exit			server	 + pex
-				dir				server
-			flags				box
-				notFastStable	server
-				fast			server
-				stable			server
-				fastStable		server
-				authority		server
-			probs				box
-				relay			value
-				guard			value
-				middle			value
-				exit			value
-			mixes				box						// later...
-				role*flag*prob	value (80 permutations)			
-	countries
-	autosys
+		clients						client
+		servers						box
+			total					server
+			bridges					box
+				total				server
+				brps				box
+					email			server
+					https			server
+					other			server
+				brts				box
+					obfs2			server
+					obfs3			server
+					obfs23			server
+				bres				box
+					bre				server
+			relays					box
+				total				server	
+				roles				box		+ pbr
+					guard			server	+ pbg
+					middle			server	+ pbm
+					exit			server	+ pbe + pex
+					dir				server
+				flags				box
+					notFastStable	server	+ probs
+					fast			server	+ probs
+					stable			server	+ probs
+					fastStable		server	+ probs
+					authority		server	+ probs
+				mixes				box						// later...
+					role*flag*prob	value (80 permutations)			
+		countries
+		autosys
 
+where a "server" generally looks like this:
 
-TODO
-	* ein config array für die grundstruktur (also flags, roles etc) 
-		per foreach abfragen und tatsächlich die ganze konstruktion per script generieren
-	* noch viel mehr modularisierung mit funktionen
-	* country und autosys in reduce mit map abgleichen
+		count						int,			+1 for each relay or bridge
+		bwa							int,			sum over all relays and bridges
+		bwc							int,			dito
+		osv: {
+			linux					int,			sum over all relays/bridges with os linux
+			darwin					int,												darwin
+			freebsd					int,												etc
+			windows: int,
+			other					int
+		},
+		tsv: {
+			v010					int,			sum over all relays/bridges with tsv 010
+			v011					int, 												 011
+			v012					int, 												 etc
+			v020					int, 
+			v021					int, 
+			v022					int, 
+			v023					int, 
+			v024					int	
+
+		plus eventually some pex or prob fields
+		
+	
+
 
 **	A schematic and annotated example of a document in the facts collection **
+as implemented in mapreduce.js - the 1. version of my MongoDB mapRerduce scripts
+and the 2. (unfinished) version
 
 		fieldname: datatype				description
         -------------------				-----------
