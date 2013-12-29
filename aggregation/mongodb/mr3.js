@@ -110,8 +110,10 @@ function mapValues() {
 			if (testIt(c)) {                                        //  if test returns false no initialization needed
 				if (config == tsvConfig)
 					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
+/*
 				else if (config == probsConfig)
 					list[c] = that.c;                               //  summing up probabilities
+*/
 				else
 					list[c] = 1;                                    //  everybody else just counts numbers of servers
 			}
@@ -134,7 +136,7 @@ function mapValues() {
 		);
 		for (var arg in args) {
 			if (arg == pex) {
-				this.pex = new PropInit(
+				/*this.pex = */new PropInit(
 					pexConfig,
 					function(c) {
 						if (that.pex)
@@ -160,14 +162,18 @@ function mapValues() {
 				);
 			}
 			else if (arg == pbr || pbg || pbm || pbe) {
+/*
 				if (that.arg)
 					this[arg] = that.arg;
+*/
 			}
 			else if (arg == probs) {
+/*
 				this.probs =  new PropInit(
 					probsConfig,
 					function(p){return (that[p] == p);}
 				)
+*/
 			}
 		};
 	};
