@@ -108,7 +108,7 @@ function mapValues() {
 		var list = {} ;
 		var testIt = test || false;                                 //  if no test is provided we don't want the value
 		config.forEach( function(c) {                                //  iterate through config array
-			if (testIt(c)) {                                        //  if test returns false no initialization needed
+			if (testIt && testIt(c)) {                                        //  if test returns false no initialization needed
 				if (config === tsvConfig) {
 					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
 				}
@@ -165,7 +165,7 @@ function mapValues() {
 			if (arg === "pex") {
 				thus.pex = new PropInit(
 					pexConfig,
-					pexTest()
+					pexTest
 				);
 			}
 			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") { // TODO das hört nach dem ersten treffer auf, muss aber alle überprüfen, da mehrfachvorkommnisse möglich sind
@@ -176,7 +176,9 @@ function mapValues() {
 			else if (arg === "probs") {
 				thus.probs =  new PropInit(
 					probsConfig,
-					propsTest(arg)
+                    function(){
+                        return propsTest(arg)
+                    }
 				);
 			}
 		});
@@ -233,16 +235,18 @@ function mapValues() {
 
 //  controls populating the mapped object with servers
 	var buildMain = function(config) {
+        var result = {};
+
 		for (var c in config) {
-			if (Object.prototype.toString.call(c) === "[object Array]" && testServers(c)) {
-				value[c] = new Server(c);                                    //  TODO  args
-			}
-			else {
-				value[c] = {};
-				buildMain(config[c]);                               //  todo    wo schreibt er denn das hin?
-																	//	todo	woher weiss er, dass er in das gerade erzeugte objekt schreiben soll
-			}
+            if (config.hasOwnProperty(c)) {
+                if (Object.prototype.toString.call(config[c]) === "[object Array]" && testServers(config[c])) {
+                    result[c] = new Server(config[c]);
+                } else {
+                    result[c] = buildMain(config[c]);
+                }
+            }
 		}
+        return result;
 	};
 
 
@@ -327,19 +331,21 @@ function reduceFact( key, values ) {
 //  DEFINING THE WORKHORSE - WILL GO THROUGH EVERY PROPERTY IN INCOMING DATA AND ADD IT TO THE 'FACT'
 	function update(fact, value){
 		for (var property in value){
-			if (fact[property] !== undefined){   // existing path - needs to be updated
-				if (typeof(fact[property]) === 'number') {
-					fact[property] += value[property];
-				}
-				else if (typeof(fact[property]) === 'string') {
-					fact[property] = value[property];
-				}
-				else {  // element is object - drill down
-					update( fact[property], value[property] );
-				}
-			} else {    // new path - needs to be added
-				fact[property] = clone(value[property]);
-			}
+            if (value.hasOwnProperty(property)){
+                if (fact[property] !== undefined){   // existing path - needs to be updated
+                    if (typeof(fact[property]) === 'number') {
+                        fact[property] += value[property];
+                    }
+                    else if (typeof(fact[property]) === 'string') {
+                        fact[property] = value[property];
+                    }
+                    else {  // element is object - drill down
+                        update( fact[property], value[property] );
+                    }
+                } else {    // new path - needs to be added
+                    fact[property] = clone(value[property]);
+                }
+            }
 		}
 	}
 
