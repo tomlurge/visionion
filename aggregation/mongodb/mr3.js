@@ -29,7 +29,7 @@ function mapValues() {
 					Dir: []
 				},
 				flags: {
-					notFastStable: ["probs"],   //  TODO    make that ["pbr", "pbg", "pbm", "pbe"]
+					notFastStable: ["probs"],
 					fast: ["probs"],
 					stable: ["probs"],
 					fastStable: ["probs"],
@@ -132,21 +132,21 @@ function mapValues() {
 	] ;
 
 	var probsConfig = [
-		{	name: "relay" ,
+		{	name: "pbr" ,
 			test: function(){ return (that.pbr ); } ,
-			labl: "pbr"
+			labl: "relay"
 		} ,
-		{	name: "guard" ,
+		{	name: "pbg" ,
 			test: function(){ return (that.pbg ); } ,
-			labl: "pbg"
+			labl: "guard"
 		} ,
-		{	name: "middle" ,
+		{	name: "pbm" ,
 			test: function(){ return (that.pbm ); } ,
-			labl: "pbm"
+			labl: "middle"
 		} ,
-		{	name: "exit" ,
+		{	name: "pbe" ,
 			test: function(){ return (that.pbe ); } ,
-			labl: "pbe"
+			labl: "exit"
 		}
 	] ;
 
@@ -191,7 +191,7 @@ function mapValues() {
 				result = (that.brp && that.brp === configToTest);
 			}
 			else if (configToTest in mainConfig.servers.bridges.brts) {
-				switch(configToTest) {                              //  TODO    gives strange results (very low numbers)
+				switch(configToTest) {
 					case "obfs2":
 						result = (that.brt && that.brt.indexOf('obfs2')  > -1);
 						break;
@@ -222,31 +222,12 @@ function mapValues() {
 //  CONSTRUCT
 
 //  construct nested property objects (osv, tsv, pex, probs...) inside the server object
-/*	//  old version with seperate test
-	var PropInit = function (config, test) {                        //  TODO    if this doesn't work call Server() with 3. parameter "this"
-		var list = {} ;
-		config.forEach( function(c) {                               //  iterate through config array
-			if (test && test(c)) {                                  //  if no test is provided no initialization is needed
-				if (config === probsConfig) {
-					list[c] = that[c];                              //  TODO    summing up probabilities
-				}
-				else if (config === tsvConfig) {
-					list["v" + c] = 1;                              //  tsv property name can't start with an int
-				}
-				else {
-					list[c] = 1;                                    //  everybody else just counts numbers of servers
-				}
-			}
-		});
-		return list;
-	};*/
-
-	var PropInit = function (conf) {                             //  TODO    if this doesn't work maybe call Server() with 2. parameter "this"
+	var PropInit = function (conf) {
 		var list = {} ;
 		conf.forEach( function(c) {                                 //  iterate through config array
 			if (c.test()) {                                         //  if no test is provided no initialization is needed
 				if (conf === probsConfig) {
-					list[c.name] = that[c.name];                    //  TODO    summing up probabilities
+					list[c.labl] = that[c.name];
 				}
 				else {
 					list[c.name] = 1;                               //  everything else just adds 1 to the count
@@ -269,18 +250,13 @@ function mapValues() {
 			if (arg === "pex" && that.pex) {
 				thus.pex = new PropInit( pexConfig );
 			}
-			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") { // TODO das hört nach dem ersten treffer auf, muss aber alle überprüfen, da mehrfachvorkommnisse möglich sind
-				if (that.arg) {
-					thus[arg] = that.arg;
+			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") {
+				if (that[arg]) {
+					thus[arg] = that[arg];
 				}
 			}
 			else if (arg === "probs") {
-				thus.probs =  new PropInit(
-					probsConfig,
-                    function(arg){
-	                    return (that[arg] === arg);         //  TODO sollte so funktionieren ?!?
-                    }
-				);
+				thus.probs =  new PropInit( probsConfig );
 			}
 		});
 	};
@@ -296,14 +272,14 @@ function mapValues() {
                 //  check for leaves in the main tree (which are arrays) and if they are relevant to the incoming data.
                 //  if yes build server object(s)
                 if (Object.prototype.toString.call(config[c]) === "[object Array]" ) {
-		            if (testServers(c, type)) {
+	                //  but check for 'total' explicitly since it doesn't occur in import data and tehrefor won't pass the test
+	                if (c === "total") {
+		                result[c] = new Server(config[c]);
+	                }
+		            else if (testServers(c, type)) {
 			            result[c] = new Server(config[c]);
-                     }
+                    }
                 }
-/*	            //  TODO    wenn alles läuft kuck nochmal was hier der fehler war
-				if ( Object.prototype.toString.call(config[c]) === "[object Array]" && testServers(config[c], type)) {
-			            result[c] = new Server(config[c], type);
-	            } */
 				//  else it must be a knot in the tree
 				//  recursively check for leaves under that knot
 	            else {
@@ -330,14 +306,12 @@ function mapValues() {
 	if (this.type === "r") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.relays = buildMain(mainConfig.servers.relays, "relay");
-		value.servers.relays.total = new Server();
 	}
 
 //	FILLING IN BRIDGES
 	else if (this.type === "b") {
 		value.servers.total = new Server(); //	pay credit to servers
 		value.servers.bridges = buildMain(mainConfig.servers.bridges, "bridge");
-		value.servers.bridges.total = new Server();
 	}
 
 //	FILLING IN CLIENTS

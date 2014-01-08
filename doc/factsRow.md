@@ -1,5 +1,5 @@
 ﻿**	new design **
-as implemented in mr3.js - the 3. version of my MongoDB mapRerduce scripts
+as implemented in mr3.js - the 3. version of the MongoDB mapReduce script
 
 		clients						client
 		servers						box
@@ -17,8 +17,8 @@ as implemented in mr3.js - the 3. version of my MongoDB mapRerduce scripts
 				bres				box
 					bre				server
 			relays					box
-				total				server	
-				roles				box		+ pbr
+				total				server	+ pbr
+				roles				box
 					guard			server	+ pbg
 					middle			server	+ pbm
 					exit			server	+ pbe + pex
