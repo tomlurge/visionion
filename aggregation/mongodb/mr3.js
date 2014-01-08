@@ -1,92 +1,5 @@
-﻿//	//////////////////////////////////////////////////////////////////////////////////////////////
-//	//////////////////////////////////////////////////////////////////////////////////////////////
-//
-//	CONFIG
-
-(function () {
+﻿(function () {
 	"use strict";
-
-//  MAIN STRUCTURE
-
-var mainConfig = {
-	clients: {},
-	servers: {
-		total : [],
-		relays: {
-			total: ["pbr"],
-			roles: {
-				guard: ["pbg"],
-				middle: ["pbe", "pex"],
-				dir: []
-			},
-			flags: {
-				notFastStable: ["probs"],
-				fast: ["probs"],
-				stable: ["probs"],
-				fastStable: ["probs"],
-				authority: ["probs"]
-			}
-		},
-		bridges: {
-			total: [],
-			brps: {
-				email: [],
-				https: [],
-				other: []
-			},
-			brts: {
-				obfs2: [],
-				obfs3: [],
-				obfs23: []
-			},
-			bres: {
-				bre: []
-			}
-		}
-	},
-	countries: {},
-	autosys: {}
-};
-
-//  SERVER COMPONENTS
-
-var osvConfig = [
-	"linux",
-	"darwin",
-	"freebsd",
-	"windows",
-	"other"
-];
-
-var tsvConfig = [
-	"010",
-	"011",
-	"012",
-	"020",
-	"021",
-	"022",
-	"023",
-	"024",
-	"025"
-];
-
-var probsConfig = [
-	"pbr",
-	"pbg",
-	"pbm",
-	"pbe"
-];
-
-var pexConfig = [
-	"p4",
-	"p6",
-	"p8",
-	"p46",
-	"p48",
-	"p68",
-	"p468"
-];
-
 
 
 //	//////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,26 +7,231 @@ var pexConfig = [
 //
 //	MAP
 
-
 function mapValues() {
 
-
-//  MACHINERY
-
-//  make "this" - the  document currently being mapped - referencable inside function
+//  make "this" - the document currently being mapped - referencable inside functions
 	var that = this;
 
-//  construct nested objects inside the server object
+//	CONFIGIGURATION
+
+//  scaffold of aggregated fact
+
+	var mainConfig = {
+		clients: {},
+		servers: {
+			total : [],
+			relays: {
+				total: ["pbr"],
+				roles: {
+					Guard: ["pbg"],
+					Middle: ["pbm"],
+					Exit: ["pbe", "pex"],
+					Dir: []
+				},
+				flags: {
+					notFastStable: ["probs"],   //  TODO    make that ["pbr", "pbg", "pbm", "pbe"]
+					fast: ["probs"],
+					stable: ["probs"],
+					fastStable: ["probs"],
+					authority: ["probs"]
+				}
+			},
+			bridges: {
+				total: [],
+				brps: {
+					email: [],
+					https: [],
+					other: []
+				},
+				brts: {
+					obfs2: [],
+					obfs3: [],
+					obfs23: []
+				},
+				bres: {
+					bre: []
+				}
+			}
+		},
+		countries: {},
+		autosys: {}
+	};
+
+//  server components
+
+	var osvConfig = [
+		{   name: "linux" ,
+			test: function(){ return (that.osv === "linux" ); }
+		} ,
+		{   name: "darwin" ,
+			test: function(){ return (that.osv === "darwin" ); }
+		} ,
+		{   name: "freebsd" ,
+			test: function(){ return (that.osv === "freebsd" ); }
+		} ,
+		{   name: "windows" ,
+			test: function(){ return (that.osv === "windows" ); }
+		} ,
+		{   name: "other" ,
+			test: function(){ return (that.osv === "other" ); }
+		}
+	] ;
+
+	var tsvConfig = [
+		{	name: "v010" ,
+			test: function(){ return (that.tsv === "010" ); }
+		} ,
+		{	name: "v011" ,
+			test: function(){ return (that.tsv === "011" ); }
+		} ,
+		{	name: "v012" ,
+			test: function(){ return (that.tsv === "012" ); }
+		} ,
+		{	name: "v020" ,
+			test: function(){ return (that.tsv === "020" ); }
+		} ,
+		{	name: "v021" ,
+			test: function(){ return (that.tsv === "021" ); }
+		} ,
+		{	name: "v022" ,
+			test: function(){ return (that.tsv === "022" ); }
+		} ,
+		{	name: "v023" ,
+			test: function(){ return (that.tsv === "023" ); }
+		} ,
+		{	name: "v024" ,
+			test: function(){ return (that.tsv === "024" ); }
+		} ,
+		{	name: "v025" ,
+			test: function(){ return (that.tsv === "025" ); }
+		}
+	] ;
+
+	var pexConfig = [
+		{   name: "p4" ,
+			test: function(){ return (that.pex && that.pex.indexOf(443) > -1); }
+		} ,
+		{   name: "p6" ,
+			test: function(){ return (that.pex && that.pex.indexOf(6667) > -1); }
+		} ,
+		{   name: "p8" ,
+			test: function(){ return (that.pex && that.pex.indexOf(80) > -1); }
+		} ,
+		{   name: "p46" ,
+			test: function(){ return (that.pex && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1); }
+		} ,
+		{   name: "p48" ,
+			test: function(){ return (that.pex && that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1); }
+		} ,
+		{   name: "p68" ,
+			test: function(){ return (that.pex && that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1); }
+		} ,
+		{   name: "p468" ,
+			test: function(){ return (that.pex && that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1); }
+		}
+	] ;
+
+	var probsConfig = [
+		{	name: "relay" ,
+			test: function(){ return (that.pbr ); } ,
+			labl: "pbr"
+		} ,
+		{	name: "guard" ,
+			test: function(){ return (that.pbg ); } ,
+			labl: "pbg"
+		} ,
+		{	name: "middle" ,
+			test: function(){ return (that.pbm ); } ,
+			labl: "pbm"
+		} ,
+		{	name: "exit" ,
+			test: function(){ return (that.pbe ); } ,
+			labl: "pbe"
+		}
+	] ;
+
+
+//  TEST
+
+	var testServers = function(configToTest, type) {
+		var result;
+		if (type === "relay") {
+			//  test for roles
+			if (configToTest in mainConfig.servers.relays.roles) {
+				result = (that.role.indexOf(configToTest) > -1);
+			}
+			//  test for flags
+			else if (configToTest in mainConfig.servers.relays.flags) {
+				switch(configToTest) {
+					case "authority":
+						result = (that.flag && that.flag.indexOf("Authority") > -1);
+						break;
+					case "fast":
+						result = (that.flag && that.flag.indexOf("Fast") > -1  && that.flag.indexOf("Stable") === -1);
+						break;
+					case "stable":
+						result = (that.flag && that.flag.indexOf("Fast") === -1 && that.flag.indexOf("Stable") > -1);
+						break;
+					case "fastStable":
+						result = (that.flag && that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
+						break;
+					case "notFastStable":
+						result = (that.flag && that.flag.indexOf("Fast") === -1 && that.flag.indexOf("Stable") === -1);
+						break;
+					default:
+						result = false;
+				}
+			}
+			else {
+				result = false;
+			}
+		}
+		else if (type === "bridge") {
+			if (configToTest in mainConfig.servers.bridges.brps) {
+				result = (that.brp && that.brp === configToTest);
+			}
+			else if (configToTest in mainConfig.servers.bridges.brts) {
+				switch(configToTest) {                              //  TODO    gives strange results (very low numbers)
+					case "obfs2":
+						result = (that.brt && that.brt.indexOf('obfs2')  > -1);
+						break;
+					case "obfs3":
+						result = (that.brt && that.brt.indexOf('obfs3') > -1);
+						break;
+					case "obfs23":
+						result = (that.brt && that.brt.indexOf('obfs2')  > -1 && that.brt.indexOf('obfs3')  > -1);
+						break;
+					default:
+						result = false;
+				}
+			}
+			else if (configToTest in mainConfig.servers.bridges.bres) {
+				result = (that.bre);
+			}
+			else {
+				result = false;
+			}
+		}
+		else {
+			result = false;
+		}
+		return result;
+	};
+
+
+//  CONSTRUCT
+
+//  construct nested property objects (osv, tsv, pex, probs...) inside the server object
+/*	//  old version with seperate test
 	var PropInit = function (config, test) {                        //  TODO    if this doesn't work call Server() with 3. parameter "this"
 		var list = {} ;
-		var testIt = test || false;                                 //  if no test is provided we don't want the value
-		config.forEach( function(c) {                                //  iterate through config array
-			if (testIt && testIt(c)) {                                        //  if test returns false no initialization needed
-				if (config === tsvConfig) {
-					list["v" + c] = 1;                              //  silly tsv property name can't start with an int
+		config.forEach( function(c) {                               //  iterate through config array
+			if (test && test(c)) {                                  //  if no test is provided no initialization is needed
+				if (config === probsConfig) {
+					list[c] = that[c];                              //  TODO    summing up probabilities
 				}
-				else if (config === probsConfig) {
-					list[c] = that.c;                               //  summing up probabilities
+				else if (config === tsvConfig) {
+					list["v" + c] = 1;                              //  tsv property name can't start with an int
 				}
 				else {
 					list[c] = 1;                                    //  everybody else just counts numbers of servers
@@ -121,52 +239,35 @@ function mapValues() {
 			}
 		});
 		return list;
-	};
+	};*/
 
+	var PropInit = function (conf) {                             //  TODO    if this doesn't work maybe call Server() with 2. parameter "this"
+		var list = {} ;
+		conf.forEach( function(c) {                                 //  iterate through config array
+			if (c.test()) {                                         //  if no test is provided no initialization is needed
+				if (conf === probsConfig) {
+					list[c.name] = that[c.name];                    //  TODO    summing up probabilities
+				}
+				else {
+					list[c.name] = 1;                               //  everything else just adds 1 to the count
+				}
+			}
+		});
+		return list;
+	};
 
 //  construct server object
-
-	var pexTest = function() {
-		if (that.pex) {
-			var result = {};
-			result.p4 = (that.pex.indexOf(443) > -1);
-			result.p6 =  (that.pex.indexOf(6667) > -1);
-			result.p8 =  (that.pex.indexOf(80) > -1);
-			result.p46 =  (that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-			result.p48 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1);
-			result.p68 = (that.pex.indexOf(80) > -1 && that.pex.indexOf(6667) > -1);
-			result.p468 =  (that.pex.indexOf(80) > -1 && that.pex.indexOf(443) > -1 && that.pex.indexOf(6667) > -1);
-			return result;  // TODO     what to do with the result?
-		}
-		else {
-			return false;
-		}
-	};
-
-	var propsTest = function(p) {
-		return (that[p] === p);
-	};
-
 	var Server = function(args){
 		args  = args || [];
 		this.count = 1;
 		this.bwa = that.bwa;
 		this.bwc = that.bwc;
-		this.osv = new PropInit(
-			osvConfig,
-			function(c){return (that.osv === c);}
-		);
-		this.tsv = new PropInit(
-			tsvConfig,
-			function(c){return (that.tsv === c);}
-		);
+		this.osv = new PropInit( osvConfig );
+		this.tsv = new PropInit( tsvConfig );
 		var thus = this;
 		args.forEach(function(arg) {
-			if (arg === "pex") {
-				thus.pex = new PropInit(
-					pexConfig,
-					pexTest
-				);
+			if (arg === "pex" && that.pex) {
+				thus.pex = new PropInit( pexConfig );
 			}
 			else if (arg === "pbr" || arg === "pbg" || arg === "pbm" || arg === "pbe") { // TODO das hört nach dem ersten treffer auf, muss aber alle überprüfen, da mehrfachvorkommnisse möglich sind
 				if (that.arg) {
@@ -176,73 +277,37 @@ function mapValues() {
 			else if (arg === "probs") {
 				thus.probs =  new PropInit(
 					probsConfig,
-                    function(){
-                        return propsTest(arg)
+                    function(arg){
+	                    return (that[arg] === arg);         //  TODO sollte so funktionieren ?!?
                     }
 				);
 			}
 		});
-
 	};
 
 
-//  test if a specific server should be constructed
 
-	var flagsTest = function() {
-		var result = {};
-		result.authority = (that.flag && that.flag.indexOf("Authority") > -1);
-		result.fast = (that.flag && that.flag.indexOf("Fast") > -1  && that.flag.indexOf("Stable") <= -1);
-		result.stable = (that.flag && that.flag.indexOf("Fast") <= -1 && that.flag.indexOf("Stable") > -1);
-		result.fastStable = (that.flag && that.flag.indexOf("Fast") > -1 && that.flag.indexOf("Stable") > -1);
-		result.notFastStable = (that.flag && that.flag.indexOf("Fast") <= -1 && that.flag.indexOf("Stable") <= -1);
-		return result;  // TODO     what to do with the result?
-	};
-
-	var rolesTest = function() {
-		var result = {};
-		result.obfs2 = (that.brt && that.brt.indexOf('obfs2')  > -1);
-		result.obfs3 = (that.brt && that.brt.indexOf('obfs3') > -1);
-		result.obfs23 = (that.brt && that.brt.indexOf('obfs2')  > -1 && that.brt.indexOf('obfs3')  > -1);
-		return result;  // TODO     what to do with the result?
-	};
-
-	var testServers = function(toTest) {
-		var result = {};
-		if (that.type === "r") {
-			if (toTest in mainConfig.servers.relays.roles) {
-				result = (that.role.indexOf(toTest) > -1);
-			}
-			else if (toTest in mainConfig.servers.relays.flags) {
-				result = flagsTest();
-			}
-		}
-		else if (that.type === "b") {
-			if (toTest in mainConfig.servers.bridges.brps) {
-				result = (that.brp && that.brp === toTest);
-			}
-			else if (toTest in mainConfig.servers.bridges.brts) {
-				result = rolesTest();
-			}
-			else if (toTest in mainConfig.servers.bridges.bres) {
-				result = (that.bre);
-			}
-		}
-		else {
-			result = false;
-		}
-		return result;
-	};
-
-//  controls populating the mapped object with servers
-	var buildMain = function(config) {
+//  controls populating the mapped object with 'servers'
+//  by checking the incoming doc against every knot in mainConfig
+	var buildMain = function(config, type) {
         var result = {};
-
 		for (var c in config) {
             if (config.hasOwnProperty(c)) {
-                if (Object.prototype.toString.call(config[c]) === "[object Array]" && testServers(config[c])) {
-                    result[c] = new Server(config[c]);
-                } else {
-                    result[c] = buildMain(config[c]);
+                //  check for leaves in the main tree (which are arrays) and if they are relevant to the incoming data.
+                //  if yes build server object(s)
+                if (Object.prototype.toString.call(config[c]) === "[object Array]" ) {
+		            if (testServers(c, type)) {
+			            result[c] = new Server(config[c]);
+                     }
+                }
+/*	            //  TODO    wenn alles läuft kuck nochmal was hier der fehler war
+				if ( Object.prototype.toString.call(config[c]) === "[object Array]" && testServers(config[c], type)) {
+			            result[c] = new Server(config[c], type);
+	            } */
+				//  else it must be a knot in the tree
+				//  recursively check for leaves under that knot
+	            else {
+                    result[c] = buildMain(config[c], type);
                 }
             }
 		}
@@ -264,13 +329,15 @@ function mapValues() {
 //  FILLING IN RELAYS
 	if (this.type === "r") {
 		value.servers.total = new Server(); //	pay credit to servers
-		value.servers.relays = buildMain(mainConfig.servers.relays);
+		value.servers.relays = buildMain(mainConfig.servers.relays, "relay");
+		value.servers.relays.total = new Server();
 	}
 
 //	FILLING IN BRIDGES
 	else if (this.type === "b") {
 		value.servers.total = new Server(); //	pay credit to servers
-		value.servers.bridges = buildMain(mainConfig.servers.bridges);
+		value.servers.bridges = buildMain(mainConfig.servers.bridges, "bridge");
+		value.servers.bridges.total = new Server();
 	}
 
 //	FILLING IN CLIENTS
@@ -289,13 +356,14 @@ function mapValues() {
 	}
 
 
-//  COUNTRIES
+//  FILLING IN COUNTRIES
 
 
-//  AUTOSYS
+//  FILLING IN AUTOSYS
 
 
-//  AND BE DONE WITH IT
+
+//  SENDING THE RESULT TO REDUCE
 
 	emit( theDate , value );
 }
@@ -316,9 +384,9 @@ function reduceFact( key, values ) {
 			return input;
 		}
 
-		var newProto = function(){};
-		newProto.prototype = input.constructor;
-		var temp = new newProto();
+		var NewProto = function(){};
+		NewProto.prototype = input.constructor;
+		var temp = new NewProto();
 
 		for(var key in input) {
 			if (input.hasOwnProperty(key)) {
@@ -328,7 +396,7 @@ function reduceFact( key, values ) {
 		return temp;
 	}
 
-//  DEFINING THE WORKHORSE - WILL GO THROUGH EVERY PROPERTY IN INCOMING DATA AND ADD IT TO THE 'FACT'
+//  WILL GO THROUGH EVERY PROPERTY IN INCOMING DATA AND ADD IT TO THE RESULT FACT AS AGGREGATED SO FAR
 	function update(fact, value){
 		for (var property in value){
             if (value.hasOwnProperty(property)){
@@ -349,15 +417,14 @@ function reduceFact( key, values ) {
 		}
 	}
 
-
-//  INITIALIZING REDUCTION WITH THE GATHERING OF BUREAUCRATIC DETAIL
+//  INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
 		date: theDate ,
 		span: theSpan ,
 		updt: theUpdate
 	};
 
-//  STARTING THE WORKHORSE
+//  ADD INCOMING DATA TO THE RESULT FACT
 	values.forEach( function(value) {
 		update(fact,value);
 	});
@@ -391,17 +458,16 @@ var runAggregation = function(date, span, update) {
 			scope: {    //  globally (in the mapReduce job) available variables
 				theDate: date,
 				theSpan: span,
-				theUpdate: update,
-				mainConfig:mainConfig,
-				osvConfig: osvConfig,
-				tsvConfig: tsvConfig,
-				pexConfig: pexConfig,
-				probsConfig: probsConfig
+				theUpdate: update
 			}
 		}
 	);
 }("2013-04-03 23" , "1" , "2013-08-14T09:23:45.302Z");
 
-})();
+
+//	//////////////////////////////////////////////////////////////////////////////////////////////
+//	//////////////////////////////////////////////////////////////////////////////////////////////
+
+})();   // end "use strict"
 
 
