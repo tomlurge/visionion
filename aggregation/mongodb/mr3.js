@@ -408,7 +408,7 @@ function mapValues() {
 			if (that.as) {
 				countryObject.autosys = [
 					{   as: that.as,
-						cuont: 1
+						count: 1
 					}
 				];
 			}
@@ -550,28 +550,10 @@ function reduceFact( key, values ) {
 	function update(fact, value){
 		for (var property in value){
 			if (value.hasOwnProperty(property)){
-
-				if (value[property] === "countries" || value[property] === "autosys") {   //  TODO    the name of the property, not its value
-
-
-
-
-
-					if (property === "as")  {               //  TODO    wie referenziert man den namen eines properties in einem array?
-						if (fact[property] === value[property]) {
-							//   wenn die gleich sind, dann addiere die counts auf
-						}
-						else {
-							//   wenn nicht, dann leg ein neues as objekt an
-						}
-					}
-
-
-
-
-				}
-
-	            else if (fact[property] !== undefined){   // existing path - needs to be updated
+				//  arrays are handled seperately (that concerns the sections "countries" and "autosys")
+				if (Object.prototype.toString.call(value[property]) === "[object Array]" ) {}// do nothing
+				//  check incoming value against already aggregated fact
+				else if (fact[property] !== undefined){   // existing path - needs to be updated
                     if (typeof(fact[property]) === 'number') {
 	                    fact[property] += value[property];
                     }
@@ -606,131 +588,93 @@ function reduceFact( key, values ) {
 
 	}
 
-	//  probleme    countries strings dürfen nicht überschrieben werden
-	//              autosys integers dürfen auch nicht überschreiben werden
-	//				nested arrays
-
-
-
-//	COUNTRIES
-	values.countries.forEach( function (vCountry) {											//	<- double loop part 1: countries in values emitted from map
-		var incomingCountryAlreadyknown = false ;                                           //  assuming data about this country has not already been aded to fact
-		for ( var fc = 0 , fcl = fact.countries.length; fc < fcl ; fc++ ) {					//	<- double loop part 2: countries in fact
-			var countryFact = fact.countries[fc] ;											//	check the array for countries already added to the aggregation process
-			if ( countryFact.country === vCountry.country ) {							    //	if an object for this country was already added to the array
-				countryFact.cbcc += vCountry.cbcc ;									        //	add values from countryMapped to that already existing object
-				countryFact.crcc += vCountry.crcc ;
-				countryFact.relay += vCountry.relay ;
-				countryFact.bwa += vCountry.bwa ;
-				countryFact.bwc += vCountry.bwc ;
-				for (role in roles)
-					countryFact.roles[role.name] += vCountry.roles[role.name] ;
-				for (flag in flags)
-					countryFact.flags[flag.name] += vCountry.flags[flag.name] ;
-				for (prob in probs)
-					countryFact.probs[prob.name] += vCountry.probs[prob.name] ;
-				for (o in osv)
-					countryFact.osv[o.name] += vCountry.osv[o.name] ;
-				for (t in tsv)
-					countryFact.tsv[t.name] += vCountry.tsv[t.name] ;
-				for (p in pex)
-					countryFact.pex[p.name] += vCountry.pex[p.name] ;
-
-				for ( var vca = 0 , vcal = vCountry.autosys.length ; vca < vcal ; vca++ ) { //	<- inner double loop part 1: 'as' in mapped.countries
-					var incomingASinCountryAlreadyKown = false ;	                        //     (can be nmore than one, because incoming may be pre-aggregated)						var incomingASinCountryAlreadyKown = false ;
-					var countryASmap = vCountry.autosys[vca] ;						        //	countryASmap is the whole object { as : int, count : int }
-
-					for ( var fca = 0 , fcal = countryFact.autosys.length; fca < fcal ; fca++ ) {   //	<- inner double loop part 2: 'as' in fact.countries
-						var countryAsFact = countryFact.autosys[fca] ;
-						if (countryAsFact.as === countryASmap.as) {
-							countryAsFact.count += countryASmap.count ;
-							incomingASinCountryAlreadyKown = true ;
-							break ;
-						}
-					}
-					if ( !incomingASinCountryAlreadyKown ) {                                //	after the inner loop is through
-						countryFact.autosys.push(countryASmap) ;                            //	if the 'as' wasn't found in the array add it
-					}
-				}                                                                           //  return to the outer loop, check the next country passed in by mapValues
-				incomingCountryAlreadyknown = true ;
-				break ;
-			}
-		}
-		if (!incomingCountryAlreadyknown) {                                                 //	if the country does not exist in the array so far
-			fact.countries.push(vCountry) ;											        //	add the country object to the array
-		}
-	});
-
-//  AUTOSYS
-	values.autosys.forEach( function(vAutosys) {
-		var incomingASalreadyKnown = false ;
-		for ( var fa = 0 , fal = fact.autosys.length ; fa < fal ; fa++ ) {
-			var asFact = fact.autosys[fa] ;													//	for each object in fact.autosys
-			if ( asFact.as === vAutosys.as ) {												//	if that objects 'as' field equals that of the relay getting mapped
-				asFact.relay += vAutosys.relay ;											//	add up the numbers
-				asFact.bwa += vAutosys.bwa ;
-				asFact.bwc += vAutosys.bwc ;
-				for (role in roles)
-					asFact.roles[role.name] += vAutosys.roles[role.name] ;
-				for (flag in flags)
-					asFact.flags[flag.name] += vAutosys.flags[flag.name] ;
-				for (prob in probs)
-					asFact.probs[prob.name] += vAutosys.probs[prob.name] ;
-
-				for ( var vac = 0 , vacl = vAutosys.countries.length ;  vac < vacl ; vac++ ) {
-					var incomingCountryInASalreadyKown = false ;
-					var asCountryMap = vAutosys.countries[vac] ;
-
-					for ( var fac = 0 , facl = asFact.countries.length; fac < facl ; fac++ ) {
-						var asCountryFact = asFact.countries[fac] ;
-
-						if (asCountryFact.cc === asCountryMap.cc) {
-							asCountryFact.relay += asCountryMap.relay ;
-							asCountryFact.bwa += asCountryMap.bwa ;
-							asCountryFact.bwc += asCountryMap.bwc ;
-							for (role in roles)
-								asCountryFact.roles[role.name] += asCountryMap.roles[role.name] ;
-							for (flag in flags)
-								asCountryFact.flags[flag.name] += asCountryMap.flags[flag.name] ;
-							for (prob in probs)
-								asCountryFact.probs[prob.name] += asCountryMap.probs[prob.name] ;
-							incomingCountryInASalreadyKown = true ;
-							break ;
-						}
-					}
-					if ( !incomingCountryInASalreadyKown ) {
-						asFact.countries.push(asCountryMap) ;
-					}
-
-				}
-
-				incomingASalreadyKnown = true ;
-				break ;
-			}
-		}
-		if ( !incomingASalreadyKnown ) {
-			fact.autosys.push(vAutosys) ;
-		}
-
-	});
-
-
-
-
 
 //  INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
-		date: theDate ,
-		span: theSpan ,
-		updt: theUpdate
+		date: theDate,
+		span: theSpan,
+		updt: theUpdate,
+		countries: [],
+		autosys: []
 	};
 
-//  ADD INCOMING DATA TO THE RESULT FACT
+//  REDUCE INCOMING DATA TO THE RESULT FACT
+	values.forEach(function(value) {
+
+		//  first reduce all properties except "countries" and "autosys" arrays because these require special treatment
+		//  update() doesn't touch arrays
+		update(fact, value);
+
+		value.countries.forEach(function(vCountry) {											//	<- double loop part 1: countries in values emitted from map
+			var incomingCountryAlreadyknown = false ;                                           //  assuming data about this country has not already been aded to fact
+			for ( var fc = 0 , fcl = fact.countries.length; fc < fcl ; fc++ ) {					//	<- double loop part 2: countries in fact
+				var countryFact = fact.countries[fc] ;											//	check the array for countries already added to the aggregation process
+				if ( countryFact.country === vCountry.country ) {							    //	if an object for this country was already added to the array
+					update(countryFact, vCountry);					                            //	add values from countryMapped to that already existing object
+					if (vCountry.autosys) {
+						for ( var vca = 0 , vcal = vCountry.autosys.length ; vca < vcal ; vca++ ) { //	<- inner double loop part 1: 'as' in mapped.countries
+							var incomingASinCountryAlreadyKown = false ;	                        //     (can be nmore than one, because incoming may be pre-aggregated)						var incomingASinCountryAlreadyKown = false ;
+							var countryASmap = vCountry.autosys[vca] ;						        //	countryASmap is the whole object { as : int, count : int }
+
+							for ( var fca = 0 , fcal = countryFact.autosys.length; fca < fcal ; fca++ ) {   //	<- inner double loop part 2: 'as' in fact.countries
+								var countryAsFact = countryFact.autosys[fca] ;
+								if (countryAsFact.as === countryASmap.as) {
+									countryAsFact.count += countryASmap.count ;
+									incomingASinCountryAlreadyKown = true ;
+									break ;
+								}
+							}
+							if ( !incomingASinCountryAlreadyKown ) {                                //	after the inner loop is through
+								countryFact.autosys.push(countryASmap) ;                            //	if the 'as' wasn't found in the array add it
+							}
+						}                                                                           //  return to the outer loop, check the next country passed in by mapValues
+					}
+					incomingCountryAlreadyknown = true ;
+					break ;
+				}
+			}
+			if (!incomingCountryAlreadyknown) {                                                 //	if the country does not exist in the array so far
+				fact.countries.push(vCountry) ;											        //	add the country object to the array
+			}
+		});
+
+		value.autosys.forEach( function(vAutosys) {
+			var incomingASalreadyKnown = false ;
+			for ( var fa = 0 , fal = fact.autosys.length ; fa < fal ; fa++ ) {
+				var asFact = fact.autosys[fa] ;													//	for each object in fact.autosys
+				if ( asFact.as === vAutosys.as ) {												//	if that objects 'as' field equals that of the relay getting mapped
+					update(asFact, vAutosys);											        //	add up the numbers
+					for ( var vac = 0 , vacl = vAutosys.countries.length ;  vac < vacl ; vac++ ) {
+						var incomingCountryInASalreadyKown = false ;
+						var asCountryMap = vAutosys.countries[vac] ;
+						for ( var fac = 0 , facl = asFact.countries.length; fac < facl ; fac++ ) {
+							var asCountryFact = asFact.countries[fac] ;
+							if (asCountryFact.cc === asCountryMap.cc) {
+								update(asCountryFact, asCountryMap);
+								incomingCountryInASalreadyKown = true ;
+								break ;
+							}
+						}
+						if ( !incomingCountryInASalreadyKown ) {
+							asFact.countries.push(asCountryMap) ;
+						}
+					}
+					incomingASalreadyKnown = true ;
+					break ;
+				}
+			}
+			if ( !incomingASalreadyKnown ) {
+				fact.autosys.push(vAutosys) ;
+			}
+		});
+
+	});
+
 	values.forEach( function(value) {
 		update(fact,value);
 	});
 
-//  AND BE DONE WITH IT, AGAIN
+//  AND BE DONE WITH IT
 	return fact;
 
 }
@@ -772,7 +716,6 @@ var runAggregation = function(date, span, update) {
 })();   // end "use strict"
 
 
-/*  TODO    zahlen mit ergebnissen des alten scripts abgleichen
-			zumindest die bridges sind anders
-	TODO    countries und autosys
+/*  TODO    check against results from mapreduce script v1
+			at least the bridge data is different
  */
