@@ -9,14 +9,14 @@
 
 function mapValues() {
 
-//  make "this" - the document currently being mapped - 
-//  referencable inside functions
+//	make "this" - the document currently being mapped - 
+//	referencable inside functions
 	var that = this;
 
 
 //	CONFIGIGURATION
 
-//  server types
+//	server types
 
 	var serversConfig = {
 		relays: {
@@ -53,28 +53,28 @@ function mapValues() {
 		}
 	};
 	
-//  relays
+//	relays
 
 	var rolesConfig = [
-		{	name : "guard",
+		{	name: "guard",
 			test: function() {return (
 				that.role &&
 				that.role.indexOf("Guard") > -1
 			);}
 		},
-		{	name : "middle",
+		{	name: "middle",
 			test: function() {return (
 				that.role &&
 				that.role.indexOf("Middle") > -1
 			);}
 		},
-		{	name : "exit",
+		{	name: "exit",
 			test: function() {return (
 				that.role &&
 				that.role.indexOf("Exit") > -1
 			);}
 		},
-		{   name : "dir",
+		{	name: "dir",
 			test: function() {return (
 				that.role &&
 				that.role.indexOf("Dir") > -1
@@ -83,35 +83,35 @@ function mapValues() {
 	];
 
 	var flagsConfig = [
-		{   name : "notFastStable",
+		{	name: "notFastStable",
 			test: function() {return (
 				that.flag &&
 				that.flag.indexOf("Fast") === -1 &&
 				that.flag.indexOf("Stable") === -1
 			);}
 		},
-		{   name : "fast",
+		{	name: "fast",
 			test: function() {return (
 				that.flag &&
-				that.flag.indexOf("Fast") > -1  &&
+				that.flag.indexOf("Fast") > -1 &&
 				that.flag.indexOf("Stable") === -1
 			);}
 		},
-		{   name : "stable",
+		{	name: "stable",
 			test: function() {return (
 				that.flag &&
 				that.flag.indexOf("Fast") === -1 &&
 				that.flag.indexOf("Stable") > -1
 			);}
 		},
-		{   name : "fastStable",
+		{	name: "fastStable",
 			test: function() {return (
 				that.flag &&
 				that.flag.indexOf("Fast") > -1 &&
 				that.flag.indexOf("Stable") > -1
 			);}
 		},
-		{   name : "authority",
+		{	name: "authority",
 			test: function() {return (
 				that.flag &&
 				that.flag.indexOf("Authority") > -1
@@ -119,7 +119,7 @@ function mapValues() {
 		}
 	];
 
-//  bridges
+//	bridges
 
 	var brpsConfig = [
 		{	name: "email",
@@ -162,22 +162,22 @@ function mapValues() {
 	];
 	
 
-//  server components
+//	server components
 
 	var osvConfig = [
-		{   name: "linux",
+		{	name: "linux",
 			test: function() {return (that.osv === "linux");}
 		},
-		{   name: "darwin",
+		{	name: "darwin",
 			test: function() {return (that.osv === "darwin");}
 		},
-		{   name: "freebsd",
+		{	name: "freebsd",
 			test: function() {return (that.osv === "freebsd");}
 		},
-		{   name: "windows",
+		{	name: "windows",
 			test: function() {return (that.osv === "windows");}
 		},
-		{   name: "other",
+		{	name: "other",
 			test: function() {return (that.osv === "other");}
 		}
 	];
@@ -212,49 +212,49 @@ function mapValues() {
 		}
 	];
 
-//  relay components
+//	relay components
 	
 	var pexConfig = [
-		{   name: "p4",
+		{	name: "p4",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(443) > -1
 			);}
 		},
-		{   name: "p6",
+		{	name: "p6",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(6667) > -1
 			);}
 		},
-		{   name: "p8",
+		{	name: "p8",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(80) > -1
 			);}
 		},
-		{   name: "p46",
+		{	name: "p46",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(443) > -1 &&
 				that.pex.indexOf(6667) > -1
 			);}
 		},
-		{   name: "p48",
+		{	name: "p48",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(80) > -1 &&
 				that.pex.indexOf(443) > -1
 			);}
 		},
-		{   name: "p68",
+		{	name: "p68",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(80) > -1 &&
 				that.pex.indexOf(6667) > -1
 			);}
 		},
-		{   name: "p468",
+		{	name: "p468",
 			test: function() {return (
 				that.pex &&
 				that.pex.indexOf(80) > -1 &&
@@ -265,7 +265,7 @@ function mapValues() {
 	];
 
 	var probsConfig = [
-		{   name: "pbr",
+		{	name: "pbr",
 			test: function() {return (that.pbr);},
 			labl: "relay"
 		},
@@ -285,22 +285,22 @@ function mapValues() {
 
 
 
-//  HELPER FUNCTIONS
+//	HELPER FUNCTIONS
 
-//  manage populating the mapped object with 'servers'
-//  by checking the incoming doc against every knot in serversConfig
+//	manage populating the mapped object with 'servers'
+//	by checking the incoming doc against every knot in serversConfig
 	function populateServers(config, type) {
 		var result = {};
 
 		for (var c in config) {
 			if (config.hasOwnProperty(c)) {
-				//  check for leaves in the main tree (which are arrays)
-				//  and if they are relevant to the incoming data.
-				//  if yes build server object(s)
+				//	check for leaves in the main tree (which are arrays)
+				//	and if they are relevant to the incoming data.
+				//	if yes build server object(s)
 				if (Object.prototype.toString.call(config[c]) ===
 					"[object Array]") {
-					//  but check for 'total' explicitly since it doesn't
-					//  occur in import data, so won't pass the test
+					//	but check for 'total' explicitly since it doesn't
+					//	occur in import data, so won't pass the test
 					if (c === "total") {
 						result[c] = new ServerObject(config[c]);
 					}
@@ -308,8 +308,8 @@ function mapValues() {
 						result[c] = new ServerObject(config[c]);
 					}
 				}
-				//  else it must be a knot in the tree
-				//  recursively check for leaves under that knot
+				//	else it must be a knot in the tree
+				//	recursively check for leaves under that knot
 				else {
 					result[c] = populateServers(config[c], type);
 				}
@@ -317,18 +317,18 @@ function mapValues() {
 		}
 		return result;
 
-		//  server type testing
+		//	server type testing
 		function testServerType(c, type) {
 			var result;
 			if (type === "relay") {
-				//  test for roles
+				//	test for roles
 				if (c in serversConfig.relays.roles) {
 					rolesConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
 					});
 
 				}
-				//  test for flags
+				//	test for flags
 				else if (c in serversConfig.relays.flags) {
 					flagsConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
@@ -339,19 +339,19 @@ function mapValues() {
 				}
 			}
 			else if (type === "bridge") {
-				//  test for transport
+				//	test for transport
 				if (c in serversConfig.bridges.brts) {
 					brtsConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
 					});
 				}
-				//  test for bridge pool
+				//	test for bridge pool
 				else if (c in serversConfig.bridges.brps) {
 					brpsConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
 					});
 				}
-				//  test for EC2 cloud
+				//	test for EC2 cloud
 				else if (c in serversConfig.bridges.bres) {
 					bresConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
@@ -369,9 +369,9 @@ function mapValues() {
 
 	}
 
-//  construct server object
+//	construct server object
 	function ServerObject(args){
-		args  = args || [];
+		args = args || [];
 		this.count = 1;
 		this.bwa = that.bwa || 0;
 		this.bwc = that.bwc || 0;
@@ -393,21 +393,21 @@ function mapValues() {
 				}
 			}
 			else if (arg === "probs") {
-				thus.probs =  new PropInit(probsConfig);
+				thus.probs = new PropInit(probsConfig);
 			}
 		});
 
-		//  construct nested property objects (osv, tsv, pex, probs...)
-		//  inside the server object
+		//	construct nested property objects (osv, tsv, pex, probs...)
+		//	inside the server object
 		function PropInit(conf) {
 			var list = {};
-			conf.forEach(function(c) { //  iterate through config array
-				if (c.test()) { //  if no test is provided no init needed
+			conf.forEach(function(c) {	//	iterate through config array
+				if (c.test()) {	//	if no test is provided no init needed
 					if (conf === probsConfig) {
 						list[c.labl] = that[c.name];
 					}
 					else {
-						list[c.name] = 1; //  everything else just adds 1
+						list[c.name] = 1; //	everything else just adds 1
 					}
 				}
 			});
@@ -416,16 +416,16 @@ function mapValues() {
 
 	}
 
-//  construct countries object
+//	construct countries object
 /*	country information can come from 2 sources: client data and relay
-  data. when it comes from clients it contains 2 arrays: one for number of
-  clients connecting through bridges by country, one for number of clients
-  connecting through relays by country (this data is already pre-aggregated
-  before import in one clients document per datetime). when the document
-  comes from a relay it may contain at most 1 country (the country the
-  relay is located in) and eventually the autonomous system. in the end we
-  want to have an array of uniform country objects with all the data
-	available.  these two types require rather different procedures when
+	data. when it comes from clients it contains 2 arrays: one for number of
+	clients connecting through bridges by country, one for number of clients
+	connecting through relays by country (this data is already pre-aggregated
+	before import in one clients document per datetime). when the document
+	comes from a relay it may contain at most 1 country (the country the
+	relay is located in) and eventually the autonomous system. in the end we
+	want to have an array of uniform country objects with all the data
+	available. these two types require rather different procedures when
 	aggregating. in the map step we therefor first check if the type of the
 	document at hand is "c" (client) or "r" (relay) and populate a country
 	template accordingly. we have 3 cases since clients data contains 2
@@ -483,7 +483,7 @@ function mapValues() {
 			});
 			if (that.as) {
 				countryObject.autosys = [
-					{   as: that.as,
+					{	as: that.as,
 						count: 1
 					}
 				];
@@ -498,12 +498,12 @@ function mapValues() {
 		return countryObject;
 	}
 
-//  construct autosys object
+//	construct autosys object
 	function ASObject(){
 		var asObject = {
 			as: that.as,
-			//  name: lookupASname();   TODO  lookup name for AS
-			//  home: lookupAShome();   TODO  lookup home country for AS
+			//	name: lookupASname();	TODO	lookup name for AS
+			//	home: lookupAShome();	TODO	lookup home country for AS
 			relay: 1,
 			bwa: that.bwa || 0,
 			bwc: that.bwc || 0,
@@ -545,7 +545,7 @@ function mapValues() {
 
 
 
-//  SEEDING RESULT OBJECT
+//	SEEDING RESULT OBJECT
 	var value = {
 		date: theDate,
 		span: theSpan,
@@ -556,16 +556,16 @@ function mapValues() {
 		autosys: []
 	};
 
-//  POPULATING SERVERS / RELAYS
+//	POPULATING SERVERS / RELAYS
 	if (this.type === "r") {
-		value.servers.total = new ServerObject(); //  pay credit to servers
+		value.servers.total = new ServerObject(); //	pay credit to servers
 		value.servers.relays =
 			populateServers(serversConfig.relays, "relay");
 	}
 
 //	POPULATING SERVERS / BRIDGES
 	else if (this.type === "b") {
-		value.servers.total = new ServerObject(); //  pay credit to servers
+		value.servers.total = new ServerObject(); //	pay credit to servers
 		value.servers.bridges =
 			populateServers(serversConfig.bridges, "bridge");
 	}
@@ -574,9 +574,9 @@ function mapValues() {
 	else if (this.type === "c") {
 		value.clients = {
 			total: this.cr && this.cb ? this.cr + this.cb : 0,
-			atBridges:  this.cb ? this.cb : 0,
+			atBridges: this.cb ? this.cb : 0,
 			atRelays: this.cr ? this.cr : 0,
-			cip4: this.cip  && this.cip.v4 ? this.cip.v4 : 0,
+			cip4: this.cip && this.cip.v4 ? this.cip.v4 : 0,
 			cip6: this.cip && this.cip.v6 ? this.cip.v6 : 0,
 			cptObfs2: this.cpt && this.cpt.obfs2 ? this.cpt.obfs2 : 0,
 			cptObfs3: this.cpt && this.cpt.obfs3 ? this.cpt.obfs3 : 0,
@@ -585,7 +585,7 @@ function mapValues() {
 		};
 	}
 
-//  POPULATING COUNTRIES
+//	POPULATING COUNTRIES
 	if (that.type === "r" && that.cc) {
 		value.countries.push(new CountryObject("relay", that.cc));
 
@@ -603,13 +603,13 @@ function mapValues() {
 		}
 	}
 
-//  POPULATING AUTOSYS
+//	POPULATING AUTOSYS
 	if (this.type === "r" && this.as) {
 		value.autosys.push(new ASObject());
 	}
 
 
-//  SENDING THE RESULT TO REDUCE
+//	SENDING THE RESULT TO REDUCE
 
 	emit(theDate, value);
 }
@@ -623,20 +623,20 @@ function mapValues() {
 
 function reduceFact(key, values) {
 
-//  SERVERS + CLIENTS
-//  will go through every property in incoming data
-//  and add it to the result fact as aggregated so far
+//	SERVERS + CLIENTS
+//	will go through every property in incoming data
+//	and add it to the result fact as aggregated so far
 	function update(fact, value){
 		for (var property in value){
 			if (value.hasOwnProperty(property)){
-				//  arrays are handled seperately
-				//  (that concerns the sections "countries" and "autosys")
+				//	arrays are handled seperately
+				//	(that concerns the sections "countries" and "autosys")
 				if (
 					Object.prototype.toString.call(value[property]) ===
 					"[object Array]"
 				) {}// do nothing
-				//  check incoming value against already aggregated fact
-				// existing path - needs to be updated
+				//	check incoming value against already aggregated fact
+				//	existing path - needs to be updated
 				else if (fact[property] !== undefined){
 					if (typeof(fact[property]) === 'number') {
 						fact[property] += value[property];
@@ -644,16 +644,16 @@ function reduceFact(key, values) {
 					else if (typeof(fact[property]) === 'string') {
 						fact[property] = value[property];
 					}
-					else {  //  element is object - drill down
+					else {	//	element is object - drill down
 						update(fact[property], value[property]);
 					}
-				} else {	//  new path - needs to be added
+				} else {	//	new path - needs to be added
 					fact[property] = clone(value[property]);
 				}
 			}
 		}
 
-		//  see http://stackoverflow.com/a/122190/128165 for details
+		//	see http://stackoverflow.com/a/122190/128165 for details
 		function clone(input){
 			if(input === null || typeof(input) !== 'object') {
 				return input;
@@ -673,7 +673,7 @@ function reduceFact(key, values) {
 	}
 
 
-//  INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
+//	INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
 		date: theDate,
 		span: theSpan,
@@ -682,17 +682,17 @@ function reduceFact(key, values) {
 		autosys: []
 	};
 
-//  REDUCE INCOMING DATA TO THE RESULT FACT
+//	REDUCE INCOMING DATA TO THE RESULT FACT
 	values.forEach(function(value) {
 
-		//  first reduce all properties except "countries" and "autosys"
-		//  arrays because these require special treatment
-		//  update() doesn't touch arrays
+		//	first reduce all properties except "countries" and "autosys"
+		//	arrays because these require special treatment
+		//	update() doesn't touch arrays
 		update(fact, value);
 
 		//	double loop part 1: countries in values emitted from map
 		value.countries.forEach(function(vCountry) {
-			//  assuming data about this country hasn't already been aded to fact
+			//	assuming data about this country hasn't already been aded to fact
 			var incomingCountryAlreadyknown = false;
 			//	double loop part 2: countries in fact
 			for (var fc = 0, fcl = fact.countries.length; fc < fcl; fc++) {
@@ -700,17 +700,17 @@ function reduceFact(key, values) {
 				var countryFact = fact.countries[fc];
 				//	if an object for this country was already added to the array
 				if (countryFact.country === vCountry.country) {
-					//  add values from countryMapped to that already existing object
+					//	add values from countryMapped to that already existing object
 					update(countryFact, vCountry);
 					if (vCountry.autosys) {
-						//  inner double loop part 1: 'as' in mapped.countries
+						//	inner double loop part 1: 'as' in mapped.countries
 						for (var vca = 0, vcal = vCountry.autosys.length;
 								 vca < vcal;
 								 vca++) {
-							//  (can be nmore than one,
-							//   because incoming may be pre-aggregated)
+							//	(can be nmore than one,
+							//	 because incoming may be pre-aggregated)
 							var incomingASinCountryAlreadyKown = false;
-							//	countryASmap is the whole object {as : int, count : int}
+							//	countryASmap is the whole object {as: int, count: int}
 							var countryASmap = vCountry.autosys[vca];
 
 							//	<- inner double loop part 2: 'as' in fact.countries
@@ -729,7 +729,7 @@ function reduceFact(key, values) {
 								//	if the 'as' wasn't found in the array add it
 								countryFact.autosys.push(countryASmap);
 							}
-						//  return to the outer loop, check the next country passed in
+						//	return to the outer loop, check the next country passed in
 						}
 					}
 					incomingCountryAlreadyknown = true;
@@ -786,7 +786,7 @@ function reduceFact(key, values) {
 		update(fact,value);
 	});
 
-//  AND BE DONE WITH IT
+//	AND BE DONE WITH IT
 	return fact;
 
 }
@@ -805,21 +805,21 @@ var runAggregation = function(date, span, update) {
 		{
 			out: {
 				//	the final fact collection:'merge' replaces existing
-				//  documents with the same key, 'reduce' would add values
-				//  to exsiting documents - we don't want that
+				//	documents with the same key, 'reduce' would add values
+				//	to exsiting documents - we don't want that
 				merge: "facts"
 			},
 			query: {
 				"date": date,
-				"addd": { "$gte": update }
+				"addd": {"$gte": update}
 			},
 			//	if "true" is faster, but needs more memory
 			jsMode: true,
-			//  speeds up mapReduce as 'date' is indexed in the import
-			//  collection but demands that "sort" equals the key of  the
-			//  map operation
-			sort: { "date": 1 },
-			//  globally (in the mapReduce job) available variables
+			//	speeds up mapReduce as 'date' is indexed in the import
+			//	collection but demands that "sort" equals the key of the
+			//	map operation
+			sort: {"date": 1},
+			//	globally (in the mapReduce job) available variables
 			scope: {
 				theDate: date,
 				theSpan: span,
@@ -833,10 +833,10 @@ var runAggregation = function(date, span, update) {
 //	///////////////////////////////////////////////////////////////////////
 //	///////////////////////////////////////////////////////////////////////
 
-})();   // end "use strict"
+})();	//	end "use strict"
 
 
-/*  TODO	the numbers are wrong :(
+/*	TODO	the numbers are wrong :(
 			check against results from mapreduce script v1
 			numbers for clients and servers are totally wrong 
 				since countries and autosys have been added
