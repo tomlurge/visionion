@@ -407,7 +407,7 @@ function mapValues() {
 						list[c.labl] = that[c.name];
 					}
 					else {
-						list[c.name] = 1; //	everything else just adds 1
+						list[c.name] = 1;	//	everything else just adds 1
 					}
 				}
 			});
@@ -558,14 +558,14 @@ function mapValues() {
 
 //	POPULATING SERVERS / RELAYS
 	if (this.type === "r") {
-		value.servers.total = new ServerObject(); //	pay credit to servers
+		value.servers.total = new ServerObject();	//  pay credit to servers
 		value.servers.relays =
 			populateServers(serversConfig.relays, "relay");
 	}
 
 //	POPULATING SERVERS / BRIDGES
 	else if (this.type === "b") {
-		value.servers.total = new ServerObject(); //	pay credit to servers
+		value.servers.total = new ServerObject();	//	pay credit to servers
 		value.servers.bridges =
 			populateServers(serversConfig.bridges, "bridge");
 	}
