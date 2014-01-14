@@ -374,7 +374,7 @@ function mapValues() {
 		args = args || [];
 		this.count = 1;
 		this.bwa = that.bwa || 0;
-		this.bwc = that.bwc || 0;
+		this.bwc = that.bwc || 0;
 		this.osv = new PropInit(osvConfig);
 		this.tsv = new PropInit(tsvConfig);
 		var thus = this;
@@ -384,8 +384,8 @@ function mapValues() {
 			}
 			else if (
 				arg === "pbr" ||
-				arg === "pbg" || 
-				arg === "pbm" || 
+				arg === "pbg" || 
+				arg === "pbm" || 
 				arg === "pbe"
 			) {
 				if (that[arg]) {
