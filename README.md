@@ -742,8 +742,7 @@ Requires [vagrant](http://www.vagrantup.com/downloads.html) to build a developme
 		db.import.ensureIndex({"date":-1, "type":1})
 		
 	or put the following 
-		db.getCollection("import").ensureIndex({"addd":-1})
-		db.getCollection("import").ensureIndex({"date":-1, "type":1})
+		db.getCollection("import").ensureIndex({"addd":-1})tCollection("import").ensureIndex({"date":-1, "type":1})
 	into a file called ensureIndex.js and run it from the unix shell like so
 		mongo localhost:27017/visionion ~/visionion/aggregation/mongodb/ensureIndex.js
 	

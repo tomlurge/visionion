@@ -588,16 +588,19 @@ function mapValues() {
 //	POPULATING COUNTRIES
 	if (that.type === "r" && that.cc) {
 		value.countries.push(new CountryObject("relay", that.cc));
-
 	}
-	else if (that.type === "c") {
-		for(var cb in that.cbcc) {
-			if (that.cbcc.hasOwnProperty(cb)) {
+	else if (that.type === "c" && that.cbcc) {
+		var thatCBcc = that.cbcc;
+		for (var cb in thatCBcc) {
+			if (thatCBcc.hasOwnProperty(cb)) {
 				value.countries.push(new CountryObject("cbcc", cb));
 			}
 		}
-		for(var cr in that.crcc) {
-			if (that.crcc.hasOwnProperty(cr)) {
+	}
+	else if (that.type === "c" && that.crcc) {
+		var thatCRcc = that.crcc;
+		for (var cr in thatCRcc) {
+			if (thatCRcc.hasOwnProperty(cr)) {
 				value.countries.push(new CountryObject("crcc", cr));
 			}
 		}
@@ -628,16 +631,15 @@ function reduceFact(key, values) {
 //	and add it to the result fact as aggregated so far
 	function update(fact, value){
 		for (var property in value){
-			if (value.hasOwnProperty(property)){
+			if (value.hasOwnProperty(property) &&
 				//	arrays are handled seperately
 				//	(that concerns the sections "countries" and "autosys")
-				if (
-					Object.prototype.toString.call(value[property]) ===
+				Object.prototype.toString.call(value[property]) !==
 					"[object Array]"
-				) {}// do nothing
+				) {
 				//	check incoming value against already aggregated fact
 				//	existing path - needs to be updated
-				else if (fact[property] !== undefined){
+				if (fact[property] !== undefined) {
 					if (typeof(fact[property]) === 'number') {
 						fact[property] += value[property];
 					}
@@ -782,10 +784,6 @@ function reduceFact(key, values) {
 
 	});
 
-	values.forEach(function(value) {
-		update(fact,value);
-	});
-
 //	AND BE DONE WITH IT
 	return fact;
 
@@ -834,14 +832,3 @@ var runAggregation = function(date, span, update) {
 //	///////////////////////////////////////////////////////////////////////
 
 })();	//	end "use strict"
-
-
-/*	TODO	the numbers are wrong :(
-			check against results from mapreduce script v1
-			numbers for clients and servers are totally wrong 
-				since countries and autosys have been added
-			clients are exactly 4 fold more than before
-			servers much more
-			bridges were already different from mr1 
-				before countries and autosys were added
- */
