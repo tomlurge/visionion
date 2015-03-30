@@ -1,48 +1,10 @@
-/**
- * Created by tl on 17/02/15.
+/** TODO
  *
- * based on mapReduceScript_v9.js
+ *	currently client data is aggregated on a per day basis. hourly facts contain
+ * 	daily client data. monthly client data has to be handled differnetly.
+ * 	for further discussion see
+ * 	https://github.com/tomlurge/visionion/issues/5
  *
- */
-
-/**    TODO
- *
- * 		daily fact: how to treat clients data?
- * 								is that already aggreted in the incoming data?
- *
- *
- * When we divided numbers of users per day by 24 in order to get the number of
- * users per hour, this was a mistake. We should have written the very same number
- * of users in the hourly data.
-
- Here's why: we calculate the number of users per day by dividing the total number
- of consensus requests by 10, assuming that every continuously connected client
- makes 10 consensus requests per day. The result is the theoretical average number
- of clients that are connected at any given time on that day. There could have been
- 10% fewer users in the morning and 10% more users in the afternoon, but we won't
- find out. This number of users is the same when considering the whole day or
- considering a single hour of it. That's why we need to undo the step where we
- divide by 24.
-
- Similarly, when we want to know the number of users per week, we can only
- calculate the average of the 7 days in a week. We wouldn't want to sum up these
- 7 numbers and state that this is the number of users per week, because what would
- that tell us?
-
- To give another example, if we knew that there were 480 relays on Linux on a
- given day, and we wanted to know that number per hour, we wouldn't divide by 24
- and say that there were 20 relays at 00:00. The reason is that 480 is already
- a mean value computed over an entire day, just like the user number per day is
- a mean value calculated over the day.
-
- I can prepare a patch to the Java importer if you agree with this change.
-
- —
- *
- *
- *
- * 		monthly fact: aggregate it from import or from fact?
- * 								make it a seperat script?
  */
 
 /*
@@ -78,10 +40,7 @@
  *
  *					The REDUCE section is exactly the same as in importMR.js.
  *					It is, again, comparatively short. Especially reducing the 'server'
- *					objects is a very straight forward process
- *					TODO	(and 'clients' are no
- *					issue at all since they only get copied over from the imported
- *					data).
+ *					objects is a very straight forward process.
  *					OTOH 'countries' and 'autonomous systems' have to go through some
  *					nested loops because they collect data from different sections of
  *					the mapping output.

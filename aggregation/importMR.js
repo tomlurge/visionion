@@ -1,4 +1,12 @@
-﻿/*
+﻿/** TODO
+ *
+ *	clients should be transformed to hourly values
+ * 	for further discussion see
+ * 	https://github.com/tomlurge/visionion/issues/5
+ *
+ */
+
+/*
  *
  * 		0.1		CONTENTS
  *
@@ -41,11 +49,11 @@
  *					the mapping output.
  *
  *					The FINIALIZE section is empty so far. Computation of averages and
- *					bound might eventually be added in this section.
+ *					bounds might eventually be added in this section.
  *
  *					The EXECUTE section configures the map reduce apparatus and sets its
  *					global variables.
- *					Finally the script get's called with the desired 'start', 'end' and
+ *					Finally the script gets called with the desired 'start', 'end' and
  *					'updated' parameters.
  *
  *
