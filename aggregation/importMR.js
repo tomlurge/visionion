@@ -1,17 +1,8 @@
 ﻿/*
  *
- *		0.		INTRODUCTION
- *
- *					TODO
- *
- *
- *
- *
- *
- *
  * 		0.1		CONTENTS
  *
- *		0			intro, contents
+ *		0			intro
  *		1.		MAP
  *		1.1		configuration and initialization
  *		1.2		helper functions
@@ -26,6 +17,36 @@
  *		2.4		autosys
  *		3			FINALIZE
  *		4			EXECUTE
+ *
+ *
+ *
+ *		0.		INTRODUCTION
+ *
+ *					This script, importMR.js, aggregates the data that the importer
+ *					scripts collect from various Tor sources and transforms it into a
+ *					structure suitable for driving the visualization.
+ *					It is a map reduce script, and a rather long on.
+ *
+ *					The MAP step begins with an elaborate section on configuration and
+ *					initilaization. Any updates to the script that only aim to add new
+ *					topics or features should have to modify nothing else than this
+ *					section. This should cover most cases.
+ *
+ *					The REDUCE section is comparatively short. Especially reducing the
+ *					'server' objects is a very straight forward process (and 'clients'
+ *					are no issue at all since they only get copied over from the
+ *					imported data).
+ *					OTOH 'countries' and 'autonomous systems' have to go through some
+ *					nested loops because they collect data from different sections of
+ *					the mapping output.
+ *
+ *					The FINIALIZE section is empty so far. Computation of averages and
+ *					bound might eventually be added in this section.
+ *
+ *					The EXECUTE section configures the map reduce apparatus and sets its
+ *					global variables.
+ *					Finally the script get's called with the desired 'start', 'end' and
+ *					'updated' parameters.
  *
  *
  */
@@ -968,7 +989,10 @@ function runAggregation (inStart, inEnd, inUpdated) {
 
 
 runAggregation(
+	//	mandatory: start aggregation at (inclusive)
 	 "2013-04-02 00"
+	//	optional: stop aggregation at (inclusive)
 //,"2013-04-04 00"
+	//	optional: only consider data added on or after
 //,"2013-08-14T09:23:45.302Z"
 );

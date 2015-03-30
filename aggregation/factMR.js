@@ -11,13 +11,29 @@
  * 								is that already aggreted in the incoming data?
  *
  *
- * When we divided numbers of users per day by 24 in order to get the number of users per hour, this was a mistake. We should have written the very same number of users in the hourly data.
+ * When we divided numbers of users per day by 24 in order to get the number of
+ * users per hour, this was a mistake. We should have written the very same number
+ * of users in the hourly data.
 
- Here's why: we calculate the number of users per day by dividing the total number of consensus requests by 10, assuming that every continuously connected client makes 10 consensus requests per day. The result is the theoretical average number of clients that are connected at any given time on that day. There could have been 10% fewer users in the morning and 10% more users in the afternoon, but we won't find out. This number of users is the same when considering the whole day or considering a single hour of it. That's why we need to undo the step where we divide by 24.
+ Here's why: we calculate the number of users per day by dividing the total number
+ of consensus requests by 10, assuming that every continuously connected client
+ makes 10 consensus requests per day. The result is the theoretical average number
+ of clients that are connected at any given time on that day. There could have been
+ 10% fewer users in the morning and 10% more users in the afternoon, but we won't
+ find out. This number of users is the same when considering the whole day or
+ considering a single hour of it. That's why we need to undo the step where we
+ divide by 24.
 
- Similarly, when we want to know the number of users per week, we can only calculate the average of the 7 days in a week. We wouldn't want to sum up these 7 numbers and state that this is the number of users per week, because what would that tell us?
+ Similarly, when we want to know the number of users per week, we can only
+ calculate the average of the 7 days in a week. We wouldn't want to sum up these
+ 7 numbers and state that this is the number of users per week, because what would
+ that tell us?
 
- To give another example, if we knew that there were 480 relays on Linux on a given day, and we wanted to know that number per hour, we wouldn't divide by 24 and say that there were 20 relays at 00:00. The reason is that 480 is already a mean value computed over an entire day, just like the user number per day is a mean value calculated over the day.
+ To give another example, if we knew that there were 480 relays on Linux on a
+ given day, and we wanted to know that number per hour, we wouldn't divide by 24
+ and say that there were 20 relays at 00:00. The reason is that 480 is already
+ a mean value computed over an entire day, just like the user number per day is
+ a mean value calculated over the day.
 
  I can prepare a patch to the Java importer if you agree with this change.
 
@@ -29,21 +45,11 @@
  * 								make it a seperat script?
  */
 
-
 /*
- *
- *		0.		INTRODUCTION
- *
- *					TODO
- *
- *
- *
- *
- *
  *
  * 		0.1		CONTENTS
  *
- *		0			intro, contents
+ *		0			intro
  *		1.		MAP
  *		2			REDUCE
  *		2.1		initialization
@@ -54,8 +60,43 @@
  *		4			EXECUTE
  *
  *
+ *
+ *		0.		INTRODUCTION
+ *
+ *					This script, factMR.js, takes the output of importMR.js - the
+ *					'facts' collection - and consolidates it into daily and monthly
+ *					aggregates. It doesn't add or change anything logically. It's only
+ *					purpose is to generate a more compact overview over the data
+ *					aggregated by importMR.js and thereby facilitate a fluid
+ *					visualization experience.
+ *
+ *					The MAP step strips the 'date' field of each fact from the undesired
+ *					detail - either hours for daily aggregation or hours and days for
+ *					monthly aggregation. It then passes on the otherwise unaltered fact
+ *					to the reduce step where all facts from the same day or month are
+ *					consolidated into one new daily or monthly fact.
+ *
+ *					The REDUCE section is exactly the same as in importMR.js.
+ *					It is, again, comparatively short. Especially reducing the 'server'
+ *					objects is a very straight forward process
+ *					TODO	(and 'clients' are no
+ *					issue at all since they only get copied over from the imported
+ *					data).
+ *					OTOH 'countries' and 'autonomous systems' have to go through some
+ *					nested loops because they collect data from different sections of
+ *					the mapping output.
+ *
+ *					The FINIALIZE section is empty so far. Computation of averages and
+ *					bound might eventually be added in this section.
+ *
+ *					The EXECUTE section configures the map reduce apparatus and sets its
+ *					global variables.
+ *					Finally the script get's called as either daily or monthly
+ *					aggregation and with the desired 'start', 'end' and 'updated'
+ *					parameters.
+ *
+ *
  */
-
 
 
 
@@ -320,7 +361,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	var updated = inUpdated || "1999-12-31T23:59:59.999Z";
 
 
-	//	supported "span" values so far are "d" (daily) and "m" (monthly)
+	//	supported "span" values are "d" (daily) and "m" (monthly)
 	if (span !== ("d" || "m")) {
 		print('first parameter must be "d" (for daily) or "m" (for monthly)!');
 		return;
@@ -371,8 +412,12 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 
 runAggregation(
+	//	mandatory: either "d" for daily aggregation or "m" for monthly aggregation
 	"d"
+	//	mandatory: start aggregation at (inclusive)
 	,"2013-04-02 00"
+	//	optional: stop aggregation at (inclusive)
 //,"2013-04-03 00"
+	//	optional: only consider data added on or after
 //,"2013-08-14T09:23:45.302Z"
 );
