@@ -1,4 +1,12 @@
-﻿(function () {
+/**
+ * Created by tl on 13/01/14.
+ *
+ * === mapReduceScript_v3.js === mr3.js
+ * will be superseeded by mr4.js
+ *
+ */
+
+(function () {
 	"use strict";
 
 
@@ -821,7 +829,7 @@ var runAggregation = function(date, span, update) {
 			scope: {
 				theDate: date,
 				theSpan: span,
-				theUpdate: update
+				theAddition: update
 			}
 		}
 	);
