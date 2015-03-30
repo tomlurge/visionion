@@ -1,4 +1,4 @@
-﻿# visionion
+# visionion
 ## Data Schema Outline
 
 ### default values 
@@ -69,7 +69,8 @@ Still two questions remain:
 
 #### Implementation
 How much complexity would it add to distinguish between the values '0' and 'null'?   
-For example the first lines in the mapping part of aggregation.js would change from:
+For example the first lines in the mapping part of aggregation.js would change    
+from:
 
 	clients : {                                                                             //  CLIENTS
 		total : 					c ?  this.cr + this.cb  : 0,

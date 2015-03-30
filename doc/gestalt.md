@@ -1,4 +1,4 @@
-﻿# visionion
+# visionion
 
 ## Import data gestalt
 
@@ -54,10 +54,10 @@ The table below tries to capture the multiple dimensions and qualities of the im
 
 "Mode" refers to the essential quality of the thing being counted. 
 This may be the numbers of hardware instances, software characteristics, measures of quality of service, locality of a service.   
-"Measure" documents if the numbers denote (one or multiple) absolute values, percentages, averages etc. 
+"Measure" documents if the numbers denote (one or multiple) absolute values, percentages, averages etc.   
 Percentages don't easily compare to absolute values. Also not in all categories values add up to a meaningful sum because value spaces overlap (like a relay can open more than one exit port). 
 Therefor it's important to carefully arrange meaningful and actually comparable configurations.   
-"Unit" is not much different from Measure, mainly reflecting if the field is single value or multi valued.
+"Unit" is not much different from Measure, mainly reflecting if the field is single value or multi valued.   
 "Upper limit" denotes the upper limit of the value space. For percentages it's 100. 
 For each relay role it's the total number of relays - the important implication being that each relay can even during the minimal timespan of 1 hour fulfill multiple roles: the roles alltogether don't add up to the number of relays, the are up to 4 times more. Bridges are distinct from relays.
 	
@@ -120,29 +120,29 @@ For each relay role it's the total number of relays - the important implication 
 			as			locality		scat + sum...s	count			< gmed (but really much less)
 			
 
-Overview data on clients and relays:   
+**Overview data on clients and relays**   
 We have some very general data on all relays and bridges: total count, software version, operating system version, total bandwidth provided and consumed. 
 Correspondingly we have quite general data on clients: how many clients in total were connected to the Tor network via bridges or directly via guard nodes. 
 These two fit well together.
 We also know which IP-version and which obfuscation techniques clients use. 
 But that's about it with clients and relays. 
 
-Clients:   
+**Clients**   
 Client data is on purpose quite sparse and we can't do much more than compare numbers of clients with the more detailed data about the relays and bridges. 
 We will eg not be able to follow clients through the network.
 
-Countries:   
+**Countries**   
 The most detailed view we can get on clients is their distribution by country. This is interesting since we also know from each relay the country in which it is located. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
 
-Relays:   
+**Relays**   
 Additionally to the data on relays and bridges we have quite specific data on different types of relays (but not bridges), namely guards, middle nodes, exits and directory servers. 
-This data is detailed but not easy to handle. 
-Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.   
+This data is detailed but not easy to handle.   
+Numbers for the different types of relays don't add up to the total number of relays since each relay can (and most often does) serve more than one purpose and implements two, three or all four types of relays besides bridges.    
 For each relay we know with which probability it is part of a clients route through the network, but we would need to agggregate averages and mean deviations to add more meaning to these numbers. 
-We also know for relays through which AS they are connected to the internet but this is a very large number of different AS which we first need to aggregate to find the most used ones and how high the concentration is. 
+We also know for relays through which AS they are connected to the internet but this is a very large number of different AS which we first need to aggregate to find the most used ones and how high the concentration is.   
 We then have some flags and exit port information which again are not particularily easy to visualize (and interpret).
 
-Bridges:    
+**Bridges**    
 Last not least we have some data about bridges, but not as much as about relays. This is again on purpose since bridges serve to circumvent attempts to block the access to the tor network alltogether. Gathering too much information about them would make the censors' job easier. 
 Since bridges are distinct from relays their numbers add up to the total number of servers.
 Apart from that we don't know much more than a few technicalities that don't have much impact on the rest of the network: from which bridge pool they were assigned, which transport they use and if they are hosted in the EC2 cloud. 
@@ -164,18 +164,21 @@ Should there be a threshold of non-null entries below which we don't aggregate a
 For example, if a relay was only running for 1 out of 6 hours, should we rather exclude it? 
 If so, what fraction of non-null entries would we require?
 
-Onionoo includes a data point if it has data for at least 20% of the considered interval, and considers the data point as null otherwise. 
+Onionoo includes a data point if it has data for at least 20% of the considered interval, and considers the data point as null otherwise.   
 So, for a 6 hour interval, having data for 1 hour wouldn't suffice, but 2 hours or more would be okay.
 
 So, if a relay upgrades in a 6-hour period, we'll have to pick either version number for the 6-hour data point.  
 Using the mode (in math sense, so most frequent element, breaking ties somehow) and breaking ties by picking the larger version number, we'll have these results:
-023 023 023 023 023 024 -> 023
-023 023 023 023 024 024 -> 023
-023 023 023 024 024 024 -> 024
-023 023 null null 024 024 -> 024
+
+	023 023 023 023 023 024 -> 023
+	023 023 023 023 024 024 -> 023
+	023 023 023 024 024 024 -> 024
+	023 023 null null 024 024 -> 024
+
 And if we use the 20% threshold for non-null values:
-023 024 null null null null -> 024
-023 null null null null null -> null
+
+	023 024 null null null null -> 024
+	023 null null null null null -> null
 
 
 #### measures and dimensions

@@ -1,8 +1,10 @@
 # visionion
 
-## the aggregated fact for 2013-04-03 22
+### a fact for 2013-04-03 22 aggregated by mapreduce_v1
+
 
 This is an example how the aggregated data for a 1 hour timespan (the default and smallest value) can look:
+
 	
 	{
 		"_id" : "Fact 2013-04-03 22",
