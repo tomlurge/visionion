@@ -92,10 +92,10 @@ function mapValues() {
 
 	//	CLIENT INITIALIZATION
 	var client = (incoming.type === "c");
-	var cb = incoming.cb,		//	clients at bridges
-		cr = incoming.cr,		//	clients at relays
-		cip = incoming.cip,	//	ip-version
-		cpt = incoming.cpt;	//	bridge pluggable transport
+	var cb = incoming.cb,			//	clients at bridges
+			cr = incoming.cr,			//	clients at relays
+			cip = incoming.cip,		//	ip-version
+			cpt = incoming.cpt;		//	bridge pluggable transport
 
 
 	//	SERVER INITIALIZATION
@@ -137,7 +137,7 @@ function mapValues() {
 	};
 
 
-	// BRIDGE INITIALIZATION
+	// SERVER INITIALIZATION only for BRIDGES
 	var bridge = incoming.type === "b";
 	//	plug init		bridge pluggable transport
 	var inPlug = incoming.plug ? incoming.plug : false;
@@ -149,9 +149,9 @@ function mapValues() {
 	};
 	//	pool init
 	var pool = {
-		be: incoming.pool === "email" ? 1 : 0,
-		bh: incoming.pool === "https" ? 1 : 0,
-		bo: incoming.pool === "other" ? 1 : 0
+		be: incoming.bpol === "email" ? 1 : 0,
+		bh: incoming.bpol === "https" ? 1 : 0,
+		bo: incoming.bpol === "other" ? 1 : 0
 	};
 	//	host init
 	var host = {
@@ -159,7 +159,7 @@ function mapValues() {
 	};
 
 
-	//	RELAY INITIALIZATION
+	//	SERVER INITIALIZATION only for RELAYS
 	var relay = incoming.type === "r";
 	//	role init
 	var inRole = incoming.role ? incoming.role : false;
@@ -187,20 +187,20 @@ function mapValues() {
 
 	//	BRIDGE RESULT TREE CONFIGURATION
 	var bridgeConf = {
-		total:		[bridge],
+		total:		[ bridge ],
 		//	defaults to projective testing
 		pool: {																			//	bridge pool
-			e:			[pool.be],												//	email
-			h:			[pool.bh],												//	https
-			o:			[pool.bo]													//	other
+			be:			[ pool.be ],											//	email
+			bh:			[ pool.bh ],											//	https
+			bo:			[ pool.bo ]												//	other
 		},
 		plug: {																			//	pluggable tramsport
-			b2:			[plug.b2],												//	obfs2
-			b3:			[plug.b3],												//	obfs3
-			b23:		[plug.b2, plug.b3]								//	obfs2 + 3
+			b2:			[ plug.b2 ],											//	obfs2
+			b3:			[ plug.b3 ],											//	obfs3
+			b23:		[ plug.b2, plug.b3 ]							//	obfs2 + 3
 		},
 		host: {
-			ec2:		[host.bc]													//	EC2
+			bc:			[ host.bc ]												//	EC2
 		}
 	};
 
@@ -208,39 +208,8 @@ function mapValues() {
 	//	RELAY RESULT TREE CONFIGURATION
 	var relayConf = {
 		//	defaults to projective testing
-		total:		[relay],
-/*	role: {
-			G:			[role.g],													//	guard
-			M:			[role.m],													//	middle
-			E:			[role.e],													//	exit
-			D:			[role.d]													//	directory
-		},
-		flag: {
-			f:			[flag.f],													//	fast
-			s:			[flag.s],													//	stable
-			fs:			[flag.f, flag.s],									// 	fast + stable
-			NOfs:		[!flag.f, !flag.s],								//	not fast + not stable
-			a:			[flag.a]													//	authority}
-		},
-		roleFlag: {
-			Gf:			[role.g, flag.f],									//	Guard fast
-			Gs:			[role.g, flag.s],									//	Guard stable
-			Gfs:		[role.g, flag.f, flag.s],					//	Guard fast stable
-			Mf:			[role.m, flag.f],									//	Middle fast
-			Ms:			[role.m, flag.s],									//	Middle stable
-			Mfs:		[role.m, flag.f, flag.s],					//	Middle fast stable
-			Ef:			[role.e, flag.f],									//	Exit fast
-			Es:			[role.e, flag.s],									//	Exit stable
-			Efs:		[role.e, flag.f, flag.s],					//	Exit fast stable
-			Df:			[role.d, flag.f],									//	Directory fast
-			Ds:			[role.d, flag.s],									//	Directory stable
-			Dfs:		[role.d, flag.f, flag.s],					//	Directory fast stable
-			Da:			[role.d, flag.a],									//	Directory authority
-			Dfa:		[role.d, flag.f, flag.a],					//	Dir. fast authority
-			Dsa:		[role.d, flag.s, flag.a],					//	Dir. stable authority
-			Dfsa:		[role.d, flag.f, flag.s, flag.a]	//	Dir. fast stable aut.
-		},*/
-		roleFlag: {																	//	projective  Roles + Flags
+		total:		[ relay ],
+		roleFlag: {																	//	(projective)  Roles + Flags
 			G:      [ role.g ],
 			Gf:     [ role.g,  flag.f ],
 			Gs:     [ role.g,  flag.s ],
@@ -321,7 +290,7 @@ function mapValues() {
 			EDfsa:  [ role.e,  role.d,  flag.f,  flag.s,  flag.a ]
 		},
 		//	dis		disjunctive testing
-		disR: {																			//	disjunctive Roles
+		disRole: {																			//	disjunctive Roles
 			none:   [!role.g, !role.m, !role.e, !role.d],
 			G:      [ role.g, !role.m, !role.e, !role.d],
 			M:      [!role.g,  role.m, !role.e, !role.d],
@@ -338,7 +307,7 @@ function mapValues() {
 			MED:    [!role.g,  role.m,  role.e,  role.d],
 			ED:     [!role.g, !role.m,  role.e,  role.d]
 		},
-		disF: {																			//	disjunctive Flags
+		disFlag: {																			//	disjunctive Flags
 			none:   [!flag.f, !flag.s, !flag.a],
 			f:      [ flag.f, !flag.s, !flag.a],
 			s:      [!flag.f,  flag.s, !flag.a],
@@ -348,86 +317,86 @@ function mapValues() {
 			sa:     [!flag.f,  flag.s,  flag.a],
 			fsa:    [ flag.f,  flag.s,  flag.a]
 		},
-		disRF: {																		//	disjunctive Roles + Flags
-			none:   [!role.g, !role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			G:      [ role.g, !role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			Gf:     [ role.g, !role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			Gs:     [ role.g, !role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			Gfs:    [ role.g, !role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			M:      [!role.g,  role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			Mf:     [!role.g,  role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			Ms:     [!role.g,  role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			Mfs:    [!role.g,  role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			E:      [!role.g, !role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			Ef:     [!role.g, !role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			Es:     [!role.g, !role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			Efs:    [!role.g, !role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			D:      [!role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			Da:     [!role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			GM:     [ role.g,  role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			GMf:    [ role.g,  role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			GMs:    [ role.g,  role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			GMfs:   [ role.g,  role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			GE:     [ role.g, !role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			GEf:    [ role.g, !role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			GEs:    [ role.g, !role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			GEfs:   [ role.g, !role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			GD:     [ role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			GDf:    [ role.g, !role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			GDs:    [ role.g, !role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			GDfs:   [ role.g, !role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			GDa:    [ role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			GDfa:   [ role.g, !role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			GDsa:   [ role.g, !role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			GDfsa:  [ role.g, !role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a],
-			GME:    [ role.g,  role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			GMEf:   [ role.g,  role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			GMEs:   [ role.g,  role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			GMEfs:  [ role.g,  role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			GMD:    [ role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			GMDf:   [ role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			GMDs:   [ role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			GMDfs:  [ role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			GMDa:   [ role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			GMDfa:  [ role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			GMDsa:  [ role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			GMDfsa: [ role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a],
-			GMED:   [ role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			GMEDf:  [ role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			GMEDs:  [ role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			GMEDfs: [ role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			GMEDa:  [ role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			GMEDfa: [ role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			GMEDsa: [ role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			GMEDfsa:[ role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a],
-			ME:     [!role.g,  role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a],
-			MEf:    [!role.g,  role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a],
-			MEs:    [!role.g,  role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a],
-			MEfs:   [!role.g,  role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a],
-			MD:     [!role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			MDf:    [!role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			MDs:    [!role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			MDfs:   [!role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			MDa:    [!role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			MDfa:   [!role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			MDsa:   [!role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			MDfsa:  [!role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a],
-			MED:    [!role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			MEDf:   [!role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			MEDs:   [!role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			MEDfs:  [!role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			MEDa:   [!role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			MEDfa:  [!role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			MEDsa:  [!role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			MEDfsa: [!role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a],
-			ED:     [!role.g, !role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a],
-			EDf:    [!role.g, !role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a],
-			EDs:    [!role.g, !role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a],
-			EDfs:   [!role.g, !role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a],
-			EDa:    [!role.g, !role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a],
-			EDfa:   [!role.g, !role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a],
-			EDsa:   [!role.g, !role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a],
-			EDfsa:  [!role.g, !role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a]
+		disRoleFlag: {																		//	disjunctive Roles + Flags
+			none:   [!role.g, !role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			G:      [ role.g, !role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			Gf:     [ role.g, !role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			Gs:     [ role.g, !role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			Gfs:    [ role.g, !role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			M:      [!role.g,  role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			Mf:     [!role.g,  role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			Ms:     [!role.g,  role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			Mfs:    [!role.g,  role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			E:      [!role.g, !role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			Ef:     [!role.g, !role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			Es:     [!role.g, !role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			Efs:    [!role.g, !role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			D:      [!role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			Da:     [!role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			GM:     [ role.g,  role.m, !role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			GMf:    [ role.g,  role.m, !role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			GMs:    [ role.g,  role.m, !role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			GMfs:   [ role.g,  role.m, !role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			GE:     [ role.g, !role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			GEf:    [ role.g, !role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			GEs:    [ role.g, !role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			GEfs:   [ role.g, !role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			GD:     [ role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			GDf:    [ role.g, !role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			GDs:    [ role.g, !role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			GDfs:   [ role.g, !role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			GDa:    [ role.g, !role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			GDfa:   [ role.g, !role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			GDsa:   [ role.g, !role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			GDfsa:  [ role.g, !role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a ],
+			GME:    [ role.g,  role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			GMEf:   [ role.g,  role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			GMEs:   [ role.g,  role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			GMEfs:  [ role.g,  role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			GMD:    [ role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			GMDf:   [ role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			GMDs:   [ role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			GMDfs:  [ role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			GMDa:   [ role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			GMDfa:  [ role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			GMDsa:  [ role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			GMDfsa: [ role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a ],
+			GMED:   [ role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			GMEDf:  [ role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			GMEDs:  [ role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			GMEDfs: [ role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			GMEDa:  [ role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			GMEDfa: [ role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			GMEDsa: [ role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			GMEDfsa:[ role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a ],
+			ME:     [!role.g,  role.m,  role.e, !role.d, !flag.f, !flag.s, !flag.a ],
+			MEf:    [!role.g,  role.m,  role.e, !role.d,  flag.f, !flag.s, !flag.a ],
+			MEs:    [!role.g,  role.m,  role.e, !role.d, !flag.f,  flag.s, !flag.a ],
+			MEfs:   [!role.g,  role.m,  role.e, !role.d,  flag.f,  flag.s, !flag.a ],
+			MD:     [!role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			MDf:    [!role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			MDs:    [!role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			MDfs:   [!role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			MDa:    [!role.g,  role.m, !role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			MDfa:   [!role.g,  role.m, !role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			MDsa:   [!role.g,  role.m, !role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			MDfsa:  [!role.g,  role.m, !role.e,  role.d,  flag.f,  flag.s,  flag.a ],
+			MED:    [!role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			MEDf:   [!role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			MEDs:   [!role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			MEDfs:  [!role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			MEDa:   [!role.g,  role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			MEDfa:  [!role.g,  role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			MEDsa:  [!role.g,  role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			MEDfsa: [!role.g,  role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a ],
+			ED:     [!role.g, !role.m,  role.e,  role.d, !flag.f, !flag.s, !flag.a ],
+			EDf:    [!role.g, !role.m,  role.e,  role.d,  flag.f, !flag.s, !flag.a ],
+			EDs:    [!role.g, !role.m,  role.e,  role.d, !flag.f,  flag.s, !flag.a ],
+			EDfs:   [!role.g, !role.m,  role.e,  role.d,  flag.f,  flag.s, !flag.a ],
+			EDa:    [!role.g, !role.m,  role.e,  role.d, !flag.f, !flag.s,  flag.a ],
+			EDfa:   [!role.g, !role.m,  role.e,  role.d,  flag.f, !flag.s,  flag.a ],
+			EDsa:   [!role.g, !role.m,  role.e,  role.d, !flag.f,  flag.s,  flag.a ],
+			EDfsa:  [!role.g, !role.m,  role.e,  role.d,  flag.f,  flag.s,  flag.a ]
 		}
 	};
 
@@ -444,9 +413,9 @@ function mapValues() {
 
 	function mapServer(serverConf) {
 		//	mapServer walks through the server properties as defined in the
-		// 	tree like configuration structures relayConf and bridgeConf (see
-		//  above), depth first.
-		//	at each knot it either - if it's a knot - recursively starts a new
+		// 	tree configuration structures relayConf and bridgeConf (see above),
+		//  depth first.
+		//	at each knot it either - if it's a fork - recursively starts a new
 		//	walk with that knot as the new root node or - if it is a leave -
 		//	runs the test with the arguments configured in the leave, and,
 		//	if the test returns true, constructs a report and adds it to the
@@ -530,9 +499,9 @@ function mapValues() {
 			}
 		}
 		if(bridge) {
-			report.pol = new SingleSubReport(pool);			//	bridge pool
-			report.plg = new SubReport(plug);						//	pluggable transport
-			report.hst = new SubReport(host);						//	hosting
+			report.pol = new SingleSubReport(pool);				//	bridge pool
+			report.plg = new SubReport(plug);							//	pluggable transport
+			report.hst = new SubReport(host);							//	hosting
 		}
 
 		function SubReport(init) {
@@ -548,18 +517,18 @@ function mapValues() {
 			return subReport;
 		}
 
-		//	since some init objects can have only one trueish property
+		//	since some init objects can have only one truthy property
 		//	per incoming document, their SubReport constructor can be optimized
 		function SingleSubReport(init) {
 			var subReport = {};
 			solo: {
 				//	for each property in the initialization object (see section 1.1)
 				for (var prop in init) {
-					//	if the property is true for the incoming data
+					//	if the property is truthy for the incoming data
 					if (init.hasOwnProperty(prop) && init[prop]) {
 						//	add it to the subreport
 						subReport[prop] = init[prop];
-						//	only possible truish prop reached, break loop execution
+						//	only possible truthy prop reached, break loop execution
 						break solo;
 					}
 				}
@@ -616,23 +585,23 @@ function mapValues() {
 			countryObject.relay = 1;
 			countryObject.bwa = incoming.bwa;
 			countryObject.bwc = incoming.bwc;
-			countryObject.proRole = {};
-			countryObject.proFlag = {};
-			countryObject.proProb = {};
+			countryObject.role = {};
+			countryObject.flag = {};
+			countryObject.prob = {};
 
 			for (var r in role) {
 				if (role.hasOwnProperty(r) && role[r]) {
-					countryObject.proRole[r] = 1;
+					countryObject.role[r] = 1;
 				}
 			}
 			for (var f in flag) {
 				if (flag.hasOwnProperty(f) && flag[f]) {
-					countryObject.proFlag[f] = 1;
+					countryObject.flag[f] = 1;
 				}
 			}
 			for (var p in prob) {
 				if (prob.hasOwnProperty(p) && prob[p]) {
-					countryObject.proProb[p] = prob[p]; }
+					countryObject.prob[p] = prob[p]; }
 			}
 			for (var o in osv) {
 				if (osv.hasOwnProperty(o) && osv[o]) {
@@ -679,35 +648,35 @@ function mapValues() {
 			relay: 1,
 			bwa: incoming.bwa || 0,
 			bwc: incoming.bwc || 0,
-			proRole: {},
-			proFlag: {},
-			proProb: {},
+			role: {},
+			flag: {},
+			prob: {},
 			country: [{
 				cc: incoming.cc,
 				relay: 1,
 				bwa: incoming.bwa || 0,
 				bwc: incoming.bwc || 0,
-				proRole: {},
-				proFlag: {},
-				proProb: {}
+				role: {},
+				flag: {},
+				prob: {}
 			}]
 		};
 		for (var r in role) {
 			if (role.hasOwnProperty(r) && role[r]) {
-				asObject.proRole[r] = 1;
-				asObject.country[0].proRole[r] = 1;
+				asObject.role[r] = 1;
+				asObject.country[0].role[r] = 1;
 			}
 		}
 		for (var f in flag) {
 			if (flag.hasOwnProperty(f) && flag[f]) {
-				asObject.proFlag[f] = 1;
-				asObject.country[0].proFlag[f] = 1;
+				asObject.flag[f] = 1;
+				asObject.country[0].flag[f] = 1;
 			}
 		}
 		for (var p in prob) {
 			if (prob.hasOwnProperty(p) && prob[p]) {
-				asObject.proProb[p] = prob[p];
-				asObject.country[0].proProb[p] = prob[p];
+				asObject.prob[p] = prob[p];
+				asObject.country[0].prob[p] = prob[p];
 			}
 		}
 		return asObject;
@@ -1027,12 +996,12 @@ function finalizeFact(key, fact) {
  */
 
 
-function runAggregation (inStart, inEnd, inUpdated) {
+function runAggregation (theStart, theEnd, theUpdated) {
 	"use strict";
 
-	var start = inStart;
-	var end = inEnd || start;
-	var updated = inUpdated || "1999-12-31T23:59:59.999Z";
+	var start = theStart;
+	var end = theEnd || start;
+	var updated = theUpdated || "1999-12-31T23:59:59.999Z";
 
 	db.runCommand (
 		{
@@ -1078,7 +1047,7 @@ function runAggregation (inStart, inEnd, inUpdated) {
 
 runAggregation(
 	//	mandatory: start aggregation at (inclusive)
-	 "2013-04-02 00"
+	 "2013-04-02 01"
 	//	optional: stop aggregation at (inclusive)
 //,"2013-04-04 00"
 	//	optional: only consider data added on or after
