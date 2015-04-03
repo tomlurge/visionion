@@ -16,6 +16,30 @@ particularily aggregation, indexing and status/control-queries
 
 ## TODO
 
+
+rename
+
+		server			report
+		inclusive		project
+		pex					exp
+		pbr					pr
+		pbg					pg
+		pbm					pm
+		pbe					pe
+		brp					pool
+		brt					plug
+		bre					host
+		bre					ec2
+
+
+vielleicht doch "total" als subkategorie rausschmeissen
+	und den entsprechenden report direkt unter relay, bridge,
+	server etc einhängen, so wie bei client auch?
+
+replace example fact with new one (from an hour later)
+
+
+
 ### AGGREGATION
 		
 	schema.json
@@ -54,6 +78,8 @@ particularily aggregation, indexing and status/control-queries
 	test suite
 			
 ### INDEXES
+
+	delete index over addd
 
 	facts collection needs to be indexed
 	but this needs more thinking on the gui

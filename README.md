@@ -157,11 +157,11 @@ They are reached by the client either directly or, if a censor blocks them, thro
 	node							everything in the tor network
 		client					the users
 		server					everything serving the user
-			bridge				special entry points for clients that need to circumvent blocking
+			bridge				special entry points to circumvent blocking
 			relay					the actual anonymization network, with different roles:
-				guard				entry points into the network (accessed by client directky or by bridge)
+				guard				entry points into the network
 				middle			intermediary nodes on anonymizing route
-				exit				now anonymized, continue route to actual destination on the internet
+				exit				now anonymized, continue route to actual destination
 				directory		some auxiliary services
 
 Some of these node types are mutually exclusive, some are not:
@@ -191,41 +191,41 @@ The following import outline documents the fields and values that each imported 
 (The field names are rather short to achieve better performance in MongoDB.
 Memorizing them or looking them up again in the table below will be helpful when reading through the rest of the documentation and the code.)
 
-	node		field	desc												type		subtype	aggregation		valuespace
-	+-------+-----+---------------------------+-------+-------+-------------+----------
-	cbr			_id		document ID									string					(*)						fingerprint/'client'+span+date
-																																					eg 'fingerprint-1-YYYYMMDDHH', 'client-24-YYYYMMDDHH'
-	cbr			updt	timedate the doc was added	string												ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-	cbr			span	period of validity					string					-							length of the interval this dataset describes:
-																																					one of: "h"(default, hourly), "d" (daily), "m" (monthly)
-	cbr			date	datetime										string					-							start of the time span that this document describes
-																																					format "YYYY-MM-DD HH" as defined in ISO-8601
-	cbr			type	type of document						string												one of: "c" (clients), "b" (bridge), "r" (relay)
-	c				cb		clients at bridges					integer					mean
-	c				cbcc	clients@bridges per country	object					mean					{cc:integer ...}
-	c				cr		clients at relays						integer					mean
-	c				crcc	clients@relays per country	object					mean					{cc:integer ...}
-	c				cpt		bridge pluggbl.transp.used	object												{obfs2/obfs3/OR/unknown:integer}
-	c				cip		ip-version used							object					mode					{v4/v6:integer}
-	 br			node	node id											string					-							Tor fingerprint
-	 br			nick	nickname										string					mode					nickname of relay
-	 br			bwa		bandwidth advertized 				integer					mean					B/s
-	 br			bwc		bandwidth consumed 					integer					mean					B/s
-	 br			tsv		Tor software version				string					mode					one of: 010, 011, 012, 020, 021, 022, 023, 024, 025
-	 br			osv		operating system						string					mode					one of: linux, darwin, freebsd, windows, other
-	 b			pool	bridge pool     						string					mode					one of: email, https, other
-	 b			ec2		bridge is in EC2 cloud			boolean					mode					//	maps to category 'host'
-	 b			plug	bridge pluggable transport	array		string	mode (*)			some of: obfs2, obfs3
-	  r			role	roles/functions of relay		array		string	mode (*)			some of: Guard, Middle, Exit, Dir
-	  r			flag	flags 											array		string	mode (*)			some of: Authority, Fast, Stable, BadExit, BadDirectory,
-	  																			 																Named, Running, Unnamed,  Valid, V2Dir, V3Dir
-	  r			pr		consensus_weight_fraction		number					mean					probability of a client picking a relay for their path
-	  r			pg		guard_probability						number					mean					probability of a client picking a relay for their guard position
-	  r			pm		middle_probability					number					mean					probability of a client picking a relay for their middle position
-	  r			pe		exit_probability						number					mean					probability of a client picking a relay for their exit position
-	  r			exp		permitted exit ports				array		integer	mode					some of: 80, 443, 6667
-	  r			as		autonomous system						integer					mode					as number
-	  r			cc		country code								string					mode					two-letter (ISO 3166-1 alpha-2), upper case
+	node		field	desc												type		subtype
+	+-------+-----+---------------------------+-------+------
+	cbr			_id		document ID									string				
+																													
+	cbr			updt	timedate the doc was added	string				
+	cbr			span	period of validity					string				
+																													
+	cbr			date	datetime										string				
+																													
+	cbr			type	type of document						string				
+	c				cb		clients at bridges					integer				
+	c				cbcc	clients@bridges per country	object				
+	c				cr		clients at relays						integer				
+	c				crcc	clients@relays per country	object				
+	c				cpt		bridge pluggbl.transp.used	object				
+	c				cip		ip-version used							object				
+	 br			node	node id											string				
+	 br			nick	nickname										string				
+	 br			bwa		bandwidth advertized 				integer				
+	 br			bwc		bandwidth consumed 					integer				
+	 br			tsv		Tor software version				string				
+	 br			osv		operating system						string				
+	 b			pool	bridge pool     						string				
+	 b			ec2		bridge is in EC2 cloud			boolean				
+	 b			plug	bridge pluggable transport	array		string
+	  r			role	roles/functions of relay		array		string
+	  r			flag	flags 											array		string
+	  																			 								
+	  r			pr		consensus_weight_fraction		number				
+	  r			pg		guard_probability						number				
+	  r			pm		middle_probability					number				
+	  r			pe		exit_probability						number				
+	  r			exp		permitted exit ports				array		integer
+	  r			as		autonomous system						integer				
+	  r			cc		country code								string				
 
 
 	LEGEND --------------------------------------------------------------------
@@ -233,14 +233,55 @@ Memorizing them or looking them up again in the table below will be helpful when
 							c (clients), b (bridge), r (relay)
 	field				name of the field in the database
 	desc				description,	short characterization
-	type				as defined in 3.5 of http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1
+	type				as defined in 3.5 of 
+							http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1
 	subtype			if type is array, type of array content
 	valuespace	expected values
 							for lists of possible values "some of" where multiple values are
 							possible or "one of" where possible values are mutually exclusive
 	(*)					if the relay provides the functionality in question for at least
 	 						half of the timespan in question
+	 					
+	 						
+		node		field	aggregation	valuespace
+  	+-------+-----+-----------+----------
+  	cbr			_id		(*)					fingerprint/'client'+span+date
+  														eg 'fingerprint-1-YYYYMMDDHH'
+  	cbr			updt							ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
+  	cbr			span	-						length of the interval this dataset describes:
+  														one of: "h"(hourly), "d" (daily), "m" (monthly)
+  	cbr			date	-						start of the time span that this document describes
+  														format "YYYY-MM-DD HH" as defined in ISO-8601
+  	cbr			type							one of: "c" (clients), "b" (bridge), "r" (relay)
+  	c				cb		mean
+  	c				cbcc	mean				{cc:integer ...}
+  	c				cr		mean
+  	c				crcc	mean				{cc:integer ...}
+  	c				cpt								{obfs2/obfs3/OR/unknown:integer}
+  	c				cip		mode				{v4/v6:integer}
+  	 br			node	-						Tor fingerprint
+  	 br			nick	mode				nickname of relay
+  	 br			bwa		mean				B/s
+  	 br			bwc		mean				B/s
+  	 br			tsv		mode				one of: 010, 011, 012, 020, 021, 022, 023, 024, 025
+  	 br			osv		mode				one of: linux, darwin, freebsd, windows, other
+  	 b			pool	mode				one of: email, https, other
+  	 b			ec2		mode				//	maps to category 'host'
+  	 b			plug	mode (*)		some of: obfs2, obfs3
+  	  r			role	mode (*)		some of: Guard, Middle, Exit, Dir
+  	  r			flag	mode (*)		some of: Authority, Fast, Stable, BadExit, 
+  	  												BadDirectory, Named, Running, Unnamed,  Valid, 
+  	  												V2Dir, V3Dir
+  	  r			pr		mean				probability this relay is used in a path
+  	  r			pg		mean				probability this relay is used as a guard node
+  	  r			pm		mean				probability this relay is used as a middle node
+  	  r			pe		mean				probability this relay is used as a exit nod
+  	  r			exp		mode				some of: 80, 443, 6667
+  	  r			as		mode				as number
+  	  r			cc		mode				two-letter (ISO 3166-1 alpha-2), upper case
+  
 
+	
 The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over large periods of time.
 
 There's a big difference between client data and relay data that isn't immediatly obvious from the schema.
@@ -382,373 +423,390 @@ Primary and secondary properties together form the main structure of an aggregat
 
 
 
-####detailed documentation of structure and reports
+TODO
+Country and AS information form enormous value spaces that need to be next to the root of aggregated tree structure, not at the leaves. We have to change perspective: we can't start from the perspective of servers and clients anymore, we have to start from the properties country and AS.
 
 
-Structure
+####detailed documentation of structure and reports####
 
-	//	first some administrative information
-	_id
-	date
-	span
-	updt
-	//	now the real stuff
-	client
-		//	clients have no subcategories.
-	server
-		total
-		bridge
-			total
-			pool
+#####structure#####
 
-			plug
-				b2
-				b3
-				b23
-			host
-				ec2
-		relay
-			total
-			role
-				G
-				M
-				D
-				E
-			flag
-				f
-				s
-				fs
-				NOfs
-				a
-			roleFlag
+	_id										//	first some administrative information
+	value									
+		date								
+		span								
+		updt								
+		client							//	clients have no subcategories, only one report
+			total							For clients this is all we know, save the clients per country which we'll tackle later.
+                        Clients @bridges and @relays are mutually exclusive, the other fields aren't.
+			atBridge					
+			atRelay						
+			cip4							
+			cip6							
+			cptObfs2					
+			cptObfs3					
+			cptObfs23					
+			cptOR							
+			cptUnknown				
+		server							
+			total							
+			bridge						
+				total						
+				pool						
+					e							email
+					h							https
+					o							other
+				plug						
+					b2						obfs2
+					b3						obfs3
+					b23						obfs2 + obfs3
+				host						
+					ec2						hosted in amazon ec2 cloud
+			relay							
+				total						
+				roleFlag					
+					G							Guard 
+					Gf						Guard fast 
+					Gs						Guard stable 
+					Gfs						Guard fast stable 
+					M							Middle 
+					Mf						Middle fast 
+					Ms						Middle stable 
+					Mfs						Middle fast stable 
+					E							Exit 
+					Ef						Exit fast 
+					Es						Exit stable 
+					Efs						Exit fast stable 
+					D							Directory 
+					Da						Directory authority
+					GM						Guard Middle 
+					GMf						Guard Middle fast 
+					GMs						Guard Middle stable 
+					GMfs					Guard Middle fast stable 
+					GE						Guard Exit 
+					GEf						Guard Exit fast 
+					GEs						Guard Exit stable 
+					GEfs					Guard Exit fast stable 
+					GD						Guard Directory 
+					GDf						Guard Directory fast 
+					GDs						Guard Directory stable 
+					GDfs					Guard Directory fast stable 
+					GDa						Guard Directory authority
+					GDfa					Guard Directory fast authority
+					GDsa					Guard Directory stable authority
+					GDfsa					Guard Directory fast stable authority
+					GME						Guard Middle Exit 
+					GMEf					Guard Middle Exit fast 
+					GMEs					Guard Middle Exit stable 
+					GMEfs					Guard Middle Exit fast stable 
+					GMD						Guard Middle Directory 
+					GMDf					Guard Middle Directory fast 
+					GMDs					Guard Middle Directory stable 
+					GMDfs					Guard Middle Directory fast stable 
+					GMDa					Guard Middle Directory 
+					GMDfa					Guard Middle Directory fast authority
+					GMDsa					Guard Middle Directory stable authority
+					GMDfsa				Guard Middle Directory fast stable authority
+					ME						Middle Exit 
+					MEf						Middle Exit fast 
+					MEs						Middle Exit stable 
+					MEfs					Middle Exit fast stable 
+					MD						Middle Directory 
+					MDf						Middle Directory fast 
+					MDs						Middle Directory stable 
+					MDfs					Middle Directory fast stable 
+					MDa						Middle Directory authority
+					MDfa					Middle Directory fast authority
+					MDsa					Middle Directory stable authority
+					MDfsa					Middle Directory fast stable authority
+					MED						Middle Exit Directory 
+					MEDf					Middle Exit Directory fast 
+					MEDs					Middle Exit Directory stable 
+					MEDfs					Middle Exit Directory fast stable 
+					MEDa					Middle Exit Directory authority
+					MEDfa					Middle Exit Directory fast authority
+					MEDsa					Middle Exit Directory stable authority
+					MEDfsa				Middle Exit Directory fast stable authority
+					ED						Exit Directory 
+					EDf						Exit Directory fast 
+					EDs						Exit Directory stable 
+					EDfs					Exit Directory fast stable 
+					EDa						Exit Directory 
+					EDfa					Exit Directory fast authority
+					EDsa					Exit Directory stable authority
+					EDfsa					Exit Directory fast stable authority
+				disRole					
+					none					
+					G							
+					M							
+					E							
+					D							
+					GM						
+					GE						
+					GD						
+					GME						
+					GMD						
+					GMED					
+					ME						
+					MD						
+					MED						
+					ED						
+				disFlag					
+					none					
+					f							
+					s							
+					a							
+					fs						
+					fa						
+					sa						
+					fsa						
+				disRoleFlag			
+					none						
+					G							
+					Gf						
+					Gs						
+					Gfs						
+					M							
+					Mf						
+					Ms						
+					Mfs						
+					E							
+					Ef						
+					Es						
+					Efs						
+					D							
+					Da						
+					GM						
+					GMf						
+					GMs						
+					GMfs					
+					GE						
+					GEf						
+					GEs						
+					GEfs					
+					GD						
+					GDf						
+					GDs						
+					GDfs					
+					GDa						
+					GDfa					
+					GDsa					
+					GDfsa					
+					GME						
+					GMEf					
+					GMEs					
+					GMEfs					
+					GMD						
+					GMDf					
+					GMDs					
+					GMDfs					
+					GMDa					
+					GMDfa					
+					GMDsa					
+					GMDfsa				
+					ME						
+					MEf						
+					MEs						
+					MEfs					
+					MD						
+					MDf						
+					MDs						
+					MDfs					
+					MDa						
+					MDfa					
+					MDsa					
+					MDfsa					
+					MED						
+					MEDf					
+					MEDs					
+					MEDfs					
+					MEDa					
+					MEDfa					
+					MEDsa					
+					MEDfsa				
+					ED						
+					EDf						
+					EDs						
+					EDfs					
+					EDa						
+					EDfa					
+					EDsa					
+					EDfsa					
+		country							//	array of all countries
+		autosys							//	array of all AS
+		
+		
 
-			disR
+######PROJECTIVE vs DISJUNCTIVE######
+
+the default testing logic is projective:
+	counting _any_ node which fulfills the criteria
+	(probably also fulfilling many other criterias)
+sections beginning with "dis" (disR, disF and disRF) are tested
+disjunctively:
+	counting _only_ nodes that fulfill _exactly_ the criterias
+	(evaluate to true for the given criterias and evaluating to false
+	for all others)
 
 
 
+#####REPORTS#####
 
 
-
-
-
-
-
-
-
-Only one report get's generated for clients:
-
-	total
-	atBridges
-	atRelays
-	cip4
-	cip6
-	cptObfs2
-	cptObfs3
-	cptOr
-	cptUnknown
-
-For clients this is all we know, save the clients per country which we'll tackle later.
-Clients @bridges and @relays are mutually exclusive, the other fields aren't.
-
-
-
-
-
-For servers - relays and bridges alike - we always aggregate total counts and counts for specific subcategories: os version (osv), tor software version (tsv), bandwidth advertized (bwa), bandwidth consumed (bwc), probabilities as applicable (pr, pg, pm, pe) and exit ports (exp) for exit nodes.
-So for every line we construct a report which contains field:value pairs for every category marked with an "x": count (sum), software versions (osv, tsv) and bandwidths (bwa, bwc) for all server nodes, probabilities (prb) and exit ports (exp) where applicable.
-
-									sum	osv	tsv	bwa	bwc	prb	exp
-	server
-		total						x	x	x	x	x
-
-For bridges it seems sensible to add a report that has fields for every possible combination of transports offered.
-The value is always the number of clients complying to the field type.
-
-									sum	osv	tsv	bwa	bwc	prb	exp
-		bridge
-			total					x	x	x	x	x
-			brpEmail				x	x	x	x	x
-			brpHttps				x	x	x	x	x
-			brpOther				x	x	x	x	x
-			breTrue					x	x	x	x	x
-			brtObfs2				x	x	x	x	x
-			brtObfs3				x	x	x	x	x
-			brtObfs23				x	x	x	x	x
-
-For relays we put an emphasis on roles and secondly flags.
-The aggregation however does not cover if a relays took more than one role (which is not uncommon).
-
-									sum	osv	tsv	bwa	bwc	prb	exp
-		relay
-			roleAll
-				total				x	x	x	x	x	x
-				flagNone			x	x	x	x	x	x
-				flagFast			x	x	x	x	x	x
-				flagStable			x	x	x	x	x	x
-				flagFastStable		x	x	x	x	x	x
-			roleGuard
-				total				x	x	x	x	x	x
-				flagNone			x	x	x	x	x	x
-				flagFast			x	x	x	x	x	x
-				flagStable			x	x	x	x	x	x
-				flagFastStable		x	x	x	x	x	x
-			roleMiddle
-				total				x	x	x	x	x	x
-				flagNone			x	x	x	x	x	x
-				flagFast			x	x	x	x	x	x
-				flagStable			x	x	x	x	x	x
-				flagFastStable		x	x	x	x	x	x
-			roleExit
-				total				x	x	x	x	x	x	x
-				flagNone			x	x	x	x	x	x	x
-				flagFast			x	x	x	x	x	x	x
-				flagStable			x	x	x	x	x	x	x
-				flagFastStable		x	x	x	x	x	x	x
-			roleDir
-				total				x	x	x	x	x
-				authorityTrue		x	x	x	x	x
-
->TODO
->this is no longer up to date
->relay aggregtion was slightly re-designed for version 3 of the map reduce script
->version 4 will go even further
->**doc/factsRow.md** is currently the authoritative source
 
 This data schema profits from the fact that node counts, software versions, bandwidths, probabilties and the exit ports are independent from each other.
-There's no way how we could construct a different perspective where bandwidths and node counts don't correlate in the same way.
 
-Country and AS information form enormous value spaces that - if they are not reduced - need to be at the root of a tree like structure, not at the leaves.
-Therefor we have to change perspective: we can't start from the perspective of servers and clients anymore, we have to start from the properties country and AS.
-Again there are differences: while there exist more than 40.000 autonomous systems, there are about 250 countries - which is still a lot, but manageable. We already have very interesting data about clients per country, which makes it highly desirable to come up with a decent schema that can handle all countries. The solution is an array on country:value objects, each populated by a rather complex result object, like so:
+######server report
+bridge + relay
 
-	country 				array of objects
-		country				cc											country
-		cbcc					int											how many clients in this country connecting through bridges
-		crcc					int											how many clients in this country connecting through relays
-		relay					int											how many relays in this country
-		guard					int											how many guard relays in this country
-		middle				int											how many middle relays in this country
-		exit					int											how many exit relays in this country
-		directory			int											how many directory relays in this country
-		bwa						int											total bwa of all relays in this country
-		bwc						int											total bwc of all relays in this country
-		pr						float										total probability of all relays in this country
-		pg						float										total probability of all guards in this country
-		pm						float										total probability of all middles in this country
-		pe						float										total probability of all exits in this country
-		fast					int											how many fast relays in this country
-		stable				int											how many stable relays in this country
-		osv						object
-			linux				int
-			freebsd			int
-			darwin			int
-			windows			int
-			other				int
+	sum			count
+	bwa			bandwidth advertized
+	bwc			bandwidth consumed
+	osv			operating system version
+		od			darwin
+		of			freebsd
+		ol			linux
+		ow			windows
+		oo			other
+	tsv			tor software version
+		t..			eg t25 for version 0.25
+
+only bridge
+		
+	pol			bridge pool														TODO
+		email
+		https
+		other
+	plg			pluggable transport
+		b2			obfs2
+		b3			obfs3
+		b23			obfs2 + obfs3
+	hst			hosting service
+		bc			amazon EC2 cloud hosting
+
+only relay
+
+	prb 		probablitiy of being used as
+		pg			guard
+		pm			middle
+		pe			exit
+		pd			directory
+	exp			permitted exit ports (projective)
+		e4			443
+		e6			6667
+		e8			80
+		e46			443 + 6667
+		e48			443 + 80
+		e68			6667 + 80
+		e468		443 + 6667 + 80
+		
+		
+######country reports
+	
+We already have very interesting data about clients per country, which makes it  desirable to come up with a schema that can handle all countries. The solution is an array of country:value objects, each populated by a rather complex result object, like so:
+	
+		country				cc					country code
+		cbcc					int					totaltotal clients in this country connecting through bridges
+		crcc					int					totaltotal clients in this country connecting through relays
+		relay					int					totaltotal relays in this country
+		bwa						int					total bwa of all relays in this country
+		bwc						int					total bwc of all relays in this country
+		role
+			g						int					total guard relays in this country
+			m						int					total middle relays in this country
+			e						int					total exit relays in this country
+			d						int					total directory relays in this country
+		flag
+			f						int					total fast relays in this country
+			s						int					total stable relays in this country
+		prob											probability
+			pr					float				total prob of all relays in this country
+			pg					float				total prob of all guards in this country
+			pm					float				total prob of all middles in this country
+			pe					float				total prob of all exits in this country
+		osv						object			operating system used
+			od					int					Darwin
+			of					int					FreeBSD
+			ol					int					Linux
+			ow					int					Windows
+			oo					int					Other
 		tsv						object
-			v010				int
-			v011				int
-			v012				int
-			v020				int
-			v021				int
-			v022				int
-			v023				int
-			v024				int
+			t10					int
+			t11					int
+			t12					int
+			t20					int
+			t21					int
+			t22					int
+			t23					int
+			t24					int
+			t25					int
 		pex						object
-			p4					int											4 as in 443
-			p6					int											6 as in 6667
-			p8					int											8 as in 80
+			p4					int					4 as in 443
+			p6					int					6 as in 6667
+			p8					int					8 as in 80
 			p46					int
 			p48					int
 			p68					int
 			p468				int
-		autosys				array of objects
-			as					string										as number
-			count				int
+		autosys										all AS serving this country
+			AS					int					as number
 
-This approach has one problem: with MongoDB the inner arrays can't be indexed if we already have an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and exp this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is close to unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
+
+This approach has one problem: with MongoDB inner arrays can't be indexed if ther's already an index on the outer array 'country' - and we definitely need that country index. For osv, tsv and exp this can be solved by plainly listing them: that's 16 rows. But for autonomous systems the problem is not so easily solvable since the matrix of 200 countries and all autonomous systems in our case is practically unmangeable. A possible workaround could be to limit the list to just the 10 or 100 AS with the most bandwidth, or probability, and one more value for the rest.
 
 Additionally countries could be grouped into continents, political regions (like "middle east", "EU"), by bandwidth consumption etc.
+	
+	
+######autonomous system reports
 
+There exist more than 40.000 autonomous systems. Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
 
-Because of their sheer number also autonomous systems have to be analyzed on their own. To understand which of them are of significant importance to the network as a whole or to specfic countries, for specific functionalities, at specific times etc we need to aggregate them over at least the most common fields.
-
-	autosys		 			array of objects				one result object per AS
-		as						string									number of as (format is string because it's a name)
-		name					string									name of as
-		home					string									home country of as, jurisdiction
-		relay					int											how many relays in this AS
-		bwa						int											total bwa of all relays in this AS
-		bwc						int											total bwc of all relays in this AS
-		fast					int											how many fast relays in this AS
-		stable					int										how many stable relays in this AS
-		guard					int											how many guard relays in this AS
-		middle					int										how many middle relays in this AS
-		exit					int											how many exit relays in this AS
-		dir						int											how many directory relays in this AS
-		pr						int											total pbr of all relays in this AS
-		pg						int											total pbg of all guards in this AS
-		pm						int											total pbm of all middles in this AS
-		pe						int											total pbe of all exits in this AS
-		countries			array of objects
-			cc					string									two-letter (ISO 3166-1 alpha-2) country code
-			relay				int											how many relays in that country in this AS
-			bwa					int											how much bwa in that country in this AS
-			bwc					int											how much bwc in that country in this AS
-			pr					float										total probability of all relays in that country and this AS
-			pg					float										total probability of all guards in that country and this AS
-			pm					float										total probability of all middles in that country and this AS
-			pe					float										total probability of all exits in that country and this AS
-
-
-See a [schematic example](doc/factsRow.md) of a facts document and a real [aggregated fact](doc/2013_04_02_00_importMR.json) for 2013-04-02 00.
-
-
-#### Dimensions nor properly captured
-
-**Mutually non exclusive relay types**
-There is a problem: guard relays, middle relays, exit relays and directory relays aren't mutually exclusive. To capture any combination thereof we need not only 4 but 15 types.
-
-	type	g		gm	ge	gd	gme	gmd	ged gmed
-				m		me	md			med
-				e		ed
-				d																	15 permutations of relay type
-
-To keep things logically straightforward we interpret these types as *disjunct*. That means that contrary to the approach taken above the types here encompass exactly what they denote and nothing more e.g. a relay counted under "gm" (signifying the flags "guard" and "middle") has *exactly* the flags "guard" and "middle" set but not (additionally) "exit" and/or "directory".
-
-Keeping track of flags for all 15 types quadruples the count (no flag, flag fast, flag stable, flags fast + stable.
-
-This approach has an advantage over the path taken above because this time the numbers of all types of relays add up to the total amount of relays. There is no overlap between types. The more general case above probably fits most usecases (at least that's our best guess) but aggregating the extra values doesn't hurt much neither computationally nor storage wise. Having a representation that may be tedious to use but is cognitively transparent (there are no surprises when adding up parts to the whole) and mathematically "clean" seems worth the effort.
-
-As a performance compromise we will omit some details like software versions and permitted exit ports, since these would add another level of indirection to the resulting dataset, making them hard to query anyway.
-
-													sum	osv	tsv	bwa	bwc	prb	exp
-		relays
-			roleAll
-				total							x		x		x		x		x		x		x
-				flagNone					x		x		x		x		x		x		x
-				flagFast					x		x		x		x		x		x		x
-				flagStable				x		x		x		x		x		x		x
-				flagFastStable		x		x		x		x		x		x		x
-			roleGuard
-				total							x		x		x		x		x		x		x
-				flagNone					x		x		x		x		x		x		x
-				flagFast					x		x		x		x		x		x		x
-				flagStable				x		x		x		x		x		x		x
-				flagFastStable		x		x		x		x		x		x		x
-			roleMiddle
-				total							x		x		x		x		x		x		x
-				flagNone					x		x		x		x		x		x		x
-				flagFast					x		x		x		x		x		x		x
-				flagStable				x		x		x		x		x		x		x
-				flagFastStable		x		x		x		x		x		x		x
-			roleExit
-				total							x		x		x		x		x		x		x
-				flagNone					x		x		x		x		x		x		x
-				flagFast					x		x		x		x		x		x		x
-				flagStable				x		x		x		x		x		x		x
-				flagFastStable		x		x		x		x		x		x		x
-			roleDir
-				total							x		x		x		x		x		x		x
-				authorityTrue			x		x		x		x		x		x		x
-			roleExclusive
-				G									x		x		x		x		x		x		x
-				Gf								x		x		x		x		x		x		x
-				Gs								x		x		x		x		x		x		x
-				Gfs								x		x		x		x		x		x		x
-				M									x		x		x		x		x		x		x
-				Mf								x		x		x		x		x		x		x
-				Ms								x		x		x		x		x		x		x
-				Mfs								x		x		x		x		x		x		x
-				E									x		x		x		x		x		x		x
-				Ef								x		x		x		x		x		x		x
-				Es								x		x		x		x		x		x		x
-				Efs								x		x		x		x		x		x		x
-				D									x		x		x		x		x		x		x
-				Da								x		x		x		x		x		x		x
-				GM								x		x		x		x		x		x		x
-				GMf								x		x		x		x		x		x		x
-				GMs								x		x		x		x		x		x		x
-				GMfs							x		x		x		x		x		x		x
-				GE								x		x		x		x		x		x		x
-				GEf								x		x		x		x		x		x		x
-				GEs								x		x		x		x		x		x		x
-				GEfs							x		x		x		x		x		x		x
-				GD								x		x		x		x		x		x		x
-				GDf								x		x		x		x		x		x		x
-				GDs								x		x		x		x		x		x		x
-				GDfs							x		x		x		x		x		x		x
-				GDa								x		x		x		x		x		x		x
-				GDfa							x		x		x		x		x		x		x
-				GDsa							x		x		x		x		x		x		x
-				GDfsa							x		x		x		x		x		x		x
-				GME								x		x		x		x		x		x		x
-				GMEf							x		x		x		x		x		x		x
-				GMEs							x		x		x		x		x		x		x
-				GMEfs							x		x		x		x		x		x		x
-				GMD								x		x		x		x		x		x		x
-				GMDf							x		x		x		x		x		x		x
-				GMDs							x		x		x		x		x		x		x
-				GMDfs							x		x		x		x		x		x		x
-				GMDa							x		x		x		x		x		x		x
-				GMDfa							x		x		x		x		x		x		x
-				GMDsa							x		x		x		x		x		x		x
-				GMDfsa						x		x		x		x		x		x		x
-				ME								x		x		x		x		x		x		x
-				MEf								x		x		x		x		x		x		x
-				MEs								x		x		x		x		x		x		x
-				MEfs							x		x		x		x		x		x		x
-				MD								x		x		x		x		x		x		x
-				MDf								x		x		x		x		x		x		x
-				MDs								x		x		x		x		x		x		x
-				MDfs							x		x		x		x		x		x		x
-				MDa								x		x		x		x		x		x		x
-				MDfa							x		x		x		x		x		x		x
-				MDsa							x		x		x		x		x		x		x
-				MDfsa							x		x		x		x		x		x		x
-				MED								x		x		x		x		x		x		x
-				MEDf							x		x		x		x		x		x		x
-				MEDs							x		x		x		x		x		x		x
-				MEDfs							x		x		x		x		x		x		x
-				MEDa							x		x		x		x		x		x		x
-				MEDfa							x		x		x		x		x		x		x
-				MEDsa							x		x		x		x		x		x		x
-				MEDfsa						x		x		x		x		x		x		x
-				ED								x		x		x		x		x		x		x
-				EDf								x		x		x		x		x		x		x
-				EDs								x		x		x		x		x		x		x
-				EDfs							x		x		x		x		x		x		x
-				EDa								x		x		x		x		x		x		x
-				EDfa							x		x		x		x		x		x		x
-				EDsa							x		x		x		x		x		x		x
-				EDfsa							x		x		x		x		x		x		x
+		as						string			number of as (format is string because it's a name)
+		relay					int					how many relays in this AS
+		bwa						int					total bwa of all relays in this AS
+		bwc						int					total bwc of all relays in this AS
+		role
+			g						int					total guard relays in this AS
+			m						int					total middle relays in this AS
+			e						int					total exit relays in this AS
+			d						int					total directory relays in this AS
+		flag
+			f						int					total fast relays in this AS
+			s						int					total stable relays in this AS
+		prob
+			pr					int					total pbr of all relays in this AS
+			pg					int					total pbg of all guards in this AS
+			pm					int					total pbm of all middles in this AS
+			pe					int					total pbe of all exits in this AS
+		country				array of objects
+			cc					string			ISO 3166-1 two-letter country code
+			relay				int					total relays in that country in this AS
+			bwa					int					total bwa in that country in this AS
+			bwc					int					total bwc in that country in this AS
+			role
+				g
+				m
+				e
+				d
+			flag
+				f
+				s
+			prob										probability
+				pr				float				total prob of all relays in this country + AS
+				pg				float				total prob of all guards in this country + AS
+				pm				float				total prob of all middles in this country + AS
+				pe				float				total prob of all exits in this country + AS
 
 
 
->TODO
->this is no longer up to date
->**doc/factsRow.md** is currently the authoritative source
 
-Adding the authority flag to the mix adds some complexity but keeps the flags inline with the approach above. Let's just hope it's worth the effort...
+Check out a real [aggregated fact](doc/2013_04_02_01_importMR.json) for 2013-04-02 01. The document is rather long with about 60.000 lines, so you'll profit from a decent editor, preferably with code folding support, when viewing it.
 
-**OS or Tor software versions**
-Adding OS or Tor software versions as further dimensions would mean blowing up the dimensionality to 37 x 5 = 195 or 37 x 8 = 296 respectively and I can't see any scenario in which this effort would be justified. That still leaves out the 40 combinations of OS and Tor software versions.
-Probably Tor software version and OS versions are only of limited significance. I tend to add them to the reports of the main 31 server rows sketched out above and be done with it.
-13 more field:value pairs added to each result object, 5 for OS and 8 for TS: would that seem useful?
-Maybe even cut that down and only add them to bridges and the 4 relays types, without honoring the flags?
 
-At least theoretically interesting are the 40 possible combinations of operating system and tor software compared with any of the other dimensions, e.g. the 8 basic node types (without flags) = 320 permutations. Not nice, but doable in a seperate collection. Would that be useful?
 
 **flags**
-Most of the flags collected in the "relays" import collection actually serve so little purpose that we will not use them in the visualization, to avoid visual clutter and distraction and improve performance on the backend.
+Only the flags "Fast", "Stable" and "Authority" will be aggregated. Most of the flags collected in the "relays" import collection actually serve so little purpose that we will not use them in the visualization, to avoid visual clutter and distraction and improve performance on the backend.
 They will be imported into the database but will not be aggregated.
-Only the flags "Fast", "Stable" and "Authority" will be aggregated for the following types of relays:
-
-							Fast	Stable	Authority
-	Guard				x			x
-	Middle			x			x
-	Exit				x			x
-	Directory 								x
-
 
 #### further possibilities
 
@@ -794,7 +852,7 @@ So far we collected about 5 years of data, which leads the following numbers of 
 	            x24		43200	hourly
 
 We will want to zoom in and out of the data visualization and henceforth need to define aggregated timespans.
-Sensible spans coudl be
+Sensible spans could be
 
 	1h		1 hour, the default and minimal span
 	6h		6 hours
@@ -802,18 +860,8 @@ Sensible spans coudl be
 	1w		168 hours, 7 days, 1 week
 	1m		1 month, about 4 weeks, about 30.5 days
 
-If we skip months as too coarse anyway (but actually because they are so unwieldy irregular) we could get by with 4 possible integer values: 1, 6, 24, 168
-
-Another idea:
-
-	H		hourly (default)
-	q		quarter daily		h x 6
-	D		daily				q x 4	h x 24
-	w		weekly				d x 7
-	M		monthly				w x 4	d x 31
-	y		yearly				m x 12
-
-hourly, daily and monthly provide roughly equivalent steppings. the should be implemented first. quarter-daily and weekly can be implemented later. yearly will not be needed too soon.
+To keep things simple we start with hourly, daily and monthly timespans. Hourly data is what we got, 24 hours make a day and around 30 days make a month. So we get not too irregular jumps between zoom steps.   
+If need arises quarter-daily and weekly aggregations can be added later. Yearly aggregation will not be needed anytime soon.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse

@@ -13,17 +13,18 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 
 ###> db.import.findOne({type: "r"})
 
-#####NEW - as of around mr6 / january 2015
-
 	{
 		"_id" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448-1-2013040321",
+		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
 		"updt" : "2013-09-10T10:57:19.871Z",
-		"as" : 21502,
-		"bwa" : 54276,
-		"bwc" : 0,
-		"cc" : "FR",
+		"nick" : "Free4all",
 		"date" : "2013-04-03 21",
-		"exp" : [ ],
+   	"type" : "r",
+		"span" : 1,
+		"role" : [
+			"Middle",
+			"Dir"
+		],
 		"flag" : [
 			"Fast",
 			"Named",
@@ -31,99 +32,42 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 			"V2Dir",
 			"Valid"
 		],
-		"nick" : "Free4all",
-		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
+		"bwa" : 54276,
+		"bwc" : 0,
 		"osv" : "linux",
-		"pe" : 0,
+  	"tsv" : "024",
+  	"pr" : 0.000003,
 		"pg" : 0,
 		"pm" : 0.000009,
-		"pr" : 0.000003,
-		"role" : [
-			"Middle",
-			"Dir"
-		],
-		"span" : 1,
-		"tsv" : "024",
-		"type" : "r"
-	}
-
-#####OLD
-
-	{
-		"_id" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448-1-2013040321",
-		"type" : "r",
-		"addd" : "2013-08-14T09:23:45.302Z",
-		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
-		"nick" : "Free4all",
-		"date" : "2013-04-03 21",
-		"span" : 1,
-		"role" : [
-			"Middle",
-			"Dir"
-		],
-		"flag" : [
-			"Fast",
-			"Named",
-			"Running",
-			"V2Dir",
-			"Valid"
-		],
-		"bwa" : 54276,
-		"bwc" : 0,
-		"tsv" : "024",
-		"osv" : "linux",
-		"pbr" : 0.000003,
-		"pbg" : 0,
-		"pbm" : 0.000009,
-		"pbe" : 0,
+   	"pe" : 0,
 		"as" : 21502,
-		"pex" : [ ],
+		"exp" : [ ],
 		"cc" : "FR"
 	}
 
-
 ###> db.import.findOne({type: "b"})
+{
+	"_id" : "0000831B236DFF73D409AD17B40E2A728A53994F-1-2013042020",
+	"bwa" : 20480,
+	"bwc" : 0,
+	"date" : "2013-04-20 20",
+	"ec2" : true,
+	"nick" : "ec2bridgercc7f31fe",
+	"node" : "0000831B236DFF73D409AD17B40E2A728A53994F",
+	"osv" : "linux",
+	"plug" : [
+		"obfs3",
+		"obfs2"
+	],
+	"pool" : "email",
+	"span" : 1,
+	"tsv" : "024",
+	"type" : "b",
+	"updt" : "2013-09-10T10:57:19.871Z"
+}
 
-#####NEW - as of around mr6 / january 2015
 
-	{
-		"_id" : "0002D9BDBBC230BD9C78FF502A16E0033EF87E0C-1-2013041407",
-		"updt" : "2013-09-10T10:57:19.871Z",
-		"bwa" : 0,
-		"bwc" : 27,
-		"date" : "2013-04-14 07",
-		"ec2" : false,
-		"nick" : "Unnamed",
-		"node" : "0002D9BDBBC230BD9C78FF502A16E0033EF87E0C",
-		"osv" : "",
-		"plug" : [ ],
-		"pool" : "",
-		"span" : 1,
-		"tsv" : "",
-		"type" : "b"
-	}
 
-#####OLD
-
-	{
-		"_id" : "0000831B236DFF73D409AD17B40E2A728A53994F-1-2013042016",
-		"type" : "b",
-		"addd" : "2013-08-14T09:23:45.302Z",
-		"node" : "0000831B236DFF73D409AD17B40E2A728A53994F",
-		"nick" : "ec2bridgercc7f31fe",
-		"date" : "2013-04-20 16",
-		"span" : 1,
-		"bwa" : 20480,
-		"bwc" : 21,
-		"tsv" : "024",
-		"osv" : "linux",
-		"brp" : "email",
-		"bre" : true,
-		"brt" : [
-			"obfs3",
-			"obfs2"
-		]
-	}
 
 
 ###> db.import.findOne({type: "c"})
@@ -134,6 +78,13 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 		"updt" : "2013-08-14T09:23:45.302Z",
 		"date" : "2013-01-01 00",
 		"span" : 1,
+		"cpt" : {
+			"OR" : 139
+		},
+		"cip" : {
+			"v4" : 137,
+			"v6" : 3
+		},
 		"cb" : 3324,
 		"cbcc" : {
 			"??" : 12,
@@ -473,12 +424,71 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 			"ZA" : 49,
 			"ZM" : 2,
 			"ZW" : 4
-		},
-		"cpt" : {
-			"OR" : 139
-		},
-		"cip" : {
-			"v4" : 137,
-			"v6" : 3
 		}
+	}
+
+
+
+
+###historic versions###
+
+around mr6 / january 2015 some field names where changed. the following
+documents from before that cahnge serve as reference when working with older
+versions of the aggregation scripts.
+
+
+####> db.import.findOne({type: "r"})####
+
+	{
+		"_id" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448-1-2013040321",
+		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
+		"addd" : "2013-08-14T09:23:45.302Z",
+		"nick" : "Free4all",
+		"date" : "2013-04-03 21",
+		"type" : "r",
+		"span" : 1,
+		"role" : [
+			"Middle",
+			"Dir"
+		],
+		"flag" : [
+			"Fast",
+			"Named",
+			"Running",
+			"V2Dir",
+			"Valid"
+		],
+		"bwa" : 54276,
+		"bwc" : 0,
+		"osv" : "linux",
+		"tsv" : "024",
+		"pbr" : 0.000003,
+		"pbg" : 0,
+		"pbm" : 0.000009,
+		"pbe" : 0,
+		"as" : 21502,
+		"pex" : [ ],
+		"cc" : "FR"
+	}
+
+####> db.import.findOne({type: "b"})####
+
+	{
+		"_id" : "0000831B236DFF73D409AD17B40E2A728A53994F-1-2013042016",
+		"node" : "0000831B236DFF73D409AD17B40E2A728A53994F",
+		"addd" : "2013-08-14T09:23:45.302Z",
+		"date" : "2013-04-20 16",
+		"nick" : "ec2bridgercc7f31fe",
+		"type" : "b",
+		"span" : 1,
+		"bwa" : 20480,
+		"bwc" : 21,
+		"osv" : "linux",
+		"tsv" : "024",
+		"brp" : "email",
+		"bre" : true,
+		"brt" : [
+			"obfs3",
+			"obfs2"
+		]
 	}

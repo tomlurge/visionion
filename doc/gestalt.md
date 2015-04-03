@@ -65,59 +65,59 @@ For each relay role it's the total number of relays - the important implication 
 	TYPE	FIELD		MODE			MEASURE			UNIT			UPPER LIMIT
 	-------------------------------------------------------------------------------
 	SERVER									
-			server		hardware		sum				count			server
-			osv			software		sum...s			count			server
-			tsv			software		sum...s			count			server
-			upt			quality			avg				percentage		100
-			bwa			network			sum				count			-
-			bwc			network			sum				count			bwa
+				server	hardware	sum					count			server
+				osv			software	sum...s			count			server
+				tsv			software	sum...s			count			server
+				upt			quality		avg					percent		100
+				bwa			network		sum					count			-
+				bwc			network		sum					count			bwa
 												
 	RELAY											
-			relay		hardware		sum				count			Server minus Bridge
-			g			hardware		sum				count			< relay
-			m			hardware		sum				count			< relay
-			e			hardware		sum				count			< relay
-			d			hardware		sum				count			< relay
-			pbr			quality			avg				percentage		100 (but should be much less)
-			pbg			quality			avg				percentage		100 (but should be much less)
-			pbm			quality			avg				percentage		100 (but should be much less)
-			pbe			quality			avg				percentage		100 (but should be much less)
-			flag		software		sum...s			count			< relay
-			as			locality		sum...s			count			< relay (but really much less)
-			pex			software		sum,sum,sum		count			< relay
+				relay		hardware	sum					count			Server minus Bridge
+				g				hardware	sum					count			< relay
+				m				hardware	sum					count			< relay
+				e				hardware	sum					count			< relay
+				d				hardware	sum					count			< relay
+				pr			quality		avg					percent		100 (but should be much less)
+				pg			quality		avg					percent		100 (but should be much less)
+				pm			quality		avg					percent		100 (but should be much less)
+				pe			quality		avg					percent		100 (but should be much less)
+				flag		software	sum...s			count			< relay
+				as			locality	sum...s			count			< relay (but really much less)
+				exp			software	sum...s			count			< relay
 												
 	BRIDGE																
-			bridge		hardware		sum				count			Server minus Relay	
-			brp			locality		sum,sum,sum		count			bridge
-			bre			locality		sum				count			bridge
-			brt			software		sum,sum			count			bridge
+				bridge	hardware	sum					count			Server minus Relay
+				pool		locality	sum...s			count			bridge
+				host		locality	sum					count			bridge
+				plug		software	sum...s			count			bridge
 											
 	CLIENT										
-			cb			locality		sum				client
-			cr			locality		sum				client
-			cpt			software		sum,sum,sum,sum	count		
-			cip			software		sum,sum			count
+				cb			locality	sum					client
+				cr			locality	sum					client
+				cpt			software	sum...s			count
+				cip			software	sum...s			count
 										
 	COUTRY								
 	clients								
-			cbcc		locality		sum				count
-			crcc		locality		sum				count
+				cbcc		locality	sum					count
+				crcc		locality	sum					count
 	relays								
-			osv			software		sum...s			count			relay
-			tsv			software						count			relay
-			upt			quality			avg				percentage		100
-			bwa			network			sum				count		
-			bwc			network			sum				count			bwa
-			g			hardware		sum				count			< relay
-			m			hardware		sum				count			< relay
-			e			hardware		sum				count			< relay
-			d			hardware		sum				count			< relay
-			pbr			quality			avg				percentage		100 (but should be much less)
-			pbg			quality			avg				percentage		100 (but should be much less)
-			pbm			quality			avg				percentage		100 (but should be much less)
-			pbe			quality			avg				percentage		100 (but should be much less)
-			flag		software		sum...s			count			< gmed
-			as			locality		scat + sum...s	count			< gmed (but really much less)
+				osv			software	sum...s			count			relay
+				tsv			software							count			relay
+				upt			quality		avg					percent		100
+				bwa			network		sum					count
+				bwc			network		sum					count			bwa
+				g				hardware	sum					count			< relay
+				m				hardware	sum					count			< relay
+				e				hardware	sum					count			< relay
+				d				hardware	sum					count			< relay
+				pr			quality		avg					percent		100 (but should be much less)
+				pg			quality		avg					percent		100 (but should be much less)
+				pm			quality		avg					percent		100 (but should be much less)
+				pe			quality		avg					percent		100 (but should be much less)
+				flag		software	sum...s			count			< gmed
+				as			locality	sum...s			count			< gmed (but really much less)
 			
 
 **Overview data on clients and relays**   
@@ -130,6 +130,7 @@ But that's about it with clients and relays.
 **Clients**   
 Client data is on purpose quite sparse and we can't do much more than compare numbers of clients with the more detailed data about the relays and bridges. 
 We will eg not be able to follow clients through the network.
+Clients data is also a rather wild guess since there is very little data avaliable on clients This is a design desicion to prevent de-anonymization.
 
 **Countries**   
 The most detailed view we can get on clients is their distribution by country. This is interesting since we also know from each relay the country in which it is located. And we know a lot about relays. So maybe we can construct some useful views on specific characteristics of relays and total numbers of clients by country.
@@ -184,33 +185,33 @@ And if we use the 20% threshold for non-null values:
 #### measures and dimensions
 Improve readbility of visualization by distinguishing clearly between measures and dimensions (see m/d column below)
 
-	in   code   m/d  description     type
-	+---+------+----+---------------+--------------------------------------
-	rbc  _id    d    document ID     dict of:
+	in		code   m/d  description     type
+	+----+------+----+---------------+--------------------------------------
+	rbc		_id			d		document ID			 dict of:
 									- datetime, ISODate
 									- span, integer, in hours
 									- type: "relay", "bridge", or "client"
 									- fingerprint, string, only rb span=1
 									- nickname, string, only rb span=1
-	r    rtype  d    type of relay   some of "Guard", "Middle", ...
-	r    rflag  d    relay flags     some of "Fast", "Stable", ...
-	rb   tsv    d    software ver.   string
-	rb   osv    d    operating sys.  string
-	r    as     d    auton. sys.     integer
-	r    pex    d    perm. exit p.   array of integers
-	r c  cc     d    country code    string
-	 b   brp    d    bridge pool     string
-	 b   bre    d    EC2 cloud       boolean
-	 bc  brt    d    pluggable trans string
-	  c  cdc    d    direct conn.    boolean: connect via relay or bridge?
-	  c  cip    d    ip version      integer: connect via IP version 4 or 6
-	rbc  nodes  m    # of nodes      float
-	rb   bwa    m    bw advertised   float
-	rb   bwc    m    bw consumed     float
-	r    pbr    m    cons. weight    float
-	r    pbg    m    guard prob.     float
-	r    pbm    m    middle prob.    float
-	r    pbe    m    exit prob.      float
+	r			type		d		type of relay		some of "Guard", "Middle", ...
+	r			flag		d		relay flags			some of "Fast", "Stable", ...
+	rb 		tsv 		d		software ver.		string
+	rb 		osv 		d		operating sys.	string
+	r			as  		d		auton. sys.			integer
+	r			exp 		d		perm. exit p.		array of integers
+	r			cc  		d		country code		string
+	 b 		pool		d		bridge pool			string
+	 b 		host		d		EC2 cloud				boolean
+	 bc		plug		d		pluggable trans string
+	  c		cdc 		d		direct conn.		boolean: connect via relay or bridge?
+	  c		cip 		d		ip version			integer: connect via IP version 4 or 6
+	rbc		nodes		m		# of nodes			float
+	rb		bwa			m		bw advertised		float
+	rb		bwc			m		bw consumed			float
+	r			pr			m		cons. weight		float
+	r			pg			m		guard prob.			float
+	r			pm			m		middle prob.		float
+	r			pe			m		exit prob.			float
 
 
 #### uptimes    

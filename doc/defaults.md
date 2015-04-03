@@ -7,7 +7,7 @@ To reduce complexity in the mapReduce script it has proven helpful that all impo
 
 For relays these are:
 
-				NOW			and maybe should be changed to
+					NOW		and maybe should be changed to
 	nick		""			""	
 	role		[]			
 	flag		[]			
@@ -15,11 +15,11 @@ For relays these are:
 	bwc			0			null
 	tsv			""			""
 	osv			""			""
-	pbr			0			null
-	pbg			0			null
-	pbm			0			null
-	pbe			0			null
-	pex			[]			
+	pr			0			null
+	pg			0			null
+	pm			0			null
+	pe			0			null
+	exp			[]			
 	as			""			""
 	cc			""			""
 			
@@ -30,9 +30,9 @@ For bridges:
 	bwc			0			null
 	tsv			""			""
 	osv			""			""
-	brp			""			""
-	bre			0			null
-	brt			[]			
+	pool		""			""
+	host		0			null
+	plug		[]			
 			
 And for clients:	
 		
@@ -46,7 +46,7 @@ And for clients:
 The following fields don't have default values because they are mandatory:
 	
 	_id
-	addd
+	updt
 	span
 	date
 	type
