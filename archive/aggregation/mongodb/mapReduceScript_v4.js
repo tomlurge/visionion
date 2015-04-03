@@ -85,13 +85,13 @@ function mapValues() {
 		relays: {
 			total: ["pbr"],
 			project: {
-				proRole: {
+				role: {
 					guard: ["pbg"],
 					middle: ["pbm"],
 					exit: ["pbe", "exp"],
 					dir: []
 				},
-				proFlag: {
+				flag: {
 					fast: ["probs"],
 					stable: ["probs"],
 					fastStable: ["probs"],
@@ -568,13 +568,13 @@ function mapValues() {
 			var result = false;
 			if (incoming.type === "r") {
 				//	test for proRole
-				if (c in serversConfig.relays.project.proRole) {
+				if (c in serversConfig.relays.project.role) {
 					proRoleConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
 					});
 				}
 				//	test for proFlag
-				else if (c in serversConfig.relays.project.proFlag) {
+				else if (c in serversConfig.relays.project.flag) {
 					proFlagConfig.forEach(function(config){
 						if (config.name === c) {result = config.test();}
 					});

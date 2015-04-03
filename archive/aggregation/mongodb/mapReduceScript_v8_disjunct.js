@@ -198,13 +198,13 @@ function mapValues() {
 	var relayConf = {
 		total:			[relay],
 		project: {
-			proRole: {
+			role: {
 				g:			[role.g],													//	guard
 				m:			[role.m],													//	middle
 				e:			[role.e],													//	exit
 				d:			[role.d]													//	directory
 			},
-			proFlag: {
+			flag: {
 				f:			[flag.f],													//	fast
 				s:			[flag.s],													//	stable
 				fs:			[flag.f, flag.s],									// 	fast + stable
@@ -569,18 +569,18 @@ function mapValues() {
 			countryObject.relay = 1;
 			countryObject.bwa = incoming.bwa;
 			countryObject.bwc = incoming.bwc;
-			countryObject.proRole = {};
-			countryObject.proFlag = {};
+			countryObject.role = {};
+			countryObject.flag = {};
 			countryObject.proProb = {};
 
 			for (var r in role) {
 				if (role.hasOwnProperty(r) && role[r]) {
-					countryObject.proRole[r] = 1;
+					countryObject.role[r] = 1;
 				}
 			}
 			for (var f in flag) {
 				if (flag.hasOwnProperty(f) && flag[f]) {
-					countryObject.proFlag[f] = 1;
+					countryObject.flag[f] = 1;
 				}
 			}
 			for (var p in prob) {
@@ -627,29 +627,29 @@ function mapValues() {
 			relay: 1,
 			bwa: incoming.bwa || 0,
 			bwc: incoming.bwc || 0,
-			proRole: {},
-			proFlag: {},
+			role: {},
+			flag: {},
 			proProb: {},
 			country: [{
 				cc: incoming.cc,
 				relay: 1,
 				bwa: incoming.bwa || 0,
 				bwc: incoming.bwc || 0,
-				proRole: {},
-				proFlag: {},
+				role: {},
+				flag: {},
 				proProb: {}
 			}]
 		};
 		for (var r in role) {
 			if (role.hasOwnProperty(r) && role[r]) {
-				asObject.proRole[r] = 1;
-				asObject.country[0].proRole[r] = 1;
+				asObject.role[r] = 1;
+				asObject.country[0].role[r] = 1;
 			}
 		}
 		for (var f in flag) {
 			if (flag.hasOwnProperty(f) && flag[f]) {
-				asObject.proFlag[f] = 1;
-				asObject.country[0].proFlag[f] = 1;
+				asObject.flag[f] = 1;
+				asObject.country[0].flag[f] = 1;
 			}
 		}
 		for (var p in prob) {

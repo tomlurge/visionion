@@ -220,13 +220,13 @@ function mapValues() {
 		relay: {
 			total:			{ test: pro(relay), subr: [prob.pr] },
 			project: {
-				proRole: {
+				role: {
 					g:			{ test: pro(role.g), subr: [prob.pg] },			//	guard
 					m:			{ test: pro(role.m), subr: [prob.pm] },			//	middle
 					e:			{ test: pro(role.e), subr: [prob.pe, exp] },	//	exit
 					d:			{ test: pro(role.d) }												//	directory
 				},
-				proFlag: {
+				flag: {
 					f:			{ test: pro(flag.f), subr: [prob] },					//	fast
 					s:			{ test: pro(flag.s), subr: [prob] },					//	stable
 					fs:			{ test: pro(flag.f,flag.s), subr: [prob] },	// 	f+s
@@ -548,18 +548,18 @@ function mapValues() {
 			countryObject.relay = 1;
 			countryObject.bwa = incoming.bwa;
 			countryObject.bwc = incoming.bwc;
-			countryObject.proRole = {};
-			countryObject.proFlag = {};
+			countryObject.role = {};
+			countryObject.flag = {};
 			countryObject.proProb = {};
 
 			for (var r in role) {
 				if (role.hasOwnProperty(r) && r) {
-					countryObject.proRole[r] = 1;
+					countryObject.role[r] = 1;
 				}
 			}
 			for (var f in flag) {
 				if (flag.hasOwnProperty(f) && f) {
-					countryObject.proFlag[f] = 1;
+					countryObject.flag[f] = 1;
 				}
 			}
 			for (var p in prob) {
@@ -611,29 +611,29 @@ function mapValues() {
 			relay: 1,
 			bwa: incoming.bwa || 0,
 			bwc: incoming.bwc || 0,
-			proRole: {},
-			proFlag: {},
+			role: {},
+			flag: {},
 			proProb: {},
 			country: [{
 				cc: incoming.cc,
 				relay: 1,
 				bwa: incoming.bwa || 0,
 				bwc: incoming.bwc || 0,
-				proRole: {},
-				proFlag: {},
+				role: {},
+				flag: {},
 				proProb: {}
 			}]
 		};
 		for (var r in role) {
 			if (role.hasOwnProperty(r) && r) {
-				asObject.proRole[r] = 1;
-				asObject.country[0].proRole[r] = 1;
+				asObject.role[r] = 1;
+				asObject.country[0].role[r] = 1;
 			}
 		}
 		for (var f in flag) {
 			if (flag.hasOwnProperty(f) && f) {
-				asObject.proFlag[f] = 1;
-				asObject.country[0].proFlag[f] = 1;
+				asObject.flag[f] = 1;
+				asObject.country[0].flag[f] = 1;
 			}
 		}
 		for (var p in prob) {

@@ -15,13 +15,13 @@ var result =
 			"relay" : 19,
 			"bwa" : 27819291,
 			"bwc" : 17985246,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 19,
 				"d" : 15,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 19,
 				"s" : 11
 			},
@@ -58,13 +58,13 @@ var result =
 			"relay" : 184,
 			"bwa" : 188390421,
 			"bwc" : 128755697,
-			"proRole" : {
+			"role" : {
 				"g" : 63,
 				"m" : 184,
 				"e" : 56,
 				"d" : 99
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 145,
 				"s" : 126
 			},
@@ -119,13 +119,13 @@ var result =
 			"relay" : 637,
 			"bwa" : 790173377,
 			"bwc" : 538094182,
-			"proRole" : {
+			"role" : {
 				"g" : 252,
 				"m" : 637,
 				"e" : 95,
 				"d" : 359
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 574,
 				"s" : 423,
 				"a" : 2
@@ -237,13 +237,13 @@ var result =
 			"relay" : 106,
 			"bwa" : 182135006,
 			"bwc" : 131113358,
-			"proRole" : {
+			"role" : {
 				"m" : 106,
 				"e" : 30,
 				"d" : 76,
 				"g" : 45
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 97,
 				"s" : 78,
 				"a" : 1
@@ -309,13 +309,13 @@ var result =
 			"relay" : 941,
 			"bwa" : 1083438891,
 			"bwc" : 701092079,
-			"proRole" : {
+			"role" : {
 				"g" : 264,
 				"m" : 941,
 				"e" : 177,
 				"d" : 606
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 853,
 				"s" : 631,
 				"a" : 4
@@ -586,13 +586,13 @@ var result =
 			"relay" : 43,
 			"bwa" : 14791829,
 			"bwc" : 6010456,
-			"proRole" : {
+			"role" : {
 				"m" : 43,
 				"d" : 26,
 				"e" : 6,
 				"g" : 10
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 42,
 				"s" : 30
 			},
@@ -642,13 +642,13 @@ var result =
 			"relay" : 174,
 			"bwa" : 128851510,
 			"bwc" : 85235410,
-			"proRole" : {
+			"role" : {
 				"m" : 174,
 				"d" : 89,
 				"e" : 32,
 				"g" : 37
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 148,
 				"s" : 104
 			},
@@ -714,13 +714,13 @@ var result =
 			"relay" : 15,
 			"bwa" : 8135959,
 			"bwc" : 4236522,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 15,
 				"d" : 11,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 10
 			},
@@ -754,11 +754,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 74110,
 			"bwc" : 20294,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -783,13 +783,13 @@ var result =
 			"relay" : 14,
 			"bwa" : 10419232,
 			"bwc" : 6998026,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 14,
 				"e" : 7,
 				"d" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 12,
 				"s" : 11
 			},
@@ -821,13 +821,13 @@ var result =
 			"relay" : 34,
 			"bwa" : 6077687,
 			"bwc" : 1599959,
-			"proRole" : {
+			"role" : {
 				"m" : 34,
 				"e" : 12,
 				"d" : 20,
 				"g" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 25,
 				"s" : 22
 			},
@@ -874,13 +874,13 @@ var result =
 			"relay" : 41,
 			"bwa" : 56552133,
 			"bwc" : 42425917,
-			"proRole" : {
+			"role" : {
 				"m" : 41,
 				"e" : 18,
 				"d" : 27,
 				"g" : 17
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 40,
 				"s" : 35
 			},
@@ -921,13 +921,13 @@ var result =
 			"relay" : 45,
 			"bwa" : 35174703,
 			"bwc" : 20933392,
-			"proRole" : {
+			"role" : {
 				"m" : 45,
 				"d" : 28,
 				"e" : 11,
 				"g" : 17
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 39,
 				"s" : 30
 			},
@@ -978,13 +978,13 @@ var result =
 			"relay" : 148,
 			"bwa" : 111755317,
 			"bwc" : 58652232,
-			"proRole" : {
+			"role" : {
 				"m" : 148,
 				"e" : 52,
 				"d" : 103,
 				"g" : 29
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 141,
 				"s" : 59
 			},
@@ -1101,13 +1101,13 @@ var result =
 			"relay" : 50,
 			"bwa" : 97852002,
 			"bwc" : 81448916,
-			"proRole" : {
+			"role" : {
 				"m" : 50,
 				"d" : 33,
 				"g" : 19,
 				"e" : 10
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 48,
 				"s" : 37,
 				"a" : 1
@@ -1158,13 +1158,13 @@ var result =
 			"relay" : 27,
 			"bwa" : 3148681,
 			"bwc" : 645993,
-			"proRole" : {
+			"role" : {
 				"m" : 27,
 				"e" : 7,
 				"d" : 15,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 19,
 				"s" : 8
 			},
@@ -1203,13 +1203,13 @@ var result =
 			"relay" : 89,
 			"bwa" : 59286998,
 			"bwc" : 35633842,
-			"proRole" : {
+			"role" : {
 				"m" : 89,
 				"d" : 47,
 				"g" : 20,
 				"e" : 15
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 65,
 				"s" : 60
 			},
@@ -1271,13 +1271,13 @@ var result =
 			"relay" : 77,
 			"bwa" : 94211446,
 			"bwc" : 47409202,
-			"proRole" : {
+			"role" : {
 				"m" : 77,
 				"e" : 42,
 				"d" : 33,
 				"g" : 29
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 52,
 				"s" : 57
 			},
@@ -1327,13 +1327,13 @@ var result =
 			"relay" : 41,
 			"bwa" : 24626445,
 			"bwc" : 13877081,
-			"proRole" : {
+			"role" : {
 				"m" : 41,
 				"e" : 18,
 				"d" : 25,
 				"g" : 9
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 20,
 				"f" : 33
 			},
@@ -1391,13 +1391,13 @@ var result =
 			"relay" : 196,
 			"bwa" : 378885530,
 			"bwc" : 282445006,
-			"proRole" : {
+			"role" : {
 				"m" : 196,
 				"e" : 76,
 				"d" : 98,
 				"g" : 77
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 164,
 				"s" : 145,
 				"a" : 2
@@ -1469,12 +1469,12 @@ var result =
 			"relay" : 17,
 			"bwa" : 2359205,
 			"bwc" : 842143,
-			"proRole" : {
+			"role" : {
 				"m" : 17,
 				"d" : 9,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 6
 			},
@@ -1509,13 +1509,13 @@ var result =
 			"relay" : 19,
 			"bwa" : 23380569,
 			"bwc" : 14667660,
-			"proRole" : {
+			"role" : {
 				"g" : 8,
 				"m" : 19,
 				"d" : 14,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 10
 			},
@@ -1550,13 +1550,13 @@ var result =
 			"relay" : 33,
 			"bwa" : 15791474,
 			"bwc" : 9208229,
-			"proRole" : {
+			"role" : {
 				"m" : 33,
 				"e" : 20,
 				"g" : 9,
 				"d" : 12
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 23,
 				"f" : 16
 			},
@@ -1588,13 +1588,13 @@ var result =
 			"relay" : 15,
 			"bwa" : 7505096,
 			"bwc" : 2243982,
-			"proRole" : {
+			"role" : {
 				"g" : 9,
 				"m" : 15,
 				"d" : 10,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 13,
 				"s" : 13
 			},
@@ -1632,13 +1632,13 @@ var result =
 			"relay" : 30,
 			"bwa" : 38486839,
 			"bwc" : 28761521,
-			"proRole" : {
+			"role" : {
 				"g" : 11,
 				"m" : 30,
 				"e" : 15,
 				"d" : 23
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 30,
 				"s" : 19
 			},
@@ -1684,13 +1684,13 @@ var result =
 			"relay" : 33,
 			"bwa" : 66259765,
 			"bwc" : 51283003,
-			"proRole" : {
+			"role" : {
 				"m" : 33,
 				"g" : 10,
 				"d" : 17,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 33,
 				"s" : 15
 			},
@@ -1727,13 +1727,13 @@ var result =
 			"relay" : 6,
 			"bwa" : 9845022,
 			"bwc" : 6598569,
-			"proRole" : {
+			"role" : {
 				"m" : 6,
 				"d" : 2,
 				"e" : 5,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 5,
 				"s" : 5
 			},
@@ -1765,12 +1765,12 @@ var result =
 			"relay" : 3,
 			"bwa" : 1417324,
 			"bwc" : 942298,
-			"proRole" : {
+			"role" : {
 				"m" : 3,
 				"d" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -1797,13 +1797,13 @@ var result =
 			"relay" : 11,
 			"bwa" : 4174761,
 			"bwc" : 1722302,
-			"proRole" : {
+			"role" : {
 				"m" : 11,
 				"d" : 8,
 				"e" : 3,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 10,
 				"s" : 7
 			},
@@ -1842,12 +1842,12 @@ var result =
 			"relay" : 22,
 			"bwa" : 2216438,
 			"bwc" : 352231,
-			"proRole" : {
+			"role" : {
 				"m" : 22,
 				"d" : 17,
 				"e" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 5
 			},
@@ -1886,13 +1886,13 @@ var result =
 			"relay" : 6,
 			"bwa" : 16638202,
 			"bwc" : 13194714,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 6,
 				"d" : 3,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 5
 			},
@@ -1924,13 +1924,13 @@ var result =
 			"relay" : 47,
 			"bwa" : 12276441,
 			"bwc" : 6848374,
-			"proRole" : {
+			"role" : {
 				"g" : 13,
 				"m" : 47,
 				"d" : 18,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 32,
 				"s" : 24
 			},
@@ -1974,13 +1974,13 @@ var result =
 			"relay" : 15,
 			"bwa" : 18600106,
 			"bwc" : 11044273,
-			"proRole" : {
+			"role" : {
 				"m" : 15,
 				"e" : 4,
 				"d" : 9,
 				"g" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 10
 			},
@@ -2019,12 +2019,12 @@ var result =
 			"relay" : 7,
 			"bwa" : 2466920,
 			"bwc" : 366229,
-			"proRole" : {
+			"role" : {
 				"m" : 7,
 				"e" : 3,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 5,
 				"s" : 4
 			},
@@ -2055,13 +2055,13 @@ var result =
 			"relay" : 23,
 			"bwa" : 143818464,
 			"bwc" : 76085477,
-			"proRole" : {
+			"role" : {
 				"g" : 12,
 				"m" : 23,
 				"d" : 18,
 				"e" : 14
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 22,
 				"s" : 13
 			},
@@ -2099,11 +2099,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 26242,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -2127,12 +2127,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 205765,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -2159,12 +2159,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 297905,
 			"bwc" : 41593,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -2192,13 +2192,13 @@ var result =
 			"relay" : 5,
 			"bwa" : 573440,
 			"bwc" : 288796,
-			"proRole" : {
+			"role" : {
 				"m" : 5,
 				"d" : 3,
 				"e" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 3
 			},
@@ -2228,13 +2228,13 @@ var result =
 			"relay" : 35,
 			"bwa" : 12711325,
 			"bwc" : 9657558,
-			"proRole" : {
+			"role" : {
 				"m" : 35,
 				"d" : 22,
 				"g" : 9,
 				"e" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 31,
 				"s" : 27
 			},
@@ -2276,12 +2276,12 @@ var result =
 			"relay" : 3,
 			"bwa" : 408904,
 			"bwc" : 21966,
-			"proRole" : {
+			"role" : {
 				"m" : 3,
 				"d" : 1,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -2311,13 +2311,13 @@ var result =
 			"relay" : 9,
 			"bwa" : 2942788,
 			"bwc" : 1317243,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 9,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 7
 			},
@@ -2349,11 +2349,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 153600,
 			"bwc" : 17576,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -2378,12 +2378,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 73728,
 			"bwc" : 17088,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1,
 				"f" : 1
 			},
@@ -2410,13 +2410,13 @@ var result =
 			"relay" : 9,
 			"bwa" : 2114498,
 			"bwc" : 1065895,
-			"proRole" : {
+			"role" : {
 				"m" : 9,
 				"g" : 3,
 				"e" : 5,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 4
 			},
@@ -2453,10 +2453,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32000,
 			"bwc" : 2554,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -2479,13 +2479,13 @@ var result =
 			"relay" : 6,
 			"bwa" : 1144335,
 			"bwc" : 381764,
-			"proRole" : {
+			"role" : {
 				"m" : 6,
 				"e" : 3,
 				"d" : 6,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6
 			},
 			"proProb" : {
@@ -2517,13 +2517,13 @@ var result =
 			"relay" : 7,
 			"bwa" : 3244886,
 			"bwc" : 2693911,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 7,
 				"d" : 5,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 7
 			},
@@ -2555,13 +2555,13 @@ var result =
 			"relay" : 6,
 			"bwa" : 2205485,
 			"bwc" : 540892,
-			"proRole" : {
+			"role" : {
 				"m" : 6,
 				"d" : 5,
 				"e" : 1,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 2
 			},
@@ -2592,12 +2592,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 137661,
 			"bwc" : 62805,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -2626,12 +2626,12 @@ var result =
 			"relay" : 7,
 			"bwa" : 3019679,
 			"bwc" : 2347623,
-			"proRole" : {
+			"role" : {
 				"m" : 7,
 				"d" : 5,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -2663,12 +2663,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 141834,
 			"bwc" : 34203,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -2695,13 +2695,13 @@ var result =
 			"relay" : 10,
 			"bwa" : 2780281,
 			"bwc" : 714542,
-			"proRole" : {
+			"role" : {
 				"m" : 10,
 				"e" : 7,
 				"d" : 6,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 9,
 				"s" : 3
 			},
@@ -2735,12 +2735,12 @@ var result =
 			"relay" : 10,
 			"bwa" : 1572272,
 			"bwc" : 461560,
-			"proRole" : {
+			"role" : {
 				"m" : 10,
 				"d" : 4,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 9,
 				"s" : 6
 			},
@@ -2776,11 +2776,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 237816,
 			"bwc" : 50791,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -2805,13 +2805,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 3831694,
 			"bwc" : 2712418,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -2839,11 +2839,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 45056,
 			"bwc" : 631,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -2866,12 +2866,12 @@ var result =
 			"relay" : 5,
 			"bwa" : 277616,
 			"bwc" : 35651,
-			"proRole" : {
+			"role" : {
 				"m" : 5,
 				"e" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -2900,13 +2900,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 7573854,
 			"bwc" : 4271686,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -2937,10 +2937,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 269439,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -2963,13 +2963,13 @@ var result =
 			"relay" : 9,
 			"bwa" : 2267826,
 			"bwc" : 442670,
-			"proRole" : {
+			"role" : {
 				"m" : 9,
 				"d" : 5,
 				"e" : 4,
 				"g" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -3008,13 +3008,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4694913,
 			"bwc" : 3577815,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -3041,12 +3041,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 440320,
 			"bwc" : 178311,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -3073,11 +3073,11 @@ var result =
 			"relay" : 3,
 			"bwa" : 182227,
 			"bwc" : 35635,
-			"proRole" : {
+			"role" : {
 				"m" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -3105,12 +3105,12 @@ var result =
 			"relay" : 3,
 			"bwa" : 1370457,
 			"bwc" : 623366,
-			"proRole" : {
+			"role" : {
 				"m" : 3,
 				"e" : 2,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -3139,11 +3139,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 43320,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -3167,10 +3167,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 649,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -3193,13 +3193,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 9118654,
 			"bwc" : 3802511,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -3227,12 +3227,12 @@ var result =
 			"relay" : 6,
 			"bwa" : 452490,
 			"bwc" : 129892,
-			"proRole" : {
+			"role" : {
 				"m" : 6,
 				"d" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 4
 			},
@@ -3262,11 +3262,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 26012,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -3291,12 +3291,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 83113,
 			"bwc" : 13845,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -3321,13 +3321,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 738456,
 			"bwc" : 379289,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -4041,12 +4041,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 156064,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -4061,12 +4061,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 156064,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -4083,13 +4083,13 @@ var result =
 			"relay" : 64,
 			"bwa" : 112860188,
 			"bwc" : 74272515,
-			"proRole" : {
+			"role" : {
 				"g" : 36,
 				"m" : 64,
 				"e" : 21,
 				"d" : 35
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 58,
 				"s" : 49
 			},
@@ -4105,13 +4105,13 @@ var result =
 					"relay" : 46,
 					"bwa" : 90773483,
 					"bwc" : 61367341,
-					"proRole" : {
+					"role" : {
 						"g" : 25,
 						"m" : 46,
 						"e" : 15,
 						"d" : 23
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 40,
 						"s" : 38
 					},
@@ -4127,13 +4127,13 @@ var result =
 					"relay" : 6,
 					"bwa" : 10684491,
 					"bwc" : 7064969,
-					"proRole" : {
+					"role" : {
 						"g" : 5,
 						"m" : 6,
 						"d" : 5,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 3
 					},
@@ -4149,11 +4149,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 122880,
 					"bwc" : 9931,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -4167,13 +4167,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 198547,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -4189,13 +4189,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 7652315,
 					"bwc" : 4307703,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -4211,13 +4211,13 @@ var result =
 					"relay" : 3,
 					"bwa" : 1271071,
 					"bwc" : 392561,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 3,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -4233,11 +4233,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 250604,
 					"bwc" : 1396,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -4250,12 +4250,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1843200,
 					"bwc" : 930067,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -4272,13 +4272,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 38397668,
 			"bwc" : 25074492,
-			"proRole" : {
+			"role" : {
 				"g" : 19,
 				"m" : 32,
 				"e" : 4,
 				"d" : 20
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 32,
 				"s" : 28
 			},
@@ -4294,13 +4294,13 @@ var result =
 					"relay" : 32,
 					"bwa" : 38397668,
 					"bwc" : 25074492,
-					"proRole" : {
+					"role" : {
 						"g" : 19,
 						"m" : 32,
 						"e" : 4,
 						"d" : 20
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 32,
 						"s" : 28
 					},
@@ -4318,13 +4318,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 3268922,
 			"bwc" : 2262615,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 8,
 				"g" : 1,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 12,
 				"s" : 1
 			},
@@ -4340,13 +4340,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 3268922,
 					"bwc" : 2262615,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 8,
 						"g" : 1,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 12,
 						"s" : 1
 					},
@@ -4364,13 +4364,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 4030914,
 			"bwc" : 2164677,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 8,
 				"e" : 4,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 9
 			},
@@ -4386,13 +4386,13 @@ var result =
 					"relay" : 13,
 					"bwa" : 3678036,
 					"bwc" : 2054194,
-					"proRole" : {
+					"role" : {
 						"m" : 13,
 						"e" : 3,
 						"d" : 5,
 						"g" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 11,
 						"s" : 8
 					},
@@ -4408,12 +4408,12 @@ var result =
 					"relay" : 3,
 					"bwa" : 352878,
 					"bwc" : 110483,
-					"proRole" : {
+					"role" : {
 						"m" : 3,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -4430,13 +4430,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 4827722,
 			"bwc" : 3135084,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -4452,13 +4452,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 4827722,
 					"bwc" : 3135084,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -4476,13 +4476,13 @@ var result =
 			"relay" : 128,
 			"bwa" : 26631074,
 			"bwc" : 9554147,
-			"proRole" : {
+			"role" : {
 				"g" : 16,
 				"m" : 128,
 				"d" : 83,
 				"e" : 20
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 114,
 				"s" : 75
 			},
@@ -4498,13 +4498,13 @@ var result =
 					"relay" : 128,
 					"bwa" : 26631074,
 					"bwc" : 9554147,
-					"proRole" : {
+					"role" : {
 						"g" : 16,
 						"m" : 128,
 						"d" : 83,
 						"e" : 20
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 114,
 						"s" : 75
 					},
@@ -4522,10 +4522,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 131072,
 			"bwc" : 34176,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -4539,10 +4539,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 34176,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -4558,13 +4558,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 1492171,
 			"bwc" : 311904,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 8,
 				"g" : 1,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 12,
 				"s" : 6
 			},
@@ -4580,13 +4580,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 1492171,
 					"bwc" : 311904,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 8,
 						"g" : 1,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 12,
 						"s" : 6
 					},
@@ -4604,11 +4604,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 573993,
 			"bwc" : 89805,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -4622,11 +4622,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 573993,
 					"bwc" : 89805,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -4642,13 +4642,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 563200,
 			"bwc" : 504095,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -4664,13 +4664,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 563200,
 					"bwc" : 504095,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -4688,13 +4688,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 26169165,
 			"bwc" : 15750587,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"e" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -4710,13 +4710,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 26169165,
 					"bwc" : 15750587,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"e" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -4734,12 +4734,12 @@ var result =
 			"relay" : 32,
 			"bwa" : 5310032,
 			"bwc" : 1532831,
-			"proRole" : {
+			"role" : {
 				"m" : 32,
 				"d" : 16,
 				"g" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 24,
 				"s" : 18
 			},
@@ -4754,12 +4754,12 @@ var result =
 					"relay" : 32,
 					"bwa" : 5310032,
 					"bwc" : 1532831,
-					"proRole" : {
+					"role" : {
 						"m" : 32,
 						"d" : 16,
 						"g" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 24,
 						"s" : 18
 					},
@@ -4776,12 +4776,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 7492404,
 			"bwc" : 4110664,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 8,
 				"d" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -4796,12 +4796,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 7492404,
 					"bwc" : 4110664,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 8,
 						"d" : 7
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -4818,11 +4818,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 74110,
 			"bwc" : 20294,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -4835,11 +4835,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 74110,
 					"bwc" : 20294,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -4854,12 +4854,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 8262698,
 			"bwc" : 6173508,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -4874,12 +4874,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 8262698,
 					"bwc" : 6173508,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -4896,13 +4896,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 14668240,
 			"bwc" : 8264610,
-			"proRole" : {
+			"role" : {
 				"g" : 6,
 				"m" : 16,
 				"d" : 5,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 11
 			},
@@ -4918,13 +4918,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 14668240,
 					"bwc" : 8264610,
-					"proRole" : {
+					"role" : {
 						"g" : 6,
 						"m" : 16,
 						"d" : 5,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 16,
 						"s" : 11
 					},
@@ -4942,11 +4942,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 104335,
 			"bwc" : 11487,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 3,
 				"f" : 1
 			},
@@ -4960,11 +4960,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 104335,
 					"bwc" : 11487,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 3,
 						"f" : 1
 					},
@@ -4980,13 +4980,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 92232219,
 			"bwc" : 69501343,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 8,
 				"e" : 5,
 				"d" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 8
 			},
@@ -5002,13 +5002,13 @@ var result =
 					"relay" : 7,
 					"bwa" : 92210296,
 					"bwc" : 69500643,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 7,
 						"e" : 5,
 						"d" : 7
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 7
 					},
@@ -5024,10 +5024,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 21923,
 					"bwc" : 700,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -5042,13 +5042,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 2356414,
 			"bwc" : 691758,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -5063,13 +5063,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 2356414,
 					"bwc" : 691758,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -5086,13 +5086,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 936752,
 			"bwc" : 85978,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -5108,13 +5108,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 936752,
 					"bwc" : 85978,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -5132,11 +5132,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 27613,
 			"bwc" : 2188,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -5149,11 +5149,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 27613,
 					"bwc" : 2188,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -5168,13 +5168,13 @@ var result =
 			"relay" : 64,
 			"bwa" : 27846703,
 			"bwc" : 20208540,
-			"proRole" : {
+			"role" : {
 				"m" : 64,
 				"d" : 41,
 				"g" : 11,
 				"e" : 8
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 60,
 				"s" : 48
 			},
@@ -5190,13 +5190,13 @@ var result =
 					"relay" : 12,
 					"bwa" : 1693696,
 					"bwc" : 1122314,
-					"proRole" : {
+					"role" : {
 						"m" : 12,
 						"d" : 7,
 						"g" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 10,
 						"s" : 11
 					},
@@ -5212,13 +5212,13 @@ var result =
 					"relay" : 14,
 					"bwa" : 2798143,
 					"bwc" : 1474534,
-					"proRole" : {
+					"role" : {
 						"m" : 14,
 						"d" : 10,
 						"g" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 12
 					},
@@ -5234,13 +5234,13 @@ var result =
 					"relay" : 9,
 					"bwa" : 1529856,
 					"bwc" : 802492,
-					"proRole" : {
+					"role" : {
 						"m" : 9,
 						"d" : 5,
 						"g" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 8
 					},
@@ -5256,13 +5256,13 @@ var result =
 					"relay" : 14,
 					"bwa" : 18304105,
 					"bwc" : 14979937,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 14,
 						"d" : 10,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 10
 					},
@@ -5278,12 +5278,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 657408,
 					"bwc" : 365828,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -5298,11 +5298,11 @@ var result =
 					"relay" : 5,
 					"bwa" : 1363968,
 					"bwc" : 859176,
-					"proRole" : {
+					"role" : {
 						"m" : 5,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 5,
 						"s" : 2
 					},
@@ -5316,12 +5316,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 542206,
 					"bwc" : 317533,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -5336,11 +5336,11 @@ var result =
 					"relay" : 5,
 					"bwa" : 957321,
 					"bwc" : 286726,
-					"proRole" : {
+					"role" : {
 						"m" : 5,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 5,
 						"s" : 2
 					},
@@ -5356,11 +5356,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 307200,
 			"bwc" : 291918,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -5374,11 +5374,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 307200,
 					"bwc" : 291918,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -5394,12 +5394,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 53462189,
 			"bwc" : 45868314,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 8,
 				"g" : 6
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 8,
 				"a" : 1
@@ -5415,12 +5415,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 53462189,
 					"bwc" : 45868314,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 8,
 						"g" : 6
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 8,
 						"a" : 1
@@ -5438,12 +5438,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 375867,
 			"bwc" : 46791,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3
 			},
 			"proProb" : {
@@ -5457,12 +5457,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 375867,
 					"bwc" : 46791,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3
 					},
 					"proProb" : {
@@ -5478,10 +5478,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 4610,
 			"bwc" : 60,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -5494,10 +5494,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 4610,
 					"bwc" : 60,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -5512,13 +5512,13 @@ var result =
 			"relay" : 128,
 			"bwa" : 177548999,
 			"bwc" : 141474069,
-			"proRole" : {
+			"role" : {
 				"g" : 86,
 				"m" : 128,
 				"d" : 73,
 				"e" : 17
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 124,
 				"s" : 111
 			},
@@ -5534,13 +5534,13 @@ var result =
 					"relay" : 127,
 					"bwa" : 176492018,
 					"bwc" : 140943031,
-					"proRole" : {
+					"role" : {
 						"g" : 85,
 						"m" : 127,
 						"d" : 72,
 						"e" : 16
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 123,
 						"s" : 110
 					},
@@ -5556,13 +5556,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1056981,
 					"bwc" : 531038,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -5580,11 +5580,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 2007884,
 			"bwc" : 401004,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -5599,11 +5599,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 2007884,
 					"bwc" : 401004,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -5620,13 +5620,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1155072,
 			"bwc" : 825142,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -5642,13 +5642,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1155072,
 					"bwc" : 825142,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -5666,10 +5666,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 40960,
 			"bwc" : 685,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -5682,10 +5682,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 40960,
 					"bwc" : 685,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -5700,12 +5700,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 101027,
 			"bwc" : 6873,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -5720,12 +5720,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 101027,
 					"bwc" : 6873,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -5742,13 +5742,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 68728,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -5764,13 +5764,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 68728,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -5788,10 +5788,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 9575,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -5805,10 +5805,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 9575,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -5824,13 +5824,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 4481963,
 			"bwc" : 2183656,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"g" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -5846,13 +5846,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 4481963,
 					"bwc" : 2183656,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"g" : 3,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -5870,12 +5870,12 @@ var result =
 			"relay" : 16,
 			"bwa" : 1577867,
 			"bwc" : 510170,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 9,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 6
 			},
@@ -5890,12 +5890,12 @@ var result =
 					"relay" : 16,
 					"bwa" : 1577867,
 					"bwc" : 510170,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 9,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 6
 					},
@@ -5912,13 +5912,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 237568,
 			"bwc" : 109834,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -5934,13 +5934,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 237568,
 					"bwc" : 109834,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -5958,12 +5958,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 951334,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -5978,12 +5978,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 951334,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -6000,13 +6000,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 1481733,
 			"bwc" : 258801,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 12,
 				"e" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 7
 			},
@@ -6022,13 +6022,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 1481733,
 					"bwc" : 258801,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 12,
 						"e" : 3,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 7
 					},
@@ -6046,12 +6046,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 58501,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -6064,12 +6064,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 58501,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -6084,13 +6084,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 41624905,
 			"bwc" : 32027626,
-			"proRole" : {
+			"role" : {
 				"g" : 13,
 				"m" : 16,
 				"d" : 11,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 15
 			},
@@ -6106,13 +6106,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 41624905,
 					"bwc" : 32027626,
-					"proRole" : {
+					"role" : {
 						"g" : 13,
 						"m" : 16,
 						"d" : 11,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 16,
 						"s" : 15
 					},
@@ -6130,13 +6130,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 52648686,
 			"bwc" : 37150659,
-			"proRole" : {
+			"role" : {
 				"m" : 32,
 				"e" : 17,
 				"g" : 15,
 				"d" : 12
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 23,
 				"s" : 29
 			},
@@ -6152,13 +6152,13 @@ var result =
 					"relay" : 29,
 					"bwa" : 46701266,
 					"bwc" : 32464966,
-					"proRole" : {
+					"role" : {
 						"m" : 29,
 						"e" : 16,
 						"g" : 13,
 						"d" : 11
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 20,
 						"s" : 26
 					},
@@ -6174,13 +6174,13 @@ var result =
 					"relay" : 3,
 					"bwa" : 5947420,
 					"bwc" : 4685693,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 3,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -6198,12 +6198,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 193084,
 			"bwc" : 23996,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -6217,12 +6217,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 193084,
 					"bwc" : 23996,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -6238,12 +6238,12 @@ var result =
 			"relay" : 64,
 			"bwa" : 12693944,
 			"bwc" : 5468357,
-			"proRole" : {
+			"role" : {
 				"m" : 64,
 				"d" : 33,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 49,
 				"s" : 4
 			},
@@ -6258,12 +6258,12 @@ var result =
 					"relay" : 64,
 					"bwa" : 12693944,
 					"bwc" : 5468357,
-					"proRole" : {
+					"role" : {
 						"m" : 64,
 						"d" : 33,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 49,
 						"s" : 4
 					},
@@ -6280,12 +6280,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 255411,
 			"bwc" : 54082,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -6300,12 +6300,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 255411,
 					"bwc" : 54082,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -6322,13 +6322,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 8772989,
 			"bwc" : 5750061,
-			"proRole" : {
+			"role" : {
 				"m" : 32,
 				"e" : 12,
 				"d" : 11,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 19,
 				"f" : 17
 			},
@@ -6344,13 +6344,13 @@ var result =
 					"relay" : 32,
 					"bwa" : 8772989,
 					"bwc" : 5750061,
-					"proRole" : {
+					"role" : {
 						"m" : 32,
 						"e" : 12,
 						"d" : 11,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 19,
 						"f" : 17
 					},
@@ -6368,12 +6368,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 141784,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -6387,12 +6387,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 409600,
 					"bwc" : 141784,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -6408,12 +6408,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 13924334,
 			"bwc" : 5873438,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -6428,12 +6428,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 13924334,
 					"bwc" : 5873438,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 3,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -6450,11 +6450,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 2097152,
 			"bwc" : 1411519,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -6468,11 +6468,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 2097152,
 					"bwc" : 1411519,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -6488,13 +6488,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 15551061,
 			"bwc" : 9900151,
-			"proRole" : {
+			"role" : {
 				"g" : 10,
 				"m" : 16,
 				"d" : 9,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 15
 			},
@@ -6510,13 +6510,13 @@ var result =
 					"relay" : 14,
 					"bwa" : 13153066,
 					"bwc" : 8794608,
-					"proRole" : {
+					"role" : {
 						"g" : 8,
 						"m" : 14,
 						"d" : 7,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 13
 					},
@@ -6532,12 +6532,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 2397995,
 					"bwc" : 1105543,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -6554,13 +6554,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1871748,
 			"bwc" : 861905,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 7,
 				"g" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 3
 			},
@@ -6576,13 +6576,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1871748,
 					"bwc" : 861905,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 7,
 						"g" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 3
 					},
@@ -6600,10 +6600,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 132583,
 			"bwc" : 17428,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -6617,10 +6617,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 132583,
 					"bwc" : 17428,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -6636,13 +6636,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 409600,
 			"bwc" : 108426,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -6658,13 +6658,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 409600,
 					"bwc" : 108426,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -6682,13 +6682,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 6831791,
 			"bwc" : 4216769,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 9,
 				"g" : 5,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 12
 			},
@@ -6704,13 +6704,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 6831791,
 					"bwc" : 4216769,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 9,
 						"g" : 5,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 16,
 						"s" : 12
 					},
@@ -6728,13 +6728,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 28067840,
 			"bwc" : 19667431,
-			"proRole" : {
+			"role" : {
 				"g" : 6,
 				"m" : 8,
 				"d" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -6750,13 +6750,13 @@ var result =
 					"relay" : 7,
 					"bwa" : 27965440,
 					"bwc" : 19618959,
-					"proRole" : {
+					"role" : {
 						"g" : 6,
 						"m" : 7,
 						"d" : 3,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 6
 					},
@@ -6772,11 +6772,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 48472,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -6792,13 +6792,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 20094605,
 			"bwc" : 11035081,
-			"proRole" : {
+			"role" : {
 				"m" : 32,
 				"d" : 27,
 				"e" : 3,
 				"g" : 8
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 31,
 				"s" : 21
 			},
@@ -6814,13 +6814,13 @@ var result =
 					"relay" : 32,
 					"bwa" : 20094605,
 					"bwc" : 11035081,
-					"proRole" : {
+					"role" : {
 						"m" : 32,
 						"d" : 27,
 						"e" : 3,
 						"g" : 8
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 31,
 						"s" : 21
 					},
@@ -6838,13 +6838,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 14553676,
 			"bwc" : 8710610,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"d" : 6,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 5
 			},
@@ -6860,13 +6860,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 14553676,
 					"bwc" : 8710610,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 8,
 						"d" : 6,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 5
 					},
@@ -6884,11 +6884,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 56320,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -6901,11 +6901,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 56320,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -6920,13 +6920,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 7777280,
 			"bwc" : 4829835,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"e" : 11,
 				"g" : 3,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 13,
 				"f" : 5
 			},
@@ -6942,13 +6942,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 7777280,
 					"bwc" : 4829835,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"e" : 11,
 						"g" : 3,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 13,
 						"f" : 5
 					},
@@ -6966,13 +6966,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 31517086,
 			"bwc" : 22411833,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 4,
 				"g" : 7,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 13,
 				"s" : 15
 			},
@@ -6988,13 +6988,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 31517086,
 					"bwc" : 22411833,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 4,
 						"g" : 7,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 13,
 						"s" : 15
 					},
@@ -7012,13 +7012,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1272160,
 			"bwc" : 399803,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 7,
 				"e" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 5,
 				"f" : 7
 			},
@@ -7034,13 +7034,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1272160,
 					"bwc" : 399803,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 7,
 						"e" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 5,
 						"f" : 7
 					},
@@ -7058,11 +7058,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 46080,
 			"bwc" : 17465,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2
 			},
 			"proProb" : {
@@ -7075,11 +7075,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 46080,
 					"bwc" : 17465,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2
 					},
 					"proProb" : {
@@ -7094,13 +7094,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 2611611,
 			"bwc" : 548764,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 11,
 				"g" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 6
 			},
@@ -7116,13 +7116,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 2611611,
 					"bwc" : 548764,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 11,
 						"g" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 6
 					},
@@ -7140,12 +7140,12 @@ var result =
 			"relay" : 16,
 			"bwa" : 1930614,
 			"bwc" : 752101,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 10,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 13,
 				"s" : 1
 			},
@@ -7160,12 +7160,12 @@ var result =
 					"relay" : 16,
 					"bwa" : 1930614,
 					"bwc" : 752101,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 10,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 13,
 						"s" : 1
 					},
@@ -7182,11 +7182,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 116736,
 			"bwc" : 14389,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -7200,11 +7200,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 116736,
 					"bwc" : 14389,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -7220,13 +7220,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1159168,
 			"bwc" : 571568,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -7242,13 +7242,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1159168,
 					"bwc" : 571568,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -7266,12 +7266,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 597435,
 			"bwc" : 178350,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -7286,12 +7286,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 597435,
 					"bwc" : 178350,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -7308,12 +7308,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 336694,
 			"bwc" : 41726,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -7327,12 +7327,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 336694,
 					"bwc" : 41726,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -7348,12 +7348,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 3421426,
 			"bwc" : 863207,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -7368,12 +7368,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 3421426,
 					"bwc" : 863207,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -7390,11 +7390,11 @@ var result =
 			"relay" : 8,
 			"bwa" : 409600,
 			"bwc" : 5097,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 8
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8
 			},
 			"proProb" : {
@@ -7407,11 +7407,11 @@ var result =
 					"relay" : 8,
 					"bwa" : 409600,
 					"bwc" : 5097,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 8
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8
 					},
 					"proProb" : {
@@ -7426,11 +7426,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 97559,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -7443,11 +7443,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 97559,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -7462,12 +7462,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1488086,
 			"bwc" : 579127,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -7482,12 +7482,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1488086,
 					"bwc" : 579127,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -7504,13 +7504,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 4578315,
 			"bwc" : 2666468,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -7526,13 +7526,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 4578315,
 					"bwc" : 2666468,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -7550,12 +7550,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1830912,
 			"bwc" : 739260,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -7570,12 +7570,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1830912,
 					"bwc" : 739260,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -7592,12 +7592,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 3134948,
 			"bwc" : 1651559,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -7612,12 +7612,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 3134948,
 					"bwc" : 1651559,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -7634,11 +7634,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 14012,
 			"bwc" : 1255,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -7651,11 +7651,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 14012,
 					"bwc" : 1255,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -7670,12 +7670,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 303104,
 			"bwc" : 32065,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 3
 			},
@@ -7690,12 +7690,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 303104,
 					"bwc" : 32065,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 3
 					},
@@ -7712,12 +7712,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 75068,
 			"bwc" : 3649,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -7731,12 +7731,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 75068,
 					"bwc" : 3649,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -7752,11 +7752,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 655360,
 			"bwc" : 493618,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -7771,11 +7771,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 655360,
 					"bwc" : 493618,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -7792,13 +7792,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 11331579,
 			"bwc" : 9888821,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 7,
 				"d" : 6,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -7814,13 +7814,13 @@ var result =
 					"relay" : 7,
 					"bwa" : 10665979,
 					"bwc" : 9242059,
-					"proRole" : {
+					"role" : {
 						"m" : 7,
 						"g" : 6,
 						"e" : 2,
 						"d" : 5
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 7
 					},
@@ -7836,12 +7836,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 665600,
 					"bwc" : 646762,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -7858,13 +7858,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 38267691,
 			"bwc" : 31404850,
-			"proRole" : {
+			"role" : {
 				"g" : 8,
 				"m" : 16,
 				"d" : 8,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 13,
 				"s" : 11,
 				"a" : 1
@@ -7881,13 +7881,13 @@ var result =
 					"relay" : 15,
 					"bwa" : 33024811,
 					"bwc" : 26585115,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 15,
 						"d" : 7,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 12,
 						"s" : 10,
 						"a" : 1
@@ -7904,12 +7904,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 4819735,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -7926,12 +7926,12 @@ var result =
 			"relay" : 6,
 			"bwa" : 364520,
 			"bwc" : 53220,
-			"proRole" : {
+			"role" : {
 				"m" : 6,
 				"e" : 1,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -7945,12 +7945,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 190440,
 					"bwc" : 49799,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -7964,11 +7964,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 174080,
 					"bwc" : 3421,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -7983,12 +7983,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 93093,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -8002,12 +8002,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 93093,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -8023,12 +8023,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1310720,
 			"bwc" : 780749,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -8043,12 +8043,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1310720,
 					"bwc" : 780749,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -8065,10 +8065,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 28126,
 			"bwc" : 131,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -8081,10 +8081,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 28126,
 					"bwc" : 131,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -8099,12 +8099,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 512000,
 			"bwc" : 340125,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -8119,12 +8119,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 512000,
 					"bwc" : 340125,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -8141,11 +8141,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 444617,
 			"bwc" : 111677,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -8158,11 +8158,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 444617,
 					"bwc" : 111677,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -8177,12 +8177,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 3339772,
 			"bwc" : 2086384,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -8197,12 +8197,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 3339772,
 					"bwc" : 2086384,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -8219,12 +8219,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 526969,
 			"bwc" : 83347,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1,
 				"f" : 2
 			},
@@ -8239,12 +8239,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 526969,
 					"bwc" : 83347,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1,
 						"f" : 2
 					},
@@ -8261,13 +8261,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 3006772,
 			"bwc" : 885744,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 13,
 				"e" : 2,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 4
 			},
@@ -8283,13 +8283,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 3006772,
 					"bwc" : 885744,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 13,
 						"e" : 2,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 4
 					},
@@ -8307,12 +8307,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 872321,
 			"bwc" : 738355,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -8327,12 +8327,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 872321,
 					"bwc" : 738355,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -8349,12 +8349,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1900544,
 			"bwc" : 977526,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -8369,12 +8369,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1900544,
 					"bwc" : 977526,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -8391,13 +8391,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 5540510,
 			"bwc" : 3484897,
-			"proRole" : {
+			"role" : {
 				"g" : 5,
 				"m" : 8,
 				"d" : 5,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -8413,13 +8413,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 5540510,
 					"bwc" : 3484897,
-					"proRole" : {
+					"role" : {
 						"g" : 5,
 						"m" : 8,
 						"d" : 5,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -8437,13 +8437,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 66112614,
 			"bwc" : 46614971,
-			"proRole" : {
+			"role" : {
 				"g" : 8,
 				"m" : 8,
 				"e" : 8,
 				"d" : 8
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -8459,13 +8459,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 66112614,
 					"bwc" : 46614971,
-					"proRole" : {
+					"role" : {
 						"g" : 8,
 						"m" : 8,
 						"e" : 8,
 						"d" : 8
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -8483,10 +8483,10 @@ var result =
 			"relay" : 4,
 			"bwa" : 1075133,
 			"bwc" : 234164,
-			"proRole" : {
+			"role" : {
 				"m" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -8500,10 +8500,10 @@ var result =
 					"relay" : 4,
 					"bwa" : 1075133,
 					"bwc" : 234164,
-					"proRole" : {
+					"role" : {
 						"m" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -8519,11 +8519,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 292783,
 			"bwc" : 57782,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -8536,11 +8536,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 292783,
 					"bwc" : 57782,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4
 					},
 					"proProb" : {
@@ -8555,11 +8555,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 283951,
 			"bwc" : 9945,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -8572,11 +8572,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 283951,
 					"bwc" : 9945,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -8591,13 +8591,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 14048271,
 			"bwc" : 11177189,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -8613,13 +8613,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 14048271,
 					"bwc" : 11177189,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -8637,13 +8637,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 11844727,
 			"bwc" : 4835015,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 14,
 				"g" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 5
 			},
@@ -8659,13 +8659,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 11844727,
 					"bwc" : 4835015,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 14,
 						"g" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 16,
 						"s" : 5
 					},
@@ -8683,13 +8683,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 8415908,
 			"bwc" : 3913941,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 4,
 				"d" : 5,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 7
 			},
@@ -8705,13 +8705,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 8415908,
 					"bwc" : 3913941,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 4,
 						"d" : 5,
 						"g" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 7
 					},
@@ -8729,10 +8729,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 76800,
 			"bwc" : 51789,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -8746,10 +8746,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 76800,
 					"bwc" : 51789,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -8765,12 +8765,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 513348,
 			"bwc" : 102358,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -8784,12 +8784,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 513348,
 					"bwc" : 102358,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -8805,11 +8805,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 1395435,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -8824,11 +8824,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 1395435,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -8845,13 +8845,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 5856098,
 			"bwc" : 4726345,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"g" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -8867,13 +8867,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 5856098,
 					"bwc" : 4726345,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"g" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -8891,10 +8891,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 198,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -8907,10 +8907,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 198,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -8925,13 +8925,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 3707292,
 			"bwc" : 1617725,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 7,
 				"g" : 3,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 5
 			},
@@ -8947,13 +8947,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 3707292,
 					"bwc" : 1617725,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 7,
 						"g" : 3,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 5
 					},
@@ -8971,13 +8971,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 3514718,
 			"bwc" : 1047646,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 11,
 				"e" : 1,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 8
 			},
@@ -8993,13 +8993,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 3514718,
 					"bwc" : 1047646,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 11,
 						"e" : 1,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 8
 					},
@@ -9017,12 +9017,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 8314880,
 			"bwc" : 7533316,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -9037,12 +9037,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 8314880,
 					"bwc" : 7533316,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -9059,13 +9059,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 9031936,
 			"bwc" : 5038653,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 8,
 				"e" : 8,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -9081,13 +9081,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 9031936,
 					"bwc" : 5038653,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 8,
 						"e" : 8,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -9105,12 +9105,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 6291456,
 			"bwc" : 6234298,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -9125,12 +9125,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 6291456,
 					"bwc" : 6234298,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -9147,12 +9147,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 478088,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -9167,12 +9167,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 478088,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -9189,12 +9189,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1916382,
 			"bwc" : 973055,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -9210,12 +9210,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1916382,
 					"bwc" : 973055,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -9233,13 +9233,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 3050052,
 			"bwc" : 1448323,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 2,
 				"d" : 7,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 4
 			},
@@ -9255,13 +9255,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 3050052,
 					"bwc" : 1448323,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 2,
 						"d" : 7,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 4
 					},
@@ -9279,11 +9279,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 145283,
 			"bwc" : 30065,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 3,
 				"f" : 1
 			},
@@ -9297,11 +9297,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 145283,
 					"bwc" : 30065,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 3,
 						"f" : 1
 					},
@@ -9317,13 +9317,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 9585573,
 			"bwc" : 6697555,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 4,
 				"e" : 10,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 9,
 				"a" : 1,
 				"f" : 5
@@ -9340,12 +9340,12 @@ var result =
 					"relay" : 5,
 					"bwa" : 7003096,
 					"bwc" : 4687913,
-					"proRole" : {
+					"role" : {
 						"m" : 5,
 						"d" : 3,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4,
 						"a" : 1,
 						"f" : 4
@@ -9361,13 +9361,13 @@ var result =
 					"relay" : 11,
 					"bwa" : 2582477,
 					"bwc" : 2009642,
-					"proRole" : {
+					"role" : {
 						"m" : 11,
 						"e" : 10,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 5,
 						"f" : 1
 					},
@@ -9385,12 +9385,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1024000,
 			"bwc" : 898919,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -9405,12 +9405,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1024000,
 					"bwc" : 898919,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -9427,11 +9427,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 10343,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -9445,11 +9445,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 10343,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -9465,11 +9465,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 31900,
 			"bwc" : 2966,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -9482,11 +9482,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 31900,
 					"bwc" : 2966,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -9501,12 +9501,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1191936,
 			"bwc" : 744582,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -9520,12 +9520,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1191936,
 					"bwc" : 744582,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -9541,12 +9541,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 598016,
 			"bwc" : 379852,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -9561,12 +9561,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 598016,
 					"bwc" : 379852,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -9583,13 +9583,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1254974,
 			"bwc" : 387025,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 3,
 				"d" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 4
 			},
@@ -9605,13 +9605,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1254974,
 					"bwc" : 387025,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 3,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 4
 					},
@@ -9629,13 +9629,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 19489854,
 			"bwc" : 13262617,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -9651,13 +9651,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 19489854,
 					"bwc" : 13262617,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -9675,11 +9675,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 435200,
 			"bwc" : 181329,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -9693,11 +9693,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 435200,
 					"bwc" : 181329,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -9713,12 +9713,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 409600,
 			"bwc" : 556239,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"a" : 1,
 				"f" : 1
@@ -9734,12 +9734,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 409600,
 					"bwc" : 556239,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"a" : 1,
 						"f" : 1
@@ -9757,11 +9757,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 7105464,
 			"bwc" : 3829644,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -9774,11 +9774,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 7105464,
 					"bwc" : 3829644,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -9793,12 +9793,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 2048000,
 			"bwc" : 1444712,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -9813,12 +9813,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 2048000,
 					"bwc" : 1444712,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -9835,13 +9835,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 4981423,
 			"bwc" : 1599946,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"e" : 3,
 				"d" : 11,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 10,
 				"f" : 14
 			},
@@ -9857,13 +9857,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 4981423,
 					"bwc" : 1599946,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"e" : 3,
 						"d" : 11,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 10,
 						"f" : 14
 					},
@@ -9881,11 +9881,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 129214,
 			"bwc" : 37375,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -9899,11 +9899,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 129214,
 					"bwc" : 37375,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -9919,13 +9919,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 13793280,
 			"bwc" : 8623974,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"g" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -9941,13 +9941,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 13793280,
 					"bwc" : 8623974,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"g" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -9965,12 +9965,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 665438,
 			"bwc" : 254100,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -9985,12 +9985,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 665438,
 					"bwc" : 254100,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10007,12 +10007,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 334206,
 			"bwc" : 84592,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 4
 			},
@@ -10027,12 +10027,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 334206,
 					"bwc" : 84592,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 4
 					},
@@ -10049,11 +10049,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 433914,
 			"bwc" : 169370,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 2
 			},
@@ -10067,11 +10067,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 433914,
 					"bwc" : 169370,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -10087,12 +10087,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 789463,
 			"bwc" : 106806,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -10107,12 +10107,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 789463,
 					"bwc" : 106806,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -10129,13 +10129,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 2373055,
 			"bwc" : 1111355,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 6,
 				"e" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 5,
 				"s" : 1
 			},
@@ -10151,13 +10151,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 2373055,
 					"bwc" : 1111355,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 6,
 						"e" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 5,
 						"s" : 1
 					},
@@ -10175,12 +10175,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 17765950,
 			"bwc" : 16132459,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 5,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 3
 			},
@@ -10195,12 +10195,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 17765950,
 					"bwc" : 16132459,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 5,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 3
 					},
@@ -10217,12 +10217,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1538585,
 			"bwc" : 624462,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -10237,12 +10237,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1538585,
 					"bwc" : 624462,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -10259,12 +10259,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 445148,
 			"bwc" : 95670,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -10279,12 +10279,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 445148,
 					"bwc" : 95670,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -10301,11 +10301,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 462642,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -10319,11 +10319,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 462642,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10339,11 +10339,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 1474326,
 			"bwc" : 876295,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 3
 			},
@@ -10357,11 +10357,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 1474326,
 					"bwc" : 876295,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 3
 					},
@@ -10377,11 +10377,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 2271232,
 			"bwc" : 874586,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -10396,11 +10396,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 2271232,
 					"bwc" : 874586,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10417,11 +10417,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 4219684,
 			"bwc" : 3799831,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -10436,11 +10436,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 4219684,
 					"bwc" : 3799831,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10457,12 +10457,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1572864,
 			"bwc" : 1007681,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -10477,12 +10477,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1572864,
 					"bwc" : 1007681,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10499,13 +10499,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2297420,
 			"bwc" : 1629134,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -10521,13 +10521,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2297420,
 					"bwc" : 1629134,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10545,13 +10545,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 89011576,
 			"bwc" : 60503838,
-			"proRole" : {
+			"role" : {
 				"g" : 6,
 				"m" : 8,
 				"d" : 7,
 				"e" : 6
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 5
 			},
@@ -10567,13 +10567,13 @@ var result =
 					"relay" : 7,
 					"bwa" : 83768696,
 					"bwc" : 56295389,
-					"proRole" : {
+					"role" : {
 						"g" : 5,
 						"m" : 7,
 						"d" : 6,
 						"e" : 6
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 4
 					},
@@ -10589,12 +10589,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 4208449,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10611,11 +10611,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 26242,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -10628,11 +10628,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 26242,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -10647,13 +10647,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 10106104,
 			"bwc" : 6074238,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"d" : 6,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -10669,13 +10669,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 10106104,
 					"bwc" : 6074238,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 8,
 						"d" : 6,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -10693,12 +10693,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 251197,
 			"bwc" : 18115,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -10713,12 +10713,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 251197,
 					"bwc" : 18115,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10735,12 +10735,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 655157,
 			"bwc" : 132768,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -10755,12 +10755,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 655157,
 					"bwc" : 132768,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10777,12 +10777,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 953344,
 			"bwc" : 449390,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 7
 			},
@@ -10797,10 +10797,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 14925,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10814,10 +10814,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 112389,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10831,11 +10831,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 483328,
 					"bwc" : 284720,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 4
 					},
@@ -10850,11 +10850,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 207872,
 					"bwc" : 37356,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -10870,12 +10870,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 205765,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -10891,12 +10891,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 409600,
 					"bwc" : 205765,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -10914,12 +10914,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 27220378,
 			"bwc" : 18079157,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -10934,12 +10934,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 27220378,
 					"bwc" : 18079157,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -10956,11 +10956,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 92160,
 			"bwc" : 15788,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -10975,11 +10975,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 92160,
 					"bwc" : 15788,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -10996,13 +10996,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 9191571,
 			"bwc" : 6103231,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 16,
 				"d" : 6,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 11
 			},
@@ -11018,13 +11018,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 9191571,
 					"bwc" : 6103231,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 16,
 						"d" : 6,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 16,
 						"s" : 11
 					},
@@ -11042,13 +11042,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 10085443,
 			"bwc" : 7809168,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -11064,13 +11064,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 10085443,
 					"bwc" : 7809168,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 3,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -11088,12 +11088,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 178227,
 			"bwc" : 51002,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -11106,12 +11106,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 178227,
 					"bwc" : 51002,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -11126,12 +11126,12 @@ var result =
 			"relay" : 16,
 			"bwa" : 1069795,
 			"bwc" : 313871,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"e" : 5,
 				"d" : 11
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 10,
 				"f" : 12
 			},
@@ -11146,12 +11146,12 @@ var result =
 					"relay" : 16,
 					"bwa" : 1069795,
 					"bwc" : 313871,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"e" : 5,
 						"d" : 11
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 10,
 						"f" : 12
 					},
@@ -11168,10 +11168,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 215040,
 			"bwc" : 139252,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -11185,10 +11185,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 215040,
 					"bwc" : 139252,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -11204,10 +11204,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 43739,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11221,10 +11221,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 43739,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11240,12 +11240,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1309438,
 			"bwc" : 704258,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -11259,12 +11259,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1309438,
 					"bwc" : 704258,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -11280,12 +11280,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 240565,
 			"bwc" : 45034,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -11300,12 +11300,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 240565,
 					"bwc" : 45034,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -11322,11 +11322,11 @@ var result =
 			"relay" : 16,
 			"bwa" : 1263146,
 			"bwc" : 246003,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 9
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 14,
 				"s" : 3
 			},
@@ -11340,11 +11340,11 @@ var result =
 					"relay" : 16,
 					"bwa" : 1263146,
 					"bwc" : 246003,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 9
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 14,
 						"s" : 3
 					},
@@ -11360,13 +11360,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 28508982,
 			"bwc" : 21563111,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 8,
 				"e" : 7,
 				"d" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -11382,13 +11382,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 28508982,
 					"bwc" : 21563111,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 8,
 						"e" : 7,
 						"d" : 7
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -11406,11 +11406,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 196608,
 			"bwc" : 32180,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -11424,11 +11424,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 196608,
 					"bwc" : 32180,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -11444,11 +11444,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 2432836,
 			"bwc" : 1133679,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11463,11 +11463,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2432836,
 					"bwc" : 1133679,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11484,10 +11484,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 40960,
 			"bwc" : 65,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -11500,10 +11500,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 40960,
 					"bwc" : 65,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -11518,12 +11518,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 86581,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11538,12 +11538,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 86581,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11560,10 +11560,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 416,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -11576,10 +11576,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 416,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -11594,11 +11594,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 860885,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11613,11 +11613,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 860885,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11634,13 +11634,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 3595097,
 			"bwc" : 1598186,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 14,
 				"g" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 10
 			},
@@ -11656,13 +11656,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 3595097,
 					"bwc" : 1598186,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 14,
 						"g" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 10
 					},
@@ -11680,12 +11680,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 203870,
 			"bwc" : 47544,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 3
 			},
@@ -11700,12 +11700,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 203870,
 					"bwc" : 47544,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 3
 					},
@@ -11722,12 +11722,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 80674,
 			"bwc" : 711,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -11740,12 +11740,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 80674,
 					"bwc" : 711,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -11760,11 +11760,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 21585,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11778,11 +11778,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 21585,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11798,12 +11798,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1324122,
 			"bwc" : 576805,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 3,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -11818,12 +11818,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1324122,
 					"bwc" : 576805,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 3,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 3
 					},
@@ -11840,11 +11840,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 2048000,
 			"bwc" : 1533393,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -11859,11 +11859,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2048000,
 					"bwc" : 1533393,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11880,12 +11880,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1853440,
 			"bwc" : 1346740,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -11900,10 +11900,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 72704,
 					"bwc" : 13266,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -11917,12 +11917,12 @@ var result =
 					"relay" : 3,
 					"bwa" : 1780736,
 					"bwc" : 1333474,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -11939,11 +11939,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 81920,
 			"bwc" : 28230,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 4
 			},
 			"proProb" : {
@@ -11956,11 +11956,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 81920,
 					"bwc" : 28230,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4
 					},
 					"proProb" : {
@@ -11975,12 +11975,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 56320,
 			"bwc" : 19550,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -11994,12 +11994,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 56320,
 					"bwc" : 19550,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -12015,11 +12015,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 167936,
 			"bwc" : 10236,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -12033,11 +12033,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 167936,
 					"bwc" : 10236,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -12053,10 +12053,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 64153,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -12069,10 +12069,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 64153,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -12087,12 +12087,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 3174400,
 			"bwc" : 2612088,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 6
 			},
@@ -12107,12 +12107,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 3174400,
 					"bwc" : 2612088,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 8,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 6
 					},
@@ -12129,12 +12129,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 548964,
 			"bwc" : 108500,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -12147,12 +12147,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 548964,
 					"bwc" : 108500,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -12167,11 +12167,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 92284,
 			"bwc" : 10632,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -12185,11 +12185,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 92284,
 					"bwc" : 10632,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -12205,11 +12205,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 909,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -12222,11 +12222,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 909,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -12241,12 +12241,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1092608,
 			"bwc" : 27,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -12259,12 +12259,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1092608,
 					"bwc" : 27,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -12279,11 +12279,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 844800,
 			"bwc" : 603264,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -12298,11 +12298,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 844800,
 					"bwc" : 603264,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -12319,12 +12319,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 184320,
 			"bwc" : 77010,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -12339,12 +12339,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 184320,
 					"bwc" : 77010,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -12361,11 +12361,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 276480,
 			"bwc" : 65751,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 2
 			},
@@ -12380,11 +12380,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 276480,
 					"bwc" : 65751,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -12401,13 +12401,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 6926490,
 			"bwc" : 2663413,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"e" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -12423,13 +12423,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 6926490,
 					"bwc" : 2663413,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"e" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -12447,12 +12447,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 245000,
 			"bwc" : 174231,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -12467,12 +12467,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 245000,
 					"bwc" : 174231,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -12489,13 +12489,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 15534870,
 			"bwc" : 11822541,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"g" : 2,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 4
 			},
@@ -12511,13 +12511,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 15534870,
 					"bwc" : 11822541,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"g" : 2,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 4
 					},
@@ -12535,11 +12535,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 50634,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -12553,11 +12553,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 50634,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -12573,13 +12573,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1324032,
 			"bwc" : 680577,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -12595,13 +12595,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1324032,
 					"bwc" : 680577,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -12619,12 +12619,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 139885,
 			"bwc" : 29086,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -12639,12 +12639,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 139885,
 					"bwc" : 29086,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -12661,13 +12661,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 837452,
 			"bwc" : 305112,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -12683,13 +12683,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 837452,
 					"bwc" : 305112,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -12707,11 +12707,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 266240,
 			"bwc" : 182036,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -12726,11 +12726,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 266240,
 					"bwc" : 182036,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -12747,11 +12747,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 384953,
 			"bwc" : 121880,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 3
 			},
@@ -12766,11 +12766,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 384953,
 					"bwc" : 121880,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -12787,13 +12787,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 357070,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -12809,13 +12809,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 357070,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -12833,11 +12833,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 67192,
 			"bwc" : 16494,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -12850,11 +12850,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 67192,
 					"bwc" : 16494,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -12869,13 +12869,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1867166,
 			"bwc" : 1013427,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -12891,13 +12891,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1867166,
 					"bwc" : 1013427,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -12915,13 +12915,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 22824436,
 			"bwc" : 12977605,
-			"proRole" : {
+			"role" : {
 				"g" : 10,
 				"m" : 16,
 				"d" : 10,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 13
 			},
@@ -12937,13 +12937,13 @@ var result =
 					"relay" : 13,
 					"bwa" : 16403638,
 					"bwc" : 8487828,
-					"proRole" : {
+					"role" : {
 						"g" : 8,
 						"m" : 13,
 						"d" : 10,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 12,
 						"s" : 10
 					},
@@ -12959,11 +12959,11 @@ var result =
 					"relay" : 3,
 					"bwa" : 6420798,
 					"bwc" : 4489777,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -12980,13 +12980,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 17494676,
 			"bwc" : 6711231,
-			"proRole" : {
+			"role" : {
 				"g" : 5,
 				"m" : 8,
 				"d" : 6,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 5
 			},
@@ -13002,13 +13002,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 17494676,
 					"bwc" : 6711231,
-					"proRole" : {
+					"role" : {
 						"g" : 5,
 						"m" : 8,
 						"d" : 6,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 5
 					},
@@ -13026,13 +13026,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 4532800,
 			"bwc" : 2643147,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 4,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 5
 			},
@@ -13048,13 +13048,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 4532800,
 					"bwc" : 2643147,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 4,
 						"e" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 5
 					},
@@ -13072,13 +13072,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 7236654,
 			"bwc" : 5150499,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"e" : 4,
 				"d" : 6
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 6
 			},
@@ -13094,13 +13094,13 @@ var result =
 					"relay" : 6,
 					"bwa" : 7150638,
 					"bwc" : 5145776,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 6,
 						"e" : 4,
 						"d" : 5
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 4
 					},
@@ -13116,10 +13116,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 543,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -13132,11 +13132,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 4180,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -13152,11 +13152,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 563200,
 			"bwc" : 173895,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -13171,11 +13171,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 563200,
 					"bwc" : 173895,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -13192,10 +13192,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 307200,
 			"bwc" : 219137,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -13209,10 +13209,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 307200,
 					"bwc" : 219137,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -13228,13 +13228,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 19078098,
 			"bwc" : 6640506,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 7,
 				"d" : 2,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 8,
 				"f" : 3
 			},
@@ -13250,12 +13250,12 @@ var result =
 					"relay" : 6,
 					"bwa" : 8592338,
 					"bwc" : 67487,
-					"proRole" : {
+					"role" : {
 						"m" : 6,
 						"e" : 5,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 6,
 						"f" : 1
 					},
@@ -13271,12 +13271,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 1807472,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -13290,13 +13290,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 4765547,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -13314,12 +13314,12 @@ var result =
 			"relay" : 10,
 			"bwa" : 4266679,
 			"bwc" : 1079641,
-			"proRole" : {
+			"role" : {
 				"m" : 10,
 				"g" : 4,
 				"d" : 5
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 9,
 				"s" : 9
 			},
@@ -13334,12 +13334,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1540814,
 					"bwc" : 1040945,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 8
 					},
@@ -13354,11 +13354,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 2725865,
 					"bwc" : 38696,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -13374,11 +13374,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 23999,
 			"bwc" : 354,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -13391,11 +13391,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 23999,
 					"bwc" : 354,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -13410,13 +13410,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 418816,
 			"bwc" : 138021,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -13432,13 +13432,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 418816,
 					"bwc" : 138021,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -13456,13 +13456,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 816684,
 			"bwc" : 311863,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"e" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -13478,13 +13478,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 816684,
 					"bwc" : 311863,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"e" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -13502,13 +13502,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 2753655,
 			"bwc" : 1086839,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 2,
 				"d" : 5,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 1
 			},
@@ -13524,13 +13524,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 2753655,
 					"bwc" : 1086839,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 2,
 						"d" : 5,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 1
 					},
@@ -13548,13 +13548,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 5509120,
 			"bwc" : 4013333,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -13570,13 +13570,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 5509120,
 					"bwc" : 4013333,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -13594,13 +13594,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 1865129,
 			"bwc" : 428286,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 7,
 				"e" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 10,
 				"s" : 11
 			},
@@ -13616,13 +13616,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 1865129,
 					"bwc" : 428286,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 7,
 						"e" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 10,
 						"s" : 11
 					},
@@ -13640,11 +13640,11 @@ var result =
 			"relay" : 8,
 			"bwa" : 28311552,
 			"bwc" : 24383305,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 2
 			},
@@ -13659,11 +13659,11 @@ var result =
 					"relay" : 8,
 					"bwa" : 28311552,
 					"bwc" : 24383305,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 2
 					},
@@ -13680,11 +13680,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 225474,
 			"bwc" : 50179,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 4
 			},
@@ -13698,11 +13698,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 225474,
 					"bwc" : 50179,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 4
 					},
@@ -13718,11 +13718,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 66546,
 			"bwc" : 5817,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -13735,11 +13735,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 66546,
 					"bwc" : 5817,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -13754,11 +13754,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 423913,
 			"bwc" : 53545,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -13771,11 +13771,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 423913,
 					"bwc" : 53545,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -13790,12 +13790,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 4915200,
 			"bwc" : 6944905,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -13810,12 +13810,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 4915200,
 					"bwc" : 6944905,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -13832,12 +13832,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 430364,
 			"bwc" : 42102,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -13851,12 +13851,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 430364,
 					"bwc" : 42102,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -13872,11 +13872,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 2405592,
 			"bwc" : 1380620,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -13889,11 +13889,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2405592,
 					"bwc" : 1380620,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -13908,13 +13908,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 4063232,
 			"bwc" : 3861143,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -13930,13 +13930,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 4063232,
 					"bwc" : 3861143,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -13954,12 +13954,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 202927,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -13974,12 +13974,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 202927,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -13996,11 +13996,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 43218,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14014,11 +14014,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 43218,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14034,11 +14034,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 72704,
 			"bwc" : 208,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -14051,11 +14051,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 72704,
 					"bwc" : 208,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -14070,12 +14070,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 604160,
 			"bwc" : 278754,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -14090,12 +14090,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 604160,
 					"bwc" : 278754,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -14112,13 +14112,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 351110,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14134,13 +14134,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 351110,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14158,11 +14158,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 81920,
 			"bwc" : 13326,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14176,11 +14176,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 81920,
 					"bwc" : 13326,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14196,13 +14196,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 9850880,
 			"bwc" : 6793228,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4,
 				"a" : 1
@@ -14219,13 +14219,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 9850880,
 					"bwc" : 6793228,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4,
 						"a" : 1
@@ -14244,12 +14244,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 2714624,
 			"bwc" : 1782444,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -14264,12 +14264,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 2714624,
 					"bwc" : 1782444,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -14286,13 +14286,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 5120000,
 			"bwc" : 5120000,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14308,13 +14308,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5120000,
 					"bwc" : 5120000,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14332,13 +14332,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 225280,
 			"bwc" : 74211,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -14354,13 +14354,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 225280,
 					"bwc" : 74211,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -14378,10 +14378,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 17576,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -14394,10 +14394,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 17576,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -14412,10 +14412,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 804170,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14429,10 +14429,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 804170,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14448,12 +14448,12 @@ var result =
 			"relay" : 16,
 			"bwa" : 12937214,
 			"bwc" : 6423253,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 7,
 				"g" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 16,
 				"s" : 7
 			},
@@ -14468,12 +14468,12 @@ var result =
 					"relay" : 15,
 					"bwa" : 12752894,
 					"bwc" : 6408779,
-					"proRole" : {
+					"role" : {
 						"m" : 15,
 						"d" : 7,
 						"g" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 6
 					},
@@ -14488,10 +14488,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 184320,
 					"bwc" : 14474,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14507,13 +14507,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 12634112,
 			"bwc" : 12607142,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -14529,13 +14529,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 12634112,
 					"bwc" : 12607142,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -14553,13 +14553,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 430080,
 			"bwc" : 143088,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -14575,13 +14575,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 430080,
 					"bwc" : 143088,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -14599,12 +14599,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 627347,
 			"bwc" : 324142,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -14619,12 +14619,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 627347,
 					"bwc" : 324142,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -14641,13 +14641,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 8519680,
 			"bwc" : 4722838,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -14663,13 +14663,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 8519680,
 					"bwc" : 4722838,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -14687,11 +14687,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 232499,
 			"bwc" : 6014,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -14704,11 +14704,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 232499,
 					"bwc" : 6014,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -14723,11 +14723,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 67427,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14741,11 +14741,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 67427,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14761,13 +14761,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 41963520,
 			"bwc" : 29178317,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"e" : 3,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 4,
 				"a" : 1
@@ -14784,13 +14784,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 41963520,
 					"bwc" : 29178317,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"e" : 3,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 4,
 						"a" : 1
@@ -14809,11 +14809,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 31068,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -14827,11 +14827,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 31068,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -14847,12 +14847,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 17830300,
 			"bwc" : 11572177,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -14867,12 +14867,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 17830300,
 					"bwc" : 11572177,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -14889,11 +14889,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 901120,
 			"bwc" : 585242,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -14908,11 +14908,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 901120,
 					"bwc" : 585242,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -14929,11 +14929,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 5380,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -14946,11 +14946,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 5380,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -14965,13 +14965,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 63885750,
 			"bwc" : 50720456,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"e" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -14987,13 +14987,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 63885750,
 					"bwc" : 50720456,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"e" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -15011,11 +15011,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 888832,
 			"bwc" : 528154,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -15029,11 +15029,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 888832,
 					"bwc" : 528154,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -15049,13 +15049,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 364544,
 			"bwc" : 185520,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -15071,13 +15071,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 364544,
 					"bwc" : 185520,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -15095,12 +15095,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 119622,
 			"bwc" : 17722,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -15113,12 +15113,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 119622,
 					"bwc" : 17722,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -15133,11 +15133,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 3174400,
 			"bwc" : 2208113,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -15152,11 +15152,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 3174400,
 					"bwc" : 2208113,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -15173,11 +15173,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 359493,
 			"bwc" : 61857,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -15191,11 +15191,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 359493,
 					"bwc" : 61857,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -15211,12 +15211,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 34440246,
 			"bwc" : 26380848,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -15231,12 +15231,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 34440246,
 					"bwc" : 26380848,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -15253,10 +15253,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 401,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -15269,10 +15269,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 401,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -15287,12 +15287,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 75152,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -15305,12 +15305,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 75152,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -15325,12 +15325,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 208896,
 			"bwc" : 17803,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -15344,12 +15344,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 208896,
 					"bwc" : 17803,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -15365,13 +15365,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 21423471,
 			"bwc" : 15803344,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 4,
 				"g" : 3,
 				"e" : 14
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 13
 			},
@@ -15387,13 +15387,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 21423471,
 					"bwc" : 15803344,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 4,
 						"g" : 3,
 						"e" : 14
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 13
 					},
@@ -15411,11 +15411,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 256000,
 			"bwc" : 4941,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -15428,11 +15428,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 256000,
 					"bwc" : 4941,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -15447,13 +15447,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 8616960,
 			"bwc" : 8277954,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -15469,13 +15469,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 8616960,
 					"bwc" : 8277954,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"d" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -15493,10 +15493,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32000,
 			"bwc" : 2554,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -15509,10 +15509,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 32000,
 					"bwc" : 2554,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -15527,12 +15527,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 249680,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -15547,12 +15547,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 249680,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -15569,11 +15569,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 236235,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -15586,11 +15586,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 236235,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -15605,12 +15605,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1114112,
 			"bwc" : 646634,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -15625,12 +15625,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1114112,
 					"bwc" : 646634,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -15647,12 +15647,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3617844,
 			"bwc" : 1635238,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -15668,12 +15668,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3617844,
 					"bwc" : 1635238,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -15691,12 +15691,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 2035473,
 			"bwc" : 559151,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 5,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 1
 			},
@@ -15711,12 +15711,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 2035473,
 					"bwc" : 559151,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 5,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 1
 					},
@@ -15733,13 +15733,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 856064,
 			"bwc" : 465134,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"e" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -15755,13 +15755,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 856064,
 					"bwc" : 465134,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"e" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -15779,10 +15779,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 40960,
 			"bwc" : 695,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -15795,10 +15795,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 40960,
 					"bwc" : 695,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -15813,13 +15813,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 659459,
 			"bwc" : 100943,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 3,
 				"d" : 4,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -15835,13 +15835,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 659459,
 					"bwc" : 100943,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 3,
 						"d" : 4,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 3
 					},
@@ -15859,11 +15859,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 4353,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -15876,11 +15876,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 4353,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -15895,10 +15895,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 122880,
 			"bwc" : 59494,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -15911,10 +15911,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 122880,
 					"bwc" : 59494,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -15929,13 +15929,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1001296,
 			"bwc" : 130873,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 1,
 				"d" : 6,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -15951,13 +15951,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1001296,
 					"bwc" : 130873,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 1,
 						"d" : 6,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 3
 					},
@@ -15975,13 +15975,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 614400,
 			"bwc" : 329857,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -15996,13 +15996,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 614400,
 					"bwc" : 329857,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -16019,11 +16019,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 3072000,
 			"bwc" : 2698077,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -16038,11 +16038,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 3072000,
 					"bwc" : 2698077,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -16059,12 +16059,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 501010,
 			"bwc" : 84859,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -16079,12 +16079,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 501010,
 					"bwc" : 84859,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -16101,11 +16101,11 @@ var result =
 			"relay" : 8,
 			"bwa" : 1224848,
 			"bwc" : 257040,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -16119,11 +16119,11 @@ var result =
 					"relay" : 8,
 					"bwa" : 1224848,
 					"bwc" : 257040,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 3
 					},
@@ -16139,11 +16139,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 39780,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16157,11 +16157,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 39780,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16177,11 +16177,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 160311,
 			"bwc" : 5198,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -16194,11 +16194,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 160311,
 					"bwc" : 5198,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -16213,13 +16213,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 17660424,
 			"bwc" : 13208161,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 4,
 				"g" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -16235,13 +16235,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 8321544,
 					"bwc" : 4508669,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -16257,13 +16257,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 9338880,
 					"bwc" : 8699492,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -16281,11 +16281,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 200506,
 			"bwc" : 10962,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -16298,11 +16298,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 200506,
 					"bwc" : 10962,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -16317,12 +16317,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 9201996,
 			"bwc" : 8147081,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -16337,12 +16337,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 9201996,
 					"bwc" : 8147081,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -16359,12 +16359,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 211963,
 			"bwc" : 30800,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3
 			},
 			"proProb" : {
@@ -16378,12 +16378,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 211963,
 					"bwc" : 30800,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3
 					},
 					"proProb" : {
@@ -16399,13 +16399,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 640000,
 			"bwc" : 634104,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16421,13 +16421,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 640000,
 					"bwc" : 634104,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16445,12 +16445,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 75997,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16464,12 +16464,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 75997,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16485,13 +16485,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16507,13 +16507,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16531,12 +16531,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 40960,
 			"bwc" : 60767,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -16549,12 +16549,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 40960,
 					"bwc" : 60767,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -16569,11 +16569,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 82225,
 			"bwc" : 35728,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16587,11 +16587,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 82225,
 					"bwc" : 35728,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16607,13 +16607,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 8611768,
 			"bwc" : 5819564,
-			"proRole" : {
+			"role" : {
 				"g" : 5,
 				"m" : 8,
 				"e" : 3,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 5
 			},
@@ -16629,13 +16629,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 8611768,
 					"bwc" : 5819564,
-					"proRole" : {
+					"role" : {
 						"g" : 5,
 						"m" : 8,
 						"e" : 3,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 5
 					},
@@ -16653,13 +16653,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 2967469,
 			"bwc" : 1113904,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 2,
 				"d" : 5,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 5
 			},
@@ -16675,13 +16675,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 2967469,
 					"bwc" : 1113904,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 2,
 						"d" : 5,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 5
 					},
@@ -16699,13 +16699,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 118678901,
 			"bwc" : 73219781,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"d" : 3,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -16721,13 +16721,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 118678901,
 					"bwc" : 73219781,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 3,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -16745,11 +16745,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 93490,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16764,11 +16764,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 93490,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16785,10 +16785,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 61904,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16802,10 +16802,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 61904,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16821,13 +16821,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1039664,
 			"bwc" : 398537,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16843,13 +16843,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1039664,
 					"bwc" : 398537,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16867,12 +16867,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1221515,
 			"bwc" : 341336,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -16887,12 +16887,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1221515,
 					"bwc" : 341336,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -16909,11 +16909,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 83036,
 			"bwc" : 10959,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -16927,11 +16927,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 83036,
 					"bwc" : 10959,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -16947,11 +16947,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 40960,
 			"bwc" : 7937,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -16964,11 +16964,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 40960,
 					"bwc" : 7937,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -16983,11 +16983,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1115136,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -17000,11 +17000,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1115136,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -17019,13 +17019,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 7836253,
 			"bwc" : 6113683,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -17041,13 +17041,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 7836253,
 					"bwc" : 6113683,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -17065,13 +17065,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2592664,
 			"bwc" : 1936957,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -17087,13 +17087,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2592664,
 					"bwc" : 1936957,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -17111,11 +17111,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 3276800,
 			"bwc" : 330332,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -17130,11 +17130,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 3276800,
 					"bwc" : 330332,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -17151,12 +17151,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 5974540,
 			"bwc" : 2284850,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -17171,12 +17171,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 5974540,
 					"bwc" : 2284850,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -17193,11 +17193,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 167936,
 			"bwc" : 47517,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -17211,11 +17211,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 167936,
 					"bwc" : 47517,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -17231,12 +17231,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 131072,
 			"bwc" : 2463,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -17250,12 +17250,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 131072,
 					"bwc" : 2463,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -17271,11 +17271,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 40504,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17289,11 +17289,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 40504,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17309,12 +17309,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1955423,
 			"bwc" : 1044045,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -17329,12 +17329,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1955423,
 					"bwc" : 1044045,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -17351,11 +17351,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 8236,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -17368,11 +17368,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 8236,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -17387,13 +17387,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 572636,
 			"bwc" : 333210,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -17409,13 +17409,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 572636,
 					"bwc" : 333210,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -17433,10 +17433,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 167936,
 			"bwc" : 24088,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -17450,10 +17450,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 167936,
 					"bwc" : 24088,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -17469,10 +17469,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 34174,
 			"bwc" : 628,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2
 			},
 			"proProb" : {
@@ -17485,10 +17485,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 471,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -17501,10 +17501,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 3454,
 					"bwc" : 157,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -17518,11 +17518,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 451731,
 			"bwc" : 115278,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -17535,11 +17535,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 451731,
 					"bwc" : 115278,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -17554,11 +17554,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 312320,
 			"bwc" : 77429,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -17572,11 +17572,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 312320,
 					"bwc" : 77429,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -17592,13 +17592,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1504458,
 			"bwc" : 892750,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17614,13 +17614,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1504458,
 					"bwc" : 892750,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17638,10 +17638,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 131072,
 			"bwc" : 84012,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17655,10 +17655,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 84012,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17674,11 +17674,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1090212,
 			"bwc" : 506839,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17692,11 +17692,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1090212,
 					"bwc" : 506839,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17712,11 +17712,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 27750,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17730,11 +17730,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 27750,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17750,13 +17750,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 109715327,
 			"bwc" : 74040133,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"e" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -17772,13 +17772,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 109715327,
 					"bwc" : 74040133,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"e" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -17796,12 +17796,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 395516,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1,
 				"a" : 1
@@ -17817,12 +17817,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 395516,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1,
 						"a" : 1
@@ -17840,13 +17840,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 80029,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -17862,13 +17862,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 80029,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -17886,11 +17886,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 1577789,
 			"bwc" : 1139832,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -17904,11 +17904,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 1577789,
 					"bwc" : 1139832,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -17924,13 +17924,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 2486272,
 			"bwc" : 990265,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"g" : 2,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -17946,13 +17946,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 2486272,
 					"bwc" : 990265,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"g" : 2,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -17970,12 +17970,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 559420,
 			"bwc" : 86329,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -17989,12 +17989,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 559420,
 					"bwc" : 86329,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -18010,12 +18010,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1354413,
 			"bwc" : 672035,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -18030,12 +18030,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1354413,
 					"bwc" : 672035,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -18052,12 +18052,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 2022082,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -18072,12 +18072,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 2022082,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -18094,12 +18094,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 587195,
 			"bwc" : 188775,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -18115,12 +18115,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 587195,
 					"bwc" : 188775,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -18138,11 +18138,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 443,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -18155,11 +18155,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 443,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -18174,12 +18174,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 383054,
 			"bwc" : 108430,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -18194,12 +18194,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 383054,
 					"bwc" : 108430,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -18216,10 +18216,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 71680,
 			"bwc" : 17346,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -18232,10 +18232,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 71680,
 					"bwc" : 17346,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -18250,12 +18250,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 34901,
 			"bwc" : 2660,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -18268,12 +18268,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 34901,
 					"bwc" : 2660,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -18288,13 +18288,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 10968743,
 			"bwc" : 6169900,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"e" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -18310,13 +18310,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 10968743,
 					"bwc" : 6169900,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"e" : 3,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -18334,10 +18334,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 458,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -18350,10 +18350,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 458,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -18368,13 +18368,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1765376,
 			"bwc" : 1496027,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -18390,13 +18390,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1765376,
 					"bwc" : 1496027,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"e" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -18414,11 +18414,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 175094,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -18431,11 +18431,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 175094,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -18450,12 +18450,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 470392,
 			"bwc" : 61323,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -18469,12 +18469,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 470392,
 					"bwc" : 61323,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -18490,12 +18490,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 98377,
 			"bwc" : 26310,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -18509,12 +18509,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 98377,
 					"bwc" : 26310,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -18530,12 +18530,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 140235,
 			"bwc" : 57816,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -18549,12 +18549,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 140235,
 					"bwc" : 57816,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -18570,10 +18570,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 128,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -18586,10 +18586,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 128,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -18604,11 +18604,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 947563,
 			"bwc" : 412629,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -18622,11 +18622,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 947563,
 					"bwc" : 412629,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -18642,11 +18642,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 4527903,
 			"bwc" : 4114721,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -18660,11 +18660,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 4527903,
 					"bwc" : 4114721,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -18680,12 +18680,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1654990,
 			"bwc" : 636767,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 7,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -18700,12 +18700,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1654990,
 					"bwc" : 636767,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 7,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -18722,11 +18722,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 215040,
 			"bwc" : 115777,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -18740,11 +18740,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 215040,
 					"bwc" : 115777,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -18760,12 +18760,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 324557,
 			"bwc" : 40295,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -18780,12 +18780,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 324557,
 					"bwc" : 40295,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -18802,13 +18802,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 5447680,
 			"bwc" : 5178039,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -18824,13 +18824,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 5447680,
 					"bwc" : 5178039,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -18848,12 +18848,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 3181216,
 			"bwc" : 802564,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -18868,12 +18868,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 3181216,
 					"bwc" : 802564,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -18890,11 +18890,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 35261,
 			"bwc" : 3124,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -18907,11 +18907,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 35261,
 					"bwc" : 3124,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -18926,11 +18926,11 @@ var result =
 			"relay" : 8,
 			"bwa" : 282511,
 			"bwc" : 12142,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 3,
 				"f" : 2
 			},
@@ -18944,11 +18944,11 @@ var result =
 					"relay" : 8,
 					"bwa" : 282511,
 					"bwc" : 12142,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 3,
 						"f" : 2
 					},
@@ -18964,11 +18964,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 437925,
 			"bwc" : 99312,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -18981,11 +18981,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 437925,
 					"bwc" : 99312,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19000,10 +19000,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 532121,
 			"bwc" : 84165,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -19016,10 +19016,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 532121,
 					"bwc" : 84165,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -19034,12 +19034,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 71680,
 			"bwc" : 11017,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -19053,12 +19053,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 71680,
 					"bwc" : 11017,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19074,12 +19074,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 18049,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19093,12 +19093,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 18049,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19114,10 +19114,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 22754,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19131,10 +19131,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 22754,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19150,12 +19150,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1474263,
 			"bwc" : 1136201,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -19170,12 +19170,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1474263,
 					"bwc" : 1136201,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -19192,12 +19192,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1626956,
 			"bwc" : 1568838,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -19212,12 +19212,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1626956,
 					"bwc" : 1568838,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -19234,12 +19234,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2526193,
 			"bwc" : 1741862,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19253,12 +19253,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2526193,
 					"bwc" : 1741862,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19274,12 +19274,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 30359,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19294,12 +19294,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 30359,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19316,11 +19316,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 81920,
 			"bwc" : 8381,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19334,11 +19334,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 81920,
 					"bwc" : 8381,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19354,11 +19354,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 208896,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -19371,11 +19371,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 208896,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19390,10 +19390,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 4629,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -19406,10 +19406,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 4629,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19424,10 +19424,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 10273,
 			"bwc" : 389,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -19440,10 +19440,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 10273,
 					"bwc" : 389,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -19458,11 +19458,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 793600,
 			"bwc" : 1826338,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -19476,11 +19476,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 793600,
 					"bwc" : 1826338,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -19496,11 +19496,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 6651904,
 			"bwc" : 6065589,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -19514,11 +19514,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 6651904,
 					"bwc" : 6065589,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -19534,12 +19534,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 977920,
 			"bwc" : 778132,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -19554,12 +19554,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 977920,
 					"bwc" : 778132,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -19576,12 +19576,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 121354,
 			"bwc" : 28269,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19595,12 +19595,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 121354,
 					"bwc" : 28269,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19616,10 +19616,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 33550,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -19632,10 +19632,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 33550,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19650,13 +19650,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 3717370,
 			"bwc" : 1134981,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19672,13 +19672,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 3717370,
 					"bwc" : 1134981,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19696,12 +19696,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 245968,
 			"bwc" : 15612,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -19715,12 +19715,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 245968,
 					"bwc" : 15612,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -19736,12 +19736,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 8932881,
 			"bwc" : 7053580,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 3,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -19756,12 +19756,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 8932881,
 					"bwc" : 7053580,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 3,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -19778,12 +19778,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 688121,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19798,12 +19798,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 688121,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19820,11 +19820,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 2053476,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -19837,11 +19837,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 2053476,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -19856,12 +19856,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 88672,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -19875,12 +19875,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 88672,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -19896,12 +19896,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 139264,
 			"bwc" : 12651,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -19916,12 +19916,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 139264,
 					"bwc" : 12651,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -19938,13 +19938,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2705023,
 			"bwc" : 1434134,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -19960,13 +19960,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2705023,
 					"bwc" : 1434134,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -19984,11 +19984,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 4334820,
 			"bwc" : 4010461,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -20001,11 +20001,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 4334820,
 					"bwc" : 4010461,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -20020,10 +20020,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2808,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20037,10 +20037,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2808,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20056,11 +20056,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65816,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -20073,11 +20073,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65816,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -20092,12 +20092,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 97283,
 			"bwc" : 23515,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -20110,12 +20110,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 97283,
 					"bwc" : 23515,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -20130,13 +20130,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 54366948,
 			"bwc" : 43742679,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"e" : 3,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -20152,13 +20152,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 54366948,
 					"bwc" : 43742679,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"e" : 3,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -20176,13 +20176,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 2634001,
 			"bwc" : 1334455,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 6,
 				"g" : 4,
 				"e" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 8
 			},
@@ -20198,13 +20198,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 2634001,
 					"bwc" : 1334455,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 6,
 						"g" : 4,
 						"e" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 8
 					},
@@ -20222,10 +20222,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 402007,
 			"bwc" : 301313,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -20238,10 +20238,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 402007,
 					"bwc" : 301313,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -20256,12 +20256,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 716800,
 			"bwc" : 528149,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -20276,12 +20276,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 716800,
 					"bwc" : 528149,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -20298,11 +20298,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 2767167,
 			"bwc" : 917976,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -20316,11 +20316,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 2767167,
 					"bwc" : 917976,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -20336,10 +20336,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 49893,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20353,10 +20353,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 49893,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20372,11 +20372,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 741008,
 			"bwc" : 302263,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20390,11 +20390,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 741008,
 					"bwc" : 302263,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20410,13 +20410,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 4165114,
 			"bwc" : 2326639,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 8,
 				"d" : 3,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 6
 			},
@@ -20432,13 +20432,13 @@ var result =
 					"relay" : 6,
 					"bwa" : 3929594,
 					"bwc" : 2251115,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 6,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 4
 					},
@@ -20454,11 +20454,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 235520,
 					"bwc" : 75524,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -20475,12 +20475,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 716800,
 			"bwc" : 711980,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20495,12 +20495,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 716800,
 					"bwc" : 711980,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20517,12 +20517,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 131072,
 			"bwc" : 24579,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20536,12 +20536,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 24579,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20557,11 +20557,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1280000,
 			"bwc" : 675151,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20576,11 +20576,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1280000,
 					"bwc" : 675151,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20597,12 +20597,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 481276,
 			"bwc" : 120721,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -20617,12 +20617,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 481276,
 					"bwc" : 120721,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -20639,12 +20639,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 600487,
 			"bwc" : 68077,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -20659,12 +20659,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 600487,
 					"bwc" : 68077,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -20681,12 +20681,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 375808,
 			"bwc" : 303173,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -20701,12 +20701,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 375808,
 					"bwc" : 303173,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -20723,12 +20723,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 100352,
 			"bwc" : 2425,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -20741,12 +20741,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 100352,
 					"bwc" : 2425,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -20761,11 +20761,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 71680,
 			"bwc" : 1703,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20779,11 +20779,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 71680,
 					"bwc" : 1703,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20799,11 +20799,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 11675,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20817,11 +20817,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 11675,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20837,10 +20837,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 158720,
 			"bwc" : 22605,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -20854,10 +20854,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 158720,
 					"bwc" : 22605,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -20873,12 +20873,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 770286,
 			"bwc" : 154123,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3
 			},
 			"proProb" : {
@@ -20892,12 +20892,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 770286,
 					"bwc" : 154123,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3
 					},
 					"proProb" : {
@@ -20913,10 +20913,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 108,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -20929,10 +20929,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 108,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -20947,11 +20947,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 98675,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -20964,11 +20964,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 98675,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -20983,13 +20983,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 14155776,
 			"bwc" : 14676330,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -21005,13 +21005,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 14155776,
 					"bwc" : 14676330,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -21029,11 +21029,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 85194,
 			"bwc" : 58946,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -21047,11 +21047,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 85194,
 					"bwc" : 58946,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -21067,12 +21067,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 223232,
 			"bwc" : 38161,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -21087,12 +21087,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 223232,
 					"bwc" : 38161,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -21109,11 +21109,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 283993,
 			"bwc" : 15075,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21126,11 +21126,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 283993,
 					"bwc" : 15075,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21145,10 +21145,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 12585,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21161,10 +21161,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 12585,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21179,11 +21179,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 97094,
 			"bwc" : 6639,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21196,11 +21196,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 97094,
 					"bwc" : 6639,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21215,12 +21215,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1137368,
 			"bwc" : 207473,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -21235,12 +21235,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1137368,
 					"bwc" : 207473,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -21257,13 +21257,13 @@ var result =
 			"relay" : 3,
 			"bwa" : 2604361,
 			"bwc" : 1218425,
-			"proRole" : {
+			"role" : {
 				"m" : 3,
 				"d" : 3,
 				"g" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -21279,13 +21279,13 @@ var result =
 					"relay" : 3,
 					"bwa" : 2604361,
 					"bwc" : 1218425,
-					"proRole" : {
+					"role" : {
 						"m" : 3,
 						"d" : 3,
 						"g" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -21303,12 +21303,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 402432,
 			"bwc" : 16175,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -21322,12 +21322,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 402432,
 					"bwc" : 16175,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -21343,12 +21343,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1244160,
 			"bwc" : 601652,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 4,
 				"f" : 3
 			},
@@ -21363,12 +21363,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1244160,
 					"bwc" : 601652,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4,
 						"f" : 3
 					},
@@ -21385,12 +21385,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 10780902,
 			"bwc" : 8013013,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21405,12 +21405,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 10780902,
 					"bwc" : 8013013,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21427,13 +21427,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 2237560,
 			"bwc" : 1600835,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21449,13 +21449,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 2237560,
 					"bwc" : 1600835,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21473,12 +21473,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 320947,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21493,12 +21493,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 320947,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21515,12 +21515,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 31590,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21533,12 +21533,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 31590,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21553,11 +21553,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 329874,
 			"bwc" : 104143,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21570,11 +21570,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 329874,
 					"bwc" : 104143,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21589,13 +21589,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 6258310,
 			"bwc" : 3549265,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -21611,13 +21611,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 6258310,
 					"bwc" : 3549265,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -21635,13 +21635,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 8788128,
 			"bwc" : 2659724,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -21657,13 +21657,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 8788128,
 					"bwc" : 2659724,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -21681,11 +21681,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 91136,
 			"bwc" : 17602,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21698,11 +21698,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 91136,
 					"bwc" : 17602,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21717,12 +21717,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 798516,
 			"bwc" : 235818,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21737,12 +21737,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 798516,
 					"bwc" : 235818,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21759,11 +21759,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3333120,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -21776,11 +21776,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3333120,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -21795,11 +21795,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 237816,
 			"bwc" : 50791,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -21812,11 +21812,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 237816,
 					"bwc" : 50791,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -21831,12 +21831,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 4883340,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21851,12 +21851,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 4883340,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21873,13 +21873,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 431009,
 			"bwc" : 103775,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21895,13 +21895,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 431009,
 					"bwc" : 103775,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21919,11 +21919,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 255066,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21938,11 +21938,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 255066,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21959,11 +21959,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -21977,11 +21977,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -21997,11 +21997,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 6291456,
 			"bwc" : 5704686,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22016,11 +22016,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 6291456,
 					"bwc" : 5704686,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -22037,12 +22037,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 291840,
 			"bwc" : 12379,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 4
 			},
@@ -22057,12 +22057,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 291840,
 					"bwc" : 12379,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 4
 					},
@@ -22079,13 +22079,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 680133,
 			"bwc" : 336218,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -22101,13 +22101,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 680133,
 					"bwc" : 336218,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -22125,10 +22125,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 456424,
 			"bwc" : 9943,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1,
 				"f" : 1
 			},
@@ -22142,10 +22142,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 456424,
 					"bwc" : 9943,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1,
 						"f" : 1
 					},
@@ -22161,13 +22161,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 3831694,
 			"bwc" : 2712418,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -22183,13 +22183,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 3831694,
 					"bwc" : 2712418,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -22207,13 +22207,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 2176000,
 			"bwc" : 1883873,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"e" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -22229,13 +22229,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 2176000,
 					"bwc" : 1883873,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"e" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -22253,11 +22253,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 999613,
 			"bwc" : 439853,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -22270,11 +22270,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 999613,
 					"bwc" : 439853,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4
 					},
 					"proProb" : {
@@ -22289,11 +22289,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3174400,
 			"bwc" : 2395022,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -22306,11 +22306,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3174400,
 					"bwc" : 2395022,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -22325,10 +22325,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 15999,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22342,10 +22342,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 15999,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -22361,13 +22361,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 599040,
 			"bwc" : 447180,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"e" : 2,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 3
 			},
@@ -22383,13 +22383,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 599040,
 					"bwc" : 447180,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"e" : 2,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -22407,11 +22407,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 250720,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -22424,11 +22424,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 250720,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -22443,12 +22443,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 523286,
 			"bwc" : 28312,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -22462,12 +22462,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 523286,
 					"bwc" : 28312,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -22483,12 +22483,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 8792,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -22501,12 +22501,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 8792,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -22521,12 +22521,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 13406776,
 			"bwc" : 5969711,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -22540,12 +22540,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 13406776,
 					"bwc" : 5969711,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4
 					},
 					"proProb" : {
@@ -22561,12 +22561,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 994689,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22581,12 +22581,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 994689,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -22603,11 +22603,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 129290,
 			"bwc" : 1508,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -22621,11 +22621,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 129290,
 					"bwc" : 1508,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -22641,11 +22641,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 28103,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22659,11 +22659,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 28103,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -22679,11 +22679,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 10240,
 			"bwc" : 101840,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -22696,11 +22696,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 10240,
 					"bwc" : 101840,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -22715,13 +22715,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1748970,
 			"bwc" : 914527,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 6,
 				"f" : 3
 			},
@@ -22737,13 +22737,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1748970,
 					"bwc" : 914527,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 6,
 						"f" : 3
 					},
@@ -22761,12 +22761,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 112640,
 			"bwc" : 14894,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -22780,12 +22780,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 112640,
 					"bwc" : 14894,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -22801,13 +22801,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 4491264,
 			"bwc" : 5142231,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -22823,13 +22823,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 4491264,
 					"bwc" : 5142231,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -22847,11 +22847,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -22864,11 +22864,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -22883,13 +22883,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1195008,
 			"bwc" : 767612,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 2,
 				"d" : 6,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 6
 			},
@@ -22905,13 +22905,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1195008,
 					"bwc" : 767612,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 2,
 						"d" : 6,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 6
 					},
@@ -22929,12 +22929,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3200000,
 			"bwc" : 2776564,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22948,12 +22948,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3200000,
 					"bwc" : 2776564,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -22969,10 +22969,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 6576,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -22986,10 +22986,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 6576,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23005,11 +23005,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 1323398,
 			"bwc" : 233042,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -23022,11 +23022,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 1323398,
 					"bwc" : 233042,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -23041,12 +23041,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 5966449,
 			"bwc" : 5103515,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -23061,11 +23061,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 846449,
 					"bwc" : 50504,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23078,11 +23078,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 5120000,
 					"bwc" : 5053011,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23098,11 +23098,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 102400,
 			"bwc" : 95272,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23115,11 +23115,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 102400,
 					"bwc" : 95272,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23134,11 +23134,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 474861,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23152,11 +23152,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 474861,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23172,12 +23172,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 611050,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23192,12 +23192,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 611050,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23214,10 +23214,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 2445092,
 			"bwc" : 1704994,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23230,10 +23230,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 2445092,
 					"bwc" : 1704994,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23248,11 +23248,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2252,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23266,11 +23266,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2252,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23286,11 +23286,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 77564,
 			"bwc" : 3112,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23303,11 +23303,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 77564,
 					"bwc" : 3112,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23322,11 +23322,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 15225,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23341,11 +23341,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 15225,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23362,11 +23362,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 45056,
 			"bwc" : 631,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23378,11 +23378,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 45056,
 					"bwc" : 631,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23396,12 +23396,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 735763,
 			"bwc" : 218306,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -23416,12 +23416,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 735763,
 					"bwc" : 218306,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -23438,12 +23438,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 91655,
 			"bwc" : 16309,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23458,12 +23458,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 91655,
 					"bwc" : 16309,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23480,10 +23480,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 18580,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23497,10 +23497,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 18580,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23516,13 +23516,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 2048000,
 			"bwc" : 1302459,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"e" : 2,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -23538,13 +23538,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 2048000,
 					"bwc" : 1302459,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"e" : 2,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -23562,12 +23562,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 257136,
 			"bwc" : 35621,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -23582,12 +23582,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 257136,
 					"bwc" : 35621,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -23604,11 +23604,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1342256,
 			"bwc" : 938649,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23621,11 +23621,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1342256,
 					"bwc" : 938649,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23640,11 +23640,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 369371,
 			"bwc" : 50184,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23657,11 +23657,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 369371,
 					"bwc" : 50184,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23676,12 +23676,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 1426966,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23696,12 +23696,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 1426966,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23718,10 +23718,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 44727,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23735,10 +23735,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 44727,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23754,11 +23754,11 @@ var result =
 			"relay" : 8,
 			"bwa" : 163840,
 			"bwc" : 15491,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 8
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 4
 			},
 			"proProb" : {
@@ -23771,11 +23771,11 @@ var result =
 					"relay" : 8,
 					"bwa" : 163840,
 					"bwc" : 15491,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 8
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4
 					},
 					"proProb" : {
@@ -23790,11 +23790,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 106496,
 			"bwc" : 6703,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23807,11 +23807,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 106496,
 					"bwc" : 6703,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23826,11 +23826,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 3100,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -23844,11 +23844,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 3100,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -23864,12 +23864,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 183296,
 			"bwc" : 46345,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -23883,12 +23883,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 183296,
 					"bwc" : 46345,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -23904,11 +23904,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 148975,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -23921,11 +23921,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 148975,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -23940,11 +23940,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 162816,
 			"bwc" : 50173,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -23958,11 +23958,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 162816,
 					"bwc" : 50173,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -23978,11 +23978,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 165888,
 			"bwc" : 47326,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -23995,11 +23995,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 165888,
 					"bwc" : 47326,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -24014,12 +24014,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 786432,
 			"bwc" : 890788,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24034,12 +24034,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 786432,
 					"bwc" : 890788,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24056,12 +24056,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 782336,
 			"bwc" : 279792,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -24076,12 +24076,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 782336,
 					"bwc" : 279792,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -24098,12 +24098,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 28200,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24117,12 +24117,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 28200,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24138,12 +24138,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 439560,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24158,12 +24158,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 439560,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24180,12 +24180,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1645075,
 			"bwc" : 565309,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24200,12 +24200,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1645075,
 					"bwc" : 565309,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24222,11 +24222,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 128000,
 			"bwc" : 20244,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24240,11 +24240,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 128000,
 					"bwc" : 20244,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24260,12 +24260,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 640000,
 			"bwc" : 354279,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24280,12 +24280,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 640000,
 					"bwc" : 354279,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24302,11 +24302,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 39809,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24320,11 +24320,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 39809,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24340,12 +24340,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 665600,
 			"bwc" : 593974,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24360,12 +24360,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 665600,
 					"bwc" : 593974,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24382,12 +24382,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 358400,
 			"bwc" : 278396,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24402,12 +24402,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 358400,
 					"bwc" : 278396,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24424,12 +24424,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 440880,
 			"bwc" : 18969,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -24443,12 +24443,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 440880,
 					"bwc" : 18969,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -24464,10 +24464,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 68698,
 			"bwc" : 2089,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24481,10 +24481,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 68698,
 					"bwc" : 2089,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24500,11 +24500,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 50958,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24518,11 +24518,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 50958,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24538,12 +24538,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 91447,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24557,12 +24557,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 91447,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24578,10 +24578,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 50448,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24595,10 +24595,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 50448,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24614,13 +24614,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 460800,
 			"bwc" : 113952,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24636,13 +24636,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 460800,
 					"bwc" : 113952,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24660,12 +24660,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1269760,
 			"bwc" : 1067567,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 1
 			},
@@ -24680,12 +24680,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1269760,
 					"bwc" : 1067567,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -24702,12 +24702,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 22814995,
 			"bwc" : 17386988,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24721,12 +24721,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 22814995,
 					"bwc" : 17386988,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24742,11 +24742,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 25946,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -24759,11 +24759,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 25946,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -24778,12 +24778,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 39829,
 			"bwc" : 204,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -24796,12 +24796,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 39829,
 					"bwc" : 204,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -24816,11 +24816,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 1280000,
 			"bwc" : 687340,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -24834,11 +24834,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 1280000,
 					"bwc" : 687340,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -24854,10 +24854,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 269439,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -24870,10 +24870,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 409600,
 					"bwc" : 269439,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -24888,10 +24888,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 131072,
 			"bwc" : 252,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -24904,10 +24904,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 252,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -24922,10 +24922,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 152,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -24938,10 +24938,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 152,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -24956,11 +24956,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 12628,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -24974,11 +24974,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 12628,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -24994,12 +24994,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1936442,
 			"bwc" : 485985,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -25012,12 +25012,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1936442,
 					"bwc" : 485985,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -25032,12 +25032,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 91530973,
 			"bwc" : 62583408,
-			"proRole" : {
+			"role" : {
 				"g" : 7,
 				"m" : 8,
 				"d" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -25052,12 +25052,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 91530973,
 					"bwc" : 62583408,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 8,
 						"d" : 7
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -25074,10 +25074,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 133120,
 			"bwc" : 13479,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -25091,10 +25091,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 133120,
 					"bwc" : 13479,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -25110,12 +25110,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1024000,
 			"bwc" : 521177,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -25130,12 +25130,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1024000,
 					"bwc" : 521177,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -25152,12 +25152,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 179200,
 			"bwc" : 38747,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -25172,12 +25172,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 179200,
 					"bwc" : 38747,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -25194,13 +25194,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 663552,
 			"bwc" : 357229,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -25216,13 +25216,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 663552,
 					"bwc" : 357229,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -25240,10 +25240,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 154,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -25256,10 +25256,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 154,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -25274,12 +25274,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 527360,
 			"bwc" : 95496,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -25294,12 +25294,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 527360,
 					"bwc" : 95496,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -25316,13 +25316,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 11838456,
 			"bwc" : 6300614,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25338,13 +25338,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 11838456,
 					"bwc" : 6300614,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25362,11 +25362,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 300748,
 			"bwc" : 26883,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -25380,11 +25380,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 300748,
 					"bwc" : 26883,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -25400,11 +25400,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 524288,
 			"bwc" : 264103,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -25419,11 +25419,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 524288,
 					"bwc" : 264103,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -25440,12 +25440,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 614400,
 			"bwc" : 443136,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25460,12 +25460,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 614400,
 					"bwc" : 443136,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25482,11 +25482,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 228352,
 			"bwc" : 45816,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -25499,11 +25499,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 228352,
 					"bwc" : 45816,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -25518,11 +25518,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 272105,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -25535,11 +25535,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 272105,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -25554,11 +25554,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 716800,
 			"bwc" : 345076,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -25573,11 +25573,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 716800,
 					"bwc" : 345076,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -25594,13 +25594,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2591634,
 			"bwc" : 1816405,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25616,13 +25616,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2591634,
 					"bwc" : 1816405,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25640,12 +25640,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 97710,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25660,12 +25660,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 97710,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25682,11 +25682,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 983040,
 			"bwc" : 777879,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25701,11 +25701,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 983040,
 					"bwc" : 777879,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25722,13 +25722,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 481383,
 			"bwc" : 36428,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -25743,13 +25743,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 481383,
 					"bwc" : 36428,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -25766,11 +25766,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 614400,
 			"bwc" : 187764,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25784,11 +25784,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 614400,
 					"bwc" : 187764,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25804,11 +25804,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -25821,11 +25821,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -25840,12 +25840,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 128000,
 			"bwc" : 30812,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25859,12 +25859,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 128000,
 					"bwc" : 30812,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25880,11 +25880,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 304128,
 			"bwc" : 23382,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25898,11 +25898,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 304128,
 					"bwc" : 23382,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25918,11 +25918,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 291840,
 			"bwc" : 64035,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -25935,11 +25935,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 291840,
 					"bwc" : 64035,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -25954,11 +25954,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 79168,
 			"bwc" : 8686,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -25972,11 +25972,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 79168,
 					"bwc" : 8686,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -25992,12 +25992,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 32480,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -26010,12 +26010,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 32480,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -26030,11 +26030,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 66560,
 			"bwc" : 25020,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26048,11 +26048,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 66560,
 					"bwc" : 25020,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26068,11 +26068,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 141324,
 			"bwc" : 45538,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -26085,11 +26085,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 141324,
 					"bwc" : 45538,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -26104,13 +26104,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 19602100,
 			"bwc" : 16157405,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"e" : 2,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -26126,13 +26126,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 19602100,
 					"bwc" : 16157405,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"e" : 2,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -26150,10 +26150,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 154660,
 			"bwc" : 65704,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -26166,10 +26166,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 154660,
 					"bwc" : 65704,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -26184,11 +26184,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 17103,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26202,11 +26202,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 17103,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26222,12 +26222,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 7298398,
 			"bwc" : 4192367,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26242,12 +26242,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 7298398,
 					"bwc" : 4192367,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26264,13 +26264,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1715200,
 			"bwc" : 1167040,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -26286,13 +26286,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1715200,
 					"bwc" : 1167040,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -26310,12 +26310,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 162423,
 			"bwc" : 26234,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -26329,12 +26329,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 162423,
 					"bwc" : 26234,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -26350,12 +26350,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 3220147,
 			"bwc" : 2030248,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -26370,12 +26370,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 3220147,
 					"bwc" : 2030248,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -26392,11 +26392,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 564648,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26410,11 +26410,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 564648,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26430,11 +26430,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 8351042,
 			"bwc" : 5349067,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26449,11 +26449,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 8351042,
 					"bwc" : 5349067,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26470,12 +26470,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 393216,
 			"bwc" : 92458,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26489,12 +26489,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 393216,
 					"bwc" : 92458,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26510,13 +26510,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2150400,
 			"bwc" : 1498862,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -26532,13 +26532,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2150400,
 					"bwc" : 1498862,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -26556,12 +26556,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 530906,
 			"bwc" : 68947,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -26575,12 +26575,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 530906,
 					"bwc" : 68947,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -26596,11 +26596,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 7145,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -26613,11 +26613,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 7145,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -26632,11 +26632,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 107593,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -26649,11 +26649,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 107593,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -26668,11 +26668,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 14093,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26686,11 +26686,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 14093,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26706,10 +26706,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 139,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -26722,10 +26722,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 139,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -26740,11 +26740,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 17529,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26759,11 +26759,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 17529,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26780,12 +26780,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 614400,
 			"bwc" : 530205,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -26801,12 +26801,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 614400,
 					"bwc" : 530205,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -26824,11 +26824,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 144173,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26843,11 +26843,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 144173,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26864,13 +26864,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 390144,
 			"bwc" : 270890,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"g" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -26886,13 +26886,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 390144,
 					"bwc" : 270890,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"g" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -26910,11 +26910,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 167936,
 			"bwc" : 11297,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -26928,11 +26928,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 167936,
 					"bwc" : 11297,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -26948,11 +26948,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 3767212,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -26967,11 +26967,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 3767212,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -26988,12 +26988,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 643072,
 			"bwc" : 189325,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -27008,12 +27008,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 643072,
 					"bwc" : 189325,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -27030,12 +27030,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 36810,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27049,12 +27049,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 36810,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27070,12 +27070,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 1023873,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27091,12 +27091,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 1023873,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27114,12 +27114,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 746250,
 			"bwc" : 749913,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -27132,12 +27132,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 746250,
 					"bwc" : 749913,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -27152,12 +27152,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 201544,
 			"bwc" : 156777,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -27171,12 +27171,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 201544,
 					"bwc" : 156777,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -27192,11 +27192,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 848945,
 			"bwc" : 274603,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -27210,11 +27210,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 848945,
 					"bwc" : 274603,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -27230,11 +27230,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 353280,
 			"bwc" : 58506,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -27247,11 +27247,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 353280,
 					"bwc" : 58506,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -27266,10 +27266,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 30562,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27283,10 +27283,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 30562,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27302,12 +27302,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 22432871,
 			"bwc" : 16977347,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -27322,12 +27322,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 22432871,
 					"bwc" : 16977347,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -27344,12 +27344,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 29331,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27363,12 +27363,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 29331,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27384,10 +27384,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 2325561,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -27400,10 +27400,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 2325561,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -27418,11 +27418,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 420864,
 			"bwc" : 91664,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -27435,11 +27435,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 420864,
 					"bwc" : 91664,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -27454,11 +27454,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 13362,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -27471,11 +27471,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 13362,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -27490,12 +27490,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 37298247,
 			"bwc" : 28022394,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27510,12 +27510,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 37298247,
 					"bwc" : 28022394,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27532,13 +27532,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1253376,
 			"bwc" : 1063653,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -27554,13 +27554,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1253376,
 					"bwc" : 1063653,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -27578,13 +27578,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 8614807,
 			"bwc" : 5248984,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"e" : 3,
 				"d" : 6
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 6
 			},
@@ -27600,13 +27600,13 @@ var result =
 					"relay" : 6,
 					"bwa" : 6204367,
 					"bwc" : 4108415,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 6,
 						"e" : 3,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 4
 					},
@@ -27622,12 +27622,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1310720,
 					"bwc" : 946386,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27642,12 +27642,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1099720,
 					"bwc" : 194183,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27664,12 +27664,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 819200,
 			"bwc" : 657596,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27684,12 +27684,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 819200,
 					"bwc" : 657596,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27706,10 +27706,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2079,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27723,10 +27723,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2079,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27742,10 +27742,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 872,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -27758,10 +27758,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 872,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -27776,12 +27776,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1515520,
 			"bwc" : 1264245,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -27796,12 +27796,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1515520,
 					"bwc" : 1264245,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -27818,11 +27818,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 221184,
 			"bwc" : 7630,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -27835,11 +27835,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 221184,
 					"bwc" : 7630,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -27854,11 +27854,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 30772,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27872,11 +27872,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 30772,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27892,12 +27892,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 424080,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27912,12 +27912,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 424080,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27934,12 +27934,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 5222747,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27954,12 +27954,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 5222747,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -27976,13 +27976,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4694913,
 			"bwc" : 3577815,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -27998,13 +27998,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 4694913,
 					"bwc" : 3577815,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28022,11 +28022,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 49841,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28041,11 +28041,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 49841,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28062,13 +28062,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 9620993,
 			"bwc" : 8271896,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"g" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -28084,13 +28084,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 9620993,
 					"bwc" : 8271896,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"g" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -28108,12 +28108,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 380738,
 			"bwc" : 52562,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28127,12 +28127,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 380738,
 					"bwc" : 52562,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28148,12 +28148,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 376954,
 			"bwc" : 78279,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -28168,12 +28168,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 376954,
 					"bwc" : 78279,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -28190,12 +28190,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 237568,
 			"bwc" : 125185,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28211,12 +28211,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 237568,
 					"bwc" : 125185,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28234,13 +28234,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 677888,
 			"bwc" : 278041,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -28256,13 +28256,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 677888,
 					"bwc" : 278041,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -28280,11 +28280,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 47104,
 			"bwc" : 36873,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -28297,11 +28297,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 47104,
 					"bwc" : 36873,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -28316,11 +28316,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 76488,
 			"bwc" : 7319,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28334,11 +28334,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 76488,
 					"bwc" : 7319,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28354,11 +28354,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 3170,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28371,11 +28371,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 3170,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28390,11 +28390,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 665600,
 			"bwc" : 323484,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28409,11 +28409,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 665600,
 					"bwc" : 323484,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28430,11 +28430,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 11608,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28448,11 +28448,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 11608,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28468,10 +28468,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 56941,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28485,10 +28485,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 56941,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28504,11 +28504,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 2454,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -28521,11 +28521,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 2454,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -28540,10 +28540,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 188575,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -28556,10 +28556,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 188575,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -28574,10 +28574,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -28590,10 +28590,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -28608,11 +28608,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1374208,
 			"bwc" : 1142742,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -28625,11 +28625,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1374208,
 					"bwc" : 1142742,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -28644,11 +28644,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 58368,
 			"bwc" : 26118,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -28661,11 +28661,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 58368,
 					"bwc" : 26118,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -28680,12 +28680,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 921600,
 			"bwc" : 804304,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -28700,12 +28700,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 921600,
 					"bwc" : 804304,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -28722,10 +28722,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 69179,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28739,10 +28739,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 69179,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28758,11 +28758,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 393339,
 			"bwc" : 151377,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -28777,11 +28777,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 393339,
 					"bwc" : 151377,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -28798,11 +28798,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 15113,
 			"bwc" : 919,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -28815,11 +28815,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 15113,
 					"bwc" : 919,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -28834,12 +28834,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 512000,
 			"bwc" : 249286,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -28854,12 +28854,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 512000,
 					"bwc" : 249286,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -28876,12 +28876,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1358946,
 			"bwc" : 436381,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -28896,12 +28896,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1358946,
 					"bwc" : 436381,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -28918,12 +28918,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 13362930,
 			"bwc" : 12033991,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -28938,12 +28938,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 13362930,
 					"bwc" : 12033991,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -28960,10 +28960,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 53655,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -28976,10 +28976,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 53655,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -28994,11 +28994,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 235563,
 			"bwc" : 13321,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -29012,11 +29012,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 235563,
 					"bwc" : 13321,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -29032,10 +29032,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 63648,
 			"bwc" : 1200,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29048,10 +29048,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 63648,
 					"bwc" : 1200,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29066,11 +29066,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 121856,
 			"bwc" : 43689,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29083,11 +29083,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 121856,
 					"bwc" : 43689,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29102,11 +29102,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 93480,
 			"bwc" : 1050,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29119,11 +29119,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 93480,
 					"bwc" : 1050,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29138,12 +29138,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 4798066,
 			"bwc" : 1708201,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1,
 				"a" : 1
@@ -29159,12 +29159,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 4798066,
 					"bwc" : 1708201,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1,
 						"a" : 1
@@ -29182,11 +29182,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 240640,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29199,11 +29199,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 240640,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29218,12 +29218,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 425916,
 			"bwc" : 33297,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -29237,12 +29237,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 425916,
 					"bwc" : 33297,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -29258,11 +29258,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 198786,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29277,11 +29277,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 198786,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29298,11 +29298,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 135168,
 			"bwc" : 42389,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29316,11 +29316,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 135168,
 					"bwc" : 42389,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29336,12 +29336,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 672282,
 			"bwc" : 87517,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -29356,12 +29356,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 672282,
 					"bwc" : 87517,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -29378,11 +29378,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 467196,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29397,11 +29397,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 467196,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29418,11 +29418,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 10445,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29436,11 +29436,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 10445,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29456,13 +29456,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1112044,
 			"bwc" : 737122,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29478,13 +29478,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1112044,
 					"bwc" : 737122,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29502,10 +29502,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 132379,
 			"bwc" : 5369,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29518,10 +29518,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 132379,
 					"bwc" : 5369,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29536,12 +29536,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 1303304,
 			"bwc" : 185027,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4
 			},
 			"proProb" : {
@@ -29555,12 +29555,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1303304,
 					"bwc" : 185027,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4
 					},
 					"proProb" : {
@@ -29576,11 +29576,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 303668,
 			"bwc" : 80768,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29594,11 +29594,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 303668,
 					"bwc" : 80768,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29614,12 +29614,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 2797543,
 			"bwc" : 2394717,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -29634,12 +29634,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 2797543,
 					"bwc" : 2394717,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -29656,12 +29656,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 544768,
 			"bwc" : 247795,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -29676,12 +29676,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 544768,
 					"bwc" : 247795,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -29698,12 +29698,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 35696,
 			"bwc" : 1862,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -29715,12 +29715,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 35696,
 					"bwc" : 1862,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -29734,13 +29734,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4096000,
 			"bwc" : 3970656,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29756,13 +29756,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 4096000,
 					"bwc" : 3970656,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29780,11 +29780,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 804,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -29797,11 +29797,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 804,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -29816,11 +29816,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 101710,
 			"bwc" : 8927,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -29833,11 +29833,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 101710,
 					"bwc" : 8927,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -29852,12 +29852,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 819200,
 			"bwc" : 516295,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29871,12 +29871,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 819200,
 					"bwc" : 516295,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29892,12 +29892,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 294888,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -29912,12 +29912,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 294888,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -29934,11 +29934,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 55922,
 			"bwc" : 5111,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -29951,11 +29951,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 55922,
 					"bwc" : 5111,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -29970,13 +29970,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1744442,
 			"bwc" : 1644504,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -29992,13 +29992,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1744442,
 					"bwc" : 1644504,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -30016,10 +30016,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 3306,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -30032,10 +30032,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 3306,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -30050,10 +30050,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 33666,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30067,10 +30067,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 33666,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30086,11 +30086,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 1089,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -30103,11 +30103,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 1089,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -30122,11 +30122,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 604939,
 			"bwc" : 212677,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30141,11 +30141,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 604939,
 					"bwc" : 212677,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30162,10 +30162,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 174785,
 			"bwc" : 59251,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30179,10 +30179,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 174785,
 					"bwc" : 59251,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30198,10 +30198,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 36457,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30215,10 +30215,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 36457,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30234,13 +30234,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1929216,
 			"bwc" : 1009301,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 3
 			},
@@ -30256,13 +30256,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1929216,
 					"bwc" : 1009301,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -30280,10 +30280,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 27435,
 			"bwc" : 560,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -30296,10 +30296,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 27435,
 					"bwc" : 560,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -30314,11 +30314,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 386632,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -30331,11 +30331,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 386632,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -30350,12 +30350,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1058461,
 			"bwc" : 437275,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 5,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 6
 			},
@@ -30370,12 +30370,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1058461,
 					"bwc" : 437275,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 5,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 6
 					},
@@ -30392,11 +30392,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 79714,
 			"bwc" : 20035,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -30409,11 +30409,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 79714,
 					"bwc" : 20035,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -30428,12 +30428,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 2626538,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30447,12 +30447,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 2626538,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30468,11 +30468,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -30485,11 +30485,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -30504,11 +30504,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 419760,
 			"bwc" : 244739,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -30523,11 +30523,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 419760,
 					"bwc" : 244739,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -30544,13 +30544,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 4467712,
 			"bwc" : 3368899,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"d" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 4
 			},
@@ -30566,13 +30566,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 4467712,
 					"bwc" : 3368899,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 8,
 						"d" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 6,
 						"s" : 4
 					},
@@ -30590,10 +30590,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 12612,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30607,10 +30607,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 12612,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30626,11 +30626,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 3215,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -30643,11 +30643,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 3215,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -30662,12 +30662,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1067665,
 			"bwc" : 98929,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -30682,12 +30682,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1067665,
 					"bwc" : 98929,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -30704,12 +30704,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5120000,
 			"bwc" : 5050772,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30724,12 +30724,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5120000,
 					"bwc" : 5050772,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30746,10 +30746,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 3539,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -30762,10 +30762,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 3539,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -30780,12 +30780,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 5383092,
 			"bwc" : 2181447,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 3,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3,
 				"a" : 1
@@ -30801,12 +30801,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 5383092,
 					"bwc" : 2181447,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 3,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3,
 						"a" : 1
@@ -30824,12 +30824,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 307959,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30844,12 +30844,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 307959,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30866,11 +30866,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 963049,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -30885,11 +30885,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 963049,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -30906,13 +30906,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 55681154,
 			"bwc" : 39858120,
-			"proRole" : {
+			"role" : {
 				"m" : 32,
 				"e" : 7,
 				"g" : 17,
 				"d" : 20
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 28,
 				"f" : 26
 			},
@@ -30928,13 +30928,13 @@ var result =
 					"relay" : 24,
 					"bwa" : 40420182,
 					"bwc" : 29130382,
-					"proRole" : {
+					"role" : {
 						"m" : 24,
 						"e" : 7,
 						"g" : 13,
 						"d" : 14
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 22,
 						"f" : 18
 					},
@@ -30950,12 +30950,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 4423680,
 					"bwc" : 4279424,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -30970,11 +30970,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 3072000,
 					"bwc" : 2911775,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -30989,11 +30989,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1714328,
 					"bwc" : 532526,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31006,12 +31006,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 1538367,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31026,11 +31026,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 676389,
 					"bwc" : 189947,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31043,11 +31043,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2228847,
 					"bwc" : 1275699,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31063,10 +31063,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 25600,
 			"bwc" : 93,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -31079,10 +31079,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 25600,
 					"bwc" : 93,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -31097,11 +31097,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 71968,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31114,11 +31114,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 71968,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31133,13 +31133,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1761280,
 			"bwc" : 1298897,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 3,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 4,
 				"f" : 3
 			},
@@ -31155,13 +31155,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1761280,
 					"bwc" : 1298897,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 3,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4,
 						"f" : 3
 					},
@@ -31179,11 +31179,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 155877,
 			"bwc" : 6940,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31197,11 +31197,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 155877,
 					"bwc" : 6940,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31217,12 +31217,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 119500,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31237,12 +31237,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 119500,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31259,11 +31259,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 50570,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31277,11 +31277,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 50570,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31297,13 +31297,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2388536,
 			"bwc" : 696891,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31318,13 +31318,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2388536,
 					"bwc" : 696891,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31341,10 +31341,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 66560,
 			"bwc" : 4230,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31358,10 +31358,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 66560,
 					"bwc" : 4230,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31377,11 +31377,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 76841,
 			"bwc" : 20893,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -31395,11 +31395,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 76841,
 					"bwc" : 20893,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -31415,13 +31415,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1779304,
 			"bwc" : 736513,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"d" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -31437,13 +31437,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1779304,
 					"bwc" : 736513,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -31461,12 +31461,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 2989871,
 			"bwc" : 982394,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 4,
 				"f" : 3
 			},
@@ -31481,12 +31481,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 2989871,
 					"bwc" : 982394,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 4,
 						"f" : 3
 					},
@@ -31503,13 +31503,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 4531373,
 			"bwc" : 2397008,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -31525,13 +31525,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 4531373,
 					"bwc" : 2397008,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 3,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -31549,13 +31549,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 5887373,
 			"bwc" : 3823106,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31571,13 +31571,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5887373,
 					"bwc" : 3823106,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31595,12 +31595,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 188815,
 			"bwc" : 18182,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31613,12 +31613,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 188815,
 					"bwc" : 18182,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31633,11 +31633,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 179794,
 			"bwc" : 1477,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31650,11 +31650,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 179794,
 					"bwc" : 1477,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31669,11 +31669,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 225280,
 			"bwc" : 54819,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -31687,11 +31687,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 225280,
 					"bwc" : 54819,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -31707,11 +31707,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 136192,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31724,11 +31724,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 136192,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31743,11 +31743,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 50342,
 			"bwc" : 14489,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31760,11 +31760,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 50342,
 					"bwc" : 14489,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31779,13 +31779,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 450015,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31801,13 +31801,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 450015,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31825,11 +31825,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 62317,
 			"bwc" : 23368,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -31842,11 +31842,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 62317,
 					"bwc" : 23368,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -31861,12 +31861,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 323234,
 			"bwc" : 119740,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -31881,11 +31881,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 118434,
 					"bwc" : 16953,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -31900,12 +31900,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 204800,
 					"bwc" : 102787,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -31921,12 +31921,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 151695,
 			"bwc" : 32090,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -31939,12 +31939,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 151695,
 					"bwc" : 32090,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -31959,11 +31959,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 58582,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -31977,11 +31977,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 58582,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -31997,10 +31997,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 45000,
 			"bwc" : 371,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -32013,10 +32013,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 45000,
 					"bwc" : 371,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -32031,11 +32031,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 5934,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -32048,11 +32048,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 5934,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -32067,10 +32067,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 620446,
 			"bwc" : 92949,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -32083,10 +32083,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 620446,
 					"bwc" : 92949,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -32101,11 +32101,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 44314,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -32118,11 +32118,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 44314,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -32137,10 +32137,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 24576,
 			"bwc" : 548,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -32153,10 +32153,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 24576,
 					"bwc" : 548,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -32171,12 +32171,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 246733,
 			"bwc" : 13128,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -32189,12 +32189,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 246733,
 					"bwc" : 13128,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -32209,13 +32209,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 4643840,
 			"bwc" : 4448974,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -32231,13 +32231,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 4643840,
 					"bwc" : 4448974,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -32255,11 +32255,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 332800,
 			"bwc" : 52774,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32274,11 +32274,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 332800,
 					"bwc" : 52774,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32295,11 +32295,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 59843,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32313,11 +32313,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 59843,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32333,12 +32333,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1175309,
 			"bwc" : 539805,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -32353,12 +32353,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1175309,
 					"bwc" : 539805,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -32375,12 +32375,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 516402,
 			"bwc" : 55306,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32395,12 +32395,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 516402,
 					"bwc" : 55306,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32417,11 +32417,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 295166,
 			"bwc" : 5371,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -32434,11 +32434,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 295166,
 					"bwc" : 5371,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -32453,11 +32453,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 202,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -32470,11 +32470,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 202,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -32489,11 +32489,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 187946,
 			"bwc" : 6084,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -32507,11 +32507,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 187946,
 					"bwc" : 6084,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -32527,12 +32527,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 1020299,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32546,12 +32546,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 1020299,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32567,12 +32567,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 33339,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32586,12 +32586,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 33339,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32607,12 +32607,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 2394500,
 			"bwc" : 837496,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -32627,12 +32627,12 @@ var result =
 					"relay" : 3,
 					"bwa" : 1606049,
 					"bwc" : 712241,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 3,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -32647,12 +32647,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 788451,
 					"bwc" : 125255,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32669,12 +32669,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 401408,
 			"bwc" : 269180,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -32689,12 +32689,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 401408,
 					"bwc" : 269180,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -32711,12 +32711,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 188416,
 			"bwc" : 63641,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -32730,12 +32730,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 188416,
 					"bwc" : 63641,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -32751,11 +32751,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 33930,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -32768,11 +32768,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 33930,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -32787,11 +32787,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 26716,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32805,11 +32805,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 26716,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32825,12 +32825,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 27025916,
 			"bwc" : 16461406,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32845,12 +32845,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 27025916,
 					"bwc" : 16461406,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32867,13 +32867,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 5962713,
 			"bwc" : 3684449,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -32889,13 +32889,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5860313,
 					"bwc" : 3648824,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32911,11 +32911,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 35625,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32931,13 +32931,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 229760,
 			"bwc" : 32877,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32953,13 +32953,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 229760,
 					"bwc" : 32877,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -32977,11 +32977,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 819200,
 			"bwc" : 505022,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -32995,11 +32995,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 819200,
 					"bwc" : 505022,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33015,13 +33015,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 358400,
 			"bwc" : 170959,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -33037,13 +33037,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 358400,
 					"bwc" : 170959,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -33061,12 +33061,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 551285,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33081,12 +33081,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 551285,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33103,11 +33103,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 614400,
 			"bwc" : 613142,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33122,11 +33122,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 614400,
 					"bwc" : 613142,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33143,11 +33143,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 19816,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33161,11 +33161,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 19816,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33181,13 +33181,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 561152,
 			"bwc" : 404018,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 1,
 				"d" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 4
 			},
@@ -33203,12 +33203,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 233472,
 					"bwc" : 126714,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -33223,11 +33223,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 276595,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33242,10 +33242,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 709,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -33260,13 +33260,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 8892416,
 			"bwc" : 7581462,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 6,
 				"g" : 4,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -33282,13 +33282,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 8892416,
 					"bwc" : 7581462,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 6,
 						"g" : 4,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -33306,12 +33306,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 520192,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -33324,12 +33324,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 520192,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -33344,12 +33344,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 2114463,
 			"bwc" : 1565096,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -33364,12 +33364,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 2114463,
 					"bwc" : 1565096,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -33386,13 +33386,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 2560000,
 			"bwc" : 2551930,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33408,13 +33408,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 2560000,
 					"bwc" : 2551930,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33432,10 +33432,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 31702,
 			"bwc" : 111,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -33448,10 +33448,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 31702,
 					"bwc" : 111,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -33466,12 +33466,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3426819,
 			"bwc" : 2784629,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33486,12 +33486,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3426819,
 					"bwc" : 2784629,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33508,10 +33508,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 38552,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33525,10 +33525,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 38552,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33544,12 +33544,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 819200,
 			"bwc" : 736225,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -33564,12 +33564,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 819200,
 					"bwc" : 736225,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -33586,12 +33586,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 122880,
 			"bwc" : 22609,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33605,12 +33605,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 122880,
 					"bwc" : 22609,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33626,11 +33626,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 122880,
 			"bwc" : 55843,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -33644,11 +33644,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 122880,
 					"bwc" : 55843,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -33664,11 +33664,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 69632,
 			"bwc" : 120,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -33681,11 +33681,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 69632,
 					"bwc" : 120,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -33700,12 +33700,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 281600,
 			"bwc" : 140800,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33721,12 +33721,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 281600,
 					"bwc" : 140800,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33744,11 +33744,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 76309,
 			"bwc" : 3432,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -33761,11 +33761,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 76309,
 					"bwc" : 3432,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -33780,11 +33780,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 204800,
 			"bwc" : 77506,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -33798,11 +33798,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 204800,
 					"bwc" : 77506,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -33818,11 +33818,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 131072,
 			"bwc" : 27249,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33836,11 +33836,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 131072,
 					"bwc" : 27249,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33856,12 +33856,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 757760,
 			"bwc" : 576201,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -33876,12 +33876,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 757760,
 					"bwc" : 576201,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -33898,11 +33898,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 561888,
 			"bwc" : 277721,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -33916,11 +33916,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 561888,
 					"bwc" : 277721,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -33936,12 +33936,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 21168337,
 			"bwc" : 14090590,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -33956,12 +33956,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 21168337,
 					"bwc" : 14090590,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -33978,13 +33978,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 9912583,
 			"bwc" : 7097249,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -34000,13 +34000,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 9912583,
 					"bwc" : 7097249,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -34024,12 +34024,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5120000,
 			"bwc" : 5042505,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34044,12 +34044,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5120000,
 					"bwc" : 5042505,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34066,10 +34066,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 50671,
 			"bwc" : 3921,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34083,10 +34083,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 50671,
 					"bwc" : 3921,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34102,11 +34102,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 43320,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34119,11 +34119,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 43320,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34138,10 +34138,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 23743,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34155,10 +34155,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 23743,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34174,11 +34174,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 2854613,
 			"bwc" : 27610,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34191,11 +34191,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2854613,
 					"bwc" : 27610,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34210,13 +34210,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 627258,
 			"bwc" : 119783,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34232,13 +34232,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 627258,
 					"bwc" : 119783,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34256,11 +34256,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 915632,
 			"bwc" : 148134,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -34274,11 +34274,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 915632,
 					"bwc" : 148134,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -34294,12 +34294,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3651563,
 			"bwc" : 2114889,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34314,12 +34314,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3651563,
 					"bwc" : 2114889,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34336,10 +34336,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 4389,
 			"bwc" : 124,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -34352,10 +34352,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 4389,
 					"bwc" : 124,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -34370,10 +34370,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 50000,
 			"bwc" : 1287,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34387,10 +34387,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 50000,
 					"bwc" : 1287,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34406,12 +34406,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 353403,
 			"bwc" : 153175,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34427,12 +34427,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 353403,
 					"bwc" : 153175,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34450,12 +34450,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1280000,
 			"bwc" : 1218167,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34470,12 +34470,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1280000,
 					"bwc" : 1218167,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34492,12 +34492,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 16577,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34510,12 +34510,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 16577,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34530,11 +34530,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 81920,
 			"bwc" : 27062,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34547,11 +34547,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 81920,
 					"bwc" : 27062,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34566,11 +34566,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3617792,
 			"bwc" : 2299451,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34583,11 +34583,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3617792,
 					"bwc" : 2299451,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34602,10 +34602,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 75298,
 			"bwc" : 19747,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34619,10 +34619,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 75298,
 					"bwc" : 19747,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34638,13 +34638,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 41963244,
 			"bwc" : 29543156,
-			"proRole" : {
+			"role" : {
 				"g" : 10,
 				"m" : 16,
 				"d" : 10,
 				"e" : 7
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 13,
 				"s" : 15
 			},
@@ -34660,13 +34660,13 @@ var result =
 					"relay" : 3,
 					"bwa" : 25208065,
 					"bwc" : 18189027,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 3,
 						"d" : 3,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 3
 					},
@@ -34682,13 +34682,13 @@ var result =
 					"relay" : 13,
 					"bwa" : 16755179,
 					"bwc" : 11354129,
-					"proRole" : {
+					"role" : {
 						"g" : 7,
 						"m" : 13,
 						"e" : 6,
 						"d" : 7
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 10,
 						"s" : 12
 					},
@@ -34706,11 +34706,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 1044435,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34723,11 +34723,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 1044435,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34742,12 +34742,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 406924,
 			"bwc" : 54577,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34760,12 +34760,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 406924,
 					"bwc" : 54577,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34780,11 +34780,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 30007,
 			"bwc" : 165,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -34797,11 +34797,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 30007,
 					"bwc" : 165,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -34816,10 +34816,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 649,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -34831,10 +34831,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 649,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -34848,12 +34848,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 491520,
 			"bwc" : 144139,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34869,12 +34869,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 491520,
 					"bwc" : 144139,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34892,13 +34892,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 7053898,
 			"bwc" : 4869160,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 3
 			},
@@ -34914,12 +34914,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1103719,
 					"bwc" : 1041905,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -34934,12 +34934,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 5950179,
 					"bwc" : 3827255,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -34957,11 +34957,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 5252194,
 			"bwc" : 3264711,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -34976,11 +34976,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 5252194,
 					"bwc" : 3264711,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -34997,11 +34997,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 11960,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35016,11 +35016,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 11960,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35037,10 +35037,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1140736,
 			"bwc" : 998852,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35053,10 +35053,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1140736,
 					"bwc" : 998852,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35071,13 +35071,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 20541387,
 			"bwc" : 14901401,
-			"proRole" : {
+			"role" : {
 				"m" : 16,
 				"d" : 13,
 				"g" : 6,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 10
 			},
@@ -35093,13 +35093,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 20541387,
 					"bwc" : 14901401,
-					"proRole" : {
+					"role" : {
 						"m" : 16,
 						"d" : 13,
 						"g" : 6,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 10
 					},
@@ -35117,12 +35117,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 7942691,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35136,12 +35136,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 7942691,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35157,12 +35157,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 118885,
 			"bwc" : 23539,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -35175,12 +35175,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 118885,
 					"bwc" : 23539,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -35195,11 +35195,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1808513,
 			"bwc" : 837661,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35214,11 +35214,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1808513,
 					"bwc" : 837661,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35235,10 +35235,10 @@ var result =
 			"relay" : 4,
 			"bwa" : 1812480,
 			"bwc" : 1269263,
-			"proRole" : {
+			"role" : {
 				"m" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -35252,10 +35252,10 @@ var result =
 					"relay" : 4,
 					"bwa" : 1812480,
 					"bwc" : 1269263,
-					"proRole" : {
+					"role" : {
 						"m" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -35271,11 +35271,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 61609,
 			"bwc" : 20561,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35289,11 +35289,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 61609,
 					"bwc" : 20561,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35309,11 +35309,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 1634304,
 			"bwc" : 610628,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -35326,11 +35326,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 1634304,
 					"bwc" : 610628,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -35345,13 +35345,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 805304,
 			"bwc" : 80329,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -35366,13 +35366,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 805304,
 					"bwc" : 80329,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -35389,12 +35389,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1021435,
 			"bwc" : 492129,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 5,
 				"s" : 3
 			},
@@ -35409,12 +35409,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1021435,
 					"bwc" : 492129,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 3,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 5,
 						"s" : 3
 					},
@@ -35431,13 +35431,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35453,13 +35453,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35477,11 +35477,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 4960,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35494,11 +35494,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 4960,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35513,12 +35513,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 2929664,
 			"bwc" : 2609332,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -35533,12 +35533,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 2929664,
 					"bwc" : 2609332,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -35555,11 +35555,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 13062,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35573,11 +35573,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 13062,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35593,11 +35593,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 50975,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35611,11 +35611,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 50975,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35631,13 +35631,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 358400,
 			"bwc" : 172567,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -35653,13 +35653,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 358400,
 					"bwc" : 172567,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -35677,11 +35677,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 14628,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35694,11 +35694,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 14628,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35713,11 +35713,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 110881,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35731,11 +35731,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 110881,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35751,11 +35751,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 655360,
 			"bwc" : 239796,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35768,11 +35768,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 655360,
 					"bwc" : 239796,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35787,10 +35787,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 88553,
 			"bwc" : 1418,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35803,10 +35803,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 88553,
 					"bwc" : 1418,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35821,10 +35821,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 11972,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35838,10 +35838,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 11972,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35857,11 +35857,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1667627,
 			"bwc" : 496958,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -35874,11 +35874,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1667627,
 					"bwc" : 496958,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -35893,13 +35893,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1082429,
 			"bwc" : 281472,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -35915,13 +35915,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1082429,
 					"bwc" : 281472,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -35939,13 +35939,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 1076657,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -35961,13 +35961,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 1076657,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -35985,10 +35985,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 103,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -36001,10 +36001,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 103,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -36019,13 +36019,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 2063826,
 			"bwc" : 349870,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 1,
 				"e" : 3,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -36041,13 +36041,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 2063826,
 					"bwc" : 349870,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 1,
 						"e" : 3,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -36065,10 +36065,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 58368,
 			"bwc" : 492,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36081,10 +36081,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 58368,
 					"bwc" : 492,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36099,13 +36099,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 336144,
 			"bwc" : 26317,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36121,13 +36121,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 336144,
 					"bwc" : 26317,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36145,11 +36145,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 1353728,
 			"bwc" : 927607,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -36164,11 +36164,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 1353728,
 					"bwc" : 927607,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -36185,11 +36185,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36202,11 +36202,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36221,13 +36221,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2764800,
 			"bwc" : 2281274,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -36243,13 +36243,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2764800,
 					"bwc" : 2281274,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -36267,11 +36267,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 356626,
 			"bwc" : 80007,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36284,11 +36284,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 356626,
 					"bwc" : 80007,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36303,12 +36303,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 215040,
 			"bwc" : 68262,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36323,12 +36323,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 215040,
 					"bwc" : 68262,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36345,11 +36345,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 56320,
 			"bwc" : 36,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36362,11 +36362,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 56320,
 					"bwc" : 36,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36381,13 +36381,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 378880,
 			"bwc" : 303735,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -36403,13 +36403,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 378880,
 					"bwc" : 303735,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -36427,12 +36427,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 1302502,
 			"bwc" : 179599,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 5,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 6
 			},
@@ -36447,12 +36447,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 1302502,
 					"bwc" : 179599,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 5,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 6
 					},
@@ -36469,12 +36469,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 4121610,
 			"bwc" : 2939691,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36489,12 +36489,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 4121610,
 					"bwc" : 2939691,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36511,12 +36511,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 2042976,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36531,12 +36531,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 2042976,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36553,11 +36553,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 28677,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36571,11 +36571,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 28677,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36591,12 +36591,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 401467,
 			"bwc" : 175555,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -36611,12 +36611,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 401467,
 					"bwc" : 175555,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -36633,13 +36633,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 14813806,
 			"bwc" : 10848566,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 2,
 				"g" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -36655,13 +36655,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 14813806,
 					"bwc" : 10848566,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 2,
 						"g" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -36679,11 +36679,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 1255,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36696,11 +36696,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 1255,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36715,13 +36715,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 409600,
 			"bwc" : 227750,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -36737,13 +36737,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 409600,
 					"bwc" : 227750,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -36761,12 +36761,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1695486,
 			"bwc" : 1117609,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36781,12 +36781,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1695486,
 					"bwc" : 1117609,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36803,13 +36803,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 1993887,
 			"bwc" : 699647,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 1,
 				"g" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 7
 			},
@@ -36825,13 +36825,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 1993887,
 					"bwc" : 699647,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 1,
 						"g" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 7
 					},
@@ -36849,12 +36849,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 301199,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36869,12 +36869,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 301199,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36891,12 +36891,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 150804,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -36911,12 +36911,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 150804,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -36933,11 +36933,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 102400,
 			"bwc" : 5128,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -36950,11 +36950,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 102400,
 					"bwc" : 5128,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -36969,11 +36969,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 1646737,
 			"bwc" : 258514,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -36987,11 +36987,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 1646737,
 					"bwc" : 258514,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -37007,11 +37007,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 284554,
 			"bwc" : 90098,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -37025,11 +37025,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 284554,
 					"bwc" : 90098,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -37045,11 +37045,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 2723940,
 			"bwc" : 1565352,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37064,11 +37064,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2723940,
 					"bwc" : 1565352,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37085,12 +37085,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 235344,
 			"bwc" : 48526,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -37105,12 +37105,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 235344,
 					"bwc" : 48526,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -37127,12 +37127,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 49540,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37146,12 +37146,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 49540,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37167,11 +37167,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 53248,
 			"bwc" : 11708,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37184,11 +37184,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 53248,
 					"bwc" : 11708,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37203,11 +37203,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 133120,
 			"bwc" : 22509,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -37221,11 +37221,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 133120,
 					"bwc" : 22509,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -37241,12 +37241,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 127749,
 			"bwc" : 8615,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37260,12 +37260,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 127749,
 					"bwc" : 8615,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37281,12 +37281,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1901167,
 			"bwc" : 473899,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37301,12 +37301,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1901167,
 					"bwc" : 473899,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37323,13 +37323,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2199552,
 			"bwc" : 596270,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -37345,13 +37345,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2199552,
 					"bwc" : 596270,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -37369,13 +37369,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1405459,
 			"bwc" : 983577,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37391,13 +37391,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1405459,
 					"bwc" : 983577,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37415,12 +37415,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 12900,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37433,12 +37433,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 12900,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37453,11 +37453,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 95322,
 			"bwc" : 50022,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37470,11 +37470,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 95322,
 					"bwc" : 50022,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37489,11 +37489,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 103542,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37506,11 +37506,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 103542,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37525,12 +37525,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 296960,
 			"bwc" : 32083,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 4,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 4
 			},
@@ -37544,12 +37544,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 296960,
 					"bwc" : 32083,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 4,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 4
 					},
@@ -37565,11 +37565,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 8247,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37582,11 +37582,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 8247,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37601,13 +37601,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 4054525,
 			"bwc" : 3694605,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -37623,13 +37623,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 4054525,
 					"bwc" : 3694605,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -37647,12 +37647,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 141843,
 			"bwc" : 22338,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37665,12 +37665,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 141843,
 					"bwc" : 22338,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37685,12 +37685,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 4864070,
 			"bwc" : 3750066,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37705,12 +37705,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 4864070,
 					"bwc" : 3750066,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37727,10 +37727,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 153600,
 			"bwc" : 18202,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -37744,10 +37744,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 153600,
 					"bwc" : 18202,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -37763,10 +37763,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 195280,
 			"bwc" : 172696,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37780,10 +37780,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 195280,
 					"bwc" : 172696,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37799,11 +37799,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 1225,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37817,11 +37817,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 1225,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37837,11 +37837,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 88205,
 			"bwc" : 12930,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37855,11 +37855,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 88205,
 					"bwc" : 12930,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37875,10 +37875,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 92160,
 			"bwc" : 32974,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -37892,10 +37892,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 92160,
 					"bwc" : 32974,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -37911,12 +37911,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 126976,
 			"bwc" : 141867,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37929,12 +37929,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 126976,
 					"bwc" : 141867,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37949,12 +37949,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 197064,
 			"bwc" : 58795,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -37967,12 +37967,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 197064,
 					"bwc" : 58795,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -37987,11 +37987,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2866,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38005,11 +38005,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2866,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38025,11 +38025,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 202752,
 			"bwc" : 29921,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38042,11 +38042,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 202752,
 					"bwc" : 29921,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38061,12 +38061,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 122880,
 			"bwc" : 43159,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -38081,12 +38081,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 122880,
 					"bwc" : 43159,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -38103,12 +38103,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 34238,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38123,12 +38123,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 34238,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38145,11 +38145,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 536683,
 			"bwc" : 34552,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38162,11 +38162,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 536683,
 					"bwc" : 34552,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38181,10 +38181,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 332,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -38197,10 +38197,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 332,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -38215,11 +38215,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 104989,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38233,11 +38233,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 104989,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38253,11 +38253,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 26012,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38271,11 +38271,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 26012,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38291,12 +38291,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 356352,
 			"bwc" : 140128,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -38311,12 +38311,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 356352,
 					"bwc" : 140128,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -38333,13 +38333,13 @@ var result =
 			"relay" : 32,
 			"bwa" : 43740067,
 			"bwc" : 32374201,
-			"proRole" : {
+			"role" : {
 				"g" : 22,
 				"m" : 32,
 				"d" : 16,
 				"e" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 31,
 				"s" : 29
 			},
@@ -38355,13 +38355,13 @@ var result =
 					"relay" : 32,
 					"bwa" : 43740067,
 					"bwc" : 32374201,
-					"proRole" : {
+					"role" : {
 						"g" : 22,
 						"m" : 32,
 						"d" : 16,
 						"e" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 31,
 						"s" : 29
 					},
@@ -38379,12 +38379,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 823433,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38399,12 +38399,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 823433,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38421,11 +38421,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 44653,
 			"bwc" : 1012,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38439,11 +38439,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 44653,
 					"bwc" : 1012,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38459,11 +38459,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 140254,
 			"bwc" : 19459,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38476,11 +38476,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 140254,
 					"bwc" : 19459,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38495,11 +38495,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 149933,
 			"bwc" : 20367,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38513,11 +38513,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 149933,
 					"bwc" : 20367,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38533,11 +38533,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 593792,
 			"bwc" : 92104,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38550,11 +38550,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 593792,
 					"bwc" : 92104,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38569,12 +38569,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1632644,
 			"bwc" : 1128892,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -38589,12 +38589,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1632644,
 					"bwc" : 1128892,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -38611,10 +38611,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 25600,
 			"bwc" : 133,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -38627,10 +38627,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 25600,
 					"bwc" : 133,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -38645,10 +38645,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1219584,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38661,10 +38661,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1219584,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38679,10 +38679,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 123,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -38695,10 +38695,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 123,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -38713,11 +38713,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 819200,
 			"bwc" : 66959,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -38731,11 +38731,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 819200,
 					"bwc" : 66959,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -38751,11 +38751,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 943063,
 			"bwc" : 827229,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -38769,11 +38769,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 943063,
 					"bwc" : 827229,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -38789,12 +38789,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3513228,
 			"bwc" : 1458033,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38808,12 +38808,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3513228,
 					"bwc" : 1458033,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38829,11 +38829,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 166266,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38847,11 +38847,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 166266,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38867,13 +38867,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1381781,
 			"bwc" : 1115963,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38889,13 +38889,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1381781,
 					"bwc" : 1115963,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38913,10 +38913,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 63488,
 			"bwc" : 3143,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -38929,10 +38929,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 63488,
 					"bwc" : 3143,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -38947,13 +38947,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 109980,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -38969,13 +38969,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 109980,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -38993,13 +38993,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 15406716,
 			"bwc" : 12947137,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39015,13 +39015,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 15406716,
 					"bwc" : 12947137,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39039,11 +39039,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 655360,
 			"bwc" : 161333,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39058,11 +39058,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 655360,
 					"bwc" : 161333,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39079,12 +39079,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 9225181,
 			"bwc" : 7020858,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39099,12 +39099,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 9225181,
 					"bwc" : 7020858,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39121,10 +39121,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 23265,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39138,10 +39138,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 23265,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39157,10 +39157,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 39,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -39173,10 +39173,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 39,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -39191,10 +39191,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 5181,
 			"bwc" : 72,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -39207,10 +39207,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 5181,
 					"bwc" : 72,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -39225,10 +39225,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 49,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -39241,10 +39241,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 49,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -39259,11 +39259,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 484813,
 			"bwc" : 106875,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2
 			},
 			"proProb" : {
@@ -39276,11 +39276,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 484813,
 					"bwc" : 106875,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2
 					},
 					"proProb" : {
@@ -39295,12 +39295,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 786432,
 			"bwc" : 630707,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39315,12 +39315,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 786432,
 					"bwc" : 630707,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39337,11 +39337,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196169,
 			"bwc" : 91748,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39354,11 +39354,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196169,
 					"bwc" : 91748,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39373,12 +39373,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 83113,
 			"bwc" : 13845,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39392,12 +39392,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 83113,
 					"bwc" : 13845,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39413,13 +39413,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 7903767,
 			"bwc" : 5897254,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 4,
 				"d" : 4,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -39435,13 +39435,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 7903767,
 					"bwc" : 5897254,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 4,
 						"d" : 4,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -39459,12 +39459,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 9779371,
 			"bwc" : 8075098,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -39479,12 +39479,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 9779371,
 					"bwc" : 8075098,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -39501,12 +39501,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1059485,
 			"bwc" : 253678,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39521,12 +39521,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1059485,
 					"bwc" : 253678,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39543,10 +39543,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 979492,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39559,10 +39559,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 979492,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39577,10 +39577,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 171009,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39593,10 +39593,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 171009,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39611,11 +39611,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 61344,
 			"bwc" : 1134,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39628,11 +39628,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 61344,
 					"bwc" : 1134,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39647,11 +39647,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 84191,
 			"bwc" : 23582,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39665,11 +39665,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 84191,
 					"bwc" : 23582,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39685,11 +39685,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 11719,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39703,11 +39703,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 11719,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39723,10 +39723,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 7815,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39739,10 +39739,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 7815,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39757,12 +39757,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 840606,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39777,12 +39777,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 840606,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39799,11 +39799,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 100599,
 			"bwc" : 33228,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -39816,11 +39816,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 100599,
 					"bwc" : 33228,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -39835,11 +39835,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1290240,
 			"bwc" : 1193979,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39853,11 +39853,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1290240,
 					"bwc" : 1193979,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39873,10 +39873,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 7168,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -39889,10 +39889,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 7168,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -39907,11 +39907,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 194560,
 			"bwc" : 16324,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -39925,11 +39925,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 194560,
 					"bwc" : 16324,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -39945,13 +39945,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 917504,
 			"bwc" : 789230,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -39967,13 +39967,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 917504,
 					"bwc" : 789230,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -39991,12 +39991,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 181990,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40011,12 +40011,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 181990,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40033,11 +40033,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 537715,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40052,11 +40052,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 537715,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40073,11 +40073,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 28213,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40091,11 +40091,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 28213,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40111,12 +40111,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 8115375,
 			"bwc" : 6490109,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40131,12 +40131,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 8115375,
 					"bwc" : 6490109,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40153,12 +40153,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 612352,
 			"bwc" : 210356,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -40171,12 +40171,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 612352,
 					"bwc" : 210356,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -40191,13 +40191,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4336654,
 			"bwc" : 1498542,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40213,13 +40213,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 4336654,
 					"bwc" : 1498542,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40237,11 +40237,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 35540,
 			"bwc" : 6758,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -40254,11 +40254,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 35540,
 					"bwc" : 6758,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -40273,11 +40273,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 62121,
 			"bwc" : 2070,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -40290,11 +40290,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 62121,
 					"bwc" : 2070,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -40309,11 +40309,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 128000,
 			"bwc" : 36577,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -40326,11 +40326,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 128000,
 					"bwc" : 36577,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -40345,12 +40345,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 946264,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40365,12 +40365,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 946264,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40387,11 +40387,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 246975,
 			"bwc" : 34901,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 2
 			},
@@ -40405,11 +40405,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 246975,
 					"bwc" : 34901,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -40425,11 +40425,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 100912,
 			"bwc" : 6537,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40443,11 +40443,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 100912,
 					"bwc" : 6537,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40463,11 +40463,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 26156,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -40480,11 +40480,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 26156,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -40499,11 +40499,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 135168,
 			"bwc" : 12257,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40517,11 +40517,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 135168,
 					"bwc" : 12257,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40537,11 +40537,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 23904,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40555,11 +40555,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 23904,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40575,13 +40575,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 937099,
 			"bwc" : 363919,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 5,
 				"e" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 3
 			},
@@ -40597,13 +40597,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 937099,
 					"bwc" : 363919,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 5,
 						"e" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 3
 					},
@@ -40621,12 +40621,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 3712952,
 			"bwc" : 2283376,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40641,12 +40641,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 3712952,
 					"bwc" : 2283376,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40663,11 +40663,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 10506240,
 			"bwc" : 695,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -40682,11 +40682,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 10506240,
 					"bwc" : 695,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -40703,10 +40703,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 153600,
 			"bwc" : 21446,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -40720,10 +40720,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 153600,
 					"bwc" : 21446,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -40739,10 +40739,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 91136,
 			"bwc" : 17677,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40756,10 +40756,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 91136,
 					"bwc" : 17677,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40775,11 +40775,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 161792,
 			"bwc" : 18692,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -40793,11 +40793,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 161792,
 					"bwc" : 18692,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -40813,11 +40813,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 81920,
 			"bwc" : 29793,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40831,11 +40831,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 81920,
 					"bwc" : 29793,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40851,11 +40851,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 303369,
 			"bwc" : 76242,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -40868,11 +40868,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 303369,
 					"bwc" : 76242,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -40887,11 +40887,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 921600,
 			"bwc" : 665037,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40906,11 +40906,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 921600,
 					"bwc" : 665037,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40927,13 +40927,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1112922,
 			"bwc" : 825634,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40949,13 +40949,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1112922,
 					"bwc" : 825634,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -40973,11 +40973,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 41955,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -40991,11 +40991,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 41955,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41011,11 +41011,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 10150,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -41028,11 +41028,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 10150,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -41047,12 +41047,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1843200,
 			"bwc" : 1836775,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41067,12 +41067,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1843200,
 					"bwc" : 1836775,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41089,13 +41089,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 22485303,
 			"bwc" : 16906080,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -41111,13 +41111,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 22485303,
 					"bwc" : 16906080,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -41135,11 +41135,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 73426,
 			"bwc" : 4880,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41153,11 +41153,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 73426,
 					"bwc" : 4880,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41173,12 +41173,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 10991674,
 			"bwc" : 7806593,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41193,12 +41193,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 10991674,
 					"bwc" : 7806593,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41215,12 +41215,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 2081629,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41235,12 +41235,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 2081629,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41257,10 +41257,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 50341,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41274,10 +41274,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 50341,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41293,11 +41293,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 28264,
 			"bwc" : 199,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -41310,11 +41310,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 28264,
 					"bwc" : 199,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -41329,13 +41329,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 12388351,
 			"bwc" : 10149555,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41351,13 +41351,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 12388351,
 					"bwc" : 10149555,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41375,11 +41375,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 24898980,
 			"bwc" : 5322622,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -41394,11 +41394,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 24898980,
 					"bwc" : 5322622,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -41415,11 +41415,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 358400,
 			"bwc" : 128499,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -41434,11 +41434,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 358400,
 					"bwc" : 128499,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -41455,12 +41455,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 639708,
 			"bwc" : 433864,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -41475,12 +41475,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 639708,
 					"bwc" : 433864,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -41497,11 +41497,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 230400,
 			"bwc" : 81626,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -41515,11 +41515,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 230400,
 					"bwc" : 81626,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -41535,12 +41535,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 200704,
 			"bwc" : 101265,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -41555,12 +41555,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 200704,
 					"bwc" : 101265,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -41577,10 +41577,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 168,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -41593,10 +41593,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 168,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -41611,12 +41611,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 9312,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41631,12 +41631,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 9312,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41653,11 +41653,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1552357,
 			"bwc" : 614031,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41671,11 +41671,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1552357,
 					"bwc" : 614031,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41691,11 +41691,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 39023,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -41708,11 +41708,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 39023,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -41727,10 +41727,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 9880,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -41743,10 +41743,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 9880,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -41761,12 +41761,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 175407,
 			"bwc" : 20611,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -41781,12 +41781,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 175407,
 					"bwc" : 20611,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -41803,11 +41803,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 54774,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41821,11 +41821,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 54774,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41841,12 +41841,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 957863,
 			"bwc" : 503748,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -41859,12 +41859,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 957863,
 					"bwc" : 503748,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -41879,10 +41879,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2891,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41896,10 +41896,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2891,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41915,11 +41915,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3584000,
 			"bwc" : 3339799,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -41934,11 +41934,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3584000,
 					"bwc" : 3339799,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -41955,12 +41955,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 5457920,
 			"bwc" : 4005003,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 3
 			},
@@ -41975,12 +41975,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 5457920,
 					"bwc" : 4005003,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 3
 					},
@@ -41997,10 +41997,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 882048,
 			"bwc" : 262982,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42013,10 +42013,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 882048,
 					"bwc" : 262982,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42031,11 +42031,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1624073,
 			"bwc" : 300627,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42048,11 +42048,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1624073,
 					"bwc" : 300627,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42067,13 +42067,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 738456,
 			"bwc" : 379289,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42089,13 +42089,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 738456,
 					"bwc" : 379289,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42113,11 +42113,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 646407,
 			"bwc" : 177250,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -42131,11 +42131,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 646407,
 					"bwc" : 177250,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -42151,12 +42151,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1643554,
 			"bwc" : 464040,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42169,12 +42169,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1643554,
 					"bwc" : 464040,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42189,11 +42189,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 185483,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42208,11 +42208,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 185483,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42229,11 +42229,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 58354,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42247,11 +42247,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 58354,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42267,10 +42267,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 9409,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42284,10 +42284,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 9409,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42303,11 +42303,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 102171,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42320,11 +42320,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 102171,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42339,12 +42339,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 191817,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42359,12 +42359,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 191817,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42381,11 +42381,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 82545,
 			"bwc" : 10233,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42398,11 +42398,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 82545,
 					"bwc" : 10233,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42417,13 +42417,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 647236,
 			"bwc" : 265887,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42439,13 +42439,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 647236,
 					"bwc" : 265887,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42463,11 +42463,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3327125,
 			"bwc" : 1587032,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42482,11 +42482,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3327125,
 					"bwc" : 1587032,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42503,11 +42503,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 11502,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42520,11 +42520,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 11502,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42539,13 +42539,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 3640354,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42561,13 +42561,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 3640354,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42585,12 +42585,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 11503481,
 			"bwc" : 9198689,
-			"proRole" : {
+			"role" : {
 				"g" : 3,
 				"m" : 4,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -42605,12 +42605,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 9437184,
 					"bwc" : 7232757,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -42625,12 +42625,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 2066297,
 					"bwc" : 1965932,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -42647,11 +42647,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 31994,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42664,11 +42664,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 31994,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42683,10 +42683,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 406528,
 			"bwc" : 47097,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42699,10 +42699,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 406528,
 					"bwc" : 47097,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42717,11 +42717,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 148480,
 			"bwc" : 13965,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -42734,11 +42734,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 148480,
 					"bwc" : 13965,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -42753,11 +42753,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 93099,
 			"bwc" : 1842,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42771,11 +42771,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 93099,
 					"bwc" : 1842,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42791,11 +42791,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51540,
 			"bwc" : 1050,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42809,11 +42809,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51540,
 					"bwc" : 1050,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42829,12 +42829,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 279305,
 			"bwc" : 46949,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -42849,12 +42849,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 279305,
 					"bwc" : 46949,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -42871,11 +42871,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 863630,
 			"bwc" : 548317,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -42889,11 +42889,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 863630,
 					"bwc" : 548317,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -42909,11 +42909,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 128000,
 			"bwc" : 47288,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42927,11 +42927,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 128000,
 					"bwc" : 47288,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42947,12 +42947,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 1042155,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -42966,12 +42966,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 1042155,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -42987,10 +42987,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 4426,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43004,10 +43004,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 4426,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43023,11 +43023,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 59944,
 			"bwc" : 445,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43040,11 +43040,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 59944,
 					"bwc" : 445,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43059,11 +43059,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 59681,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43077,11 +43077,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 59681,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43097,12 +43097,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 343040,
 			"bwc" : 196469,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -43117,12 +43117,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 343040,
 					"bwc" : 196469,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -43139,12 +43139,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 456704,
 			"bwc" : 186374,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 4
 			},
@@ -43159,12 +43159,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 456704,
 					"bwc" : 186374,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 4
 					},
@@ -43181,12 +43181,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 225280,
 			"bwc" : 63221,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43201,12 +43201,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 225280,
 					"bwc" : 63221,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43223,11 +43223,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 167936,
 			"bwc" : 14381,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -43241,11 +43241,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 167936,
 					"bwc" : 14381,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -43261,11 +43261,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 987648,
 			"bwc" : 144926,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43279,11 +43279,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 987648,
 					"bwc" : 144926,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43299,10 +43299,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 239616,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43316,10 +43316,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 239616,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43335,11 +43335,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 753970,
 			"bwc" : 556927,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -43353,11 +43353,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 753970,
 					"bwc" : 556927,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -43373,10 +43373,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 9381768,
 			"bwc" : 6364892,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43390,10 +43390,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 9381768,
 					"bwc" : 6364892,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43409,10 +43409,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 283270,
 			"bwc" : 112106,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43425,10 +43425,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 283270,
 					"bwc" : 112106,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43443,11 +43443,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 71680,
 			"bwc" : 24976,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43460,11 +43460,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 71680,
 					"bwc" : 24976,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43479,11 +43479,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 8192000,
 			"bwc" : 8153720,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43498,11 +43498,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 8192000,
 					"bwc" : 8153720,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43519,12 +43519,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 735483,
 			"bwc" : 64509,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43539,12 +43539,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 735483,
 					"bwc" : 64509,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43561,11 +43561,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 42603,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43578,11 +43578,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 42603,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43597,10 +43597,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 36907,
 			"bwc" : 190,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -43613,10 +43613,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 36907,
 					"bwc" : 190,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -43631,13 +43631,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 2033607,
 			"bwc" : 740343,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 8,
 				"d" : 5,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 6,
 				"s" : 3
 			},
@@ -43653,12 +43653,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 1318787,
 					"bwc" : 285807,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 3
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 1
 					},
@@ -43673,12 +43673,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 10843,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43692,10 +43692,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 418032,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43709,11 +43709,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 34884,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -43726,10 +43726,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 25661,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43744,13 +43744,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 9523810,
 			"bwc" : 6428859,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -43766,13 +43766,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 9523810,
 					"bwc" : 6428859,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -43790,11 +43790,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 409600,
 			"bwc" : 167445,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -43808,11 +43808,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 409600,
 					"bwc" : 167445,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -43828,10 +43828,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 139885,
 			"bwc" : 13903,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43844,10 +43844,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 139885,
 					"bwc" : 13903,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43862,10 +43862,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 30,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -43878,10 +43878,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 30,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -43896,13 +43896,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1310720,
 			"bwc" : 240277,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43918,13 +43918,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1310720,
 					"bwc" : 240277,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -43942,11 +43942,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 237568,
 			"bwc" : 18078,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -43959,11 +43959,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 237568,
 					"bwc" : 18078,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -43978,11 +43978,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 131072,
 			"bwc" : 49733,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -43996,11 +43996,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 131072,
 					"bwc" : 49733,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44016,13 +44016,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 50953137,
 			"bwc" : 14560204,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -44038,13 +44038,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 1087969,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44060,13 +44060,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 45710257,
 					"bwc" : 13472235,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44084,11 +44084,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 235078,
 			"bwc" : 22867,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44102,11 +44102,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 235078,
 					"bwc" : 22867,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44122,12 +44122,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 144727,
 			"bwc" : 40694,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44140,12 +44140,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 144727,
 					"bwc" : 40694,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44160,12 +44160,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 5242880,
 			"bwc" : 2320837,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44180,12 +44180,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 5242880,
 					"bwc" : 2320837,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44202,10 +44202,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 29196,
 			"bwc" : 438,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -44218,10 +44218,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 29196,
 					"bwc" : 438,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -44236,11 +44236,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 87414,
 			"bwc" : 110,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44253,11 +44253,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 87414,
 					"bwc" : 110,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44272,11 +44272,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 148480,
 			"bwc" : 34071,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44289,11 +44289,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 148480,
 					"bwc" : 34071,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44308,11 +44308,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 83968,
 			"bwc" : 226087,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44326,11 +44326,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 83968,
 					"bwc" : 226087,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44346,11 +44346,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 14747,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44364,11 +44364,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 14747,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44384,12 +44384,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 5273600,
 			"bwc" : 5063753,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -44404,12 +44404,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 5273600,
 					"bwc" : 5063753,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -44426,13 +44426,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 524288,
 			"bwc" : 232882,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44448,13 +44448,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 524288,
 					"bwc" : 232882,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44472,11 +44472,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 40960,
 			"bwc" : 4081,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2
 			},
 			"proProb" : {
@@ -44489,11 +44489,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 40960,
 					"bwc" : 4081,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2
 					},
 					"proProb" : {
@@ -44508,11 +44508,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 153600,
 			"bwc" : 26427,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44526,11 +44526,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 153600,
 					"bwc" : 26427,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44546,10 +44546,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 9878,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44562,10 +44562,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 9878,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44580,13 +44580,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 1569110,
 			"bwc" : 1123677,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -44602,13 +44602,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 1569110,
 					"bwc" : 1123677,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -44626,13 +44626,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 487173,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44648,13 +44648,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 487173,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44672,11 +44672,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 332021,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44691,11 +44691,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 332021,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44712,11 +44712,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 45056,
 			"bwc" : 4576,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44729,11 +44729,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 45056,
 					"bwc" : 4576,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44748,12 +44748,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 46089,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -44767,12 +44767,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 46089,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -44788,11 +44788,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 59268,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44805,11 +44805,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 59268,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44824,13 +44824,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 7086080,
 			"bwc" : 5680793,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -44846,13 +44846,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 7086080,
 					"bwc" : 5680793,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -44870,10 +44870,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 25600,
 			"bwc" : 421,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -44886,10 +44886,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 25600,
 					"bwc" : 421,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -44904,10 +44904,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2385,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -44920,10 +44920,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2385,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -44938,12 +44938,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1114112,
 			"bwc" : 948773,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -44958,12 +44958,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1114112,
 					"bwc" : 948773,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -44980,12 +44980,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1833779,
 			"bwc" : 1096753,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -45000,12 +45000,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1833779,
 					"bwc" : 1096753,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -45022,13 +45022,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 2529995,
 			"bwc" : 1620737,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -45044,13 +45044,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 2529995,
 					"bwc" : 1620737,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -45068,10 +45068,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 590,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -45084,10 +45084,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 590,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -45102,11 +45102,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 204800,
 			"bwc" : 141739,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -45120,11 +45120,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 204800,
 					"bwc" : 141739,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -45140,12 +45140,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 225280,
 			"bwc" : 194341,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -45160,12 +45160,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 225280,
 					"bwc" : 194341,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -45182,13 +45182,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1188614,
 			"bwc" : 423572,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -45204,13 +45204,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1188614,
 					"bwc" : 423572,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -45228,11 +45228,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 135168,
 			"bwc" : 34989,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -45247,11 +45247,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 135168,
 					"bwc" : 34989,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -45268,12 +45268,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 338452,
 			"bwc" : 87198,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -45288,12 +45288,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 338452,
 					"bwc" : 87198,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -45310,11 +45310,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 829325,
 			"bwc" : 133643,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45327,11 +45327,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 829325,
 					"bwc" : 133643,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45346,11 +45346,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 307200,
 			"bwc" : 154103,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -45364,11 +45364,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 307200,
 					"bwc" : 154103,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -45384,11 +45384,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 81920,
 			"bwc" : 9171,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45401,11 +45401,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 81920,
 					"bwc" : 9171,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45420,10 +45420,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -45436,10 +45436,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -45454,12 +45454,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 175329,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -45474,12 +45474,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 175329,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -45496,10 +45496,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 484,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -45512,10 +45512,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 484,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -45530,11 +45530,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 211968,
 			"bwc" : 47566,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45547,11 +45547,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 211968,
 					"bwc" : 47566,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45566,11 +45566,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 7788951,
 			"bwc" : 6894727,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -45585,11 +45585,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 7788951,
 					"bwc" : 6894727,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -45606,11 +45606,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 665600,
 			"bwc" : 520058,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45623,11 +45623,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 665600,
 					"bwc" : 520058,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45642,12 +45642,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 100928,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -45661,12 +45661,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 100928,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -45682,10 +45682,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 879639,
 			"bwc" : 1046818,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45698,10 +45698,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 879639,
 					"bwc" : 1046818,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45716,13 +45716,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 1372453,
 			"bwc" : 601203,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"e" : 2,
 				"d" : 3,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 3,
 				"f" : 3
 			},
@@ -45738,13 +45738,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 1372453,
 					"bwc" : 601203,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"e" : 2,
 						"d" : 3,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 3,
 						"f" : 3
 					},
@@ -45762,10 +45762,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 678,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -45778,10 +45778,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 678,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -45796,12 +45796,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 3682683,
 			"bwc" : 3269156,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 1,
 				"d" : 3
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -45816,11 +45816,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 3153920,
 					"bwc" : 3070531,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -45834,12 +45834,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 528763,
 					"bwc" : 198625,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -45856,11 +45856,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 94763,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45873,11 +45873,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 94763,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45892,10 +45892,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 815569,
 			"bwc" : 574827,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45908,10 +45908,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 815569,
 					"bwc" : 574827,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -45926,12 +45926,12 @@ var result =
 			"relay" : 8,
 			"bwa" : 9679410,
 			"bwc" : 7921644,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"d" : 8,
 				"g" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 8,
 				"s" : 3
 			},
@@ -45946,12 +45946,12 @@ var result =
 					"relay" : 8,
 					"bwa" : 9679410,
 					"bwc" : 7921644,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"d" : 8,
 						"g" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 8,
 						"s" : 3
 					},
@@ -45968,11 +45968,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 53489,
 			"bwc" : 1533,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -45985,11 +45985,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 53489,
 					"bwc" : 1533,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46004,10 +46004,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 43569,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46020,10 +46020,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 43569,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46038,10 +46038,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 59767,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46054,10 +46054,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 59767,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46072,13 +46072,13 @@ var result =
 			"relay" : 16,
 			"bwa" : 4985593,
 			"bwc" : 1835154,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 16,
 				"e" : 2,
 				"d" : 13
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 15,
 				"s" : 10
 			},
@@ -46094,13 +46094,13 @@ var result =
 					"relay" : 16,
 					"bwa" : 4985593,
 					"bwc" : 1835154,
-					"proRole" : {
+					"role" : {
 						"g" : 4,
 						"m" : 16,
 						"e" : 2,
 						"d" : 13
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 15,
 						"s" : 10
 					},
@@ -46118,13 +46118,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4194304,
 			"bwc" : 4154975,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46140,13 +46140,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 4194304,
 					"bwc" : 4154975,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46164,10 +46164,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 51860,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46180,10 +46180,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 51860,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46198,13 +46198,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 22162776,
 			"bwc" : 17209880,
-			"proRole" : {
+			"role" : {
 				"m" : 8,
 				"e" : 6,
 				"g" : 5,
 				"d" : 5
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 7
 			},
@@ -46220,13 +46220,13 @@ var result =
 					"relay" : 8,
 					"bwa" : 22162776,
 					"bwc" : 17209880,
-					"proRole" : {
+					"role" : {
 						"m" : 8,
 						"e" : 6,
 						"g" : 5,
 						"d" : 5
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 7,
 						"s" : 7
 					},
@@ -46244,11 +46244,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 236378,
 			"bwc" : 34922,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46262,11 +46262,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 236378,
 					"bwc" : 34922,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46282,11 +46282,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 326446,
 			"bwc" : 21884,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46300,11 +46300,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 326446,
 					"bwc" : 21884,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46320,11 +46320,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 38561,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46338,11 +46338,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 38561,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46358,13 +46358,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 1024000,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46380,13 +46380,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 1024000,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46404,12 +46404,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2011956,
 			"bwc" : 1099374,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46422,12 +46422,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2011956,
 					"bwc" : 1099374,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46442,11 +46442,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 83812,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46461,11 +46461,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 83812,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46482,11 +46482,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 532512,
 			"bwc" : 187055,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46499,11 +46499,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 532512,
 					"bwc" : 187055,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46518,10 +46518,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 900,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -46534,10 +46534,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 900,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -46552,12 +46552,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 14643,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46571,12 +46571,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 14643,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46592,10 +46592,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 61440,
 			"bwc" : 10380,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46609,10 +46609,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 61440,
 					"bwc" : 10380,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46628,13 +46628,13 @@ var result =
 			"relay" : 8,
 			"bwa" : 16609280,
 			"bwc" : 8835179,
-			"proRole" : {
+			"role" : {
 				"g" : 4,
 				"m" : 8,
 				"d" : 5,
 				"e" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 7,
 				"s" : 7
 			},
@@ -46650,13 +46650,13 @@ var result =
 					"relay" : 6,
 					"bwa" : 14299136,
 					"bwc" : 7663588,
-					"proRole" : {
+					"role" : {
 						"g" : 3,
 						"m" : 6,
 						"d" : 3,
 						"e" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 5,
 						"s" : 6
 					},
@@ -46672,11 +46672,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 2048000,
 					"bwc" : 1032119,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46689,12 +46689,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 139472,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46711,10 +46711,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 13768,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46727,10 +46727,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 13768,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46745,11 +46745,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 384752,
 			"bwc" : 76085,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 3,
 				"s" : 2
 			},
@@ -46763,11 +46763,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 384752,
 					"bwc" : 76085,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 3,
 						"s" : 2
 					},
@@ -46783,12 +46783,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 196227,
 			"bwc" : 31011,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -46801,12 +46801,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 196227,
 					"bwc" : 31011,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -46821,10 +46821,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 27114,
 			"bwc" : 282,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -46837,10 +46837,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 27114,
 					"bwc" : 282,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -46855,12 +46855,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 898390,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46875,12 +46875,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 898390,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46897,13 +46897,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 1079654,
 			"bwc" : 536601,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46919,13 +46919,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 1079654,
 					"bwc" : 536601,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46943,11 +46943,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 262144,
 			"bwc" : 148716,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -46961,11 +46961,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 262144,
 					"bwc" : 148716,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -46981,11 +46981,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 409600,
 			"bwc" : 348654,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -47000,11 +47000,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 409600,
 					"bwc" : 348654,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -47021,11 +47021,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 2174,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -47038,11 +47038,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 2174,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -47057,10 +47057,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 165,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -47073,10 +47073,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 165,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -47091,12 +47091,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 65842,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47111,12 +47111,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 65842,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47133,11 +47133,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 132370,
 			"bwc" : 20825,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47151,11 +47151,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 132370,
 					"bwc" : 20825,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47171,10 +47171,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 17418,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47187,10 +47187,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 17418,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47205,11 +47205,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 2395921,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47222,11 +47222,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 2395921,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47241,13 +47241,13 @@ var result =
 			"relay" : 4,
 			"bwa" : 9290226,
 			"bwc" : 6027172,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"g" : 2,
 				"d" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 2
 			},
@@ -47263,13 +47263,13 @@ var result =
 					"relay" : 4,
 					"bwa" : 9290226,
 					"bwc" : 6027172,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"g" : 2,
 						"d" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 2
 					},
@@ -47287,10 +47287,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 120700,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47303,10 +47303,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 120700,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47321,11 +47321,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 148062,
 			"bwc" : 50394,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47338,11 +47338,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 148062,
 					"bwc" : 50394,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47357,13 +47357,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 4194304,
 			"bwc" : 3860430,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47379,13 +47379,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 4194304,
 					"bwc" : 3860430,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47403,11 +47403,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 94208,
 			"bwc" : 25547,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47421,11 +47421,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 94208,
 					"bwc" : 25547,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47441,11 +47441,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 10542,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47458,11 +47458,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 10542,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47477,11 +47477,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 203364,
 			"bwc" : 36148,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -47496,11 +47496,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 203364,
 					"bwc" : 36148,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -47517,11 +47517,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 17675,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47535,11 +47535,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 17675,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47555,12 +47555,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 256028,
 			"bwc" : 40370,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47573,12 +47573,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 256028,
 					"bwc" : 40370,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47593,12 +47593,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 14462,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47611,12 +47611,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 14462,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47631,11 +47631,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 196608,
 			"bwc" : 980,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47648,11 +47648,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 196608,
 					"bwc" : 980,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47667,12 +47667,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2621440,
 			"bwc" : 2095941,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47687,12 +47687,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2621440,
 					"bwc" : 2095941,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47709,11 +47709,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 2366249,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47727,11 +47727,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 2366249,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47747,10 +47747,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1007526,
 			"bwc" : 470606,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47763,10 +47763,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1007526,
 					"bwc" : 470606,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47781,11 +47781,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 4296704,
 			"bwc" : 3562444,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -47799,11 +47799,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 4296704,
 					"bwc" : 3562444,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -47819,13 +47819,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 1699742,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47841,13 +47841,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 1699742,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47865,11 +47865,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 590943,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47882,11 +47882,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 590943,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47901,10 +47901,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 65536,
 			"bwc" : 28075,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47917,10 +47917,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 65536,
 					"bwc" : 28075,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -47935,10 +47935,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 49574,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -47952,10 +47952,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 49574,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -47971,11 +47971,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 218924,
 			"bwc" : 71869,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -47988,11 +47988,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 218924,
 					"bwc" : 71869,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -48007,10 +48007,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 48157,
 			"bwc" : 1301,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48024,10 +48024,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 48157,
 					"bwc" : 1301,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48043,11 +48043,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 957440,
 			"bwc" : 28812,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -48060,11 +48060,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 957440,
 					"bwc" : 28812,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -48079,11 +48079,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 97280,
 			"bwc" : 413,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48097,11 +48097,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 97280,
 					"bwc" : 413,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48117,11 +48117,11 @@ var result =
 			"relay" : 4,
 			"bwa" : 684032,
 			"bwc" : 130935,
-			"proRole" : {
+			"role" : {
 				"m" : 4,
 				"d" : 4
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 1
 			},
@@ -48135,11 +48135,11 @@ var result =
 					"relay" : 4,
 					"bwa" : 684032,
 					"bwc" : 130935,
-					"proRole" : {
+					"role" : {
 						"m" : 4,
 						"d" : 4
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 1
 					},
@@ -48155,11 +48155,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 16435,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -48172,11 +48172,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 16435,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -48191,11 +48191,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 614400,
 			"bwc" : 395673,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48210,11 +48210,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 614400,
 					"bwc" : 395673,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48231,11 +48231,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 173904,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48249,11 +48249,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 173904,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48269,10 +48269,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 219184,
 			"bwc" : 56722,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -48286,10 +48286,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 219184,
 					"bwc" : 56722,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -48305,12 +48305,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 2097152,
 			"bwc" : 2094025,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48325,12 +48325,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 2097152,
 					"bwc" : 2094025,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48347,11 +48347,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 86885,
 			"bwc" : 20775,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48364,11 +48364,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 86885,
 					"bwc" : 20775,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48383,12 +48383,12 @@ var result =
 			"relay" : 4,
 			"bwa" : 6062080,
 			"bwc" : 5122661,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 4,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 4,
 				"s" : 4
 			},
@@ -48403,12 +48403,12 @@ var result =
 					"relay" : 4,
 					"bwa" : 6062080,
 					"bwc" : 5122661,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 4,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 4,
 						"s" : 4
 					},
@@ -48425,10 +48425,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 40960,
 			"bwc" : 14442,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -48441,10 +48441,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 40960,
 					"bwc" : 14442,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -48459,13 +48459,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 7140837,
 			"bwc" : 2208857,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 2,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -48481,13 +48481,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 7140837,
 					"bwc" : 2208857,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 2,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -48505,12 +48505,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 71680,
 			"bwc" : 2894,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1,
 				"f" : 1
 			},
@@ -48525,12 +48525,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 71680,
 					"bwc" : 2894,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1,
 						"f" : 1
 					},
@@ -48547,11 +48547,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 614400,
 			"bwc" : 257723,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48566,11 +48566,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 614400,
 					"bwc" : 257723,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48587,13 +48587,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 660480,
 			"bwc" : 269559,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"e" : 1,
 				"g" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 2,
 				"f" : 1
 			},
@@ -48609,13 +48609,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 660480,
 					"bwc" : 269559,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"e" : 1,
 						"g" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 2,
 						"f" : 1
 					},
@@ -48633,10 +48633,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 174080,
 			"bwc" : 46022,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -48649,10 +48649,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 174080,
 					"bwc" : 46022,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -48667,11 +48667,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 210328,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48686,11 +48686,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 210328,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48707,12 +48707,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 409600,
 			"bwc" : 173970,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48728,12 +48728,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 409600,
 					"bwc" : 173970,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48751,12 +48751,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 1007347,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48771,12 +48771,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 1007347,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48793,12 +48793,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 1048576,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48812,12 +48812,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 1048576,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48833,11 +48833,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48851,11 +48851,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48871,13 +48871,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 2179072,
 			"bwc" : 2190099,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"e" : 1,
 				"d" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -48893,13 +48893,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 2179072,
 					"bwc" : 2190099,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"e" : 1,
 						"d" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -48917,12 +48917,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 10093050,
 			"bwc" : 5415230,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48937,12 +48937,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 10093050,
 					"bwc" : 5415230,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48959,11 +48959,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 772029,
 			"bwc" : 274157,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -48977,11 +48977,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 772029,
 					"bwc" : 274157,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -48997,11 +48997,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 716800,
 			"bwc" : 555661,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49015,11 +49015,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 716800,
 					"bwc" : 555661,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49035,11 +49035,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 10240,
 			"bwc" : 154523,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"a" : 1
 			},
 			"proProb" : {
@@ -49052,11 +49052,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 10240,
 					"bwc" : 154523,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"a" : 1
 					},
 					"proProb" : {
@@ -49071,11 +49071,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 94557,
 			"bwc" : 1873,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49089,11 +49089,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 94557,
 					"bwc" : 1873,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49109,11 +49109,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 204800,
 			"bwc" : 41395,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -49127,11 +49127,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 204800,
 					"bwc" : 41395,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -49147,11 +49147,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 71680,
 			"bwc" : 38294,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49165,11 +49165,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 71680,
 					"bwc" : 38294,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49185,12 +49185,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 6553600,
 			"bwc" : 4839002,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49205,12 +49205,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 6553600,
 					"bwc" : 4839002,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49227,11 +49227,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 587776,
 			"bwc" : 97645,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 1
 			},
@@ -49245,11 +49245,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 587776,
 					"bwc" : 97645,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 1
 					},
@@ -49265,12 +49265,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 49053,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49283,12 +49283,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 49053,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49303,11 +49303,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1508717,
 			"bwc" : 590235,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49320,11 +49320,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1508717,
 					"bwc" : 590235,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49339,12 +49339,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 119314,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49359,12 +49359,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 119314,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49381,11 +49381,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 29017,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49399,11 +49399,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 29017,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49419,10 +49419,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 251,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -49435,10 +49435,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 251,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -49453,10 +49453,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 2112,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49469,10 +49469,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 2112,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49487,13 +49487,13 @@ var result =
 			"relay" : 2,
 			"bwa" : 3062879,
 			"bwc" : 1521237,
-			"proRole" : {
+			"role" : {
 				"g" : 2,
 				"m" : 2,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -49509,13 +49509,13 @@ var result =
 					"relay" : 2,
 					"bwa" : 3062879,
 					"bwc" : 1521237,
-					"proRole" : {
+					"role" : {
 						"g" : 2,
 						"m" : 2,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -49533,10 +49533,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 24933,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49550,10 +49550,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 24933,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49569,11 +49569,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 0,
 			"bwc" : 0,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 
 			},
 			"proProb" : {
@@ -49585,11 +49585,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 0,
 					"bwc" : 0,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 
 					},
 					"proProb" : {
@@ -49603,11 +49603,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 110961,
 			"bwc" : 34364,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49620,11 +49620,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 110961,
 					"bwc" : 34364,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49639,11 +49639,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 729150,
 			"bwc" : 15494,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49656,11 +49656,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 729150,
 					"bwc" : 15494,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49675,10 +49675,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 358400,
 			"bwc" : 5314,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49691,10 +49691,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 358400,
 					"bwc" : 5314,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49709,11 +49709,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 59347,
 			"bwc" : 622,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49726,11 +49726,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 59347,
 					"bwc" : 622,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49745,12 +49745,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 655360,
 			"bwc" : 189085,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49764,12 +49764,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 655360,
 					"bwc" : 189085,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49785,11 +49785,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1903286,
 			"bwc" : 648044,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49802,11 +49802,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1903286,
 					"bwc" : 648044,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49821,11 +49821,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 63488,
 			"bwc" : 4319,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49838,11 +49838,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 63488,
 					"bwc" : 4319,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49857,10 +49857,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 307200,
 			"bwc" : 68936,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49873,10 +49873,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 307200,
 					"bwc" : 68936,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49891,12 +49891,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 55296,
 			"bwc" : 2126,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -49909,12 +49909,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 55296,
 					"bwc" : 2126,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -49929,10 +49929,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 28014,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -49946,10 +49946,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 28014,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -49965,12 +49965,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 233548,
 			"bwc" : 44710,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 2
 			},
@@ -49985,12 +49985,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 233548,
 					"bwc" : 44710,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 2
 					},
@@ -50007,10 +50007,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 1422,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50024,10 +50024,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 1422,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50043,11 +50043,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 3230,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -50060,11 +50060,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 3230,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -50079,11 +50079,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 309895,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50097,11 +50097,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 309895,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50117,12 +50117,12 @@ var result =
 			"relay" : 2,
 			"bwa" : 1638400,
 			"bwc" : 1560005,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1,
 				"g" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -50137,12 +50137,12 @@ var result =
 					"relay" : 2,
 					"bwa" : 1638400,
 					"bwc" : 1560005,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1,
 						"g" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -50159,11 +50159,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 589302,
 			"bwc" : 6281,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -50176,11 +50176,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 589302,
 					"bwc" : 6281,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -50195,12 +50195,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 143360,
 			"bwc" : 38289,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -50213,12 +50213,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 143360,
 					"bwc" : 38289,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -50233,10 +50233,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 20480,
 			"bwc" : 241,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -50249,10 +50249,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 20480,
 					"bwc" : 241,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -50267,11 +50267,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 32768,
 			"bwc" : 911,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -50284,11 +50284,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 32768,
 					"bwc" : 911,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -50303,11 +50303,11 @@ var result =
 			"relay" : 2,
 			"bwa" : 112640,
 			"bwc" : 12574,
-			"proRole" : {
+			"role" : {
 				"m" : 2,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 2,
 				"s" : 2
 			},
@@ -50321,11 +50321,11 @@ var result =
 					"relay" : 2,
 					"bwa" : 112640,
 					"bwc" : 12574,
-					"proRole" : {
+					"role" : {
 						"m" : 2,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 2,
 						"s" : 2
 					},
@@ -50341,10 +50341,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 25600,
 			"bwc" : 161,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -50357,10 +50357,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 25600,
 					"bwc" : 161,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -50375,12 +50375,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1219584,
 			"bwc" : 685892,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50394,12 +50394,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1219584,
 					"bwc" : 685892,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50415,12 +50415,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1125599,
 			"bwc" : 544230,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50435,12 +50435,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1125599,
 					"bwc" : 544230,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50457,11 +50457,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 1024000,
 			"bwc" : 403387,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50475,11 +50475,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 1024000,
 					"bwc" : 403387,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50495,12 +50495,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 616581,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50515,12 +50515,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 616581,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50537,11 +50537,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 102400,
 			"bwc" : 12934,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50555,11 +50555,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 102400,
 					"bwc" : 12934,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50575,13 +50575,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 512000,
 			"bwc" : 123541,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50597,13 +50597,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 512000,
 					"bwc" : 123541,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50621,11 +50621,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 98304,
 			"bwc" : 28739,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -50638,11 +50638,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 98304,
 					"bwc" : 28739,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -50657,12 +50657,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 819200,
 			"bwc" : 777566,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50677,12 +50677,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 819200,
 					"bwc" : 777566,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50699,13 +50699,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 3145728,
 			"bwc" : 2718510,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50721,13 +50721,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 3145728,
 					"bwc" : 2718510,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50745,12 +50745,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 204800,
 			"bwc" : 41458,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50765,12 +50765,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 204800,
 					"bwc" : 41458,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50787,10 +50787,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 37724,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50804,10 +50804,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 37724,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50823,10 +50823,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 1048576,
 			"bwc" : 205709,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -50839,10 +50839,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 1048576,
 					"bwc" : 205709,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -50857,11 +50857,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 30720,
 			"bwc" : 13398,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"e" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"s" : 1
 			},
 			"proProb" : {
@@ -50874,11 +50874,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 30720,
 					"bwc" : 13398,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"e" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"s" : 1
 					},
 					"proProb" : {
@@ -50893,12 +50893,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 369200,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50913,12 +50913,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 369200,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50935,13 +50935,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 8094654,
 			"bwc" : 3802511,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -50957,13 +50957,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 8094654,
 					"bwc" : 3802511,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -50981,10 +50981,10 @@ var result =
 			"relay" : 2,
 			"bwa" : 124577,
 			"bwc" : 8848,
-			"proRole" : {
+			"role" : {
 				"m" : 2
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -50997,10 +50997,10 @@ var result =
 					"relay" : 2,
 					"bwa" : 124577,
 					"bwc" : 8848,
-					"proRole" : {
+					"role" : {
 						"m" : 2
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -51015,13 +51015,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 404358,
 			"bwc" : 137283,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -51037,13 +51037,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 404358,
 					"bwc" : 137283,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -51061,12 +51061,12 @@ var result =
 			"relay" : 1,
 			"bwa" : 256000,
 			"bwc" : 566556,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -51081,12 +51081,12 @@ var result =
 					"relay" : 1,
 					"bwa" : 256000,
 					"bwc" : 566556,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -51103,10 +51103,10 @@ var result =
 			"relay" : 1,
 			"bwa" : 51200,
 			"bwc" : 17642,
-			"proRole" : {
+			"role" : {
 				"m" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -51120,10 +51120,10 @@ var result =
 					"relay" : 1,
 					"bwa" : 51200,
 					"bwc" : 17642,
-					"proRole" : {
+					"role" : {
 						"m" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -51139,11 +51139,11 @@ var result =
 			"relay" : 1,
 			"bwa" : 325632,
 			"bwc" : 98078,
-			"proRole" : {
+			"role" : {
 				"m" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1
 			},
 			"proProb" : {
@@ -51156,11 +51156,11 @@ var result =
 					"relay" : 1,
 					"bwa" : 325632,
 					"bwc" : 98078,
-					"proRole" : {
+					"role" : {
 						"m" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1
 					},
 					"proProb" : {
@@ -51175,13 +51175,13 @@ var result =
 			"relay" : 1,
 			"bwa" : 3174400,
 			"bwc" : 2009786,
-			"proRole" : {
+			"role" : {
 				"g" : 1,
 				"m" : 1,
 				"e" : 1,
 				"d" : 1
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : 1,
 				"s" : 1
 			},
@@ -51197,13 +51197,13 @@ var result =
 					"relay" : 1,
 					"bwa" : 3174400,
 					"bwc" : 2009786,
-					"proRole" : {
+					"role" : {
 						"g" : 1,
 						"m" : 1,
 						"e" : 1,
 						"d" : 1
 					},
-					"proFlag" : {
+					"flag" : {
 						"f" : 1,
 						"s" : 1
 					},
@@ -51307,7 +51307,7 @@ var result =
 						"e468" : 652
 				}
 			},
-			"proRole" : {
+			"role" : {
 				"g" : {
 					"sum" : 1032,
 						"bwa" : 2656921979,
@@ -51437,7 +51437,7 @@ var result =
 					}
 				}
 			},
-			"proFlag" : {
+			"flag" : {
 				"f" : {
 					"sum" : 2912,
 						"bwa" : 3722238949,
