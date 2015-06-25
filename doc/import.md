@@ -18,7 +18,7 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
 		"updt" : "2013-09-10T10:57:19.871Z",
 		"nick" : "Free4all",
-		"date" : "2013-04-03 21",
+		"date" : "2013-04-03T21:00",
    	"type" : "r",
 		"span" : 1,
 		"role" : [
@@ -50,7 +50,7 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 	"_id" : "0000831B236DFF73D409AD17B40E2A728A53994F-1-2013042020",
 	"bwa" : 20480,
 	"bwc" : 0,
-	"date" : "2013-04-20 20",
+	"date" : "2013-04-20T20:00",
 	"ec2" : true,
 	"nick" : "ec2bridgercc7f31fe",
 	"node" : "0000831B236DFF73D409AD17B40E2A728A53994F",
@@ -76,7 +76,7 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 		"_id" : "client-1-2013010100",
 		"type" : "c",
 		"updt" : "2013-08-14T09:23:45.302Z",
-		"date" : "2013-01-01 00",
+		"date" : "2013-01-01T00:00",
 		"span" : 1,
 		"cpt" : {
 			"OR" : 139
@@ -433,7 +433,7 @@ each one arbitrarily picked by the MongoDB command 'findOne'.
 ###historic versions###
 
 around mr6 / january 2015 some field names where changed. the following
-documents from before that cahnge serve as reference when working with older
+documents from before that change serve as reference when working with older
 versions of the aggregation scripts.
 
 
