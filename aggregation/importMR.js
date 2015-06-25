@@ -100,7 +100,7 @@ function mapValues() {
 
 	//	SERVER INITIALIZATION
 	//	exp init		permitted exit ports
-	var inExp = incoming.exp ? incoming.exp : false;
+	var inExp = incoming.exp || false;
 	var exp = {
 		e4: inExp && inExp.indexOf(443) > -1 ? 1 : 0,
 		e6: inExp && inExp.indexOf(6667) > -1 ? 1 : 0,
@@ -140,7 +140,7 @@ function mapValues() {
 	// SERVER INITIALIZATION only for BRIDGES
 	var bridge = incoming.type === "b";
 	//	plug init		bridge pluggable transport
-	var inPlug = incoming.plug ? incoming.plug : false;
+	var inPlug = incoming.plug || false;
 	var plug = {
 		b2: inPlug && inPlug.indexOf('obfs2') > -1 ? 1 : 0,
 		b3: inPlug && inPlug.indexOf('obfs3') > -1 ? 1 : 0,
@@ -162,7 +162,7 @@ function mapValues() {
 	//	SERVER INITIALIZATION only for RELAYS
 	var relay = incoming.type === "r";
 	//	role init
-	var inRole = incoming.role ? incoming.role : false;
+	var inRole = incoming.role || false;
 	var role = {
 		g: inRole && inRole.indexOf("Guard") > -1 ? 1 : 0,
 		m: inRole && inRole.indexOf("Middle") > -1 ? 1 : 0,
@@ -170,7 +170,7 @@ function mapValues() {
 		d: inRole && inRole.indexOf("Dir") > -1 ? 1 : 0
 	};
 	//	flag init
-	var inFlag = incoming.flag ? incoming.flag : false;
+	var inFlag = incoming.flag || false;
 	var flag = {
 		f: inFlag && inFlag.indexOf("Fast") > -1 ? 1 : 0,
 		s: inFlag && inFlag.indexOf("Stable") > -1 ? 1 : 0,
@@ -178,10 +178,10 @@ function mapValues() {
 	};
 	//	probability init
 	var prob = {
-		pr: incoming.pr ? incoming.pr : 0,
-		pg: incoming.pg ? incoming.pg : 0,
-		pm: incoming.pm ? incoming.pm : 0,
-		pe: incoming.pe ? incoming.pe : 0
+		pr: incoming.pr || 0,
+		pg: incoming.pg || 0,
+		pm: incoming.pm || 0,
+		pe: incoming.pe || 0
 	};
 
 
@@ -1001,7 +1001,7 @@ function runAggregation (theStart, theEnd, theUpdated) {
 
 	var start = theStart;
 	var end = theEnd || start;
-	var updated = theUpdated || "1999-12-31T23:59:59.999Z";
+	var updated = theUpdated || "2000-01-01T00:00:00.000Z";
 
 	db.runCommand (
 		{

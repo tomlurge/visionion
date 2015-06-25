@@ -27,7 +27,7 @@
  *
  *					This script, factMR.js, takes the output of importMR.js - the
  *					'facts' collection - and consolidates it into daily and monthly
- *					aggregates. It doesn't add or change anything logically. It's only
+ *					aggregates. It doesn't add or change anything logically. Its only
  *					purpose is to generate a more compact overview over the data
  *					aggregated by importMR.js and thereby facilitate a fluid
  *					visualization experience.
@@ -317,7 +317,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	var span = inSpan;
 	var start = inStart;
 	var end = inEnd || start;
-	var updated = inUpdated || "1999-12-31T23:59:59.999Z";
+	var updated = inUpdated || "2000-01-01T00:00:00.000Z";
 
 
 	//	supported "span" values are "d" (daily) and "m" (monthly)
