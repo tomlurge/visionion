@@ -114,7 +114,7 @@ Support for geo-data could be beneficial either (no other NoSQL database has tha
 
 ### Web application framework
 
-[React.js](http://facebook.github.io/react/)is the likely candidate because of it's declarative style and it's attractive approach to routing and view updates. Ressources:
+[React.js](http://facebook.github.io/react/)is promising candidate because of it's declarative style and it's attractive approach to routing and view updates. Ressources:
 
 - [React Getting Started](http://facebook.github.io/react/docs/getting-started.html)
 - the accompanying routing architecture [Flux](http://facebook.github.io/react/blog/2014/05/06/flux.html)
@@ -122,7 +122,13 @@ Support for geo-data could be beneficial either (no other NoSQL database has tha
 - From the D3 creator himself: [bar + sum: d3.js, react.js, & Flux](http://bl.ocks.org/milroc/d22bbf92231876505e5d)
 - Scalable Data Visualization - [React.js Conference 2015 talk and demo] (https://github.com/znation/scalable-data-visualization)
 
-[Angular.js](http://angularjs.org/) is a runner up. It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)). But it currently undergoes a major rework. Version 2 is expected for the end of 2015 and will (try to) incorporate the good (declarative) parts of React.js. Until then we'll stick with React.js.
+But there is a problem: both React.js and D3.js want to control the DOM. 
+It is possible to tell React to stay away from the D3 part of the DOM but the question is what benefits React can then provide to us.
+
+
+[Angular.js](http://angularjs.org/) is runner up. It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)). But it currently undergoes a major rework. Version 2 is expected for the end of 2015 and will (try to) incorporate the good (declarative) parts of React.js. 
+
+Status: undecided. Slight advantage for Angular.
 
 >TODO
 >we'll know more after the first prototype.
@@ -251,7 +257,7 @@ Memorizing them or looking them up again in the table below will be helpful when
   	cbr			span	-						length of the interval this dataset describes:
   														one of: "h"(hourly), "d" (daily), "m" (monthly)
   	cbr			date	-						start of the time span that this document describes
-  														format "YYYY-MM-DD HH" as defined in ISO-8601
+  														format "YYYY-MM-DDTHH:MM" as defined by ECMAScript
   	cbr			type							one of: "c" (clients), "b" (bridge), "r" (relay)
   	c				cb		mean
   	c				cbcc	mean				{cc:integer ...}
@@ -282,7 +288,7 @@ Memorizing them or looking them up again in the table below will be helpful when
   
 
 	
-The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over large periods of time.
+The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over larger periods of time.
 
 There's a big difference between client data and relay data that isn't immediatly obvious from the schema.
 Client data is - unlike all relay and bridge data - never collected at the client nodes themselves because that could compromise anonymity.
@@ -290,7 +296,7 @@ Instead client data is estimated by some calculations over relay data. During th
 OTOH we import data for each and every server active during a given timespan. We keep this data to be able to look up individual relays but for most visualization tasks we want data for all servers (that have certain characteristics) during a timespan. This data is only aggregated within MongoDB by the mapReduce operation outlined below.
 So the import database contains many server entries per hour, one for each relay and bridge active during that timespan, but only one client entry, with numbers for all clients active during that timespan.
 
-One more detail: client data is originally calculated per day. The import data for clients contains one document for each hour because the default  timespan for server data is 1 hour. That means we have 24 client documents per day (one for each hour), each with the same values (see the [discussion](https://github.com/tomlurge/visionion/issues/5) for more details).
+One more detail: client data is originally calculated per day. The import data for clients contains one document for each hour because the default timespan for server data is 1 hour. That means we have 24 client documents per day (one for each hour), each with the same values (see the [discussion](https://github.com/tomlurge/visionion/issues/5) for more details).
 
 Check out an [**example**](doc/import.md) of each of the 3 types of documents in the import collection to get a better idea of its structure.
 
@@ -303,7 +309,7 @@ The data gathered by the Tor metrics project is not always complete (not astonis
 ### JSON schema
 The above has been transformed into a JSON [schema](doc/schema.json).
 
-The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks this can be useful to detect if somethings goes wrong.
+The purpose of the schema is twofold: combined with a [validator](https://github.com/garycourt/JSV) it can provide some control over what data get's inserted into the database. Since MongoDB doesn't perform any consistency checks this can be useful to detect if something goes wrong.
 More importantly the validator can spot data that's not handled by the schema and trigger the addition of an appropriate (probably rather generic) query interface to the visualization GUI.
 
 If the outline above and the schema get out of sync, the *outline is authorative*.
@@ -317,7 +323,7 @@ For information about JSON Schema see [Wikipedia](http://en.wikipedia.org/wiki/J
 Indices over the import table are essential as they speed up mapReduce very considerably. Two indices can be used:
 
 - an index on "updt" since we query over "updt"
-- an index on "date" since we emit date as (part of) the key
+- an index on "date" since the key in the mapping step is derived from date
 
 see also:
 
@@ -430,6 +436,56 @@ Country and AS information form enormous value spaces that need to be next to th
 ####detailed documentation of structure and reports####
 
 #####structure#####
+
+overview
+
+		_id										
+  	value									
+  		date								
+  		span								
+  		updt								
+  		client							
+  												clients have no subcategories, only one report
+  		server							each entry under server carries a report
+  			total							
+  			bridge						
+  				total						
+  				pool						
+  					e							email
+  					h							https
+  					o							other
+  				plug						
+  					b2						obfs2
+  					b3						obfs3
+  					b23						obfs2 + obfs3
+  				host						
+  					ec2						hosted in amazon ec2 cloud
+  			relay							
+  				total						
+  				roleFlag			
+  												69 permtations of 
+  												Guard, Middle, Exit Directory, 
+  												fast, stable, authority
+  												projective
+  				disRole					
+  												15 permtations of 
+  												Guard, Middle, Exit Directory
+  												disjunctive					
+  				disFlag					
+  												8 permtations of 
+  												fast, stable, authority
+  												disjunctive
+  				disRoleFlag			
+  												70 permtations of 
+  												Guard, Middle, Exit Directory, 
+  												fast, stable, authority
+  												disjunctive
+  		country							
+  												array of all countries
+  		autosys							
+  												array of all AS
+
+detailed
 
 	_id										//	first some administrative information
 	value									
@@ -827,7 +883,7 @@ And we should establish some measure to indicate how even the distribution is (w
 
 #### aggregation with mapReduce in MongoDB - some hints
 
-It can't be overestimated enough that what is output in the map step has to have the exact same structure than what is output in the reduce step. The two structures have to be **idempotent**. I had a lot of trouble with scripts running fine on the testdata but then failing strangely on the actual data. The reason was that the actual data set was much bigger and the mapReduce engine in MongoDB started to work through it in chunks: processing the first 100 documents in the collection, then the next 100 documents and so forth, and then aggregatig those results together like they were new input documents. So what is spit out in the reduce step - and you think you're done with that - get's sucked into another mapreduce circle again, and again... That's why it's so important when implementing the reduce step to always have in mind that it might not just chew through one more of those single-document map outputs, but through one of the results - which in this case were much more complex and therefor required some additional checks and logic. E.g. since we are counting a lot of single relay entries on a given date there was more than one place where it was tempting to add a +1 in the reduce step instead of adding the actual value contained in the document to be reduced - which might as well be 100 (and in that case actually was because MongoDBs mapReduce workes through the data in chunks of 100 documents).
+It can't be overestimated enough that what is output in the map step has to have the exact same structure than what is output in the reduce step. The two structures have to be **idempotent**. I had a lot of trouble with scripts running fine on the testdata but then failing strangely on the actual data. The reason was that the actual data set was much bigger and the mapReduce engine in MongoDB started to work through it in chunks: processing the first 100 documents in the collection, then the next 100 documents and so forth, and then aggregatig those results together like they were new input documents. So what is spit out in the reduce step - and you think you're done with that - get's sucked into another mapreduce circle again, and again... That's why it's so important when implementing the reduce step to always have in mind that it might not just chew through one more of those single-document 'map' outputs, but through one of the 'reduce' outputs - which in this case were much more complex and therefor required some additional checks and logic. E.g. since we are counting a lot of single relay entries on a given date there was more than one place where it was tempting to add a +1 in the reduce step instead of adding the actual value contained in the document to be reduced - which might as well be 100 (and in that case actually was because MongoDBs mapReduce workes through the data in chunks of 100 documents).
 
 Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence. Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be gathered that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend. The examples other people had posted really opened my eyes for what is possible within the reduce step.
 
@@ -854,13 +910,13 @@ So far we collected about 5 years of data, which leads the following numbers of 
 We will want to zoom in and out of the data visualization and henceforth need to define aggregated timespans.
 Sensible spans could be
 
-	1h		1 hour, the default and minimal span
-	6h		6 hours
-	1d		24 hours, 1 day
-	1w		168 hours, 7 days, 1 week
-	1m		1 month, about 4 weeks, about 30.5 days
+	H		1hour, the default and minimal span
+	Q		6 hours, quarter day
+	D		24 hours, 1 day
+	W		168 hours, 7 days, 1 week
+	M		1 month, about 4 weeks, about 30.5 days
 
-To keep things simple we start with hourly, daily and monthly timespans. Hourly data is what we got, 24 hours make a day and around 30 days make a month. So we get not too irregular jumps between zoom steps.   
+To keep things simple we start with hourly, daily and monthly timespans. Hourly data is what we got, 24 hours make a day and around 30 days make a month. So we get approximately regular jumps between zoom steps.   
 If need arises quarter-daily and weekly aggregations can be added later. Yearly aggregation will not be needed anytime soon.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date

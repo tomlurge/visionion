@@ -70,24 +70,25 @@
 function mapValues() {
 	"use strict";
 
-	var period;
+	var key;
+	var values = this;
 
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
 		//	strip hours from "date"
-		period = this.value.date.slice(0,10);
+		key = values._id.slice(0,10);
+		values.value.date = values.value.date.slice(0,10) + "T00:00";
 	}
 
 	//	MONTHLY AGGREGATION
 	if (theSpan === "m") {
 		//	strip hours and days from "date"
-		period = this.value.date.slice(0,7);
+		key = values._id.slice(0,7);
+		values.value.date = values.value.date.slice(0,7) + "-01T00:00";
 	}
 
-	this.value.date = period;
-
 //	SEND THE RESULT TO REDUCE
-	emit(period, this);
+	emit(key, values);
 }
 
 
@@ -111,7 +112,7 @@ function reduceFact(key, values) {
 
 	//	INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
-		date: key,
+		date: "",
 		span: theSpan,
 		updt: theUpdate,
 		client: {},

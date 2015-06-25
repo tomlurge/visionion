@@ -695,6 +695,7 @@ function mapValues() {
 		//	after all the configurations and initializations this is where the
 		//	action starts: hooks for themain categories client, server
 		//	(bridges + relays), country and autonomous system are created
+		date: date,
 		client: {},
 		server: {},
 		country: [],
@@ -771,8 +772,12 @@ function mapValues() {
 	}
 
 
+	//	create id
+	var key = date.replace("T"," ").slice(0,13);
+
+
 	//	SENDING THE RESULT TO REDUCE
-	emit(date, mapped);
+	emit(key, mapped);
 }
 
 
@@ -796,7 +801,7 @@ function reduceFact(key, values) {
 
 	//	INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
-		date: key,
+		date: "",
 		span: "h",						//	import data is always aggregated hourly,
 		updt: theUpdate,
 		client: {},
@@ -1047,9 +1052,9 @@ function runAggregation (theStart, theEnd, theUpdated) {
 
 runAggregation(
 	//	mandatory: start aggregation at (inclusive)
-	 "2013-04-02 01"
+	 "2013-04-02T01:00"
 	//	optional: stop aggregation at (inclusive)
-//,"2013-04-04 00"
+	,"2013-04-02T01:00"
 	//	optional: only consider data added on or after
 //,"2013-08-14T09:23:45.302Z"
 );
