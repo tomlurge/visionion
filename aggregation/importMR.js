@@ -1036,9 +1036,7 @@ function runAggregation (theStart, theEnd, theUpdated) {
 				//	if "true" it's faster, but needs more memory
 				//	works only for up to 500.000 keys
 			sort: {
-				//	speeds up mapReduce as 'date' is indexed in the import
-				//	collection but demands that "sort" equals the key of the
-				//	map operation
+				//	speeds up mapReduce as 'date' is indexed in the import collection
 				"date": 1
 			},
 			scope: {
@@ -1052,9 +1050,9 @@ function runAggregation (theStart, theEnd, theUpdated) {
 
 runAggregation(
 	//	mandatory: start aggregation at (inclusive)
-	 "2013-04-02T01:00"
+	 "2012-04-01T12:00"
 	//	optional: stop aggregation at (inclusive)
-	,"2013-04-02T01:00"
+	,"2012-04-01T12:00"
 	//	optional: only consider data added on or after
 //,"2013-08-14T09:23:45.302Z"
 );

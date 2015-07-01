@@ -79,7 +79,7 @@ In a nutshell:
 * Tor metrics data get's prepared and imported into a [MongoDB](http://www.mongodb.org/) database.
 * Aggregation and indexing transforms the imported data into a big fact table (a "[cube](http://en.wikipedia.org/wiki/OLAP_cube)" in OLAP parlance) suitable to drive the visualization.
 * Visualization Framework is [D3.js](http://d3js.org/), additionally [Crossfilter](http://square.github.io/crossfilter/), maybe also [dc.js](http://nickqizhu.github.io/dc.js/).
-* Client side application framework used is [React.js](http://facebook.github.io/react/), maybe [Angular.js 2.0](http://angularjs.org/) later.
+* Client side application framework used will probably be [React.js](http://facebook.github.io/react/), or [Angular.js](http://angularjs.org/) later.
 * Targeted web browsers are Chrome and Firefox. Others might work as well.
 Most of the visualization facets get rendered seperatly, on seperate planes (technically DIVs).
 The application prepares the joins and the eyes carry them out.
@@ -124,11 +124,18 @@ Support for geo-data could be beneficial either (no other NoSQL database has tha
 
 But there is a problem: both React.js and D3.js want to control the DOM. 
 It is possible to tell React to stay away from the D3 part of the DOM but the question is what benefits React can then provide to us.
+- [Ways of Integrating React.js and D3](http://ahmadchatha.com/writings/article1.html)
 
 
-[Angular.js](http://angularjs.org/) is runner up. It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)). But it currently undergoes a major rework. Version 2 is expected for the end of 2015 and will (try to) incorporate the good (declarative) parts of React.js. 
+[Angular.js](http://angularjs.org/) is runner up. It integrates nicely [with](http://briantford.com/blog/angular-d3.html "Using the D3.js Visualization Library with AngularJS") D3.js. and [with](http://square.github.com/cube/) MongoDB (also [here](http://square.github.com/cubism/)).
+ A prototype with Angular, D3 and MongoDB is documented [here](http://adilmoujahid.com/posts/2015/01/interactive-data-visualization-d3-dc-python-mongodb/). THere's also a new book [Data Visualization with D3 and AngularJS](http://shop.oreilly.com/product/9781784398484.do).
+But AngularJS currently undergoes a major rework. Version 2 is expected for the end of 2015 and will (try to) incorporate the good (declarative) parts of React.js. 
 
-Status: undecided. Slight advantage for Angular.
+[Backbone] is a rather pedestrian solution but will be tedious as soon as the interface get's more elaborated.
+
+[Ember] is used in the company of D3's developer Mike Bostock. Ember is rather opinionated and bloated. OTOH in our case framework size is negligable compared to data size. And the strength of Ember is that it can provide results quickly.
+
+Status: undecided. Advantage for Angular.
 
 >TODO
 >we'll know more after the first prototype.
@@ -1040,6 +1047,7 @@ work both in the browser and in Node.JS".  For further discussion of the topic
 see
 [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
 
+	correction: we now use YYYY-MM-DDTHH:MM, because that's understood by JavaScripts Date function
 
 ### [TODO](todo.md)
 
@@ -1169,3 +1177,9 @@ now look at that: 2.4.8 directly from mongodb.org crashes in exactly the same wa
 
 turned out it was a problem with the script (surprise, surprise...) but always good to have an alternative tool with better error reporting ;-)
 
+###### the data i've got
+	
+	ranges from		"date" : "2011-03-06T00:00"
+								// db.import.find().sort({date:1}).limit(1);
+	to						"date" : "2013-10-17T23:00"
+								// db.import.find().sort({date:-1}).limit(1);

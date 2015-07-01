@@ -1,10 +1,27 @@
-﻿# visionion
+﻿
+
+## INSTANT TODO
+
+	docs need more love
+	
+
 
 ## next steps
 
+*	aggregation
+		solve client data hourly issue
+		aggregate one month with server and client data (april 2013?)
+		export that month as JSON and CSV (compare sizes)
+		change dates in the export and reimport it 
+			to fill the database with bogus data for a few years
+		aggregate days and months (factsMR.js)
+
 * sketches of a visualization
+
 * more documentation of pre-import aggregation (extract from karsten's mails)
+
 * aggregation of visualization primitives and timespans
+
 * figure out how to control MongoDB via external scripts   
   http://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
   e.g. prompt:> mongo localhost:27017/tor ~/visionion/aggregation.js
@@ -14,35 +31,8 @@ particularily aggregation, indexing and status/control-queries
 * Then the real work on the visualizations can begin.
 * tbc
 
-## TODO
-
-
-rename
-
-		server			report
-		inclusive		project
-		pex					exp
-		pbr					pr
-		pbg					pg
-		pbm					pm
-		pbe					pe
-		brp					pool
-		brt					plug
-		bre					host
-		bre					ec2
-
-
-vielleicht doch "total" als subkategorie rausschmeissen
-	und den entsprechenden report direkt unter relay, bridge,
-	server etc einhängen, so wie bei client auch?
-
-replace example fact with new one (from an hour later)
-
-
-
 ### AGGREGATION
 		
-	schema.json
 	
 	command+control
 		update
@@ -90,34 +80,32 @@ replace example fact with new one (from an hour later)
 	
 ### DOCUMENTATION
 	
-	split it up in
+	needs refactoring
+	
 		intro
-		backend
+		gestalt
+		backend/model
 			import
+				schema
 			aggregation
-			indexing + querying
-		webapp
+				sample fact
+			database
+				indexing
+				querying
+		frontend/view
 			node
-			angular
+			react
 			bootstrap
-			yeoman
+			webpack
 		vis
 			D3
 			supporting libraries
 		setup
-		
-### WEBAPP
+			project
+			data
+			import
+			aggregation
 
-	2 days playing with angular
-	1 days playing with node
-	1 day playing with node and mongo
-	1 day playing with angular and node and mongo
-	1 day playing with D3 and mongo
-
-### INTERFACE
-
-	what to visualize
-	how to interface it
 
 ### VIS
 
@@ -127,3 +115,24 @@ replace example fact with new one (from an hour later)
 		crossfilter
 		queue
 	
+	literaturtipps
+		zum einstieg
+			Interactive Data Visualization for the Web
+			http://chimera.labs.oreilly.com/books/1230000000345/index.html
+		erste komplexe projekte, mit crossfilter
+			developing a d3 edge
+			http://backstopmedia.booktype.pro/developing-a-d3js-edge/1-getting-started/
+			(auch als pdf)
+		für fortgeschrittene
+			mastering d3.js (packt) - mit backbone-beispielen
+			d3.js cookbook (packt)
+			
+### WEBAPP
+
+		
+	
+
+### INTERFACE
+
+	what to visualize
+	how to interface it
