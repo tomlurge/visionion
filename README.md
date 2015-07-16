@@ -1179,7 +1179,27 @@ turned out it was a problem with the script (surprise, surprise...) but always g
 
 ###### the data i've got
 	
-	ranges from		"date" : "2011-03-06T00:00"
+	documents
+	range from		"date" : "2011-03-06T00:00"
 								// db.import.find().sort({date:1}).limit(1);
 	to						"date" : "2013-10-17T23:00"
 								// db.import.find().sort({date:-1}).limit(1);
+	but most of that is only client data
+	
+	servers and clients are only availbale 
+	from				"date" : "2013-04-01T00:00"
+								// db.import.find({type:"r"}).sort({date:1}).limit(1);
+	to						"date" : "2013-05-10T02:00:00"
+								// db.import.find({type:"r"}).sort({date:-1}).limit(1);
+								
+###### csv versus json
+it is written that csv is more compact than json. my experiments suggest that thats not true, at least not for my data. size was almost the same. no need to bother with conversion to csv
+								
+###### constructing fake data from the data i've got
+
+	export 31 days from 2013-04-01 to 2013-05-01 (inclusive)
+	make 12 months from them (don't forget to shorten february)
+	make 10 years from that (don't forget leap years)
+	import that into a new collection called "fakes"
+	(generate bins from there)
+	
