@@ -1193,7 +1193,7 @@ turned out it was a problem with the script (surprise, surprise...) but always g
 								// db.import.find({type:"r"}).sort({date:-1}).limit(1);
 								
 ###### csv versus json
-it is written that csv is more compact than json. my experiments suggest that thats not true, at least not for my data. size was almost the same. no need to bother with conversion to csv
+it is written that csv is more compact than json. an experiment suggested that thats not true, since size was almost the same. but the expoeriment was flawed as the [generated csv file](doc/testCSV/2013_04_02_01_importMR.csv) clearly shows. needs more work.
 								
 ###### constructing fake data from the data i've got
 
@@ -1203,3 +1203,4 @@ it is written that csv is more compact than json. my experiments suggest that th
 	import that into a new collection called "fakes"
 	(generate bins from there)
 	
+for more details see [how to generate fake data](doc/how2fake.md)

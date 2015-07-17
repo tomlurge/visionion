@@ -4,16 +4,18 @@
 
 	docs need more love
 	
+	GIT trouble
+		probably changed date-related stuff in map reduce job during aggregation of fake data
+			but overwrote with version from git
+			recunstruct that ASAP
+			
+		git is not working as i want it to: is TODO.md checked in? if not why the fuck not?
 
 
 ## next steps
 
 *	aggregation
 		solve client data hourly issue
-		aggregate one month with server and client data (april 2013?)
-		export that month as JSON and CSV (compare sizes)
-		change dates in the export and reimport it 
-			to fill the database with bogus data for a few years
 		aggregate days and months (factsMR.js)
 
 * sketches of a visualization
@@ -136,3 +138,8 @@ particularily aggregation, indexing and status/control-queries
 
 	what to visualize
 	how to interface it
+
+### MISC
+
+	check if CSV instead of JSON would be more compact
+		maybe use CSV for initial data set?

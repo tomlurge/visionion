@@ -16,7 +16,9 @@
 	
 ### date
 
-	change date format 
+	change date format to make it JavaScript compatible
+	
 		from	"YYYY-MM-DD HH"
 		to		"YYYY-MM-DDTHH:00" 
+	
 	(replace the space by a "T" and add ":00")

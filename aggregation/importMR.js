@@ -772,7 +772,8 @@ function mapValues() {
 	}
 
 
-	//	create id
+	//	CREATE ID
+	//	TODO	why did I do this? (... but it works)
 	var key = date.replace("T"," ").slice(0,13);
 
 
