@@ -1,6 +1,23 @@
 #Indexing in MongoDB
 ##some notes
 
+welche daten/zeitraum habe ich in import
+	> db.import.distinct("date", {},{"date":1, "_id": -1})
+		"2013-10-17 23"
+		"2011-03-06 00"
+
+welche indices über import
+	> db.import.getIndexes()
+			"_id" : 1
+			"addd" : -1
+			"date" : -1, "type" : 1
+
+
+welche indices über fact
+	> db.fact.getIndexes()	
+			[ ]
+
+
 #####from Oreilly.MongoDB.The.Definitive.Guide.Sep.2010
 
 built in maximum of 64 indices per collection    

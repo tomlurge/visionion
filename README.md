@@ -894,7 +894,7 @@ It can't be overestimated enough that what is output in the map step has to have
 
 Another important thing to note - and that you don't learn from the MongoDB docs - is that you have a lot of freedom with your JavaScript as long as you don't break idempotence. Most of the stuff like numbers of relays complying to certain characteristics is aggregated by just adding up document after document. But the more complex constructs like countries and autonomous systems which I had to collect from different documents through different means and intermediary steps can't be gathered that easily. First I tried to aggregate them stepwise through intermediate collections but that didn't quite work out and made the whole thing very complex. Stackoverflow was my best friend. The examples other people had posted really opened my eyes for what is possible within the reduce step.
 
-For more nitty gritty details on aggregation with MongoDBs mapReduce see a collection of mapReduce [examples](doc/mongoReduce.md) compiled from the web (mostly Stackoverflow) and some weird [working notes](doc/aggregation.md) on how to tackle the aggregation.
+For more nitty gritty details on aggregation with MongoDBs mapReduce see a collection of mapReduce [examples](doc/how2/how2mapReduce.md) compiled from the web (mostly Stackoverflow) and some weird [working notes](doc/aggregation.md) on how to tackle the aggregation.
 And there's of course the [**mapReduce script**](aggregation/mongodb/mapreduce.js) itself.
 
 
@@ -953,7 +953,7 @@ Some material about MongoDB and OLAP
 
 ### aggregation step 3 : Indexing
 
-see [indexing notes](doc/indexingNotes.md).
+see [indexing notes](doc/how2/how2index.md).
 
 * import collections
 	relay: node+timespan to look up specific nodes
@@ -1205,4 +1205,4 @@ it is written that csv is more compact than json. an experiment suggested that t
 	import that into a new collection called "fakes"
 	(generate bins from there)
 	
-for more details see [how to generate fake data](doc/how2fake.md)
+for more details see [how to generate fake data](doc/how2/how2fake.md)
