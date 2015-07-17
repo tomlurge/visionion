@@ -40,9 +40,9 @@ prüfen in welchen gruppen thomas eingetragen ist
 	groups thomas
 user wechseln
 	su			zb von tl aus root werden
-	su -			zb von tl aus root werden, aber mit komfortablerer shell
+	su -		zb von tl aus root werden, aber mit komfortablerer shell
 	su tl		zb von root aus tl werden
-wer ist eigeloggt
+wer ist eingeloggt
 	w
 
 RECHTE 

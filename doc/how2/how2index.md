@@ -1,10 +1,6 @@
 #Indexing in MongoDB
 ##some notes
 
-welche daten/zeitraum habe ich in import
-	> db.import.distinct("date", {},{"date":1, "_id": -1})
-		"2013-10-17 23"
-		"2011-03-06 00"
 
 welche indices über import
 	> db.import.getIndexes()

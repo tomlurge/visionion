@@ -1,11 +1,9 @@
-data directory zurück auf zut
-xcode updaten
-brew install mongodb
-rauskriegen wie man dann die console auf die shell leitet
-	oder log file usage lernen
-oder weiter selbst installiert und per shell starten
-	dann in der bash_profile wieder den pfad setzen
-	und ulimit peramnent ändern (bash rc ?
+
+welche daten/zeitraum habe ich in import
+	> db.import.distinct("date", {},{"date":1, "_id": -1})
+		"2013-10-17 23"
+		"2011-03-06 00"
+		
 
 ########################### debugging
 print("debug comment");
