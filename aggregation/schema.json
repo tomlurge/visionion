@@ -68,7 +68,7 @@
 			"type": "string",
 				"title": "Date of dataset",
 				"description": "Start of the time span that this document describes.",
-				"format" : "'YYYY-MM-DD HH' as defined in ISO-8601",
+				"format" : "'YYYY-MM-DDTHH:MM' as implemented in JavaScript",
 				"required": "true"
 		},
 

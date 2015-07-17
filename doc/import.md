@@ -444,7 +444,7 @@ versions of the aggregation scripts.
 		"node" : "0007D67338884CB39AF52CD37B4A1A54DCEDC448",
 		"addd" : "2013-08-14T09:23:45.302Z",
 		"nick" : "Free4all",
-		"date" : "2013-04-03 21",
+		"date" : "2013-04-03T21:00",
 		"type" : "r",
 		"span" : 1,
 		"role" : [
@@ -477,7 +477,7 @@ versions of the aggregation scripts.
 		"_id" : "0000831B236DFF73D409AD17B40E2A728A53994F-1-2013042016",
 		"node" : "0000831B236DFF73D409AD17B40E2A728A53994F",
 		"addd" : "2013-08-14T09:23:45.302Z",
-		"date" : "2013-04-20 16",
+		"date" : "2013-04-20T16:00",
 		"nick" : "ec2bridgercc7f31fe",
 		"type" : "b",
 		"span" : 1,

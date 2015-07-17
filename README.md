@@ -208,10 +208,10 @@ Memorizing them or looking them up again in the table below will be helpful when
 	+-------+-----+---------------------------+-------+------
 	cbr			_id		document ID									string				
 																													
-	cbr			updt	timedate the doc was added	string				
+	cbr			updt	JS Date the doc was added		string				
 	cbr			span	period of validity					string				
 																													
-	cbr			date	datetime										string				
+	cbr			date	JS Date											string				
 																													
 	cbr			type	type of document						string				
 	c				cb		clients at bridges					integer				
@@ -1047,7 +1047,9 @@ work both in the browser and in Node.JS".  For further discussion of the topic
 see
 [Stackoverflow](http://stackoverflow.com/questions/1056728/formatting-a-date-in-javascript).
 
-	correction: we now use YYYY-MM-DDTHH:MM, because that's understood by JavaScripts Date function
+	correction: as of June 2015 we  use 
+		YYYY-MM-DDTHH:MM
+	because that's understood by JavaScripts Date function
 
 ### [TODO](todo.md)
 
@@ -1125,7 +1127,7 @@ Requires [vagrant](http://www.vagrantup.com/downloads.html) to build a developme
 	db.collectionName.getIndexSpecs()
 	db.collectionName.findOne()
 	db.collectionName.find().pretty()
-	db.collectionName.find({date : "2013-04-03 22", bre : true }).count()
+	db.collectionName.find({_id : "2013-04-03 22", bre : true }).count()
 
 
 ### modifying mongo defaults for macOS
