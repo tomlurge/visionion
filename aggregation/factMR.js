@@ -32,11 +32,17 @@
  *					aggregated by importMR.js and thereby facilitate a fluid
  *					visualization experience.
  *
- *					The MAP step strips the 'date' field of each fact from the undesired
- *					detail - either hours for daily aggregation or hours and days for
- *					monthly aggregation. It then passes on the otherwise unaltered fact
- *					to the reduce step where all facts from the same day or month are
- *					consolidated into one new daily or monthly fact.
+ *					Both daily and monthly aggregation operate on hourly data. Monthly
+ *					aggregation could later be optimized to work on daily data when need
+ *					arises.
+ *
+ *					The MAP step generates new mapping keys by stripping the '_id'
+ *					field of each fact from undesired detail - either hours for daily
+ *					aggregation or hours and days for monthly aggregation.
+  *					It also sets the 'date' to the start of that day or month.
+ *					It then passes on the otherwise unaltered fact to the reduce step
+ *					where all facts from the same day or month are consolidated into
+ *					one new daily or monthly fact.
  *
  *					The REDUCE section is exactly the same as in importMR.js.
  *					It is, again, comparatively short. Especially reducing the 'server'
@@ -73,22 +79,27 @@ function mapValues() {
 	var key;
 	var values = this;
 
+
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
 		//	strip hours from "date"
 		key = values._id.slice(0,10);
-		values.value.date = values.value.date.slice(0,10) + "T00:00";
+		//	set 'date' to the start of that day
+		values.value.date = key + "T00:00";
 	}
+
 
 	//	MONTHLY AGGREGATION
 	if (theSpan === "m") {
 		//	strip hours and days from "date"
 		key = values._id.slice(0,7);
-		values.value.date = values.value.date.slice(0,7) + "-01T00:00";
+		//	set 'date' to the start of that month
+		values.value.date = key + "-01T00:00";
 	}
 
-//	SEND THE RESULT TO REDUCE
+	//	SEND THE RESULT TO REDUCE
 	emit(key, values);
+
 }
 
 
@@ -323,7 +334,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 	//	supported "span" values are "d" (daily) and "m" (monthly)
 	if (span !== ("d" || "m")) {
-		print('first parameter must be "d" (for daily) or "m" (for monthly)!');
+		print('first parameter must be "d" (for "daily") or "m" (for "monthly")!');
 		return;
 	}
 
@@ -341,13 +352,15 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 				merge: "facts"
 			},
 			query: {
-				"date": {
+				"_id": {
 					"$gte": start,
 					"$lte": end
 					//	both conditions have to include equality, otherwise
 					//	single parameter invocation (start === end) would return
 					//	an empty result
 				},
+				//	only work from hourly data
+				"span": "h",
 				"updt": {
 					"$gte": updated
 				}
@@ -355,12 +368,13 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 			jsMode: true,
 			//	if "true" it's faster, but needs more memory
 			//	works only for up to 500.000 keys
-			sort: {
+			//	sort: {
 				//	speeds up mapReduce as 'date' is indexed in the import
 				//	collection but demands that "sort" equals the key of the
 				//	map operation
-				"date": 1
-			},
+			//		therefor it's applicable to importMR.js but not to factMR.js
+			//		"date": 1
+			//	},
 			scope: {
 				//	globally (in the mapReduce job) available variables
 				theSpan: span,
@@ -375,9 +389,12 @@ runAggregation(
 	//	mandatory: either "d" for daily aggregation or "m" for monthly aggregation
 	"d"
 	//	mandatory: start aggregation at (inclusive)
-	,"2013-04-02 00"
+	,"2007-01-01 00"
 	//	optional: stop aggregation at (inclusive)
 //,"2013-04-03 00"
+	//	NOTE that we are using '_id', not 'date' here. reasons:
+	//			'_id' is always indexed and
+	// 			it's shorter and easier to write than JavaScript Date
 	//	optional: only consider data added on or after
 //,"2013-08-14T09:23:45.302Z"
 );
