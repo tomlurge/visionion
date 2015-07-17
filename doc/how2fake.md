@@ -37,12 +37,11 @@ then remove the 31. day from april and generate the 30-day-months
 	sed 's/2013-04-/2013-09-/g' fake-2013-04.json > fake-2013-09.json
 	sed 's/2013-04-/2013-11-/g' fake-2013-04.json > fake-2013-11.json
 
-weitere jahre erzeugen:
-alle dateien in ein neues verzeichnis kopieren und umbennen
-auf der console dorthin wechseln
-sed -i '' 's/2013-/2014-/g' *.*
+generate more years: copy all files into a new directory. on the shell:
+
+	sed -i '' 's/2013-/2014-/g' *.*
 	// http://stackoverflow.com/questions/11895169/can-i-search-replace-in-multiple-txt-files-quickly-from-terminal
-	// die syntax ist etwas anders als auf GNU/Linux
+	// this is the syntax for Mac OS X. it's slightly different for GNU/Linux
 
 bulk importing the fake data into mongodb through the following shell script
 
