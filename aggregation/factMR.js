@@ -32,6 +32,11 @@
  *					aggregated by importMR.js and thereby facilitate a fluid
  *					visualization experience.
  *
+ *					It differs from importMR.js in that it has to work on aggregated
+ *					data which regretfully and diseíngeously but unavoidably has all
+ *					values boxed except "_id" in a "value" element. MongoDB just loves
+ *					it that way.
+ *
  *					While daily aggregation is based on hourly facts, monthly
  *					aggregation is based on daily facts. Otherwise it would take too
  *					long and eventually break the database (which is not overly robust).
@@ -83,28 +88,28 @@ function mapValues() {
 	"use strict";
 
 	var key;
-	var values = this;
+	var hourly = this;
 
 
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
 		//	strip hours from "_id"
-		key = values._id.slice(0,10);
+		key = hourly._id.slice(0,10);
 		//	set 'date' to the start of that day
-		values.value.date = key + "T00:00";
+		hourly.value.date = key + "T00:00";
 	}
 
 
 	//	MONTHLY AGGREGATION
 	if (theSpan === "m") {
 		//	strip hours and days from "_id"
-		key = values._id.slice(0,7);
+		key = hourly._id.slice(0,7);
 		//	set 'date' to the start of that month
-		values.value.date = key + "-01T00:00";
+		hourly.value.date = key + "-01T00:00";
 	}
 
 	//	SEND THE RESULT TO REDUCE
-	emit(key, values);
+	emit(key, hourly.value);
 
 }
 
@@ -117,7 +122,7 @@ function mapValues() {
  */
 
 
-function reduceFact(key, values) {
+function reduceFact(key, hourly) {
 	"use strict";
 	//	will go through every property in incoming data - server and client -
 	//	and add it to the result fact as aggregated so far
@@ -144,7 +149,7 @@ function reduceFact(key, values) {
 
 
 	//	REDUCE INCOMING DATA TO THE RESULT FACT
-	values.forEach(function(value) {
+	hourly.forEach(function(value) {
 
 		/*
 		 *		2.2		CLIENTS & SERVERS
@@ -374,8 +379,8 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 					//	an empty result
 				},
 				//	only work from hourly data
-				"span": factSpan,
-				"updt": {
+				"value.span": factSpan,
+				"value.updt": {
 					"$gte": updated
 				}
 			},

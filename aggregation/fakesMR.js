@@ -168,8 +168,6 @@ function reduceFact(key, hourly) {
 					//	existing path - needs to be updated
 					if (fact[property] !== undefined) {
 						if (typeof(fact[property]) === 'number') {
-							//	TODO	if (client && daily) don't add up numbers, just copy
-							// 			fact[property] = value[property];
 							fact[property] += value[property];
 						}
 						else if (typeof(fact[property]) === 'string') {
@@ -342,12 +340,19 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 
 	//	supported "span" values are "d" (daily) and "m" (monthly)
-	//	TODO	'or' doesn't work - am i crazy?
-	if (span !== ("m" || "d")) {
+	if ( ! ( (span === "d") || (span === "m") ) ) {
 		print('first parameter must be "d" (for "daily") or "m" (for "monthly")!');
 		return;
 	}
 
+	//	monthly aggregation works on daily aggregates to save computation
+	var factSpan;
+	if (span === "d") {
+		factSpan = "h";
+	}
+	else {
+		factSpan = "d";
+	}
 
 	db.runCommand (
 		{
@@ -370,7 +375,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 					//	an empty result
 				},
 				//	only work from hourly data
-				"value.span": "h",
+				"value.span": factSpan,
 				"value.updt": {
 					"$gte": updated
 				}
