@@ -333,7 +333,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 
 	//	supported "span" values are "d" (daily) and "m" (monthly)
-	if (span !== ("d" || "m")) {
+	if ( ! ( (span === "d") || (span === "m") ) ) {
 		print('first parameter must be "d" (for "daily") or "m" (for "monthly")!');
 		return;
 	}
