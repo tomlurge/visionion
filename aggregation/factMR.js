@@ -32,9 +32,15 @@
  *					aggregated by importMR.js and thereby facilitate a fluid
  *					visualization experience.
  *
- *					Both daily and monthly aggregation operate on hourly data. Monthly
- *					aggregation could later be optimized to work on daily data when need
- *					arises.
+ *					While daily aggregation is based on hourly facts, monthly
+ *					aggregation is based on daily facts. Otherwise it would take too
+ *					long and eventually break the database (which is not overly robust).
+ *
+ *					TODO: Client data is still a mess. The data thats aggregated into
+ *					hourly facts is actually daily data. Therefor the client numbres
+ *					daily and monthly facts are 24 times to high. To correct that in the
+ *					mapReduce job is possible but probably it would be better to adjust
+ *					import data.
  *
  *					The MAP step generates new mapping keys by stripping the '_id'
  *					field of each fact from undesired detail - either hours for daily
@@ -82,7 +88,7 @@ function mapValues() {
 
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
-		//	strip hours from "date"
+		//	strip hours from "_id"
 		key = values._id.slice(0,10);
 		//	set 'date' to the start of that day
 		values.value.date = key + "T00:00";
@@ -91,7 +97,7 @@ function mapValues() {
 
 	//	MONTHLY AGGREGATION
 	if (theSpan === "m") {
-		//	strip hours and days from "date"
+		//	strip hours and days from "_id"
 		key = values._id.slice(0,7);
 		//	set 'date' to the start of that month
 		values.value.date = key + "-01T00:00";
@@ -338,6 +344,14 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 		return;
 	}
 
+	//	monthly aggregation works on daily aggregates to save computation
+	var factSpan;
+	if (span === "d") {
+		factSpan = "h";
+	}
+	else {
+		factSpan = "d";
+	}
 
 	db.runCommand (
 		{
@@ -360,7 +374,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 					//	an empty result
 				},
 				//	only work from hourly data
-				"span": "h",
+				"span": factSpan,
 				"updt": {
 					"$gte": updated
 				}
