@@ -356,7 +356,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 	db.runCommand (
 		{
-			mapReduce: "fakes",			//	the sourcing database collection
+			mapReduce: "dailyFakes",			//	the sourcing database collection
 			map: mapValues,
 			reduce: reduceFact,
 			finalize: finalizeFact,
@@ -375,7 +375,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 					//	an empty result
 				},
 				//	only work from hourly data
-				"value.span": factSpan,
+//				"value.span": factSpan,
 				"value.updt": {
 					"$gte": updated
 				}
