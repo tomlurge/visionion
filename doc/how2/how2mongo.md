@@ -1,9 +1,28 @@
 
+### Notes on using the mongo shell
+
+	# housekeeping tasks in mongo shell
+	show dbs
+	use dbName
+	db.dropDatabase()
+	show collections
+	db.collectionName.drop()							// deletes the collection
+	db.collectionName.remove()							// removes the contents of the collection
+	db.collectionName.ensureIndex({fieldName:1})		// sorting: 1 ascending, -1 descending
+	db.collectionName.dropIndex("indexName")
+	db.collectionName.getIndexSpecs()
+	db.collectionName.findOne()
+	db.collectionName.find().pretty()
+	db.collectionName.find({_id : "2013-04-03 22", bre : true }).count()
+
+
+### more...
+
 welche daten/zeitraum habe ich in import
 	> db.import.distinct("date", {},{"date":1, "_id": -1})
 		"2013-10-17 23"
 		"2011-03-06 00"
-		
+
 
 ########################### debugging
 print("debug comment");

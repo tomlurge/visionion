@@ -8,40 +8,40 @@ To reduce complexity in the mapReduce script it has proven helpful that all impo
 For relays these are:
 
 					NOW		and maybe should be changed to
-	nick		""			""	
+	nick		""		""	
 	role		[]			
 	flag		[]			
 	bwa			0			null
 	bwc			0			null
-	tsv			""			""
-	osv			""			""
+	tsv			""		""
+	osv			""		""
 	pr			0			null
 	pg			0			null
 	pm			0			null
 	pe			0			null
 	exp			[]			
-	as			""			""
-	cc			""			""
+	as			""		""
+	cc			""		""
 			
 For bridges:		
 		
-	nick		""			""
+	nick		""		""
 	bwa			0			null
 	bwc			0			null
-	tsv			""			""
-	osv			""			""
-	pool		""			""
+	tsv			""		""
+	osv			""		""
+	pool		""		""
 	host		0			null
 	plug		[]			
 			
 And for clients:	
 		
 	cb			0			null
-	cbcc		{}			null		
+	cbcc		{}		null
 	cr			0			null
-	crcc		{}			null
-	cpt			{}			null
-	cip			{}			null
+	crcc		{}		null
+	cpt			{}		null
+	cip			{}		null
 
 The following fields don't have default values because they are mandatory:
 	

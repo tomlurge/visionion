@@ -63,5 +63,5 @@ errors:
 with every yearly mongoimport run i got 4 times the following error message:
 "exception:BSON representation of supplied JSON is too large: code FailedToParse: FailedToParse: Expecting '{': offset:0"
 the count of imported documents was correct though. 
-this seems to suggest that 4 of the documents contained an array that was larger than 16 mb. that is not plausibel because 1) the average document (data per 1 hour) has a size of about 600 kb 2) every year contains 12 times (months) the same data. the error should therefor occur in a multiple of 12 (or at least 8, since only 8 months have 31 days, the other months are shorter).
+this seems to suggest that 4 of the documents contained an array that was larger than 16 mb. that is not plausibel because 1) the average document (data per 1 hour) has a size of about 600 kb 2) every year contains 12 times (months) the same data. the error should therefor occur in a multiple of 12 (or at least 7, since only 7 months have 31 days, the other months are shorter).
 strange...   

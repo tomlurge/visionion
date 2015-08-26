@@ -1,6 +1,43 @@
-﻿# visionion
+## Tor network terminology
 
-**A more detailed description of the different nodes and measures**
+The Tor network is comprised of a lot of different nodes.
+All these nodes operate - despite their different functions - from the same software, just with different configuration flags set.
+A single node can be in _most_ categories at the same time and in _every_ category over time.
+
+**Nodes** are all the actors that form the network.
+Nodes encompass clients and servers. Servers again encompass bridges and relays. Nodes can be either client or server, servers can be either bridge or relay. Relays can play different roles: Guard, Middle, Exit and Directory.
+**Clients** are end user nodes, connecting to the Tor network to anonymously use the internet.
+**Servers** are all nodes except clients.
+Servers encompass relays and bridges.
+**Bridges** are the nodes that clients connect to to circumvent attempts to block access to Tor.
+**Relays** are the nodes that form the actual Tor network which provides anonymity.
+Relays can take the roles of guard nodes, middle nodes, exit nodes and directory nodes.
+**Guard** relays function as entry points to an anonymized route through the Tor network.
+They are reached by the client either directly or, if a censor blocks them, through a bridge.
+**Middle** relays function as intermediary steps on that route.
+**Exit** relays function as exit points, leaving the Tor network and continuing to the destination on the internet.
+**Directory** relays provide some auxiliary services to the Tor network.
+
+	node							everything in the tor network
+		client					the users
+		server					everything serving the user
+			bridge				special entry points to circumvent blocking
+			relay					the actual anonymization network, with different roles:
+				guard				entry points into the network
+				middle			intermediary nodes on anonymizing route
+				exit				now anonymized, continue route to actual destination
+				directory		some auxiliary services
+
+Some of these node types are mutually exclusive, some are not:
+
+- a node may have been configured as bridge before or after being configured as a relay and that same node can switch to being a client at any time. But:
+- a node can't be a client and a server at the same time.
+- a server node can't be a bridge and a relay at the same time.
+- a relay node quite commonly fulfills various roles simultaneously: a relay can be configured as guard node, middle node, exit node and directory mirror at the same time.
+
+All this might be a bit confusing at first. What is most important to realize is that adding up the different kinds of relay nodes - guard, middle, exit and directory - will result in a number much bigger than the relay nodes actually available in the network.
+Following is an attempt for a more detailed and extensive description.
+
 
 	TODO	the following still needs a lot of work
 
