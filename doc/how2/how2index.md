@@ -3,6 +3,7 @@
 
 
 welche indices über import
+
 	> db.import.getIndexes()
 			"_id" : 1
 			"addd" : -1
@@ -10,6 +11,7 @@ welche indices über import
 
 
 welche indices über fact
+
 	> db.fact.getIndexes()	
 			[ ]
 
@@ -199,10 +201,133 @@ arrays
 	- you can match array values using operators such as $all, $in, $nin.
 	- you can also use multikey indexes indexing each element of the array.
 	- you can use the $slice operator to retrieve a subset of an array.	
+	
 and again arrays and objects of objects   
 [MongoDB: Building complex data structures](http://stackoverflow.com/questions/8614856)
 
 
+
+
+INDEXES
+=======
+
+		db.collectionName.ensureIndex({fieldName:1})		// sortierung: 1 aufsteigend, -1 absteigend
+		db.collectionName.dropIndex("indexName")
+		db.collectionName.getIndexSpecs()
+
+	indexes beziehen sich immer auf eine collection
+		eine collection kann maximal 64 indexes haben
+			aber ein multi-key index über einen array mit mehr als 64 feldern ist möglich
+	eine suche kann immer nur einen index nutzen
+	arrays werden automatisch als multikey indexes indexiert
+	ein compound index indexiert mehrere felder
+		dabei ist die reihenfolge wichtig
+		eine suche kann nur uber das erste feld eines compound index geführt werden
+			aber nicht nur über das zweite
+		ein suche kann über das erste und zweite element eines compound index geführt werden,
+			aber nicht über das erste+dritte und auch nicht das zweite+dritte
+		ausserdem low selectivity fields zuletzt
+			also zb zuerst date, dann type
+	
+	ein compound index kann nur einen array enthalten
+	ein index "überdeckt" (covers) eine suche, wenn er sowhl alle suchfelder als auch alle zurückzugebenden felder enthält
+		in diesem fall muss zur beantwortung der frage nicht auf das originaldokument zugegriffen werden
+	man kann auch felder in sub-documents indexieren
+		db.people.ensureIndex( { "address.zipcode": 1 } )
+		das ist nicht das gleiche wie das ganze sub-document zu indexieren
+	
+	> db.relay.stats()
+	{
+		"ns" : "tor.relay",
+		"count" : 4.600.366,
+		"size" :           1.823.813.584,
+		"avgObjSize" :               396,44967030884067,
+		"storageSize" : 	2.449.735.680,
+		"numExtents" : 21,
+		"nindexes" : 17,
+		"lastExtentSize" :   638.570.496,
+		"paddingFactor" : 1,
+		"systemFlags" : 0,
+		"userFlags" : 0,
+		"totalIndexSize" : 3.018.015.056,
+		"indexSizes" : {
+			"_id_" : 		  368.770.304,
+			"pex_1" : 	  121.667.056,
+			"flag_1" : 	  462.966.000,
+			"type_1" : 	  193.861.136,
+			"as_1" : 		  104.391.168,
+			"cc_1" : 		   88.382.560,
+			"pe_1" : 		  104.407.520,
+			"pg_1" : 		  104.407.520,
+			"pm_1" : 	 	  104.407.520,
+			"os_1" : 		  108.103.072,
+			"nick_1" : 	  125.951.280,
+			"tsv_1" : 	   97.073.648,
+			"ba_1" : 		   31.543.008,
+			"bez_1" : 	   24.111.024,
+			"bpt_1" : 	    9.762.144,
+			"nid_1" : 	  270.609.248,
+			"nid_1_date_1_type_1_ba_1" :
+							697.600.848,
+		},
+		"ok" : 1
+	}
+	>
+	
+	
+	unique indices 		may be useful for views where we want exactly one entry per datetime
+	sparse indices			ignore documents for which the indexed field is null
+	multikey indices		eg on array fileds like tags	 (default if the index builder finds an array)
+	
+	specifying an index	spec = {ns: "green.users", key: {'addresses.zip': 1}, name: 'zip'}
+						db.system.indexes.insert(spec, true)
+	finding an index		db.system.indexes.find()
+								{ "_id" : ObjectId("4d2205c4051f853d46447e95"), "ns" : "green.users",
+								 "key" : { "addresses.zip" : 1 }, "name" : "zip", "v" : 1 }
+	
+	my indexes so far:
+	
+	> db.client.ensureIndex({cb: 1})
+	> db.client.ensureIndex({cbcc: 1})
+	> db.client.ensureIndex({cr: 1})
+	> db.client.ensureIndex({crcc: 1})
+	
+	> db.relay.ensureIndex({pex: 1})
+	> db.relay.ensureIndex({flag: 1})
+	> db.relay.ensureIndex({type: 1})
+	> db.relay.ensureIndex({as: 1})
+	> db.relay.ensureIndex({cc: 1})
+	> db.relay.ensureIndex({pe: 1}
+	> db.relay.ensureIndex({pe: 1})
+	> db.relay.ensureIndex({pg:1})
+	> db.relay.ensureIndex({pm:1})
+	> db.relay.ensureIndex({os:1})
+	> db.relay.ensureIndex({nick:1})
+	> db.relay.ensureIndex({tsv:1})
+	> db.relay.ensureIndex({ba:1}, {sparse:true})
+	> db.relay.ensureIndex({bez:1}, {sparse:true})
+	> db.relay.ensureIndex({bpt:1}, {sparse:true})
+	
+	> db.stats()
+	{
+		"db" : "tor",
+		"collections" : 4,
+		"objects" : 4600537,
+		"avgObjSize" : 396.5257273227017,
+		"dataSize" : 		1824231280,
+		"storageSize" : 	2450776064,
+		"numExtents" : 26,
+		"indexes" : 20,
+		"indexSize" : 		2049845840,
+		"fileSize" : 		8519680000,
+		"nsSizeMB" : 16,
+		"dataFileVersion" : {
+			"major" : 4,
+			"minor" : 5
+		},
+		"ok" : 1
+	}
+	>
 
 
 
