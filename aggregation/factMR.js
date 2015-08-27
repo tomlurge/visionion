@@ -39,7 +39,7 @@
  *
  *					While daily aggregation is based on hourly facts, monthly
  *					aggregation is based on daily facts. Otherwise it would take too
- *					long and eventually break the database (which is not overly robust).
+ *					long and eventually break the database..
  *
  *					TODO: Client data is still a mess. The data thats aggregated into
  *					hourly facts is actually daily data. Therefor the client numbres

@@ -37,9 +37,15 @@
  *					values boxed except "_id" in a "value" element. MongoDB just loves
  *					it that way.
  *
- *					Both daily and monthly aggregation operate on hourly data. Monthly
- *					aggregation could later be optimized to work on daily data when need
- *					arises.
+ *					While daily aggregation is based on hourly facts, monthly
+ *					aggregation is based on daily facts. Otherwise it would take too
+ *					long and eventually break the database..
+ *
+ *					TODO: Client data is still a mess. The data thats aggregated into
+ *					hourly facts is actually daily data. Therefor the client numbres
+ *					daily and monthly facts are 24 times to high. To correct that in the
+ *					mapReduce job is possible but probably it would be better to adjust
+ *					import data.
  *
  *					The MAP step generates new mapping keys by stripping the '_id'
  *					field of each fact from undesired detail - either hours for daily
@@ -88,7 +94,7 @@ function mapValues() {
 
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
-		//	strip hours from "date"
+		//	strip hours from "_id"
 		key = hourly._id.slice(0,10);
 		//	set 'date' to the start of that day
 		hourly.value.date = key + "T00:00";
@@ -97,7 +103,7 @@ function mapValues() {
 
 	//	MONTHLY AGGREGATION
 	if (theSpan === "m") {
-		//	strip hours and days from "date"
+		//	strip hours and days from "_id"
 		key = hourly._id.slice(0,7);
 		//	set 'date' to the start of that month
 		hourly.value.date = key + "-01T00:00";
@@ -338,6 +344,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	var end = inEnd || start;
 	var updated = inUpdated || "2000-01-01T00:00:00.000Z";
 
+/* this get's too cumbersome during teting
 
 	//	supported "span" values are "d" (daily) and "m" (monthly)
 	if ( ! ( (span === "d") || (span === "m") ) ) {
@@ -353,6 +360,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	else {
 		factSpan = "d";
 	}
+*/
 
 	db.runCommand (
 		{
@@ -364,7 +372,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 				//	the final fact collection:
 				//	'merge' replaces existing documents with the same key,
 				//	'reduce' adds values to existing documents
-				merge: "monthlyFakes"
+				merge: "weeklyFakes"
 			},
 			query: {
 				"_id": {
@@ -402,11 +410,11 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 runAggregation(
 	//	mandatory: either "d" for daily aggregation or "m" for monthly aggregation
-	"m"
+	"w"
 	//	mandatory: start aggregation at (inclusive)
 	,"2007-01-01"
 	//	optional: stop aggregation at (inclusive)
-	,"2007-01-31"
+	,"2007-01-07"
 	//	NOTE that we are using '_id', not 'date' here. reasons:
 	//			'_id' is always indexed and
 	// 			it's shorter and easier to write than JavaScript Date
