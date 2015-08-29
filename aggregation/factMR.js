@@ -37,8 +37,9 @@
  *					values boxed except "_id" in a "value" element. MongoDB just loves
  *					it that way.
  *
+ * 					TODO: proposal to base monthly aggregation on daily aggregates
  *					While daily aggregation is based on hourly facts, monthly
- *					aggregation is based on daily facts. Otherwise it would take too
+ *					aggregation may be based on daily facts. Otherwise it could take too
  *					long and eventually break the database..
  *
  *					TODO: Client data is still a mess. The data thats aggregated into
@@ -90,6 +91,7 @@ function mapValues() {
 	var key;
 	var hourly = this;
 
+	//	print(hourly.value.date);			//	TODO remove debug
 
 	//	DAILY AGGREGATION
 	if (theSpan === "d") {
@@ -127,6 +129,7 @@ function reduceFact(key, hourly) {
 	//	will go through every property in incoming data - server and client -
 	//	and add it to the result fact as aggregated so far
 
+	//	print("reduce " + hourly.date);			//	TODO remove debug
 
 	/*
 	 *		2.1		INITIALIZATION
@@ -361,6 +364,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	db.runCommand (
 		{
 			mapReduce: "facts",			//	the sourcing database collection
+			//	mapReduce: "dailyFakes",					//	TODO remove debug
 			map: mapValues,
 			reduce: reduceFact,
 			finalize: finalizeFact,
@@ -369,6 +373,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 				//	'merge' replaces existing documents with the same key,
 				//	'reduce' adds values to existing documents
 				merge: "facts"
+				//	merge: "weeklyFakes"					//	TODO remove debug
 			},
 			query: {
 				"_id": {
@@ -379,7 +384,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 					//	an empty result
 				},
 				//	only work from hourly data
-				"value.span": factSpan,
+				"value.span": factSpan,						//	TODO debug auskommentierung
 				"value.updt": {
 					"$gte": updated
 				}
@@ -407,10 +412,11 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 runAggregation(
 	//	mandatory: either "d" for daily aggregation or "m" for monthly aggregation
 	"d"
+	//	"w"																		//	TODO remove debug
 	//	mandatory: start aggregation at (inclusive)
 	,"2007-01-01 00"
 	//	optional: stop aggregation at (inclusive)
-//,"2013-04-03 00"
+	,"2013-04-03 00"
 	//	NOTE that we are using '_id', not 'date' here. reasons:
 	//			'_id' is always indexed and
 	// 			it's shorter and easier to write than JavaScript Date

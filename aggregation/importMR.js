@@ -30,15 +30,15 @@
  *
  *		0.		INTRODUCTION
  *
- *					This script, importMR.js, aggregates the data that the importer
- *					scripts collect from various Tor sources and transforms it into a
- *					structure suitable for driving the visualization.
- *					It is a map reduce script, and a rather long on.
+ *					This script, importMR.js, is a Map Reduce script that aggregates the
+ *					data that the importer scripts collect from various Tor sources and
+ *					transforms it into a format suitable for driving the visionion
+ *					visualization.
  *
  *					The MAP step begins with an elaborate section on configuration and
- *					initilaization. Any updates to the script that only aim to add new
- *					topics or features should have to modify nothing else than this
- *					section. This should cover most cases.
+ *					initilaization. Any updates to this script that only aim to add new
+ *					topics or features should in most cases have to modify nothing else
+ *					than the configuration section of the Map step.
  *
  *					The REDUCE section is comparatively short. Especially reducing the
  *					'server' objects is a very straight forward process (and 'clients'
@@ -69,6 +69,12 @@
  *
  */
 
+/*
+ The MapReduce runtime provided by MongoDB feeds a collection of documents one
+ after the other into this script. Each incoming document is handed over to
+ the mapValues() function (so configured in db.runCommand() at the very bottom
+ of this script).
+ */
 
 function mapValues() {
 	"use strict";
@@ -79,11 +85,11 @@ function mapValues() {
  *
  */
 
-	//	make "this" - the document currently being mapped -referencable
-	//	inside functions
+	//	make "this" - the document currently being mapped - referencable
+	//	inside inner functions
 	var incoming = this;
 
-	//	the key to the reduce operation
+	//	date will be used to generate the key to the reduce operation
 	var date = incoming.date;
 
 	//	all object properties serve as variable declarations but also as
@@ -98,7 +104,7 @@ function mapValues() {
 			cpt = incoming.cpt;		//	bridge pluggable transport
 
 
-	//	SERVER INITIALIZATION
+	//	SERVER INITIALIZATION for both BRIDGES and RELAYS
 	//	exp init		permitted exit ports
 	var inExp = incoming.exp || false;
 	var exp = {
@@ -138,7 +144,7 @@ function mapValues() {
 
 
 	// SERVER INITIALIZATION only for BRIDGES
-	var bridge = incoming.type === "b";
+	var bridge = (incoming.type === "b");
 	//	plug init		bridge pluggable transport
 	var inPlug = incoming.plug || false;
 	var plug = {
@@ -160,7 +166,7 @@ function mapValues() {
 
 
 	//	SERVER INITIALIZATION only for RELAYS
-	var relay = incoming.type === "r";
+	var relay = (incoming.type === "r");
 	//	role init
 	var inRole = incoming.role || false;
 	var role = {
@@ -412,9 +418,9 @@ function mapValues() {
  */
 
 	function mapServer(serverConf) {
-		//	mapServer walks through the server properties as defined in the
-		// 	tree configuration structures relayConf and bridgeConf (see above),
-		//  depth first.
+		//	mapServer walks depth first through the server properties as defined in
+		//	the tree configuration structures. the variable serverConf can evaluate
+		//	to either relayConf or bridgeConf (see above).
 		//	at each knot it either - if it's a fork - recursively starts a new
 		//	walk with that knot as the new root node or - if it is a leave -
 		//	runs the test with the arguments configured in the leave, and,
@@ -424,7 +430,7 @@ function mapValues() {
 
 		var result = {};
 
-		//	start walking through the configTree
+		//	start walking through the configTree (either relayConf or bridgeConf)
 		for (var entry in serverConf) {
 			if (serverConf.hasOwnProperty(entry)) {
 				//	if it's an object it must be the root of a subtree
@@ -481,6 +487,9 @@ function mapValues() {
 		//	when mapServer finds a leave and the test returns true
 		// 	it initiates the construction of a report object by calling
 		//	this 'Report' constructor.
+		//	reports contain sub reports that may be single valued (constructed by
+		//	calling the 'SingelSubReport' constructor) for multi valued (calling
+		//	'SubReport' respectively).
 
 		var report = {};
 
@@ -550,15 +559,15 @@ function mapValues() {
 
 		//	country information can originate from 2 sources: client and relay.
 		//	when it originates from client it contains 2 arrays: one for number
-		//	of clients connecting through bridge by country and one for number
-		//	of clients connecting through relay by country (this data is
-		//	already preaggregated before import in one clients document per
-		//	datetime).
+		//	of clients connecting through bridge by country (cbcc) and one for number
+		//	of clients connecting through relay by country (crcc) (this data is
+		//	already preaggregated before import in one clients document per day).
 		//	when the incoming documentc originates from a relay it may contain
 		//	at most 1 country (the country the relay is located in) and
-		//	eventually the autonomous system. the resulting document should
-		//	comprise an array of uniform country objects containing all
-		//	available data.
+		//	eventually the autonomous system.
+		//	the resulting document should comprise one array of uniform country
+		//	objects, each containing all available data for that country.
+		//
 		//	these 2 types of results require rather different aggregation
 		//	procedures. the map step therefor first checks if the type of
 		//	the document at hand is "client" or "relay" and populates a country
@@ -568,14 +577,14 @@ function mapValues() {
 		//	data from the mapped document. the country array constructed from a
 		//	mapped client type document may contain 2 documents for each
 		//	country - 1 from cbcc and 1 from crcc - and a total of about 500
-		//	country documents whereas a relay document maps to at most one
+		//	country documents whereas a relay document can map to only one
 		//	country entry in the country array.
 		//
-		//	the reduce step then always checks first if the country at hand is
-		//	already contained in the fact.country array. if so, it adds new
-		//	data to the values of that object, if not it pushes the country
-		//	object at hand onto the fact.country array. autosys is an array
-		//	within the object and therefor needs an inner loop.
+		//	the reduce step then first checks if the country at hand is already
+		//	contained in the fact.country array. if so, it adds new data to the
+		//	values of that object, if not it pushes the country object at hand onto
+		//	the fact.country array. autosys is an array within the object and
+		//	therefor needs an inner loop.
 
 		var countryObject = {
 			country: country
@@ -617,6 +626,7 @@ function mapValues() {
 			}
 			if (incoming.as) {
 				countryObject.autosys = {};
+				//	TODO get rid of the space after AS
 				countryObject.autosys["AS " + incoming.as] = 1;
 			}
 		}
@@ -639,12 +649,12 @@ function mapValues() {
 		//	construct autosys object
 		var asObject = {
 			as: incoming.as,
-			//	possible future enhancement:
-			// 	get full name of AS from external source
-			//	name: lookupASname();
-			//	possible future enhancement:
-			//	get home country for AS from external source
-			//	home: lookupAShome();
+			/*	possible future enhancement:
+				// 	get full name of AS from external source
+				name: lookupASname();
+				//	get home country for AS from external source
+				home: lookupAShome();
+			*/
 			relay: 1,
 			bwa: incoming.bwa || 0,
 			bwc: incoming.bwc || 0,
@@ -691,10 +701,11 @@ function mapValues() {
  */
 
 	//	SEEDING RESULT OBJECT
-	var mapped = {
+	var value = {
 		//	after all the configurations and initializations this is where the
-		//	action starts: hooks for themain categories client, server
-		//	(bridges + relays), country and autonomous system are created
+		//	action starts: the mapping value is initialized and hooks for the main
+		// categories client, server (bridges + relays), country and autonomous
+		//	system are created
 		date: date,
 		client: {},
 		server: {},
@@ -707,21 +718,21 @@ function mapValues() {
 		//	if the incoming document represents a relay, mapServer is called
 		//	with the relay part of the serverTree map as configuration.
 		//	"server.total" is  mentioned nowhere but here and 6 lines below...
-		mapped.server.total = new Report();			//  pay credit to server.total
-		mapped.server.relay = mapServer(relayConf);
+		value.server.total = new Report();			//  pay credit to server.total
+		value.server.relay = mapServer(relayConf);
 	}
 
 	//	MAPPING SERVER.BRIDGE
 	else if (bridge) {
 		//	likewise for bridges
-		mapped.server.total = new Report();			//  pay credit to server.total
-		mapped.server.bridge = mapServer(bridgeConf);
+		value.server.total = new Report();			//  pay credit to server.total
+		value.server.bridge = mapServer(bridgeConf);
 	}
 
 	//	MAPPING CLIENT
 	else if (client) {
-		//	incoming data is copied into the following object as is
-		mapped.client = {
+		//	incoming client data is copied into the client section as is
+		value.client = {
 			total: cr && cb ? cr + cb : 0,
 			atBridge: cb ? cb : 0,
 			atRelay: cr ? cr : 0,
@@ -741,7 +752,7 @@ function mapValues() {
 	if (relay && incoming.cc) {
 		//	countries are mentioned in relay data specifying the physical
 		//	location of the relay
-		mapped.country.push(new Country("relay", incoming.cc));
+		value.country.push(new Country("relay", incoming.cc));
 	}
 	else if (client) {
 		//	countries are also mentioned in client data specifying how many
@@ -750,7 +761,7 @@ function mapValues() {
 			//	connecting by bridge
 			for (var cbIn in incoming.cbcc) {
 				if (incoming.cbcc.hasOwnProperty(cbIn)) {
-					mapped.country.push(new Country("cbcc", cbIn));
+					value.country.push(new Country("cbcc", cbIn));
 				}
 			}
 		}
@@ -758,7 +769,7 @@ function mapValues() {
 			//	connecting by relay
 			for (var crIn in incoming.crcc) {
 				if (incoming.crcc.hasOwnProperty(crIn)) {
-					mapped.country.push(new Country("crcc", crIn));
+					value.country.push(new Country("crcc", crIn));
 				}
 			}
 
@@ -768,7 +779,7 @@ function mapValues() {
 
 	//	MAPPING AUTOSYS
 	if (relay && incoming.as) {
-		mapped.autosys.push(new AS());
+		value.autosys.push(new AS());
 	}
 
 
@@ -778,7 +789,7 @@ function mapValues() {
 
 
 	//	SENDING THE RESULT TO REDUCE
-	emit(key, mapped);
+	emit(key, value);
 }
 
 
@@ -789,6 +800,10 @@ function mapValues() {
  *
  */
 
+/*
+ The Reduce step takes an array of key/value pairs as emitted by the Map step
+ and reduces them one by one, according to their key.
+ */
 
 function reduceFact(key, values) {
 	"use strict";
@@ -824,32 +839,32 @@ function reduceFact(key, values) {
  */
 
 		//	first reduce all properties except "country" and "autosys" arrays
-		//	because these require special treatment (function "update()" won't
-		//	touch arrays)
+		//	because these require special treatment
+		//	(function "update()" won't touch arrays)
 		update(fact, value);
 
-		function update(fact, value){
-			for (var property in value){
-				if (value.hasOwnProperty(property) &&
+		function update(reduced, mapped) {
+			for (var property in mapped) {
+				if (mapped.hasOwnProperty(property) &&
 						//	arrays are handled seperately
 						//	(that concerns the sections "country" and "autosys")
-					Object.prototype.toString.call(value[property]) !==
+					Object.prototype.toString.call(mapped[property]) !==
 					"[object Array]"
 				) {
-					//	check incoming value against already aggregated fact
+					//	check incoming value against already reduced fact
 					//	existing path - needs to be updated
-					if (fact[property] !== undefined) {
-						if (typeof(fact[property]) === 'number') {
-							fact[property] += value[property];
+					if (reduced[property] !== undefined) {
+						if (typeof(reduced[property]) === 'number') {
+							reduced[property] += mapped[property];
 						}
-						else if (typeof(fact[property]) === 'string') {
-							fact[property] = value[property];
+						else if (typeof(reduced[property]) === 'string') {
+							reduced[property] = mapped[property];
 						}
 						else {	//	element is object - drill down
-							update(fact[property], value[property]);
+							update(reduced[property], mapped[property]);
 						}
 					} else {	//	new path - needs to be added
-						fact[property] = clone(value[property]);
+						reduced[property] = clone(mapped[property]);
 					}
 				}
 			}
@@ -874,102 +889,139 @@ function reduceFact(key, values) {
 /*
  *		2.3		COUNTRIES
  */
+		//	DID rename vCountry -> valCountryObj
+		//	DID rename countryFact -> factCountryObj
 
-		value.country.forEach(function(vCountry) {
-		//	double loop part 1: country in values emitted from map
-			//	assuming data about this country hasn't already been aded to fact
-			var incomingCountryAlreadyknown = false;
-			//	double loop part 2: country in fact
+		value.country.forEach(function(valCountryObj) {
+		//	double loop part 1: 'country' array in values emitted from map
+			//	assuming data about current country hasn't already been aded to fact
+			var incomingCountryAlreadyKnown = false;
+
+			//	double loop part 2: for each country object in fact's 'country' array
+			//	TODO why not	fact.country.forEach(function(factCountryObj)) {
+			//	instead of the next 3 lines
 			for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
 				//	check the array for country already added to the aggregation
-				var countryFact = fact.country[fc];
+				var factCountryObj = fact.country[fc];
 				//	if an object for this country was already added to the array
-				if (countryFact.country === vCountry.country) {
-					//	add values from countryMapped to that already existing object
-					update(countryFact, vCountry);
-					if (vCountry.autosys) {
-						//	inner double loop part 1: 'as' in mapped.country
-						for (var vca = 0, vcal = vCountry.autosys.length;
+				if (factCountryObj.country === valCountryObj.country) {
+					//	add values from incoming country to the fact's country object
+					update(factCountryObj, valCountryObj);
+					if (valCountryObj.autosys) {
+
+						//	inner double loop part 1: if incoming country contains AS data
+						//	TODO	wrong!	valCountryObj.autosys is an object, not an array
+						//	TODO	for(var AS in valCountryObj.autosys) { if AS is ownProperty ...
+						for (var vca = 0, vcal = valCountryObj.autosys.length;
 								 vca < vcal;
 								 vca++) {
-							//	(can be nmore than one,
-							//	 because incoming may be pre-aggregated)
+							//	(can be nmore than one because incoming may be pre-aggregated)
 							var incomingASinCountryAlreadyKown = false;
-							//	countryASmap is the whole object {as: int, count: int}
-							var countryASmap = vCountry.autosys[vca];
+							//	valCountryAS is the whole object {as: int, count: int}
+							//	TODO wrong! not an object, just a property
+							//	TODO ... but makes no difference: valCountryAS is the number
+							//	TODO	var valCountryAS = valCountryObj.autosys[AS];
+							var valCountryAS = valCountryObj.autosys[vca];
 
 							//	<- inner double loop part 2: 'as' in fact.country
-							for (var fca = 0, fcal = countryFact.autosys.length;
+							//	TODO	wrong again: not an array, but an object
+							//	TODO	like above change to (for x in y) if y hasOwnProperty x
+							for (var fca = 0, fcal = factCountryObj.autosys.length;
 									 fca < fcal;
 									 fca++) {
-								var countryAsFact = countryFact.autosys[fca];
-								if (countryAsFact.as === countryASmap.as) {
-									countryAsFact.count += countryASmap.count;
+								var factCountryAS = factCountryObj.autosys[fca];
+								//	TODO	oh-oooh - how make the following comparison???
+								//	TODO	maybe		if(factCountryObj[AS]) {...
+								if (factCountryAS.as === valCountryAS.as) {
+									//	TODO	wrong format of result, remove both ".count"
+									factCountryAS.count += valCountryAS.count;
 									incomingASinCountryAlreadyKown = true;
 									break;
 								}
 							}
 							//	after the inner loop is through
 							if (!incomingASinCountryAlreadyKown) {
-								//	if the 'as' wasn't found in the array add it
-								countryFact.autosys.push(countryASmap);
+								//	if the 'as' wasn't found in the fact add it
+								//	TODO	again not an array, no pushing but adding...
+								//	TODO	maybe		factCountryObj.autosys[AS] = valCountryAS;
+								factCountryObj.autosys.push(valCountryAS);
 							}
 						//	return to the outer loop, check the next country passed in
 						}
+
 					}
-					incomingCountryAlreadyknown = true;
+					incomingCountryAlreadyKnown = true;
 					break;
 				}
 			}
 			//	if the country does not exist in the array so far
-			if (!incomingCountryAlreadyknown) {
+			if (!incomingCountryAlreadyKnown) {
 				//	add the country object to the array
-				fact.country.push(vCountry);
+				fact.country.push(valCountryObj);
 			}
 		});
 
 /*
  *		2.4		AUTONOMOUS SYSTEMS
  */
-
-		value.autosys.forEach(function(vAutosys) {
+		//	V 1
+		value.autosys.forEach(function(valASobj) {
 			var incomingASalreadyKnown = false;
+
+			//	F 1
+			//	TODO	make it forEach and loose Break
 			for (var fa = 0, fal = fact.autosys.length; fa < fal; fa++) {
 				//	for each object in fact.autosys
-				var asFact = fact.autosys[fa];
-				//	if that object's 'as' field equals that of the relay
-				if (asFact.as === vAutosys.as) {
+				var factASobj = fact.autosys[fa];
+
+				//	IF 1
+				//	if that object's 'as' field equals that of the incoming value
+				if (factASobj.as === valASobj.as) {
 					//	add up the numbers
-					update(asFact, vAutosys);
-					for (var vac = 0, vacl = vAutosys.country.length;
+					update(factASobj, valASobj);
+
+					//	V 2
+					//	now check each country in the country array
+					//	of that incoming AS object value
+					//	TODO	make it forEach REALLY
+					for (var vac = 0, vacl = valASobj.country.length;
 							 vac < vacl;
 							 vac++) {
 						var incomingCountryInASalreadyKown = false;
-						var asCountryMap = vAutosys.country[vac];
-						for (var fac = 0, facl = asFact.country.length;
+						var valAScountryObj = valASobj.country[vac];
+
+						//	F 2
+						//	compare them with the countries in the country array
+						//	of  fact's AS object
+						//	TODO	make it forEach and loose Break
+						for (var fac = 0, facl = factASobj.country.length;
 								 fac < facl;
 								 fac++) {
-							var asCountryFact = asFact.country[fac];
-							if (asCountryFact.cc === asCountryMap.cc) {
-								update(asCountryFact, asCountryMap);
+							var factAScountryObj = factASobj.country[fac];
+
+							//	IF 2
+							if (factAScountryObj.cc === valAScountryObj.cc) {
+								update(factAScountryObj, valAScountryObj);
 								incomingCountryInASalreadyKown = true;
 								break;
 							}
 						}
 						if (!incomingCountryInASalreadyKown) {
-							asFact.country.push(asCountryMap);
+							factASobj.country.push(valAScountryObj);
 						}
 					}
+
 					incomingASalreadyKnown = true;
 					break;
 				}
 			}
 			if (!incomingASalreadyKnown) {
-				fact.autosys.push(vAutosys);
+				fact.autosys.push(valASobj);
 			}
 		});
 
 	});
+
 
 	//	finally retun the reduced fact
 	return fact;
