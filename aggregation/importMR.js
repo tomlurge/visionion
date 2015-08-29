@@ -960,7 +960,7 @@ function reduceFact(key, values) {
 				fact.country.push(valCountryObj);
 			}
 		});
-
+// just a test
 /*
  *		2.4		AUTONOMOUS SYSTEMS
  */
