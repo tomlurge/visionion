@@ -37,7 +37,7 @@ These generic views can then be combined and tailored to elucidate structural pa
 	* [Notes](doc/aggregation.md#notes)  
 * [Visualization](doc/visualization.md)  
 * [Technicalities](doc/technicalities.md)  
-	+ [Background Information](doc/technicalities.md#background)
+	* [Background Information](doc/technicalities.md#background)
 	* [JavaScript Issues](doc/technicalities.md#jsIssues)   
 	* [Indexing](doc/technicalities.md#indexing)   
 		* [Indexing Import Data](doc/technicalities.md#indexingImport) 
@@ -54,6 +54,7 @@ These generic views can then be combined and tailored to elucidate structural pa
 		* [vim](doc/how2/how2vim.md)
 		* [git](doc/how2/how2git.md)
 		* [webstorm](doc/how2/how2webstorm.md)
+	* [Acronyms](doc/acronyms.md)
 	* [TODO](todo.md)
 		
 		

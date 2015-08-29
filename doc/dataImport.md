@@ -65,43 +65,43 @@ Memorizing them or looking them up again in the table below will be helpful when
 	 						half of the timespan in question
 	 					
 	 						
-		node		field	aggregation	valuespace
-  	+-------+-----+-----------+----------
-  	cbr			_id		(*)					fingerprint/'client'+span+date
-  														eg 'fingerprint-1-YYYYMMDDHH'
-  	cbr			updt							ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-  	cbr			span	-						length of the interval this dataset describes:
-  														one of: "h"(hourly), "d" (daily), "m" (monthly)
-  	cbr			date	-						start of the time span that this document describes
-  														format "YYYY-MM-DDTHH:MM" as defined by ECMAScript
-  	cbr			type							one of: "c" (clients), "b" (bridge), "r" (relay)
-  	c				cb		mean
-  	c				cbcc	mean				{cc:integer ...}
-  	c				cr		mean
-  	c				crcc	mean				{cc:integer ...}
-  	c				cpt								{obfs2/obfs3/OR/unknown:integer}
-  	c				cip		mode				{v4/v6:integer}
-  	 br			node	-						Tor fingerprint
-  	 br			nick	mode				nickname of relay
-  	 br			bwa		mean				B/s
-  	 br			bwc		mean				B/s
-  	 br			tsv		mode				one of: 010, 011, 012, 020, 021, 022, 023, 024, 025
-  	 br			osv		mode				one of: linux, darwin, freebsd, windows, other
-  	 b			pool	mode				one of: email, https, other
-  	 b			ec2		mode				//	maps to category 'host'
-  	 b			plug	mode (*)		some of: obfs2, obfs3
-  	  r			role	mode (*)		some of: Guard, Middle, Exit, Dir
-  	  r			flag	mode (*)		some of: Authority, Fast, Stable, BadExit, 
-  	  												BadDirectory, Named, Running, Unnamed,  Valid, 
-  	  												V2Dir, V3Dir
-  	  r			pr		mean				probability this relay is used in a path
-  	  r			pg		mean				probability this relay is used as a guard node
-  	  r			pm		mean				probability this relay is used as a middle node
-  	  r			pe		mean				probability this relay is used as a exit nod
-  	  r			exp		mode				some of: 80, 443, 6667
-  	  r			as		mode				as number
-  	  r			cc		mode				two-letter (ISO 3166-1 alpha-2), upper case
-  
+	node		field	aggregation	valuespace
+	+-------+-----+-----------+----------
+	cbr			_id		(*)					fingerprint/'client'+span+date
+														eg 'fingerprint-1-YYYYMMDDHH'
+	cbr			updt							ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
+	cbr			span	-						length of the interval this dataset describes:
+														one of: "h"(hourly), "d" (daily), "m" (monthly)
+	cbr			date	-						start of the time span that this document describes
+														format "YYYY-MM-DDTHH:MM" as defined by ECMAScript
+	cbr			type							one of: "c" (clients), "b" (bridge), "r" (relay)
+	c				cb		mean
+	c				cbcc	mean				{cc:integer ...}
+	c				cr		mean
+	c				crcc	mean				{cc:integer ...}
+	c				cpt								{obfs2/obfs3/OR/unknown:integer}
+	c				cip		mode				{v4/v6:integer}
+	 br			node	-						Tor fingerprint
+	 br			nick	mode				nickname of relay
+	 br			bwa		mean				B/s
+	 br			bwc		mean				B/s
+	 br			tsv		mode				one of: 010, 011, 012, 020, 021, 022, 023, 024, 025
+	 br			osv		mode				one of: linux, darwin, freebsd, windows, other
+	 b			pool	mode				one of: email, https, other
+	 b			ec2		mode				//	maps to category 'host'
+	 b			plug	mode (*)		some of: obfs2, obfs3
+		r			role	mode (*)		some of: Guard, Middle, Exit, Dir
+		r			flag	mode (*)		some of: Authority, Fast, Stable, BadExit, 
+														BadDirectory, Named, Running, Unnamed,  Valid, 
+														V2Dir, V3Dir
+		r			pr		mean				probability this relay is used in a path
+		r			pg		mean				probability this relay is used as a guard node
+		r			pm		mean				probability this relay is used as a middle node
+		r			pe		mean				probability this relay is used as a exit nod
+		r			exp		mode				some of: 80, 443, 6667
+		r			as		mode				as number
+		r			cc		mode				two-letter (ISO 3166-1 alpha-2), upper case
+
 
 	
 The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over larger periods of time.
