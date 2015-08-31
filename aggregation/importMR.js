@@ -626,8 +626,7 @@ function mapValues() {
 			}
 			if (incoming.as) {
 				countryObject.autosys = {};
-				//	TODO get rid of the space after AS
-				countryObject.autosys["AS " + incoming.as] = 1;
+				countryObject.autosys["AS" + incoming.as] = 1;
 			}
 		}
 		else if (arg === "cbcc") {
@@ -784,7 +783,6 @@ function mapValues() {
 
 
 	//	CREATE ID
-	//	TODO	why did I do this? (... but it works)
 	var key = date.replace("T"," ").slice(0,13);
 
 
@@ -889,90 +887,38 @@ function reduceFact(key, values) {
 /*
  *		2.3		COUNTRIES
  */
-		//	DID rename vCountry -> valCountryObj
-		//	DID rename countryFact -> factCountryObj
 
-		value.country.forEach(function(valCountryObj) {
-		//	double loop part 1: 'country' array in values emitted from map
+		//	LOOP 1 OF 2: 'country' array in values emitted from map
+		value.country.forEach( function(valCountryObj) {
 			//	assuming data about current country hasn't already been aded to fact
 			var incomingCountryAlreadyKnown = false;
-
-			//	double loop part 2: for each country object in fact's 'country' array
-			//	TODO why not	fact.country.forEach(function(factCountryObj)) {
-			//	instead of the next 3 lines
-			for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
-				//	check the array for country already added to the aggregation
-				var factCountryObj = fact.country[fc];
+			//	LOOP 2 OF 2: for each country object in fact's 'country' array
+			fact.country.forEach( function(factCountryObj) {
 				//	if an object for this country was already added to the array
 				if (factCountryObj.country === valCountryObj.country) {
 					//	add values from incoming country to the fact's country object
 					update(factCountryObj, valCountryObj);
-					if (valCountryObj.autosys) {
-
-						//	inner double loop part 1: if incoming country contains AS data
-						//	TODO	wrong!	valCountryObj.autosys is an object, not an array
-						//	TODO	for(var AS in valCountryObj.autosys) { if AS is ownProperty ...
-						for (var vca = 0, vcal = valCountryObj.autosys.length;
-								 vca < vcal;
-								 vca++) {
-							//	(can be nmore than one because incoming may be pre-aggregated)
-							var incomingASinCountryAlreadyKown = false;
-							//	valCountryAS is the whole object {as: int, count: int}
-							//	TODO wrong! not an object, just a property
-							//	TODO ... but makes no difference: valCountryAS is the number
-							//	TODO	var valCountryAS = valCountryObj.autosys[AS];
-							var valCountryAS = valCountryObj.autosys[vca];
-
-							//	<- inner double loop part 2: 'as' in fact.country
-							//	TODO	wrong again: not an array, but an object
-							//	TODO	like above change to (for x in y) if y hasOwnProperty x
-							for (var fca = 0, fcal = factCountryObj.autosys.length;
-									 fca < fcal;
-									 fca++) {
-								var factCountryAS = factCountryObj.autosys[fca];
-								//	TODO	oh-oooh - how make the following comparison???
-								//	TODO	maybe		if(factCountryObj[AS]) {...
-								if (factCountryAS.as === valCountryAS.as) {
-									//	TODO	wrong format of result, remove both ".count"
-									factCountryAS.count += valCountryAS.count;
-									incomingASinCountryAlreadyKown = true;
-									break;
-								}
-							}
-							//	after the inner loop is through
-							if (!incomingASinCountryAlreadyKown) {
-								//	if the 'as' wasn't found in the fact add it
-								//	TODO	again not an array, no pushing but adding...
-								//	TODO	maybe		factCountryObj.autosys[AS] = valCountryAS;
-								factCountryObj.autosys.push(valCountryAS);
-							}
-						//	return to the outer loop, check the next country passed in
-						}
-
-					}
 					incomingCountryAlreadyKnown = true;
-					break;
 				}
-			}
-			//	if the country does not exist in the array so far
+			});
+			//	if the country wasn't found in the reduced fact
 			if (!incomingCountryAlreadyKnown) {
-				//	add the country object to the array
+				//	add the country object to the fact.counry array
 				fact.country.push(valCountryObj);
 			}
 		});
-// just a test
+
 /*
  *		2.4		AUTONOMOUS SYSTEMS
  */
-		//	V 1
-		value.autosys.forEach(function(valASobj) {
+
+		//	OUTER LOOP OVER AUTOSYS ARRAY
+		//	Value 1. loop
+		value.autosys.forEach( function(valASobj) {
 			var incomingASalreadyKnown = false;
 
-			//	F 1
-			//	TODO	make it forEach and loose Break
-			for (var fa = 0, fal = fact.autosys.length; fa < fal; fa++) {
-				//	for each object in fact.autosys
-				var factASobj = fact.autosys[fa];
+			//	Fact 1. loop
+			fact.autosys.forEach( function(factASobj) {
 
 				//	IF 1
 				//	if that object's 'as' field equals that of the incoming value
@@ -980,41 +926,34 @@ function reduceFact(key, values) {
 					//	add up the numbers
 					update(factASobj, valASobj);
 
-					//	V 2
+					//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY
+					//	Value 2. loop
 					//	now check each country in the country array
 					//	of that incoming AS object value
-					//	TODO	make it forEach REALLY
-					for (var vac = 0, vacl = valASobj.country.length;
-							 vac < vacl;
-							 vac++) {
-						var incomingCountryInASalreadyKown = false;
-						var valAScountryObj = valASobj.country[vac];
+					valASobj.country.forEach( function(valAScountryObj) {
+						var incomingAScountryAlreadyKown = false;
 
-						//	F 2
+						//	Fact 2. loop
 						//	compare them with the countries in the country array
 						//	of  fact's AS object
-						//	TODO	make it forEach and loose Break
-						for (var fac = 0, facl = factASobj.country.length;
-								 fac < facl;
-								 fac++) {
-							var factAScountryObj = factASobj.country[fac];
+						factASobj.country.forEach( function(factAScountryObj) {
 
 							//	IF 2
 							if (factAScountryObj.cc === valAScountryObj.cc) {
 								update(factAScountryObj, valAScountryObj);
-								incomingCountryInASalreadyKown = true;
-								break;
+								incomingAScountryAlreadyKown = true;
 							}
-						}
-						if (!incomingCountryInASalreadyKown) {
+
+						});
+						if (!incomingAScountryAlreadyKown) {
 							factASobj.country.push(valAScountryObj);
 						}
-					}
+
+					});
 
 					incomingASalreadyKnown = true;
-					break;
 				}
-			}
+			});
 			if (!incomingASalreadyKnown) {
 				fact.autosys.push(valASobj);
 			}
@@ -1068,10 +1007,10 @@ function runAggregation (theStart, theEnd, theUpdated) {
 			reduce: reduceFact,
 			finalize: finalizeFact,
 			out: {
-				//	the final fact collection:
+				//	the  fact collection:
 				//	'merge' replaces existing documents with the same key,
 				//	'reduce' adds values to existing documents
-				merge: "facts"
+				merge: "hourly"
 			},
 			query: {
 				"date": {
@@ -1103,9 +1042,9 @@ function runAggregation (theStart, theEnd, theUpdated) {
 
 runAggregation(
 	//	mandatory: start aggregation at (inclusive)
-	 "2013-04-02T01:00"
+	 "2013-04-01T00:00"
 	//	optional: stop aggregation at (inclusive)
-	,"2013-04-02T01:00"
+	,"2013-04-01T23:00"
 	//	optional: only consider data added on or after
-//,"2013-08-14T09:23:45.302Z"
+	//,"2013-08-14T09:23:45.302Z"
 );
