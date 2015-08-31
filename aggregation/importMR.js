@@ -907,6 +907,65 @@ function reduceFact(key, values) {
 				fact.country.push(valCountryObj);
 			}
 		});
+		/*	elaborated version with loops optimized for performance
+				and country.autosys implemented as array instead of simple object
+		 value.country.forEach(function(valCountryObj) {
+		 //	double loop part 1: 'country' array in values emitted from map
+		 //	assuming data about current country hasn't already been aded to fact
+		 var incomingCountryAlreadyKnown = false;
+
+		 //	double loop part 2: for each country object in fact's 'country' array
+		 //	instead of the next 3 lines
+		 for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
+		 //	check the array for country already added to the aggregation
+		 var factCountryObj = fact.country[fc];
+		 //	if an object for this country was already added to the array
+		 if (factCountryObj.country === valCountryObj.country) {
+		 //	add values from incoming country to the fact's country object
+		 update(factCountryObj, valCountryObj);
+		 if (valCountryObj.autosys) {
+
+		 //	inner double loop part 1: if incoming country contains AS data
+		 for (var vca = 0, vcal = valCountryObj.autosys.length;
+		 vca < vcal;
+		 vca++) {
+		 //	(can be nmore than one because incoming may be pre-aggregated)
+		 var incomingASinCountryAlreadyKown = false;
+		 //	valCountryAS is the whole object {as: int, count: int}
+		 var valCountryAS = valCountryObj.autosys[vca];
+
+		 //	<- inner double loop part 2: 'as' in fact.country
+		 for (var fca = 0, fcal = factCountryObj.autosys.length;
+		 fca < fcal;
+		 fca++) {
+		 var factCountryAS = factCountryObj.autosys[fca];
+		 if (factCountryAS.as === valCountryAS.as) {
+		 factCountryAS.count += valCountryAS.count;
+		 incomingASinCountryAlreadyKown = true;
+		 break;
+		 }
+		 }
+		 //	after the inner loop is through
+		 if (!incomingASinCountryAlreadyKown) {
+		 //	if the 'as' wasn't found in the fact add it
+		 factCountryObj.autosys.push(valCountryAS);
+		 }
+		 //	return to the outer loop, check the next country passed in
+		 }
+
+		 }
+		 incomingCountryAlreadyKnown = true;
+		 break;
+		 }
+		 }
+		 //	if the country does not exist in the array so far
+		 if (!incomingCountryAlreadyKnown) {
+		 //	add the country object to the array
+		 fact.country.push(valCountryObj);
+		 }
+		 });
+
+		 */
 
 /*
  *		2.4		AUTONOMOUS SYSTEMS
@@ -958,14 +1017,72 @@ function reduceFact(key, values) {
 				fact.autosys.push(valASobj);
 			}
 		});
+		/*	elaborated version with loops optimized for performance
+
+		 //	V 1
+		 value.autosys.forEach(function(valASobj) {
+		 var incomingASalreadyKnown = false;
+
+		 //	F 1
+		 for (var fa = 0, fal = fact.autosys.length; fa < fal; fa++) {
+		 //	for each object in fact.autosys
+		 var factASobj = fact.autosys[fa];
+
+		 //	IF 1
+		 //	if that object's 'as' field equals that of the incoming value
+		 if (factASobj.as === valASobj.as) {
+		 //	add up the numbers
+		 update(factASobj, valASobj);
+
+		 //	V 2
+		 //	now check each country in the country array
+		 //	of that incoming AS object value
+		 for (var vac = 0, vacl = valASobj.country.length;
+		 vac < vacl;
+		 vac++) {
+		 var incomingCountryInASalreadyKown = false;
+		 var valAScountryObj = valASobj.country[vac];
+
+		 //	F 2
+		 //	compare them with the countries in the country array
+		 //	of  fact's AS object
+		 for (var fac = 0, facl = factASobj.country.length;
+		 fac < facl;
+		 fac++) {
+		 var factAScountryObj = factASobj.country[fac];
+
+		 //	IF 2
+		 if (factAScountryObj.cc === valAScountryObj.cc) {
+		 update(factAScountryObj, valAScountryObj);
+		 incomingCountryInASalreadyKown = true;
+		 break;
+		 }
+		 }
+		 if (!incomingCountryInASalreadyKown) {
+		 factASobj.country.push(valAScountryObj);
+		 }
+		 }
+
+		 incomingASalreadyKnown = true;
+		 break;
+		 }
+		 }
+		 if (!incomingASalreadyKnown) {
+		 fact.autosys.push(valASobj);
+		 }
+		 });
+		 */
 
 	});
-
 
 	//	finally retun the reduced fact
 	return fact;
 
 }
+
+
+
+
 
 
 
