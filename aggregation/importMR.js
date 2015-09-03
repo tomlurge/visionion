@@ -1,12 +1,4 @@
-﻿/** TODO
- *
- *	clients should be transformed to hourly values
- * 	for further discussion see
- * 	https://github.com/tomlurge/visionion/issues/5
- *
- */
-
-/*
+﻿/*
  *
  * 		0.1		CONTENTS
  *
@@ -624,10 +616,21 @@ function mapValues() {
 					countryObject.tsv[t] = 1;
 				}
 			}
+
 			if (incoming.as) {
-				countryObject.autosys = {};
-				countryObject.autosys["AS" + incoming.as] = 1;
+			 countryObject.autosys = {};
+			 countryObject.autosys["AS" + incoming.as] = 1;
+			 }
+			/*	EXTENDED/EXCESSIVE VERSION: AUTOSYS ARRAY AND AS OBJECTS
+			if (incoming.as) {
+				countryObject.autosys = [];
+				countryObject.autosys[0] = {
+					"as" : "AS" + incoming.as,
+					"count" : 1
+				};
 			}
+			*/
+
 		}
 		else if (arg === "cbcc") {
 			countryObject.cbcc = incoming.cbcc[country];
@@ -647,7 +650,7 @@ function mapValues() {
 	function AS(){
 		//	construct autosys object
 		var asObject = {
-			as: incoming.as,
+			as: "AS" + incoming.as,
 			/*	possible future enhancement:
 				// 	get full name of AS from external source
 				name: lookupASname();
@@ -659,35 +662,49 @@ function mapValues() {
 			bwc: incoming.bwc || 0,
 			role: {},
 			flag: {},
-			prob: {},
-			country: [{
-				cc: incoming.cc,
-				relay: 1,
-				bwa: incoming.bwa || 0,
-				bwc: incoming.bwc || 0,
-				role: {},
-				flag: {},
-				prob: {}
-			}]
+			prob: {}
 		};
+		//	check if need for country sub array
+		var ccObject = incoming.cc ? true : false;
+		if (ccObject) {
+			asObject.country = [
+				{
+					cc: incoming.cc,
+					relay: 1,
+					bwa: incoming.bwa || 0,
+					bwc: incoming.bwc || 0,
+					role: {},
+					flag: {},
+					prob: {}
+				}
+			];
+		}
+		//	populate property sub objects
 		for (var r in role) {
 			if (role.hasOwnProperty(r) && role[r]) {
 				asObject.role[r] = 1;
-				asObject.country[0].role[r] = 1;
+				if (ccObject) {
+					asObject.country[0].role[r] = 1;
+				}
 			}
 		}
 		for (var f in flag) {
 			if (flag.hasOwnProperty(f) && flag[f]) {
 				asObject.flag[f] = 1;
-				asObject.country[0].flag[f] = 1;
+				if (ccObject) {
+					asObject.country[0].flag[f] = 1;
+				}
 			}
 		}
 		for (var p in prob) {
 			if (prob.hasOwnProperty(p) && prob[p]) {
 				asObject.prob[p] = prob[p];
-				asObject.country[0].prob[p] = prob[p];
+				if (ccObject) {
+					asObject.country[0].prob[p] = prob[p];
+				}
 			}
 		}
+
 		return asObject;
 	}
 
@@ -782,8 +799,26 @@ function mapValues() {
 	}
 
 
-	//	CREATE ID
-	var key = date.replace("T"," ").slice(0,13);
+	//	CREATE ID AND ADJUST DATE ACCORDING TO SPAN
+	var key;
+	//	hourly aggregation
+	if (theSpan === "h") {
+		key = date.replace("T","-").slice(0,13);
+	}
+	//	daily aggregation
+	if (theSpan === "d") {
+		//	strip hours from key (which will become the result's _id)
+		key = date.slice(0, 10);
+		//	set 'date' to the start of that day
+		value.date = key + "T00:00";
+	}
+	//	monthly aggregation
+	if (theSpan === "m") {
+		//	strip hours and days from key (which will become the result's _id)
+		key = date.slice(0, 7);
+		//	set 'date' to the start of that month
+		value.date = key + "-01T00:00";
+	}
 
 
 	//	SENDING THE RESULT TO REDUCE
@@ -816,7 +851,7 @@ function reduceFact(key, values) {
 	//	INITIALIZE REDUCTION BY GATHERING OF ADMINISTRATIVE DATA
 	var fact = {
 		date: "",
-		span: "h",						//	import data is always aggregated hourly,
+		span: theSpan,
 		updt: theUpdate,
 		client: {},
 		server: {
@@ -884,15 +919,16 @@ function reduceFact(key, values) {
 			}
 		}
 
+
 /*
  *		2.3		COUNTRIES
  */
-
-		//	LOOP 1 OF 2: 'country' array in values emitted from map
+		/*	SIMPLE VERSION
+		//	LOOP 1/2: 'country' array in values emitted from map
 		value.country.forEach( function(valCountryObj) {
 			//	assuming data about current country hasn't already been aded to fact
 			var incomingCountryAlreadyKnown = false;
-			//	LOOP 2 OF 2: for each country object in fact's 'country' array
+			//	LOOP 2/2: for each country object in fact's 'country' array
 			fact.country.forEach( function(factCountryObj) {
 				//	if an object for this country was already added to the array
 				if (factCountryObj.country === valCountryObj.country) {
@@ -907,173 +943,229 @@ function reduceFact(key, values) {
 				fact.country.push(valCountryObj);
 			}
 		});
-		/*	elaborated version with loops optimized for performance
-				and country.autosys implemented as array instead of simple object
-		 value.country.forEach(function(valCountryObj) {
-		 //	double loop part 1: 'country' array in values emitted from map
-		 //	assuming data about current country hasn't already been aded to fact
-		 var incomingCountryAlreadyKnown = false;
+		*/
 
-		 //	double loop part 2: for each country object in fact's 'country' array
-		 //	instead of the next 3 lines
-		 for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
-		 //	check the array for country already added to the aggregation
-		 var factCountryObj = fact.country[fc];
-		 //	if an object for this country was already added to the array
-		 if (factCountryObj.country === valCountryObj.country) {
-		 //	add values from incoming country to the fact's country object
-		 update(factCountryObj, valCountryObj);
-		 if (valCountryObj.autosys) {
+		/*	EXTENDED VERSION WITH LOOPS OPTIMIZED FOR PERFORMANCE */
+		//	LOOP OVER COUNTRY ARRAY 1/2: INCOMING VALUES
+		value.country.forEach(function(valCountryObj) {
+			//	assuming data about current country hasn't already been aded to fact
+			var incomingCountryAlreadyKnown = false;
 
-		 //	inner double loop part 1: if incoming country contains AS data
-		 for (var vca = 0, vcal = valCountryObj.autosys.length;
-		 vca < vcal;
-		 vca++) {
-		 //	(can be nmore than one because incoming may be pre-aggregated)
-		 var incomingASinCountryAlreadyKown = false;
-		 //	valCountryAS is the whole object {as: int, count: int}
-		 var valCountryAS = valCountryObj.autosys[vca];
+			//	LOOP OVER COUNTRY ARRAY 2/2: REDUCED FACT
+			for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
+				var factCountryObj = fact.country[fc];
+				//	if an object for this country was already added to the array
+				if (factCountryObj.country === valCountryObj.country) {
+					//	add values from incoming country to the fact's country object
+					update(factCountryObj, valCountryObj);
+					incomingCountryAlreadyKnown = true;
+					break;
+				}
+			}
+			//	if the incoming country wasn't found in the fact.country array
+			if (!incomingCountryAlreadyKnown) {
+				//	add the country object to the array
+				fact.country.push(valCountryObj);
+			}
+		});
+		/*	EXCESSIVE VERSION WITH LOOPS OPTIMIZED FOR PERFORMANCE
+		 AND COUNTRY.AUTOSYS IMPLEMENTED AS ARRAY INSTEAD OF A SIMPLE OBJECT
 
-		 //	<- inner double loop part 2: 'as' in fact.country
-		 for (var fca = 0, fcal = factCountryObj.autosys.length;
-		 fca < fcal;
-		 fca++) {
-		 var factCountryAS = factCountryObj.autosys[fca];
-		 if (factCountryAS.as === valCountryAS.as) {
-		 factCountryAS.count += valCountryAS.count;
-		 incomingASinCountryAlreadyKown = true;
-		 break;
-		 }
-		 }
-		 //	after the inner loop is through
-		 if (!incomingASinCountryAlreadyKown) {
-		 //	if the 'as' wasn't found in the fact add it
-		 factCountryObj.autosys.push(valCountryAS);
-		 }
-		 //	return to the outer loop, check the next country passed in
-		 }
+		//	OUTER LOOP OVER COUNTRY ARRAY 1/2: INCOMING VALUES
+		value.country.forEach(function(valCountryObj) {
+			//	assuming data about current country hasn't already been aded to fact
+			var incomingCountryAlreadyKnown = false;
 
-		 }
-		 incomingCountryAlreadyKnown = true;
-		 break;
-		 }
-		 }
-		 //	if the country does not exist in the array so far
-		 if (!incomingCountryAlreadyKnown) {
-		 //	add the country object to the array
-		 fact.country.push(valCountryObj);
-		 }
-		 });
+			//	OUTER LOOP OVER COUNTRY ARRAY 2/2: REDUCED FACT
+			for (var fc = 0, fcl = fact.country.length; fc < fcl; fc++) {
+				var factCountryObj = fact.country[fc];
+				//	if an object for this country was already added to the array
+				if (factCountryObj.country === valCountryObj.country) {
+					//	add values from incoming country to the fact's country object
+					update(factCountryObj, valCountryObj);
 
+					//	update() doesn't cover arrays, therefor country.autosys has to be
+					//	handeled seperately
+					if (valCountryObj.autosys) {
+						//	INNER LOOP 1/2: AS data in incoming value.country
+						for (var vca = 0, vcal = valCountryObj.autosys.length;
+								 vca < vcal;
+								 vca++) {
+							//	(can be nmore than one because incoming may be pre-aggregated)
+							var ASinIncomingCountryAlreadyKown = false;
+							//	valCountryAS is the whole object {as: string, count: int}
+							var valCountryAS = valCountryObj.autosys[vca];
+
+							//	INNER LOOP 2/2: check fact.country.autosys for incoming AS
+							//	make sure the fact object has an autosys array
+							if (!factCountryObj.autosys) {
+								factCountryObj.autosys = [];
+							}
+							for (var fca = 0, fcal = factCountryObj.autosys.length;
+									 fca < fcal;
+									 fca++) {
+								var factCountryAS = factCountryObj.autosys[fca];
+								//	if incoming country.AS is found in fact, add count
+								if (factCountryAS.as === valCountryAS.as) {
+									factCountryAS.count += valCountryAS.count;
+									ASinIncomingCountryAlreadyKown = true;
+									break;
+								}
+							}
+							//	after the inner loop is through
+							if (!ASinIncomingCountryAlreadyKown) {
+								//	if incoming AS wasn't found in fact.country.autosys, add it
+								factCountryObj.autosys.push(valCountryAS);
+							}
+							//	return to the outer loop, check the next country passed in
+						}
+					}
+
+					incomingCountryAlreadyKnown = true;
+					break;
+				}
+			}
+			//	if the incoming country doesn't exist in the fact.country array so far
+			if (!incomingCountryAlreadyKnown) {
+				//	add the country object to the array
+				fact.country.push(valCountryObj);
+			}
+		});
 		 */
 
 /*
  *		2.4		AUTONOMOUS SYSTEMS
  */
-
-		//	OUTER LOOP OVER AUTOSYS ARRAY
-		//	Value 1. loop
+		/* SIMPLE VERSION
+		//	OUTER LOOP OVER AUTOSYS ARRAY 1/2: INCOMING VALUES
 		value.autosys.forEach( function(valASobj) {
 			var incomingASalreadyKnown = false;
-
-			//	Fact 1. loop
+			//	OUTER LOOP OVER AUTOSYS ARRAY 2/2: REDUCED FACT
 			fact.autosys.forEach( function(factASobj) {
 
-				//	IF 1
-				//	if that object's 'as' field equals that of the incoming value
+				//	if the fact's object's 'as' field equals that of the incoming value
 				if (factASobj.as === valASobj.as) {
 					//	add up the numbers
 					update(factASobj, valASobj);
 
-					//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY
-					//	Value 2. loop
-					//	now check each country in the country array
-					//	of that incoming AS object value
-					valASobj.country.forEach( function(valAScountryObj) {
-						var incomingAScountryAlreadyKown = false;
 
-						//	Fact 2. loop
-						//	compare them with the countries in the country array
-						//	of  fact's AS object
-						factASobj.country.forEach( function(factAScountryObj) {
+					//	update() doesn't cover arrays, therefor autosys.country has to be
+					//	handeled seperately. first check for it's existance since inner
+					//	arrays in AS (and country) objects are only created on demand
+					if (valASobj.country) {
 
-							//	IF 2
-							if (factAScountryObj.cc === valAScountryObj.cc) {
-								update(factAScountryObj, valAScountryObj);
-								incomingAScountryAlreadyKown = true;
+						//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY 1/2: INCOMING VALUE
+						//	now check each country in the country array
+						//	of that incoming AS object value
+						valASobj.country.forEach(function (valAScountryObj) {
+							var incomingAScountryAlreadyKown = false;
+
+							//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY 2/2: REDUCED FACT
+							//	compare them with the countries in the country array
+							//	of  fact's AS object. again check for it's existance first
+							if (!factASobj.country) {
+								factASobj.country = [];
+							}
+							factASobj.country.forEach(function (factAScountryObj) {
+
+								//	if the incoming AS is already present in fact
+								if (factAScountryObj.cc === valAScountryObj.cc) {
+									//	add up the numbers
+									update(factAScountryObj, valAScountryObj);
+									incomingAScountryAlreadyKown = true;
+								}
+
+							});
+							//	if incoming AS wasn't already known add it to facts country
+							if (!incomingAScountryAlreadyKown) {
+								factASobj.country.push(valAScountryObj);
 							}
 
 						});
-						if (!incomingAScountryAlreadyKown) {
-							factASobj.country.push(valAScountryObj);
-						}
 
-					});
+					}
+
 
 					incomingASalreadyKnown = true;
 				}
 			});
+			//	if the incoming country wasn't already known add it to the fact
 			if (!incomingASalreadyKnown) {
 				fact.autosys.push(valASobj);
 			}
 		});
-		/*	elaborated version with loops optimized for performance
-
-		 //	V 1
-		 value.autosys.forEach(function(valASobj) {
-		 var incomingASalreadyKnown = false;
-
-		 //	F 1
-		 for (var fa = 0, fal = fact.autosys.length; fa < fal; fa++) {
-		 //	for each object in fact.autosys
-		 var factASobj = fact.autosys[fa];
-
-		 //	IF 1
-		 //	if that object's 'as' field equals that of the incoming value
-		 if (factASobj.as === valASobj.as) {
-		 //	add up the numbers
-		 update(factASobj, valASobj);
-
-		 //	V 2
-		 //	now check each country in the country array
-		 //	of that incoming AS object value
-		 for (var vac = 0, vacl = valASobj.country.length;
-		 vac < vacl;
-		 vac++) {
-		 var incomingCountryInASalreadyKown = false;
-		 var valAScountryObj = valASobj.country[vac];
-
-		 //	F 2
-		 //	compare them with the countries in the country array
-		 //	of  fact's AS object
-		 for (var fac = 0, facl = factASobj.country.length;
-		 fac < facl;
-		 fac++) {
-		 var factAScountryObj = factASobj.country[fac];
-
-		 //	IF 2
-		 if (factAScountryObj.cc === valAScountryObj.cc) {
-		 update(factAScountryObj, valAScountryObj);
-		 incomingCountryInASalreadyKown = true;
-		 break;
-		 }
-		 }
-		 if (!incomingCountryInASalreadyKown) {
-		 factASobj.country.push(valAScountryObj);
-		 }
-		 }
-
-		 incomingASalreadyKnown = true;
-		 break;
-		 }
-		 }
-		 if (!incomingASalreadyKnown) {
-		 fact.autosys.push(valASobj);
-		 }
-		 });
 		 */
 
+		/*	EXTENDED VERSION WITH LOOPS OPTIMIZED FOR PERFORMANCE */
+		//	OUTER LOOP OVER AUTOSYS ARRAY 1/2: INCOMING VALUES
+		value.autosys.forEach(function(valASobj) {
+			//	assuming data about current AS hasn't already been aded to fact
+			var incomingASalreadyKnown = false;
+
+			//	OUTER LOOP OVER AUTOSYS ARRAY 2/2: REDUCED FACT
+			for (var fa = 0, fal = fact.autosys.length; fa < fal; fa++) {
+				var factASobj = fact.autosys[fa];
+
+				//	if the fact's object's 'as' field equals that of the incoming value
+				if (factASobj.as === valASobj.as) {
+					//	add up the numbers
+					update(factASobj, valASobj);
+
+					//	update() doesn't cover arrays, therefor autosys.country has to be
+					//	handeled seperately
+					if (valASobj.country) {
+						//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY 1/2: INCOMING VALUE
+						//	now check each country in the country array
+						//	of that incoming AS object value
+						for (var vac = 0, vacl = valASobj.country.length;
+								 vac < vacl;
+								 vac++) {
+							var incomingCountryInASalreadyKown = false;
+							var valAScountryObj = valASobj.country[vac];
+
+							//	INNER LOOP OVER AUTOSYS.COUNTRY ARRAY 2/2: REDUCED FACT
+							//	compare them with the countries in the country array
+							//	of  fact's AS object
+							//	but first make sure the fact object has an autosys array
+							if (!factASobj.country) {
+								factASobj.country = [];
+							}
+							for (var fac = 0, facl = factASobj.country.length;
+									 fac < facl;
+									 fac++) {
+								var factAScountryObj = factASobj.country[fac];
+								//	if the incoming AS is already present in fact
+								if (factAScountryObj.cc === valAScountryObj.cc) {
+									//	add up the numbers
+									update(factAScountryObj, valAScountryObj);
+									incomingCountryInASalreadyKown = true;
+									break;
+								}
+							}
+							//	if incoming AS wasn't already known add it to the facts country
+							if (!incomingCountryInASalreadyKown) {
+								factASobj.country.push(valAScountryObj);
+							}
+						}
+					}
+
+					incomingASalreadyKnown = true;
+					break;
+				}
+			}
+			//	if the incoming country wasn't already known add it to the fact
+			if (!incomingASalreadyKnown) {
+				fact.autosys.push(valASobj);
+			}
+		});
+
+
+	// END values.forEach
 	});
+
+
+	//	fact.span has to be set after update(), otherwise it wil be overwritten
+	fact.span = theSpan;
 
 	//	finally retun the reduced fact
 	return fact;
@@ -1110,12 +1202,21 @@ function finalizeFact(key, fact) {
  */
 
 
-function runAggregation (theStart, theEnd, theUpdated) {
+function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 	"use strict";
 
-	var start = theStart;
-	var end = theEnd || start;
-	var updated = theUpdated || "2000-01-01T00:00:00.000Z";
+	var span = inSpan;
+	var start = inStart;
+	var end = inEnd || start;
+	var updated = inUpdated || "2000-01-01T00:00:00.000Z";
+
+
+	//	supported "span" values are "d" (daily) and "m" (monthly)
+	if ( ! ( (span === "h") || (span === "d") || (span === "m") ) ) {
+		print('first parameter must be "h" (for "hourly"), "d" (for "daily") or ' +
+			'"m" (for "monthly") aggregation!');
+		return;
+	}
 
 	db.runCommand (
 		{
@@ -1124,10 +1225,10 @@ function runAggregation (theStart, theEnd, theUpdated) {
 			reduce: reduceFact,
 			finalize: finalizeFact,
 			out: {
-				//	the  fact collection:
+				//	the resulting  collection of reduced facts:
 				//	'merge' replaces existing documents with the same key,
 				//	'reduce' adds values to existing documents
-				merge: "hourly"
+				merge: "facts"
 			},
 			query: {
 				"date": {
@@ -1141,7 +1242,7 @@ function runAggregation (theStart, theEnd, theUpdated) {
 					"$gte": updated
 				}
 			},
-			jsMode: true,
+			jsMode: false,
 				//	if "true" it's faster, but needs more memory
 				//	works only for up to 500.000 keys
 			sort: {
@@ -1150,6 +1251,7 @@ function runAggregation (theStart, theEnd, theUpdated) {
 			},
 			scope: {
 				//	globally (in the mapReduce job) available variables
+				theSpan: span,
 				theUpdate: updated
 			}
 		}
@@ -1158,10 +1260,26 @@ function runAggregation (theStart, theEnd, theUpdated) {
 
 
 runAggregation(
+	//	mandatory: "h" for hourly, "d" for daily or "m" for monthly aggregation
+	"d"
 	//	mandatory: start aggregation at (inclusive)
-	 "2013-04-01T00:00"
+	,"2013-04-02T00:00"
 	//	optional: stop aggregation at (inclusive)
-	,"2013-04-01T23:00"
+	,"2013-05-01T23:00"
 	//	optional: only consider data added on or after
 	//,"2013-08-14T09:23:45.302Z"
 );
+
+
+/* HINT - READ BEFORE RUNNING
+
+ in absence of a polished UI this has to do as interface and manual:
+
+	- of course check parameters in runAggregation)
+	- check parameters in db.runCommand, especially
+	-- mapReduce
+	-- merge
+
+	everything else should work automagically
+
+ */
