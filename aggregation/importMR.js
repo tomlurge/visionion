@@ -1261,7 +1261,7 @@ function runAggregation (inSpan, inStart, inEnd, inUpdated) {
 
 runAggregation(
 	//	mandatory: "h" for hourly, "d" for daily or "m" for monthly aggregation
-	"d"
+	"h"
 	//	mandatory: start aggregation at (inclusive)
 	,"2013-04-02T00:00"
 	//	optional: stop aggregation at (inclusive)
