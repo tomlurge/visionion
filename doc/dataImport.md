@@ -13,95 +13,57 @@ The following import outline documents the fields and values that each imported 
 (The field names are rather short to achieve better performance in MongoDB.
 Memorizing them or looking them up again in the table below will be helpful when reading through the rest of the documentation and the code.)
 
-	node		field	desc												type		subtype
-	+-------+-----+---------------------------+-------+------
-	cbr			_id		document ID									string				
-																													
-	cbr			updt	JS Date the doc was added		string				
-	cbr			span	period of validity					string				
-																													
-	cbr			date	JS Date											string				
-																													
-	cbr			type	type of document						string				
-	c				cb		clients at bridges					integer				
-	c				cbcc	clients@bridges per country	object				
-	c				cr		clients at relays						integer				
-	c				crcc	clients@relays per country	object				
-	c				cpt		bridge pluggbl.transp.used	object				
-	c				cip		ip-version used							object				
-	 br			node	node id											string				
-	 br			nick	nickname										string				
-	 br			bwa		bandwidth advertized 				integer				
-	 br			bwc		bandwidth consumed 					integer				
-	 br			tsv		Tor software version				string				
-	 br			osv		operating system						string				
-	 b			pool	bridge pool     						string				
-	 b			ec2		bridge is in EC2 cloud			boolean				
-	 b			plug	bridge pluggable transport	array		string
-	  r			role	roles/functions of relay		array		string
-	  r			flag	flags 											array		string
-	  																			 								
-	  r			pr		consensus_weight_fraction		number				
-	  r			pg		guard_probability						number				
-	  r			pm		middle_probability					number				
-	  r			pe		exit_probability						number				
-	  r			exp		permitted exit ports				array		integer
-	  r			as		autonomous system						integer				
-	  r			cc		country code								string				
+	node    field desc                        type    subtype aggregation valuespace
+	+-------+-----+---------------------------+-------+-------+-----------+---------
+	cbr     _id   document ID                 string          (*)         fingerprint/'client'+span+date
+	                                                                      eg 'fingerprint-1-YYYYMMDDHH'
+	cbr     updt  JS Date the doc was added   string                      ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
+	cbr     span  period of validity          string          -           length of the interval this dataset describes:
+	                                                                      one of: "h"(hourly), "d" (daily), "m" (monthly)
+	cbr     date  JS Date                     string          -           start of the time span that this document describes
+	                                                                      format "YYYY-MM-DDTHH:MM" as defined by ECMAScript
+	cbr     type  type of document            string                      one of: "c" (clients), "b" (bridge), "r" (relay)
+	c       cb    clients at bridges          integer         mean
+	c       cbcc  clients@bridges per country object          mean        {cc:integer ...}
+	c       cr    clients at relays           integer         mean
+	c       crcc  clients@relays per country  object          mean        {cc:integer ...}
+	c       cpt   bridge pluggbl.transp.used  object                      {obfs2/obfs3/OR/unknown:integer}
+	c       cip   ip-version used             object          mode        {v4/v6:integer}
+	 br     node  node id                     string          -           Tor fingerprint
+	 br     nick  nickname                    string          mode        nickname of relay
+	 br     bwa   bandwidth advertized        integer         mean        B/s
+	 br     bwc   bandwidth consumed          integer         mean        B/s
+	 br     tsv   Tor software version        string          mode        one of: t10, t11, t12, t20, t21, t22, t23, t24, t25
+	 br     osv   operating system            string          mode        one of: linux, darwin, freebsd, windows, other
+	 b      pool  bridge pool                 string          mode        one of: email, https, other
+	 b      ec2   bridge is in EC2 cloud      boolean         mode        //  maps to category 'host'
+	 b      plug  bridge pluggable transport  array   string  mode (*)    some of: obfs2, obfs3
+	  r     role  roles/functions of relay    array   string  mode (*)    some of: Guard, Middle, Exit, Dir
+	  r     flag  flags                       array   string  mode (*)    some of: Authority, Fast, Stable, BadExit, 
+	                                                                      BadDirectory, Named, Running, Unnamed,  Valid, 
+	  r     pr    consensus_weight_fraction   number                      V2Dir, V3Dir
+	  r     pg    guard_probability           number          mean        probability this relay is used in a path
+	  r     pm    middle_probability          number          mean        probability this relay is used as a guard node
+	  r     pe    exit_probability            number          mean        probability this relay is used as a middle node
+	  r     exp   permitted exit ports        array   integer mean        probability this relay is used as a exit nod
+	  r     as    autonomous system           integer         mode        as number
+	  r     cc    country code                string          mode        two-letter (ISO 3166-1 alpha-2), upper case
 
 
 	LEGEND --------------------------------------------------------------------
-	node				indicates, for which type of node the field is relevant,
-							c (clients), b (bridge), r (relay)
-	field				name of the field in the database
-	desc				description,	short characterization
-	type				as defined in 3.5 of 
-							http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1
-	subtype			if type is array, type of array content
-	valuespace	expected values
-							for lists of possible values "some of" where multiple values are
-							possible or "one of" where possible values are mutually exclusive
-	(*)					if the relay provides the functionality in question for at least
-	 						half of the timespan in question
+	node          indicates, for which type of node the field is relevant,
+	              c (clients), b (bridge), r (relay)
+	field         name of the field in the database
+	desc          description,	short characterization
+	type          as defined in 3.5 of 
+	              http://datatracker.ietf.org/doc/draft-zyp-json-schema/?include_text=1
+	subtype       if type is array, type of array content
+	valuespace    expected values
+	              for lists of possible values "some of" where multiple values are
+	              possible or "one of" where possible values are mutually exclusive
+	(*)           if the relay provides the functionality in question for at least
+	              half of the timespan in question
 	 					
-	 						
-	node		field	aggregation	valuespace
-	+-------+-----+-----------+----------
-	cbr			_id		(*)					fingerprint/'client'+span+date
-														eg 'fingerprint-1-YYYYMMDDHH'
-	cbr			updt							ISO 8601 extended format YYYY-MM-DDTHH:mm:ss.sssZ
-	cbr			span	-						length of the interval this dataset describes:
-														one of: "h"(hourly), "d" (daily), "m" (monthly)
-	cbr			date	-						start of the time span that this document describes
-														format "YYYY-MM-DDTHH:MM" as defined by ECMAScript
-	cbr			type							one of: "c" (clients), "b" (bridge), "r" (relay)
-	c				cb		mean
-	c				cbcc	mean				{cc:integer ...}
-	c				cr		mean
-	c				crcc	mean				{cc:integer ...}
-	c				cpt								{obfs2/obfs3/OR/unknown:integer}
-	c				cip		mode				{v4/v6:integer}
-	 br			node	-						Tor fingerprint
-	 br			nick	mode				nickname of relay
-	 br			bwa		mean				B/s
-	 br			bwc		mean				B/s
-	 br			tsv		mode				one of: 010, 011, 012, 020, 021, 022, 023, 024, 025
-	 br			osv		mode				one of: linux, darwin, freebsd, windows, other
-	 b			pool	mode				one of: email, https, other
-	 b			ec2		mode				//	maps to category 'host'
-	 b			plug	mode (*)		some of: obfs2, obfs3
-		r			role	mode (*)		some of: Guard, Middle, Exit, Dir
-		r			flag	mode (*)		some of: Authority, Fast, Stable, BadExit, 
-														BadDirectory, Named, Running, Unnamed,  Valid, 
-														V2Dir, V3Dir
-		r			pr		mean				probability this relay is used in a path
-		r			pg		mean				probability this relay is used as a guard node
-		r			pm		mean				probability this relay is used as a middle node
-		r			pe		mean				probability this relay is used as a exit nod
-		r			exp		mode				some of: 80, 443, 6667
-		r			as		mode				as number
-		r			cc		mode				two-letter (ISO 3166-1 alpha-2), upper case
-
 
 	
 The timespan for import data is always 1 hour. During aggregation, described below, we will derive larger timespans to improve performance for  visualizations over larger periods of time.

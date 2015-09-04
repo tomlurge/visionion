@@ -76,10 +76,13 @@ and then execute it
 
 	./import.sh
 
-Import took about 100 minutes on my 6 year old laptop for 4 years of fake data.
-It produced 4 errors (see the very bottom). Like last time it complained 4 times 
-that the supplied JSON is too large. This is strange since in the supplied fake 
-data no generated month occurs exactly 4 times.
+Import took about 100 minutes on my 6 year old laptop for 4 years of fake data.  
+
+
+#### Errors
+Import produced 4 errors in 09/2015 (see the very bottom). Like the first time 
+in 06/2015it complained 4 times that the supplied JSON is too large. This is 
+strange since in the supplied fake data no generated month occurs exactly 4 times.
 
 	./import.sh: line 1: ﻿#!/bin/bash: No such file or directory
 	connected to: 127.0.0.1

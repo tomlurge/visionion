@@ -8,20 +8,20 @@ To reduce complexity in the mapReduce script it has proven helpful that all impo
 For relays these are:
 
 					NOW		and maybe should be changed to
-	nick		""		""	
+	nick		""		
 	role		[]			
 	flag		[]			
 	bwa			0			null
 	bwc			0			null
-	tsv			""		""
-	osv			""		""
+	tsv			""		
+	osv			""		
 	pr			0			null
 	pg			0			null
 	pm			0			null
 	pe			0			null
 	exp			[]			
-	as			""		""
-	cc			""		""
+	as			""		
+	cc			""
 			
 For bridges:		
 		
@@ -62,7 +62,7 @@ Discussion:
 **objects**: this concerns only client data. Since client data is already preaggregated missing values almost certainly mean that we don't know the real values. Therefor missing object data should be represented not as an empty object '{}' but as 'null'.   
 
 
-Still two questions remain:   
+TODO Still two questions remain:   
 - Did we know at any point through gathering the data for sure if the value in question is just missing/unknown or really/deliberatly empty? E.g. do we have a way to distinguish if the flag-field was lost during transmission or if there was really no single flag set? Is the answer to that question for all fields the same?  
 - What do we do with it? So far there's no concept on why or how to visualize unknown data, and neither the aggregation script nor the data schema for aggregated data does take it into account. Of course both could easily change resp. be changed. 
 
@@ -91,7 +91,7 @@ Modification of the reduce part would probably be less involved.
 We'd only have to add new fields to the aggregated data, counting for example all servers for which we have no (null) data for bwa, bwc, tsv, osv. Etc.
 
 	clients	
-									easy, since already pre aggregated: just copy null from import to aggregated  
+										easy, since already pre aggregated: just copy null from import to aggregated  
 	servers
 		total
 			count					# of servers from which some fields have a value of null

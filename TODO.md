@@ -3,13 +3,6 @@
 ## INSTANT TODO
 
 	docs need more love
-	
-	GIT trouble
-		probably changed date-related stuff in map reduce job during aggregation of fake data
-			but overwrote with version from git
-			recunstruct that ASAP
-			
-		git is not working as i want it to: is TODO.md checked in? if not why the fuck not?
 
 
 ## next steps
@@ -34,7 +27,6 @@ particularily aggregation, indexing and status/control-queries
 * tbc
 
 ### AGGREGATION
-		
 	
 	command+control
 		update
@@ -48,7 +40,7 @@ particularily aggregation, indexing and status/control-queries
 			gui for manually controlling import and aggregation
 					
 	naming
-		replace "total" through "flagAny"
+		replace "total" with "flagAny"
 		maybe other inconsistencies
 	
 	documentation
@@ -63,11 +55,13 @@ particularily aggregation, indexing and status/control-queries
 				mean
 				etc?
 		
-	timespans
-		really needs to be done
-		but first check D3 and Cube if they do it
 	
 	test suite
+	
+	default values
+		default.md contains some discussion about the right way to define defaults
+		
+		
 			
 ### INDEXES
 
@@ -140,6 +134,3 @@ particularily aggregation, indexing and status/control-queries
 	how to interface it
 
 ### MISC
-
-	check if CSV instead of JSON would be more compact
-		maybe use CSV for initial data set?

@@ -495,4 +495,35 @@ before adding it to the "facts" collection
 		collection.update({_id: result._id}, value);     
 		collection.update({_id: result.id}, {$unset: {value: 1}} ) } 
 	)};
+
 	  
+###calling emit multiple times
+http://docs.mongodb.org/manual/reference/method/db.collection.mapReduce/#db.collection.mapReduce
+The following map function may call emit(key,value) multiple times depending on the number of elements in the input document's items field:
+
+	function() {
+		this.items.forEach(function(item){ emit(item.sku, 1); });
+	}
+
+
+###combine data from multiple sources
+	
+	run mapReduce steps  sequentially and reduce them all to one result { out: { reduce : "tempFacts" }
+		http://stackoverflow.com/questions/5681851/mongodb-combine-data-from-multiple-collections-in-to-one-how
+		http://tebros.com/2011/07/using-mongodb-mapreduce-to-join-2-collections/
+
+
+###Subsequent Incremental Map-Reduce (mapping heterogeneous collections)
+http://docs.mongodb.org/manual/tutorial/perform-incremental-map-reduce/
+
+if several collections with different fields have to be aggregated into one target collection   
+  
+	+	either all map functions have to contaion all fields (with sensible defaults like 0 or null)   
+	+	or the reduce function must handle the case of a missing field, which means:   
+		- asking/waiting if map delivers the field
+		- if yes that case receive the value
+		- otherwise create it with sensible defaults
+
+the [mapReduce script](aggregation/importMR.js) takes the second option with the update() 
+function. The update() function can either replace the existing document with the new document or update specific fields in the existing document.
+
