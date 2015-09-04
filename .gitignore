@@ -25,6 +25,5 @@ test*.*
 
 ## single files
 
-aggregation/quicksetup.md
-
 mySetup.md
+how2javascript.md

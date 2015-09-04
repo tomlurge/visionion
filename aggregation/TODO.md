@@ -13,10 +13,6 @@ client data
     https://github.com/tomlurge/visionion/issues/5
     
 
-check if the format of country.autosys is correctly documented 
-
-	(object, not array)
-
 		
 remove simple and excessive versions of loops in 2.3 Countries and 2.4 AS
 	

@@ -2,105 +2,82 @@
 
 ## INSTANT TODO
 
-	docs need more love
+	connect to the database
+	draw first graph
+	decide on web framework
 
 
 ## next steps
 
-*	aggregation
-		solve client data hourly issue
-		aggregate days and months (factsMR.js)
-
 * sketches of a visualization
 
-* more documentation of pre-import aggregation (extract from karsten's mails)
 
-* aggregation of visualization primitives and timespans
 
-* figure out how to control MongoDB via external scripts   
-  http://docs.mongodb.org/manual/tutorial/write-scripts-for-the-mongo-shell/
-  e.g. prompt:> mongo localhost:27017/tor ~/visionion/aggregation.js
-particularily aggregation, indexing and status/control-queries
-* Then a prototype visualization of some graph will be the first occassion to connect the database, the web application framework and the visualization library.
-* When that's accomplished more experiments need to be conducted to see if it's really possible to have more than one D3 instances on one webpage and how they can interact.
-* Then the real work on the visualizations can begin.
-* tbc
+
 
 ### AGGREGATION
-	
-	command+control
+
+client data
+
+    right now the values reflect usage per day, not per hour
+		therefor hourly values are each 24x too high
+		daily and monthly values are multiplied on this basis
+		so also daily values are 24 times too high too
+		monthly analogously
+		
+		client data should be transformed to hourly values
+    for further discussion see
+    https://github.com/tomlurge/visionion/issues/5
+    
+remove simple and excessive versions of loops in 2.3 Countries and 2.4 AS
+
+		some time in the future, when everything is running smoothly
+
+command+control
+
 		update
-			make sure newly imported data does not overwrite the whole collection but only the affected documents
-		add more data
-			the last 5 years
+			make sure newly imported data does not overwrite the whole collection 
+			but only the affected documents
+			partially update documents with new features
+			the functionality seems to be provided by MongoDB, but was never tested...
+		
 		automated workflow
 			when data arrives in a certain directory -> import it
 			when new data is imported -> aggregate it
-		manual control
-			gui for manually controlling import and aggregation
+		
+		GUI
+			web gui for manually controlling import and aggregation
 					
-	naming
-		replace "total" with "flagAny"
-		maybe other inconsistencies
-	
-	documentation
-		is currently a mess
-			only one import
-			type
-			span
-		factsrow.md
-			add descriptions
-			add type of timespan aggregation
-				sum
-				mean
-				etc?
-		
-	
-	test suite
-	
-	default values
+default values
+
 		default.md contains some discussion about the right way to define defaults
-		
-		
-			
+
+gestalt + mean + median
+
+	indulge in data science
+	make no mistake
+	work on gestalt.md
+
+more documentation of pre-import aggregation
+
+	extract from karsten's mails
+
+
+
 ### INDEXES
 
-	delete index over addd
+	delete index over import
+		eg addd
 
 	facts collection needs to be indexed
-	but this needs more thinking on the gui
-		what visualizations
-		what perspectives, controls
-	
-	documentation
+		but this needs more thinking on the gui
+			what visualizations
+			what perspectives, controls
+
 	
 ### DOCUMENTATION
 	
-	needs refactoring
-	
-		intro
-		gestalt
-		backend/model
-			import
-				schema
-			aggregation
-				sample fact
-			database
-				indexing
-				querying
-		frontend/view
-			node
-			react
-			bootstrap
-			webpack
-		vis
-			D3
-			supporting libraries
-		setup
-			project
-			data
-			import
-			aggregation
+	never finished
 
 
 ### VIS
@@ -111,22 +88,10 @@ particularily aggregation, indexing and status/control-queries
 		crossfilter
 		queue
 	
-	literaturtipps
-		zum einstieg
-			Interactive Data Visualization for the Web
-			http://chimera.labs.oreilly.com/books/1230000000345/index.html
-		erste komplexe projekte, mit crossfilter
-			developing a d3 edge
-			http://backstopmedia.booktype.pro/developing-a-d3js-edge/1-getting-started/
-			(auch als pdf)
-		für fortgeschrittene
-			mastering d3.js (packt) - mit backbone-beispielen
-			d3.js cookbook (packt)
-			
+	
 ### WEBAPP
 
-		
-	
+
 
 ### INTERFACE
 
