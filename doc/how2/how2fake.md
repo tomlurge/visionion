@@ -1,10 +1,16 @@
 # How To Generate Fake Data #
 
-The real data we got from the metrics project did span only about 6 weeks. That wasnt enough to test the application under real load. We therefor had to add some fake data. The fake data wasn't generated from scratch but derived by copying the real data into the database again and again.
+The real data we got from the metrics project did span only about 6 weeks. That 
+isnt enough to test the application under real load. We therefor had to derive 
+some fake data from it by copying the real data into the database again and 
+again.
 
-First we exported 31 days:
+First we exported chunks of 28, 29, 30 and 31 days:
 
-	mongoexport -d visionion -c facts -q '{_id: {$gte: "2013-04-01 00", $lte: "2013-05-01 23"}}' --out ~/Desktop/2013_04.json
+	mongoexport -d visionion -c fact -q '{_id: {$gte: "2013-04-01-00", $lte: "2013-04-28-23"}}' --out /Volumes/fake/28.json
+	mongoexport -d visionion -c fact -q '{_id: {$gte: "2013-04-01-00", $lte: "2013-04-29-23"}}' --out /Volumes/fake/29.json
+	mongoexport -d visionion -c fact -q '{_id: {$gte: "2013-04-01-00", $lte: "2013-04-30-23"}}' --out /Volumes/fake/30.json
+	mongoexport -d visionion -c fact -q '{_id: {$gte: "2013-04-01-00", $lte: "2013-05-01-23"}}' --out /Volumes/fake/itching31.json
 
 	mongoexport docs:
 	http://docs.mongodb.org/v2.4/reference/program/mongoexport/
@@ -12,56 +18,62 @@ First we exported 31 days:
 	http://buraktas.com/mongoexport-query-with-using-date/
 	http://stackoverflow.com/questions/19805738/mongodump-range-query-on-timestamp-filed-raising-failedtoparser-error
 
+The month with 31 days had to be massaged a little
 
-Some cleaning had to be done to remove errors added in prior aggregation steps:
+	sed 's/-05-01/-04-31/g' itching31.json > 31.json
 
-	sed 's/:00:00"/:00"/g' export-2013-04.json > export-2013-04-removeNulls.json
-	sed 's/-05-01/-04-31/g' export-2013-04-removeNulls.json > export-2013-04-31tage.json
+Then generate months with 31 days
 
-Then the months with 31 days were generated from that prototype
+	/Volumes/fake$ sed 's/2013-04-/2013-01-/g' 31.json > fake-2013-01.json
+	/Volumes/fake$ sed 's/2013-04-/2013-03-/g' 31.json > fake-2013-03.json
+	/Volumes/fake$ sed 's/2013-04-/2013-05-/g' 31.json > fake-2013-05.json
+	/Volumes/fake$ sed 's/2013-04-/2013-07-/g' 31.json > fake-2013-07.json
+	/Volumes/fake$ sed 's/2013-04-/2013-08-/g' 31.json > fake-2013-08.json
+	/Volumes/fake$ sed 's/2013-04-/2013-10-/g' 31.json > fake-2013-10.json
+	/Volumes/fake$ sed 's/2013-04-/2013-12-/g' 31.json > fake-2013-12.json
 
-	sed 's/2013-04-/2013-01-/g' export-2013-04-31tage.json > fake-2013-01.json
-	sed 's/2013-01-/2013-03-/g' fake-2013-01.json > fake-2013-03.json
-	sed 's/2013-01-/2013-05-/g' fake-2013-01.json > fake-2013-05.json
+... and with 30 days
 
-etcetera for 07, 08, 10, 12
+	/Volumes/fake$ sed 's/2013-04-/2013-04-/g' 30.json > fake-2013-04.json
+	/Volumes/fake$ sed 's/2013-04-/2013-06-/g' 30.json > fake-2013-06.json
+	/Volumes/fake$ sed 's/2013-04-/2013-09-/g' 30.json > fake-2013-09.json
+	/Volumes/fake$ sed 's/2013-04-/2013-11-/g' 30.json > fake-2013-11.json
 
-Then generate february and don't forget leap years
+... and a short and a long february
 
-	sed 's/2013-01-/2013-02-/g' fake-2013-01.json > fake-2013-02.json
-	sed 's/2013-01-/2013-04-/g' fake-2013-01.json > fake-2013-04.json
+	/Volumes/fake$ sed 's/2013-04-/2013-02-/g' 28.json > fake-2013-02.json
+	/Volumes/fake$ sed 's/2013-04-/2012-02-/g' 29.json > fake-2012-02.json
 
-then remove the 31. day from april and generate the 30-day-months
+	
+Then duplicate these files into new folders for the years 2010, 2011, 2012.
+Remove the unecessary februaries. 2012 takes the 29 days february. Then in each
+folder (adjust file names if you wish and) execute the appropiate command to 
+change the years in the duplicated data.
 
-	sed 's/2013-04-/2013-06-/g' fake-2013-04.json > fake-2013-06.json
-	sed 's/2013-04-/2013-09-/g' fake-2013-04.json > fake-2013-09.json
-	sed 's/2013-04-/2013-11-/g' fake-2013-04.json > fake-2013-11.json
+	/Volumes$ cd 2010
+	/Volumes/fake/2010$ sed -i '' 's/2013-/2010-/g' *.*
+  /Volumes/fake/2010$ cd ../2011
+  /Volumes/fake/2011$ sed -i '' 's/2013-/2011-/g' *.*
+  /Volumes/fake/2011$ cd ../2012
+  /Volumes/fake/2012$ sed -i '' 's/2013-/2012-/g' *.*
 
-generate more years: copy all files into a new directory. on the shell:
-
-	sed -i '' 's/2013-/2014-/g' *.*
-	// http://stackoverflow.com/questions/11895169/can-i-search-replace-in-multiple-txt-files-quickly-from-terminal
+	// http://stackoverflow.com/questions/11895169
 	// this is the syntax for Mac OS X. it's slightly different for GNU/Linux
 
-bulk importing the fake data into mongodb through the following shell script
+Bulk import the fake data into mongodb through the following shell script
 
 	#!/bin/bash
 	for filename in *; do 
-		mongoimport -d visionion -c fakes $filename  
+		mongoimport -d visionion -c fake $filename  
 	done
 
-saved as import.sh.sh in the directory where the fake data files lie
-made executable by
+Save it as import.sh.sh in the directory where the fake data files lie
+make it executable by
 
 	chmod u+x import.sh
 
-and then executed by
+and then execute it
 
 	./import.sh
 
-errors:
-with every yearly mongoimport run i got 4 times the following error message:
-"exception:BSON representation of supplied JSON is too large: code FailedToParse: FailedToParse: Expecting '{': offset:0"
-the count of imported documents was correct though. 
-this seems to suggest that 4 of the documents contained an array that was larger than 16 mb. that is not plausibel because 1) the average document (data per 1 hour) has a size of about 600 kb 2) every year contains 12 times (months) the same data. the error should therefor occur in a multiple of 12 (or at least 7, since only 7 months have 31 days, the other months are shorter).
-strange...   
+Import took about 100 minutes on my 6 year old laptop for 4 years of fake data.
