@@ -31,15 +31,3 @@ visualization
 - bookmarkability of any state of visualization
 - no dependance on client-side javascript
 
-### Recommended Reading
-
-	Intro
-		Interactive Data Visualization for the Web
-		http://chimera.labs.oreilly.com/books/1230000000345/index.html
-	first projects of moderate complexity, mit crossfilter
-		developing a d3 edge
-		http://backstopmedia.booktype.pro/developing-a-d3js-edge/1-getting-started/
-	advanced
-		mastering d3.js (packt) - with backbone-examples
-		d3.js cookbook (packt)
-
