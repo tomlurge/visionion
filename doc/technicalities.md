@@ -89,7 +89,9 @@ turned out it was a problem with the script (surprise, surprise...) but always g
 								// db.import.find({type:"r"}).sort({date:-1}).limit(1);
 								
 ###### csv versus json
-it is written that csv is more compact than json. an experiment suggested that thats not true, since size was almost the same. but the expoeriment was flawed as the [generated csv file](doc/testCSV/2013_04_02_01_importMR.csv) clearly shows. needs more work.
+it is written that csv is more compact than json. an experiment suggested that that's not true, since size was almost the same. but the expoeriment was flawed as the [generated csv file](doc/testCSV/2013_04_02_01_importMR.csv) clearly shows. needs more work. a lot of data has to be pushed from the server to 
+the client. some reduction in size would sure help make the thing as 
+responsive as possible.
 								
 ###### constructing fake data from the data i've got
 

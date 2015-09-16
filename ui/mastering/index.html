@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Stock Explorer</title>
+
+    <link href="/assets/css/book.css" rel="stylesheet">
+    <script src="/assets/js/lib/d3.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Include the Backbone Libraries -->
+        <script src="/js/lib/jquery.min.js"></script>
+        <script src="/js/lib/underscore.js"></script>
+        <script src="/js/lib/backbone.js"></script>
+        <script src="/js/lib/d3.min.js"></script>
+        <script src="/js/stockcharts.js"></script>
+
+        <div>
+            <link rel="stylesheet" href="/css/stock.css"/>
+        </div>
+
+        <!-- Templates  -->
+        <script type="text/template" id="stock-selector-tpl">
+            <select id="stock-selector">
+                <% _.each(stocks, function(s) { %>
+                    <option value="<%= s.symbol %>"><%= s.symbol %></option>
+                <% }); %>
+            </select>
+        </script>
+
+        <!-- Application Container -->
+        <div id="stock-app">
+            <div>
+                <div id="stock-control"></div>
+                <div id="stock-title"></div>
+            </div>
+            <div class="charts">
+                <div id="stock-detail"></div>
+                <div id="stock-context"></div>
+            </div>
+        </div>
+
+        <!-- Application Components -->
+        <script src="/js/models/app.js"></script>
+        <script src="/js/models/stock.js"></script>
+        <script src="/js/collections/stocks.js"></script>
+        <script src="/js/views/stocks.js"></script>
+        <script src="/js/views/app.js"></script>
+        <script src="/js/routers/router.js"></script>
+        <script src="/js/app.js"></script>
+
+
+        <div class="footer"></div>
+    </div>
+    <script src="/assets/js/lib/jquery.min.js"></script>
+    <script src="/assets/js/lib/bootstrap.min.js"></script>
+</body>
+</html>

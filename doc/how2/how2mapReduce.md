@@ -1,5 +1,13 @@
 #some notes on the usage of mapReduce in MongoDB
 
+
+
+
+### debugging mapReduce
+
+	print("debug comment");
+	
+	
 ###UPDATING records
 
 out.MERGE versus out.REDUCE

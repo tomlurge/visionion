@@ -1,7 +1,7 @@
 	git
 	git status
-	git add FILE/DIR 		// tworks recursively
-	git commit -m "comment"	// comment is mandatory
+	git add FILE/DIR          // works recursively
+	git commit -m "comment"   // comment is mandatory
 	git log
 	git show-branch --more=10
 
@@ -12,6 +12,9 @@
 	$ git add .
 	$ git commit -m 'Begin Project Foo!'
 
+	git commit -a // will automatically notice any modified (but not new) files, 
+								// add them to the index, and commit, all in one step
+	http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html
 
 ### STEP 0:	git init
 	
@@ -20,21 +23,23 @@
 
 ### STEP 1:	git add	...
 
-	"git add	 filename" adds a new file to the index
-		or updates the index about an already added file
-	"git add ." adds everything in the current dir recursively
-	"git ignore ..." excludes files from the index
-	"git add -p filename" (p for patch) adds only a certain
-		subset of changes made to a file
-	"git reset" undos any additions since the last commit
+	git add filename      // adds a new file to the index
+	                      // or updates the index about an already added file
+	git add file1 file2 file3
+	git add .             // adds everything in the current dir recursively
+	git ignore ..         // excludes files from the index
+	
+	git add -p filename   // (p for patch) adds only a certain
+	                      // subset of changes made to a file
+	
+	git reset             // undoes any additions since the last commit
 
 ### STEP 2:	git commit ...
 
-	"git commit -m 'why i did this'"
-	"git diff -staged" shows changes between the current index
-		and the last commit
-	"git diff" (without "-staged") shows unstaged changes
-		(the differnce between the working tree and the index)
+	git commit -m 'why i did this'
+	git diff -staged      // show changes between current index and last commit
+	git diff              // (without "-staged") shows unstaged changes
+		                    // (the differnce between working tree and index)
 
 ### STEP 3:	git push filenemae
 
@@ -58,15 +63,10 @@
 	# see https://github.com/github/gitignore
 
 
-### ANOTHER HOWTO
+### nice mergetool with git
 
-	git init
-	git add .
-	git commit  	// will ask for commit message
-	git add file1 file2 file3
-	git commit -a // will automatically notice any modified (but not new) files, 
-								// add them to the index, and commit, all in one step
-	http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html
+	mt = mergetool -t opendiff
+
 
 
 

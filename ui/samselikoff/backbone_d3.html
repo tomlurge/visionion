@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<link rel="stylesheet" href="res/style.css">
+</head>
+
+<body class='backbone'>
+
+<div id="demo">
+	<button class='add'>Add company</button>
+	<button class='remove'>Remove company</button>
+	<div class="chart"></div>
+	<div class="company-list"></div>
+</div>
+
+<script src="res/jquery.js"></script>
+<script src="res/underscore.js"></script>
+<script src="res/backbone.js"></script>lib
+<script src="res/d3.js"></script>
+
+<!-- Our bubble chart -->
+<script src="bubblechart.js"></script>
+<script>
+
+	// MODEL CLASS
+	var CompanyCollection = Backbone.Collection.extend({
+		chartData: function() {	// for D3 bubble-chart
+			return {
+				name: 'compaines',  // typo
+				children: this.map(function(c) {
+					return {name: c.get('name'), size: c.get('revenue')};
+				})
+			}
+		}
+	});
+	// MODEL INSTANCE
+	var companies = new CompanyCollection([
+		// var companies = new Backbone.Collection([
+		{name: "Wayne Enterprises", revenue: 3938, cost: 1423},
+		{name: "Stark Enterprises", revenue: 3812, cost: 823},
+		{name: "Acme Corp", revenue: 6714, cost: 2990},
+		{name: "Dunder Mifflin", revenue: 743, cost: 1304}
+	]);
+
+	// VIEW CLASS - HTML LIST
+	var CompaniesView = Backbone.View.extend({
+		initialize: function() {
+			this.listenTo(this.collection, "change add remove", this.render);
+			this.render();
+		},
+		render: function() {
+			this.$el.html(this.template({
+				companies: this.collection.toJSON()
+			}));
+			return this;
+		},
+		template: _.template(
+			'<ul>' +
+				'<% _.each(companies, function(company) { %> ' +
+					'<li>' +
+						'<strong><%= company.name %></strong>' +
+						': revenue: <%= company.revenue %>, cost: <%= company.cost %>' +
+					'</li>' +
+				' <% }); %>' +
+			'</ul>'
+		)
+	});
+	// VIEW INSTANCE - HTML LIST
+	var list = new CompaniesView({
+		el: '.company-list',
+		collection: companies
+	});
+
+	// VIEW CLASS - D3
+	var BubbleChartView = Backbone.View.extend({
+		initialize: function() {
+			this.listenTo(this.collection, "change add remove", this.render);
+			this.render();
+		},
+		render: function() {
+			d3.select(this.el)
+							.datum(this.collection.chartData())
+							.call(this.chart);
+			return this;
+		},
+		chart: d3.charts.bubble()
+	});
+	// VIEW INSTANCE - D3
+	var bubbles = new BubbleChartView({
+		el: '.chart',
+		collection: companies
+	});
+
+
+	// INTERACTIVITY
+	$('.add').click(function() {
+		companies.push({name: 'Corp ' + Math.floor(Math.random()*100), revenue: Math.floor(Math.random()*10000), cost: Math.floor(Math.random()*10000)});
+	});
+	$('.remove').click(function() {
+		companies.at(0).destroy();
+	});
+</script>
+</body>
+</html>
