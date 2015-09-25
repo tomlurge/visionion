@@ -1,6 +1,7 @@
-var express = require('express'),
-		d3 = require("d3"),
-		db = require("mongodb");
+var express = require('express');
+// var d3 = require("d3");
+// var db = require("mongodb");
+var db = require("mongoose");
 
 var app = express();
 
@@ -16,4 +17,4 @@ app.get('/', function(req, res){
 	);
 });
 
-app.listen(8080);
+app.listen(7777);
