@@ -29,6 +29,9 @@ we're trying to stick with well established and documented techniques here.
 	npm install express                 // installs express into /node_modules
 	                                    // within my app and makes it require_able
 	                                    // and usable like any build-in module
+	npm install moduleName -g           // installs the module in /usr/local/lib
+	                                    // (or /Users/tl ?!)
+	                                    // instead of the current working dir
 	INSTALL all modules per project
 	{                                   // place a 'package.json'
 	  "name" : "MyStaticServer",        // in the root dir of your project
@@ -49,13 +52,13 @@ we're trying to stick with well established and documented techniques here.
 	                                    // through it's path instead of its name
  
 
-###D3 within node
+######D3 within node
 
 	The correct way to use D3 within Node is to use NPM to install d3 and then to 
 	require it. Either' npm install d3' or add it to a package.json file:
-  { ... "dependencies": { "d3": "3" } ... }
-  Once you have d3 in your node_modules directory, load it via require:
-  var d3 = require("d3");
+	  { ... "dependencies": { "d3": "3" } ... }
+	Once you have d3 in your node_modules directory, load it via require:
+	  var d3 = require("d3");
 	http://stackoverflow.com/questions/9948350/how-to-use-d3-in-node-js-properly
 	
 	
@@ -117,13 +120,23 @@ we're trying to stick with well established and documented techniques here.
 
 	MONGOOSE
 	Mongoose is an extension of mongodb.js (and used in most tutorials). It 
-	enables (and favors) the use of data schemas and adds some uilities.
+	enables (and favors) the use of data schemas and adds some uilities. One 
+	problem: we need to circumvent schema creation since the data is 
+	"preexisting" in the database. See [How to access a preexisting collection 
+	with Mongoose?](http://stackoverflow.com/questions/5794834) and the [docs]
+	(http://mongoosejs.com/docs/guide.html#collection) for a solution
+	
+	
+	
 	
 	
 ###EXPRESS - thin web server layer
 	
-	could also be used for view rendering and routing, instead of backbone
-	
+	acts as webserver, supports authentication (OAuth?) etc. 
+	will be useful for the administartive interface to the aggregation process
+	could also be used for view rendering and routing, instead of backbone. but
+	since we'll need to load data into existing pages a lot we'll use backbone 
+	for that.
 	var express = require('express'),
 	    app = express();
 	app.use(express.static(__dirname + '/public'));
@@ -192,23 +205,21 @@ we're trying to stick with well established and documented techniques here.
 	examples where D3 is backed by a database are hard to come by. examples 
 	about the usage of the native mongodb javascript driver are even harder to 
 	find on the web. and an example of how all these well established 
-	and very mainstream technologies - MongoDb, node, node-mongodb-native, 
-	backbone and D3 - work together are near impossible to find. since i'm 
-	having real trouble to tie together all these technologies with none of 
-	which i'm very proficient i made a chart of examples covering parts of the 
-	toolchain:
+	and very mainstream technologies - MongoDb, node, mongodb-native, express,
+	backbone and D3 - work together are near impossible to find. 
 	
-	mongo   node    driver  backb.  D3    example
-	  x       x       x             x     Square's Cube
-	  x       x       .       x           Addi Osmani's TodoMVC
-	  x       x       x                   Modulus
-	  x       x       x       :           Blog rolling
-	  x       x       .       :     x     Anmol Koul
-	                          x     x     Sam Selikoff
-	                          x     x     Mastering D3.js (book, Packt Publishing)
-	  (.) uses Mongoose
-	  (:) uses Express
-[Square's Cube](https://github.com/square/cube)
+	mongo   node    driver  express backb.  D3      example
+	  x       x       x                      x      Square's Cube
+	  x       x       +               x             Addi Osmani's TodoMVC
+	  x       x       x                             Modulus
+	  x       x       x       x                     Blog rolling
+	  x       x       +       x       x             Building Node App.s (O'Reilly)
+	  x       x       +       x              x      Anmol Koul
+	                                  x      x      Sam Selikoff
+	                                  x      x      Mastering D3.js (Packt)
+	  (+) uses Mongoose
+	  
+   [Square's Cube](https://github.com/square/cube)
  | [Addi Osmani's TodoMVC](https://github.com/addyosmani/backbone-fundamentals)
  | [Modulus](http://blog.modulus.io/mongodb-tutorial)
  | [Blog rolling](http://howtonode.org/express-mongodb)
