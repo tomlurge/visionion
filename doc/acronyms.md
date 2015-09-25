@@ -18,12 +18,12 @@
 	cbcc    clients@bridges per country  {cc:integer ...}
 	cr      clients at relays           
 	crcc    clients@relays per country   {cc:integer ...}
-	cpt     bridge pluggbl.transp.used   {obfs2/obfs3/OR/unknown:integer}
+	cpt     bridge pluggbl.transp.used   {obfs2/obfs3/OnionRouting /unknown:integer}
 	  cptObfs2
 	  cptObfs3
 	  cptOR
 	  cprtUnknown
-	cip     ip-version used              {v4/v6:integer}
+	cip     clients ip-version used      {v4/v6:integer}
 	  cip4
 	  cip6
 	node    node id                      Tor fingerprint

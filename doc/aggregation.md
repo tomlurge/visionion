@@ -156,7 +156,7 @@ Clients have no subcategories, only one report. For clients this is all that's k
 	cip6            int         using ip version 6
 	cptObfs2        int         using pluggable transport version 2
 	cptObfs3        int         using pluggable transport version 3
-	cptOR           int         using pluggable transport OR
+	cptOR           int         using normal "Onion Routing"
 	cptUnknown      int         using unknown pluggable transport 
 	    
 	    
@@ -340,11 +340,11 @@ So far we collected about 5 years of data, which leads the following numbers of 
 We will want to zoom in and out of the data visualization and henceforth need to define aggregated timespans.
 Sensible spans could be
 
-	H		1hour, the default and minimal span
-	Q		6 hours, quarter day
-	D		24 hours, 1 day
-	W		168 hours, 7 days, 1 week
-	M		1 month, about 4 weeks, about 30.5 days
+	H   1hour, the default and minimal span
+	Q   6 hours, quarter day
+	D   24 hours, 1 day
+	W   168 hours, 7 days, 1 week
+	M   1 month, about 4 weeks, about 30.5 days
 
 To keep things simple we start with hourly, daily and monthly timespans. Hourly data is what we got, 24 hours make a day and around 30 days make a month. So we get quite regular jumps between zoom steps.   
 If need arises quarter-daily and weekly aggregations can be added later. Yearly aggregation will not be needed anytime soon.

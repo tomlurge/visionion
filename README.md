@@ -33,7 +33,7 @@ These generic views can then be combined and tailored to elucidate structural pa
 			* [Autonomous System Reports](doc/aggregation.md#as)  
 		* [Future Possibilities](doc/aggregation.md#future)  
 		* [Structure Detailed](doc/aggregation.md#detailed)  
-		* [Sample Fact](../aggregation/exampleFacts/shortened_2013-04-02-01.json) (radically shortened)
+		* [Annotated + Radically Shortened Sample Fact](doc/annotatedFactRow.md)
 	* [Consolidation and Simplification](doc/aggregation.md#consolidate)  
 	* [Aggregation Admin Interface](doc/aggregation.md#admin)  
 	* [MapReduce with MongoDB](doc/aggregation.md#mongoDB)   
