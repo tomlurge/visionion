@@ -1,5 +1,12 @@
 # visionion
 
+
+**development on this project has ended**
+**sorry, but it didn't work out**
+**parts may be resurrected in the [trice](https://gitlab.com/rat10/trice) analytics suite for Tor metrics data**
+**january 2017**
+
+
 visionion aims to provide a webbased visualization tool for Tor metrics data.
 
 The [Tor](https://www.torproject.org/index.html) project is primarily a system to provide a user with anonymity while on the internet.
