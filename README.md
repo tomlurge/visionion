@@ -3,9 +3,9 @@
   
   
 **development on this project has ended**   
-**sorry, but it didn't work out** 
-**parts may be resurrected in the [trice](https://gitlab.com/rat10/trice) analytics suite for Tor metrics data**   
-**january 2017**
+**sorry, but it didn't work out**   
+**parts may be resurrected in the [trice](https://gitlab.com/rat10/trice) analytics suite for Tor metrics data**     
+**january 2017**   
   
     
   
