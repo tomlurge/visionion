@@ -1,13 +1,12 @@
-# visionion
-  
-  
-  
-**development on this project has ended**   
-**sorry, but it didn't work out**   
-**parts may be resurrected in the [trice](https://gitlab.com/rat10/trice) analytics suite for Tor metrics data**     
+**development on visionion has ended.**   
+**sorry, but it didn't work out.**   
+**parts may be resurrected in the [trice](https://gitlab.com/rat10/trice) analytics suite for Tor metrics data.**     
 **january 2017**   
   
+  
+  
     
+### visionion
   
 visionion aims to provide a webbased visualization tool for Tor metrics data.
 
@@ -71,17 +70,3 @@ These generic views can then be combined and tailored to elucidate structural pa
 	* [Acronyms](doc/acronyms.md)
 	* [TODO](todo.md)
 		
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
